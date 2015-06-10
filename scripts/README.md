@@ -4,7 +4,7 @@ This folder will contain scripts that can be used to support the contribution, c
 
 ## Script Formats ##
 
-TBD. We're currently onsidering python and/or shell scrips.
+TBD. We're currently considering python and/or shell scrips.
 
 ## To Do List ##
 
@@ -14,7 +14,7 @@ We should collaborate to complete and prioritize this list of tasks.
   - Parameters: definition id(s) OR "all", report filepath
   - Notes: schema validate, schematron validate, validate metadata, validate file format, validate file name, validate file location, create report
   - Output: report including definitions list and success/failure for each task
-- **Determine Effected Definitions**: determines defintions effected by changes to one or more files in repo
+- **Determine Effected Definitions**: determines definitions effected by changes to one or more files in repo
   - Parameters: ids or filepaths of changed files
   - Notes: tbd
   - Output: definition ids of effected definitions
@@ -26,7 +26,7 @@ We should collaborate to complete and prioritize this list of tasks.
   - Parameters: definition id
   - Notes: tbd
   - Output: valid OVAL file for 1 definition
-- **Generate OVAL Defitions by Schema** 
+- **Generate OVAL Definitions by Schema** 
   - Parameters: schema and version
   - Notes:  tbd
   - Output: valid OVAL file containing all definitions for specified schema/version
