@@ -18,6 +18,10 @@ We should collaborate to complete and prioritize this list of tasks.
   - Parameters: ids or filepaths of changed files
   - Notes: tbd
   - Output: definition ids of effected definitions
+- **Increment Version of Effected Upstream Elements**: determines upstream elements effected by changes to one or more files in repo and increments their version
+  - Parameters: ids or filepaths of changed files
+  - Notes: "upstream" means elements that depend on the changed element (i.e. reference it directly or indirectly)
+  - Output: oval ids of effected elements
 - **Itemize Changed OVAL IDs**: determines OVAL ids of files added or changed in a pull request
   - Parameters: tbd
   - Notes: uses git command line to generate OVAL ids list in PR, this can then be used to Determine Effected Definition and that can be used to drive the Validate Definitions Script
