@@ -46,6 +46,10 @@ We should collaborate to complete and prioritize this list of tasks.
   - Parameters: 
   - Notes: generate HTML pages listing definitions by CPE?, Class?, Status?, Reference?, Type?
   - Output:
+- **Decompose Definition**: 
+  - Parameters: an oval definition file
+  - Notes: decomposes a definition file. The intent is to reduce effort for content submitters that currently submit entire definitons vice corrections to existing items. This script would need to look for collisions between items in the definition file and existing items in the repo. For examples, the input definition file may contain a modified test, an unmodified variable and state, but a new object. 
+  - Output: individual and properly placed files that correspond with the oval tst/obj/var/etc in the definition file.
 - **Related Tasks that aren't scripts**: 
   - Add sections to this readme with step-by-step instructions for:
     - Using scripts to build content
