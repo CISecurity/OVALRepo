@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23926" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:1054: libtiff security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>libtiff</product>
+    </affected>
+    <reference ref_id="ELSA-2012:1054-01" ref_url="http://linux.oracle.com/errata/ELSA-2012-1054.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-2088" ref_url="http://linux.oracle.com/cve/CVE-2012-2088.html" source="CVE"/>
+    <reference ref_id="CVE-2012-2113" ref_url="http://linux.oracle.com/cve/CVE-2012-2113.html" source="CVE"/>
+    <description>Multiple integer overflows in tiff2pdf in libtiff before 4.0.2 allow remote attackers to cause a denial of service (application crash) or possibly execute arbitrary code via a crafted tiff image, which triggers a heap-based buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:37:47.393-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:28.200-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:47.944-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23926 - optimisation of Oracle Linux content" date="2014-05-05T17:22:00.913-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:23:39.560-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:51.526-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="libtiff is earlier than 0:3.8.2-15.el5_8" test_ref="oval:org.mitre.oval:tst:110618"/>
+        <criterion comment="libtiff-devel is earlier than 0:3.8.2-15.el5_8" test_ref="oval:org.mitre.oval:tst:110740"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="libtiff is earlier than 0:3.9.4-6.el6_3" test_ref="oval:org.mitre.oval:tst:110755"/>
+        <criterion comment="libtiff-static is earlier than 0:3.9.4-6.el6_3" test_ref="oval:org.mitre.oval:tst:110512"/>
+        <criterion comment="libtiff-devel is earlier than 0:3.9.4-6.el6_3" test_ref="oval:org.mitre.oval:tst:110766"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

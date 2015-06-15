@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7480" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1996 linux-2.6 -- privilege escalation/denial of service/sensitive memory leak</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>linux-2.6</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-1996" ref_id="DSA-1996"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3939" ref_id="CVE-2009-3939"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4027" ref_id="CVE-2009-4027"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4536" ref_id="CVE-2009-4536"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4538" ref_id="CVE-2009-4538"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0003" ref_id="CVE-2010-0003"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0007" ref_id="CVE-2010-0007"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0291" ref_id="CVE-2010-0291"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0298" ref_id="CVE-2010-0298"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0306" ref_id="CVE-2010-0306"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0307" ref_id="CVE-2010-0307"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0309" ref_id="CVE-2010-0309"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0410" ref_id="CVE-2010-0410"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0415" ref_id="CVE-2010-0415"/>
+    <description>Several vulnerabilities have been discovered in the Linux kernel that may lead to a denial of service, sensitive memory leak or privilege escalation. The Common Vulnerabilities and Exposures project identifies the following problems: Joseph Malicki reported that the dbg_lvl sysfs attribute for the megaraid_sas device driver had world-writable permissions, permitting local users to modify logging settings. Lennert Buytenhek reported a race in the mac80211 subsystem that may allow remote users to cause a denial of service on a system connected to the same wireless network. Fabian Yamaguchi reported issues in the e1000 and e1000e drivers for Intel gigabit network adapters which allow remote users to bypass packet filters using specially crafted ethernet frames. Andi Kleen reported a defect which allows local users to gain read access to memory reachable by the kernel when the print-fatal-signals option is enabled. This option is disabled by default. Florian Westphal reported a lack of capability checking in the ebtables netfilter subsystem. If the ebtables module is loaded, local users can add and modify ebtables rules. Al Viro reported several issues with the mmap/mremap system calls that allow local users to cause a denial of service or obtain elevated privileges. Gleb Natapov discovered issues in the KVM subsystem where missing permission checks permit a user in a guest system to denial of service a guest or gain escalated privileges with the guest. Mathias Krause reported an issue with the load_elf_binary code on the amd64 flavor kernels that allows local users to cause a denial of service. Marcelo Tosatti fixed an issue in the PIT emulation code in the KVM subsystem that allows privileged users in a guest domain to cause a denial of service of the host system. Sebastian Krahmer discovered an issue in the netlink connector subsystem that permits local users to allocate large amounts of system memory resulting in a denial of service. Ramon de Carvalho Valle discovered an issue in the sys_move_pages interface, limited to amd64, ia64 and powerpc64 flavors in Debian. Local users can exploit this issue to cause a denial of service or gain access to sensitive kernel memory.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:08:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:28:47.102-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:55.676-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:55.562-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7480 - Debian Patch Update" date="2014-06-06T16:46:00.520-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:48:10.979-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:28.723-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-patch-debian-2.6.26 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:25636"/>
+          <criterion comment="linux-support-2.6.26-2 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26587"/>
+          <criterion comment="linux-doc-2.6.26 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26184"/>
+          <criterion comment="linux-tree-2.6.26 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26500"/>
+          <criterion comment="linux-source-2.6.26 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26338"/>
+          <criterion comment="linux-manual-2.6.26 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26522"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.26-2-all is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26534"/>
+          <criterion comment="linux-image-2.6.26-2-vserver-s390x is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26293"/>
+          <criterion comment="linux-image-2.6.26-2-s390 is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26442"/>
+          <criterion comment="linux-headers-2.6.26-2-s390 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26132"/>
+          <criterion comment="linux-image-2.6.26-2-s390-tape is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26165"/>
+          <criterion comment="linux-headers-2.6.26-2-all-s390 is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26364"/>
+          <criterion comment="linux-headers-2.6.26-2-vserver-s390x is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26540"/>
+          <criterion comment="linux-headers-2.6.26-2-common-vserver is earlier than 2.6.26-21lenny1" test_ref="oval:org.mitre.oval:tst:26332"/>
+          <criterion comment="linux-libc-dev is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26348"/>
+          <criterion comment="linux-image-2.6.26-2-s390x is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26149"/>
+          <criterion comment="linux-headers-2.6.26-2-common is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26382"/>
+          <criterion comment="linux-headers-2.6.26-2-s390x is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26512"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="xen-linux-system-2.6.26-2-xen-amd64 is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26340"/>
+          <criterion comment="linux-headers-2.6.26-2-all is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26333"/>
+          <criterion comment="linux-headers-2.6.26-2-openvz-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26537"/>
+          <criterion comment="linux-headers-2.6.26-2-common-vserver is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:25650"/>
+          <criterion comment="linux-image-2.6.26-2-openvz-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26439"/>
+          <criterion comment="linux-image-2.6.26-2-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26440"/>
+          <criterion comment="linux-headers-2.6.26-2-common-openvz is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26416"/>
+          <criterion comment="linux-modules-2.6.26-2-xen-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26373"/>
+          <criterion comment="linux-headers-2.6.26-2-all-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26645"/>
+          <criterion comment="linux-image-2.6.26-2-xen-amd64 is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26635"/>
+          <criterion comment="linux-headers-2.6.26-2-common-xen is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26475"/>
+          <criterion comment="linux-libc-dev is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26625"/>
+          <criterion comment="linux-headers-2.6.26-2-xen-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26143"/>
+          <criterion comment="linux-headers-2.6.26-2-amd64 is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26606"/>
+          <criterion comment="linux-headers-2.6.26-2-common is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:25820"/>
+          <criterion comment="linux-image-2.6.26-2-vserver-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26559"/>
+          <criterion comment="linux-headers-2.6.26-2-vserver-amd64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26536"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.26-2-all is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26749"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26705"/>
+          <criterion comment="linux-image-2.6.26-2-parisc64 is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26582"/>
+          <criterion comment="linux-image-2.6.26-2-parisc is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26782"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc-smp is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26704"/>
+          <criterion comment="linux-headers-2.6.26-2-all-hppa is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26745"/>
+          <criterion comment="linux-image-2.6.26-2-parisc-smp is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26803"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc64-smp is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26703"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc64 is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26835"/>
+          <criterion comment="linux-libc-dev is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26762"/>
+          <criterion comment="linux-image-2.6.26-2-parisc64-smp is earlier than 2.6.26-21lenny2" test_ref="oval:org.mitre.oval:tst:26550"/>
+          <criterion comment="linux-headers-2.6.26-2-common is earlier than 2.6.26-21lenny3" test_ref="oval:org.mitre.oval:tst:26169"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

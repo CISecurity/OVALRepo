@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1689" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Sendmail setjmp longjmp bo (Red Hat Internal)</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <product>Sendmail</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-0058" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0058"/>
+    <description>Signal handler race condition in Sendmail 8.13.x before 8.13.6 allows remote attackers to execute arbitrary code by triggering timeouts in a way that causes the setjmp and longjmp function calls to be interrupted and modify unexpected memory locations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-03-27T09:51:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-04-06T06:30:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-31T09:45:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex in ste:694. Implemented by Jon Baker of The MITRE Corporation." date="2007-05-01T15:07:00.947-04:00">
+          <contributor organization="DSCI Contractor">Vladimir Giszpenc</contributor>
+        </modified>
+        <status_change date="2007-05-01T15:08:55.075-04:00">INTERIM</status_change>
+        <status_change date="2007-05-23T15:05:31.387-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected vulnerability information for Redhat 3 and Redhat 4" date="2008-01-15T11:57:00-04:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2008-01-17T12:05:31.387-04:00">INTERIM</status_change>
+        <status_change date="2008-02-04T04:00:06.233-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:694 - I found a few issues (regular expressions), which I've corrected and will detail below." date="2013-04-04T21:53:00.831-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2013-04-04T21:54:40.282-04:00">INTERIM</status_change>
+        <status_change date="2013-04-22T04:00:13.977-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software section">
+    <criteria operator="AND" comment="Sendmail on Redhat 4">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4 for x86" definition_ref="oval:org.mitre.oval:def:1734"/>
+      <criterion comment="sendmail version is less than 8.13.1-3" test_ref="oval:org.mitre.oval:tst:7716"/>
+    </criteria>
+    <criteria operator="AND" comment="Sendmail on Redhat 3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3 for x86" definition_ref="oval:org.mitre.oval:def:5537"/>
+      <criterion comment="sendmail version is less than 8.12.11-4" test_ref="oval:org.mitre.oval:tst:7751"/>
+    </criteria>
+    <criteria operator="AND" comment="Sendmail on other flavors of redhat">
+      <extend_definition negate="true" comment="The operating system installed on the system is Red Hat Enterprise Linux 3 for x86" definition_ref="oval:org.mitre.oval:def:5537"/>
+      <extend_definition negate="true" comment="The operating system installed on the system is Red Hat Enterprise Linux 4 for x86" definition_ref="oval:org.mitre.oval:def:1734"/>
+      <criteria operator="OR" comment="vulnerable version of sendmail">
+        <criterion comment="sendmail before 8.12.x is installed" test_ref="oval:org.mitre.oval:tst:774"/>
+        <criterion comment="sendmail 8.12.x before 8.12.11 is installed" test_ref="oval:org.mitre.oval:tst:773"/>
+        <criterion comment="sendmail 8.13.x before 8.13.6 is installed" test_ref="oval:org.mitre.oval:tst:772"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

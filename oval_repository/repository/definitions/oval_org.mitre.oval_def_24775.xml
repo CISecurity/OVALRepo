@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24775" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0383: samba4 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>samba4</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0383-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0383.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-6150" ref_url="http://linux.oracle.com/cve/CVE-2012-6150.html" source="CVE"/>
+    <reference ref_id="CVE-2013-4496" ref_url="http://linux.oracle.com/cve/CVE-2013-4496.html" source="CVE"/>
+    <reference ref_id="CVE-2013-6442" ref_url="http://linux.oracle.com/cve/CVE-2013-6442.html" source="CVE"/>
+    <description>Samba is an open-source implementation of the Server Message Block (SMB) or
+Common Internet File System (CIFS) protocol, which allows PC-compatible
+machines to share files, printers, and other information.
+It was found that certain Samba configurations did not enforce the password
+lockout mechanism. A remote attacker could use this flaw to perform
+password guessing attacks on Samba user accounts. Note: this flaw only
+affected Samba when deployed as a Primary Domain Controller.
+(CVE-2013-4496)
+A flaw was found in Samba's "smbcacls" command, which is used to set or get
+ACLs on SMB file shares. Certain command line options of this command would
+incorrectly remove an ACL previously applied on a file or a directory,
+leaving the file or directory without the intended ACL. (CVE-2013-6442)
+A flaw was found in the way the pam_winbind module handled configurations
+that specified a non-existent group as required. An authenticated user
+could possibly use this flaw to gain access to a service using pam_winbind
+in its PAM configuration when group restriction was intended for access to
+the service. (CVE-2012-6150)
+Red Hat would like to thank the Samba project for reporting CVE-2013-4496
+and CVE-2013-6442, and Sam Richardson for reporting CVE-2012-6150.
+Upstream acknowledges Andrew Bartlett as the original reporter of
+CVE-2013-4496, and Noel Power as the original reporter of CVE-2013-6442.
+All users of Samba are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing this
+update, the smb service will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-05-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Ajin Cherian</contributor>
+        </submitted>
+        <status_change date="2014-05-22T11:01:33.472-04:00">DRAFT</status_change>
+        <status_change date="2014-06-09T04:01:38.205-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:10:51.590-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24775 - optimisation of Oracle Linux content" date="2014-07-03T11:23:00.792-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-03T11:29:15.148-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:41.116-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="samba4-python is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114079"/>
+      <criterion comment="samba4-dc-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114203"/>
+      <criterion comment="samba4-devel is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114274"/>
+      <criterion comment="samba4-winbind-krb5-locator is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114165"/>
+      <criterion comment="samba4-dc is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113613"/>
+      <criterion comment="samba4-pidl is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113723"/>
+      <criterion comment="samba4-winbind is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113384"/>
+      <criterion comment="samba4-test is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113739"/>
+      <criterion comment="samba4 is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113977"/>
+      <criterion comment="samba4-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114222"/>
+      <criterion comment="samba4-swat is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114279"/>
+      <criterion comment="samba4-client is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114208"/>
+      <criterion comment="samba4-winbind-clients is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:114234"/>
+      <criterion comment="samba4-common is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113979"/>
+    </criteria>
+  </criteria>
+</definition>

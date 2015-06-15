@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25729" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0981: kernel security, bug fix, and enhancement update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0981-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0981.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0981"/>
+    <reference source="CVE" ref_id="CVE-2012-6647" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-6647.html"/>
+    <reference source="CVE" ref_id="CVE-2013-7339" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-7339.html"/>
+    <reference source="CVE" ref_id="CVE-2014-2672" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2672.html"/>
+    <reference source="CVE" ref_id="CVE-2014-2678" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2678.html"/>
+    <reference source="CVE" ref_id="CVE-2014-2706" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2706.html"/>
+    <reference source="CVE" ref_id="CVE-2014-2851" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2851.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3144" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3144.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3145" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3145.html"/>
+    <description>The kernel packages contain the Linux kernel, the core of any Linux
+operating system.
+
+* A use-after-free flaw was found in the way the ping_init_sock() function
+of the Linux kernel handled the group_info reference counter. A local,
+unprivileged user could use this flaw to crash the system or, potentially,
+escalate their privileges on the system. (CVE-2014-2851, Important)
+
+* A NULL pointer dereference flaw was found in the way the
+futex_wait_requeue_pi() function of the Linux kernel's futex subsystem
+handled the requeuing of certain Priority Inheritance (PI) futexes.
+A local, unprivileged user could use this flaw to crash the system.
+(CVE-2012-6647, Moderate)
+
+* A NULL pointer dereference flaw was found in the rds_ib_laddr_check()
+function in the Linux kernel's implementation of Reliable Datagram Sockets
+(RDS). A local, unprivileged user could use this flaw to crash the system.
+(CVE-2013-7339, Moderate)
+
+* It was found that a remote attacker could use a race condition flaw in
+the ath_tx_aggr_sleep() function to crash the system by creating large
+network traffic on the system's Atheros 9k wireless network adapter.
+(CVE-2014-2672, Moderate)
+
+* A NULL pointer dereference flaw was found in the rds_iw_laddr_check()
+function in the Linux kernel's implementation of Reliable Datagram Sockets
+(RDS). A local, unprivileged user could use this flaw to crash the system.
+(CVE-2014-2678, Moderate)
+
+* A race condition flaw was found in the way the Linux kernel's mac80211
+subsystem implementation handled synchronization between TX and STA wake-up
+code paths. A remote attacker could use this flaw to crash the system.
+(CVE-2014-2706, Moderate)
+
+* An out-of-bounds memory access flaw was found in the Netlink Attribute
+extension of the Berkeley Packet Filter (BPF) interpreter functionality in
+the Linux kernel's networking implementation. A local, unprivileged user
+could use this flaw to crash the system or leak kernel memory to user space
+via a specially crafted socket filter. (CVE-2014-3144, CVE-2014-3145,
+Moderate)
+
+This update also fixes several bugs and adds one enhancement.
+Documentation for these changes will be available shortly from the
+Technical Notes document linked to in the References section.
+
+All kernel users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues and add this
+enhancement. The system must be rebooted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-05T10:24:53">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-08-07T15:02:27.393-04:00">DRAFT</status_change>
+        <status_change date="2014-08-25T04:01:12.748-04:00">INTERIM</status_change>
+        <status_change date="2014-09-15T04:00:19.575-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="kernel is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121291"/>
+      <criterion comment="kernel-abi-whitelists is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121501"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121010"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121456"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121253"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:120933"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:120822"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121431"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121181"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121002"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121300"/>
+      <criterion comment="perf is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121234"/>
+      <criterion comment="python-perf is earlier than 0:2.6.32-431.23.3.el6" test_ref="oval:org.mitre.oval:tst:121145"/>
+    </criteria>
+  </criteria>
+</definition>

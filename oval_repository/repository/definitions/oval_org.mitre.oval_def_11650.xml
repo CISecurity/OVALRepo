@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11650" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The _gnutls_x509_verify_certificate function in lib/x509/verify.c in libgnutls in GnuTLS before 2.6.1 trusts certificate chains in which the last certificate is an arbitrary trusted, self-signed certificate, which allows man-in-the-middle attackers to insert a spoofed certificate for any Distinguished Name (DN).</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4989" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4989"/>
+    <description>The _gnutls_x509_verify_certificate function in lib/x509/verify.c in libgnutls in GnuTLS before 2.6.1 trusts certificate chains in which the last certificate is an arbitrary trusted, self-signed certificate, which allows man-in-the-middle attackers to insert a spoofed certificate for any Distinguished Name (DN).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:34:08.171-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:10:12.593-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:10:59.750-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11650 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:47:00.450-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:49:30.912-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:15:11.466-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="gnutls is earlier than 0:1.4.1-3.el5_2.1" test_ref="oval:org.mitre.oval:tst:37768"/>
+      <criterion comment="gnutls-devel is earlier than 0:1.4.1-3.el5_2.1" test_ref="oval:org.mitre.oval:tst:37721"/>
+      <criterion comment="gnutls-utils is earlier than 0:1.4.1-3.el5_2.1" test_ref="oval:org.mitre.oval:tst:37986"/>
+    </criteria>
+  </criteria>
+</definition>

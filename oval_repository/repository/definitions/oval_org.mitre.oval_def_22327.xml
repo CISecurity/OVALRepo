@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22327" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0872: glibc security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0872-02" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0872.html"/>
+    <reference source="CVE" ref_id="CVE-2010-3847" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-3847.html"/>
+    <reference source="CVE" ref_id="CVE-2010-3856" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-3856.html"/>
+    <description>ld.so in the GNU C Library (aka glibc or libc6) before 2.11.3, and 2.12.x before 2.12.2, does not properly restrict use of the LD_AUDIT environment variable to reference dynamic shared objects (DSOs) as audit objects, which allows local users to gain privileges by leveraging an unsafe DSO located in a trusted library directory, as demonstrated by libpcprofile.so.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:09.971-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:39.142-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:05.823-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="glibc-devel is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99543"/>
+      <criterion comment="glibc-utils is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99766"/>
+      <criterion comment="glibc is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99757"/>
+      <criterion comment="nscd is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99369"/>
+      <criterion comment="glibc-static is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99888"/>
+      <criterion comment="glibc-common is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99889"/>
+      <criterion comment="glibc-headers is earlier than 0:2.12-1.7.el6_0.3" test_ref="oval:org.mitre.oval:tst:99672"/>
+    </criteria>
+  </criteria>
+</definition>

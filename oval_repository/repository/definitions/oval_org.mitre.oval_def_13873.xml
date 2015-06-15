@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13873" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-717-2 -- firefox-3.0 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <product>firefox-3.0</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-February/000838.html" ref_id="USN-717-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0355" ref_id="CVE-2009-0355"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0357" ref_id="CVE-2009-0357"/>
+    <description>A flaw was discovered in the browser engine when restoring closed tabs. If a user were tricked into restoring a tab to a malicious website with form input controls, an attacker could steal local files on the user�s system. Wladimir Palant discovered that Firefox did not restrict access to cookies in HTTP response headers. If a user were tricked into opening a malicious web page, a remote attacker could view sensitive information</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:55:59.084-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:18.106-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:27.294-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13873 - added CVE references; also made minor updates" date="2014-06-13T15:21:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:23:00.491-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:16.874-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="firefox-dom-inspector DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69345"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="firefox-libthai DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69325"/>
+          <criterion comment="firefox-dbg DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69137"/>
+          <criterion comment="firefox DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69339"/>
+          <criterion comment="firefox-dev DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69227"/>
+          <criterion comment="firefox-gnome-support DPKG is earlier than 2.0.0.21~20090209t122238+nobinonly-0ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69093"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6039" version="6" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Mozilla Thunderbird Phishing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Mozilla Thunderbird</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0777" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0777"/>
+    <description>Mozilla Firefox before 3.0.7, Thunderbird before 2.0.0.21, and SeaMonkey before 1.1.15 decode invisible characters when they are displayed in the location bar, which causes an incorrect address to be displayed and makes it easier for remote attackers to spoof URLs and conduct phishing attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-16T09:45:11">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </submitted>
+        <status_change date="2009-04-21T14:30:41.104-04:00">DRAFT</status_change>
+        <status_change date="2009-05-11T04:00:33.791-04:00">INTERIM</status_change>
+        <modified comment="Modified platform to Microsoft Windows Server 2003" date="2009-05-25T10:32:00.713-04:00">
+          <contributor organization="The MITRE Corporation">Brendan Miles</contributor>
+        </modified>
+        <status_change date="2009-06-15T04:00:57.661-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecated after consolidating other definitions for the same CVE. The new consolidated definition is oval:org.mitre.oval:def:7435" date="2010-01-03T18:00:11.513-04:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-01-03T18:00:11.513-04:00">DEPRECATED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6768 - definitions for the latest CVEs for Firefox, Thunderbird, and SeaMonkey, along with a few updates." date="2013-09-19T17:54:00.261-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6768 - Changed to registry default value of HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Thunderbird" date="2014-06-06T16:25:00.703-04:00">
+          <contributor organization="baramundi software">Richard Helbing</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:def:6039 - Fixed vulnerability detection; replaced registry tests with file tests" date="2014-06-13T17:43:00.534-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:obj:30168 - In some &quot;pattern match&quot; strings added &quot;\&quot; before &quot;.&quot; to clarify if &quot;point&quot; or &quot;any symbol&quot; needed." date="2014-07-28T18:11:00.493-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:obj:30018 - critical fixes to objects 30212, 30018, 29411 and 29644" date="2014-09-17T10:11:00.267-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+      </criteria>
+      <criteria operator="AND" comment="Check Mozilla Thunderbird version">
+        <extend_definition comment="Mozilla Thunderbird Mainline release is installed" definition_ref="oval:org.mitre.oval:def:22093"/>
+        <criterion comment="Thunderbird version is less than or equal to 2.0.0.20" test_ref="oval:org.mitre.oval:tst:114906"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

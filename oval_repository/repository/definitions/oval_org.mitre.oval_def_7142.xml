@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7142" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1987 lighttpd -- denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>lighttpd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-1987" ref_id="DSA-1987"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0295" ref_id="CVE-2010-0295"/>
+    <description>Li Ming discovered that lighttpd, a small and fast webserver with minimal memory footprint, is vulnerable to a denial of service attack due to bad memory handling. Slowly sending very small chunks of request data causes lighttpd to allocate new buffers for each read instead of appending to old ones. An attacker can abuse this behaviour to cause denial of service conditions due to memory exhaustion.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:05:05-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:28:01.304-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:35.893-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:24.513-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7142 - Debian Patch Update" date="2014-06-06T16:48:00.629-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:49:46.181-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:06.853-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="lighttpd-doc is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25962"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="lighttpd-mod-mysql-vhost is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25908"/>
+            <criterion comment="lighttpd-mod-magnet is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25795"/>
+            <criterion comment="lighttpd is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25601"/>
+            <criterion comment="lighttpd-mod-cml is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25535"/>
+            <criterion comment="lighttpd-mod-webdav is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25966"/>
+            <criterion comment="lighttpd-mod-trigger-b4-dl is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:25115"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="lighttpd-doc is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25338"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="lighttpd-mod-mysql-vhost is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25292"/>
+            <criterion comment="lighttpd-mod-magnet is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25970"/>
+            <criterion comment="lighttpd is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25893"/>
+            <criterion comment="lighttpd-mod-cml is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25882"/>
+            <criterion comment="lighttpd-mod-webdav is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25571"/>
+            <criterion comment="lighttpd-mod-trigger-b4-dl is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:25853"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

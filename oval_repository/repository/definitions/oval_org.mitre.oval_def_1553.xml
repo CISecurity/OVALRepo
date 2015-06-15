@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition class="vulnerability" id="oval:org.mitre.oval:def:1553" version="4" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Office 2000 Remote Code Execution via Malformed Routing Slip</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Office</product>
+    </affected>
+    <reference ref_id="CVE-2006-0009" source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0009"/>
+    <description>Buffer overflow in Microsoft Office 2000 SP3, XP SP3, and other versions and packages, allows user-assisted attackers to execute arbitrary code via a routing slip that is longer than specified by the provided length field, as exploited by malware such as TROJ_MDROPPER.BH and Trojan.PPDropper.E in attacks against PowerPoint.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-03-15T10:53:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-15T07:17:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-07-25T12:05:44" comment="changed tst:863 to only look for the existing object and applied an inventory definition.">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2006-10-07T09:15:21.300-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:862 - Updating Microsoft Word registry locations." date="2012-05-10T14:37:00.794-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:51:22.917-04:00">INTERIM</status_change>
+        <status_change date="2012-05-28T04:01:11.871-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <extend_definition comment="Microsoft Office 2000 is installed" definition_ref="oval:org.mitre.oval:def:93"/>
+    <criterion comment="the version of Winword.exe is less than 9.0.0.8938" negate="false" test_ref="oval:org.mitre.oval:tst:862"/>
+  </criteria>
+</definition>

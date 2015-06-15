@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5971" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running ftpd, Remote Privileged Access</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1668" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1668"/>
+    <description>ftpd.c in (1) wu-ftpd 2.4.2 and (2) ftpd in HP HP-UX B.11.11 assigns uid 0 to the FTP client in certain operating-system misconfigurations in which PAM authentication can succeed even though no passwd entry is available for a user, which allows remote attackers to gain privileges, as demonstrated by a login attempt for an LDAP account when nsswitch.conf does not specify LDAP for passwd information.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-12T16:30:32.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:02:35.905-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:19.712-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:38.867-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:32:32.486-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:49.334-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Criteria meets Security Bulletin HPSBUX02356">
+    <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+    <criterion comment="InternetSrvcs.INETSVCS-RUN is installed" test_ref="oval:org.mitre.oval:tst:9029"/>
+    <criterion negate="true" comment="Patch PHNE_38458 is installed" test_ref="oval:org.mitre.oval:tst:9107"/>
+  </criteria>
+</definition>

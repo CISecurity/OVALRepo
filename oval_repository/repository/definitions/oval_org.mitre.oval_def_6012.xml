@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6012" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SMB Credential Reflection Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4037" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4037"/>
+    <description>Microsoft Windows 2000 Gold through SP4, XP Gold through SP3, Server 2003 SP1 and SP2, Vista Gold and SP1, and Server 2008 allows remote SMB servers to execute arbitrary code on a client machine by replaying the NTLM credentials of a client user, as demonstrated by backrush, aka "SMB Credential Reflection Vulnerability."  NOTE: some reliable sources report that this vulnerability exists because of an insufficient fix for CVE-2000-0834.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-11-19T14:19:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-11-19T10:55:27.254-05:00">DRAFT</status_change>
+        <status_change date="2008-12-08T04:01:05.623-05:00">INTERIM</status_change>
+        <status_change date="2008-12-29T04:00:35.154-05:00">ACCEPTED</status_change>
+        <modified comment="Updated comment to be consistent with test" date="2010-02-10T12:57:00.636-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2010-02-10T12:58:38.938-05:00">INTERIM</status_change>
+        <modified comment="Updated comment to be consistent with test" date="2010-02-10T12:59:00.665-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Updated comment to be consistent with test" date="2010-02-10T12:59:00.585-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Updated comment to be consistent with test" date="2010-02-10T12:59:00.822-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Changed operation attribute to 'greater than or equals'" date="2010-02-10T13:00:00.223-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Changed operation attribute to 'greater than or equals'" date="2010-02-10T13:05:00.805-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Changed operation attribute to 'greater than or equals'" date="2010-02-10T13:05:00.517-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <modified comment="Changed operation attribute to 'greater than or equals'" date="2010-02-10T13:05:00.923-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2010-03-01T04:00:05.708-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6012 - &quot;Added support for Windows Server 2003 SP1 &amp; SP2 for Itanium Edition&quot; and &quot;Removed test criterion tst:9035 &amp; tst:9505, which wasn't required.&quot;" date="2011-10-17T14:48:00.683-04:00">
+          <contributor organization="SecPod Technologies">Prashanth A.</contributor>
+        </modified>
+        <status_change date="2011-10-17T14:50:56.329-04:00">INTERIM</status_change>
+        <status_change date="2011-11-07T04:01:03.883-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:4525 - contains tests with modified comments and all dependences" date="2014-02-13T12:19:00.287-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-13T12:23:14.170-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:01:12.165-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for Vulnerable Windows 2000 SP4 and Mrxsmb.sys version">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="Mrxsmb.sys version is less than 5.0.2195.7174" test_ref="oval:org.mitre.oval:tst:9360"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows XP (x86) SP2 and Mrxsmb.sys version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="Mrxsmb.sys version is less than 5.1.2600.3467" test_ref="oval:org.mitre.oval:tst:8573"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows XP (x86) SP3 and Mrxsmb.sys version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="Mrxsmb.sys version is less than 5.1.2600.5700" test_ref="oval:org.mitre.oval:tst:9308"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows Server 2003 SP1 (x64)/(x86)/(ia-64)/Windows XP Professional SP1 (x64) and Mrxsmb.sys version">
+      <criteria operator="OR" comment="Check for Vulnerable Windows Server 2003 SP1 (x64)/(x86)/(ia-64)/Windows XP Professional SP1 (x64)">
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:4386"/>
+        <extend_definition comment="Microsoft Windows XP Professional x64 Edition SP1 is installed" definition_ref="oval:org.mitre.oval:def:720"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="Mrxsmb.sys version is less than 5.2.3790.3206" test_ref="oval:org.mitre.oval:tst:9180"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows Server 2003 SP2 (x64)/(x86)/(ia-64)Windows XP Professional SP2 (x64)and Mrxsmb.sys version">
+      <criteria operator="OR" comment="Check for Vulnerable Windows Server 2003 SP2 (x64)/(x86)/(ia-64)/Windows XP Professional SP2 (x64)">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="Mrxsmb.sys version is less than 5.2.3790.4369" test_ref="oval:org.mitre.oval:tst:9476"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows Vista(x64)/Vista(x86) and Mrxsmb10.sys version">
+      <criteria operator="OR" comment="Check for Vulnerable Windows Vista(x64)/Vista(x86)">
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR/GDR">
+        <criteria operator="AND" comment="Check for GDR">
+          <criterion comment="Mrxsmb10.sys version is less than 6.0.6000.16738" test_ref="oval:org.mitre.oval:tst:9295"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Mrxsmb10.sys version is greater than or equal 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9423"/>
+          <criterion comment="Mrxsmb10.sys version is less than 6.0.6000.20904" test_ref="oval:org.mitre.oval:tst:9374"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for Vulnerable Windows Vista (32-bit)SP1/x64 SP1/Server 2008 (32-bit)/(64-bit)/(ia-64) and Mrxsmb10.sys version">
+      <criteria operator="OR" comment="Check for Vulnerable Windows Vista (32-bit)SP1/x64 SP1/Server 2008 (32-bit)/(64-bit)/(ia-64)">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR/GDR">
+        <criteria operator="AND" comment="Check for GDR">
+          <criterion comment="Mrxsmb10.sys version is less than 6.0.6001.18130" test_ref="oval:org.mitre.oval:tst:8808"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Mrxsmb10.sys version is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:9535"/>
+          <criterion comment="Mrxsmb10.sys version is less than 6.0.6001.22252" test_ref="oval:org.mitre.oval:tst:9477"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

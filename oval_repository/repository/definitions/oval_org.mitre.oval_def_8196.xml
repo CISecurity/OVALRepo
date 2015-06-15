@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8196" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1607 iceweasel -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>iceweasel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1607" ref_id="DSA-1607"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2798" ref_id="CVE-2008-2798"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2799" ref_id="CVE-2008-2799"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2800" ref_id="CVE-2008-2800"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2801" ref_id="CVE-2008-2801"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2802" ref_id="CVE-2008-2802"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2803" ref_id="CVE-2008-2803"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2805" ref_id="CVE-2008-2805"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2807" ref_id="CVE-2008-2807"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2808" ref_id="CVE-2008-2808"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2809" ref_id="CVE-2008-2809"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2811" ref_id="CVE-2008-2811"/>
+    <description>Several remote vulnerabilities have been discovered in the Iceweasel web browser, an unbranded version of the Firefox browser. The Common Vulnerabilities and Exposures project identifies the following problems: Devon Hubbard, Jesse Ruderman and Martijn Wargers discovered crashes in the layout engine, which might allow the execution of arbitrary code. Igor Bukanov, Jesse Ruderman and Gary Kwong discovered crashes in the Javascript engine, which might allow the execution of arbitrary code. "moz_bug_r_a4" discovered several cross-site scripting vulnerabilities. Collin Jackson and Adam Barth discovered that Javascript code could be executed in the context of signed JAR archives. "moz_bug_r_a4" discovered that XUL documents can escalate privileges by accessing the pre-compiled "fastload" file. "moz_bug_r_a4" discovered that missing input sanitising in the mozIJSSubScriptLoader.loadSubScript() function could lead to the execution of arbitrary code. Iceweasel itself is not affected, but some addons are. Claudio Santambrogio discovered that missing access validation in DOM parsing allows malicious web sites to force the browser to upload local files to the server, which could lead to information disclosure. Daniel Glazman discovered that a programming error in the code for parsing .properties files could lead to memory content being exposed to addons, which could lead to information disclosure. Masahiro Yamada discovered that file URLS in directory listings were insufficiently escaped. John G. Myers, Frank Benkstein and Nils Toedtmann discovered that alternate names on self-signed certificates were handled insufficiently, which could lead to spoofings secure connections. Greg McManus discovered a crash in the block reflow code, which might allow the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:10-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:57:55.770-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:57.879-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:43.346-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8196 - Debian Patch Update" date="2014-06-06T16:30:00.923-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:32:31.513-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:20.563-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="mozilla-firefox is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18571"/>
+          <criterion comment="firefox is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18555"/>
+          <criterion comment="firefox-dom-inspector is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18649"/>
+          <criterion comment="iceweasel-dom-inspector is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18677"/>
+          <criterion comment="mozilla-firefox-gnome-support is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18150"/>
+          <criterion comment="mozilla-firefox-dom-inspector is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18583"/>
+          <criterion comment="firefox-gnome-support is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18673"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="iceweasel-gnome-support is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18615"/>
+          <criterion comment="iceweasel-dbg is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18314"/>
+          <criterion comment="iceweasel is earlier than 2.0.0.15-0etch1" test_ref="oval:org.mitre.oval:tst:18735"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

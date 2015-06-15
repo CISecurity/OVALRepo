@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23152" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:0447: krb5 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>krb5</product>
+    </affected>
+    <reference ref_id="ELSA-2011:0447-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-0447.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-0285" ref_url="http://linux.oracle.com/cve/CVE-2011-0285.html" source="CVE"/>
+    <description>The process_chpw_request function in schpw.c in the password-changing functionality in kadmind in MIT Kerberos 5 (aka krb5) 1.7 through 1.9 frees an invalid pointer, which allows remote attackers to execute arbitrary code or cause a denial of service (daemon crash) via a crafted request that triggers an error condition.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:25:29.275-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:24.958-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:36.981-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23152 - optimisation of Oracle Linux content" date="2014-05-05T17:49:00.090-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:51:25.927-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:31.807-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="krb5-server-ldap is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108722"/>
+      <criterion comment="krb5-devel is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108803"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108788"/>
+      <criterion comment="krb5-libs is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108382"/>
+      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108727"/>
+      <criterion comment="krb5-server is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108831"/>
+      <criterion comment="krb5 is earlier than 0:1.8.2-3.el6_0.7" test_ref="oval:org.mitre.oval:tst:108668"/>
+    </criteria>
+  </criteria>
+</definition>

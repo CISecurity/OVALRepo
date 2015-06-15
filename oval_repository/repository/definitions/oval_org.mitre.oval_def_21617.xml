@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21617" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0616: dbus-glib security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>NetworkManager</product>
+      <product>dbus-glib</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0616-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0616.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0616"/>
+    <reference source="CVE" ref_id="CVE-2010-1172" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-1172.html"/>
+    <description>DBus-GLib 0.73 disregards the access flag of exported GObject properties, which allows local users to bypass intended access restrictions and possibly cause a denial of service by modifying properties, as demonstrated by properties of the (1) DeviceKit-Power, (2) NetworkManager, and (3) ModemManager services.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:28.400-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:22.792-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:47.882-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="dbus-glib-devel is earlier than 0:0.73-10.el5_5" test_ref="oval:org.mitre.oval:tst:99310"/>
+      <criterion comment="dbus-glib is earlier than 0:0.73-10.el5_5" test_ref="oval:org.mitre.oval:tst:99499"/>
+      <criterion comment="NetworkManager-glib is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:98964"/>
+      <criterion comment="NetworkManager-gnome is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:99680"/>
+      <criterion comment="NetworkManager-devel is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:99358"/>
+      <criterion comment="NetworkManager-glib-devel is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:99611"/>
+      <criterion comment="NetworkManager is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:99222"/>
+    </criteria>
+  </criteria>
+</definition>

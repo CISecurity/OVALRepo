@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25801" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:0779-1 -- Recommended update for gnome-system-monitor</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>gnome-system-monitor</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20130779-1.html" ref_id="SUSE-RU-2013:0779-1"/>
+    <description>This combined update provides the following fixes and
+enhancements:
+
+    * 
+
+      The System tab in GNOME System Monitor was redesigned
+to display information in summarized format. Previously,
+data about each CPU core was printed in one text line and
+could be truncated on machines with many cores.
+
+    * 
+
+      Additionally, libgtop was fixed to correctly read CPU
+information from /proc/cpuinfo when the file is larger than
+16Kb.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:35:53">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:34:05.295-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:16.606-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:21.625-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="gnome-system-monitor RPM is earlier than 0:2.28.0-1.9.9.1" test_ref="oval:org.mitre.oval:tst:120086"/>
+        <criterion comment="gnome-system-monitor-lang RPM is earlier than 0:2.28.0-1.9.9.1" test_ref="oval:org.mitre.oval:tst:120267"/>
+        <criterion comment="libgtop RPM is earlier than 0:2.28.0-1.4.1" test_ref="oval:org.mitre.oval:tst:119956"/>
+        <criterion comment="libgtop-2_0-7 RPM is earlier than 0:2.28.0-1.4.1" test_ref="oval:org.mitre.oval:tst:120204"/>
+        <criterion comment="libgtop-lang RPM is earlier than 0:2.28.0-1.4.1" test_ref="oval:org.mitre.oval:tst:119838"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="libgtop-doc RPM is earlier than 0:2.28.0-1.4.1" test_ref="oval:org.mitre.oval:tst:120099"/>
+    </criteria>
+  </criteria>
+</definition>

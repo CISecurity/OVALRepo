@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2078" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerabilities in The Solaris Event Port API May Result in a Denial of Service (DoS) Condition</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-3781" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-3781"/>
+    <description>Unspecified vulnerability in Sun Solaris 10 allows context-dependent attackers to cause a denial of service (panic) via unspecified vectors involving the event port API.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:26.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:14.069-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:29.992-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:43.586-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102485" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 118833-12 or later installed" test_ref="oval:org.mitre.oval:tst:3185" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102485" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 118855-10 or later installed" test_ref="oval:org.mitre.oval:tst:4131" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:259" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Server 2003 Unknown Vector SMB Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>SMB (Server Message Block)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1206" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1206"/>
+    <description>Buffer overflow in the Server Message Block (SMB) functionality for Microsoft Windows 2000, XP SP1 and SP2, and Server 2003 and SP1 allows remote attackers to execute arbitrary code via unknown vectors, aka the "Server Message Block Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-06-22T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </submitted>
+        <status_change date="2005-06-22T12:38:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-07-27T10:37:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-08-18T07:37:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:45:32.278-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:02:33.423-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software section">
+    <criterion comment="Windows Server 2003 is installed" test_ref="oval:org.mitre.oval:tst:2761"/>
+    <criteria operator="OR" comment="a vulnerable version of srv.sys exists">
+      <criteria operator="AND" comment="for specific Windows configurations a vulnerable version of srv.sys exists">
+        <criterion negate="true" comment="Win2K/XP/2003 is patched" test_ref="oval:org.mitre.oval:tst:2437"/>
+        <criteria operator="OR" comment="32-bit version of Windows or 64-bit (itanium architecture) version of Windows is installed">
+          <criterion comment="32-Bit version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2748"/>
+          <criterion comment="a version of Windows for the ia64 architecture is installed" test_ref="oval:org.mitre.oval:tst:2747"/>
+        </criteria>
+        <criterion comment="the version of srv.sys is less than 5.2.3790.324" test_ref="oval:org.mitre.oval:tst:2746"/>
+      </criteria>
+      <criteria operator="AND" comment="for specific Windows configurations a vulnerable version of srv.sys exists">
+        <criterion comment="Win2K/XP/2003 service pack 1 is installed" test_ref="oval:org.mitre.oval:tst:2843"/>
+        <criteria operator="OR" comment="32-bit version of Windows or 64-bit (itanium architecture) version of Windows is installed">
+          <criterion comment="32-Bit version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2748"/>
+          <criterion comment="a version of Windows for the ia64 architecture is installed" test_ref="oval:org.mitre.oval:tst:2747"/>
+        </criteria>
+        <criterion comment="the version of srv.sys is less than 5.2.3790.2437" test_ref="oval:org.mitre.oval:tst:2745"/>
+      </criteria>
+      <criteria operator="AND" comment="for 64-bit (x64 arch) Windows (gold edition) a vulnerable version of srv.sys exists">
+        <criterion comment="64-Bit (x64 architecture) version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2744"/>
+        <criterion negate="true" comment="Win2K/XP/2003 is patched" test_ref="oval:org.mitre.oval:tst:2437"/>
+        <criterion comment="the version of srv.sys is less than 5.2.3790.2437" test_ref="oval:org.mitre.oval:tst:2745"/>
+      </criteria>
+    </criteria>
+    <criterion negate="true" comment="the patch KB896422 is installed" test_ref="oval:org.mitre.oval:tst:2743"/>
+  </criteria>
+</definition>

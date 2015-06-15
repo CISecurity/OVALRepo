@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19095" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Unspecified vulnerability in Oracle Java SE 7u40 and earlier, Java SE 6u60 and earlier</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Java Runtime Environment</product>
+    </affected>
+    <reference ref_id="CVE-2013-5832" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5832" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Java SE 7u40 and earlier, Java SE 6u60 and earlier, and Java SE Embedded 7u40 and earlier allows remote attackers to affect confidentiality, integrity, and availability via unknown vectors related to Deployment.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-10-24T16:31:26.748+04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-10-25T10:06:35.775-04:00">DRAFT</status_change>
+        <status_change date="2013-11-11T04:01:46.857-05:00">INTERIM</status_change>
+        <status_change date="2013-11-26T13:49:26.232-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19095 - tests had wrong objects, replaced and tests and states modified, comment change in obj:24238" date="2014-01-21T16:36:00.034-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2014-01-21T16:44:07.320-05:00">INTERIM</status_change>
+        <status_change date="2014-02-10T04:00:14.768-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_61 and is greater than or equal to 1.6.0">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_61" test_ref="oval:org.mitre.oval:tst:100078"/>
+      <extend_definition comment="Java SE Runtime Environment 6 is installed" definition_ref="oval:org.mitre.oval:def:16362"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_41 and is greater than or equal to 1.7.0">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_41" test_ref="oval:org.mitre.oval:tst:100060"/>
+      <extend_definition comment="Java SE Runtime Environment 7 is installed" definition_ref="oval:org.mitre.oval:def:16050"/>
+    </criteria>
+  </criteria>
+</definition>

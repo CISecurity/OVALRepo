@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13916" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-723-1 -- git-core vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>git-core</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-February/000843.html" ref_id="USN-723-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3546" ref_id="CVE-2008-3546"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5516" ref_id="CVE-2008-5516"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5517" ref_id="CVE-2008-5517"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5916" ref_id="CVE-2008-5916"/>
+    <description>It was discovered that Git did not properly handle long file paths. If a user were tricked into performing commands on a specially crafted Git repository, an attacker could possibly execute arbitrary code with the privileges of the user invoking the program. It was discovered that the Git web interface did not correctly handle shell metacharacters when processing certain commands. A remote attacker could send specially crafted commands to the Git server and execute arbitrary code with the privileges of the Git web server. This issue only applied to Ubuntu 7.10 and 8.04 LTS. It was discovered that the Git web interface did not properly restrict the diff.external configuration parameter. A local attacker could exploit this issue and execute arbitrary code with the privileges of the Git web server. This issue only applied to Ubuntu 8.04 LTS and 8.10</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:11:18.402-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:34.406-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:44.517-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13916 - added CVE references; also made minor updates" date="2014-06-13T15:11:00.891-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:14:08.357-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:24.784-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="git-gui DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74428"/>
+            <criterion comment="git-daemon-run DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74126"/>
+            <criterion comment="gitweb DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73549"/>
+            <criterion comment="git-doc DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74544"/>
+            <criterion comment="git-p4 DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74184"/>
+            <criterion comment="git-arch DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74370"/>
+            <criterion comment="git-cvs DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74209"/>
+            <criterion comment="git-svn DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74400"/>
+            <criterion comment="git-email DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74053"/>
+            <criterion comment="gitk DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74084"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criterion comment="git-core DPKG is earlier than 1:1.5.2.5-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:74509"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="git-gui DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74266"/>
+            <criterion comment="git-daemon-run DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73892"/>
+            <criterion comment="gitweb DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74366"/>
+            <criterion comment="git-doc DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74548"/>
+            <criterion comment="git-svn DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73579"/>
+            <criterion comment="git-arch DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74133"/>
+            <criterion comment="git-cvs DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73674"/>
+            <criterion comment="git-email DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74660"/>
+            <criterion comment="gitk DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74474"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criterion comment="git-core DPKG is earlier than 1:1.5.4.3-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74631"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="git-doc DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:74123"/>
+            <criterion comment="git-svn DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73965"/>
+            <criterion comment="git-arch DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:74288"/>
+            <criterion comment="git-cvs DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:74452"/>
+            <criterion comment="git-email DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:74101"/>
+            <criterion comment="gitk DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73764"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criterion comment="git-core DPKG is earlier than 1.1.3-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:74587"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="git-gui DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74460"/>
+            <criterion comment="git-daemon-run DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74616"/>
+            <criterion comment="gitweb DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74604"/>
+            <criterion comment="git-doc DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74026"/>
+            <criterion comment="git-svn DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74492"/>
+            <criterion comment="git-arch DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74328"/>
+            <criterion comment="git-cvs DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74613"/>
+            <criterion comment="git-email DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74468"/>
+            <criterion comment="gitk DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74552"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criterion comment="git-core DPKG is earlier than 1:1.5.6.3-1.1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74638"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

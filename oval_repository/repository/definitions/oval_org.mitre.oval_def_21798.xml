@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21798" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2008:0818: hplip security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>hplip</product>
+    </affected>
+    <reference ref_id="ELSA-2008:0818-02" ref_url="http://linux.oracle.com/errata/ELSA-2008-0818.html" source="VENDOR"/>
+    <reference ref_id="CVE-2008-2940" ref_url="http://linux.oracle.com/cve/CVE-2008-2940.html" source="CVE"/>
+    <reference ref_id="CVE-2008-2941" ref_url="http://linux.oracle.com/cve/CVE-2008-2941.html" source="CVE"/>
+    <description>The hpssd message parser in hpssd.py in HP Linux Imaging and Printing (HPLIP) 1.6.7 allows local users to cause a denial of service (process stop) via a crafted packet, as demonstrated by sending "msg=0" to TCP port 2207.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:53:12.106-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:18.120-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:26.492-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21798 - optimisation of Oracle Linux content" date="2014-05-05T18:23:00.086-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:24:30.337-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:28.943-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="hplip is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:101523"/>
+      <criterion comment="libsane-hpaio is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:101461"/>
+      <criterion comment="hpijs is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:102211"/>
+    </criteria>
+  </criteria>
+</definition>

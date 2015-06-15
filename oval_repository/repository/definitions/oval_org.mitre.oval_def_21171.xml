@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21171" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1090: ruby security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>ruby</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:1090-00" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1090.html"/>
+    <reference source="CESA" ref_id="CESA-2013:1090"/>
+    <reference source="CVE" ref_id="CVE-2013-4073" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-4073.html"/>
+    <description>The OpenSSL::SSL.verify_certificate_identity function in lib/openssl/ssl.rb in Ruby 1.8 before 1.8.7-p374, 1.9 before 1.9.3-p448, and 2.0 before 2.0.0-p247 does not properly handle a '\0' character in a domain name in the Subject Alternative Name field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority, a related issue to CVE-2009-2408.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:14.387-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:01:12.043-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:25.912-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="ruby-rdoc is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91540"/>
+        <criterion comment="ruby-ri is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:90988"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91554"/>
+        <criterion comment="ruby-static is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91608"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91532"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91265"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91197"/>
+        <criterion comment="ruby-irb is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91298"/>
+        <criterion comment="ruby is earlier than 0:1.8.7.352-12.el6_4" test_ref="oval:org.mitre.oval:tst:91472"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="ruby-rdoc is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91512"/>
+        <criterion comment="ruby-ri is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91538"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91219"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91547"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91099"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91125"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91358"/>
+        <criterion comment="ruby-irb is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91606"/>
+        <criterion comment="ruby is earlier than 0:1.8.5-31.el5_9" test_ref="oval:org.mitre.oval:tst:91418"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27473" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013-0870 -- tomcat5 security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>tomcat5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-0870.html" ref_id="ELSA-2013-0870"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1976" ref_id="CVE-2013-1976"/>
+    <description>[0:5.5.23-0jpp.40]
+- Related: CVE-2013-1976 It was found during additional testing
+- that the tomcat5 init may fail to start because the user
+- shell is set to sbin/nologin. Fixed in init scrip. SU now
+- uses -s /bin/sh during startup
+
+[0:5.5.23-0jpp.39]
+- Resolves: CVE-2013-1976 Improper TOMCAT_LOG management in
+- initscript. Change location of TOMCAT_LOG to /var/log so
+- only root can write to it. Touching TOMCAT_LOG is no longer
+- required during initscript startup. Permissions and ownership
+- changed to 0755 tomcat:root for logdir</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:03:36.253-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:04:39.902-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:01.011-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T18:34:46.978-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T18:34:46.978-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="tomcat5 is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129542"/>
+      <criterion comment="tomcat5-admin-webapps is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129362"/>
+      <criterion comment="tomcat5-common-lib is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129354"/>
+      <criterion comment="tomcat5-jasper is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129525"/>
+      <criterion comment="tomcat5-jasper-javadoc is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129497"/>
+      <criterion comment="tomcat5-jsp-2.0-api is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129530"/>
+      <criterion comment="tomcat5-jsp-2.0-api-javadoc is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129436"/>
+      <criterion comment="tomcat5-server-lib is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:128711"/>
+      <criterion comment="tomcat5-servlet-2.4-api is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:128931"/>
+      <criterion comment="tomcat5-servlet-2.4-api-javadoc is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129456"/>
+      <criterion comment="tomcat5-webapps is earlier than 0:5.5.23-0jpp.40.el5_9" test_ref="oval:org.mitre.oval:tst:129480"/>
+    </criteria>
+  </criteria>
+</definition>

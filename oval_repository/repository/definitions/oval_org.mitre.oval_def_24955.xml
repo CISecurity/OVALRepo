@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24955" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in OpenSSL 0.9.8 - 0.9.8za, 1.0.0 - 1.0.0m and 1.0.1 - 1.0.1h, allows remote attackers to cause a denial of service</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-0224" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0224"/>
+    <description>OpenSSL before 0.9.8za, 1.0.0 before 1.0.0m, and 1.0.1 before 1.0.1h does not properly restrict processing of ChangeCipherSpec messages, which allows man-in-the-middle attackers to trigger use of a zero-length master key in certain OpenSSL-to-OpenSSL communications, and consequently hijack sessions or obtain sensitive information, via a crafted TLS handshake, aka the "CCS Injection" vulnerability.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-18T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-06-25T16:20:50.539-04:00">DRAFT</status_change>
+        <status_change date="2014-07-14T04:01:24.561-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24955 - Nonprintable characters in title of some OpenSSL definitions" date="2014-07-28T17:28:00.362-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-18T04:02:58.456-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24955 - Removed Unicode characters from title." date="2014-11-20T23:04:00.942-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2014-11-20T23:14:22.302-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:18.160-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check vulnerable OpenSSL">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL">
+        <criterion comment="Check if the version of OpenSSL 0.9.8 before 0.9.8za" test_ref="oval:org.mitre.oval:tst:115020"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.0 before 1.0.0m" test_ref="oval:org.mitre.oval:tst:114595"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.1 before 1.0.1h" test_ref="oval:org.mitre.oval:tst:114590"/>
+      </criteria>
+      <criterion comment="OpenSSL is installed" test_ref="oval:org.mitre.oval:tst:113869"/>
+    </criteria>
+    <criteria operator="AND" comment="Check vulnerable OpenSSL (32_bit)">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL (32_bit)">
+        <criterion comment="Check if the version of OpenSSL 0.9.8 before 0.9.8za (32_bit)" test_ref="oval:org.mitre.oval:tst:114808"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.0 before 1.0.0m (32_bit)" test_ref="oval:org.mitre.oval:tst:114995"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.1 before 1.0.1h (32_bit)" test_ref="oval:org.mitre.oval:tst:115127"/>
+      </criteria>
+      <criterion comment="OpenSSL (32_bit) is installed" test_ref="oval:org.mitre.oval:tst:113875"/>
+    </criteria>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8za" test_ref="oval:org.mitre.oval:tst:115175"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8za (32_bit)" test_ref="oval:org.mitre.oval:tst:114277"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8za under System Root" test_ref="oval:org.mitre.oval:tst:115243"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0m ProgramFilesDir" test_ref="oval:org.mitre.oval:tst:114936"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0m ProgramFilesDir x86" test_ref="oval:org.mitre.oval:tst:115165"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0m under Sytem32 and SysWOW64" test_ref="oval:org.mitre.oval:tst:115016"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1h ProgramFilesDir" test_ref="oval:org.mitre.oval:tst:114805"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1h ProgramFilesDir x86" test_ref="oval:org.mitre.oval:tst:115168"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1h under Sytem32 and SysWOW64" test_ref="oval:org.mitre.oval:tst:115173"/>
+  </criteria>
+</definition>

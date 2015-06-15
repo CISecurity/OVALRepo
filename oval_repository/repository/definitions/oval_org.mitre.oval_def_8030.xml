@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8030" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1577 gforge -- insecure temporary files</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>gforge</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1577" ref_id="DSA-1577"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0167" ref_id="CVE-2008-0167"/>
+    <description>Stephen Gran and Mark Hymers discovered that some scripts run by GForge, a collaborative development tool, open files in write mode in a potentially insecure manner. This may be exploited to overwrite arbitrary files on the local system.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:05-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:52:27.572-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:39.783-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:42.793-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8030 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:37:43.362-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:49.964-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="gforge-ldap-openldap is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14206"/>
+      <criterion comment="gforge-mta-exim4 is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14088"/>
+      <criterion comment="gforge-mta-courier is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14554"/>
+      <criterion comment="gforge-db-postgresql is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14349"/>
+      <criterion comment="gforge is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14338"/>
+      <criterion comment="gforge-common is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14125"/>
+      <criterion comment="gforge-mta-postfix is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14402"/>
+      <criterion comment="gforge-shell-postgresql is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14487"/>
+      <criterion comment="gforge-shell-ldap is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14551"/>
+      <criterion comment="gforge-lists-mailman is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:13997"/>
+      <criterion comment="gforge-web-apache is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14263"/>
+      <criterion comment="gforge-mta-exim is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14494"/>
+      <criterion comment="gforge-ftp-proftpd is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14164"/>
+      <criterion comment="gforge-dns-bind9 is earlier than 4.5.14-22etch8" test_ref="oval:org.mitre.oval:tst:14101"/>
+    </criteria>
+  </criteria>
+</definition>

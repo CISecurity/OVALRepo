@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:152" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 7 X Font Server Remote Buffer Overrun</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>fs.auto, xfs</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-1317" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1317"/>
+    <description>Buffer overflow in Dispatch() routine for XFS font server (fs.auto) on Solaris 2.5.1 through 9 allows remote attackers to cause a denial of service (crash) or execute arbitrary code via a certain XFS query.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-09-08T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+        <modified comment="fixed the service_name entity used in the inetd_object" date="2007-04-10T15:16:00.255-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:16:47.568-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:17.491-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed incorrect user_id element value in process_state.  Incorrect value was 'root', updated to value of '0'." date="2010-09-02T15:11:00.501-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2010-09-02T15:13:54.067-04:00">INTERIM</status_change>
+        <status_change date="2010-09-20T04:00:14.407-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 7 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3045"/>
+      <criterion comment="File fs.auto exists" negate="false" test_ref="oval:org.mitre.oval:tst:2873"/>
+      <criterion comment="File xfs exists" negate="false" test_ref="oval:org.mitre.oval:tst:2872"/>
+      <criterion comment="Patch 108117-06 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:2864"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="inetd.conf contains fs.auto" negate="false" test_ref="oval:org.mitre.oval:tst:2870"/>
+      <criterion comment="inetd running" negate="false" test_ref="oval:org.mitre.oval:tst:3135"/>
+      <criteria operator="OR" comment="File xfs executable">
+        <criterion comment="File xfs executable" negate="false" test_ref="oval:org.mitre.oval:tst:2869"/>
+        <criterion comment="File xfs executable" negate="false" test_ref="oval:org.mitre.oval:tst:2868"/>
+        <criterion comment="File xfs executable" negate="false" test_ref="oval:org.mitre.oval:tst:2867"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11787" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SChannel Malformed Certificate Request Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2566" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2566"/>
+    <description>The Secure Channel (aka SChannel) security package in Microsoft Windows XP SP2 and SP3, and Windows Server 2003 SP2, does not properly validate certificate request messages from TLS and SSL servers, which allows remote servers to execute arbitrary code via a crafted SSL response, aka "SChannel Malformed Certificate Request Remote Code Execution Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-08-10T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-08-16T12:27:13.779-04:00">DRAFT</status_change>
+        <status_change date="2010-09-06T04:11:27.755-04:00">INTERIM</status_change>
+        <status_change date="2010-09-27T04:00:12.130-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP SP3 x86">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of schannel.dll is less than 5.1.2600.6006" test_ref="oval:org.mitre.oval:tst:40676"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP SP2 x64, Windows Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of schannel.dll is less than 5.2.3790.4724" test_ref="oval:org.mitre.oval:tst:41575"/>
+    </criteria>
+  </criteria>
+</definition>

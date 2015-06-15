@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17310" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1871-1 -- xserver-xorg-video-openchrome vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 13.04</platform>
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>xserver-xorg-video-openchrome</product>
+      <product>xserver-xorg-video-openchrome-lts-quantal</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1871-1/" ref_id="usn-1871-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1994" ref_id="CVE-2013-1994"/>
+    <description>Several security issues were fixed in xserver-xorg-video-openchrome.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-06-25T10:26:26.748+04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-07-03T15:28:49.164-04:00">DRAFT</status_change>
+        <status_change date="2013-07-22T04:02:57.195-04:00">INTERIM</status_change>
+        <status_change date="2013-08-12T04:09:06.852-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17310 - added CVE references; also made minor updates" date="2014-06-13T17:25:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:27:58.320-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:06:28.110-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="xserver-xorg-video-openchrome DPKG is earlier than 1:0.3.1-0ubuntu1.12.10.1" test_ref="oval:org.mitre.oval:tst:81410"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 13.04 is installed" definition_ref="oval:org.mitre.oval:def:16014"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="xserver-xorg-video-openchrome DPKG is earlier than 1:0.3.1-0ubuntu1.13.04.1" test_ref="oval:org.mitre.oval:tst:80790"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xserver-xorg-video-openchrome-lts-quantal DPKG is earlier than 1:0.3.1-0ubuntu1~precise3" test_ref="oval:org.mitre.oval:tst:80653"/>
+        <criterion comment="xserver-xorg-video-openchrome DPKG is earlier than 1:0.2.904+svn1050-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:81507"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

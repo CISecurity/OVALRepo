@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21115" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0310: nfs-utils security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>nfs-utils</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0310-03" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0310.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1749" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1749.html"/>
+    <description>The nfs_addmntent function in support/nfs/nfs_mntent.c in the mount.nsf tool in nfs-utils before 1.2.4 attempts to append to the /etc/mtab file without first checking whether resource limits would interfere, which allows local users to corrupt this file via a process with a small RLIMIT_FSIZE value, a related issue to CVE-2011-1089.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:32.847-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:31.645-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:49.401-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criterion comment="nfs-utils is earlier than 1:1.0.9-60.el5" test_ref="oval:org.mitre.oval:tst:92738"/>
+  </criteria>
+</definition>

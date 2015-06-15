@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8428" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Kerberos Null Pointer Dereference Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0035" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0035"/>
+    <description>The Key Distribution Center (KDC) in Kerberos in Microsoft Windows 2000 SP4, Server 2003 SP2, and Server 2008 Gold and SP2, when a trust relationship with a non-Windows Kerberos realm exists, allows remote authenticated users to cause a denial of service (NULL pointer dereference and domain controller outage) via a crafted Ticket Granting Ticket (TGT) renewal request, aka "Kerberos Null Pointer Dereference Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-02-08T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-02-10T13:40:19.771-05:00">DRAFT</status_change>
+        <status_change date="2010-03-01T04:00:24.231-05:00">INTERIM</status_change>
+        <modified comment="Update for CVE-2010-0035 for bulletin MS10-014" date="2010-03-08T14:55:00.741-05:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-05-17T04:01:25.410-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 2000 SP4 or later">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criteria operator="OR" comment="Windows NT server product option">
+        <criterion comment="this is an NT Server (stand-alone)" test_ref="oval:org.mitre.oval:tst:2408"/>
+        <criterion comment="this is an NT Server (domain controller)" test_ref="oval:org.mitre.oval:tst:3035"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 5.0.2195.7361" test_ref="oval:org.mitre.oval:tst:20657"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 5.2.3790.4628" test_ref="oval:org.mitre.oval:tst:20941"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 32bit/x64/ia64 - GDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 6.0.6001.18374" test_ref="oval:org.mitre.oval:tst:21000"/>
+      <criterion comment="the version of Kdcsvc.dll is greater than or equal 6.0.6001.18000" test_ref="oval:org.mitre.oval:tst:20922"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 32bit/x64/ia64 - LDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 6.0.6001.22574" test_ref="oval:org.mitre.oval:tst:21088"/>
+      <criterion comment="the version of Kdcsvc.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:20781"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 SP2 32bit/x64/ia64 - GDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 6.0.6002.18157" test_ref="oval:org.mitre.oval:tst:20849"/>
+      <criterion comment="the version of Kdcsvc.dll is greater than or equal 6.0.6002.18000" test_ref="oval:org.mitre.oval:tst:20843"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 SP2 32bit/x64/ia64 - LDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criterion comment="the system is being used as AD - DomainRole is 4 or 5" test_ref="oval:org.mitre.oval:tst:10696"/>
+      <criterion comment="the version of Kdcsvc.dll is less than 6.0.6002.22280" test_ref="oval:org.mitre.oval:tst:20839"/>
+      <criterion comment="the version of Kdcsvc.dll is greater than or equal 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:20769"/>
+    </criteria>
+  </criteria>
+</definition>

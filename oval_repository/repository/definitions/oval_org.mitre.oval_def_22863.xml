@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22863" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:1209: curl security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>curl</product>
+    </affected>
+    <reference ref_id="ELSA-2009:1209-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-1209.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-2417" ref_url="http://linux.oracle.com/cve/CVE-2009-2417.html" source="CVE"/>
+    <description>lib/ssluse.c in cURL and libcurl 7.4 through 7.19.5, when OpenSSL is used, does not properly handle a '\0' character in a domain name in the subject's Common Name (CN) field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority, a related issue to CVE-2009-2408.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:57:31.584-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:40.804-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:26.066-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22863 - optimisation of Oracle Linux content" date="2014-05-05T18:01:00.702-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:03:00.396-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:32.666-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="curl is earlier than 0:7.15.5-2.1.el5_3.5" test_ref="oval:org.mitre.oval:tst:103048"/>
+      <criterion comment="curl-devel is earlier than 0:7.15.5-2.1.el5_3.5" test_ref="oval:org.mitre.oval:tst:103011"/>
+    </criteria>
+  </criteria>
+</definition>

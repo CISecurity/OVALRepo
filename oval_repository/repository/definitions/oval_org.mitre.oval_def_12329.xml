@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12329" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OpenType Font Double Free Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3957" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3957"/>
+    <description>Double free vulnerability in the OpenType Font (OTF) driver in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP1 and SP2, Windows Server 2008 Gold, SP2, and R2, and Windows 7 allows local users to gain privileges via a crafted OpenType font, aka "OpenType Font Double Free Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-12-17T20:53:54.004-05:00">DRAFT</status_change>
+        <status_change date="2011-01-03T04:00:27.877-05:00">INTERIM</status_change>
+        <status_change date="2011-01-24T04:00:26.399-05:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:24:08.916-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:24:08.916-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:01:22.947-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of Atmfd.dll is less than 5.1.2.230" test_ref="oval:org.mitre.oval:tst:41896"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of Atmfd.dll is less than 5.2.2.230" test_ref="oval:org.mitre.oval:tst:41556"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP1 x86/x64, Server 2008 32bit/x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criterion comment="the version of Atmfd.dll is less than 5.1.2.230" test_ref="oval:org.mitre.oval:tst:41896"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP2 x86/x64, Server 2008 SP2 32bit/x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criterion comment="the version of Atmfd.dll is less than 5.1.2.230" test_ref="oval:org.mitre.oval:tst:41896"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64, Server 2008 R2 x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criterion comment="the version of Atmfd.dll is less than 5.1.2.230" test_ref="oval:org.mitre.oval:tst:41896"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8333" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1807 cyrus-sasl2, cyrus-sasl2-heimdal -- buffer overflow</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>cyrus-sasl2</product>
+      <product>cyrus-sasl2-heimdal</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1807" ref_id="DSA-1807"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0688" ref_id="CVE-2009-0688"/>
+    <description>James Ralston discovered that the sasl_encode64() function of cyrus-sasl2, a free library implementing the Simple Authentication and Security Layer, suffers from a missing null termination in certain situations. This causes several buffer overflows in situations where cyrus-sasl2 itself requires the string to be null terminated which can lead to denial of service or arbitrary code execution. Important notice (Quoting from US-CERT): While this patch will fix currently vulnerable code, it can cause non-vulnerable existing code to break. Here's a function prototype from include/saslutil.h to clarify my explanation: Assume a scenario where calling code has been written in such a way that it calculates the exact size required for base64 encoding in advance, then allocates a buffer of that exact size, passing a pointer to the buffer into sasl_encode64() as *out. As long as this code does not anticipate that the buffer is NUL-terminated (does not call any string-handling functions like strlen(), for example) the code will work and it will not be vulnerable. Once this patch is applied, that same code will break because sasl_encode64() will begin to return SASL_BUFOVER.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:13-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T08:00:40.952-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:27.372-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:04:09.429-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8333 - Debian Patch Update" date="2014-06-06T17:29:00.238-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:31:12.633-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:34.791-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="cyrus-sasl2-doc is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20447"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libsasl2-2 is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20234"/>
+          <criterion comment="libsasl2-modules-gssapi-heimdal is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20148"/>
+          <criterion comment="cyrus-sasl2-heimdal-dbg is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20365"/>
+          <criterion comment="sasl2-bin is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20378"/>
+          <criterion comment="cyrus-sasl2-dbg is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:19990"/>
+          <criterion comment="libsasl2-modules-gssapi-mit is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20409"/>
+          <criterion comment="libsasl2-dev is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20331"/>
+          <criterion comment="libsasl2-modules-sql is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:19896"/>
+          <criterion comment="libsasl2-modules is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20458"/>
+          <criterion comment="libsasl2-modules-ldap is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20215"/>
+          <criterion comment="libsasl2-modules-otp is earlier than 2.1.22.dfsg1-23+lenny1" test_ref="oval:org.mitre.oval:tst:20402"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

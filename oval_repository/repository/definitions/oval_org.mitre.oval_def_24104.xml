@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24104" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0420: qemu-kvm security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>qemu-kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0420-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0420.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0420"/>
+    <reference source="CVE" ref_id="CVE-2014-0142" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0142.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0143" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0143.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0144" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0144.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0145" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0145.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0146" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0146.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0147" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0147.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0148" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0148.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0150" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0150.html"/>
+    <description>KVM (Kernel-based Virtual Machine) is a full virtualization solution for
+Linux on AMD64 and Intel 64 systems. The qemu-kvm package provides the
+user-space component for running virtual machines using KVM.
+
+Multiple integer overflow, input validation, logic error, and buffer
+overflow flaws were discovered in various QEMU block drivers. An attacker
+able to modify a disk image file loaded by a guest could use these flaws to
+crash the guest, or corrupt QEMU process memory on the host, potentially
+resulting in arbitrary code execution on the host with the privileges of
+the QEMU process. (CVE-2014-0143, CVE-2014-0144, CVE-2014-0145,
+CVE-2014-0147)
+
+A buffer overflow flaw was found in the way the virtio_net_handle_mac()
+function of QEMU processed guest requests to update the table of MAC
+addresses. A privileged guest user could use this flaw to corrupt QEMU
+process memory on the host, potentially resulting in arbitrary code
+execution on the host with the privileges of the QEMU process.
+(CVE-2014-0150)
+
+A divide-by-zero flaw was found in the seek_to_sector() function of the
+parallels block driver in QEMU. An attacker able to modify a disk image
+file loaded by a guest could use this flaw to crash the guest.
+(CVE-2014-0142)
+
+A NULL pointer dereference flaw was found in the QCOW2 block driver in
+QEMU. An attacker able to modify a disk image file loaded by a guest could
+use this flaw to crash the guest. (CVE-2014-0146)
+
+It was found that the block driver for Hyper-V VHDX images did not
+correctly calculate BAT (Block Allocation Table) entries due to a missing
+bounds check. An attacker able to modify a disk image file loaded by a
+guest could use this flaw to crash the guest. (CVE-2014-0148)
+
+The CVE-2014-0143 issues were discovered by Kevin Wolf and Stefan Hajnoczi
+of Red Hat, the CVE-2014-0144 issues were discovered by Fam Zheng, Jeff
+Cody, Kevin Wolf, and Stefan Hajnoczi of Red Hat, the CVE-2014-0145 issues
+were discovered by Stefan Hajnoczi of Red Hat, the CVE-2014-0150 issue was
+discovered by Michael S. Tsirkin of Red Hat, the CVE-2014-0142,
+CVE-2014-0146, and CVE-2014-0147 issues were discovered by Kevin Wolf of
+Red Hat, and the CVE-2014-0148 issue was discovered by Jeff Cody of
+Red Hat.
+
+All qemu-kvm users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing this
+update, shut down all running virtual machines. Once all virtual machines
+have shut down, start them again for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-24T11:24:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-04-30T15:08:01.093-04:00">DRAFT</status_change>
+        <status_change date="2014-05-19T04:00:11.499-04:00">INTERIM</status_change>
+        <status_change date="2014-06-09T04:00:28.711-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="qemu-kvm-tools is earlier than 2:0.12.1.2-2.415.el6_5.8" test_ref="oval:org.mitre.oval:tst:113919"/>
+      <criterion comment="qemu-guest-agent is earlier than 2:0.12.1.2-2.415.el6_5.8" test_ref="oval:org.mitre.oval:tst:113840"/>
+      <criterion comment="qemu-img is earlier than 2:0.12.1.2-2.415.el6_5.8" test_ref="oval:org.mitre.oval:tst:114025"/>
+      <criterion comment="qemu-kvm is earlier than 2:0.12.1.2-2.415.el6_5.8" test_ref="oval:org.mitre.oval:tst:113998"/>
+    </criteria>
+  </criteria>
+</definition>

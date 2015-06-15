@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25621" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1642-1 -- Security update for libvirt</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131642-1.html" ref_id="SUSE-SU-2013:1642-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4296" ref_id="CVE-2013-4296"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5651" ref_id="CVE-2013-5651"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4311" ref_id="CVE-2013-4311"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4291" ref_id="CVE-2013-4291"/>
+    <description>libvirt has been updated to the 1.0.5.6 stable release that
+fixes bugs and  security issues:
+
+    * CVE-2013-4296: Fix crash in
+remoteDispatchDomainMemoryStats
+    * CVE-2013-5651: virBitmapParse out-of-bounds read
+access Libvirt on SLES 11 SP3 is not affected:
+    * CVE-2013-4311: Add support for using 3-arg pkcheck
+syntax for process ()
+    * CVE-2013-4291: security: provide supplemental groups
+even when parsing label ()
+
+Changes in this version:
+
+    * virsh: fix change-media bug on disk block type
+    * Include process start time when doing polkit checks
+    * qemuDomainChangeGraphics: Check listen address change
+by listen type
+    * python: return dictionary without value in case of no
+blockjob
+    * virbitmap: Refactor virBitmapParse to avoid access
+beyond bounds of array
+
+Also the following bug has been fixed:
+
+    * Fix retrieval of SRIOV VF info, which prevented using
+some SRIOV virtual functions in guest domains with ""
+(bnc#837329)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:24:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:21:20.317-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:45.120-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:50.142-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libvirt RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118193"/>
+        <criterion comment="libvirt-client RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118182"/>
+        <criterion comment="libvirt-doc RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118186"/>
+        <criterion comment="libvirt-python RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118197"/>
+        <criterion comment="libvirt-client-32bit RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118126"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="libvirt-lock-sanlock RPM is earlier than 0:1.0.5.6-0.7.1" test_ref="oval:org.mitre.oval:tst:118296"/>
+    </criteria>
+  </criteria>
+</definition>

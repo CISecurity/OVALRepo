@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6317" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Buffer Overflow in Print Spooler Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0228" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0228"/>
+    <description>Stack-based buffer overflow in the EnumeratePrintShares function in Windows Print Spooler Service (win32spl.dll) in Microsoft Windows 2000 SP4 allows remote printer servers to execute arbitrary code via a a crafted ShareName in a response to an RPC request, related to "printing data structures," aka "Buffer Overflow in Print Spooler Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-06-09T14:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-06-15T17:07:09.694-04:00">DRAFT</status_change>
+        <status_change date="2009-07-06T04:00:57.957-04:00">INTERIM</status_change>
+        <status_change date="2009-07-21T07:46:10.235-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+    <criterion comment="Win32spl.dll version is less than 5.0.2195.7266" test_ref="oval:org.mitre.oval:tst:9847"/>
+  </criteria>
+</definition>

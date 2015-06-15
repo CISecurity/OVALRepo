@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:255" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Clear Text Password Logging Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0653" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0653"/>
+    <description>Solaris 9, when configured as a Kerberos client with patch 112908-12 or 115168-03 and using pam_krb5 as an "auth" module with the debug feature enabled, records passwords in plaintext, which could allow local users to gain other user's passwords by reading log files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-09-22T05:52:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-09-22T20:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-10-07T09:15:44.676-04:00">INTERIM</status_change>
+        <status_change date="2006-10-24T09:15:52.059-04:00">ACCEPTED</status_change>
+        <modified comment="Added title and CVE reference. Implemented by Jon Baker of The MITRE Corporation." date="2007-02-13T14:48:00.753-05:00">
+          <contributor organization="Security-Database">Nabil Ouchn</contributor>
+        </modified>
+        <status_change date="2007-02-13T14:49:30.783-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:17:13.310-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:255 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:05:03.306-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:28.701-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Software section">
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert ID 101519 criteria.">
+        <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3172"/>
+        <criterion comment="sparc architecture" test_ref="oval:org.mitre.oval:tst:3237"/>
+        <criterion comment="Patch 112908-12 is installed" test_ref="oval:org.mitre.oval:tst:4105"/>
+        <criterion negate="true" comment="Patch 112908-13 or later installed" test_ref="oval:org.mitre.oval:tst:3957"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert ID 101519 criteria.">
+        <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3172"/>
+        <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:3912"/>
+        <criterion comment="Patch 115168-03 is installed" test_ref="oval:org.mitre.oval:tst:3258"/>
+        <criterion negate="true" comment="Patch 115168-04 or later installed" test_ref="oval:org.mitre.oval:tst:4013"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="/etc/krb5/krb5.conf is configured as a kerberos client" test_ref="oval:org.mitre.oval:tst:3487"/>
+      <criterion comment="pam_krb5 is an auth module with debug enabled" test_ref="oval:org.mitre.oval:tst:4074"/>
+      <criterion comment="Logging of LOG_DEBUG level messages is enabled" test_ref="oval:org.mitre.oval:tst:3394"/>
+    </criteria>
+  </criteria>
+</definition>

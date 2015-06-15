@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1669" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability Relating to the acl(2) System Call May Allow Denial of Service (DoS) to the System</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2529" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2529"/>
+    <description>Integer signedness error in the acl (facl) system call in Solaris 10 before 20070507 allows local users to cause a denial of service (kernel panic) and possibly gain privileges via a certain argument, related to ACE_SETACL.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-06-15T09:00:00.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-06-15T11:20:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-07-03T14:05:55.388-04:00">INTERIM</status_change>
+        <status_change date="2007-07-18T15:57:49.919-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="OR">
+    <criteria operator="AND" comment="Solaris 10 (SPARC)" negate="false">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3680"/>
+      <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3237"/>
+      <criterion comment="Patch 125100-06 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3442"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86)" negate="false">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3680"/>
+      <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3912"/>
+      <criterion comment="Patch 125101-06 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3825"/>
+    </criteria>
+  </criteria>
+</definition>

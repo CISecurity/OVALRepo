@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24298" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Heap-based buffer overflow in Adobe Flash Player 12.0.0.77 allows remote attackers to execute arbitrary code and bypass a sandbox protection mechanism</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Adobe Flash Player</product>
+    </affected>
+    <reference ref_id="CVE-2014-0510" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0510" source="CVE"/>
+    <description>Heap-based buffer overflow in Adobe Flash Player 12.0.0.77 allows remote attackers to execute arbitrary code and bypass a sandbox protection mechanism via unspecified vectors, as demonstrated by Zeguang Zhao and Liang Chen during a Pwn2Own competition at CanSecWest 2014.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-05-15T08:31:03">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-05-20T12:45:31.370-04:00">DRAFT</status_change>
+        <status_change date="2014-06-09T04:00:33.951-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:10:06.474-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24298 - checks the version of Flash .ocx" date="2014-09-17T10:26:00.393-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-17T10:29:09.990-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:02.924-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Adobe Flash Player 12 is installed" definition_ref="oval:org.mitre.oval:def:22127"/>
+    <criteria operator="OR" comment="Vulnerable version of Adobe Flash Player">
+      <criterion comment="Version of Adobe Flash Player is 12.0.0.77" test_ref="oval:org.mitre.oval:tst:113898"/>
+      <criterion comment="Determine if the version of Flash.ocx is equals 12.0.0.77" test_ref="oval:org.mitre.oval:tst:122981"/>
+    </criteria>
+  </criteria>
+</definition>

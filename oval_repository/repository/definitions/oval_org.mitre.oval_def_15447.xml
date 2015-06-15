@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15447" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MSCOMCTL.OCX RCE Vulnerability - MS12-060</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Host Integration Server 2004</product>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office 2010</product>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2003 Web Components</product>
+      <product>Microsoft Visual FoxPro 8.0</product>
+      <product>Microsoft Visual FoxPro 9.0</product>
+      <product>Microsoft SQL Server 2000 Analysis Services</product>
+      <product>Microsoft SQL Server 2000</product>
+      <product>Microsoft SQL Server 2005</product>
+      <product>Microsoft SQL Server 2008</product>
+      <product>Microsoft SQL Server 2008 R2</product>
+      <product>Microsoft Commerce Server 2002</product>
+      <product>Microsoft Commerce Server 2007</product>
+      <product>Microsoft Commerce Server 2009</product>
+      <product>Microsoft Commerce Server 2009 R2</product>
+      <product>Microsoft Visual Basic 6.0</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-1856" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1856"/>
+    <description>The TabStrip ActiveX control in the Common Controls in MSCOMCTL.OCX in Microsoft Office 2003 SP3, Office 2003 Web Components SP3, Office 2007 SP2 and SP3, Office 2010 SP1, SQL Server 2000 SP4, SQL Server 2005 SP4, SQL Server 2008 SP2, SP3, R2, R2 SP1, and R2 SP2, Commerce Server 2002 SP4, Commerce Server 2007 SP2, Commerce Server 2009 Gold and R2, Host Integration Server 2004 SP1, Visual FoxPro 8.0 SP1, Visual FoxPro 9.0 SP2, and Visual Basic 6.0 Runtime allows remote attackers to execute arbitrary code via a crafted (1) document or (2) web page that triggers system-state corruption, aka "MSCOMCTL.OCX RCE Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-08-21T11:30:57">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-08-21T16:55:28.181-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:23620 - New Microsoft Patch Tuesday August 2012 definitions." date="2012-08-21T16:16:00.261-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:def:15447 - Updating definitions affected by revised Microsoft bulletins. New inventory definitions for MS Commerce Server." date="2012-09-05T11:32:00.374-04:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2012-09-24T04:00:05.259-04:00">INTERIM</status_change>
+        <status_change date="2012-10-15T04:00:05.185-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15447 - New inventory definition for VB6, and updates to definitions incorrectly checking VBA inventory instead of VB6." date="2012-10-25T16:38:00.742-04:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2012-10-25T16:58:33.313-04:00">INTERIM</status_change>
+        <status_change date="2012-11-12T04:00:10.756-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:23554 - fixes false negative Office 32bit is installed on a 64bit OS" date="2014-05-23T10:37:00.086-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2014-05-23T10:39:25.345-04:00">INTERIM</status_change>
+        <status_change date="2014-06-09T04:00:13.929-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for office/web components/sql server/commerce">
+      <criteria operator="OR" comment="Either apllications">
+        <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+        <extend_definition comment="Microsoft Office 2003 Web Components SP3 is installed" definition_ref="oval:org.mitre.oval:def:15325"/>
+        <extend_definition comment="Microsoft Office 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15198"/>
+        <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+        <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+        <extend_definition comment="Microsoft SQL Server 2008 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15497"/>
+        <extend_definition comment="Microsoft SQL Server 2008 R2 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15808"/>
+        <extend_definition comment="Microsoft SQL Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12596"/>
+        <extend_definition comment="Microsoft SQL Server 2008 SP2 is installed" definition_ref="oval:org.mitre.oval:def:12310"/>
+        <extend_definition comment="Microsoft SQL Server 2008 R2 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15803"/>
+        <extend_definition comment="Microsoft SQL Server 2005 SP4 is installed" definition_ref="oval:org.mitre.oval:def:12442"/>
+        <extend_definition comment="Microsoft Commerce Server 2002 SP4 is installed" definition_ref="oval:org.mitre.oval:def:15722"/>
+        <extend_definition comment="Microsoft Commerce Server 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15552"/>
+        <extend_definition comment="Microsoft Commerce Server 2009 is installed" definition_ref="oval:org.mitre.oval:def:15443"/>
+        <extend_definition comment="Microsoft Commerce Server 2009 R2 is installed" definition_ref="oval:org.mitre.oval:def:15274"/>
+      </criteria>
+      <criterion comment="Check if the version of mscomctl.ocx is less than 6.1.98.34" test_ref="oval:org.mitre.oval:tst:80068"/>
+    </criteria>
+    <criteria operator="AND" comment="visual foxpro 8.0">
+      <extend_definition comment="Microsoft Visual FoxPro is installed" definition_ref="oval:org.mitre.oval:def:14198"/>
+      <criterion comment="Check if Visual FoxPro 8.0 is installed" test_ref="oval:org.mitre.oval:tst:80030"/>
+      <criterion comment="Check if the version of comctl32.ocx is less than 6.0.98.34" test_ref="oval:org.mitre.oval:tst:79890"/>
+    </criteria>
+    <criteria operator="AND" comment="visual foxpro 9.0">
+      <extend_definition comment="Microsoft Visual FoxPro is installed" definition_ref="oval:org.mitre.oval:def:14198"/>
+      <criterion comment="Check if Visual FoxPro 9.0 is installed" test_ref="oval:org.mitre.oval:tst:80086"/>
+      <criterion comment="Check if the version of comctl32.ocx is less than 6.0.98.34" test_ref="oval:org.mitre.oval:tst:79890"/>
+    </criteria>
+    <criteria operator="AND" comment="HIS 2004/visual basic">
+      <criteria operator="OR" comment="either application">
+        <extend_definition comment="Microsoft Host Integration Server 2004 SP1 is installed" definition_ref="oval:org.mitre.oval:def:5430"/>
+        <extend_definition comment="Microsoft Visual Basic 6.0 is installed" definition_ref="oval:org.mitre.oval:def:15369"/>
+      </criteria>
+      <criterion comment="Check if the version of comctl32.ocx is less than 6.0.98.34" test_ref="oval:org.mitre.oval:tst:79890"/>
+    </criteria>
+    <criteria operator="AND" comment="sql server 2000 analysis services">
+      <extend_definition comment="Microsoft SQL Server 2000 Analysis Services SP4 is installed" definition_ref="oval:org.mitre.oval:def:15730"/>
+      <criterion comment="Check if the version of Msmdsrv.exe is less than 8.0.2304.0" test_ref="oval:org.mitre.oval:tst:79849"/>
+    </criteria>
+    <criteria operator="AND" comment="sql server 2000">
+      <extend_definition comment="Microsoft SQL Server 2000 SP4 is installed" definition_ref="oval:org.mitre.oval:def:15762"/>
+      <criteria operator="OR" comment="gdr/ldr">
+        <criterion comment="Check if the version of Sqlservr.exe is less than 2000.80.2066.0" test_ref="oval:org.mitre.oval:tst:79792"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of sqlservr.exe is greater than or equal to 2000.80.2100.0" test_ref="oval:org.mitre.oval:tst:79871"/>
+          <criterion comment="Check if the version of Sqlservr.exe is less than 2000.80.2305.0" test_ref="oval:org.mitre.oval:tst:79588"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

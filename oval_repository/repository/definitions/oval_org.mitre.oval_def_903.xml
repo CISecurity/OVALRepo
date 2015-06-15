@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:903" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows NT SSL PCT Handshake Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Private Communications Transport (PCT)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0719" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0719"/>
+    <description>Buffer overflow in the Private Communications Transport (PCT) protocol implementation in the Microsoft SSL library, as used in Microsoft Windows NT 4.0 SP6a, 2000 SP2 through SP4, XP SP1, Server 2003, NetMeeting, Windows 98, and Windows ME, allows remote attackers to execute arbitrary code via PCT 1.0 handshake packets.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-04-13T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <status_change date="2004-05-05T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected to use a forward slash as the separator in the key." date="2007-05-07T15:59:00.528-04:00">
+          <contributor organization="Secure Elements, Inc.">Glenn Strickland</contributor>
+        </modified>
+        <status_change date="2007-05-07T16:06:47.653-04:00">INTERIM</status_change>
+        <status_change date="2007-05-23T15:05:55.032-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:59.903-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:53.521-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <criterion comment="the version of schannel.dll is less than 4.87.1964.1880" test_ref="oval:org.mitre.oval:tst:1479"/>
+      <criterion negate="true" comment="the patch kb835732 is installed" test_ref="oval:org.mitre.oval:tst:1510"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="SSL is enabled" test_ref="oval:org.mitre.oval:tst:1508"/>
+      <criterion negate="true" comment="PCT support is disabled" test_ref="oval:org.mitre.oval:tst:1503"/>
+    </criteria>
+  </criteria>
+</definition>

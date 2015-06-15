@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:82" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft RPC Denial of Service</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft SQL Server 2000</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2001-0509" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0509"/>
+    <description>Vulnerabilities in RPC servers in (1) Microsoft Exchange Server 2000 and earlier, (2) Microsoft SQL Server 2000 and earlier, (3) Windows NT 4.0, and (4) Windows 2000 allow remote attackers to cause a denial of service via malformed inputs.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-08-27T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <modified date="2005-04-07T12:00:00.000-04:00" comment="modified wft-225 - correct literal component in file path. Added '\' to the start of the literal string.">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2005-04-11T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2005-04-12T12:00:00.000-04:00" comment="modified wft-89 - wft-89 corrected literal string">
+          <contributor organization="The MITRE Corporation">Ingrid Skoog</contributor>
+        </modified>
+        <status_change date="2005-04-27T12:07:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-27T01:26:00.000-04:00" comment="modified wft-89 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="SQL Server 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2977"/>
+    <criterion comment="the version of ssmsrp70.dll is less than 2000.80.213.0" negate="false" test_ref="oval:org.mitre.oval:tst:2968"/>
+    <criterion comment="the version of dbmsrpcn.dll is less than 2000.80.213.0" negate="false" test_ref="oval:org.mitre.oval:tst:2967"/>
+    <criterion comment="File sqlservr.exe version3 greater than or equal to 2000.80.384.0" negate="true" test_ref="oval:org.mitre.oval:tst:2966"/>
+  </criteria>
+</definition>

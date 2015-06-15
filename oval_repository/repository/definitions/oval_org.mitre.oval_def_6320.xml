@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6320" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Pidgin before 2.5.9 allow denial of service via SLP (aka MSNSLP) messages</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Pidgin</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2694" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2694"/>
+    <description>The msn_slplink_process_msg function in libpurple/protocols/msn/slplink.c in libpurple, as used in Pidgin (formerly Gaim) before 2.5.9 and Adium 1.3.5 and earlier, allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption and application crash) by sending multiple crafted SLP (aka MSNSLP) messages to trigger an overwrite of an arbitrary memory location.  NOTE: this issue reportedly exists because of an incomplete fix for CVE-2009-1376.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-24T03:13:11">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </submitted>
+        <status_change date="2009-09-24T22:36:43.565-04:00">DRAFT</status_change>
+        <status_change date="2009-10-12T04:00:12.648-04:00">INTERIM</status_change>
+        <status_change date="2009-11-02T04:00:13.570-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:10316 - number of updates and additions for Pidgin on Windows" date="2013-08-22T10:34:00.589-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2013-08-22T10:37:16.939-04:00">INTERIM</status_change>
+        <status_change date="2013-09-09T04:03:42.755-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Pidgin is installed" definition_ref="oval:org.mitre.oval:def:12366"/>
+    <criterion comment="Pidgin version is less than 2.5.9" test_ref="oval:org.mitre.oval:tst:10316"/>
+  </criteria>
+</definition>

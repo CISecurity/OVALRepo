@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6120" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Snapshot Viewer Arbitrary File Download Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Access 2000</product>
+      <product>Microsoft Access 2002</product>
+      <product>Microsoft Access 2003</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2463" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2463"/>
+    <description>The Microsoft Office Snapshot Viewer ActiveX control in snapview.ocx 10.0.5529.0, as distributed in the standalone Snapshot Viewer and Microsoft Office Access 2000 through 2003, allows remote attackers to download arbitrary files to a client machine via a crafted HTML document or e-mail message, probably involving use of the SnapshotPath and CompressedPath properties and the PrintSnapshot method. NOTE: this can be leveraged for code execution by writing to a Startup folder.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-13T09:28:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:02:14.243-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:25.815-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:41.961-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6390 - Updating pre-Microsoft Office 2010 content to use windows_view behaviors." date="2012-05-10T14:55:00.075-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:57:07.577-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-06-04T04:02:05.889-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:12.185-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:11:15.430-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR">
+      <criterion comment="Access 2000 SP3 or greater is installed" test_ref="oval:org.mitre.oval:tst:8805"/>
+      <criterion comment="Access 2002 SP3 or greater is installed" test_ref="oval:org.mitre.oval:tst:8792"/>
+      <criterion comment="Access 2003 SP2 or greater is installed" test_ref="oval:org.mitre.oval:tst:9131"/>
+    </criteria>
+    <criterion comment="Snapview.ocx version is less than 11.0.8228.0" test_ref="oval:org.mitre.oval:tst:8931"/>
+  </criteria>
+</definition>

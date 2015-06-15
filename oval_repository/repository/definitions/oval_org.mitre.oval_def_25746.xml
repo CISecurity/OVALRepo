@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25746" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:0352-1 -- Recommended update for trousers</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>trousers</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20130352-1.html" ref_id="SUSE-RU-2013:0352-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0698" ref_id="CVE-2012-0698"/>
+    <description>This collective update for the trousers library and daemon
+fixes the  following issues:
+
+    * 
+
+      One minor security issue for cases where tcsd is
+enabled for TCP: CVE-2012-0698: tcsd in TrouSerS allowed
+remote attackers to cause a denial of service (daemon
+crash) via a crafted type_offset value in a TCP packet to
+port 30003.
+
+    * 
+
+      An issue in the trousers library which prevents
+disabling of TPM physical presence.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:41:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:38:06.098-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:06.697-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:11.830-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libtspi1 RPM is earlier than 0:0.3.7-3.9.1" test_ref="oval:org.mitre.oval:tst:120854"/>
+      <criterion comment="trousers RPM is earlier than 0:0.3.7-3.9.1" test_ref="oval:org.mitre.oval:tst:120575"/>
+      <criterion comment="libtspi1-32bit RPM is earlier than 0:0.3.7-3.9.1" test_ref="oval:org.mitre.oval:tst:120759"/>
+    </criteria>
+  </criteria>
+</definition>

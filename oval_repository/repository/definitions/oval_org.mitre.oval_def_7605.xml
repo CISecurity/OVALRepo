@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7605" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1728 dkim-milter -- improper assertion</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>dkim-milter</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1728" ref_id="DSA-1728"/>
+    <description>It was discovered that dkim-milter, an implementation of the DomainKeys Identified Mail protocol, may crash during DKIM verification if it encounters a specially-crafted or revoked public key record in DNS. The old stable distribution (etch) does not contain dkim-milter packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:08-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:56:28.617-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:13.592-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:51.010-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7605 - Debian Patch Update" date="2014-06-06T16:44:00.039-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:46:29.113-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:39.089-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Supported architectures section">
+      <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+      <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+      <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+      <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+      <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+      <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+      <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+      <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libsmdkim-dev is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:17647"/>
+      <criterion comment="libsmdkim2 is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:17507"/>
+      <criterion comment="dkim-filter is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:17514"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8370" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1737 wesnoth -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>wesnoth</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1737" ref_id="DSA-1737"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0366" ref_id="CVE-2009-0366"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0367" ref_id="CVE-2009-0367"/>
+    <description>Several security issues have been discovered in wesnoth, a fantasy turn-based strategy game. The Common Vulnerabilities and Exposures project identifies the following problems: Daniel Franke discovered that the wesnoth server is prone to a denial of service attack when receiving special crafted compressed data. Daniel Franke discovered that the sandbox implementation for the python AIs can be used to execute arbitrary python code on wesnoth clients. In order to prevent this issue, the python support has been disabled. A compatibility patch was included, so that the affected campagne is still working properly.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:36.478-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:30.268-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:04:12.386-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8370 - Debian Patch Update" date="2014-06-06T16:28:00.025-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:30:37.987-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:36.181-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="wesnoth-sotbe is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19644"/>
+            <criterion comment="wesnoth-aoi is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19599"/>
+            <criterion comment="wesnoth-tsg is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19642"/>
+            <criterion comment="wesnoth-nr is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19252"/>
+            <criterion comment="wesnoth-l is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19621"/>
+            <criterion comment="wesnoth-music is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19102"/>
+            <criterion comment="wesnoth-thot is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:18684"/>
+            <criterion comment="wesnoth-httt is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19623"/>
+            <criterion comment="wesnoth-tools is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19254"/>
+            <criterion comment="wesnoth-sof is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19647"/>
+            <criterion comment="wesnoth-data is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19180"/>
+            <criterion comment="wesnoth-ttb is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:18852"/>
+            <criterion comment="wesnoth-trow is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19580"/>
+            <criterion comment="wesnoth-did is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19593"/>
+            <criterion comment="wesnoth-ei is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:18711"/>
+            <criterion comment="wesnoth-utbs is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19691"/>
+            <criterion comment="wesnoth-all is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19658"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="wesnoth-server is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19684"/>
+            <criterion comment="wesnoth is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19693"/>
+            <criterion comment="wesnoth-editor is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19589"/>
+            <criterion comment="wesnoth-dbg is earlier than 1.4.4-2+lenny1" test_ref="oval:org.mitre.oval:tst:19609"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="wesnoth-data is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19639"/>
+            <criterion comment="wesnoth-tsg is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:18938"/>
+            <criterion comment="wesnoth-music is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19552"/>
+            <criterion comment="wesnoth-httt is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19496"/>
+            <criterion comment="wesnoth-ttb is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:18990"/>
+            <criterion comment="wesnoth-trow is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19610"/>
+            <criterion comment="wesnoth-ei is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19105"/>
+            <criterion comment="wesnoth-utbs is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19280"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="wesnoth-server is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19262"/>
+            <criterion comment="wesnoth is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19011"/>
+            <criterion comment="wesnoth-editor is earlier than 1.2-5" test_ref="oval:org.mitre.oval:tst:19710"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

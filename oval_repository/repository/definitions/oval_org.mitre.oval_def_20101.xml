@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20101" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1458-1 openafs</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>openafs</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1458-1" ref_id="DSA-1458-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6599" ref_id="CVE-2007-6599"/>
+    <description>A race condition in the OpenAFS fileserver allows remote attackers to cause a denial of service (daemon crash) by simultaneously acquiring and giving back file callbacks, which causes the handler for the GiveUpAllCallBacks RPC to perform linked-list operations without the host_glock lock.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:23:19">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:56.512-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:35.498-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:13.524-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20101 - Debian Patch Update" date="2014-06-06T17:24:00.692-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:26:36.746-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:40.107-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="openafs DPKG is earlier than 0:1.4.2-6etch1" test_ref="oval:org.mitre.oval:tst:89322"/>
+  </criteria>
+</definition>

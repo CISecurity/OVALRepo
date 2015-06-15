@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7268" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Adobe Shockwave Player Director File Parsing Invalid Offset Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Adobe Shockwave Player</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-1281" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1281"/>
+    <description>iml32.dll in Adobe Shockwave Player before 11.5.7.609 does not validate a certain value from a file before using it in file-pointer calculations, which allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted .dir (aka Director) file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-12T17:30:00.000-05:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </submitted>
+        <status_change date="2010-05-14T10:00:46.270-04:00">DRAFT</status_change>
+        <status_change date="2010-05-31T04:00:34.659-04:00">INTERIM</status_change>
+        <status_change date="2010-06-21T04:00:18.479-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:7257 - For 64-bit systems, all files are placed in syswow64-branch. And also check=&quot;all&quot; was replaced on check=&quot;at least one&quot; in tests." date="2014-10-24T13:15:00.008-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-10-24T13:17:06.794-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:02:34.717-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Adobe Shockwave Player is installed" definition_ref="oval:org.mitre.oval:def:5990"/>
+    <criterion comment="Adobe Shockwave Player version is less than 11.5.7.609" test_ref="oval:org.mitre.oval:tst:11787"/>
+  </criteria>
+</definition>

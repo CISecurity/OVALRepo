@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:198" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Automatic ActiveX Approval on Windows 2000 Low Memory</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0660" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0660"/>
+    <description>The Authenticode capability in Microsoft Windows NT through Server 2003 does not prompt the user to download and install ActiveX controls when the system is low on memory, which could allow remote attackers execute arbitrary code without user approval.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-10-16T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <modified date="2004-03-04T12:00:00.000-04:00" comment="Added the configuration check to see if downloading of signed ActiveX controls are enabled by the current user when local machine settings are not in use.">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </modified>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+      <criterion comment="File %windir%\system32\cryptui.dll version is less than 5.131.2195.6758" negate="false" test_ref="oval:org.mitre.oval:tst:2817"/>
+      <criterion comment="Patch WindowsXP-KB823182-x86-ENU Installed" negate="true" test_ref="oval:org.mitre.oval:tst:2841"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="AND" comment="downloading of signed ActiveX controls is enabled">
+        <criteria operator="AND" comment="current user settings are being used and the downloading of signed ActiveX controls is enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="downloading of signed ActiveX controls is enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2840"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and the downloading of signed ActiveX controls is enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="downloading of signed ActiveX controls is enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2839"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6869" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1964 postgresql-7.4, postgresql-8.1, postgresql-8.3 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>postgresql-7.4</product>
+      <product>postgresql-8.1</product>
+      <product>postgresql-8.3</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1964" ref_id="DSA-1964"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4034" ref_id="CVE-2009-4034"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4136" ref_id="CVE-2009-4136"/>
+    <description>Several vulnerabilities have been discovered in PostgreSQL, a database server. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered that PostgreSQL did not properly verify the Common Name attribute in X.509 certificates, enabling attackers to bypass the TLS protection on client-server connections, by relying on a certificate from a trusted CA which contains an embedded NUL byte in the Common Name. Authenticated database users could elevate their privileges by creating specially-crafted index functions. The following matrix shows fixed source package versions for the respective distributions. In addition to these security fixes, the updates contain reliability improvements and fix other defects. We recommend that you upgrade your PostgreSQL packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:08:41-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:29:02.373-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:16.728-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:48:59.994-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6869 - Debian Patch Update" date="2014-06-06T16:51:00.206-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:52:53.908-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:54.641-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:26878 - Modified Debian patches to correct Epochs." date="2015-02-03T13:15:00.798-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-03T13:18:16.325-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:36.077-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26450"/>
+            <criterion comment="postgresql-doc is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26115"/>
+            <criterion comment="postgresql-client is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26778"/>
+            <criterion comment="postgresql is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26824"/>
+            <criterion comment="postgresql-contrib is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26639"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-client-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26003"/>
+            <criterion comment="postgresql-plperl-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26826"/>
+            <criterion comment="postgresql-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26852"/>
+            <criterion comment="libecpg6 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26640"/>
+            <criterion comment="libpq-dev is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26556"/>
+            <criterion comment="postgresql-plpython-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26839"/>
+            <criterion comment="postgresql-contrib-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26856"/>
+            <criterion comment="postgresql-server-dev-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26901"/>
+            <criterion comment="libecpg-dev is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26700"/>
+            <criterion comment="postgresql-pltcl-8.3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26687"/>
+            <criterion comment="libpq5 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26426"/>
+            <criterion comment="libpgtypes3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26834"/>
+            <criterion comment="libecpg-compat3 is earlier than 8.3.9-0lenny1" test_ref="oval:org.mitre.oval:tst:26647"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26829"/>
+            <criterion comment="postgresql-server-dev-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26790"/>
+            <criterion comment="postgresql-doc-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26823"/>
+          </criteria>
+        </criteria>
+        <criterion comment="postgresql-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26851"/>
+        <criterion comment="postgresql-client-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:25923"/>
+        <criterion comment="postgresql-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26709"/>
+        <criterion comment="libpq-dev is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26894"/>
+        <criterion comment="postgresql-plpython-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26878"/>
+        <criterion comment="postgresql-contrib-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26737"/>
+        <criterion comment="postgresql-contrib-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26840"/>
+        <criterion comment="libecpg5 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26880"/>
+        <criterion comment="postgresql-pltcl-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26641"/>
+        <criterion comment="postgresql-client-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26801"/>
+        <criterion comment="libpgtypes2 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:25968"/>
+        <criterion comment="postgresql-server-dev-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26951"/>
+        <criterion comment="libecpg-dev is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26949"/>
+        <criterion comment="postgresql-plpython-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26673"/>
+        <criterion comment="libpq4 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26777"/>
+        <criterion comment="postgresql-plperl-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26890"/>
+        <criterion comment="postgresql-plperl-8.1 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26957"/>
+        <criterion comment="postgresql-pltcl-7.4 is earlier than 1:7.4.27-0etch1" test_ref="oval:org.mitre.oval:tst:26656"/>
+        <criterion comment="libecpg-compat2 is earlier than 8.1.19-0etch1" test_ref="oval:org.mitre.oval:tst:26960"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

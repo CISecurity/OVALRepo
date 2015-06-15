@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8349" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerabilities in the Apache 2 "mod_perl2" Module Components "PerlRun.pm" May Lead to Denial of Service (DoS) or Unauthorized Access to Data</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-1349" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1349"/>
+    <description>PerlRun.pm in Apache mod_perl before 1.30, and RegistryCooker.pm in mod_perl 2.x, does not properly escape PATH_INFO before use in a regular expression, which allows remote attackers to cause a denial of service (resource consumption) via a crafted URI.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-16T15:16:58.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-03-17T22:26:12.189-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:18.858-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:05.430-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 272230">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criterion negate="true" comment="Patch 120543-15 or later installed" test_ref="oval:org.mitre.oval:tst:20986"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 272230">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criterion negate="true" comment="Patch 120544-15 or later installed" test_ref="oval:org.mitre.oval:tst:21020"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Configuration Section">
+      <criterion comment="Solaris 10 bundled Apache 2.0 web server service is enable" test_ref="oval:org.mitre.oval:tst:21122"/>
+      <criterion comment="PerlRun.pm component is used" test_ref="oval:org.mitre.oval:tst:21159"/>
+    </criteria>
+  </criteria>
+</definition>

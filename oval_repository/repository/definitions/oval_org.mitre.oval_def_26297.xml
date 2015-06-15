@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26297" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2991-1 -- modsecurity-apache - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>modsecurity-apache</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2991-1" ref_id="DSA-2991-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5705" ref_id="CVE-2013-5705"/>
+    <description>Martin Holst Swende discovered a flaw in the way chunked requests are handled in ModSecurity, an Apache module whose purpose is to tighten the Web application security. A remote attacker could use this flaw to bypass intended mod_security restrictions by using chunked transfer coding with a capitalized Chunked value in the Transfer-Encoding HTTP header, allowing to send requests containing content that should have been removed by mod_security.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-05T10:11:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-08-07T15:04:28.504-04:00">DRAFT</status_change>
+        <status_change date="2014-08-25T04:01:47.761-04:00">INTERIM</status_change>
+        <status_change date="2014-09-15T04:00:54.311-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26297 - modified patches on Debian: corrected platform" date="2014-09-19T15:03:00.435-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-19T15:04:28.598-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:30.873-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="AND" comment="Debian 7">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+    </criteria>
+    <criterion comment="modsecurity-apache DPKG is earlier than 0:2.6.6-6+deb7u2" test_ref="oval:org.mitre.oval:tst:121034"/>
+  </criteria>
+</definition>

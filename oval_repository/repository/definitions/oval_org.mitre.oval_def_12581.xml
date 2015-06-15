@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12581" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cross-site scripting (XSS) vulnerability in Apache Continuum 1.1 through 1.2.3.1, 1.3.6, and 1.4.0 Beta; and Archiva 1.3.0 through 1.3.3 and 1.0 through 1.22</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Apache Archiva</product>
+      <product>Apache Continuum</product>
+    </affected>
+    <reference ref_id="CVE-2011-0533" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0533" source="CVE"/>
+    <description>Cross-site scripting (XSS) vulnerability in Apache Continuum 1.1 through 1.2.3.1, 1.3.6, and 1.4.0 Beta; and Archiva 1.3.0 through 1.3.3 and 1.0 through 1.22 allows remote attackers to inject arbitrary web script or HTML via a crafted parameter, related to the autoIncludeParameters setting for the extremecomponents table.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-05-04T09:50:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-05-06T15:23:18.916-04:00">DRAFT</status_change>
+        <status_change date="2011-05-23T04:00:14.215-04:00">INTERIM</status_change>
+        <status_change date="2011-06-13T04:00:10.551-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15537 - In some &quot;pattern match&quot; strings added &quot;\&quot; before &quot;.&quot; to clarify if &quot;point&quot; or &quot;any symbol&quot; needed." date="2014-07-28T18:11:00.493-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-07-28T18:12:34.832-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:00:32.256-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Apache Continuum/versions">
+      <extend_definition comment="Apache Continuum is installed" definition_ref="oval:org.mitre.oval:def:12515"/>
+      <criterion comment="Check if the version of Apache Continuum is 1.1 through 1.2.3.1 or 1.3.6 or 1.4.0 Beta" test_ref="oval:org.mitre.oval:tst:42064"/>
+    </criteria>
+    <criteria operator="AND" comment="Apache Archiva/versions">
+      <extend_definition comment="Apache Archiva is installed" definition_ref="oval:org.mitre.oval:def:12022"/>
+      <criterion comment="Check if the version of Apache Archiva is 1.3.0 through 1.3.3 or 1.0 through 1.2.2" test_ref="oval:org.mitre.oval:tst:42666"/>
+    </criteria>
+  </criteria>
+</definition>

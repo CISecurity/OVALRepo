@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7032" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Word Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Word 2002</product>
+      <product>Microsoft Word 2003</product>
+      <product>Microsoft Office Word Viewer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3221" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3221"/>
+    <description>Microsoft Word 2002 SP3 and 2003 SP3, Office 2004 for Mac, and Word Viewer do not properly handle a malformed record during parsing of a Word document, which allows remote attackers to execute arbitrary code via a crafted document that triggers memory corruption, aka "Word Parsing Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-11-10T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-10-18T21:49:35.121-04:00">DRAFT</status_change>
+        <status_change date="2010-11-08T04:00:10.859-05:00">INTERIM</status_change>
+        <status_change date="2010-11-29T04:00:19.618-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:1517 - In obj:1517 for Office Word Viewer is updated by adding new variable and object to make it work. Earlier obj:1517 was referring to OfficeWord object path" date="2011-07-18T15:27:00.494-04:00">
+          <contributor organization="SecPod Technologies">Sharath S</contributor>
+        </modified>
+        <status_change date="2011-07-18T15:28:20.635-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:53.315-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6394 - Updating Microsoft Word registry locations." date="2012-05-10T14:37:00.794-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:51:17.118-04:00">INTERIM</status_change>
+        <status_change date="2012-05-28T04:02:21.786-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15263 - added new criteria and 32 bit checks." date="2013-01-31T09:01:00.731-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-01-31T09:03:28.989-05:00">INTERIM</status_change>
+        <status_change date="2013-02-18T04:00:32.815-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Word 2002">
+      <extend_definition comment="Microsoft Word 2002 is installed" definition_ref="oval:org.mitre.oval:def:973"/>
+      <criterion comment="the version of Winword.exe is less than 10.0.6866.0" test_ref="oval:org.mitre.oval:tst:11360"/>
+    </criteria>
+    <criteria operator="AND" comment="Word 2003">
+      <extend_definition comment="Microsoft Word 2003 is installed" definition_ref="oval:org.mitre.oval:def:475"/>
+      <criterion comment="the version of Winword.exe is less than 11.0.8328.0" test_ref="oval:org.mitre.oval:tst:11358"/>
+    </criteria>
+    <criteria operator="AND" comment="Word Viewer">
+      <extend_definition comment="Microsoft Word Viewer is installed" definition_ref="oval:org.mitre.oval:def:737"/>
+      <criterion comment="the version of Wordview.exe is less than 11.0.8328.0" test_ref="oval:org.mitre.oval:tst:11354"/>
+    </criteria>
+  </criteria>
+</definition>

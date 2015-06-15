@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21251" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0016: gnupg security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>gnupg</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0016-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0016.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0016"/>
+    <reference source="CVE" ref_id="CVE-2013-4576" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-4576.html"/>
+    <description>GnuPG 1.x before 1.4.16 generates RSA keys using sequences of introductions with certain patterns that introduce a side channel, which allows physically proximate attackers to extract RSA keys via a chosen-ciphertext attack and acoustic cryptanalysis during decryption. NOTE: applications are not typically expected to protect themselves from acoustic side-channel attacks, since this is arguably the responsibility of the physical device. Accordingly, issues of this type would not normally receive a CVE identifier. However, for this issue, the developer has specified a security policy in which GnuPG should offer side-channel resistance, and developer-specified security-policy violations are within the scope of CVE.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:58:59">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:42:31.984-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:40.809-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:00.899-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21251 - Products and Centos critera added" date="2014-06-13T17:47:00.365-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:50:41.923-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:32.801-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criterion comment="gnupg is earlier than 0:1.4.5-18.el5_10.1" test_ref="oval:org.mitre.oval:tst:98929"/>
+  </criteria>
+</definition>

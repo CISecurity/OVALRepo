@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:10603" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The wordwrap function in PHP 4 before 4.4.8, and PHP 5 before 5.2.4, does not properly use the breakcharlen variable, which allows remote attackers to cause a denial of service (divide-by-zero error and application crash, or infinite loop) via certain arguments, as demonstrated by a 'chr(0), 0, ""' argument set.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3998" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3998"/>
+    <description>The wordwrap function in PHP 4 before 4.4.8, and PHP 5 before 5.2.4, does not properly use the breakcharlen variable, which allows remote attackers to cause a denial of service (divide-by-zero error and application crash, or infinite loop) via certain arguments, as demonstrated by a 'chr(0), 0, ""' argument set.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:29:23.825-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:04:14.553-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:04:33.690-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:10603 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:04:00.787-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:08:38.174-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:07:01.346-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="php is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:35216"/>
+        <criterion comment="php-pgsql is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:35012"/>
+        <criterion comment="php-mysql is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:34787"/>
+        <criterion comment="php-ldap is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:35164"/>
+        <criterion comment="php-imap is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:34818"/>
+        <criterion comment="php-odbc is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:35171"/>
+        <criterion comment="php-devel is earlier than 0:4.3.2-43.ent" test_ref="oval:org.mitre.oval:tst:34820"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="php-xmlrpc is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35008"/>
+        <criterion comment="php-snmp is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:34796"/>
+        <criterion comment="php-domxml is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35363"/>
+        <criterion comment="php-mysql is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35010"/>
+        <criterion comment="php-imap is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35249"/>
+        <criterion comment="php-gd is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:34683"/>
+        <criterion comment="php is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:34365"/>
+        <criterion comment="php-mbstring is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:34976"/>
+        <criterion comment="php-pgsql is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35087"/>
+        <criterion comment="php-pear is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35298"/>
+        <criterion comment="php-ldap is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35289"/>
+        <criterion comment="php-odbc is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35309"/>
+        <criterion comment="php-ncurses is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35263"/>
+        <criterion comment="php-devel is earlier than 0:4.3.9-3.22.9" test_ref="oval:org.mitre.oval:tst:35044"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="php-bcmath is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35279"/>
+        <criterion comment="php-soap is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34964"/>
+        <criterion comment="php-common is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34896"/>
+        <criterion comment="php-mysql is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35084"/>
+        <criterion comment="php-imap is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35078"/>
+        <criterion comment="php-gd is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34802"/>
+        <criterion comment="php is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35270"/>
+        <criterion comment="php-mbstring is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35361"/>
+        <criterion comment="php-pgsql is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34769"/>
+        <criterion comment="php-xml is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35108"/>
+        <criterion comment="php-ldap is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35037"/>
+        <criterion comment="php-odbc is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34943"/>
+        <criterion comment="php-ncurses is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34689"/>
+        <criterion comment="php-devel is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35221"/>
+        <criterion comment="php-xmlrpc is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35077"/>
+        <criterion comment="php-snmp is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34934"/>
+        <criterion comment="php-pdo is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:35170"/>
+        <criterion comment="php-dba is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34376"/>
+        <criterion comment="php-cli is earlier than 0:5.1.6-15.el5" test_ref="oval:org.mitre.oval:tst:34764"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

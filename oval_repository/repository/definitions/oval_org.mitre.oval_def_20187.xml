@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20187" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2494-1 ffmpeg - several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>ffmpeg</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2494-1" ref_id="DSA-2494-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3951" ref_id="CVE-2011-3951"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3952" ref_id="CVE-2011-3952"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0851" ref_id="CVE-2012-0851"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0852" ref_id="CVE-2012-0852"/>
+    <description><![CDATA[It was discovered that FFmpeg, Debian's version of the Libav media codec suite, contains vulnerabilities in the DPCM codecs (<a href="http://security-tracker.debian.org/tracker/CVE-2011-3951">CVE-2011-3951</a>), H.264 (<a href="http://security-tracker.debian.org/tracker/CVE-2012-0851">CVE-2012-0851</a>), ADPCM (<a href="http://security-tracker.debian.org/tracker/CVE-2012-0852">CVE-2012-0852</a>), and the KMVC decoder (<a href="http://security-tracker.debian.org/tracker/CVE-2011-3952">CVE-2011-3952</a>).]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:22:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:48:56.879-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:39.276-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:18.497-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20187 - Debian Patch Update" date="2014-06-06T17:24:00.692-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:26:23.424-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:56.073-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="ffmpeg DPKG is earlier than 4:0.5.9-1" test_ref="oval:org.mitre.oval:tst:89180"/>
+  </criteria>
+</definition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12694" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Office Component Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2007</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1980" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1980"/>
+    <description>Untrusted search path vulnerability in Microsoft Office 2003 SP3 and 2007 SP2 allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .doc, .ppt, or .xls file, aka "Office Component Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-13T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-09-19T14:13:14.250-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:20.751-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:00:38.372-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12694 - CVE-2011-1980 - extend_definitions were changed" date="2014-05-08T11:16:00.409-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-08T11:16:53.617-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:07.120-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Office 2003">
+      <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+      <criterion comment="Mso.dll version is less than 11.0.8341.0" test_ref="oval:org.mitre.oval:tst:43794"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Office 2007">
+      <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+      <criterion comment="Mso.dll version is less than 12.0.6562.5003" test_ref="oval:org.mitre.oval:tst:43478"/>
+    </criteria>
+  </criteria>
+</definition>

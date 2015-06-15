@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23459" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:0428: dhcp security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>dhcp</product>
+    </affected>
+    <reference ref_id="ELSA-2011:0428-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-0428.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-0997" ref_url="http://linux.oracle.com/cve/CVE-2011-0997.html" source="CVE"/>
+    <description>dhclient in ISC DHCP 3.0.x through 4.2.x before 4.2.1-P1, 3.1-ESV before 3.1-ESV-R1, and 4.1-ESV before 4.1-ESV-R2 allows remote attackers to execute arbitrary commands via shell metacharacters in a hostname obtained from a DHCP message, as demonstrated by a hostname that is provided to dhclient-script.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:25:36.322-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:10.475-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:50.808-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23459 - optimisation of Oracle Linux content" date="2014-05-05T17:37:00.448-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:41:33.810-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:27.319-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="dhclient is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:108783"/>
+      <criterion comment="dhcp-devel is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:108796"/>
+      <criterion comment="dhcp is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:108537"/>
+    </criteria>
+  </criteria>
+</definition>

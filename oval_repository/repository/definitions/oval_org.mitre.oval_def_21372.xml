@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21372" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0571: kernel security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0571-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0571.html"/>
+    <reference source="CESA" ref_id="CESA-2012:0571"/>
+    <reference source="CVE" ref_id="CVE-2011-4086" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-4086.html"/>
+    <reference source="CVE" ref_id="CVE-2012-1601" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-1601.html"/>
+    <description>The KVM implementation in the Linux kernel before 3.3.6 allows host OS users to cause a denial of service (NULL pointer dereference and host OS crash) by making a KVM_CREATE_IRQCHIP ioctl call after a virtual CPU already exists.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:21:35.162-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:02:33.668-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:17.382-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93053"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93410"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93442"/>
+      <criterion comment="python-perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93062"/>
+      <criterion comment="perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:92805"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:92811"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93444"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93450"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93176"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93231"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:93178"/>
+      <criterion comment="kernel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:92992"/>
+    </criteria>
+  </criteria>
+</definition>

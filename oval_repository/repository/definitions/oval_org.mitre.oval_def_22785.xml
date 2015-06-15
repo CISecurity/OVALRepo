@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22785" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0615: libvirt security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0615-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0615.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-2239" ref_url="http://linux.oracle.com/cve/CVE-2010-2239.html" source="CVE"/>
+    <reference ref_id="CVE-2010-2242" ref_url="http://linux.oracle.com/cve/CVE-2010-2242.html" source="CVE"/>
+    <description>Red Hat libvirt 0.2.0 through 0.8.2 creates iptables rules with improper mappings of privileged source ports, which allows guest OS users to bypass intended access restrictions by leveraging IP address and source-port values, as demonstrated by copying and deleting an NFS directory tree.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:06:05.908-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:29.793-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:06.554-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22785 - optimisation of Oracle Linux content" date="2014-05-05T18:03:00.641-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:05:20.376-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:13.406-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="libvirt-devel is earlier than 0:0.6.3-33.el5_5.3" test_ref="oval:org.mitre.oval:tst:104237"/>
+      <criterion comment="libvirt is earlier than 0:0.6.3-33.el5_5.3" test_ref="oval:org.mitre.oval:tst:103819"/>
+      <criterion comment="libvirt-python is earlier than 0:0.6.3-33.el5_5.3" test_ref="oval:org.mitre.oval:tst:104289"/>
+    </criteria>
+  </criteria>
+</definition>

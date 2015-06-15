@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24792" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in OpenSSL before 0.9.8n, allows remote attackers to cause a denial of service (NULL pointer dereference and daemon crash)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0433" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0433"/>
+    <description>The kssl_keytab_is_available function in ssl/kssl.c in OpenSSL before 0.9.8n, when Kerberos is enabled but Kerberos configuration files cannot be opened, does not check a certain return value, which allows remote attackers to cause a denial of service (NULL pointer dereference and daemon crash) via SSL cipher negotiation, as demonstrated by a chroot installation of Dovecot or stunnel without Kerberos configuration files inside the chroot.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-07T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-07-08T12:49:21.350-04:00">DRAFT</status_change>
+        <status_change date="2014-07-28T04:00:28.987-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:02:47.784-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check vulnerable OpenSSL">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL">
+        <criterion comment="Check if the version of OpenSSL 0.9.8 before 0.9.8n" test_ref="oval:org.mitre.oval:tst:115557"/>
+      </criteria>
+      <criterion comment="OpenSSL is installed" test_ref="oval:org.mitre.oval:tst:113869"/>
+    </criteria>
+    <criteria operator="AND" comment="Check vulnerable OpenSSL (32_bit)">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL (32_bit)">
+        <criterion comment="Check if the version of OpenSSL 0.9.8 before 0.9.8n (32_bit)" test_ref="oval:org.mitre.oval:tst:114750"/>
+      </criteria>
+      <criterion comment="OpenSSL (32_bit) is installed" test_ref="oval:org.mitre.oval:tst:113875"/>
+    </criteria>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8n ProgramFilesDir" test_ref="oval:org.mitre.oval:tst:115309"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8n ProgramFilesDir x86" test_ref="oval:org.mitre.oval:tst:115546"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8 before 0.9.8n under Sytem32 and SysWOW64" test_ref="oval:org.mitre.oval:tst:115558"/>
+  </criteria>
+</definition>

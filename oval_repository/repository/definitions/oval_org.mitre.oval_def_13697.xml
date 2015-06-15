@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13697" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1062-1 -- krb5 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001247.html" ref_id="USN-1062-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4022" ref_id="CVE-2010-4022"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0281" ref_id="CVE-2011-0281"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0282" ref_id="CVE-2011-0282"/>
+    <description>Keiichi Mori discovered that the MIT krb5 KDC database propagation daemon is vulnerable to a denial of service attack due to improper logic when a worker child process exited because of invalid network input. This could only occur when kpropd is running in standalone mode; kpropd was not affected when running in incremental propagation mode or as an inetd server. This issue only affects Ubuntu 9.10, Ubuntu 10.04 LTS, and Ubuntu 10.10. Kevin Longfellow and others discovered that the MIT krb5 Key Distribution Center daemon is vulnerable to denial of service attacks when using an LDAP back end due to improper handling of network input</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:35:27.646-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:10:05.750-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:33.428-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13697 - added CVE references; also made minor updates" date="2014-06-13T15:21:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:23:01.383-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:41.100-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61996"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="krb5-rsh-server DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:62286"/>
+            <criterion comment="krb5-telnetd DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61916"/>
+            <criterion comment="libkrb53 DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:62326"/>
+            <criterion comment="libkrb5-dev DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:62123"/>
+            <criterion comment="krb5-ftpd DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61696"/>
+            <criterion comment="krb5-pkinit DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61956"/>
+            <criterion comment="krb5-admin-server DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:62398"/>
+            <criterion comment="libkadm55 DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61438"/>
+            <criterion comment="libkrb5-dbg DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:62410"/>
+            <criterion comment="krb5-user DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61832"/>
+            <criterion comment="krb5-clients DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61912"/>
+            <criterion comment="krb5-kdc DPKG is earlier than 1.6.dfsg.3~beta1-2ubuntu1.8" test_ref="oval:org.mitre.oval:tst:61481"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:61981"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgssrpc4 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62440"/>
+            <criterion comment="krb5-multidev DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:61856"/>
+            <criterion comment="libk5crypto3 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62127"/>
+            <criterion comment="krb5-kdc-ldap DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62044"/>
+            <criterion comment="libkrb5-dev DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62351"/>
+            <criterion comment="libkadm5srv-mit7 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62366"/>
+            <criterion comment="libkadm5clnt-mit7 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62074"/>
+            <criterion comment="krb5-pkinit DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:61651"/>
+            <criterion comment="libkrb5-3 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62029"/>
+            <criterion comment="libkdb5-4 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62434"/>
+            <criterion comment="libkrb5-dbg DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:61496"/>
+            <criterion comment="krb5-user DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62321"/>
+            <criterion comment="krb5-kdc DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62269"/>
+            <criterion comment="libkrb5support0 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62400"/>
+            <criterion comment="libgssapi-krb5-2 DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62370"/>
+            <criterion comment="krb5-admin-server DPKG is earlier than 1.8.1+dfsg-5ubuntu0.4" test_ref="oval:org.mitre.oval:tst:62031"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62373"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="krb5-rsh-server DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62265"/>
+            <criterion comment="libk5crypto3 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:61930"/>
+            <criterion comment="krb5-kdc-ldap DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62459"/>
+            <criterion comment="krb5-telnetd DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62409"/>
+            <criterion comment="libkadm5clnt6 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62258"/>
+            <criterion comment="libkdb5-4 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62103"/>
+            <criterion comment="libgssrpc4 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62220"/>
+            <criterion comment="libkrb5-dev DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:61782"/>
+            <criterion comment="krb5-ftpd DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62357"/>
+            <criterion comment="krb5-pkinit DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62439"/>
+            <criterion comment="libkadm5srv6 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62401"/>
+            <criterion comment="krb5-admin-server DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62393"/>
+            <criterion comment="libkrb5-3 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:61998"/>
+            <criterion comment="libkrb5-dbg DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:61590"/>
+            <criterion comment="krb5-user DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62477"/>
+            <criterion comment="krb5-clients DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62213"/>
+            <criterion comment="libkrb5support0 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62389"/>
+            <criterion comment="libgssapi-krb5-2 DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62318"/>
+            <criterion comment="krb5-kdc DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.9" test_ref="oval:org.mitre.oval:tst:62384"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62492"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="krb5-multidev DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:61756"/>
+            <criterion comment="libk5crypto3 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62442"/>
+            <criterion comment="krb5-kdc-ldap DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62087"/>
+            <criterion comment="libkadm5srv-mit7 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62470"/>
+            <criterion comment="libkrb5-dev DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:61529"/>
+            <criterion comment="krb5-pkinit DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62334"/>
+            <criterion comment="krb5-admin-server DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62028"/>
+            <criterion comment="libkrb5-3 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:61523"/>
+            <criterion comment="libkdb5-4 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62339"/>
+            <criterion comment="libkrb5-dbg DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:61928"/>
+            <criterion comment="krb5-user DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62396"/>
+            <criterion comment="krb5-kdc DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62331"/>
+            <criterion comment="libgssrpc4 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62149"/>
+            <criterion comment="libkrb5support0 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62051"/>
+            <criterion comment="libgssapi-krb5-2 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62487"/>
+            <criterion comment="libkadm5clnt-mit7 DPKG is earlier than 1.8.1+dfsg-2ubuntu0.6" test_ref="oval:org.mitre.oval:tst:62450"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

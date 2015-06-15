@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23597" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0627: thunderbird security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>thunderbird</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0627-01" ref_url="http://linux.oracle.com/errata/ELSA-2013-0627.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-0787" ref_url="http://linux.oracle.com/cve/CVE-2013-0787.html" source="CVE"/>
+    <description>Use-after-free vulnerability in the nsEditor::IsPreformatted function in editor/libeditor/base/nsEditor.cpp in Mozilla Firefox before 19.0.2, Firefox ESR 17.x before 17.0.4, Thunderbird before 17.0.4, Thunderbird ESR 17.x before 17.0.4, and SeaMonkey before 2.16.1 allows remote attackers to execute arbitrary code via vectors involving an execCommand call.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:44:40.170-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:35.965-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:05:27.016-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23597 - optimisation of Oracle Linux content" date="2014-05-05T17:32:00.187-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:34:10.120-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:55.408-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <criterion comment="thunderbird is earlier than 0:17.0.3-2.el6_4" test_ref="oval:org.mitre.oval:tst:111449"/>
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criterion comment="thunderbird is earlier than 0:17.0.3-2.el5_9" test_ref="oval:org.mitre.oval:tst:111675"/>
+    </criteria>
+  </criteria>
+</definition>

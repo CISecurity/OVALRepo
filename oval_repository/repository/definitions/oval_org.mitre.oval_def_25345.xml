@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25345" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1655-1 -- Security update for CUPS</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>CUPS</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131655-1.html" ref_id="SUSE-SU-2013:1655-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5519" ref_id="CVE-2012-5519"/>
+    <description>The following security issue has been fixed in the CUPS
+print daemon  CVE-2012-5519:
+
+The patch adds better default protection against misuse of
+privileges by  normal users who have been specifically
+allowed by root to do cupsd  configuration changes
+
+The new ConfigurationChangeRestriction cupsd.conf directive
+specifies the  level of restriction for cupsd.conf changes
+that happen via HTTP/IPP  requests to the running cupsd
+(e.g. via CUPS web interface or via the  cupsctl command).
+
+By default certain cupsd.conf directives that deal with
+filenames, paths,  and users can no longer be changed via
+requests to the running cupsd but  only by manual editing
+the cupsd.conf file and its default file permissions
+permit only root to write the cupsd.conf file.
+
+Those directives are: ConfigurationChangeRestriction,
+AccessLog,  BrowseLDAPCACertFile, CacheDir, ConfigFilePerm,
+DataDir, DocumentRoot,  ErrorLog, FileDevice, FontPath,
+Group, LogFilePerm, PageLog, Printcap,  PrintcapFormat,
+PrintcapGUI, RemoteRoot, RequestRoot, ServerBin,
+ServerCertificate, ServerKey, ServerRoot, StateDir,
+SystemGroup,  SystemGroupAuthKey, TempDir, User.
+
+The default group of users who are allowed to do cupsd
+configuration  changes via requests to the running cupsd
+(i.e. the SystemGroup directive in  cupsd.conf) is set to
+'root' only.
+
+Additionally the following bug has been fixed:
+
+    * strip trailing "@REALM" from username for Kerberos
+authentication (CUPS STR#3972 bnc#827109)
+
+Security Issue reference:
+
+    * CVE-2012-5519
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5519
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:24:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:21:17.662-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:00.677-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:00.163-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="cups RPM is earlier than 0:1.3.9-8.46.48.1" test_ref="oval:org.mitre.oval:tst:117667"/>
+      <criterion comment="cups-client RPM is earlier than 0:1.3.9-8.46.48.1" test_ref="oval:org.mitre.oval:tst:118260"/>
+      <criterion comment="cups-libs RPM is earlier than 0:1.3.9-8.46.48.1" test_ref="oval:org.mitre.oval:tst:117967"/>
+      <criterion comment="cups-libs-32bit RPM is earlier than 0:1.3.9-8.46.48.1" test_ref="oval:org.mitre.oval:tst:118312"/>
+    </criteria>
+  </criteria>
+</definition>

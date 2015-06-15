@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13296" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-860-1 -- apache2 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>apache2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-November/001001.html" ref_id="USN-860-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" ref_id="CVE-2009-3555"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3094" ref_id="CVE-2009-3094"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3095" ref_id="CVE-2009-3095"/>
+    <description>Marsh Ray and Steve Dispensa discovered a flaw in the TLS and SSLv3 protocols. If an attacker could perform a man in the middle attack at the start of a TLS connection, the attacker could inject arbitrary content at the beginning of the user�s session. The flaw is with TLS renegotiation and potentially affects any software that supports this feature. Attacks against the HTTPS protocol are known, with the severity of the issue depending on the safeguards used in the web application. Until the TLS protocol and underlying libraries are adjusted to defend against this vulnerability, a partial, temporary workaround has been applied to Apache that disables client initiated TLS renegotiation. This update does not protect against server initiated TLS renegotiation when using SSLVerifyClient and SSLCipherSuite on a per Directory or Location basis. Users can defend againt server inititiated TLS renegotiation attacks by adjusting their Apache configuration to use SSLVerifyClient and SSLCipherSuite only on the server or virtual host level. It was discovered that mod_proxy_ftp in Apache did not properly sanitize its input when processing replies to EPASV and PASV commands. An attacker could use this to cause a denial of service in the Apache child process. Another flaw was discovered in mod_proxy_ftp. If Apache is configured as a reverse proxy, an attacker could send a crafted HTTP header to bypass intended access controls and send arbitrary commands to the FTP server</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:50:53.729-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:05:05.128-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:04:07.390-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13296 - added CVE references; also made minor updates" date="2014-06-13T16:08:00.228-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:09:37.367-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:02:23.346-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-mpm-perchild DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67243"/>
+            <criterion comment="apache2-doc DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67251"/>
+            <criterion comment="apache2-src DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67362"/>
+            <criterion comment="apache2 DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67426"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-utils DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67207"/>
+            <criterion comment="apache2-mpm-worker DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:66858"/>
+            <criterion comment="apache2.2-common DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67406"/>
+            <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67282"/>
+            <criterion comment="apache2-threaded-dev DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67002"/>
+            <criterion comment="apache2-mpm-event DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67247"/>
+            <criterion comment="apache2-prefork-dev DPKG is earlier than 2.2.8-1ubuntu0.14" test_ref="oval:org.mitre.oval:tst:67484"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-doc DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67432"/>
+            <criterion comment="apache2-src DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67153"/>
+            <criterion comment="apache2 DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67497"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-utils DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67116"/>
+            <criterion comment="apache2-mpm-worker DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67168"/>
+            <criterion comment="apache2.2-common DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67228"/>
+            <criterion comment="apache2-suexec-custom DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67190"/>
+            <criterion comment="apache2-suexec DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67305"/>
+            <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67385"/>
+            <criterion comment="apache2-threaded-dev DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:66514"/>
+            <criterion comment="apache2-mpm-event DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67443"/>
+            <criterion comment="apache2-prefork-dev DPKG is earlier than 2.2.9-7ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67506"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-doc DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67468"/>
+            <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67148"/>
+            <criterion comment="apache2-mpm-itk DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67218"/>
+            <criterion comment="apache2-mpm-worker DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67175"/>
+            <criterion comment="apache2-mpm-event DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67332"/>
+            <criterion comment="apache2.2-common DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:66555"/>
+            <criterion comment="apache2 DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:66999"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2.2-bin DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67461"/>
+            <criterion comment="apache2-utils DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67524"/>
+            <criterion comment="apache2-suexec-custom DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67427"/>
+            <criterion comment="apache2-suexec DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:66634"/>
+            <criterion comment="apache2-threaded-dev DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67122"/>
+            <criterion comment="apache2-prefork-dev DPKG is earlier than 2.2.12-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67344"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="apache2-doc DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67398"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libapr0 DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:66602"/>
+            <criterion comment="apache2-utils DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67509"/>
+            <criterion comment="apache2-mpm-worker DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67548"/>
+            <criterion comment="apache2-mpm-perchild DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67125"/>
+            <criterion comment="apache2-common DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67349"/>
+            <criterion comment="libapr0-dev DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67336"/>
+            <criterion comment="apache2 DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67582"/>
+            <criterion comment="apache2-threaded-dev DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67306"/>
+            <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67041"/>
+            <criterion comment="apache2-prefork-dev DPKG is earlier than 2.0.55-4ubuntu2.9" test_ref="oval:org.mitre.oval:tst:67214"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-doc DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67304"/>
+            <criterion comment="apache2-src DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67029"/>
+            <criterion comment="apache2 DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67523"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-utils DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67110"/>
+            <criterion comment="apache2-mpm-worker DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67117"/>
+            <criterion comment="apache2.2-common DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67559"/>
+            <criterion comment="apache2-suexec-custom DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67586"/>
+            <criterion comment="apache2-suexec DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67526"/>
+            <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67570"/>
+            <criterion comment="apache2-threaded-dev DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67178"/>
+            <criterion comment="apache2-mpm-event DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67527"/>
+            <criterion comment="apache2-prefork-dev DPKG is earlier than 2.2.11-2ubuntu2.5" test_ref="oval:org.mitre.oval:tst:67188"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

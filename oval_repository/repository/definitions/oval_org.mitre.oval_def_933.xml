@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:933" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IIS WebDAV Request Denial of Service</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Internet Information Server (IIS)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0226" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0226"/>
+    <description>Microsoft Internet Information Services (IIS) 5.0 and 5.1 allows remote attackers to cause a denial of service via a long WebDAV request with a (1) PROPFIND or (2) SEARCH method, which generates an error condition that is not properly handled.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-05-17T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-06-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-06-30T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-27T10:43:00.000-04:00" comment="modified wft-332 - Changed test to match comment">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Changed tst:1444 to use obj:496 was introduced to properly look for w3svc.dll in System32/inetsrv." date="2007-07-18T12:59:00.963-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-07-18T13:02:05.118-04:00">INTERIM</status_change>
+        <status_change date="2007-08-02T14:47:16.660-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="IIS major version equals 5" negate="false" test_ref="oval:org.mitre.oval:tst:3081"/>
+    <criterion comment="IIS minor version equals 0" negate="false" test_ref="oval:org.mitre.oval:tst:3098"/>
+    <criterion comment="File %windir%\System32\w3svc.dll is less than 5.0.2195.6672" negate="false" test_ref="oval:org.mitre.oval:tst:1444"/>
+    <criterion comment="Patch Q811114 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:1443"/>
+  </criteria>
+</definition>

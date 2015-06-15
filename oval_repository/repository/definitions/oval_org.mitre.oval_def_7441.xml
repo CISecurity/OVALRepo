@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7441" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MPEG Layer-3 Audio Decoder Stack Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0480" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0480"/>
+    <description>Multiple stack-based buffer overflows in the MPEG Layer-3 audio codecs in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP2, Vista Gold, SP1, and SP2, and Server 2008 Gold and SP2 allow remote attackers to execute arbitrary code via a crafted AVI file, aka "MPEG Layer-3 Audio Decoder Stack Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-13T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-04-15T10:43:10.806-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:00:52.077-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:00:39.696-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows 2000 SP4, Windows XP x86 SP2/SP3, Windows Server 2003 SP2 x86">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+      </criteria>
+      <criterion comment="The version of L3codeca.acm is less than 1.9.0.306" test_ref="oval:org.mitre.oval:tst:11752"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows XP x64 SP2, Server 2003 X64/IA64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criteria operator="OR">
+        <criterion comment="The version of L3codeca.acm is less than 1.9.0.306" test_ref="oval:org.mitre.oval:tst:11582"/>
+        <criterion comment="The version of Wl3codeca.acm is less than 1.9.0.306" test_ref="oval:org.mitre.oval:tst:11399"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Windows Vista x86/x64, Windows Server 2008 x86/x64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+      </criteria>
+      <criterion comment="The version of L3codeca.acm is less than 1.9.0.402" test_ref="oval:org.mitre.oval:tst:11396"/>
+    </criteria>
+  </criteria>
+</definition>

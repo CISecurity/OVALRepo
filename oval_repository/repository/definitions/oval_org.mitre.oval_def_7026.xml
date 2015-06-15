@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7026" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Red Hat Linux Kernel Routing Implementation Multiple Remote Denial of Service Vulnerabilities</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-4272" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4272"/>
+    <description>A certain Red Hat patch for net/ipv4/route.c in the Linux kernel 2.6.18 on Red Hat Enterprise Linux (RHEL) 5 allows remote attackers to cause a denial of service (deadlock) via crafted packets that force collisions in the IPv4 routing hash table, and trigger a routing "emergency" in which a hash chain is too long.  NOTE: this is related to an issue in the Linux kernel before 2.6.31, when the kernel routing cache is disabled, involving an uninitialized pointer and a panic.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-01T17:30:00.000-05:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </submitted>
+        <status_change date="2010-06-02T16:40:33.751-04:00">DRAFT</status_change>
+        <status_change date="2010-06-21T04:00:12.416-04:00">INTERIM</status_change>
+        <status_change date="2010-07-12T04:00:09.865-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7026 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:24.617-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:31.410-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criterion comment="Patch ESX400-201005401-SG is not installed" test_ref="oval:org.mitre.oval:tst:27569"/>
+  </criteria>
+</definition>

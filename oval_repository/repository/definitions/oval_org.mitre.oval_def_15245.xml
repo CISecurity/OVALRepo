@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15245" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1365-1 -- Puppet vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 11.04</platform>
+      <platform>Ubuntu 11.10</platform>
+      <platform>Ubuntu 10.10</platform>
+      <product>Puppet</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2012-February/001590.html" ref_id="USN-1365-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0528" ref_id="CVE-2011-0528"/>
+    <description>puppet: Centralized configuration management Puppet would allow unintended access to resources over the network.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-31T03:11:26-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-31T09:16:38.694-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:16.858-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:40.194-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15245 - added CVE references; also made minor updates" date="2014-06-13T16:29:00.177-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:31:49.262-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:05:35.560-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 11.04 is installed" definition_ref="oval:org.mitre.oval:def:14150"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="puppet-common DPKG is earlier than 2.6.4-2ubuntu2.7" test_ref="oval:org.mitre.oval:tst:79451"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 11.10 is installed" definition_ref="oval:org.mitre.oval:def:14657"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="puppet-common DPKG is earlier than 2.7.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:79432"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="puppet-common DPKG is earlier than 2.6.1-0ubuntu2.5" test_ref="oval:org.mitre.oval:tst:79465"/>
+    </criteria>
+  </criteria>
+</definition>

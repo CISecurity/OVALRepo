@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5942" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SPN Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Windows Media Player 6.4</product>
+      <product>Windows Media Server 4.1</product>
+      <product>Windows Media Server 9</product>
+      <product>Windows Media Format Runtime 7.1</product>
+      <product>Windows Media Format Runtime 9.5</product>
+      <product>Windows Media Format Runtime 11</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3009" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3009"/>
+    <description>Microsoft Windows Media Player 6.4, Windows Media Format Runtime 7.1 through 11, and Windows Media Services 4.1, 9, and 2008 do not properly use the Service Principal Name (SPN) identifier when validating replies to authentication requests, which allows remote servers to execute arbitrary code via vectors that employ NTLM credential reflection, aka "SPN Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-12-10T10:44:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-12-12T16:42:41.693-05:00">DRAFT</status_change>
+        <status_change date="2008-12-29T04:00:32.351-05:00">INTERIM</status_change>
+        <status_change date="2009-01-19T04:00:14.339-05:00">ACCEPTED</status_change>
+        <modified comment="Added Windows Server 2008 SP2 as affected version" date="2009-05-07T10:34:00.056-04:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2009-05-07T10:36:28.062-04:00">INTERIM</status_change>
+        <status_change date="2009-05-25T04:01:50.396-04:00">ACCEPTED</status_change>
+        <modified comment="Including checks for Windows Media Player 6.4" date="2009-12-01T17:32:00.359-05:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2009-12-01T17:33:37.367-05:00">INTERIM</status_change>
+        <status_change date="2009-12-21T04:00:43.809-05:00">ACCEPTED</status_change>
+        <modified comment="corrected file name from Nscm.exe to Nsum.exe for obj:6532" date="2010-04-16T14:46:00.908-04:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2010-04-16T14:50:18.481-04:00">INTERIM</status_change>
+        <status_change date="2010-05-17T04:00:08.946-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5942 - def:5942 &amp; def:5689, Enhanced to cover WinVista, 2008, 2003 &amp; also 64-bit with service packs" date="2011-11-15T14:56:00.873-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2011-11-15T14:58:45.961-05:00">INTERIM</status_change>
+        <status_change date="2011-12-05T04:00:34.404-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5942 - extended definitions of OS are without SP checks" date="2014-07-28T17:41:00.906-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:42:51.130-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:05.949-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for Media player 6.4">
+      <extend_definition comment="Windows Media Player 6.4 is installed." definition_ref="oval:org.mitre.oval:def:6408"/>
+      <criteria operator="OR" comment="Check for Windows 2000/XP/2003">
+        <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+      </criteria>
+      <criterion comment="the version of Strmdll.dll is less than 4.1.0.3937" test_ref="oval:org.mitre.oval:tst:11104"/>
+      <criteria operator="OR" comment="Check for Windows XP/2003">
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      </criteria>
+      <criterion comment="the version of Wstrmdll.dll is less than 4.1.0.3937" test_ref="oval:org.mitre.oval:tst:11180"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Windows 2000,Media Services 4.1 and Nsum.exe version">
+      <extend_definition comment="Microsoft Media Services 4.1 is installed" definition_ref="oval:org.mitre.oval:def:5705"/>
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <criterion comment="Nsum.exe version is less than 4.1.0.3936" test_ref="oval:org.mitre.oval:tst:9602"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Media Services 9">
+      <extend_definition comment="Microsoft Media Services 9 is installed" definition_ref="oval:org.mitre.oval:def:5844"/>
+      <criteria operator="OR" comment="Check for vulnerable Media Services 9 and Wmsserver.dll version">
+        <criteria operator="AND" comment="Check for Windows 2003">
+          <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+          <criterion comment="Wmsserver.dll version is less than 9.1.1.3845" test_ref="oval:org.mitre.oval:tst:9156"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows 2003">
+          <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+          <criterion comment="Wmsserver.dll version is less than 9.1.1.5000" test_ref="oval:org.mitre.oval:tst:9492"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows 2008-32/64 and Wmsserver.dll version">
+          <criteria operator="OR" comment="Check for Windows 2008-32/64">
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+          </criteria>
+          <criterion comment="Wmsserver.dll version is less than 9.5.6001.18161" test_ref="oval:org.mitre.oval:tst:9250"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for Media Player 7.1,Windows 2000 and Wmstream.dll version">
+      <extend_definition comment="Windows Media Player v7.1 is installed." definition_ref="oval:org.mitre.oval:def:1386"/>
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <criterion comment="Wmstream.dll version is less than 7.10.0.3082" test_ref="oval:org.mitre.oval:tst:8658"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for Media Player 9">
+      <extend_definition comment="Windows Media Player v9 is installed." definition_ref="oval:org.mitre.oval:def:2147"/>
+      <criteria operator="OR" comment="Check for vulnerable Media Player 9">
+        <criteria operator="AND" comment="Check for Windows 2000/XP and Wmnetmgr.dll version">
+          <criterion comment="Wmnetmgr.dll version is less than 9.0.0.3268" test_ref="oval:org.mitre.oval:tst:9440"/>
+          <criteria operator="OR" comment="Check for Windows 2000/XP">
+            <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+            <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows XP and Wmnetmgr.dll version">
+          <criterion comment="Wmnetmgr.dll version is less than 9.0.0.4504" test_ref="oval:org.mitre.oval:tst:9564"/>
+          <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for Media Player v10">
+      <extend_definition comment="Windows Media Player v10 is installed." definition_ref="oval:org.mitre.oval:def:2172"/>
+      <criteria operator="OR" comment="Check for vulnerable Media Player 10">
+        <criteria operator="AND" comment="Check for Windows XP and Wmnetmgr.dll version">
+          <criterion comment="Wmnetmgr.dll version is less than 10.0.0.3703" test_ref="oval:org.mitre.oval:tst:9104"/>
+          <criteria operator="OR" comment="Check for Windows XP">
+            <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+            <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows 2003 and Wmnetmgr.dll version">
+          <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+          <criterion comment="Wmnetmgr.dll version is less than 10.0.0.3711" test_ref="oval:org.mitre.oval:tst:9257"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows 2003 and Wmnetmgr.dll version">
+          <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+          <criterion comment="Wmnetmgr.dll version is less than 10.0.0.4001" test_ref="oval:org.mitre.oval:tst:9445"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows XP/2003 and Wmnetmgr.dll version">
+          <criteria operator="OR" comment="Check for Windows XP/2003">
+            <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+          </criteria>
+          <criterion comment="Wmnetmgr.dll version is less than 10.0.0.3711" test_ref="oval:org.mitre.oval:tst:9257"/>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows XP/2003(x64) and Wmnetmgr.dll version">
+          <criteria operator="OR" comment="Check for Windows XP/2003(x64)">
+            <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+          </criteria>
+          <criterion comment="Wmnetmgr.dll version is less than 10.0.0.4001" test_ref="oval:org.mitre.oval:tst:9445"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for Media Player v11">
+      <extend_definition comment="Windows Media Player v11 is installed." definition_ref="oval:org.mitre.oval:def:2126"/>
+      <criteria operator="OR" comment="Check for vulnerable Media Player 10">
+        <criteria operator="AND" comment="Check for Windows XP(32)/(64) and Wmnetmgr.dll version">
+          <criterion comment="Wmnetmgr.dll version is less than 11.0.5721.5251" test_ref="oval:org.mitre.oval:tst:9534"/>
+          <criteria operator="OR" comment="Check for Windows XP(32)/(64)">
+            <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+            <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+            <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows Vista and Wmnetmgr.dll version">
+          <criterion comment="Check if version of Wmnetmgr.dll is less than 11.0.6000.6346" test_ref="oval:org.mitre.oval:tst:77438"/>
+          <criteria operator="OR" comment="Check for Windows Vista">
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Check for Windows Vista/2008 and Wmnetmgr.dll version">
+          <criterion comment="Check if version of Wmnetmgr.dll is less than 11.0.6001.7001" test_ref="oval:org.mitre.oval:tst:77313"/>
+          <criteria operator="OR" comment="Check for Windows Vista/2008">
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

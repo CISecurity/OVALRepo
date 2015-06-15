@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8094" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1524 krb5 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 3.1</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1524" ref_id="DSA-1524"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0062" ref_id="CVE-2008-0062"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0063" ref_id="CVE-2008-0063"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0947" ref_id="CVE-2008-0947"/>
+    <description>Several remote vulnerabilities have been discovered in the kdc component of the krb5, a system for authenticating users and services on a network. The Common Vulnerabilities and Exposures project identifies the following problems: An unauthenticated remote attacker may cause a krb4-enabled KDC to crash, expose information, or execute arbitrary code. Successful exploitation of this vulnerability could compromise the Kerberos key database and host security on the KDC host. An unauthenticated remote attacker may cause a krb4-enabled KDC to expose information. It is theoretically possible for the exposed information to include secret key data on some platforms. An unauthenticated remote attacker can cause memory corruption in the kadmind process, which is likely to cause kadmind to crash, resulting in a denial of service. It is at least theoretically possible for such corruption to result in database corruption or arbitrary code execution, though we have no such exploit and are not aware of any such exploits in use in the wild. In versions of MIT Kerberos shipped by Debian, this bug can only be triggered in configurations that allow large numbers of open file descriptors in a process.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:58:59.468-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:07.812-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:04.395-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8094 - Debian Patch Update" date="2014-06-06T16:34:00.948-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:35:53.204-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:01.765-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19327"/>
+        </criteria>
+        <criterion comment="krb5-rsh-server is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19148"/>
+        <criterion comment="krb5-telnetd is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:18840"/>
+        <criterion comment="libkrb5-dev is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19282"/>
+        <criterion comment="libkrb53 is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19040"/>
+        <criterion comment="krb5-ftpd is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19328"/>
+        <criterion comment="krb5-admin-server is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19325"/>
+        <criterion comment="libkadm55 is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19080"/>
+        <criterion comment="libkrb5-dbg is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:18759"/>
+        <criterion comment="krb5-user is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19062"/>
+        <criterion comment="krb5-clients is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19172"/>
+        <criterion comment="krb5-kdc is earlier than 1.4.4-7etch5" test_ref="oval:org.mitre.oval:tst:19205"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="krb5-doc is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19009"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is m68k" test_ref="oval:org.mitre.oval:tst:13064"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="krb5-rsh-server is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19090"/>
+            <criterion comment="krb5-telnetd is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19312"/>
+            <criterion comment="libkrb53 is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19202"/>
+            <criterion comment="libkrb5-dev is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:18853"/>
+            <criterion comment="krb5-ftpd is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19139"/>
+            <criterion comment="libkadm55 is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19263"/>
+            <criterion comment="krb5-user is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19295"/>
+            <criterion comment="krb5-kdc is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:18815"/>
+            <criterion comment="krb5-clients is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:19183"/>
+            <criterion comment="krb5-admin-server is earlier than 1.3.6-2sarge6" test_ref="oval:org.mitre.oval:tst:18970"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

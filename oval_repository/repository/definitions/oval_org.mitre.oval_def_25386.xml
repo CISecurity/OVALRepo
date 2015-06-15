@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25386" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:1240-1 -- Recommended update for AutoYaST2</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>AutoYaST2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131240-1.html" ref_id="SUSE-RU-2013:1240-1"/>
+    <description>This update fixes the following issues:
+
+    * #820499: AutoYaST module creates a bad ask-list
+    * #822009: AutoYaST module crashes while saving the
+profile
+    * #799725: Problem reusing large number of partitions
+    * #794403: Unattended upgrade dependency errors when
+update repos are present in 'autoupg.xml'
+    * #788593: Problem handling script notifications in UI
+    * #752318: Fix cloning of raids</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:30:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:30.868-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:10.472-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:11.450-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="autoyast2 RPM is earlier than 0:2.17.57.3-0.5.1" test_ref="oval:org.mitre.oval:tst:118655"/>
+      <criterion comment="autoyast2-installation RPM is earlier than 0:2.17.57.3-0.5.1" test_ref="oval:org.mitre.oval:tst:119186"/>
+    </criteria>
+  </criteria>
+</definition>

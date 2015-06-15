@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21082" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1868: xorg-x11-server security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>xorg-x11-server</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:1868-00" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1868.html"/>
+    <reference source="CESA" ref_id="CESA-2013:1868"/>
+    <reference source="CVE" ref_id="CVE-2013-6424" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6424.html"/>
+    <description>Integer underflow in the xTrapezoidValid macro in render/picture.h in X.Org allows context-dependent attackers to cause a denial of service (crash) via a negative bottom value.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:57:39.355-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:01:01.809-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:13.427-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21082 - Products and Centos critera added" date="2014-06-13T17:47:00.365-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:50:42.620-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:23.064-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xorg-x11-server-Xephyr is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:92119"/>
+        <criterion comment="xorg-x11-server-Xnest is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:91723"/>
+        <criterion comment="xorg-x11-server is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:91970"/>
+        <criterion comment="xorg-x11-server-sdk is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:92093"/>
+        <criterion comment="xorg-x11-server-Xvfb is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:92104"/>
+        <criterion comment="xorg-x11-server-Xdmx is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:91938"/>
+        <criterion comment="xorg-x11-server-Xvnc-source is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:91734"/>
+        <criterion comment="xorg-x11-server-Xorg is earlier than 0:1.1.1-48.101.el5_10.2" test_ref="oval:org.mitre.oval:tst:91224"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xorg-x11-server-Xephyr is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92235"/>
+        <criterion comment="xorg-x11-server-Xnest is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:91754"/>
+        <criterion comment="xorg-x11-server is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92138"/>
+        <criterion comment="xorg-x11-server-sdk is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92040"/>
+        <criterion comment="xorg-x11-server-Xvfb is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:91302"/>
+        <criterion comment="xorg-x11-server-Xdmx is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92140"/>
+        <criterion comment="xorg-x11-server-Xvnc-source is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92271"/>
+        <criterion comment="xorg-x11-server-Xorg is earlier than 0:1.1.1-48.101.0.1.el5.centos.2" test_ref="oval:org.mitre.oval:tst:92007"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Redhat 6 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xorg-x11-server-Xephyr is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92103"/>
+        <criterion comment="xorg-x11-server-Xnest is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:91238"/>
+        <criterion comment="xorg-x11-server is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:91728"/>
+        <criterion comment="xorg-x11-server-Xvfb is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:91968"/>
+        <criterion comment="xorg-x11-server-devel is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92165"/>
+        <criterion comment="xorg-x11-server-Xdmx is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92211"/>
+        <criterion comment="xorg-x11-server-common is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92011"/>
+        <criterion comment="xorg-x11-server-Xorg is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92142"/>
+        <criterion comment="xorg-x11-server-source is earlier than 0:1.13.0-23.1.el6_5" test_ref="oval:org.mitre.oval:tst:92183"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 6 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xorg-x11-server-Xephyr is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:92206"/>
+        <criterion comment="xorg-x11-server-Xnest is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:92000"/>
+        <criterion comment="xorg-x11-server is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:92298"/>
+        <criterion comment="xorg-x11-server-Xvfb is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:91875"/>
+        <criterion comment="xorg-x11-server-devel is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:92089"/>
+        <criterion comment="xorg-x11-server-Xdmx is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:91984"/>
+        <criterion comment="xorg-x11-server-common is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:92074"/>
+        <criterion comment="xorg-x11-server-Xorg is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:91916"/>
+        <criterion comment="xorg-x11-server-source is earlier than 0:1.13.0-23.1.el6.centos" test_ref="oval:org.mitre.oval:tst:91846"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

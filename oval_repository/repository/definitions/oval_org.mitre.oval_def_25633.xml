@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25633" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Arbitrary code executing via unknown vectors.</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Internet Explorer 8</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1346" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1346"/>
+    <description>Unspecified vulnerability in Microsoft Internet Explorer 8 on Windows 7 allows remote attackers to execute arbitrary code via unknown vectors, as demonstrated by Stephen Fewer as the second of three chained vulnerabilities during a Pwn2Own competition at CanSecWest 2011.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-03T08:31:03">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-09-11T08:03:36.855-04:00">DRAFT</status_change>
+        <status_change date="2014-09-29T04:00:12.433-04:00">INTERIM</status_change>
+        <status_change date="2014-10-20T04:00:13.514-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Windows 7 is installed">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Internet Explorer is vulnerable">
+      <extend_definition comment="Microsoft Internet Explorer 8 is installed" definition_ref="oval:org.mitre.oval:def:6210"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Mshtml.dll version is less than 8.0.7600.16722" test_ref="oval:org.mitre.oval:tst:42403"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Mshtml.dll version is greater than or equal 8.0.7600.20000" test_ref="oval:org.mitre.oval:tst:20848"/>
+          <criterion comment="Mshtml.dll version is less than 8.0.7600.20861" test_ref="oval:org.mitre.oval:tst:42393"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8093" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1856 mantis -- information leak</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>mantis</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1856" ref_id="DSA-1856"/>
+    <description>It was discovered that the Debian Mantis package, a web based bug tracking system, installed the database credentials in a file with world-readable permissions onto the local filesystem. This allows local users to acquire the credentials used to control the Mantis database. This updated package corrects this problem for new installations and will carefully try to update existing ones. Administrators can check the permissions of the file /etc/mantis/config_db.php to see if they are safe for their environment. The old stable distribution (etch) does not contain a mantis package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:58:56.408-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:07.603-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:04.172-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8093 - Debian Patch Update" date="2014-06-06T16:34:00.948-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:35:53.385-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:01.666-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="mantis is earlier than 1.1.6+dfsg-2lenny1" test_ref="oval:org.mitre.oval:tst:19241"/>
+  </criteria>
+</definition>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5838" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability May Allow Popup Windows to Appear Through the Solaris XScreenSaver Program on Xorg(1) Servers</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2711" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2711"/>
+    <description>XScreenSaver in Sun Solaris 9 and 10, OpenSolaris before snv_120, and X11 6.4.1 for Solaris 8, when the Xorg or Xnewt server is used, allows physically proximate attackers to obtain sensitive information by reading popup windows, which are displayed even when the screen is locked, a different vulnerability than CVE-2009-1276.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-08-10T16:40:08.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-08-12T09:49:58.244-04:00">DRAFT</status_change>
+        <status_change date="2009-08-31T04:00:06.335-04:00">INTERIM</status_change>
+        <status_change date="2009-09-21T04:00:04.819-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+        <criterion negate="true" comment="Patch 115298-02 or later installed" test_ref="oval:org.mitre.oval:tst:10067"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+        <criterion negate="true" comment="Patch 115158-11 or later installed" test_ref="oval:org.mitre.oval:tst:10579"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criterion negate="true" comment="Patch 120094-23 or later installed" test_ref="oval:org.mitre.oval:tst:10472"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+        <criterion negate="true" comment="Patch 115299-02 or later installed" test_ref="oval:org.mitre.oval:tst:10441"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+        <criterion negate="true" comment="Patch 115159-11 or later installed" test_ref="oval:org.mitre.oval:tst:10429"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 258928">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criterion negate="true" comment="Patch 120095-23 or later installed" test_ref="oval:org.mitre.oval:tst:10567"/>
+      </criteria>
+    </criteria>
+    <criterion comment="SUNWxwsvr is installed" test_ref="oval:org.mitre.oval:tst:10577"/>
+    <criterion comment="The Xorg X server is running" test_ref="oval:org.mitre.oval:tst:1334"/>
+  </criteria>
+</definition>

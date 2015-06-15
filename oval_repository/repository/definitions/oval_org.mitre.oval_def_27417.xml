@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27417" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013-1213 -- gdm security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>gdm</product>
+      <product>initscripts</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-1213.html" ref_id="ELSA-2013-1213"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4169" ref_id="CVE-2013-4169"/>
+    <description>gdm
+[2.16.0-59.0.1.el5_9.1]
+- Fix gdmconfig memory leaks [orabug 12734629]
+
+[2.16.0-59.1]
+- Don't try to pre-create directories that are internal
+  implementation details of X.
+  Resolves: #997619 CVE-2013-4169
+
+initscripts
+[8.45.42-2.0.1.el5_9.1]
+- Do not rename eth devices. Orabug 14266688.
+  Apply upstream patches:
+  0001-Remove-reference-to-rename_device.patch
+  0002-rename_device-dequote-DEVICE-eth0.patch
+  0003-dont_try_to_rename_devices.patch
+- change the ifup-eth and ifdown-eth script to use default leases file of dhclient. [Orabug 12434590]
+- Update oracle-enterprise.patch to do detection on /etc/oracle-release
+  and /etc/enterprise-release
+- Patch x86_64 sysctl.conf as well as default sysctl.conf
+- Patch sysctl.conf to default rp_filter to loose reverse path
+  filtering (has no effect for pre-2.6.32 kernels) [orabug 10286227]
+- Move hwclock into udev rules
+- Update oracle-enterprise.patch to fix RedHat references in arch specific
+  sysctl.conf files in source tarball
+- Add oracle-enterprise.patch and update specfile
+- Don't attempt to re-enslave already-enslaved devices (#455537) (pknirsch@redhat.com)
+
+[8.45.42-2.1]
+- create /tmp/.X11-unix in rc.sysinit (#997622, CVE-2013-4169)
+
+[8.45.42-2]
+- added missing '-p p' for kpartx in netfs (#844671)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:16">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:03:28.567-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:04:17.823-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:47.115-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T19:05:49.757-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T19:05:49.757-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="gdm is earlier than 0:2.16.0-59.0.1.el5_9.1" test_ref="oval:org.mitre.oval:tst:128884"/>
+      <criterion comment="initscripts is earlier than 0:8.45.42-2.0.1.el5_9.1" test_ref="oval:org.mitre.oval:tst:128191"/>
+      <criterion comment="gdm-docs is earlier than 0:2.16.0-59.0.1.el5_9.1" test_ref="oval:org.mitre.oval:tst:129030"/>
+    </criteria>
+  </criteria>
+</definition>

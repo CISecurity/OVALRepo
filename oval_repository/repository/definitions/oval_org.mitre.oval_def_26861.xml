@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26861" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:1216-1 -- Recommended update for mkinitrd</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>mkinitrd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20141216-1.html" ref_id="SUSE-RU-2014:1216-1"/>
+    <description>This collective update for mkinitrd provides the following fixes and
+enhancements:
+
+    * Fix matching of device numbers in /proc/partitions in setup-storage.
+      (bnc#887683)
+    * Complete support of 2nd ibft iscsi interface. (bnc#830968)
+    * Include USB HID support whenever the kernel supports it. (bnc#879502)
+    * Respect the sixth field (fs_passno) in /etc/fstab for the root
+      device entry. (bnc#858023)
+    * Fix network setup with mkinitrd -f ifup. (bnc#872435)
+    * Include ifup dependencies even if ifup is not used. (bnc#891573)
+    * Retry nfs mount if network is not yet up. (bnc#891573)
+    * Add cciss compat rules to mkinitrd. (bnc#858663)
+    * Cleanup /lib/mkinitrd/{boot,setup} upon package removal. (bnc#892507)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T10:08:36">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:10:37.128-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:59.792-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:02:10.238-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criterion comment="mkinitrd RPM is earlier than 0:2.4.2-0.92.2" test_ref="oval:org.mitre.oval:tst:123874"/>
+  </criteria>
+</definition>

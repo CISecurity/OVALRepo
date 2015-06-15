@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8566" version="11" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running Java, Remote Increase in Privilege, Denial of Service and Other Vulnerabilities</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-3869" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3869"/>
+    <description>Stack-based buffer overflow in the setDiffICM function in the Abstract Window Toolkit (AWT) in Java Runtime Environment (JRE) in Sun Java SE in JDK and JRE 5.0 before Update 22, JDK and JRE 6 before Update 17, SDK and JRE 1.3.x before 1.3.1_27, and SDK and JRE 1.4.x before 1.4.2_24 allows remote attackers to execute arbitrary code via a crafted argument, aka Bug Id 6872357.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-22T17:00:25.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-04-02T15:02:09.178-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:40.132-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:24.692-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:07.782-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:02:02.819-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:33:32.948-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:38.855-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:36:21.191-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:02:40.347-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02503">
+    <criteria operator="OR">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+    </criteria>
+    <criteria operator="OR" comment="filesets tests">
+      <criterion comment="Jdk14.JDK14-IPF32 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20287"/>
+      <criterion comment="Jre14.JRE14-IPF32-HS version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21009"/>
+      <criterion comment="Jre14.JRE14-IPF64 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20865"/>
+      <criterion comment="Jdk14.JDK14-IPF64 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21181"/>
+      <criterion comment="Jdk14.JDK14-PA11 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21269"/>
+      <criterion comment="Jre14.JRE14-COM version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20785"/>
+      <criterion comment="Jdk14.JDK14-PA20 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20932"/>
+      <criterion comment="Jre14.JRE14-PA11 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20739"/>
+      <criterion comment="Jdk14.JDK14-PA20W version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21166"/>
+      <criterion comment="Jre14.JRE14-PA11-HS version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20975"/>
+      <criterion comment="Jre14.JRE14-PA20 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21157"/>
+      <criterion comment="Jre14.JRE14-PA20-HS version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:20888"/>
+      <criterion comment="Jre14.JRE14-PA20W version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21180"/>
+      <criterion comment="Jre14.JRE14-IPF64-HS version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21161"/>
+      <criterion comment="Jre14.JRE14-PA20W-HS version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21041"/>
+      <criterion comment="Jre14.JRE14-IPF32 version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21186"/>
+      <criterion comment="Jdk14.JDK14-COM version is less than 1.4.2.24.00" test_ref="oval:org.mitre.oval:tst:21112"/>
+      <criterion comment="Jre15.JRE15-IPF64-HS version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:20942"/>
+      <criterion comment="Jdk15.JDK15-IPF32 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21163"/>
+      <criterion comment="Jdk15.JDK15-PA20 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21239"/>
+      <criterion comment="Jdk15.JDK15-IPF64 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21147"/>
+      <criterion comment="Jre15.JRE15-COM version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21050"/>
+      <criterion comment="Jre15.JRE15-PA20 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21152"/>
+      <criterion comment="Jre15.JRE15-PA20-HS version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:20695"/>
+      <criterion comment="Jre15.JRE15-PA20W version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:20858"/>
+      <criterion comment="Jre15.JRE15-PA20W-HS version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:20653"/>
+      <criterion comment="Jre15.JRE15-IPF32 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21240"/>
+      <criterion comment="Jre15.JRE15-IPF32-HS version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21098"/>
+      <criterion comment="Jdk15.JDK15-PA20W version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21241"/>
+      <criterion comment="Jre15.JRE15-IPF64 version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:20456"/>
+      <criterion comment="Jdk15.JDK15-COM version is less than 1.5.0.19.00" test_ref="oval:org.mitre.oval:tst:21285"/>
+      <criterion comment="Jdk60.JDK60-PA20 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20892"/>
+      <criterion comment="Jre60.JRE60-PA20W-HS version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21053"/>
+      <criterion comment="Jdk60.JDK60-PA20W version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21191"/>
+      <criterion comment="Jdk60.JDK60-COM version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20877"/>
+      <criterion comment="Jre60.JRE60-COM version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20556"/>
+      <criterion comment="Jre60.JRE60-IPF32 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20758"/>
+      <criterion comment="Jre60.JRE60-IPF32-HS version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20683"/>
+      <criterion comment="Jre60.JRE60-IPF64 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21228"/>
+      <criterion comment="Jre60.JRE60-IPF64-HS version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21149"/>
+      <criterion comment="Jre60.JRE60-PA20 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21107"/>
+      <criterion comment="Jdk60.JDK60-IPF32 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20916"/>
+      <criterion comment="Jre60.JRE60-PA20-HS version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21272"/>
+      <criterion comment="Jdk60.JDK60-IPF64 version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:21105"/>
+      <criterion comment="Jre60.JRE60-PA20W version is less than 1.6.0.06.00" test_ref="oval:org.mitre.oval:tst:20746"/>
+    </criteria>
+  </criteria>
+</definition>

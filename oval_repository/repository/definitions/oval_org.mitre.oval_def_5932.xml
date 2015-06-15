@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5932" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IBM AIX 'swcons' Insecure File Creation Vulnerability</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.2</platform>
+      <platform>IBM AIX 5.3</platform>
+      <platform>IBM AIX 6.1</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4018" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4018"/>
+    <description>swcons in bos.rte.console in IBM AIX 5.2.0 through 6.1.1 allows local users in the system group to create or overwrite an arbitrary file, and establish weak permissions and root ownership for this file, via unspecified vectors.  NOTE: this can be leveraged to gain privileges. NOTE: this issue exists because of an incomplete fix for CVE-2007-5805.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-09-16T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-09-19T17:09:31.133-04:00">DRAFT</status_change>
+        <status_change date="2008-10-06T04:00:14.416-04:00">INTERIM</status_change>
+        <status_change date="2008-10-27T04:00:24.414-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="IBM AIX 5.2 meets CVE-2008-4018">
+      <extend_definition comment="IBM AIX 5.2 is installed" definition_ref="oval:org.mitre.oval:def:5189"/>
+      <criterion negate="true" comment="All filesets for APAR IZ18335 are installed" test_ref="oval:org.mitre.oval:tst:9163"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5.3 meets CVE-2008-4018">
+      <extend_definition comment="IBM AIX 5.3 is installed" definition_ref="oval:org.mitre.oval:def:5325"/>
+      <criterion negate="true" comment="All filesets for APAR IZ18334 are installed" test_ref="oval:org.mitre.oval:tst:9292"/>
+      <criterion negate="true" comment="All filesets for APAR IZ18338 are installed" test_ref="oval:org.mitre.oval:tst:9251"/>
+      <criterion negate="true" comment="All filesets for APAR IZ18339 are installed" test_ref="oval:org.mitre.oval:tst:9010"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 6.1 meets CVE-2008-4018">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <criterion negate="true" comment="All filesets for APAR iZ28943 are installed" test_ref="oval:org.mitre.oval:tst:9324"/>
+      <criterion negate="true" comment="All filesets for APAR IZ18341 are installed" test_ref="oval:org.mitre.oval:tst:9161"/>
+    </criteria>
+  </criteria>
+</definition>

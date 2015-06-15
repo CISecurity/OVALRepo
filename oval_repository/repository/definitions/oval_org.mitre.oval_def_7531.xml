@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7531" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1623 dnsmasq -- DNS cache poisoning</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>dnsmasq</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1623" ref_id="DSA-1623"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" ref_id="CVE-2008-1447"/>
+    <description>Dan Kaminsky discovered that properties inherent to the DNS protocol lead to practical DNS cache poisoning attacks. Among other things, successful attacks can lead to misdirected web traffic and email rerouting. This update changes Debian's dnsmasq packages to implement the recommended countermeasure: UDP query source port randomization. This change increases the size of the space from which an attacker has to guess values in a backwards-compatible fashion and makes successful attacks significantly more difficult. This update also switches the random number generator to Dan Bernstein's SURF.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:04-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:50:52.946-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:02.951-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:42.231-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7531 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:34:41.728-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:33.622-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Supported architectures section">
+      <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+      <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+      <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+      <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+      <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+      <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+      <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+    </criteria>
+    <criterion comment="dnsmasq is earlier than 2.35-1+etch4" test_ref="oval:org.mitre.oval:tst:13249"/>
+  </criteria>
+</definition>

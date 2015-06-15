@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22776" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:0261: vnc security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>vnc</product>
+    </affected>
+    <reference ref_id="ELSA-2009:0261-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-0261.html" source="VENDOR"/>
+    <reference ref_id="CVE-2008-4770" ref_url="http://linux.oracle.com/cve/CVE-2008-4770.html" source="CVE"/>
+    <description>The CMsgReader::readRect function in the VNC Viewer component in RealVNC VNC Free Edition 4.0 through 4.1.2, Enterprise Edition E4.0 through E4.4.2, and Personal Edition P4.0 through P4.4.2 allows remote VNC servers to execute arbitrary code via crafted RFB protocol data, related to "encoding type."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:55:25.811-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:29.001-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:05.322-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22776 - optimisation of Oracle Linux content" date="2014-05-05T18:03:00.641-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:05:19.134-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:12.162-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="vnc is earlier than 0:4.1.2-14.el5_3.1" test_ref="oval:org.mitre.oval:tst:102726"/>
+      <criterion comment="vnc-server is earlier than 0:4.1.2-14.el5_3.1" test_ref="oval:org.mitre.oval:tst:102713"/>
+    </criteria>
+  </criteria>
+</definition>

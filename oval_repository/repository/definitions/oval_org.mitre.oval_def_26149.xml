@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26149" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0470-1 -- Security update for Mozilla Firefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Mozilla Firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130470-1.html" ref_id="SUSE-SU-2013:0470-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0787" ref_id="CVE-2013-0787"/>
+    <description>MozillaFirefox has been updated to the 17.0.4ESR release
+which fixes one  important security issue:
+
+    * MFSA 2013-29 / CVE-2013-0787: VUPEN Security, via
+TippingPoint's Zero Day Initiative, reported a
+use-after-free within the HTML editor when content script
+is run by the document.execCommand() function while
+internal editor operations are occurring. This could allow
+for arbitrary code execution.
+
+Security Issue reference:
+
+    * CVE-2013-0787
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0787
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:39:55">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:36:37.088-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:50.666-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:53.672-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="MozillaFirefox RPM is earlier than 0:17.0.4esr-0.5.1" test_ref="oval:org.mitre.oval:tst:120642"/>
+      <criterion comment="MozillaFirefox-translations RPM is earlier than 0:17.0.4esr-0.5.1" test_ref="oval:org.mitre.oval:tst:120608"/>
+    </criteria>
+  </criteria>
+</definition>

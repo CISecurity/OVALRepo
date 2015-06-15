@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11854" version="12" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>GDI+ Integer Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Office XP</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-0041" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0041"/>
+    <description>Integer overflow in gdiplus.dll in GDI+ in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP1 and SP2, Windows Server 2008 Gold and SP2, and Office XP SP3 allows remote attackers to execute arbitrary code via a crafted EMF image, aka "GDI+ Integer Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-10-13T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-04-18T00:36:52.626-04:00">DRAFT</status_change>
+        <status_change date="2011-05-09T04:00:10.962-04:00">INTERIM</status_change>
+        <status_change date="2011-05-30T04:00:07.248-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:42337 - Microsoft Office 2003 was deleted as Non-Affected Software." date="2013-09-11T10:15:00.361-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-11T10:19:44.064-04:00">INTERIM</status_change>
+        <status_change date="2013-09-30T04:00:06.250-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:26264 - Negate=&quot;true&quot; was removed because of returning &quot;true&quot; value if the file gdiplus.dll does not exists." date="2013-11-01T13:11:00.105-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-11-01T13:13:46.714-04:00">INTERIM</status_change>
+        <status_change date="2013-11-18T04:00:05.101-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:42140 - Updating criterion logic and check attributes for Gdiplus.dll related Objects." date="2013-12-30T09:14:00.018-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-30T09:17:35.717-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:07.454-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11854 - extended definitions of OS are without SP checks" date="2014-07-28T17:42:00.658-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:44:55.538-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:00:11.686-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows XP x86">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criterion comment="the version of %SystemRoot%\WinSxS\(x86|amd64)_Microsoft.Windows.GdiPlus_6595b64144ccf1df.*\gdiplus.dll is less than 5.2.6002.22509" test_ref="oval:org.mitre.oval:tst:42531"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP x64, Server 2003 x86/x64/ia64">
+      <criteria operator="OR" comment="Vulnerable Windows XP x64, Server 2003 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+      </criteria>
+      <criterion comment="the version of %SystemRoot%\WinSxS\(x86|amd64)_Microsoft.Windows.GdiPlus_6595b64144ccf1df.*\gdiplus.dll is less than 5.2.6002.22507" test_ref="oval:org.mitre.oval:tst:42140"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista x86/x64, Server 2008 x86/x64/ia64">
+      <criteria operator="OR" comment="Windows Vista x86/x64, Server 2008 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criterion comment="the version of %SystemRoot%\WinSxS\(x86|amd64)_Microsoft.Windows.GdiPlus_6595b64144ccf1df.*\gdiplus.dll is less than 6.0.6002.22519" test_ref="oval:org.mitre.oval:tst:42337"/>
+    </criteria>
+  </criteria>
+</definition>

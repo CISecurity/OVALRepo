@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13098" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2038-1 pidgin -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>pidgin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00078.html" ref_id="DSA-2038-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0420" ref_id="CVE-2010-0420"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0423" ref_id="CVE-2010-0423"/>
+    <description>Several remote vulnerabilities have been discovered in Pidgin, a multi-protocol instant messaging client. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2010-0420 Crafted nicknames in the XMPP protocol can crash Pidgin remotely. CVE-2010-0423 Remote contacts may send too many custom smilies, crashing Pidgin. Since a few months, Microsoft's servers for MSN have changed the protocol, making Pidgin non-functional for use with MSN. It is not feasible to port these changes to the version of Pidgin in Debian Lenny. This update formalises that situation by disabling the protocol in the client. Users of the MSN protocol are advised to use the version of Pidgin in the repositories of www.backports.org. For the stable distribution, these problems have been fixed in version 2.4.3-4lenny6. For the unstable distribution, these problems have been fixed in version 2.6.6-1. We recommend that you upgrade your pidgin package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:26:40.308-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:01:34.252-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:02:59.386-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13098 - Debian Patch Update" date="2014-06-06T17:03:00.064-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:05:31.254-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:33.411-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libpurple-dev DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:45771"/>
+          <criterion comment="finch-dev DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46041"/>
+          <criterion comment="pidgin-dev DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46198"/>
+          <criterion comment="libpurple-bin DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46290"/>
+          <criterion comment="pidgin-data DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46325"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libpurple0 DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:45881"/>
+          <criterion comment="pidgin-dbg DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46044"/>
+          <criterion comment="pidgin DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46285"/>
+          <criterion comment="finch DPKG is earlier than 2.4.3-4lenny6" test_ref="oval:org.mitre.oval:tst:46126"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

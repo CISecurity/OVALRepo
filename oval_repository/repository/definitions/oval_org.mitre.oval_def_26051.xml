@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26051" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0633-1 -- Security update for PostgreSQL</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>PostgreSQL</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130633-1.html" ref_id="SUSE-SU-2013:0633-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1899" ref_id="CVE-2013-1899"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1900" ref_id="CVE-2013-1900"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1901" ref_id="CVE-2013-1901"/>
+    <description>This update to version 9.1.9 fixes:
+
+    * CVE-2013-1899: Fix insecure parsing of server
+command-line switches.
+    * CVE-2013-1900: Reset OpenSSL randomness state in each
+postmaster child process.
+    * CVE-2013-1901: Make REPLICATION privilege checks test
+current user not authenticated user.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:38:29">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:36:15.909-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:46.036-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:49.553-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libecpg6 RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:119780"/>
+        <criterion comment="libpq5 RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:120436"/>
+        <criterion comment="postgresql91 RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:119850"/>
+        <criterion comment="libpq5-32bit RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:120084"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postgresql91-contrib RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:120196"/>
+        <criterion comment="postgresql91-docs RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:120499"/>
+        <criterion comment="postgresql91-server RPM is earlier than 0:9.1.9-0.3.1" test_ref="oval:org.mitre.oval:tst:120445"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

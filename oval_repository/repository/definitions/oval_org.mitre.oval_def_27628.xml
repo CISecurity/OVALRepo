@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27628" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2010-0998 -- kvm security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2010-0998.html" ref_id="ELSA-2010-0998"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3881" ref_id="CVE-2010-3881"/>
+    <description>[kvm-83-164.0.1.el5_5.30]
+- Added kvm-add-oracle-workaround-for-libvirt-bug.patch to replace RHEL with OEL
+- Added kvm-Introduce-oel-machine-type.patch so that OEL is a recognized VM
+
+[kvm-83-164.el5_5.30]
+- Revert the bz#661397 patches as they are not enough
+  - kvm-kernel-Revert-KVM-VMX-Return-0-from-a-failed-VMREAD.patch [bz#661397]
+  - kvm-kernel-Revert-KVM-Don-t-spin-on-virt-instruction-faults-dur.patch [bz#661397]
+- Related: bz#661397
+  (reboot(RB_AUTOBOOT) fails if kvm instance is running)
+- kvm-kernel-KVM-fix-AMD-initial-TSC-offset-problems-additional-f.patch [bz#656984]
+- Resolves: bz#656984
+  (TSC offset of virtual machines is not initialized correctly by 'kvm_amd' kernel module.)
+
+[kvm-83-164.el5_5.29]
+- kvm-kernel-KVM-Don-t-spin-on-virt-instruction-faults-during-reb.patch [bz#661397]
+- kvm-kernel-KVM-VMX-Return-0-from-a-failed-VMREAD.patch [bz#661397]
+- Resolves: bz#661397
+  (reboot(RB_AUTOBOOT) fails if kvm instance is running)
+
+[kvm-83-164.el5_5.28]
+- kvm-implement-dummy-PnP-support.patch [bz#659850]
+- kvm-load-registers-after-restoring-pvclock-msrs.patch [bz#660239]
+- Resolves: bz#659850
+  (If VM boot seq. is set up as nc (PXE then disk) the VM is always stuck on trying to PXE boot)
+- Resolves: bz#660239
+  (clock drift when migrating a guest between mis-matched CPU clock speed)
+
+[kvm-83-164.el5_5.27]
+- kvm-kernel-KVM-fix-AMD-initial-TSC-offset-problems.patch [bz#656984]
+- Resolves: bz#656984
+  (TSC offset of virtual machines is not initialized correctly by 'kvm_amd' kernel module.)
+
+[kvm-83-164.el5_5.26]
+- Updated kversion to 2.6.18-194.26.1.el5 to match build root
+- kvm-kernel-KVM-x86-fix-information-leak-to-userland.patch [bz#649832]
+- Resolves: bz#649832
+  (CVE-2010-3881 kvm: arch/x86/kvm/x86.c: reading uninitialized stack memory [5.5.z])
+- CVE: CVE-2010-3881</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:26:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:04:06.293-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:23.997-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:28.724-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T17:53:40.963-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T17:53:40.963-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kvm is earlier than 0:83-164.0.1.el5_5.30" test_ref="oval:org.mitre.oval:tst:134473"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-164.0.1.el5_5.30" test_ref="oval:org.mitre.oval:tst:134685"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-164.0.1.el5_5.30" test_ref="oval:org.mitre.oval:tst:133906"/>
+      <criterion comment="kvm-tools is earlier than 0:83-164.0.1.el5_5.30" test_ref="oval:org.mitre.oval:tst:134860"/>
+    </criteria>
+  </criteria>
+</definition>

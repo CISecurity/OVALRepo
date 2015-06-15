@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28318" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2984-2 -- acpi-support regression update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>acpi-support</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2984" ref_id="DSA-2984-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1419" ref_id="CVE-2014-1419"/>
+    <description>CESG discovered a root escalation flaw in the acpi-support package. An unprivileged user can inject the DBUS_SESSION_BUS_ADDRESS environment variable to run arbitrary commands as root user via the policy-funcs script.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T12:28:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:31:49.474-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:30.783-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:34.333-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="acpi-support is earlier than 0:0.140-5+deb7u1" test_ref="oval:org.mitre.oval:tst:135741"/>
+  </criteria>
+</definition>

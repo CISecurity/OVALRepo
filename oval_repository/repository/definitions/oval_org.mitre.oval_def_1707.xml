@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1707" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Enterprise Storage Manager 2.1 SAN Manager management station patch</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <product>Sun Enterprise Storage Manager (ESM)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1345" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1345"/>
+    <description>Unknown vulnerability in Sun StorEdge Enterprise Storage Manager (ESM) 2.1 for Solaris 8 and Solaris 9 allows local users with the "ESMUser" role to gain root access.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-19T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-01-24T03:40:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2009-06-15T12:00:00.000-04:00" comment="Added CVE Reference. Added solaris 9 as an affected platform.">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2009-06-22T04:00:51.071-04:00">INTERIM</status_change>
+        <status_change date="2009-07-13T04:00:30.181-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Solaris 8 or 9 installed">
+      <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+    </criteria>
+    <criterion comment="Sun Enterprise Storage Manager installed" test_ref="oval:org.mitre.oval:tst:762"/>
+    <criterion negate="true" comment="Patch 117367-01 or later installed" test_ref="oval:org.mitre.oval:tst:761"/>
+  </criteria>
+</definition>

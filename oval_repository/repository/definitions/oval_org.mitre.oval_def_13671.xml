@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13671" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-900-1 -- ruby1.9 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>ruby1.9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-February/001045.html" ref_id="USN-900-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4124" ref_id="CVE-2009-4124"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4492" ref_id="CVE-2009-4492"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1904" ref_id="CVE-2009-1904"/>
+    <description>Emmanouel Kellinis discovered that Ruby did not properly handle certain string operations. An attacker could exploit this issue and possibly execute arbitrary code with application privileges. Giovanni Pellerano, Alessandro Tanasi, and Francesco Ongaro discovered that Ruby did not properly sanitize data written to log files. An attacker could insert specially-crafted data into log files which could affect certain terminal emulators and cause arbitrary files to be overwritten, or even possibly execute arbitrary commands. It was discovered that Ruby did not properly handle string arguments that represent large numbers. An attacker could exploit this and cause a denial of service. This issue only affected Ubuntu 9.10</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:29:57.788-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:09:51.135-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:24.919-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13671 - added CVE references; also made minor updates" date="2014-06-13T15:31:00.286-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:32:48.027-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:38.052-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="rdoc1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:59645"/>
+            <criterion comment="ri1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60603"/>
+            <criterion comment="ruby1.9-elisp DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60598"/>
+            <criterion comment="ruby1.9-examples DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60123"/>
+            <criterion comment="irb1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60012"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60628"/>
+            <criterion comment="ruby1.9-dev DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60417"/>
+            <criterion comment="libopenssl-ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60534"/>
+            <criterion comment="libdbm-ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60212"/>
+            <criterion comment="libreadline-ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60427"/>
+            <criterion comment="libruby1.9-dbg DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60530"/>
+            <criterion comment="libtcltk-ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60612"/>
+            <criterion comment="libgdbm-ruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60221"/>
+            <criterion comment="libruby1.9 DPKG is earlier than 1.9.0.2-7ubuntu1.3" test_ref="oval:org.mitre.oval:tst:60208"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="rdoc1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60083"/>
+            <criterion comment="ri1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:59965"/>
+            <criterion comment="ruby1.9-elisp DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:59684"/>
+            <criterion comment="ruby1.9-examples DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60662"/>
+            <criterion comment="irb1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60505"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60345"/>
+            <criterion comment="ruby1.9-dev DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60503"/>
+            <criterion comment="libopenssl-ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60594"/>
+            <criterion comment="libdbm-ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60203"/>
+            <criterion comment="libreadline-ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60621"/>
+            <criterion comment="libruby1.9-dbg DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60168"/>
+            <criterion comment="libtcltk-ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60613"/>
+            <criterion comment="libgdbm-ruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60676"/>
+            <criterion comment="libruby1.9 DPKG is earlier than 1.9.0.5-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60611"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="rdoc1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60672"/>
+            <criterion comment="ri1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60281"/>
+            <criterion comment="ruby1.9-elisp DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60097"/>
+            <criterion comment="ruby1.9-examples DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60653"/>
+            <criterion comment="irb1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60477"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60563"/>
+            <criterion comment="ruby1.9-dev DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60312"/>
+            <criterion comment="libopenssl-ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60579"/>
+            <criterion comment="libdbm-ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60541"/>
+            <criterion comment="libreadline-ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60538"/>
+            <criterion comment="libruby1.9-dbg DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:59804"/>
+            <criterion comment="libtcltk-ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60190"/>
+            <criterion comment="libgdbm-ruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60397"/>
+            <criterion comment="libruby1.9 DPKG is earlier than 1.9.0.2-9ubuntu1.2" test_ref="oval:org.mitre.oval:tst:60614"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9480" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Buffer overflow in the FileReadGIF function in tkImgGIF.c for Tk Toolkit 8.4.12 and earlier, and 8.3.5 and earlier, allows user-assisted attackers to cause a denial of service (segmentation fault) via an animated GIF in which the first subimage is smaller than a subsequent subimage, which triggers the overflow in the ReadImage function, a different vulnerability than CVE-2007-5137.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-5378" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5378"/>
+    <description>Buffer overflow in the FileReadGIF function in tkImgGIF.c for Tk Toolkit 8.4.12 and earlier, and 8.3.5 and earlier, allows user-assisted attackers to cause a denial of service (segmentation fault) via an animated GIF in which the first subimage is smaller than a subsequent subimage, which triggers the overflow in the ReadImage function, a different vulnerability than CVE-2007-5137.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:19:23.200-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:12:12.285-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:13:15.244-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9480 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:04:00.787-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:10:15.516-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:19:40.221-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="tix is earlier than 0:8.1.4-92.8" test_ref="oval:org.mitre.oval:tst:36200"/>
+        <criterion comment="tclx is earlier than 0:8.3-92.8" test_ref="oval:org.mitre.oval:tst:35800"/>
+        <criterion comment="tcl-devel is earlier than 0:8.3.5-92.8" test_ref="oval:org.mitre.oval:tst:35961"/>
+        <criterion comment="expect-devel is earlier than 0:5.38.0-92.8" test_ref="oval:org.mitre.oval:tst:36175"/>
+        <criterion comment="tcltk is earlier than 0:8.3.5-92.8" test_ref="oval:org.mitre.oval:tst:36169"/>
+        <criterion comment="itcl is earlier than 0:3.2-92.8" test_ref="oval:org.mitre.oval:tst:35879"/>
+        <criterion comment="tcl is earlier than 0:8.3.5-92.8" test_ref="oval:org.mitre.oval:tst:36313"/>
+        <criterion comment="expect is earlier than 0:5.38.0-92.8" test_ref="oval:org.mitre.oval:tst:35369"/>
+        <criterion comment="tk-devel is earlier than 0:8.3.5-92.8" test_ref="oval:org.mitre.oval:tst:36316"/>
+        <criterion comment="tk is earlier than 0:8.3.5-92.8" test_ref="oval:org.mitre.oval:tst:36018"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="tk-devel is earlier than 0:8.4.7-3.el4_6.1" test_ref="oval:org.mitre.oval:tst:36356"/>
+        <criterion comment="tk is earlier than 0:8.4.7-3.el4_6.1" test_ref="oval:org.mitre.oval:tst:36225"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

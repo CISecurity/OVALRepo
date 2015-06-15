@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5941" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DHCP dhclient Stack Overflow in script_write_params() Lets Remote Users Execute Arbitrary Code</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0692" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0692"/>
+    <description>Stack-based buffer overflow in the script_write_params method in client/dhclient.c in ISC DHCP dhclient 4.1 before 4.1.0p1, 4.0 before 4.0.1p1, 3.1 before 3.1.2p1, 3.0, and 2.0 allows remote DHCP servers to execute arbitrary code via a crafted subnet-mask option.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-11-30T14:34:17.185-05:00">DRAFT</status_change>
+        <status_change date="2009-12-21T04:00:43.521-05:00">INTERIM</status_change>
+        <status_change date="2010-01-11T04:01:30.677-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.3 is installed" definition_ref="oval:org.mitre.oval:def:6026"/>
+      <criterion comment="Patch ESX303-200910402-SG is not installed" test_ref="oval:org.mitre.oval:tst:10803"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX350-200910406-SG is not installed" test_ref="oval:org.mitre.oval:tst:11129"/>
+        <criterion comment="Patch ESX350-200910401-SG is not installed" test_ref="oval:org.mitre.oval:tst:10930"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

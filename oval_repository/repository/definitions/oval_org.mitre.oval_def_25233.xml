@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25233" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0667-1 -- Security update for Linux Kernel</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Linux Kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140667-1.html" ref_id="SUSE-SU-2014:0667-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1737" ref_id="CVE-2014-1737"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1738" ref_id="CVE-2014-1738"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0196" ref_id="CVE-2014-0196"/>
+    <description>The SUSE Linux Enterprise 11 Service Pack 3 kernel was updated to fix the
+following severe security issues:
+
+    *
+
+      CVE-2014-1737: The raw_cmd_copyin function in drivers/block/floppy.c
+in the Linux kernel through 3.14.3 does not properly handle error
+conditions during processing of an FDRAWCMD ioctl call, which allows local
+users to trigger kfree operations and gain privileges by leveraging write
+access to a /dev/fd device. (bnc#875798)
+
+    *
+
+      CVE-2014-1738: The raw_cmd_copyout function in
+drivers/block/floppy.c in the Linux kernel through 3.14.3 does not
+properly restrict access to certain pointers during processing of an
+FDRAWCMD ioctl call, which allows local users to obtain sensitive
+information from kernel heap memory by leveraging write access to a
+/dev/fd device. (bnc#875798)
+
+    *
+
+      CVE-2014-0196: The n_tty_write function in drivers/tty/n_tty.c in
+the Linux kernel through 3.14.3 does not properly manage tty driver access
+in the "LECHO &amp; !OPOST" case, which allows local users to cause a denial
+of service (memory corruption and system crash) or gain privileges by
+triggering a race condition involving read and write operations with long
+strings. (bnc#875690)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:12:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:46.087-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:34.427-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:22.044-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-default RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116487"/>
+        <criterion comment="kernel-default-base RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116509"/>
+        <criterion comment="kernel-default-devel RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116455"/>
+        <criterion comment="kernel-source RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116465"/>
+        <criterion comment="kernel-syms RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116708"/>
+        <criterion comment="kernel-trace-devel RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116615"/>
+        <criterion comment="kernel-xen RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116103"/>
+        <criterion comment="kernel-xen-base RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116558"/>
+        <criterion comment="kernel-xen-devel RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116671"/>
+        <criterion comment="xen-kmp-default RPM is earlier than 0:4.2.4_02_3.0.101_0.29-0.7.24" test_ref="oval:org.mitre.oval:tst:116700"/>
+        <criterion comment="kernel-pae RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:115877"/>
+        <criterion comment="kernel-pae-base RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116393"/>
+        <criterion comment="kernel-pae-devel RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116608"/>
+        <criterion comment="xen-kmp-pae RPM is earlier than 0:4.2.4_02_3.0.101_0.29-0.7.24" test_ref="oval:org.mitre.oval:tst:116531"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-trace RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116667"/>
+        <criterion comment="kernel-trace-base RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116641"/>
+        <criterion comment="kernel-ec2 RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116224"/>
+        <criterion comment="kernel-ec2-base RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116460"/>
+        <criterion comment="kernel-ec2-devel RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116706"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-default-extra RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:115733"/>
+        <criterion comment="kernel-xen-extra RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116723"/>
+        <criterion comment="kernel-pae-extra RPM is earlier than 0:3.0.101-0.29.1" test_ref="oval:org.mitre.oval:tst:116624"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

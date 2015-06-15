@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22973" version="26" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2011:1341: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2011:1341-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-1341.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-2372" ref_url="http://linux.oracle.com/cve/CVE-2011-2372.html" source="CVE"/>
+    <reference ref_id="CVE-2011-2995" ref_url="http://linux.oracle.com/cve/CVE-2011-2995.html" source="CVE"/>
+    <reference ref_id="CVE-2011-2998" ref_url="http://linux.oracle.com/cve/CVE-2011-2998.html" source="CVE"/>
+    <reference ref_id="CVE-2011-2999" ref_url="http://linux.oracle.com/cve/CVE-2011-2999.html" source="CVE"/>
+    <reference ref_id="CVE-2011-3000" ref_url="http://linux.oracle.com/cve/CVE-2011-3000.html" source="CVE"/>
+    <description>Mozilla Firefox before 3.6.23 and 4.x through 6, Thunderbird before 7.0, and SeaMonkey before 2.4 do not properly handle HTTP responses that contain multiple Location, Content-Length, or Content-Disposition headers, which makes it easier for remote attackers to conduct HTTP response splitting attacks via crafted header values.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:15:25.754-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:02.084-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:59.627-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22973 - optimisation of Oracle Linux content" date="2014-05-05T17:55:00.751-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:57:16.687-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:02.487-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecate duplicates in Oracle Linux patches." date="2014-07-11T15:44:58.326-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-11T15:44:58.326-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.23-1.el5_7" test_ref="oval:org.mitre.oval:tst:105272"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.23-1.el5_7" test_ref="oval:org.mitre.oval:tst:105242"/>
+        <criterion comment="firefox is earlier than 0:3.6.23-2.el5_7" test_ref="oval:org.mitre.oval:tst:105338"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="firefox is earlier than 0:3.6.23-2.el6_1" test_ref="oval:org.mitre.oval:tst:105219"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.23-1.el6_1.1" test_ref="oval:org.mitre.oval:tst:105300"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.23-1.el6_1.1" test_ref="oval:org.mitre.oval:tst:105080"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

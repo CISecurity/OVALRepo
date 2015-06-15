@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15503" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1382-1 -- Light Display Manager vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 11.10</platform>
+      <product>Light</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2012-March/001612.html" ref_id="USN-1382-1"/>
+    <description>lightdm: Display Manager Light Display Manager would allow unintended access to file descriptors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-31T03:11:26-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-31T09:16:53.432-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:53.855-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:02:34.205-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Ubuntu 11.10 is installed" definition_ref="oval:org.mitre.oval:def:14657"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="liblightdm-gobject-1-0 DPKG is earlier than 1.0.6-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:79561"/>
+          <criterion comment="liblightdm-qt-1-0 DPKG is earlier than 1.0.6-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:79376"/>
+          <criterion comment="lightdm DPKG is earlier than 1.0.6-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:79567"/>
+          <criterion comment="lightdm-gtk-greeter DPKG is earlier than 1.0.6-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:79462"/>
+          <criterion comment="lightdm-qt-greeter DPKG is earlier than 1.0.6-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:79400"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

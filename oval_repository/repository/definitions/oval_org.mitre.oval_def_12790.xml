@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12790" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1719-1 gnutls13 -- design flaw</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>gnutls13</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00028.html" ref_id="DSA-1719-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4989" ref_id="CVE-2008-4989"/>
+    <description>Martin von Gagern discovered that GNUTLS, an implementation of the TLS/SSL protocol, handles verification of X.509 certificate chains incorrectly if a self-signed certificate is configured as a trusted certificate. This could cause clients to accept forged server certificates as genuine. In addition, this update tightens the checks for X.509v1 certificates which causes GNUTLS to reject certain certificate chains it accepted before. For the stable distribution, this problem has been fixed in version 1.4.4-3+etch3. For the unstable distribution, this problem has been fixed in version 2.4.2-3 of the gnutls26 package. We recommend that you upgrade your gnutls13 packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:10.537-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:00:49.146-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:01:09.287-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12790 - Debian Patch Update" date="2014-06-06T17:34:00.215-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:36:33.522-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:49.874-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="gnutls-doc DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:52162"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libgnutls13 DPKG is earlier than 1.4.4-3+etch2" test_ref="oval:org.mitre.oval:tst:51902"/>
+          <criterion comment="libgnutls-dev DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:52052"/>
+          <criterion comment="libgnutls13-dbg DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:51933"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+        </criteria>
+        <criterion comment="gnutls-bin DPKG is earlier than 1.4.4-3+etch2" test_ref="oval:org.mitre.oval:tst:51822"/>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libgnutls-dev DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:52052"/>
+          <criterion comment="gnutls-bin DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:51868"/>
+          <criterion comment="libgnutls13 DPKG is earlier than 1.4.4-3+etch3" test_ref="oval:org.mitre.oval:tst:52089"/>
+          <criterion comment="libgnutls13-dbg DPKG is earlier than 1.4.4-3+etch2" test_ref="oval:org.mitre.oval:tst:51834"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

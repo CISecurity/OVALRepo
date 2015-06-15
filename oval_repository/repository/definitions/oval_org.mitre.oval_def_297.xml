@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:297" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 10 patchadd T-patch Issue</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+      <product>patchadd</product>
+    </affected>
+    <reference source="MISC" ref_id="http://sunsolve9.sun.com/search/document.do?assetkey=1-26-101666-1&amp;searchclause="/>
+    <description>The patchadd facility for Solaris 10 fails to install T-patches.  Sun sometimes releases a T-patch as a temporary version of a patch prior to the final release of that patch.  While this flaw does not directly represent a vulnerability, it does prevent the timely application of some (possibly critical) updates.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-09-22T05:52:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-09-22T20:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-10-07T09:15:45.131-04:00">INTERIM</status_change>
+        <status_change date="2006-10-24T09:15:52.633-04:00">ACCEPTED</status_change>
+        <modified comment="Added title." date="2007-02-26T01:12:00.098-05:00">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2007-02-26T01:12:39.122-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:17:15.226-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="OR">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert ID 101666 criteria." negate="false">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3680"/>
+      <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3237"/>
+      <criterion comment="Patch 119254-03 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3284"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert ID 101666 criteria." negate="false">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3680"/>
+      <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3237"/>
+      <criterion comment="Patch 119255-03 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3698"/>
+    </criteria>
+  </criteria>
+</definition>

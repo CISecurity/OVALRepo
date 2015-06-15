@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8606" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware kernel libata vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-5700" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5700"/>
+    <description>libata in the Linux kernel before 2.6.27.9 does not set minimum timeouts for SG_IO requests, which allows local users to cause a denial of service (Programmed I/O mode on drives) via multiple simultaneous invocations of an unspecified test program.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-19T16:57:59.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-03-22T11:00:29.880-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:43.707-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:28.207-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8606 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:25.852-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:40.850-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criterion comment="Patch ESX400-200911201-UG is not installed" test_ref="oval:org.mitre.oval:tst:20677"/>
+  </criteria>
+</definition>

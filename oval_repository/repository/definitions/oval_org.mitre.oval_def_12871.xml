@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12871" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Components Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference ref_id="CVE-2011-1991" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1991" source="CVE"/>
+    <description>Multiple untrusted search path vulnerabilities in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2, R2, and R2 SP1, and Windows 7 Gold and SP1 allow local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .doc, .rtf, or .txt file, related to (1) deskpan.dll in the Display Panning CPL Extension, (2) EAPHost Authenticator Service, (3) Folder Redirection, (4) HyperTerminal, (5) the Japanese Input Method Editor (IME), and (6) Microsoft Management Console (MMC), aka "Windows Components Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-13T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-09-19T14:08:13.265-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:34.642-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:00:59.382-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x86 SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion negate="true" comment="Registry key verification for KB2570947 for XP x86 is installed" test_ref="oval:org.mitre.oval:tst:43773"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x64 SP2">
+      <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+      <criterion negate="true" comment="Registry key verification for KB2570947 for XP x64 is installed" test_ref="oval:org.mitre.oval:tst:43836"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Windows Server 2003 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion negate="true" comment="Registry key verification for KB2570947 for Server 2003 is installed" test_ref="oval:org.mitre.oval:tst:43940"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP2 x86/x64, Server 2008 SP2 32bit/x64/ia64">
+      <criteria operator="OR" comment="Windows Vista SP2 x86/x64, Server 2008 SP2 32bit/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Imjpapi.dll is less than 10.0.6002.18495" test_ref="oval:org.mitre.oval:tst:43220"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Imjpapi.dll is less than 10.0.6002.22684" test_ref="oval:org.mitre.oval:tst:43729"/>
+          <criterion comment="the version of Imjpapi.dll is greater than or equal to 10.0.6002.22000" test_ref="oval:org.mitre.oval:tst:43796"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64, Windows Server 2008 R2 x86/x64/ia64">
+      <criteria operator="OR" comment="Windows 7 x86/x64, Windows Server 2008 R2 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Imjpapi.dll is less than 10.1.7600.16856" test_ref="oval:org.mitre.oval:tst:43432"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Imjpapi.dll is less than 10.1.7600.21016" test_ref="oval:org.mitre.oval:tst:43922"/>
+          <criterion comment="the version of Imjpapi.dll is greater than or equal to 10.1.7600.21000" test_ref="oval:org.mitre.oval:tst:43748"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64 sp1/sp1, Windows Server 2008 R2 x86/x64/ia64 sp1/sp1">
+      <criteria operator="OR" comment="Windows 7 x86/x64 sp1/sp1, Windows Server 2008 R2 x86/x64/ia64 sp1/sp1">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Imjpapi.dll is less than 10.1.7601.17658" test_ref="oval:org.mitre.oval:tst:43842"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Imjpapi.dll is less than 10.1.7601.21779" test_ref="oval:org.mitre.oval:tst:43218"/>
+          <criterion comment="the version of Imjpapi.dll is greater than or equal to 10.1.7601.21000" test_ref="oval:org.mitre.oval:tst:43687"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

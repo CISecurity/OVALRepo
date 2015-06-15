@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25018" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OpenSSL vulnerability in before 0.9.8v allow remote attackers to conduct buffer overflow attacks, and cause a denial of service (memory corruption) or possibly have unspecified other impact</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-2131" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2131"/>
+    <description>Multiple integer signedness errors in crypto/buffer/buffer.c in OpenSSL 0.9.8v allow remote attackers to conduct buffer overflow attacks, and cause a denial of service (memory corruption) or possibly have unspecified other impact, via crafted DER data, as demonstrated by an X.509 certificate or an RSA public key.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2012-2110.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-18T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-06-25T16:20:42.148-04:00">DRAFT</status_change>
+        <status_change date="2014-07-14T04:01:25.330-04:00">INTERIM</status_change>
+        <status_change date="2014-08-04T04:00:14.589-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check vulnerable OpenSSL">
+      <criterion comment="Check if the version of OpenSSL 0.9.8v" test_ref="oval:org.mitre.oval:tst:114257"/>
+      <criterion comment="OpenSSL is installed" test_ref="oval:org.mitre.oval:tst:113869"/>
+    </criteria>
+    <criteria operator="AND" comment="Check vulnerable OpenSSL (32_bit)">
+      <criterion comment="Check if the version of OpenSSL 0.9.8v (32_bit)" test_ref="oval:org.mitre.oval:tst:115191"/>
+      <criterion comment="OpenSSL (32_bit) is installed" test_ref="oval:org.mitre.oval:tst:113875"/>
+    </criteria>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8v" test_ref="oval:org.mitre.oval:tst:114881"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8v (32_bit)" test_ref="oval:org.mitre.oval:tst:115088"/>
+    <criterion comment="Check if the version of ssleay32.dll 0.9.8v under System Root" test_ref="oval:org.mitre.oval:tst:115046"/>
+  </criteria>
+</definition>

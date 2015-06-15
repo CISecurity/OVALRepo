@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21113" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0276: libvirt security, bug fix, and enhancement update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0276-02" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0276.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0276"/>
+    <reference source="CVE" ref_id="CVE-2012-3411" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-3411.html"/>
+    <description>Dnsmasq before 2.63test1, when used with certain libvirt configurations, replies to requests from prohibited interfaces, which allows remote attackers to cause a denial of service (traffic amplification) via a spoofed DNS query.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:58:29.772-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:01:05.023-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:16.787-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libvirt-devel is earlier than 0:0.10.2-18.el6" test_ref="oval:org.mitre.oval:tst:90406"/>
+      <criterion comment="libvirt-python is earlier than 0:0.10.2-18.el6" test_ref="oval:org.mitre.oval:tst:90244"/>
+      <criterion comment="libvirt-client is earlier than 0:0.10.2-18.el6" test_ref="oval:org.mitre.oval:tst:90249"/>
+      <criterion comment="libvirt-lock-sanlock is earlier than 0:0.10.2-18.el6" test_ref="oval:org.mitre.oval:tst:89576"/>
+      <criterion comment="libvirt is earlier than 0:0.10.2-18.el6" test_ref="oval:org.mitre.oval:tst:90501"/>
+    </criteria>
+  </criteria>
+</definition>

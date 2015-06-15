@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21064" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security vulnerabilities in Perl for AIX</title>
+    <affected family="unix">
+      <platform>IBM AIX 6.1</platform>
+      <platform>IBM AIX 7.1</platform>
+    </affected>
+    <reference ref_id="CVE-2012-5526" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5526" source="CVE"/>
+    <description>CGI.pm module before 3.63 for Perl does not properly escape newlines in (1) Set-Cookie or (2) P3P headers, which might allow remote attackers to inject arbitrary headers into responses from applications that use CGI.pm.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-18T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Ganesh Manal</contributor>
+        </submitted>
+        <status_change date="2014-01-03T11:40:37.666-05:00">DRAFT</status_change>
+        <status_change date="2014-01-20T04:01:18.777-05:00">INTERIM</status_change>
+        <status_change date="2014-02-10T04:00:21.129-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="platforms">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <extend_definition comment="IBM AIX 7.1 is installed" definition_ref="oval:org.mitre.oval:def:18828"/>
+    </criteria>
+    <criteria operator="OR" comment="filesets">
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="perl.rte greater than or equal 5.8.8.0" test_ref="oval:org.mitre.oval:tst:90093"/>
+        <criterion comment="perl.rte less than or equal 5.8.8.123" test_ref="oval:org.mitre.oval:tst:89331"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="perl.rte greater than or equal 5.8.8.0" test_ref="oval:org.mitre.oval:tst:90123"/>
+        <criterion comment="perl.rte less than or equal 5.8.8.122" test_ref="oval:org.mitre.oval:tst:90062"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="perl.rte greater than or equal 5.8.8.0" test_ref="oval:org.mitre.oval:tst:90182"/>
+        <criterion comment="perl.rte less than or equal 5.8.8.244" test_ref="oval:org.mitre.oval:tst:89774"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="perl.rte greater than or equal 5.10.1.0" test_ref="oval:org.mitre.oval:tst:89684"/>
+        <criterion comment="perl.rte less than or equal 5.10.1.100" test_ref="oval:org.mitre.oval:tst:89553"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="perl.rte greater than or equal 5.10.1.0" test_ref="oval:org.mitre.oval:tst:89923"/>
+        <criterion comment="perl.rte less than or equal 5.10.1.150" test_ref="oval:org.mitre.oval:tst:90147"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

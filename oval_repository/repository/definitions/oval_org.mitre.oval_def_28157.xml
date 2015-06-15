@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28157" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011-2025 -- Unbreakable Enterprise kernel security and bug fix update
+          (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+      <product>ofa</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+      <product>kernel-uek-headers</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2011-2025.html" ref_id="ELSA-2011-2025"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1576" ref_id="CVE-2011-1576"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1898" ref_id="CVE-2011-1898"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2183" ref_id="CVE-2011-2183"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2491" ref_id="CVE-2011-2491"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2492" ref_id="CVE-2011-2492"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2495" ref_id="CVE-2011-2495"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2497" ref_id="CVE-2011-2497"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2517" ref_id="CVE-2011-2517"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2695" ref_id="CVE-2011-2695"/>
+    <description>[2.6.32-200.19.1.el6uek] - Apply new fix for CVE-2011-1576.
+          [2.6.32-200.18.1.el6uek] - Revert 'proc: fix a race in do_io_accounting'
+          [2.6.32-200.17.1.el6uek] - net: Fix memory leak/corruption on VLAN GRO_DROP
+          {CVE-2011-1576} - iommu-api: Extension to check for interrupt remapping {CVE-2011-1898} -
+          KVM: IOMMU: Disable device assignment without interrupt remapping {CVE-2011-1898} - ext4:
+          Fix max file size and logical block counting of extent format file {CVE-2011-2695} -
+          nl80211: fix overflow in ssid_len {CVE-2011-2517} - Bluetooth: Prevent buffer overflow in
+          l2cap config request {CVE-2011-2497} - proc: fix a race in do_io_accounting()
+          {CVE-2011-2495} - proc: restrict access to /proc/PID/io {CVE-2011-2495} - Bluetooth: l2cap
+          and rfcomm: fix 1 byte infoleak to userspace {CVE-2011-2492} - NLM: Don't hang forever on
+          NLM unlock requests {CVE-2011-2491} - ksm: fix NULL pointer dereference in
+          scan_get_next_rmap_item() {CVE-2011-2183}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:58:36.061-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:07:32.774-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:35.556-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:133312 - Corrected package names in objects and versions in states." date="2015-02-26T20:03:00.822-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T20:05:52.084-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:48.681-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133383"/>
+        <criterion comment="ofa-2.6.32-200.19.1.el5uek is earlier than 0:1.5.1-4.0.28" test_ref="oval:org.mitre.oval:tst:133565"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133267"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133551"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133597"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:132786"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133475"/>
+        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-200.19.1.el5uek" test_ref="oval:org.mitre.oval:tst:133446"/>
+        <criterion comment="ofa-2.6.32-200.19.1.el5uekdebug is earlier than 0:1.5.1-4.0.28" test_ref="oval:org.mitre.oval:tst:133440"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:132623"/>
+        <criterion comment="ofa-2.6.32-200.19.1.el6uek is earlier than 0:1.5.1-4.0.47" test_ref="oval:org.mitre.oval:tst:133312"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133536"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133589"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133618"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133324"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133609"/>
+        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-200.19.1.el6uek" test_ref="oval:org.mitre.oval:tst:133421"/>
+        <criterion comment="ofa-2.6.32-200.19.1.el6uekdebug is earlier than 0:1.5.1-4.0.47" test_ref="oval:org.mitre.oval:tst:133451"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

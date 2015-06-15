@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3606" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Sendmail Ruleset Parsing Buffer Overflow</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <product>Sendmail</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0681" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0681"/>
+    <description>A "potential buffer overflow in ruleset parsing" for Sendmail 8.12.9, when using the nonstandard rulesets (1) recipient (2), final, or (3) mailer-specific envelope recipients, has unknown consequences.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-12T12:26:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2004-10-13T01:15:00.000-04:00">DRAFT</status_change>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="Sendmail - root (SUNWsndmr) installed" test_ref="oval:org.mitre.oval:tst:608"/>
+      <criteria operator="OR" comment="Solaris 7,8,or 9 installed">
+        <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="Solaris 7 Installed" test_ref="oval:org.mitre.oval:tst:3045"/>
+        <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      </criteria>
+      <criterion negate="true" comment="Patch 107684-11 or later installed" test_ref="oval:org.mitre.oval:tst:392"/>
+      <criterion negate="true" comment="Patch 110615-11 or later installed" test_ref="oval:org.mitre.oval:tst:391"/>
+      <criterion negate="true" comment="Patch 113575-05 or later installed" test_ref="oval:org.mitre.oval:tst:464"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="Sendmail running" test_ref="oval:org.mitre.oval:tst:583"/>
+      <criterion comment="Sendmail has recipient or final rulesets" test_ref="oval:org.mitre.oval:tst:393"/>
+    </criteria>
+  </criteria>
+</definition>

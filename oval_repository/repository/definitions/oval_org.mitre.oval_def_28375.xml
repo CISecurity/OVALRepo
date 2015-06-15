@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28375" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1795 -- cups-filters security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>cups-filters</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1795.html" ref_id="RHSA-2014:1795"/>
+    <reference source="CESA-2014:1795" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020734.html" ref_id="CESA-2014:1795"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4337" ref_id="CVE-2014-4337"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4338" ref_id="CVE-2014-4338"/>
+    <description>The cups-filters package contains backends, filters, and other software
+that was once part of the core CUPS distribution but is now maintained
+independently.
+
+An out-of-bounds read flaw was found in the way the process_browse_data()
+function of cups-browsed handled certain browse packets. A remote attacker
+could send a specially crafted browse packet that, when processed by
+cups-browsed, would crash the cups-browsed daemon. (CVE-2014-4337)
+
+A flaw was found in the way the cups-browsed daemon interpreted the
+&amp;quot;BrowseAllow&amp;quot; directive in the cups-browsed.conf file. An attacker able to
+add a malformed &amp;quot;BrowseAllow&amp;quot; directive to the cups-browsed.conf file could
+use this flaw to bypass intended access restrictions. (CVE-2014-4338)
+
+All cups-filters users are advised to upgrade to these updated packages,
+which contain backported patches to correct these issues. After installing
+this update, the cups-browsed daemon will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T15:38:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:36:03.653-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:37.677-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:40.196-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cups-filters is earlier than 0:1.0.35-15.el7_0.1" test_ref="oval:org.mitre.oval:tst:136354"/>
+        <criterion comment="cups-filters-devel is earlier than 0:1.0.35-15.el7_0.1" test_ref="oval:org.mitre.oval:tst:136107"/>
+        <criterion comment="cups-filters-libs is earlier than 0:1.0.35-15.el7_0.1" test_ref="oval:org.mitre.oval:tst:135836"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <criterion comment="cups-filters-debuginfo is earlier than 0:1.0.35-15.el7_0.1" test_ref="oval:org.mitre.oval:tst:136234"/>
+    </criteria>
+  </criteria>
+</definition>

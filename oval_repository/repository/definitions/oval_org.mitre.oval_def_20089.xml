@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20089" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2646-1 typo3-src - several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>typo3-src</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2646-1" ref_id="DSA-2646-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1842" ref_id="CVE-2013-1842"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1843" ref_id="CVE-2013-1843"/>
+    <description>TYPO3, a PHP-based content management system, was found vulnerable to several vulnerabilities.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:22:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:32.077-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:34.973-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:12.789-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20089 - Debian Patch Update" date="2014-06-06T17:36:00.316-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:38:26.692-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:38.102-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="typo3-src DPKG is earlier than 0:4.3.9+dfsg1-1+squeeze8" test_ref="oval:org.mitre.oval:tst:89214"/>
+  </criteria>
+</definition>

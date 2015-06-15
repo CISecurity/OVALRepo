@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26608" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1112-1 -- Security update for MozillaFirefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>MozillaFirefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141112-1.html" ref_id="SUSE-SU-2014:1112-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1567" ref_id="CVE-2014-1567"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1562" ref_id="CVE-2014-1562"/>
+    <description>Mozilla Firefox was updated to the 24.8.0ESR release, fixing security
+issues and bugs.
+
+Only some of the published security advisories affect the Mozilla Firefox
+24ESR codestream:
+
+    * MFSA 2014-72 / CVE-2014-1567: Security researcher regenrecht
+      reported, via TippingPoint's Zero Day Initiative, a use-after-free
+      during text layout when interacting with the setting of text
+      direction. This results in a use-after-free which can lead to
+      arbitrary code execution.
+    * MFSA 2014-67: Mozilla developers and community identified and fixed
+      several memory safety bugs in the browser engine used in Firefox and
+      other Mozilla-based products. Some of these bugs showed evidence of
+memory corruption under certain circumstances, and we presume that with
+enough effort at least some of these could be exploited to run arbitrary
+code.
+    * Jan de Mooij reported a memory safety problem that affects Firefox
+      ESR 24.7, ESR 31 and Firefox 31. (CVE-2014-1562)
+
+More information is referenced on:
+https://www.mozilla.org/security/announce/
+&lt;https://www.mozilla.org/security/announce/> .
+
+Security Issues:
+
+    * CVE-2014-1562
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1562>
+    * CVE-2014-1567
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1567></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T10:49:35">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:10:33.564-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:41.603-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:36.851-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="MozillaFirefox RPM is earlier than 0:24.8.0esr-0.3.1" test_ref="oval:org.mitre.oval:tst:123400"/>
+      <criterion comment="MozillaFirefox-translations RPM is earlier than 0:24.8.0esr-0.3.1" test_ref="oval:org.mitre.oval:tst:124176"/>
+      <criterion comment="libfreebl3 RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:124340"/>
+      <criterion comment="mozilla-nspr RPM is earlier than 0:4.10.7-0.3.1" test_ref="oval:org.mitre.oval:tst:123576"/>
+      <criterion comment="mozilla-nspr-devel RPM is earlier than 0:4.10.7-0.3.1" test_ref="oval:org.mitre.oval:tst:124305"/>
+      <criterion comment="mozilla-nss RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:124358"/>
+      <criterion comment="mozilla-nss-devel RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:123993"/>
+      <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:124180"/>
+      <criterion comment="libfreebl3-32bit RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:124051"/>
+      <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.10.7-0.3.1" test_ref="oval:org.mitre.oval:tst:124355"/>
+      <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.16.4-0.3.1" test_ref="oval:org.mitre.oval:tst:124325"/>
+    </criteria>
+  </criteria>
+</definition>

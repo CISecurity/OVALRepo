@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20936" version="42" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0200: krb5 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0200-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0200.html"/>
+    <reference source="CVE" ref_id="CVE-2010-4022" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-4022.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0281" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0281.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0282" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0282.html"/>
+    <description>The Key Distribution Center (KDC) in MIT Kerberos 5 (aka krb5) 1.6.x through 1.9, when an LDAP backend is used, allows remote attackers to cause a denial of service (NULL pointer dereference or buffer over-read, and daemon crash) via a crafted principal name.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:26.611-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:21.929-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:38.080-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="krb5-devel is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:97521"/>
+      <criterion comment="krb5-server-ldap is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:97329"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:96731"/>
+      <criterion comment="krb5-libs is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:96787"/>
+      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:97516"/>
+      <criterion comment="krb5-server is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:96858"/>
+      <criterion comment="krb5 is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:97519"/>
+    </criteria>
+  </criteria>
+</definition>

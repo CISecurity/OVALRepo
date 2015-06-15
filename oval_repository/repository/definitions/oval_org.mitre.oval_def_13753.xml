@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13753" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1785-1 wireshark -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>wireshark</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00096.html" ref_id="DSA-1785-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1210" ref_id="CVE-2009-1210"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1268" ref_id="CVE-2009-1268"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1269" ref_id="CVE-2009-1269"/>
+    <description>Several remote vulnerabilities have been discovered in the Wireshark network traffic analyzer, which may lead to denial of service or the execution of arbitrary code. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-1210 A format string vulnerability was discovered in the PROFINET dissector. CVE-2009-1268 The dissector for the Check Point High-Availability Protocol could be forced to crash. CVE-2009-1269 Malformed Tektronix files could lead to a crash. The old stable distribution is only affected by the CPHAP crash, which doesn’t warrant an update on its own. The fix will be queued up for an upcoming security update or a point release. For the stable distribution, these problems have been fixed in version 1.0.2-3+lenny5. For the unstable distribution, these problems have been fixed in version 1.0.7-1. We recommend that you upgrade your wireshark packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:06.130-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:03:59.968-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:10:46.400-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13753 - Debian Patch Update" date="2014-06-06T16:53:00.834-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:54:34.614-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:02.989-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Supported architectures section">
+      <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+      <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+      <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+      <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+      <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+      <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+      <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+      <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+      <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="wireshark-dev DPKG is earlier than 1.0.2-3+lenny5" test_ref="oval:org.mitre.oval:tst:52043"/>
+      <criterion comment="wireshark-common DPKG is earlier than 1.0.2-3+lenny5" test_ref="oval:org.mitre.oval:tst:52038"/>
+      <criterion comment="tshark DPKG is earlier than 1.0.2-3+lenny5" test_ref="oval:org.mitre.oval:tst:52103"/>
+      <criterion comment="wireshark DPKG is earlier than 1.0.2-3+lenny5" test_ref="oval:org.mitre.oval:tst:51987"/>
+    </criteria>
+  </criteria>
+</definition>

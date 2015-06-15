@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13221" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1051-1 -- hplip vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>hplip</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-January/001235.html" ref_id="USN-1051-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4267" ref_id="CVE-2010-4267"/>
+    <description>Sebastian Krahmer discovered that HPLIP incorrectly handled certain long SNMP responses. A remote attacker could send malicious SNMP replies to certain HPLIP tools and cause them to crash or possibly execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:33:35.541-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:04:17.276-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:03:27.143-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13221 - added CVE references; also made minor updates" date="2014-06-13T16:06:00.587-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:07:58.725-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:02:07.973-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hpijs-ppds DPKG is earlier than 2.8.2+2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61511"/>
+            <criterion comment="hplip-gui DPKG is earlier than 2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61838"/>
+            <criterion comment="hplip-data DPKG is earlier than 2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61599"/>
+            <criterion comment="hplip-doc DPKG is earlier than 2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61721"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hplip DPKG is earlier than 2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61597"/>
+            <criterion comment="hplip-dbg DPKG is earlier than 2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61813"/>
+            <criterion comment="hpijs DPKG is earlier than 2.8.2+2.8.2-0ubuntu8.2" test_ref="oval:org.mitre.oval:tst:61622"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hpijs-ppds DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61326"/>
+            <criterion comment="hplip-gui DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61576"/>
+            <criterion comment="hplip-data DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61480"/>
+            <criterion comment="hplip-doc DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61427"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hplip-dbg DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61223"/>
+            <criterion comment="hplip DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61371"/>
+            <criterion comment="libhpmud-dev DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61505"/>
+            <criterion comment="libhpmud0 DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61680"/>
+            <criterion comment="hplip-cups DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61592"/>
+            <criterion comment="hpijs DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61774"/>
+            <criterion comment="libsane-hpaio DPKG is earlier than 3.10.6-1ubuntu10.2" test_ref="oval:org.mitre.oval:tst:61205"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hpijs-ppds DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61633"/>
+            <criterion comment="hplip-gui DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61655"/>
+            <criterion comment="hplip-data DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61710"/>
+            <criterion comment="hplip-doc DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61800"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hplip DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61765"/>
+            <criterion comment="hplip-dbg DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61213"/>
+            <criterion comment="hpijs DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61560"/>
+            <criterion comment="hplip-cups DPKG is earlier than 3.9.8-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:61252"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hpijs-ppds DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61724"/>
+            <criterion comment="hplip-gui DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:60982"/>
+            <criterion comment="hplip-data DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61605"/>
+            <criterion comment="hplip-doc DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61593"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="hplip-dbg DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61734"/>
+            <criterion comment="hplip DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61718"/>
+            <criterion comment="libhpmud-dev DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61141"/>
+            <criterion comment="libhpmud0 DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61408"/>
+            <criterion comment="hplip-cups DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61211"/>
+            <criterion comment="hpijs DPKG is earlier than 3.10.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:61849"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

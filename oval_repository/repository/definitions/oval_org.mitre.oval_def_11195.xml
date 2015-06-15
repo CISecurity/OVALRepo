@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11195" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The binfmt_elf loader (binfmt_elf.c) in Linux kernel 2.4.x up to 2.4.27, and 2.6.x up to 2.6.8, may create an interpreter name string that is not NULL terminated, which could cause strings longer than PATH_MAX to be used, leading to buffer overflows that allow local users to cause a denial of service (hang) and possibly execute arbitrary code.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1072" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1072"/>
+    <description>The binfmt_elf loader (binfmt_elf.c) in Linux kernel 2.4.x up to 2.4.27, and 2.6.x up to 2.6.8, may create an interpreter name string that is not NULL terminated, which could cause strings longer than PATH_MAX to be used, leading to buffer overflows that allow local users to cause a denial of service (hang) and possibly execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:29:51.743-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:08:03.576-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:08:43.640-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11195 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:43:00.327-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:52:30.837-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:12:15.085-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="kernel-BOOT is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30934"/>
+      <criterion comment="kernel-unsupported is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30708"/>
+      <criterion comment="kernel-smp-unsupported is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30577"/>
+      <criterion comment="kernel-hugemem-unsupported is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30874"/>
+      <criterion comment="kernel-hugemem is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30794"/>
+      <criterion comment="kernel is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30892"/>
+      <criterion comment="kernel-source is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30873"/>
+      <criterion comment="kernel-doc is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:31080"/>
+      <criterion comment="kernel-smp is earlier than 0:2.4.21-20.0.1.EL" test_ref="oval:org.mitre.oval:tst:30866"/>
+    </criteria>
+  </criteria>
+</definition>

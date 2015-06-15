@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14797" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2399-2 php5 -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>php5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2012/msg00024.html" ref_id="DSA-2399-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1938" ref_id="CVE-2011-1938"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2483" ref_id="CVE-2011-2483"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4566" ref_id="CVE-2011-4566"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4885" ref_id="CVE-2011-4885"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0057" ref_id="CVE-2012-0057"/>
+    <description>A regression was found in the fix for PHP's XSLT transformations. Updated packages are now available to address this regression. For reference, the original advisory text follows. Several vulnerabilities have been discovered in PHP, the web scripting language. The Common Vulnerabilities and Exposures project identifies the following issues: CVE-2011-1938 The UNIX socket handling allowed attackers to trigger a buffer overflow via a long path name. CVE-2011-2483 The crypt_blowfish function did not properly handle 8-bit characters, which made it easier for attackers to determine a cleartext password by using knowledge of a password hash. CVE-2011-4566 When used on 32 bit platforms, the exif extension could be used to trigger an integer overflow in the exif_process_IFD_TAG function when processing a JPEG file. CVE-2011-4885 It was possible to trigger hash collisions predictably when parsing form parameters, which allows remote attackers to cause a denial of service by sending many crafted parameters. CVE-2012-0057 When applying a crafted XSLT transform, an attacker could write files to arbitrary places in the filesystem. NOTE: the fix for CVE-2011-2483 required changing the behaviour of this function: it is now incompatible with some old generated hashes for passwords containing 8-bit characters. See the package NEWS entry for details. This change has not been applied to the Lenny version of PHP. NOTE: at the time of release packages for some architectures are still being built. They will be installed into the archive as soon as they arrive.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:57:16.215-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:05:58.407-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:00:29.557-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14797 - Debian Patch Update" date="2014-06-06T17:13:00.482-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:15:20.690-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:14.559-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="php5 DPKG is earlier than 5.2.6.dfsg.1-1+lenny15" test_ref="oval:org.mitre.oval:tst:78667"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="php5 DPKG is earlier than 5.3.3-7+squeeze6" test_ref="oval:org.mitre.oval:tst:78719"/>
+    </criteria>
+  </criteria>
+</definition>

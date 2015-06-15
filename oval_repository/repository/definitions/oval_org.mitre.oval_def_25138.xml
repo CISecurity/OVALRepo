@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25138" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0788: mod_wsgi security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>mod_wsgi</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0788-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0788.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0788"/>
+    <reference source="CVE" ref_id="CVE-2014-0240" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0240.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0242" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0242.html"/>
+    <description>The mod_wsgi adapter is an Apache module that provides a WSGI-compliant
+interface for hosting Python-based web applications within Apache.
+
+It was found that mod_wsgi did not properly drop privileges if the call to
+setuid() failed. If mod_wsgi was set up to allow unprivileged users to run
+WSGI applications, a local user able to run a WSGI application could
+possibly use this flaw to escalate their privileges on the system.
+(CVE-2014-0240)
+
+Note: mod_wsgi is not intended to provide privilege separation for WSGI
+applications. Systems relying on mod_wsgi to limit or sandbox the
+privileges of mod_wsgi applications should migrate to a different solution
+with proper privilege separation.
+
+It was discovered that mod_wsgi could leak memory of a hosted web
+application via the "Content-Type" header. A remote attacker could possibly
+use this flaw to disclose limited portions of the web application's memory.
+(CVE-2014-0242)
+
+Red Hat would like to thank Graham Dumpleton for reporting these issues.
+Upstream acknowledges RÃ³bert Kisteleki as the original reporter of
+CVE-2014-0240, and Buck Golemon as the original reporter of CVE-2014-0242.
+
+All mod_wsgi users are advised to upgrade to this updated package, which
+contains backported patches to correct these issues.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-02T17:22:28">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-07T16:13:28.782-04:00">DRAFT</status_change>
+        <status_change date="2014-07-28T04:00:50.675-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:03:20.837-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criterion comment="mod_wsgi is earlier than 0:3.2-6.el6_5" test_ref="oval:org.mitre.oval:tst:114605"/>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+  </criteria>
+</definition>

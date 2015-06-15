@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:837" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Red Hat Linux Kernel do_mremap Privilege Escalation Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <product>mremap</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0077" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0077"/>
+    <description>The do_mremap function for the mremap system call in Linux 2.2 to 2.2.25, 2.4 to 2.4.24, and 2.6 to 2.6.2, does not properly check the return value from the do_munmap function when the maximum number of VMA descriptors is exceeded, which allows local users to gain root privileges, a different vulnerability than CAN-2003-0985.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-03-20T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="The MITRE Corporation">Matt Busby</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:54.124-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:59.044-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat 9 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3153"/>
+    <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+    <criteria operator="OR" comment="Vulnerable Configuration">
+      <criterion comment="kernel version is less than 2.4.20-30.9" negate="false" test_ref="oval:org.mitre.oval:tst:1606"/>
+      <criterion comment="kernel-smp version is less than 2.4.20-30.9" negate="false" test_ref="oval:org.mitre.oval:tst:1605"/>
+      <criterion comment="kernel-bigmem version is less than 2.4.20-30.9" negate="false" test_ref="oval:org.mitre.oval:tst:1604"/>
+    </criteria>
+  </criteria>
+</definition>

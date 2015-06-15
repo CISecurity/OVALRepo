@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1966" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability in the in.iked(1M) Service May Lead To a Denial of Service (DoS)</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2989" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2989"/>
+    <description>The libike library in Sun Solaris 9 before 20070529 contains a logic error related to a certain pointer, which allows remote attackers to cause a denial of service (in.iked daemon crash) by sending certain UDP packets with a source port different from 500.  NOTE: this issue might overlap CVE-2006-2298.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-06-06T11:47:00.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-06-06T14:28:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-06-22T08:57:42.447-04:00">INTERIM</status_change>
+        <status_change date="2007-07-10T21:08:50.458-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="OR">
+      <criteria operator="AND" comment="Solaris 9 (SPARC)" negate="false">
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3172"/>
+        <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3237"/>
+        <criterion comment="Patch 113451-13 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3350"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86)" negate="false">
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3172"/>
+        <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3912"/>
+        <criterion comment="Patch 114435-12 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3373"/>
+      </criteria>
+    </criteria>
+    <criterion comment="/etc/inet/ike/config exists" negate="false" test_ref="oval:org.mitre.oval:tst:3233"/>
+  </criteria>
+</definition>

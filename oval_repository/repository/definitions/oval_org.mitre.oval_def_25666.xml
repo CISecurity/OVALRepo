@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25666" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0791-1 -- Recommended update for util-linux</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>util-linux</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140791-1.html" ref_id="SUSE-RU-2014:0791-1"/>
+    <description>This update for util-linux provides the several fixes.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-06T15:04:45">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-08-07T15:08:42.523-04:00">DRAFT</status_change>
+        <status_change date="2014-08-25T04:01:09.963-04:00">INTERIM</status_change>
+        <status_change date="2014-09-15T04:00:17.393-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libblkid1 RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:122168"/>
+        <criterion comment="libuuid1 RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:121994"/>
+        <criterion comment="util-linux RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:122193"/>
+        <criterion comment="util-linux-lang RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:121880"/>
+        <criterion comment="uuid-runtime RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:121525"/>
+        <criterion comment="libblkid1-32bit RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:122236"/>
+        <criterion comment="libuuid1-32bit RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:121727"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criterion comment="libuuid-devel RPM is earlier than 0:2.19.1-6.54.1" test_ref="oval:org.mitre.oval:tst:122259"/>
+    </criteria>
+  </criteria>
+</definition>

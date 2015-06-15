@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14661" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2423-1 movabletype-opensource -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>movabletype-opensource</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2012/msg00051.html" ref_id="DSA-2423-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1497" ref_id="CVE-2012-1497"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1262" ref_id="CVE-2012-1262"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0320" ref_id="CVE-2012-0320"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0319" ref_id="CVE-2012-0319"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0318" ref_id="CVE-2012-0318"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0317" ref_id="CVE-2012-0317"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-5085" ref_id="CVE-2011-5085"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-5084" ref_id="CVE-2011-5084"/>
+    <description>Several vulnerabilities were discovered in Movable Type, a blogging system: Under certain circumstances, a user who has &amp;quot;Create Entries&amp;quot; or &amp;quot;Manage Blog&amp;quot; permissions may be able to read known files on the local file system. The file management system contains shell command injection vulnerabilities, the most serious of which may lead to arbitrary OS command execution by a user who has a permission to sign-in to the admin script and also has a permission to upload files. Session hijack and cross-site request forgery vulnerabilities exist in the commenting and the community script. A remote attacker could hijack the user session or could execute arbitrary script code on victim's browser under the certain circumstances. Templates which do not escape variable properly and mt-wizard.cgi contain cross-site scripting vulnerabilities.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:57:22.208-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:05:22.720-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:00:17.519-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14661 - Debian Patch Update" date="2014-06-06T17:13:00.482-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:15:22.838-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:10.834-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="movabletype-opensource DPKG is earlier than 4.3.8+dfsg-0+squeeze2" test_ref="oval:org.mitre.oval:tst:78090"/>
+  </criteria>
+</definition>

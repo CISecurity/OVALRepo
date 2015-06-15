@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20452" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware ESX third party updates for Service Console packages glibc and dhcp</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference ref_id="CVE-2010-3477" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3477" source="CVE"/>
+    <description>The tcf_act_police_dump function in net/sched/act_police.c in the actions implementation in the network queueing functionality in the Linux kernel before 2.6.36-rc4 does not properly initialize certain structure members, which allows local users to obtain potentially sensitive information from kernel memory via vectors involving a dump operation.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2010-2942.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:41:34.678-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:41.456-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:45.422-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201110201-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201110201-SG is not installed" test_ref="oval:org.mitre.oval:tst:89698"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX400-201110401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criterion comment="Patch ESX400-201110401-SG is not installed" test_ref="oval:org.mitre.oval:tst:89202"/>
+    </criteria>
+  </criteria>
+</definition>

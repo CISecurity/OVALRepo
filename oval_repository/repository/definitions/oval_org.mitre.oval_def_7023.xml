@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7023" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris and OpenSolaris products Trusted Extensions component vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0882" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0882"/>
+    <description>Unspecified vulnerability in the Solaris component in Oracle Sun Product Suite 10 and OpenSolaris snv_134 allows local users to affect confidentiality, integrity, and availability via unknown vectors related to Trusted Extensions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-04-21T14:34:00.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-04-22T13:39:58.737-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:00:37.659-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:00:22.799-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 263689">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criteria operator="OR">
+          <criterion negate="true" comment="Patch 119906-15 or later installed" test_ref="oval:org.mitre.oval:tst:11348"/>
+          <criterion negate="true" comment="Patch 122212-36 or later installed" test_ref="oval:org.mitre.oval:tst:11584"/>
+          <criterion negate="true" comment="Patch 120460-16 or later installed" test_ref="oval:org.mitre.oval:tst:11336"/>
+          <criterion negate="true" comment="Patch 120094-25 or later installed" test_ref="oval:org.mitre.oval:tst:11607"/>
+          <criterion negate="true" comment="Patch 122470-03 or later installed" test_ref="oval:org.mitre.oval:tst:11633"/>
+          <criterion negate="true" comment="Patch 125533-15 or later installed" test_ref="oval:org.mitre.oval:tst:11661"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 263689">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criteria>
+          <criterion negate="true" comment="Patch 122471-03 or later installed" test_ref="oval:org.mitre.oval:tst:11394"/>
+          <criterion negate="true" comment="Patch 125534-15 or later installed" test_ref="oval:org.mitre.oval:tst:10950"/>
+          <criterion negate="true" comment="Patch 119907-15 or later installed" test_ref="oval:org.mitre.oval:tst:11613"/>
+          <criterion negate="true" comment="Patch 122213-36 or later installed" test_ref="oval:org.mitre.oval:tst:11317"/>
+          <criterion negate="true" comment="Patch 120461-16 or later installed" test_ref="oval:org.mitre.oval:tst:11724"/>
+          <criterion negate="true" comment="Patch 120095-25 or later installed" test_ref="oval:org.mitre.oval:tst:11890"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criterion comment="System is configured to use Solaris Trusted Extensions (labeld service is online)" test_ref="oval:org.mitre.oval:tst:11134"/>
+  </criteria>
+</definition>

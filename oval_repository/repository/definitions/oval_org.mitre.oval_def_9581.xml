@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9581" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Integer underflow in the isakmp_id_print for TCPDUMP 3.8.1 and earlier allows remote attackers to cause a denial of service (crash) via an ISAKMP packet with an Identification payload with a length that becomes less than 8 during byte order conversion, which causes an out-of-bounds read, as demonstrated by the Striker ISAKMP Protocol Test Suite.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0184" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0184"/>
+    <description>Integer underflow in the isakmp_id_print for TCPDUMP 3.8.1 and earlier allows remote attackers to cause a denial of service (crash) via an ISAKMP packet with an Identification payload with a length that becomes less than 8 during byte order conversion, which causes an out-of-bounds read, as demonstrated by the Striker ISAKMP Protocol Test Suite.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:12:30.749-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:12:46.713-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:13:51.203-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9581 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:27:00.394-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:34:53.427-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:20:26.117-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="libpcap is earlier than 14:0.7.2-7.E3.2" test_ref="oval:org.mitre.oval:tst:30722"/>
+      <criterion comment="tcpdump is earlier than 14:3.7.2-7.E3.2" test_ref="oval:org.mitre.oval:tst:29722"/>
+    </criteria>
+  </criteria>
+</definition>

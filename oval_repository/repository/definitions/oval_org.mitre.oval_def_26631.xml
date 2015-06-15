@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26631" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1247-1 -- Security update for bash</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>bash</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141247-1.html" ref_id="SUSE-SU-2014:1247-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7169" ref_id="CVE-2014-7169"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271" ref_id="CVE-2014-6271"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7186" ref_id="CVE-2014-7186"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7187" ref_id="CVE-2014-7187"/>
+    <description>The command-line shell 'bash' evaluates environment variables, which
+allows the injection of characters and might be used to access files on
+the system in some circumstances (CVE-2014-7169).
+Please note that this issue is different from a previously fixed
+vulnerability tracked under CVE-2014-6271 and is less serious due to the
+special, non-default system configuration that is needed to create an
+exploitable situation.
+To remove further exploitation potential we now limit the
+function-in-environment variable to variables prefixed with BASH_FUNC_.
+This hardening feature is work in progress and might be improved in later
+updates.
+Additionally, two other security issues have been fixed:
+    * CVE-2014-7186: Nested HERE documents could lead to a crash of bash.
+    * CVE-2014-7187: Nesting of for loops could lead to a crash of bash.
+Security Issues:
+    * CVE-2014-7169
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7169>
+    * CVE-2014-7186
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7186>
+    * CVE-2014-7187
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7187></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-14T11:42:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-24T13:10:10.800-04:00">DRAFT</status_change>
+        <status_change date="2014-11-10T04:01:39.636-05:00">INTERIM</status_change>
+        <status_change date="2014-12-01T04:00:39.179-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bash RPM is earlier than 0:3.2-147.22.1" test_ref="oval:org.mitre.oval:tst:125645"/>
+        <criterion comment="bash-doc RPM is earlier than 0:3.2-147.22.1" test_ref="oval:org.mitre.oval:tst:124919"/>
+        <criterion comment="libreadline5 RPM is earlier than 0:5.2-147.22.1" test_ref="oval:org.mitre.oval:tst:125709"/>
+        <criterion comment="readline-doc RPM is earlier than 0:5.2-147.22.1" test_ref="oval:org.mitre.oval:tst:125771"/>
+        <criterion comment="libreadline5-32bit RPM is earlier than 0:5.2-147.22.1" test_ref="oval:org.mitre.oval:tst:125762"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bash RPM is earlier than 0:3.2-147.14.22.1" test_ref="oval:org.mitre.oval:tst:125422"/>
+        <criterion comment="bash-doc RPM is earlier than 0:3.2-147.14.22.1" test_ref="oval:org.mitre.oval:tst:125379"/>
+        <criterion comment="libreadline5 RPM is earlier than 0:5.2-147.14.22.1" test_ref="oval:org.mitre.oval:tst:125679"/>
+        <criterion comment="readline-doc RPM is earlier than 0:5.2-147.14.22.1" test_ref="oval:org.mitre.oval:tst:125728"/>
+        <criterion comment="libreadline5-32bit RPM is earlier than 0:5.2-147.14.22.1" test_ref="oval:org.mitre.oval:tst:125792"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 10 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bash RPM is earlier than 0:3.1-24.34.1" test_ref="oval:org.mitre.oval:tst:125751"/>
+        <criterion comment="readline RPM is earlier than 0:5.1-24.34.1" test_ref="oval:org.mitre.oval:tst:125253"/>
+        <criterion comment="readline-devel RPM is earlier than 0:5.1-24.34.1" test_ref="oval:org.mitre.oval:tst:125842"/>
+        <criterion comment="readline-32bit RPM is earlier than 0:5.1-24.34.1" test_ref="oval:org.mitre.oval:tst:125680"/>
+        <criterion comment="readline-devel-32bit RPM is earlier than 0:5.1-24.34.1" test_ref="oval:org.mitre.oval:tst:125779"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

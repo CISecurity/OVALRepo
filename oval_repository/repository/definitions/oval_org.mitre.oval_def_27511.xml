@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27511" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-3062-1 -- wget security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>wget</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3062" ref_id="DSA-3062-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4877" ref_id="CVE-2014-4877"/>
+    <description>HD Moore of Rapid7 discovered a symlink attack in Wget, a command-line utility to retrieve files via HTTP, HTTPS, and FTP. The vulnerability allows to create arbitrary files on the user's system when Wget runs in recursive mode against a malicious FTP server. Arbitrary file creation may override content of user's files or permit remote code execution with the user privilege.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-14T09:55:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-17T19:41:27.170-05:00">DRAFT</status_change>
+        <status_change date="2014-12-08T04:00:46.013-05:00">INTERIM</status_change>
+        <status_change date="2014-12-29T04:00:11.935-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="wget is earlier than 0:1.13.4-3+deb7u2" test_ref="oval:org.mitre.oval:tst:135251"/>
+  </criteria>
+</definition>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5451" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in the Solaris 10 DTrace Dynamic Tracing Framework May Allow Unauthorized Kernel Level Tracing</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-0938" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0938"/>
+    <description>Unspecified vulnerability in the dynamic tracing framework (DTrace) in Sun Solaris 10 allows local users with PRIV_DTRACE_USER or PRIV_DTRACE_PROC privileges to obtain sensitive kernel information via unspecified vectors, a different vulnerability than CVE-2007-4126.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-02-27T15:10:45.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-02-28T09:30:27.910-05:00">DRAFT</status_change>
+        <status_change date="2008-03-17T04:00:23.061-04:00">INTERIM</status_change>
+        <status_change date="2008-04-07T04:00:09.767-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 231803">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 120011-04 or later installed" test_ref="oval:org.mitre.oval:tst:7688"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 231803">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 120012-04 or later installed" test_ref="oval:org.mitre.oval:tst:7520"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25299" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-OU-2014:0571-1 -- Optional OpenSSL 1.0 versions of cyrus-sasl, libcurl4 and libldap</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>compat-libldap-2_3-0</product>
+      <product>libldap-2_4-2</product>
+      <product>openldap2</product>
+      <product>openldap2-back-meta</product>
+      <product>openldap2-client</product>
+      <product>libldap-2_4-2-32bit</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ou-20140571-1.html" ref_id="SUSE-OU-2014:0571-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0138" ref_id="CVE-2014-0138"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0139" ref_id="CVE-2014-0139"/>
+    <description>This update includes variants of existing libraries built
+against OpenSSL  1.0.
+
+As OpenSSL 0.8.9j and OpenSSL 1.0.1 are not binary
+compatible, but have the  same function names, care must be
+taken that they are not loaded by the  same program.
+
+As some system libraries also link against libssl.so or
+libcrypto.so, these  need to be available in variants
+linked against OpenSSL 1.0. These  libraries are installed
+below the /opt/suse/ directory hierarchy.
+
+The version and the APIs of these "shadow" libraries are
+exactly the same  as the versions in the system, and so are
+interchangeable.
+
+For building your OpenSSL 1.0 enabled program, link using
+the linkflags 
+-L/opt/suse/lib64 -Wl, -rpath, /opt/suse/lib64 (on 32bit
+ systems, use lib  instead of lib64).
+
+This update provides variants for the OpenLDAP2 client,
+libcurl4 and  cyrus-sasl libraries.
+
+Additionally, two bugs have been fixed in openldap2
+regarding IPv6 support:
+
+    * tls_checkpeer does not work with IPv6 address as
+Subject Alternative Name. (bnc#862623)
+    * getaddrinfo does not return if ldap is used for host
+lookups on IPv6 environments. (bnc#843697)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:14:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:12:54.969-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:47.801-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:41.206-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="compat-libldap-2_3-0 RPM is earlier than 0:2.3.37-2.28.5" test_ref="oval:org.mitre.oval:tst:117036"/>
+        <criterion comment="openldap2 RPM is earlier than 0:2.4.26-0.28.5" test_ref="oval:org.mitre.oval:tst:117029"/>
+        <criterion comment="openldap2-back-meta RPM is earlier than 0:2.4.26-0.28.5" test_ref="oval:org.mitre.oval:tst:116300"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libldap-2_4-2 RPM is earlier than 0:2.4.26-0.28.5" test_ref="oval:org.mitre.oval:tst:116964"/>
+        <criterion comment="openldap2-client RPM is earlier than 0:2.4.26-0.28.5" test_ref="oval:org.mitre.oval:tst:117232"/>
+        <criterion comment="libldap-2_4-2-32bit RPM is earlier than 0:2.4.26-0.28.5" test_ref="oval:org.mitre.oval:tst:117204"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

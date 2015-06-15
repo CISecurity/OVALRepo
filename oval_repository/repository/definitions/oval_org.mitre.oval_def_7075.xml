@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7075" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1983 wireshark -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>wireshark</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-1983" ref_id="DSA-1983"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4377" ref_id="CVE-2009-4377"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0304" ref_id="CVE-2010-0304"/>
+    <description>Several remote vulnerabilities have been discovered in the Wireshark network traffic analyzer, which may lead to the execution of arbitrary code or denial of service. The Common Vulnerabilities and Exposures project identifies the following problems: A NULL pointer dereference was found in the SMB/SMB2 dissectors. Several buffer overflows were found in the LWRES dissector.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:05:21-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:28:05.129-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:33.701-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:20.370-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7075 - Debian Patch Update" date="2014-06-06T16:49:00.366-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:51:21.305-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:05.171-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="wireshark-dev is earlier than 1.0.2-3+lenny8" test_ref="oval:org.mitre.oval:tst:25942"/>
+      <criterion comment="wireshark-common is earlier than 1.0.2-3+lenny8" test_ref="oval:org.mitre.oval:tst:25805"/>
+      <criterion comment="tshark is earlier than 1.0.2-3+lenny8" test_ref="oval:org.mitre.oval:tst:25872"/>
+      <criterion comment="wireshark is earlier than 1.0.2-3+lenny8" test_ref="oval:org.mitre.oval:tst:25921"/>
+    </criteria>
+  </criteria>
+</definition>

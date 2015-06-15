@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6019" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Office WPG Image File Heap Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Office 2000</product>
+      <product>Microsoft Office XP</product>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office Project 2002</product>
+      <product>Microsoft Office Converter Pack</product>
+      <product>Microsoft Works</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3460" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3460"/>
+    <description>WPGIMP32.FLT in Microsoft Office 2000 SP3, XP SP3, and 2003 SP2; Office Converter Pack; and Works 8 does not properly parse the length of a WordPerfect Graphics (WPG) file, which allows remote attackers to execute arbitrary code via a crafted WPG file, aka the "WPG Image File Heap Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-13T09:28:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:02:31.086-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:22.885-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:39.870-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6019 - Corrected capitalization and extra spacing errors in product names" date="2011-04-08T16:13:00.153-04:00">
+          <contributor organization="AIST">Akihito Nakamura</contributor>
+        </modified>
+        <status_change date="2011-04-08T16:17:40.145-04:00">INTERIM</status_change>
+        <status_change date="2011-04-25T04:00:21.955-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6019 - several updates for comment property to comply with style authoring guide schematron and changes" date="2013-12-31T11:57:00.092-05:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-12-31T12:00:40.159-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:23.464-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8935 - check=&quot;all&quot; was replased with check=&quot;at least one&quot; because all objects have the set of objects." date="2014-03-21T13:14:00.094-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:16:52.418-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:06:55.629-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Office 2000, XP, 2003, Project 2002 or Office File Converter Pack">
+      <extend_definition comment="Microsoft Office 2000 is installed" definition_ref="oval:org.mitre.oval:def:93"/>
+      <extend_definition comment="Microsoft Office XP is installed" definition_ref="oval:org.mitre.oval:def:663"/>
+      <extend_definition comment="Microsoft Office 2003 is installed" definition_ref="oval:org.mitre.oval:def:233"/>
+      <extend_definition comment="Microsoft Project 2002 SP1 is installed" definition_ref="oval:org.mitre.oval:def:707"/>
+      <criterion comment="Office File Converter Pack is Installed" test_ref="oval:org.mitre.oval:tst:8935"/>
+    </criteria>
+    <criterion comment="Gifimp32.flt version is less than 2003.1100.8165.0" test_ref="oval:org.mitre.oval:tst:8744"/>
+  </criteria>
+</definition>

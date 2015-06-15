@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24887" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0560: libvirt security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0560-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0560.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0560"/>
+    <reference source="CVE" ref_id="CVE-2014-0179" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0179.html"/>
+    <description>The libvirt library is a C API for managing and interacting with the
+virtualization capabilities of Linux and other operating systems. In 
+addition, libvirt provides tools for remote management of virtualized
+systems. 
+
+It was found that libvirt passes the XML_PARSE_NOENT flag when parsing XML
+documents using the libxml2 library, in which case all XML entities in the
+parsed documents are expanded. A user able to force libvirtd to parse an
+XML document with an entity pointing to a special file that blocks on read
+access could use this flaw to cause libvirtd to hang indefinitely,
+resulting in a denial of service on the system. (CVE-2014-0179)
+
+Red Hat would like to thank the upstream Libvirt project for reporting this
+issue. Upstream acknowledges Daniel P. Berrange and Richard Jones as the
+original reporters.
+
+This update also fixes the following bugs:
+
+* When hot unplugging a virtual CPU (vCPU), libvirt kept a pointer to
+already freed memory if the vCPU was pinned to a host CPU. Consequently,
+when reading the CPU pinning information, libvirt terminated unexpectedly
+due to an attempt to access this memory. This update ensures that libvirt
+releases the pointer to the previously allocated memory when a vCPU is
+being hot unplugged, and it no longer crashes in this situation.
+(BZ#1091206)
+
+* Previously, libvirt passed an incorrect argument to the "tc" command when
+setting quality of service (QoS) on a network interface controller (NIC).
+As a consequence, QoS was applied only to IP traffic. With this update,
+libvirt constructs the "tc" command correctly so that QoS is applied to all
+traffic as expected. (BZ#1096806)
+
+* When using the sanlock daemon for managing access to shared storage,
+libvirt expected all QEMU domains to be registered with sanlock. However,
+if a QEMU domain was started prior to enabling sanlock, the domain was not
+registered with sanlock. Consequently, migration of a virtual machine (VM)
+from such a QEMU domain failed with a libvirt error. With this update,
+libvirt verifies whether a QEMU domain process is registered with sanlock
+before it starts working with the domain, ensuring that migration of
+virtual machines works as expected. (BZ#1097227)
+
+All libvirt users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing the
+updated packages, libvirtd will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-09T15:16:45">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-06-10T14:50:17.417-04:00">DRAFT</status_change>
+        <status_change date="2014-06-30T04:10:59.043-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:46.049-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libvirt-lock-sanlock is earlier than 0:0.10.2-29.el6_5.8" test_ref="oval:org.mitre.oval:tst:114344"/>
+      <criterion comment="libvirt-devel is earlier than 0:0.10.2-29.el6_5.8" test_ref="oval:org.mitre.oval:tst:114742"/>
+      <criterion comment="libvirt is earlier than 0:0.10.2-29.el6_5.8" test_ref="oval:org.mitre.oval:tst:114687"/>
+      <criterion comment="libvirt-python is earlier than 0:0.10.2-29.el6_5.8" test_ref="oval:org.mitre.oval:tst:114793"/>
+      <criterion comment="libvirt-client is earlier than 0:0.10.2-29.el6_5.8" test_ref="oval:org.mitre.oval:tst:114873"/>
+    </criteria>
+  </criteria>
+</definition>

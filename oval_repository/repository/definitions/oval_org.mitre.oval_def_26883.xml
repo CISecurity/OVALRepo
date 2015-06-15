@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26883" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-3014 -- unbreakable enterprise kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>dtrace-modules</product>
+      <product>kernel-uek</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+      <product>kernel-uek-headers</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-3014.html" ref_id="ELSA-2014-3014"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0055" ref_id="CVE-2014-0055"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0069" ref_id="CVE-2014-0069"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0101" ref_id="CVE-2014-0101"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2523" ref_id="CVE-2014-2523"/>
+    <description>kernel-uek
+[3.8.13-26.2.2.el6uek]
+- netfilter: nf_conntrack_dccp: fix skb_header_pointer API usages (Daniel Borkmann)  [Orabug: 18421673]  {CVE-2014-2523}
+- cifs: ensure that uncached writes handle unmapped areas correctly (Jeff Layton)  [Orabug: 18461067]  {CVE-2014-0069} {CVE-2014-0069}
+- net: sctp: fix sctp_sf_do_5_1D_ce to verify if we/peer is AUTH capable (Daniel Borkmann)  [Orabug: 18461065]  {CVE-2014-0101}
+- vhost-net: insufficient handling of error conditions in get_rx_bufs() (Guangyu Sun)  [Orabug: 18461050]  {CVE-2014-0055}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:55">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:44:38.049-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:01:04.943-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:26.482-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:35289 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T18:48:34.749-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:01.598-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="dtrace-modules-3.8.13-26.2.2.el6uek is earlier than 0:0.4.2-3.el6" test_ref="oval:org.mitre.oval:tst:127835"/>
+      <criterion comment="kernel-uek is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127792"/>
+      <criterion comment="kernel-uek-debug is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127154"/>
+      <criterion comment="kernel-uek-debug-devel is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127720"/>
+      <criterion comment="kernel-uek-devel is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127513"/>
+      <criterion comment="kernel-uek-doc is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127805"/>
+      <criterion comment="kernel-uek-firmware is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127912"/>
+      <criterion comment="kernel-uek-headers is earlier than 0:3.8.13-26.2.2.el6uek" test_ref="oval:org.mitre.oval:tst:127800"/>
+    </criteria>
+  </criteria>
+</definition>

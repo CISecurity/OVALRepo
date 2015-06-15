@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21530" version="81" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:1265: libxslt security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>libxslt</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:1265-02" ref_url="https://rhn.redhat.com/errata/RHSA-2012-1265.html"/>
+    <reference source="CESA" ref_id="CESA-2012:1265"/>
+    <reference source="CVE" ref_id="CVE-2011-1202" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1202.html"/>
+    <reference source="CVE" ref_id="CVE-2011-3970" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-3970.html"/>
+    <reference source="CVE" ref_id="CVE-2012-2825" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2825.html"/>
+    <reference source="CVE" ref_id="CVE-2012-2870" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2870.html"/>
+    <reference source="CVE" ref_id="CVE-2012-2871" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2871.html"/>
+    <reference source="CVE" ref_id="CVE-2012-2893" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2893.html"/>
+    <description>Double free vulnerability in libxslt, as used in Google Chrome before 22.0.1229.79, allows remote attackers to cause a denial of service or possibly have unspecified other impact via vectors related to XSL transforms.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:55.547-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:02:55.148-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:39.331-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libxslt-devel is earlier than 0:1.1.17-4.el5_8.3" test_ref="oval:org.mitre.oval:tst:94297"/>
+        <criterion comment="libxslt is earlier than 0:1.1.17-4.el5_8.3" test_ref="oval:org.mitre.oval:tst:94515"/>
+        <criterion comment="libxslt-python is earlier than 0:1.1.17-4.el5_8.3" test_ref="oval:org.mitre.oval:tst:94580"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libxslt-devel is earlier than 0:1.1.26-2.el6_3.1" test_ref="oval:org.mitre.oval:tst:94414"/>
+        <criterion comment="libxslt is earlier than 0:1.1.26-2.el6_3.1" test_ref="oval:org.mitre.oval:tst:94308"/>
+        <criterion comment="libxslt-python is earlier than 0:1.1.26-2.el6_3.1" test_ref="oval:org.mitre.oval:tst:94603"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

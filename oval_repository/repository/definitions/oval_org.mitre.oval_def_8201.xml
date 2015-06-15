@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8201" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1934 apache2 -- multiple issues</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>apache2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1934" ref_id="DSA-1934"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3094" ref_id="CVE-2009-3094"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3095" ref_id="CVE-2009-3095"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" ref_id="CVE-2009-3555"/>
+    <description>A design flaw has been found in the TLS and SSL protocol that allows an attacker to inject arbitrary content at the beginning of a TLS/SSL connection. The attack is related to the way how TLS and SSL handle session renegotiations. CVE-2009-3555 has been assigned to this vulnerability. As a partial mitigation against this attack, this apache2 update disables client-initiated renegotiations. This should fix the vulnerability for the majority of Apache configurations in use. NOTE: This is not a complete fix for the problem. The attack is still possible in configurations where the server initiates the renegotiation. This is the case for the following configurations (the information in the changelog of the updated packages is slightly inaccurate): As a workaround, you may rearrange your configuration in a way that SSLVerifyClient and SSLCipherSuite are only used on the server or virtual host level. A complete fix for the problem will require a protocol change. Further information will be included in a separate announcement about this issue. In addition, this update fixes the following issues in Apache's mod_proxy_ftp: Insufficient input validation in the mod_proxy_ftp module allowed remote FTP servers to cause a denial of service (NULL pointer dereference and child process crash) via a malformed reply to an EPSV command. Insufficient input validation in the mod_proxy_ftp module allowed remote authenticated attackers to bypass intended access restrictions and send arbitrary FTP commands to an FTP server. The oldstable distribution (etch), these problems have been fixed in version 2.2.3-4+etch11.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:17.199-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:00.808-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:45.542-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8201 - Debian Patch Update" date="2014-06-06T16:30:00.923-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:32:28.630-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:21.506-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-doc is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:18971"/>
+            <criterion comment="apache2-src is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19402"/>
+            <criterion comment="apache2 is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19459"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-utils is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19247"/>
+            <criterion comment="apache2-mpm-worker is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19133"/>
+            <criterion comment="apache2.2-common is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19089"/>
+            <criterion comment="apache2-suexec-custom is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19323"/>
+            <criterion comment="apache2-suexec is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19222"/>
+            <criterion comment="apache2-threaded-dev is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:18986"/>
+            <criterion comment="apache2-dbg is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19347"/>
+            <criterion comment="apache2-mpm-event is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19299"/>
+            <criterion comment="apache2-mpm-prefork is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:19473"/>
+            <criterion comment="apache2-prefork-dev is earlier than 2.2.9-10+lenny6" test_ref="oval:org.mitre.oval:tst:18822"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          </criteria>
+          <criterion comment="apache2-mpm-itk is earlier than 2.2.6-02-1+lenny2+b2" test_ref="oval:org.mitre.oval:tst:19074"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apache2-mpm-perchild is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19447"/>
+            <criterion comment="apache2-doc is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19425"/>
+            <criterion comment="apache2-src is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19160"/>
+            <criterion comment="apache2 is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:18828"/>
+          </criteria>
+        </criteria>
+        <criterion comment="apache2-utils is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19385"/>
+        <criterion comment="apache2-mpm-worker is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19234"/>
+        <criterion comment="apache2.2-common is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19409"/>
+        <criterion comment="apache2-mpm-prefork is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:18829"/>
+        <criterion comment="apache2-threaded-dev is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:18734"/>
+        <criterion comment="apache2-mpm-event is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19469"/>
+        <criterion comment="apache2-mpm-itk is earlier than 2.2.3-01-2+etch4+b1" test_ref="oval:org.mitre.oval:tst:18893"/>
+        <criterion comment="apache2-prefork-dev is earlier than 2.2.3-4+etch11" test_ref="oval:org.mitre.oval:tst:19038"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

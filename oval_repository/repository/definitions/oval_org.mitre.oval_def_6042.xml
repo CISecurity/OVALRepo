@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6042" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Memory Corruption in Indexing Service Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2507" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2507"/>
+    <description>A certain ActiveX control in the Indexing Service in Microsoft Windows 2000 SP4, XP SP2 and SP3, and Server 2003 SP2 does not properly process URLs, which allows remote attackers to execute arbitrary programs via unspecified vectors that cause a "vulnerable binary" to load and run, aka "Memory Corruption in Indexing Service Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-10-13T13:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-10-22T17:36:45.516-04:00">DRAFT</status_change>
+        <status_change date="2009-11-09T04:00:33.465-05:00">INTERIM</status_change>
+        <status_change date="2009-11-30T04:00:18.262-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows 2000 SP4">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of query.dll is less than 5.0.2195.7320" test_ref="oval:org.mitre.oval:tst:10734"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows XP x86 SP2">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="the version of query.dll is less than 5.1.2600.3602" test_ref="oval:org.mitre.oval:tst:10632"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows XP x86 SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of query.dll is less than 5.1.2600.5847" test_ref="oval:org.mitre.oval:tst:10993"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows XP x64 SP2, Windows Server 2003 SP2 x86/x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of query.dll is less than 5.2.3790.4554" test_ref="oval:org.mitre.oval:tst:10897"/>
+    </criteria>
+  </criteria>
+</definition>

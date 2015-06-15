@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1607" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX PMTUD Remote DoS (B.11.11)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1192" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1192"/>
+    <description>Unknown vulnerability in HP-UX B.11.00, B.11.04, B.11.11, B.11.22, and B.11.23, when running TCP/IP on IPv4, allows remote attackers to cause a denial of service via certain packets, related to the PMTU, a different vulnerability than CVE-2004-1060.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-02-01T11:45:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-09T12:19:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="modified patch test to only check for specific patch, checking for supersedence was incorrect and need a language change" date="2007-09-13T00:00:00.000-05:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-09-13T14:05:28.493-04:00">INTERIM</status_change>
+        <status_change date="2007-10-02T08:08:09.927-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1607 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:05:49.558-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:15.620-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="700 Series or 800 Series OS Release 11.11">
+      <criteria operator="AND" comment="700 Series OS Release 11.11">
+        <criterion comment="700-series HP" test_ref="oval:org.mitre.oval:tst:2515"/>
+        <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:2514"/>
+      </criteria>
+      <criteria operator="AND" comment="800 Series OS Release 11.11">
+        <criterion comment="800-series HP" test_ref="oval:org.mitre.oval:tst:2513"/>
+        <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:2514"/>
+      </criteria>
+    </criteria>
+    <criterion comment="Networking.NET2-KRN is installed" test_ref="oval:org.mitre.oval:tst:1442"/>
+    <criterion negate="true" comment="Patch PHNE_33159 is installed" test_ref="oval:org.mitre.oval:tst:823"/>
+  </criteria>
+</definition>

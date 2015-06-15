@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25576" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0041-1 -- Recommended update for aide</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>aide</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140041-1.html" ref_id="SUSE-RU-2014:0041-1"/>
+    <description>The filesystem intrusion detection tool "aide" was not able
+to load gzip  compressed databases anymore on SUSE Linux
+Enterprise Server 11 SP3 as the  zlib API was changed
+slightly. This update fixes this problem and gzip
+compressed databases can be opened again.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:21:52">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:20:52.441-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:39.448-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:44.149-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criterion comment="aide RPM is earlier than 0:0.13.1-40.16.1" test_ref="oval:org.mitre.oval:tst:117724"/>
+  </criteria>
+</definition>

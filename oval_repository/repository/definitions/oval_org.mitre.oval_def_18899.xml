@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18899" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>TrueType Font CMAP Table Vulnerability (CVE-2013-3894) - MS13-081</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3894" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3894"/>
+    <description>The kernel-mode drivers in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows 7 SP1, Windows 8, Windows Server 2012, and Windows RT allow remote attackers to execute arbitrary code via a crafted CMAP table in a TrueType font (TTF) file, aka "TrueType Font CMAP Table Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-10-15T15:40:52">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-10-17T11:48:58.896-04:00">DRAFT</status_change>
+        <status_change date="2013-11-11T04:00:53.399-05:00">INTERIM</status_change>
+        <status_change date="2013-11-26T13:49:15.325-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="xp sp3/version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="Check if the version of win32k.sys is less than 5.1.2600.6442" test_ref="oval:org.mitre.oval:tst:86763"/>
+    </criteria>
+    <criteria operator="AND" comment="win xp/server 2003/versions">
+      <criteria operator="OR" comment="xp/server 2003">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+      </criteria>
+      <criterion comment="Check if the version of win32k.sys is less than 5.2.3790.5216" test_ref="oval:org.mitre.oval:tst:86519"/>
+    </criteria>
+    <criteria operator="AND" comment="vista/2008/version">
+      <criteria operator="OR" comment="vista/2008">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="gdr/ldr">
+        <criterion comment="Check if the version of win32k.sys is less than 6.0.6002.18927" test_ref="oval:org.mitre.oval:tst:86538"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of win32k.sys is less than 6.0.6002.23204" test_ref="oval:org.mitre.oval:tst:86561"/>
+          <criterion comment="Check if the version of Win32k.sys is greater than or equal to 6.0.6002.23000" test_ref="oval:org.mitre.oval:tst:81723"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win 7/2008 r2/versions">
+      <criteria operator="OR" comment="win/2008 r2">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="gdr/ldr">
+        <criterion comment="Check if the version of win32k.sys is less than 6.1.7601.18246" test_ref="oval:org.mitre.oval:tst:87029"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of win32k.sys is less than 6.1.7601.22435" test_ref="oval:org.mitre.oval:tst:87016"/>
+          <criterion comment="Check if the version of Win32k.sys is greater than or equal to 6.1.7601.22000" test_ref="oval:org.mitre.oval:tst:81763"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win 8/server 2012">
+      <criteria operator="OR" comment="win 8/server 2012">
+        <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+        <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+        <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+      </criteria>
+      <criteria operator="OR" comment="gdr/ldr">
+        <criterion comment="Check if the version of win32k.sys is less than 6.2.9200.16699" test_ref="oval:org.mitre.oval:tst:86941"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of win32k.sys is less than 6.2.9200.20807" test_ref="oval:org.mitre.oval:tst:86991"/>
+          <criterion comment="Check if the version of Win32k.sys is greater than or equal to 6.2.9200.20000" test_ref="oval:org.mitre.oval:tst:80697"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

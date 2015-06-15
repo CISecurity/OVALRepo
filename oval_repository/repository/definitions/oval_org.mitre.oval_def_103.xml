@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:103" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows RPC Locator Service Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Locator service</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0003" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0003"/>
+    <description>Buffer overflow in the RPC Locator service for Microsoft Windows NT 4.0, Windows NT 4.0 Terminal Server Edition, Windows 2000, and Windows XP allows local users to execute arbitrary code via an RPC call to the service containing certain parameter information.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-08-27T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <criterion negate="true" comment="this is an NT Terminal Server" test_ref="oval:org.mitre.oval:tst:3097"/>
+      <criterion comment="the version of locator.exe is less than 4.0.1381.7202" test_ref="oval:org.mitre.oval:tst:2942"/>
+      <criterion negate="true" comment="Patch Q810833 Installed" test_ref="oval:org.mitre.oval:tst:2941"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="Locator Enabled" test_ref="oval:org.mitre.oval:tst:2940"/>
+    </criteria>
+  </criteria>
+</definition>

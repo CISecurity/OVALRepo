@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:885" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Server 2003 SSL Library Denial of Service</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Secure Sockets Layer (SSL)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0120" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0120"/>
+    <description>The Microsoft Secure Sockets Layer (SSL) library, as used in Windows 2000, Windows XP, and Windows Server 2003, allows remote attackers to cause a denial of service via malformed SSL messages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-04-13T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+        <status_change date="2004-05-05T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected to use a forward slash as the separator in the key." date="2007-05-07T15:59:00.528-04:00">
+          <contributor organization="Secure Elements, Inc.">Glenn Strickland</contributor>
+        </modified>
+        <status_change date="2007-05-07T16:06:48.429-04:00">INTERIM</status_change>
+        <status_change date="2007-05-23T15:05:53.475-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+      <criterion comment="the version of schannel.dll is less than 5.2.3790.132" negate="false" test_ref="oval:org.mitre.oval:tst:1509"/>
+      <criterion comment="the patch kb835732 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1510"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="SSL is enabled" negate="false" test_ref="oval:org.mitre.oval:tst:1508"/>
+    </criteria>
+  </criteria>
+</definition>

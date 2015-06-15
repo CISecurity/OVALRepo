@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23444" version="7" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013:1457: libgcrypt security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>libgcrypt</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1457-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-1457.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-4242" ref_url="http://linux.oracle.com/cve/CVE-2013-4242.html" source="CVE"/>
+    <description>GnuPG before 1.4.14, and Libgcrypt before 1.5.3 as used in GnuPG 2.0.x and possibly other products, allows local users to obtain private RSA keys via a cache side-channel attack involving the L3 cache, aka Flush+Reload.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:32:33.974-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:08.741-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:48.144-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23444 - optimisation of Oracle Linux content" date="2014-05-05T17:37:00.448-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:41:28.685-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:25.251-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecate duplicates in Oracle Linux patches." date="2014-07-11T17:34:23.298-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-11T17:34:23.298-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="libgcrypt-devel is earlier than 0:1.4.5-11.el6_4" test_ref="oval:org.mitre.oval:tst:107763"/>
+        <criterion comment="libgcrypt is earlier than 0:1.4.5-11.el6_4" test_ref="oval:org.mitre.oval:tst:107602"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="libgcrypt-devel is earlier than 0:1.4.4-7.el5_10" test_ref="oval:org.mitre.oval:tst:107403"/>
+        <criterion comment="libgcrypt is earlier than 0:1.4.4-7.el5_10" test_ref="oval:org.mitre.oval:tst:107646"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

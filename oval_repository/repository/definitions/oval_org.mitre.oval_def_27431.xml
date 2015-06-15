@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27431" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013-2584 -- Unbreakable Enterprise Kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-2584.html" ref_id="ELSA-2013-2584"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6545" ref_id="CVE-2012-6545"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3231" ref_id="CVE-2013-3231"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0343" ref_id="CVE-2013-0343"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4345" ref_id="CVE-2013-4345"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1928" ref_id="CVE-2013-1928"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2888" ref_id="CVE-2013-2888"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2889" ref_id="CVE-2013-2889"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2892" ref_id="CVE-2013-2892"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4387" ref_id="CVE-2013-4387"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4592" ref_id="CVE-2013-4592"/>
+    <description>[2.6.39-400.211.2]
+- fs/compat_ioctl.c: VIDEO_SET_SPU_PALETTE missing error check (Kees Cook) [Orabug: 17842208] {CVE-2013-1928}
+- Bluetooth: RFCOMM - Fix info leak via getsockname() (Mathias Krause) [Orabug: 17842129] {CVE-2012-6545}
+- Bluetooth: RFCOMM - Fix info leak in ioctl(RFCOMMGETDEVLIST) (Mathias Krause) [Orabug: 17842105] {CVE-2012-6545}
+- llc: Fix missing msg_namelen update in llc_ui_recvmsg() (Mathias Krause) [Orabug: 17842095] {CVE-2013-3231}
+- HID: pantherlord: validate output report details (Kees Cook) [Orabug: 17842084] {CVE-2013-2892}
+- HID: zeroplus: validate output report details (Kees Cook) [Orabug: 17842081] {CVE-2013-2889}
+- HID: provide a helper for validating hid reports (Kees Cook) [Orabug: 17842081] {CVE-2013-2889}
+- KVM: Fix iommu map/unmap to handle memory slot moves (Jerry Snitselaar) [Orabug: 17842075] {CVE-2013-4592}
+- ansi_cprng: Fix off by one error in non-block size request (Jerry Snitselaar) [Orabug: 17842072] {CVE-2013-4345}
+- HID: validate HID report id size (Kees Cook) [Orabug: 17842063] {CVE-2013-2888}
+- ipv6: remove max_addresses check from ipv6_create_tempaddr (Hannes Frederic Sowa) [Orabug: 17842056] {CVE-2013-0343}
+- ipv6: udp packets following an UFO enqueued packet need also be handled by UFO (Hannes Frederic Sowa) [Orabug: 17842050] {CVE-2013-4387}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:22:17">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:51:53.256-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:04:23.336-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:50.111-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:128420"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:128175"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:128485"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:128397"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:127806"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-400.211.2.el5uek" test_ref="oval:org.mitre.oval:tst:128468"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:128453"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:128170"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:128437"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:128173"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:127888"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-400.211.2.el6uek" test_ref="oval:org.mitre.oval:tst:128441"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

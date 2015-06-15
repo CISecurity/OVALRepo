@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21950" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1402: freetype security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>freetype</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1402-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1402.html"/>
+    <reference source="CESA" ref_id="CESA-2011:1402"/>
+    <reference source="CVE" ref_id="CVE-2011-3256" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-3256.html"/>
+    <description>FreeType 2 before 2.4.7, as used in CoreGraphics in Apple iOS before 5, Mandriva Enterprise Server 5, and possibly other products, allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted font, a different vulnerability than CVE-2011-0226.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:38:06.540-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:06.500-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:26.110-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="freetype-demos is earlier than 0:2.2.1-28.el5_7.1" test_ref="oval:org.mitre.oval:tst:98660"/>
+        <criterion comment="freetype is earlier than 0:2.2.1-28.el5_7.1" test_ref="oval:org.mitre.oval:tst:98536"/>
+        <criterion comment="freetype-devel is earlier than 0:2.2.1-28.el5_7.1" test_ref="oval:org.mitre.oval:tst:98188"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="freetype-demos is earlier than 0:2.3.11-6.el6_1.7" test_ref="oval:org.mitre.oval:tst:98700"/>
+        <criterion comment="freetype is earlier than 0:2.3.11-6.el6_1.7" test_ref="oval:org.mitre.oval:tst:98065"/>
+        <criterion comment="freetype-devel is earlier than 0:2.3.11-6.el6_1.7" test_ref="oval:org.mitre.oval:tst:98563"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

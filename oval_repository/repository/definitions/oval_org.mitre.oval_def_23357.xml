@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23357" version="7" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013:0788: subscription-manager security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>subscription-manager</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0788-01" ref_url="http://linux.oracle.com/errata/ELSA-2013-0788.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-6137" ref_url="http://linux.oracle.com/cve/CVE-2012-6137.html" source="CVE"/>
+    <description>rhn-migrate-classic-to-rhsm tool in Red Hat subscription-manager does not verify the Red Hat Network Classic server's X.509 certificate when migrating to a Certificate-based Red Hat Network, which allows remote man-in-the-middle attackers to obtain sensitive information such as user credentials.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:29:49.053-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:57.786-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:30.210-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23357 - optimisation of Oracle Linux content" date="2014-05-05T17:43:00.345-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:44:43.489-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:09.682-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecate duplicates in Oracle Linux patches." date="2014-07-11T17:08:59.339-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-11T17:08:59.339-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="subscription-manager-firstboot is earlier than 0:1.1.23.1-1.el6_4" test_ref="oval:org.mitre.oval:tst:107491"/>
+        <criterion comment="subscription-manager-gui is earlier than 0:1.1.23.1-1.el6_4" test_ref="oval:org.mitre.oval:tst:106504"/>
+        <criterion comment="subscription-manager-migration is earlier than 0:1.1.23.1-1.el6_4" test_ref="oval:org.mitre.oval:tst:107048"/>
+        <criterion comment="subscription-manager is earlier than 0:1.1.23.1-1.el6_4" test_ref="oval:org.mitre.oval:tst:107201"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="subscription-manager-firstboot is earlier than 0:1.0.24.1-1.el5_9" test_ref="oval:org.mitre.oval:tst:107146"/>
+        <criterion comment="subscription-manager-gui is earlier than 0:1.0.24.1-1.el5_9" test_ref="oval:org.mitre.oval:tst:107419"/>
+        <criterion comment="subscription-manager-migration is earlier than 0:1.0.24.1-1.el5_9" test_ref="oval:org.mitre.oval:tst:106948"/>
+        <criterion comment="subscription-manager is earlier than 0:1.0.24.1-1.el5_9" test_ref="oval:org.mitre.oval:tst:107322"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

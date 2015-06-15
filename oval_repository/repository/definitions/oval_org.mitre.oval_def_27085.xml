@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27085" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1552 -- openssh security, bug fix, and enhancement update</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>openssh</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1552.html" ref_id="ELSA-2014-1552"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2532" ref_id="CVE-2014-2532"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2653" ref_id="CVE-2014-2653"/>
+    <description>[5.3p1-104]
+- ignore SIGXFSZ in postauth monitor child (#1133906)
+
+[5.3p1-103]
+- don't try to generate DSA keys in the init script in FIPS mode (#1118735)
+
+[5.3p1-102]
+- ignore SIGPIPE in ssh-keyscan (#1108836)
+
+[5.3p1-101]
+- ssh-add: fix fatal exit when removing card (#1042519)
+
+[5.3p1-100]
+- fix race in backported ControlPersist patch (#953088)
+
+[5.3p1-99.2]
+- skip requesting smartcard PIN when removing keys from agent (#1042519)
+
+[5.3p1-98]
+- add possibility to autocreate only RSA key into initscript (#1111568)
+- fix several issues reported by coverity
+
+[5.3p1-97]
+- x11 forwarding - be less restrictive when can't bind to one of available addresses
+  (#1027197)
+- better fork error detection in audit patch (#1028643)
+- fix openssh-5.3p1-x11.patch for non-linux platforms (#1100913)
+
+[5.3p1-96]
+- prevent a server from skipping SSHFP lookup (#1081338) CVE-2014-2653
+- ignore environment variables with embedded '=' or '\0' characters CVE-2014-2532
+- backport ControlPersist option (#953088)
+- log when a client requests an interactive session and only sftp is allowed (#997377)
+- don't try to load RSA1 host key in FIPS mode (#1009959)
+- restore Linux oom_adj setting when handling SIGHUP to maintain behaviour over restart
+  (#1010429)
+- ssh-keygen -V - relative-specified certificate expiry time should be relative to current time
+  (#1022459)
+
+[5.3p1-95]
+- adjust the key echange DH groups and ssh-keygen according to SP800-131A (#993580)
+- log failed integrity test if /etc/system-fips exists (#1020803)
+- backport ECDSA and ECDH support (#1028335)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-17T17:21:05">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-17T23:33:21.794-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:27085 - Updated patches for Oracle Linux by switching dpkginfo tests to new rpminfo tests." date="2014-10-31T14:02:00.180-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-11-17T04:01:42.021-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:35.833-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:27085 - Updated States &amp; Objects" date="2015-02-02T15:56:00.526-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-02T16:00:51.935-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:00:54.076-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="openssh is earlier than 0:5.3p1-104.el6" test_ref="oval:org.mitre.oval:tst:125098"/>
+      <criterion comment="openssh-askpass is earlier than 0:5.3p1-104.el6" test_ref="oval:org.mitre.oval:tst:125378"/>
+      <criterion comment="openssh-clients is earlier than 0:5.3p1-104.el6" test_ref="oval:org.mitre.oval:tst:125037"/>
+      <criterion comment="openssh-ldap is earlier than 0:5.3p1-104.el6" test_ref="oval:org.mitre.oval:tst:124984"/>
+      <criterion comment="openssh-server is earlier than 0:5.3p1-104.el6" test_ref="oval:org.mitre.oval:tst:124560"/>
+      <criterion comment="pam_ssh_agent_auth is earlier than 0:0.9.3-104.el6" test_ref="oval:org.mitre.oval:tst:125340"/>
+    </criteria>
+  </criteria>
+</definition>

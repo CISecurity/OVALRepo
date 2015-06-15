@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5509" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Exchange Server 2003 Routing Engine Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>SMTP</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0840" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0840"/>
+    <description>The SMTP (Simple Mail Transfer Protocol) component of Microsoft Windows XP 64-bit Edition, Windows Server 2003, Windows Server 2003 64-bit Edition, and the Exchange Routing Engine component of Exchange Server 2003, allows remote attackers to execute arbitrary code via a malicious DNS response message containing length values that are not properly validated.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-13T10:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-10-13T01:16:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-10-27T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-11-17T10:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.406-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+        <status_change date="2007-10-25T16:53:46.688-04:00">INTERIM</status_change>
+        <status_change date="2007-11-13T12:01:18.967-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+      <criterion comment="The version of smtpsvc.dll is less than 6.0.3790.211" negate="false" test_ref="oval:org.mitre.oval:tst:558"/>
+      <criterion comment="the patch WindowsServer2003-KB885881-x86-enu.exe is installed" negate="true" test_ref="oval:org.mitre.oval:tst:557"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="SMTP Enabled" negate="false" test_ref="oval:org.mitre.oval:tst:3054"/>
+    </criteria>
+  </criteria>
+</definition>

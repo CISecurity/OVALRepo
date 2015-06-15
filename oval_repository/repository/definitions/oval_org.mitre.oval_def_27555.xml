@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27555" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013-2523 -- Unbreakable Enterprise kernel security and bugfix update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-2523.html" ref_id="ELSA-2013-2523"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4542" ref_id="CVE-2012-4542"/>
+    <description>[2.6.39-400.23.1]
+- Parallel mtrr init between cpus (Zhenzhong Duan) [Orabug: 16777774]
+- Merge tag 'v2.6.39-400.21.1.16748891' of git://ca-git.us.oracle.com/linux-uek-2.6.39-ofed into uek-2.6.39-400 (Maxim Uvarov) [Orabug: 16748891]
+- xen-blkfront: use a different scatterlist for each request (Roger Pau Monne)
+- Fix EN driver to work with newer FWs based on latest mlx4_core (Yuval Shaia) [Orabug: 16748891]
+
+[2.6.39-400.22.1]
+- block: default SCSI command filter does not accomodate commands overlap across device classes (Jamie Iles) [Orabug: 16387137] {CVE-2012-4542}
+- Merge tag 'v2.6.39-400.21.1#bug16684527' of git://ca-git.us.oracle.com/linux-joejin-public into uek-2.6.39-400_errata (Maxim Uvarov) [Orabug: 16684527]
+- KVM: x86: Convert MSR_KVM_SYSTEM_TIME to use gfn_to_hva_cache functions (CVE-2013-1797) (Andy Honig) [Orabug: 16711660] {CVE-2013-1797}
+- Bluetooth: Fix incorrect strncpy() in hidp_setup_hid() (Anderson Lizardo) [Orabug: 16711065] {CVE-2013-0349}
+- USB: io_ti: Fix NULL dereference in chase_port() (Wolfgang Frisch) [Orabug: 16425358] {CVE-2013-1774}
+- keys: fix race with concurrent install_user_keyrings() (David Howells) [Orabug: 16493354] {CVE-2013-1792}
+- KVM: Fix bounds checking in ioapic indirect register reads (CVE-2013-1798) (Andy Honig) [Orabug: 16710951] {CVE-2013-1798}
+- KVM: x86: fix for buffer overflow in handling of MSR_KVM_SYSTEM_TIME (CVE-2013-1796) (Andy Honig) [Orabug: 16710806] {CVE-2013-1796}
+- tmpfs: fix use-after-free of mempolicy object (Greg Thelen) [Orabug: 16515833] {CVE-2013-1767}
+- procfs: do not confuse jiffies with cputime64_t (Andreas Schwab) [Orabug: 16673925]
+- procfs: do not overflow get_{idle,iowait}_time for nohz (Michal Hocko) [Orabug: 16673925]
+- xen/evtchn: Handle VIRQ_TIMER before any other hardirq in event loop. (Keir Fraser) [Orabug: 16093126]
+- Fix device removal NULL pointer dereference (Joe Jin) [Orabug: 16684527]
+- put stricter guards on queue dead checks (James Bottomley) [Orabug: 16684527]</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:09:42.829-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:02.466-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:14.088-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129253"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129386"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129494"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129344"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129462"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-400.23.1.el5uek" test_ref="oval:org.mitre.oval:tst:129422"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129653"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129649"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129619"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129437"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129639"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-400.23.1.el6uek" test_ref="oval:org.mitre.oval:tst:129562"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

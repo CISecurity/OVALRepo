@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22406" version="23" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0163: kvm security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0163-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0163.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0163"/>
+    <reference source="CVE" ref_id="CVE-2013-6367" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6367.html"/>
+    <reference source="CVE" ref_id="CVE-2013-6368" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6368.html"/>
+    <description>The KVM subsystem in the Linux kernel through 3.12.5 allows local users to gain privileges or cause a denial of service (system crash) via a VAPIC synchronization operation involving a page-end address.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-02-14T11:55:48">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-02-19T08:08:20.618-05:00">DRAFT</status_change>
+        <status_change date="2014-03-10T04:00:43.671-04:00">INTERIM</status_change>
+        <status_change date="2014-03-31T04:00:24.202-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22406 - CentOS was added to RedHat vulnerabilities and products were added were nessesary." date="2014-04-23T10:34:00.988-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-04-23T10:36:18.585-04:00">INTERIM</status_change>
+        <status_change date="2014-05-12T04:00:17.210-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22406 - RHEL/CentOS  patches with added CESA ids" date="2014-06-20T11:49:00.014-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:51:34.049-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:55.074-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="kmod-kvm-debug is earlier than 0:83-266.el5_10.1" test_ref="oval:org.mitre.oval:tst:100519"/>
+        <criterion comment="kvm-tools is earlier than 0:83-266.el5_10.1" test_ref="oval:org.mitre.oval:tst:100105"/>
+        <criterion comment="kvm-qemu-img is earlier than 0:83-266.el5_10.1" test_ref="oval:org.mitre.oval:tst:100459"/>
+        <criterion comment="kvm is earlier than 0:83-266.el5_10.1" test_ref="oval:org.mitre.oval:tst:100594"/>
+        <criterion comment="kmod-kvm is earlier than 0:83-266.el5_10.1" test_ref="oval:org.mitre.oval:tst:100575"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="kmod-kvm-debug is earlier than 0:83-266.el5.centos.1" test_ref="oval:org.mitre.oval:tst:114002"/>
+        <criterion comment="kvm-tools is earlier than 0:83-266.el5.centos.1" test_ref="oval:org.mitre.oval:tst:113825"/>
+        <criterion comment="kvm-qemu-img is earlier than 0:83-266.el5.centos.1" test_ref="oval:org.mitre.oval:tst:113694"/>
+        <criterion comment="kvm is earlier than 0:83-266.el5.centos.1" test_ref="oval:org.mitre.oval:tst:113913"/>
+        <criterion comment="kmod-kvm is earlier than 0:83-266.el5.centos.1" test_ref="oval:org.mitre.oval:tst:113808"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

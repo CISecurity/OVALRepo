@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27818" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012-0690-1 -- kernel security and bug fix update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+      <product>ocfs2</product>
+      <product>oracleasm</product>
+      <product>kernel-PAE</product>
+      <product>kernel-PAE-devel</product>
+      <product>kernel-debug</product>
+      <product>kernel-debug-devel</product>
+      <product>kernel-devel</product>
+      <product>kernel-doc</product>
+      <product>kernel-headers</product>
+      <product>kernel-xen</product>
+      <product>kernel-xen-devel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0690-1.html" ref_id="ELSA-2012-0690-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2136" ref_id="CVE-2012-2136"/>
+    <description>[2.6.18-308.8.1.0.1.el5] - [net] bonding: fix carrier detect when bond is down
+          [orabug 12377284] - [mm] fix hugetlb page leak (Dave McCracken) [orabug 12375075] - fix
+          ia64 build error due to add-support-above-32-vcpus.patch(Zhenzhong Duan) - [x86] use
+          dynamic vcpu_info remap to support more than 32 vcpus (Zhenzhong Duan) - [x86] Fix lvt0
+          reset when hvm boot up with noapic param - [scsi] remove printk's when doing I/O to a dead
+          device (John Sobecki, Chris Mason) [orabug 12342275] - [char] ipmi: Fix IPMI errors due to
+          timing problems (Joe Jin) [orabug 12561346] - [scsi] Fix race when removing SCSI devices
+          (Joe Jin) [orabug 12404566] - [net] net: Redo the broken redhat netconsole over bonding
+          (Tina Yang) [orabug 12740042] - [fs] nfs: Fix __put_nfs_open_context() NULL pointer panic
+          (Joe Jin) [orabug 12687646] - [scsi] fix scsi hotplug and rescan race [orabug 10260172] -
+          fix filp_close() race (Joe Jin) [orabug 10335998] - make xenkbd.abs_pointer=1 by default
+          [orabug 67188919] - [xen] check to see if hypervisor supports memory reservation change
+          (Chuck Anderson) [orabug 7556514] - [net] Enable entropy for
+          bnx2,bnx2x,e1000e,igb,ixgb,ixgbe,ixgbevf (John Sobecki) [orabug 10315433] - [NET] Add xen
+          pv netconsole support (Tina Yang) [orabug 6993043] [bz 7258] - [mm] shrink_zone patch
+          (John Sobecki,Chris Mason) [orabug 6086839] - fix aacraid not to reset during kexec (Joe
+          Jin) [orabug 8516042] - [rds] Patch rds to 1.4.2-20 (Andy Grover) [orabug 9471572,
+          9344105] RDS: Fix BUG_ONs to not fire when in a tasklet ipoib: Fix lockup of the tx queue
+          RDS: Do not call set_page_dirty() with irqs off (Sherman Pun) RDS: Properly unmap when
+          getting a remote access error (Tina Yang) RDS: Fix locking in rds_send_drop_to() - [xen]
+          PVHVM guest with PoD crashes under memory pressure (Chuck Anderson) [orabug 9107465] -
+          [xen] PV guest with FC HBA hangs during shutdown (Chuck Anderson) [orabug 9764220] -
+          Support 256GB+ memory for pv guest (Mukesh Rathor) [orabug 9450615] - fix overcommit
+          memory to use percpu_counter for el5 (KOSAKI Motohiro, Guru Anbalagane) [orabug 6124033] -
+          [ipmi] make configurable timeouts for kcs of ipmi [orabug 9752208] - [ib] fix memory
+          corruption (Andy Grover) [orabug 9972346]</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:27:10.030-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:06:22.861-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:01.647-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:131463 - Corrected package names in objects and versions in states." date="2015-02-26T19:47:00.567-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:51:37.898-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:33.737-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132171"/>
+      <criterion comment="ocfs2-2.6.18-308.8.1.0.1.el5 is earlier than 0:1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:132029"/>
+      <criterion comment="oracleasm-2.6.18-308.8.1.0.1.el5 is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132178"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132125"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:131860"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:131711"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132156"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132148"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132184"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132207"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132167"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-308.8.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132163"/>
+      <criterion comment="ocfs2-2.6.18-308.8.1.0.1.el5PAE is earlier than 0:1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:131963"/>
+      <criterion comment="ocfs2-2.6.18-308.8.1.0.1.el5debug is earlier than 0:1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:131869"/>
+      <criterion comment="ocfs2-2.6.18-308.8.1.0.1.el5xen is earlier than 0:1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:131463"/>
+      <criterion comment="oracleasm-2.6.18-308.8.1.0.1.el5PAE is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:131985"/>
+      <criterion comment="oracleasm-2.6.18-308.8.1.0.1.el5debug is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132057"/>
+      <criterion comment="oracleasm-2.6.18-308.8.1.0.1.el5xen is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132135"/>
+    </criteria>
+  </criteria>
+</definition>

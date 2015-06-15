@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1036" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Veritas Backup Exec RestrictAnonymous Forced Misconfiguration Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Veritas Backup Exec 8.5</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-1117" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1117"/>
+    <description>Veritas Backup Exec 8.5 and earlier requires that the "RestrictAnonymous" registry key for Microsoft Exchange 2000 must be set to 0, which enables anonymous listing of the SAM database and shares.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-06-15T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <status_change date="2004-06-30T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2005-04-08T12:00:00.000-04:00" comment="modified wrt-472 - wrt-472 corrected literal string">
+          <contributor organization="The MITRE Corporation">Ingrid Skoog</contributor>
+        </modified>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="Affected bkupexec.exe versions 3.60.1.298" test_ref="oval:org.mitre.oval:tst:1271"/>
+      <criterion comment="Veritas Backup Exec 8.5 Installed" test_ref="oval:org.mitre.oval:tst:1270"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="RestrictAnonymous registry value allows anonymous connections" test_ref="oval:org.mitre.oval:tst:1269"/>
+    </criteria>
+  </criteria>
+</definition>

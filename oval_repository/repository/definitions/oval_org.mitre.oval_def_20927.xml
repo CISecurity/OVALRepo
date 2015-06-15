@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20927" version="31" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0509: rdma security, bug fix and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>ibacm</product>
+      <product>infinipath-psm</product>
+      <product>libibmad</product>
+      <product>libibumad</product>
+      <product>libibverbs</product>
+      <product>libmlx4</product>
+      <product>librdmacm</product>
+      <product>opensm</product>
+      <product>rdma</product>
+      <product>ibsim</product>
+      <product>ibutils</product>
+      <product>infiniband-diags</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0509-02" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0509.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0509"/>
+    <reference source="CVE" ref_id="CVE-2012-4517" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-4517.html"/>
+    <reference source="CVE" ref_id="CVE-2012-4518" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-4518.html"/>
+    <description>ibacm 1.0.7 creates files with world-writable permissions, which allows local users to overwrite the ib_acm daemon log or ibacm.port file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:57:36.235-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:43.980-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:00:54.435-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="infinipath-psm-devel is earlier than 0:3.0.1-115.1015_open.1.el6" test_ref="oval:org.mitre.oval:tst:90222"/>
+      <criterion comment="infinipath-psm is earlier than 0:3.0.1-115.1015_open.1.el6" test_ref="oval:org.mitre.oval:tst:90563"/>
+      <criterion comment="rdma is earlier than 0:3.6-1.el6" test_ref="oval:org.mitre.oval:tst:90517"/>
+      <criterion comment="libibverbs-devel is earlier than 0:1.1.6-5.el6" test_ref="oval:org.mitre.oval:tst:89693"/>
+      <criterion comment="libibverbs is earlier than 0:1.1.6-5.el6" test_ref="oval:org.mitre.oval:tst:90385"/>
+      <criterion comment="libibverbs-devel-static is earlier than 0:1.1.6-5.el6" test_ref="oval:org.mitre.oval:tst:90525"/>
+      <criterion comment="libibverbs-utils is earlier than 0:1.1.6-5.el6" test_ref="oval:org.mitre.oval:tst:90531"/>
+      <criterion comment="libmlx4-static is earlier than 0:1.0.4-1.el6" test_ref="oval:org.mitre.oval:tst:90363"/>
+      <criterion comment="libmlx4 is earlier than 0:1.0.4-1.el6" test_ref="oval:org.mitre.oval:tst:90052"/>
+      <criterion comment="libibumad is earlier than 0:1.3.8-1.el6" test_ref="oval:org.mitre.oval:tst:90594"/>
+      <criterion comment="libibumad-devel is earlier than 0:1.3.8-1.el6" test_ref="oval:org.mitre.oval:tst:90288"/>
+      <criterion comment="libibumad-static is earlier than 0:1.3.8-1.el6" test_ref="oval:org.mitre.oval:tst:90214"/>
+      <criterion comment="libibmad-static is earlier than 0:1.3.9-1.el6" test_ref="oval:org.mitre.oval:tst:90478"/>
+      <criterion comment="libibmad is earlier than 0:1.3.9-1.el6" test_ref="oval:org.mitre.oval:tst:90599"/>
+      <criterion comment="libibmad-devel is earlier than 0:1.3.9-1.el6" test_ref="oval:org.mitre.oval:tst:90511"/>
+      <criterion comment="opensm-static is earlier than 0:3.3.15-1.el6" test_ref="oval:org.mitre.oval:tst:89927"/>
+      <criterion comment="opensm is earlier than 0:3.3.15-1.el6" test_ref="oval:org.mitre.oval:tst:90504"/>
+      <criterion comment="opensm-devel is earlier than 0:3.3.15-1.el6" test_ref="oval:org.mitre.oval:tst:90606"/>
+      <criterion comment="opensm-libs is earlier than 0:3.3.15-1.el6" test_ref="oval:org.mitre.oval:tst:90539"/>
+      <criterion comment="ibutils is earlier than 0:1.5.7-7.el6" test_ref="oval:org.mitre.oval:tst:90298"/>
+      <criterion comment="ibutils-libs is earlier than 0:1.5.7-7.el6" test_ref="oval:org.mitre.oval:tst:90611"/>
+      <criterion comment="ibutils-devel is earlier than 0:1.5.7-7.el6" test_ref="oval:org.mitre.oval:tst:90653"/>
+      <criterion comment="ibsim is earlier than 0:0.5-7.el6" test_ref="oval:org.mitre.oval:tst:90451"/>
+      <criterion comment="ibacm is earlier than 0:1.0.8-0.git7a3adb7.el6" test_ref="oval:org.mitre.oval:tst:90499"/>
+      <criterion comment="ibacm-devel is earlier than 0:1.0.8-0.git7a3adb7.el6" test_ref="oval:org.mitre.oval:tst:89881"/>
+      <criterion comment="infiniband-diags-devel-static is earlier than 0:1.5.12-5.el6" test_ref="oval:org.mitre.oval:tst:90575"/>
+      <criterion comment="infiniband-diags is earlier than 0:1.5.12-5.el6" test_ref="oval:org.mitre.oval:tst:90275"/>
+      <criterion comment="infiniband-diags-devel is earlier than 0:1.5.12-5.el6" test_ref="oval:org.mitre.oval:tst:90624"/>
+      <criterion comment="librdmacm-utils is earlier than 0:1.0.17-0.git4b5c1aa.el6" test_ref="oval:org.mitre.oval:tst:90506"/>
+      <criterion comment="librdmacm is earlier than 0:1.0.17-0.git4b5c1aa.el6" test_ref="oval:org.mitre.oval:tst:90345"/>
+      <criterion comment="librdmacm-static is earlier than 0:1.0.17-0.git4b5c1aa.el6" test_ref="oval:org.mitre.oval:tst:90676"/>
+      <criterion comment="librdmacm-devel is earlier than 0:1.0.17-0.git4b5c1aa.el6" test_ref="oval:org.mitre.oval:tst:90489"/>
+    </criteria>
+  </criteria>
+</definition>

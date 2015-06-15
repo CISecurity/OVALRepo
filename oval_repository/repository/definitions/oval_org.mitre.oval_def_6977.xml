@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6977" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1962 kvm -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1962" ref_id="DSA-1962"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3638" ref_id="CVE-2009-3638"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3722" ref_id="CVE-2009-3722"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4031" ref_id="CVE-2009-4031"/>
+    <description>Several vulnerabilities have been discovered in kvm, a full virtualization system. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered an Integer overflow in the kvm_dev_ioctl_get_supported_cpuid function. This allows local users to have an unspecified impact via a KVM_GET_SUPPORTED_CPUID request to the kvm_arch_dev_ioctl function. It was discovered that the handle_dr function in the KVM subsystem does not properly verify the Current Privilege Level before accessing a debug register, which allows guest OS users to cause a denial of service on the host OS via a crafted application. It was discovered that the do_insn_fetch function in the x86 emulator in the KVM subsystem tries to interpret instructions that contain too many bytes to be valid, which allows guest OS users to cause a denial of service on the host OS via unspecified manipulations related to SMP support.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:09:29-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:29:07.717-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:28.794-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:13.782-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6977 - Debian Patch Update" date="2014-06-06T16:49:00.366-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:51:23.295-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:00.727-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="kvm-source is earlier than 72+dfsg-5~lenny4" test_ref="oval:org.mitre.oval:tst:26943"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criterion comment="kvm is earlier than 72+dfsg-5~lenny4" test_ref="oval:org.mitre.oval:tst:26938"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25370" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0666-1 -- Recommended update for ZMD</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <product>ZMD</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140666-1.html" ref_id="SUSE-RU-2014:0666-1"/>
+    <description>ZMD was updated to roll in fixes already done in SUSE Linux Enterprise 10
+SP4 branch, and to enable the usage of the current nu.novell.com
+certificates.
+
+ZMD was switched to use /etc/ssl/certs as trust storage. (bnc#723034)
+Various SSL certificate handling issues were fixed as follows:
+
+    * Skip password protected or invalid PKCS12 certificates. (bnc#751782)
+    * Skip invalid SPC certificates. (bnc#754502)
+    * Skip broken certificates. (bnc#751782)
+
+Bugs in the logrotate scripts were fixed. (bnc#719869)
+
+ZMD now also retrieves and handles susedata.xml.gz. (bnc#722339)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:12:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:53.543-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:05.897-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:06.320-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="zmd RPM is earlier than 0:7.3.0.0-0.20.63" test_ref="oval:org.mitre.oval:tst:116394"/>
+      <criterion comment="zmd-devel RPM is earlier than 0:7.3.0.0-0.20.63" test_ref="oval:org.mitre.oval:tst:116376"/>
+    </criteria>
+  </criteria>
+</definition>

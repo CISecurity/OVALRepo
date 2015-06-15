@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26398" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Internet Explorer Memory Corruption Vulnerability - CVE-2014-2822 (MS14-051)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <product>Microsoft Internet Explorer 11</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-2822" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2822"/>
+    <description>Microsoft Internet Explorer 11 allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted web site, aka "Internet Explorer Memory Corruption Vulnerability," a different vulnerability than CVE-2014-2810, CVE-2014-2811, CVE-2014-2823, and CVE-2014-4057.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-19T08:33:30">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-08-26T16:07:46.550-04:00">DRAFT</status_change>
+        <status_change date="2014-09-15T04:00:58.046-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:36.529-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft Internet Explorer 11 is installed" definition_ref="oval:org.mitre.oval:def:18343"/>
+    <criteria operator="OR" comment="Win 7 / 2k8 R2">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924"/>
+      <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956"/>
+      <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+    </criteria>
+    <criterion comment="Check if the version of mshtml.dll is less than 11.0.9600.17239" test_ref="oval:org.mitre.oval:tst:122281"/>
+  </criteria>
+</definition>

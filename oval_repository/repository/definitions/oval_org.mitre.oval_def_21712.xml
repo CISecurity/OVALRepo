@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21712" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0428: dhcp security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>dhcp</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0428-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0428.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0997" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0997.html"/>
+    <reference source="CESA-2011:0428" ref_url="http://lists.centos.org/pipermail/centos-announce/2011-April/017295.html" ref_id="CESA-2011:0428-CentOS 5"/>
+    <description>dhclient in ISC DHCP 3.0.x through 4.2.x before 4.2.1-P1, 3.1-ESV before 3.1-ESV-R1, and 4.1-ESV before 4.1-ESV-R2 allows remote attackers to execute arbitrary commands via shell metacharacters in a hostname obtained from a DHCP message, as demonstrated by a hostname that is provided to dhclient-script.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:12.343-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:38.277-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:56.804-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21712 - RHEL and Centos checks were added where necessary" date="2015-02-16T13:05:00.404-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-16T13:08:23.375-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:13.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dhcp is earlier than 12:3.0.5-23.el5_6.4" test_ref="oval:org.mitre.oval:tst:137712"/>
+        <criterion comment="dhcp-devel is earlier than 12:3.0.5-23.el5_6.4" test_ref="oval:org.mitre.oval:tst:137895"/>
+        <criterion comment="libdhcp4client-devel is earlier than 12:3.0.5-23.el5_6.4" test_ref="oval:org.mitre.oval:tst:137676"/>
+        <criterion comment="dhclient is earlier than 12:3.0.5-23.el5_6.4" test_ref="oval:org.mitre.oval:tst:137671"/>
+        <criterion comment="libdhcp4client is earlier than 12:3.0.5-23.el5_6.4" test_ref="oval:org.mitre.oval:tst:137734"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dhclient is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:97534"/>
+        <criterion comment="dhcp is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:97866"/>
+        <criterion comment="dhcp-debuginfo is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:137889"/>
+        <criterion comment="dhcp-devel is earlier than 12:4.1.1-12.P1.el6_0.4" test_ref="oval:org.mitre.oval:tst:97717"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28378" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1873 -- libvirt security and bug fix update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1873.html" ref_id="ELSA-2014-1873"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3633" ref_id="CVE-2014-3633"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3657" ref_id="CVE-2014-3657"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7823" ref_id="CVE-2014-7823"/>
+    <description>[0.10.2-46.0.1.el6_6.2]
+- Replace docs/et.png in tarball with blank image
+
+[0.10.2-46.el6_6.2]
+- qemu: allow restore with non-migratable XML input (rhbz#1155564)
+- qemu: Introduce qemuDomainDefCheckABIStability (rhbz#1155564)
+- Make ABI stability issue easier to debug (rhbz#1155564)
+- CVE-2014-3633: qemu: blkiotune: Use correct definition when looking up disk (CVE-2014-3633)
+- domain_conf: fix domain deadlock (CVE-2014-3657)
+- CVE-2014-7823: dumpxml: security hole with migratable flag (CVE-2014-7823)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T11:06:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:34:31.029-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:38.134-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:40.627-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libvirt is earlier than 0:0.10.2-46.0.1.el6_6.2" test_ref="oval:org.mitre.oval:tst:136009"/>
+      <criterion comment="libvirt-client is earlier than 0:0.10.2-46.0.1.el6_6.2" test_ref="oval:org.mitre.oval:tst:135949"/>
+      <criterion comment="libvirt-devel is earlier than 0:0.10.2-46.0.1.el6_6.2" test_ref="oval:org.mitre.oval:tst:135675"/>
+      <criterion comment="libvirt-python is earlier than 0:0.10.2-46.0.1.el6_6.2" test_ref="oval:org.mitre.oval:tst:135974"/>
+      <criterion comment="libvirt-lock-sanlock is earlier than 0:0.10.2-46.0.1.el6_6.2" test_ref="oval:org.mitre.oval:tst:135954"/>
+    </criteria>
+  </criteria>
+</definition>

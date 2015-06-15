@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26943" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013-0514 -- php security, bug fix and enhancement update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>php</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-0514.html" ref_id="ELSA-2013-0514"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2688" ref_id="CVE-2012-2688"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1398" ref_id="CVE-2011-1398"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0831" ref_id="CVE-2012-0831"/>
+    <description>It was found that PHP did not check for carriage returns in HTTP headers,
+allowing intended HTTP response splitting protections to be bypassed.
+Depending on the web browser the victim is using, a remote attacker could
+use this flaw to perform HTTP response splitting attacks. (CVE-2011-1398)
+
+An integer signedness issue, leading to a heap-based buffer underflow, was
+found in the PHP scandir() function. If a remote attacker could upload an
+excessively large number of files to a directory the scandir() function
+runs on, it could cause the PHP interpreter to crash or, possibly, execute
+arbitrary code. (CVE-2012-2688)
+
+It was found that PHP did not correctly handle the magic_quotes_gpc
+configuration directive. This could result in magic_quotes_gpc input
+escaping not being applied in all cases, possibly making it easier for a
+remote attacker to perform SQL injection attacks. (CVE-2012-0831)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:50">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:14:34.642-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:01:25.068-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:32.222-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T11:26:54.879-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T11:26:54.879-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="php is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129809"/>
+      <criterion comment="php-bcmath is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130270"/>
+      <criterion comment="php-cli is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130211"/>
+      <criterion comment="php-common is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129787"/>
+      <criterion comment="php-dba is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130264"/>
+      <criterion comment="php-devel is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130148"/>
+      <criterion comment="php-embedded is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130241"/>
+      <criterion comment="php-enchant is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130104"/>
+      <criterion comment="php-fpm is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130238"/>
+      <criterion comment="php-gd is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130136"/>
+      <criterion comment="php-imap is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130254"/>
+      <criterion comment="php-intl is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129318"/>
+      <criterion comment="php-ldap is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130190"/>
+      <criterion comment="php-mbstring is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129453"/>
+      <criterion comment="php-mysql is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130077"/>
+      <criterion comment="php-odbc is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130031"/>
+      <criterion comment="php-pdo is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129963"/>
+      <criterion comment="php-pgsql is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129725"/>
+      <criterion comment="php-process is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129543"/>
+      <criterion comment="php-pspell is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129967"/>
+      <criterion comment="php-recode is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129852"/>
+      <criterion comment="php-snmp is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130239"/>
+      <criterion comment="php-soap is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130310"/>
+      <criterion comment="php-tidy is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130051"/>
+      <criterion comment="php-xml is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129833"/>
+      <criterion comment="php-xmlrpc is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:130122"/>
+      <criterion comment="php-zts is earlier than 0:5.3.3-22.el6" test_ref="oval:org.mitre.oval:tst:129746"/>
+    </criteria>
+  </criteria>
+</definition>

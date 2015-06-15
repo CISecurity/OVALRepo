@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8134" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Multiple Security Vulnerabilities in the Solaris GNOME PDF Rendering Libraries May Lead to a Denial of Service (DoS) or Execution of Arbitrary Code</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-3609" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3609"/>
+    <description>Integer overflow in the ImageStream::ImageStream function in Stream.cc in Xpdf before 3.02pl4 and Poppler before 0.12.1, as used in GPdf, kdegraphics KPDF, and CUPS pdftops, allows remote attackers to cause a denial of service (application crash) via a crafted PDF document that triggers a NULL pointer dereference or buffer over-read.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-22T14:26:56.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-03-23T19:12:41.327-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:13.805-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:00.084-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 274030">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 120739-06 or later installed" test_ref="oval:org.mitre.oval:tst:21117"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 274030">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 120740-06 or later installed" test_ref="oval:org.mitre.oval:tst:20980"/>
+    </criteria>
+  </criteria>
+</definition>

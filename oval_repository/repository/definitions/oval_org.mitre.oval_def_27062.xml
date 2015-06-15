@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27062" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0255 -- subversion security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>subversion</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0255.html" ref_id="RHSA-2014:0255"/>
+    <reference source="CESA-2014:0255" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-March/020189.html" ref_id="CESA-2014:0255"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1968" ref_id="CVE-2013-1968"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2112" ref_id="CVE-2013-2112"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0032" ref_id="CVE-2014-0032"/>
+    <description>Subversion (SVN) is a concurrent version control system which enables one
+or more users to collaborate in developing and maintaining a hierarchy of
+files and directories while keeping a history of all changes. The
+mod_dav_svn module is used with the Apache HTTP Server to allow access to
+Subversion repositories via HTTP.
+
+A flaw was found in the way the mod_dav_svn module handled OPTIONS
+requests. A remote attacker with read access to an SVN repository served
+via HTTP could use this flaw to cause the httpd process that handled such a
+request to crash. (CVE-2014-0032)
+
+A flaw was found in the way Subversion handled file names with newline
+characters when the FSFS repository format was used. An attacker with
+commit access to an SVN repository could corrupt a revision by committing a
+specially crafted file. (CVE-2013-1968)
+
+A flaw was found in the way the svnserve tool of Subversion handled remote
+client network connections. An attacker with read access to an SVN
+repository served via svnserve could use this flaw to cause the svnserve
+daemon to exit, leading to a denial of service. (CVE-2013-2112)
+
+All subversion users should upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing the
+updated packages, for the update to take effect, you must restart the httpd
+daemon, if you are using mod_dav_svn, and the svnserve daemon, if you are
+serving Subversion repositories via the svn:// protocol.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:14:35">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:47:56.701-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:38.486-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:34.769-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="mod_dav_svn is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:125411"/>
+        <criterion comment="subversion is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:125048"/>
+        <criterion comment="subversion-devel is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:126009"/>
+        <criterion comment="subversion-javahl is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:125958"/>
+        <criterion comment="subversion-perl is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:126006"/>
+        <criterion comment="subversion-ruby is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:125062"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="subversion-debuginfo is earlier than 0:1.6.11-12.el5_10" test_ref="oval:org.mitre.oval:tst:126061"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="mod_dav_svn is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125681"/>
+        <criterion comment="subversion is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:126034"/>
+        <criterion comment="subversion-devel is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125974"/>
+        <criterion comment="subversion-gnome is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125069"/>
+        <criterion comment="subversion-javahl is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125508"/>
+        <criterion comment="subversion-kde is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:126051"/>
+        <criterion comment="subversion-perl is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:126055"/>
+        <criterion comment="subversion-ruby is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125809"/>
+        <criterion comment="subversion-svn2cl is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125525"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criterion comment="subversion-debuginfo is earlier than 0:1.6.11-10.el6_5" test_ref="oval:org.mitre.oval:tst:125964"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7917" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1608 mysql-dfsg-5.0 -- authorisation bypass</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>mysql-dfsg-5.0</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1608" ref_id="DSA-1608"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2079" ref_id="CVE-2008-2079"/>
+    <description>Sergei Golubchik discovered that MySQL, a widely-deployed database server, did not properly validate optional data or index directory paths given in a CREATE TABLE statement, nor would it (under proper conditions) prevent two databases from using the same paths for data or index files. This permits an authenticated user with authorisation to create tables in one database to read, write or delete data from tables subsequently created in other databases, regardless of other GRANT authorisations. The Common Vulnerabilities and Exposures project identifies this weakness as CVE-2008-2079.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:10-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:57:52.479-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:02:43.130-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:57.770-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7917 - Debian Patch Update" date="2014-06-06T16:39:00.749-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:41:22.050-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:24.291-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="mysql-client is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18602"/>
+          <criterion comment="mysql-common is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18458"/>
+          <criterion comment="mysql-server is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18506"/>
+        </criteria>
+      </criteria>
+      <criterion comment="libmysqlclient15-dev is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18676"/>
+      <criterion comment="mysql-server-4.1 is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18318"/>
+      <criterion comment="mysql-client-5.0 is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18556"/>
+      <criterion comment="libmysqlclient15off is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18665"/>
+      <criterion comment="mysql-server-5.0 is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:18616"/>
+    </criteria>
+  </criteria>
+</definition>

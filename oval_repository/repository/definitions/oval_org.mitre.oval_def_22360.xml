@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22360" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0858: bzip2 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>bzip2</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0858-03" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0858.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0405" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0405.html"/>
+    <description>Integer overflow in the BZ2_decompress function in decompress.c in bzip2 and libbzip2 before 1.0.6 allows context-dependent attackers to cause a denial of service (application crash) or possibly execute arbitrary code via a crafted compressed file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:08.133-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:42.451-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:09.875-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="bzip2 is earlier than 0:1.0.5-7.el6_0" test_ref="oval:org.mitre.oval:tst:99905"/>
+      <criterion comment="bzip2-libs is earlier than 0:1.0.5-7.el6_0" test_ref="oval:org.mitre.oval:tst:99897"/>
+      <criterion comment="bzip2-devel is earlier than 0:1.0.5-7.el6_0" test_ref="oval:org.mitre.oval:tst:99760"/>
+    </criteria>
+  </criteria>
+</definition>

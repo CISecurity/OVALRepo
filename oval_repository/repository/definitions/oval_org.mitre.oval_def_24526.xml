@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24526" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0690-1 -- Recommended update for crash</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>crash</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140690-1.html" ref_id="SUSE-RU-2014:0690-1"/>
+    <description>This collective update for the Kdump stack provides the following fixes
+and enhancements:
+
+crash:
+
+    * Fix display of the CPU number in back traces on systems with more
+      than 255 cores. (bnc#847353)
+    * Add support for kernel dumps from systems with 46-bit addressing
+      enabled. (bnc#841145, FATE#316838)
+    * Fix NMI backtrace for kernels patched to handle nested NMIs.
+      (bnc#874179)
+
+kdump:
+
+    * Unmount all filesystems prior to reboot. (bnc#849621)
+    * Provide per-filesystem mount points in kdump environment.
+      (bnc#839999)
+    * Add disable_cpu_apicid for BSP to the crash kernel commandline.
+      (bnc#861981)
+    * Add NOSPLIT flag to disable makedumpfile split mode. (bnc#854600)
+    * Add '-X' to makedumpfile when dumping a Xen host. (bnc#864910)
+
+makedumpfile:
+
+    * Add support for kernel dumps on systems with 46-bit addressing
+      enabled. (bnc#841145, FATE#316838)
+    * Allow --dump-dmesg for Xen vmcores. (bnc#864910, bnc#829646)
+    * Fix creation of kernel dumps on Xen systems. (bnc#864910, bnc#829646)
+    * Calculate cyclic buffer size according to info->num_dumpfile.
+      (bnc#854600)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:11:41">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:53.308-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:02:32.090-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:00:13.602-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="crash RPM is earlier than 0:6.0.7-0.16.1" test_ref="oval:org.mitre.oval:tst:116510"/>
+        <criterion comment="crash-sial RPM is earlier than 0:6.0.7-0.16.1" test_ref="oval:org.mitre.oval:tst:116499"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kdump RPM is earlier than 0:0.8.4-0.39.2" test_ref="oval:org.mitre.oval:tst:115737"/>
+        <criterion comment="makedumpfile RPM is earlier than 0:1.5.1-0.15.1" test_ref="oval:org.mitre.oval:tst:116642"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27162" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-0678 -- kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-0678.html" ref_id="ELSA-2014-0678"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0196" ref_id="CVE-2014-0196"/>
+    <description>[3.10.0-123.1.2]
+- Oracle Linux certificates (Alexey Petrenko)
+
+[3.10.0-123.1.2]
+- [tty] n_tty: Fix n_tty_write crash when echoing in raw mode (Aristeu Rozanski) [1094241 1094242] {CVE-2014-0196}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:41">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:29:36.888-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:02:36.083-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:56.894-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127373"/>
+      <criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:126790"/>
+      <criterion comment="kernel-debug is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127302"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127148"/>
+      <criterion comment="kernel-devel is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127134"/>
+      <criterion comment="kernel-doc is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127155"/>
+      <criterion comment="kernel-headers is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127088"/>
+      <criterion comment="kernel-tools is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127300"/>
+      <criterion comment="kernel-tools-libs is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127328"/>
+      <criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127280"/>
+      <criterion comment="perf is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:126766"/>
+      <criterion comment="python-perf is earlier than 0:3.10.0-123.1.2.el7" test_ref="oval:org.mitre.oval:tst:127211"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28010" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2011-0200 -- krb5 security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2011-0200.html" ref_id="ELSA-2011-0200"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4020" ref_id="CVE-2010-4020"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4022" ref_id="CVE-2010-4022"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1322" ref_id="CVE-2010-1322"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1323" ref_id="CVE-2010-1323"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1324" ref_id="CVE-2010-1324"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0281" ref_id="CVE-2011-0281"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0282" ref_id="CVE-2011-0282"/>
+    <description>[1.8.2-3.4]
+- add upstream patches to fix standalone kpropd exiting if the per-client
+  child process exits with an error, and hang or crash in the KDC when using
+  the LDAP kdb backend (CVE-2010-4022, CVE-2011-0281, CVE-2011-0282, #671101)
+
+[1.8.2-3.3]
+- pull up crypto changes made between 1.8.2 and 1.8.3 to fix upstream #6751,
+  assumed to already be there for the next fix
+- incorporate candidate patch to fix various issues from MITKRB5-SA-2010-007
+  (CVE-2010-1323, CVE-2010-1324, CVE-2010-4020, #651962)
+
+[1.8.2-3.2]
+- fix reading of keyUsage extensions when attempting to select pkinit client
+  certs (part of #644825, RT#6775)
+- fix selection of pkinit client certs when one or more don't include a
+  subjectAltName extension (part of #644825, RT#6774)
+
+[1.8.2-3.1]
+- incorporate candidate patch to fix uninitialized pointer crash in the KDC
+  (CVE-2010-1322, #636336)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:02:12.574-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:07:06.616-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:22.557-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T20:57:53.554-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T20:57:53.554-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="krb5 is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134331"/>
+      <criterion comment="krb5-devel is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134179"/>
+      <criterion comment="krb5-libs is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134008"/>
+      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134297"/>
+      <criterion comment="krb5-server is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134371"/>
+      <criterion comment="krb5-server-ldap is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:133844"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.8.2-3.el6_0.4" test_ref="oval:org.mitre.oval:tst:134248"/>
+    </criteria>
+  </criteria>
+</definition>

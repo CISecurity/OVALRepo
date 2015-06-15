@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6684" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RTSP Use After Free Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3225" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3225"/>
+    <description>Use-after-free vulnerability in the Media Player Network Sharing Service in Microsoft Windows Vista SP1 and SP2 and Windows 7 allows remote attackers to execute arbitrary code via a crafted Real Time Streaming Protocol (RTSP) packet, aka "RTSP Use After Free Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-08-10T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-10-18T21:48:59.055-04:00">DRAFT</status_change>
+        <status_change date="2010-11-08T04:00:03.798-05:00">INTERIM</status_change>
+        <status_change date="2010-11-29T04:00:13.552-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows Vista x86/x64 sp1">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Wmpmde.dll is less than 11.0.6001.7009" test_ref="oval:org.mitre.oval:tst:11826"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Wmpmde.dll is greater than or equal to 11.0.6001.7100" test_ref="oval:org.mitre.oval:tst:11418"/>
+          <criterion comment="the version of Wmpmde.dll is less than 11.0.6001.7117" test_ref="oval:org.mitre.oval:tst:11610"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Windows Vista x86/x64 sp2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Wmpmde.dll is less than 11.0.6002.18297" test_ref="oval:org.mitre.oval:tst:11417"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Wmpmde.dll is greater than or equal to 11.0.6002.22000" test_ref="oval:org.mitre.oval:tst:11397"/>
+          <criterion comment="the version of Wmpmde.dll is less than 11.0.6002.22471" test_ref="oval:org.mitre.oval:tst:11377"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Windows 7 x86/x64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Wmpmde.dll is less than 12.0.7600.16661" test_ref="oval:org.mitre.oval:tst:11375"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Wmpmde.dll is greater than or equal to 12.0.7600.20000" test_ref="oval:org.mitre.oval:tst:11406"/>
+          <criterion comment="the version of Wmpmde.dll is less than 12.0.7600.20787" test_ref="oval:org.mitre.oval:tst:11371"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

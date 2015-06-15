@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25552" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0351-1 -- Security update for inkscape</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>inkscape</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130351-1.html" ref_id="SUSE-SU-2013:0351-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5656" ref_id="CVE-2012-5656"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6076" ref_id="CVE-2012-6076"/>
+    <description>inkscape was updated to fix a XXE (Xml eXternal Entity)
+attack during  rasterization of SVG images (CVE-2012-5656),
+where the rendering of  malicious SVG images could have
+connected from inkscape to internal hosts.
+
+Also inkscape would have loaded .EPS files from untrusted
+/tmp occasionaly  instead from the current directory.
+(CVE-2012-6076)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:41:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:38:23.158-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:33.994-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:38.627-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="inkscape RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120781"/>
+      <criterion comment="inkscape-extensions-dia RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120872"/>
+      <criterion comment="inkscape-extensions-extra RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120885"/>
+      <criterion comment="inkscape-extensions-fig RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120819"/>
+      <criterion comment="inkscape-extensions-gimp RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120790"/>
+      <criterion comment="inkscape-lang RPM is earlier than 0:0.46-62.38.1" test_ref="oval:org.mitre.oval:tst:120972"/>
+    </criteria>
+  </criteria>
+</definition>

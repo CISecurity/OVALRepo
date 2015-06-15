@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25222" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1287-1 -- Security update for glibc</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131287-1.html" ref_id="SUSE-SU-2013:1287-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1914" ref_id="CVE-2013-1914"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4756" ref_id="CVE-2010-4756"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3480" ref_id="CVE-2012-3480"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1089" ref_id="CVE-2011-1089"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0864" ref_id="CVE-2012-0864"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-5029" ref_id="CVE-2009-5029"/>
+    <description>This collective update for the GNU C library (glibc)
+provides the following  fixes and enhancements:
+
+Security issues fixed: - Fix stack overflow in getaddrinfo
+with many  results. (bnc#813121, CVE-2013-1914) - Fixed
+another stack overflow in  getaddrinfo with many results
+(bnc#828637) - Fix buffer overflow in glob.  (bnc#691365)
+(CVE-2010-4756) - Fix array overflow in floating point
+parser  [bnc#775690] (CVE-2012-3480) - Fix strtod
+integer/buffer overflows  [bnc#775690] (CVE-2012-3480) -
+Make addmntent return errors also for cached  streams. [bnc
+#676178, CVE-2011-1089] - Fix overflows in vfprintf. [bnc
+#770891, CVE 2012-3406] - Add vfprintf-nargs.diff for
+possible format  string overflow. [bnc #747768,
+CVE-2012-0864] - Check values from file  header in
+__tzfile_read. [bnc #735850, CVE-2009-5029]
+
+Also several bugs were fixed: - Fix locking in _IO_cleanup.
+(bnc#796982) -  Fix memory leak in execve. (bnc#805899) -
+Fix nscd timestamps in logging  (bnc#783196) - Fix perl
+script error message (bnc#774467) - Fall back to  localhost
+if no nameserver defined (bnc#818630) - Fix incomplete
+results  from nscd. [bnc #753756] - Fix a deadlock in dlsym
+in case the symbol isn't  found, for multithreaded
+programs. [bnc #760216] - Fix problem with TLS and  dlopen.
+[#732110] - Backported regex fix for skipping of valid
+EUC-JP  matches [bnc#743689] - Fixed false regex match on
+incomplete chars in  EUC-JP [bnc#743689] - Add
+glibc-pmap-timeout.diff in order to fix useless  connection
+attempts to NFS servers. [bnc #661460]</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:29:07">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:08.743-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:32.912-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:18.761-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="glibc RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119356"/>
+      <criterion comment="glibc-devel RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119137"/>
+      <criterion comment="glibc-html RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:118582"/>
+      <criterion comment="glibc-i18ndata RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:118480"/>
+      <criterion comment="glibc-info RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119245"/>
+      <criterion comment="glibc-locale RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119415"/>
+      <criterion comment="glibc-profile RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119343"/>
+      <criterion comment="nscd RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119371"/>
+      <criterion comment="glibc-32bit RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119265"/>
+      <criterion comment="glibc-devel-32bit RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119098"/>
+      <criterion comment="glibc-locale-32bit RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119225"/>
+      <criterion comment="glibc-profile-32bit RPM is earlier than 0:2.4-31.77.102.1" test_ref="oval:org.mitre.oval:tst:119312"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28532" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:2021 -- jasper security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 6</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>jasper</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-2021.html" ref_id="RHSA-2014:2021"/>
+    <reference source="CESA-2014:2021-CentOS 6" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-December/020847.html" ref_id="CESA-2014:2021-CentOS 6"/>
+    <reference source="CESA-2014:2021-CentOS 7" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-December/020848.html" ref_id="CESA-2014:2021-CentOS 7"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8137" ref_id="CVE-2014-8137"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8138" ref_id="CVE-2014-8138"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9029" ref_id="CVE-2014-9029"/>
+    <description>JasPer is an implementation of Part 1 of the JPEG 2000 image compression
+standard.
+
+Multiple off-by-one flaws, leading to heap-based buffer overflows, were
+found in the way JasPer decoded JPEG 2000 image files. A specially crafted
+file could cause an application using JasPer to crash or, possibly, execute
+arbitrary code. (CVE-2014-9029)
+
+A heap-based buffer overflow flaw was found in the way JasPer decoded JPEG
+2000 image files. A specially crafted file could cause an application using
+JasPer to crash or, possibly, execute arbitrary code. (CVE-2014-8138)
+
+A double free flaw was found in the way JasPer parsed ICC color profiles in
+JPEG 2000 image files. A specially crafted file could cause an application
+using JasPer to crash or, possibly, execute arbitrary code. (CVE-2014-8137)
+
+Red Hat would like to thank oCERT for reporting these issues. oCERT
+acknowledges Jose Duart of the Google Security Team as the original
+reporter.
+
+All JasPer users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. All applications using
+the JasPer libraries must be restarted for the update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-30T11:33:30">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:14:27.043-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:29.629-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:26.519-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="jasper is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:137205"/>
+        <criterion comment="jasper-devel is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:137282"/>
+        <criterion comment="jasper-libs is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:137294"/>
+        <criterion comment="jasper-utils is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:136997"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criterion comment="jasper-debuginfo is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:137323"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="jasper is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:137067"/>
+        <criterion comment="jasper-devel is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:136928"/>
+        <criterion comment="jasper-libs is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:137333"/>
+        <criterion comment="jasper-utils is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:137388"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <criterion comment="jasper-debuginfo is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:137351"/>
+    </criteria>
+  </criteria>
+</definition>

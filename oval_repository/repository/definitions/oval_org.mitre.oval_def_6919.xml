@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6919" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cisco IOS WebVPN/SSLVPN Multiple Denial of Service Vulnerabilities</title>
+    <affected family="ios">
+      <platform>Cisco IOS</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0626" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0626"/>
+    <description>The SSLVPN feature in Cisco IOS 12.3 through 12.4 allows remote attackers to cause a denial of service (device reload or hang) via a crafted HTTPS packet.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-26T11:06:36.000-04:00">
+          <contributor organization="DTCC">Ronald Jones</contributor>
+        </submitted>
+        <status_change date="2010-05-12T13:19:22.347-04:00">DRAFT</status_change>
+        <status_change date="2010-05-31T04:00:31.311-04:00">INTERIM</status_change>
+        <status_change date="2010-06-21T04:00:09.972-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Cisco IOS meets CVE-2009-0626">
+      <criterion comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:11435"/>
+      <criterion comment="config contains: webvpn gateway" test_ref="oval:org.mitre.oval:tst:11540"/>
+      <criterion comment="config contains: inservice" test_ref="oval:org.mitre.oval:tst:10979"/>
+    </criteria>
+    <criteria operator="AND" comment="Cisco IOS meets CVE-2009-0626">
+      <criterion comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:11435"/>
+      <criterion comment="config contains: webvpn enable" test_ref="oval:org.mitre.oval:tst:10989"/>
+      <criterion comment="config contains: ssl trustpoint" test_ref="oval:org.mitre.oval:tst:10990"/>
+    </criteria>
+  </criteria>
+</definition>

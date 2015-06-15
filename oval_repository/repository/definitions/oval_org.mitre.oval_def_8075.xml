@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8075" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1655 linux-2.6.24 -- denial of service/information leak/privilege escalation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>linux-2.6.24</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1655" ref_id="DSA-1655"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1514" ref_id="CVE-2008-1514"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3525" ref_id="CVE-2008-3525"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3831" ref_id="CVE-2008-3831"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4113" ref_id="CVE-2008-4113"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4445" ref_id="CVE-2008-4445"/>
+    <description>Several vulnerabilities have been discovered in the Linux kernel that may lead to a denial of service, privilege escalation or a leak of sensitive data. The Common Vulnerabilities and Exposures project identifies the following problems: Jan Kratochvil reported a local denial of service vulnerability in the ptrace interface for the s390 architecture. Local users can trigger an invalid pointer dereference, leading to a system panic. Eugene Teo reported a lack of capability checks in the kernel driver for Granch SBNI12 leased line adapters (sbni), allowing local users to perform privileged operations. Olaf Kirch discovered an issue with the i915 driver that may allow local users to cause memory corruption by use of an ioctl with insufficient privilege restrictions. Eugene Teo discovered two issues in the SCTP subsystem which allow local users to obtain access to sensitive memory when the SCTP-AUTH extension is enabled.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:05-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:53:29.391-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:00.325-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:58.428-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8075 - Debian Patch Update" date="2014-06-06T16:34:00.948-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:35:58.170-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:58.732-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-patch-debian-2.6.24 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15219"/>
+          <criterion comment="linux-support-2.6.24-etchnhalf.1 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14796"/>
+          <criterion comment="linux-doc-2.6.24 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15203"/>
+          <criterion comment="linux-tree-2.6.24 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14785"/>
+          <criterion comment="linux-source-2.6.24 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15006"/>
+          <criterion comment="linux-manual-2.6.24 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14898"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390x is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14797"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-s390 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14995"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all-s390 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15060"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15230"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390-tape is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14628"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14939"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15084"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-s390x is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14500"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-amd64 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14418"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15048"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-amd64 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14281"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15163"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc64 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15240"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc-smp is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15426"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc-smp is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15180"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15312"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:14469"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all-hppa is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15104"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc64-smp is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15297"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc64-smp is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15381"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15420"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15469"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc64 is earlier than 2.6.24-6~etchnhalf.6" test_ref="oval:org.mitre.oval:tst:15400"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25291" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0759-1 -- Security update for OpenSSL</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140759-1.html" ref_id="SUSE-SU-2014:0759-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0224" ref_id="CVE-2014-0224"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0221" ref_id="CVE-2014-0221"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3470" ref_id="CVE-2014-3470"/>
+    <description>OpenSSL was updated to fix several vulnerabilities:
+
+    * SSL/TLS MITM vulnerability. (CVE-2014-0224)
+    * DTLS recursion flaw. (CVE-2014-0221)
+    * Anonymous ECDH denial of service. (CVE-2014-3470)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:09:05">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:39.115-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:45.469-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:36.956-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libopenssl0_9_8 RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:115894"/>
+        <criterion comment="openssl RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:116163"/>
+        <criterion comment="libopenssl0_9_8-32bit RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:116418"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libopenssl0_9_8-hmac RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:116100"/>
+        <criterion comment="openssl-doc RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:116124"/>
+        <criterion comment="libopenssl0_9_8-hmac-32bit RPM is earlier than 0:0.9.8j-0.58.1" test_ref="oval:org.mitre.oval:tst:116370"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26416" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AIX OpenSSL Denial of Service due to memory consumption</title>
+    <affected family="unix">
+      <platform>IBM AIX 6.1</platform>
+      <platform>IBM AIX 7.1</platform>
+    </affected>
+    <reference ref_id="CVE-2014-3567" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3567" source="CVE"/>
+    <description>Memory leak in the tls_decrypt_ticket function in t1_lib.c in OpenSSL before 0.9.8zc, 1.0.0 before 1.0.0o, and 1.0.1 before 1.0.1j allows remote attackers to cause a denial of service (memory consumption) via a crafted session ticket that triggers an integrity-check failure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </submitted>
+        <status_change date="2014-11-05T14:12:34.592-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:00:21.138-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:09.630-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="platforms">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <extend_definition comment="IBM AIX 7.1 is installed" definition_ref="oval:org.mitre.oval:def:18828"/>
+    </criteria>
+    <criteria operator="OR" comment="filesets">
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="openssl.base greater than or equal 1.0.1.500" test_ref="oval:org.mitre.oval:tst:126498"/>
+        <criterion comment="openssl.base less than or equal 1.0.1.512" test_ref="oval:org.mitre.oval:tst:126419"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="openssl.base greater than or equal 0.9.8.401" test_ref="oval:org.mitre.oval:tst:126501"/>
+        <criterion comment="openssl.base less than or equal 0.9.8.2503" test_ref="oval:org.mitre.oval:tst:126500"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="openssl.base greater than or equal 12.9.8.1100" test_ref="oval:org.mitre.oval:tst:126325"/>
+        <criterion comment="openssl.base less than or equal 12.9.8.2503" test_ref="oval:org.mitre.oval:tst:126177"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

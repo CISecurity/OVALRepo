@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5240" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Kernel TCP/IP Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+    </affected>
+    <reference ref_id="CVE-2008-0084" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0084" source="CVE"/>
+    <description>Unspecified vulnerability in the TCP/IP support in Microsoft Windows Vista allows remote DHCP servers to cause a denial of service (hang and restart) via a crafted DHCP packet.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-02-14T10:00:19">
+          <contributor organization="Secure Elements, Inc.">Jeff Ito</contributor>
+        </submitted>
+        <status_change date="2008-02-14T14:55:52.716-05:00">DRAFT</status_change>
+        <status_change date="2008-03-03T04:00:11.428-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:41.405-04:00">ACCEPTED</status_change>
+        <modified comment="Changing deprecated obj:563 to obj:588" date="2010-01-12T15:25:00.223-05:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2010-01-12T15:26:06.407-05:00">INTERIM</status_change>
+        <status_change date="2010-02-01T04:00:08.967-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5240 - October Patch Tuesday" date="2011-10-14T15:52:00.072-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2011-10-14T15:53:13.706-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:04:07.851-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Windows Vista (32-bit/x64)">
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+    </criteria>
+    <criteria operator="OR" comment="Check for LDR/GDR">
+      <criterion comment="the version of tcpip.sys is less than 6.0.6000.16627" test_ref="oval:org.mitre.oval:tst:7783"/>
+      <criteria operator="AND" comment="Check for LDR">
+        <criterion comment="the version of Tcpip.sys is greater than or equal 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:10454"/>
+        <criterion comment="Check if version of Tcpip.sys is less than 6.0.6000.20752" test_ref="oval:org.mitre.oval:tst:44074"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1074" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Perl Format String Integer Overflow Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+      <product>Perl</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-3962" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3962"/>
+    <description>Integer overflow in the format string functionality (Perl_sv_vcatpvfn) in Perl 5.9.2 and 5.8.6 Perl allows attackers to overwrite arbitrary memory and possibly execute arbitrary code via format string specifiers with large values, which causes an integer wrap and leads to a buffer overflow, as demonstrated using format string vulnerabilities in Perl applications.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-03-02T02:05:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-09T12:19:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="OR">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert ID 102192 criteria.">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Patch 119985-02 or later installed (SPARC-10)" negate="true" test_ref="oval:org.mitre.oval:tst:1197"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert ID 102192 criteria.">
+      <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion comment="Patch 122082-01 or later installed (x86-10)" negate="true" test_ref="oval:org.mitre.oval:tst:1196"/>
+    </criteria>
+  </criteria>
+</definition>

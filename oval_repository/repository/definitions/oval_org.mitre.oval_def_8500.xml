@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8500" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MySQL 5.0 and 5.1 SELECT Statement DOS Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>MySQL Server 5.0</product>
+      <product>MySQL Server 5.1</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-4019" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4019"/>
+    <description>mysqld in MySQL 5.0.x before 5.0.88 and 5.1.x before 5.1.41 does not (1) properly handle errors during execution of certain SELECT statements with subqueries, and does not (2) preserve certain null_value flags during execution of statements that use the GeomFromWKB function, which allows remote authenticated users to cause a denial of service (daemon crash) via a crafted statement.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-01-22T17:00:00.000-05:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </submitted>
+        <status_change date="2010-01-27T13:49:18.646-05:00">DRAFT</status_change>
+        <status_change date="2010-02-15T04:00:11.539-05:00">INTERIM</status_change>
+        <status_change date="2010-03-08T04:00:15.716-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:6359 - corrected regex (symbol '\' not needed before symbol '_')" date="2013-09-06T13:39:00.864-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-06T13:43:17.389-04:00">INTERIM</status_change>
+        <status_change date="2013-09-23T04:05:40.091-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="MySQL 5.0 is installed" definition_ref="oval:org.mitre.oval:def:8282"/>
+      <criterion comment="MySQL Server 5.0 version is less than 5.0.88" test_ref="oval:org.mitre.oval:tst:20192"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="MySQL 5.1 is installed" definition_ref="oval:org.mitre.oval:def:8297"/>
+      <criterion comment="MySQL Server 5.1 version is less than 5.1.41" test_ref="oval:org.mitre.oval:tst:20859"/>
+    </criteria>
+  </criteria>
+</definition>

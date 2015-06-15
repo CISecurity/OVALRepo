@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9857" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The Internet Key Exchange version 1 (IKEv1) implementation (isakmp_agg.c) in racoon in ipsec-tools before 0.6.3, when running in aggressive mode, allows remote attackers to cause a denial of service (null dereference and crash) via crafted IKE packets, as demonstrated by the PROTOS ISAKMP Test Suite for IKEv1.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-3732" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3732"/>
+    <description>The Internet Key Exchange version 1 (IKEv1) implementation (isakmp_agg.c) in racoon in ipsec-tools before 0.6.3, when running in aggressive mode, allows remote attackers to cause a denial of service (null dereference and crash) via crafted IKE packets, as demonstrated by the PROTOS ISAKMP Test Suite for IKEv1.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:16:39.780-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:14:33.922-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:15:41.492-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9857 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:27:00.394-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:34:47.575-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:22:48.577-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criterion comment="ipsec-tools is earlier than 0:0.2.5-0.7.rhel3.3" test_ref="oval:org.mitre.oval:tst:32025"/>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criterion comment="ipsec-tools is earlier than 0:0.3.3-6.rhel4.1" test_ref="oval:org.mitre.oval:tst:32632"/>
+    </criteria>
+  </criteria>
+</definition>

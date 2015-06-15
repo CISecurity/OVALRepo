@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21008" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1142: thunderbird security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>thunderbird</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:1142-01" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1142.html"/>
+    <reference source="CESA" ref_id="CESA-2013:1142"/>
+    <reference source="CVE" ref_id="CVE-2013-1701" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-1701.html"/>
+    <description>Mozilla Thunderbird is a standalone mail and newsgroup client.
+
+Several flaws were found in the processing of malformed content. Malicious
+content could cause Thunderbird to crash or, potentially, execute arbitrary
+code with the privileges of the user running Thunderbird. (CVE-2013-1701)
+
+A flaw was found in the way Thunderbird generated Certificate Request
+Message Format (CRMF) requests. An attacker could use this flaw to perform
+cross-site scripting (XSS) attacks or execute arbitrary code with the
+privileges of the user running Thunderbird. (CVE-2013-1710)
+
+A flaw was found in the way Thunderbird handled the interaction between
+frames and browser history. An attacker could use this flaw to trick
+Thunderbird into treating malicious content as if it came from the browser
+history, allowing for XSS attacks. (CVE-2013-1709)
+
+It was found that the same-origin policy could be bypassed due to the way
+Uniform Resource Identifiers (URI) were checked in JavaScript. An attacker
+could use this flaw to perform XSS attacks, or install malicious add-ons
+from third-party pages. (CVE-2013-1713)
+
+It was found that web workers could bypass the same-origin policy. An
+attacker could use this flaw to perform XSS attacks. (CVE-2013-1714)
+
+It was found that, in certain circumstances, Thunderbird incorrectly
+handled Java applets. If a user launched an untrusted Java applet via
+Thunderbird, the applet could use this flaw to obtain read-only access to
+files on the user's local system. (CVE-2013-1717)
+
+Red Hat would like to thank the Mozilla project for reporting these issues.
+Upstream acknowledges Jeff Gilbert, Henrik Skupin, moz_bug_r_a4, Cody
+Crews, Federico Lanusse, and Georgi Guninski as the original reporters of
+these issues.
+
+Note: All of the above issues cannot be exploited by a specially-crafted
+HTML mail message as JavaScript is disabled by default for mail messages.
+They could be exploited another way in Thunderbird, for example, when
+viewing the full remote content of an RSS feed.
+
+All Thunderbird users should upgrade to this updated package, which
+contains Thunderbird version 17.0.8 ESR, which corrects these issues. After
+installing the update, Thunderbird must be restarted for the changes to
+take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:58:21.437-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:54.093-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:04.962-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21008 - modified Vulnerability definition of CVE-2013-1701 for CentOS" date="2014-05-30T10:40:00.295-04:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2014-05-30T10:42:17.655-04:00">INTERIM</status_change>
+        <status_change date="2014-06-16T04:00:08.881-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 6 section">
+      <criterion comment="thunderbird is earlier than 0:17.0.8-5.el6_4" test_ref="oval:org.mitre.oval:tst:91629"/>
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    </criteria>
+    <criteria operator="AND" comment="Centos 6 section">
+      <criterion comment="thunderbird is earlier than 0:17.0.8-5.el6.centos" test_ref="oval:org.mitre.oval:tst:92027"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="thunderbird is earlier than 0:17.0.8-5.el5_9" test_ref="oval:org.mitre.oval:tst:91431"/>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criterion comment="thunderbird is earlier than 0:17.0.8-5.el5.centos" test_ref="oval:org.mitre.oval:tst:91287"/>
+    </criteria>
+  </criteria>
+</definition>

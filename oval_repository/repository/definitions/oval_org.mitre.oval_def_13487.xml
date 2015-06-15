@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13487" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-942-1 -- postgresql-8.1, postgresql-8.3, postgresql-8.4 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>postgresql-8.1</product>
+      <product>postgresql-8.3</product>
+      <product>postgresql-8.4</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-May/001095.html" ref_id="USN-942-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1169" ref_id="CVE-2010-1169"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1170" ref_id="CVE-2010-1170"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1975" ref_id="CVE-2010-1975"/>
+    <description>It was discovered that the Safe.pm module as used by PostgreSQL did not properly restrict PL/perl procedures. If PostgreSQL was configured to use Perl stored procedures, a remote authenticated attacker could exploit this to execute arbitrary Perl code. It was discovered that PostgreSQL did not properly check permissions to restrict PL/Tcl procedures. If PostgreSQL was configured to use Tcl stored procedures, a remote authenticated attacker could exploit this to execute arbitrary Tcl code</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:19:06.767-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:07:55.365-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:06:19.921-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13487 - added CVE references; also made minor updates" date="2014-06-13T15:51:00.199-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:53:36.470-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:14.779-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56202"/>
+            <criterion comment="postgresql-doc DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56037"/>
+            <criterion comment="postgresql-client DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56698"/>
+            <criterion comment="postgresql-contrib DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56334"/>
+            <criterion comment="postgresql DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56080"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-client-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56772"/>
+            <criterion comment="postgresql-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:55992"/>
+            <criterion comment="libecpg6 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56622"/>
+            <criterion comment="libpq-dev DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56441"/>
+            <criterion comment="postgresql-plpython-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56779"/>
+            <criterion comment="postgresql-contrib-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56761"/>
+            <criterion comment="postgresql-server-dev-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56715"/>
+            <criterion comment="libpgtypes3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56543"/>
+            <criterion comment="libecpg-dev DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56299"/>
+            <criterion comment="postgresql-pltcl-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56782"/>
+            <criterion comment="libpq5 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56282"/>
+            <criterion comment="postgresql-plperl-8.3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56663"/>
+            <criterion comment="libecpg-compat3 DPKG is earlier than 8.3.11-0ubuntu8.04" test_ref="oval:org.mitre.oval:tst:56649"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56178"/>
+            <criterion comment="postgresql-client DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56458"/>
+            <criterion comment="postgresql-contrib DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56245"/>
+            <criterion comment="postgresql DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56775"/>
+            <criterion comment="postgresql-doc DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56662"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56078"/>
+            <criterion comment="postgresql-client-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56758"/>
+            <criterion comment="libecpg6 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56610"/>
+            <criterion comment="postgresql-pltcl-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56447"/>
+            <criterion comment="postgresql-plpython-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56709"/>
+            <criterion comment="libpq5 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56658"/>
+            <criterion comment="libpq-dev DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56561"/>
+            <criterion comment="postgresql-server-dev-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56776"/>
+            <criterion comment="libecpg-dev DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56455"/>
+            <criterion comment="postgresql-contrib-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56506"/>
+            <criterion comment="libpgtypes3 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56460"/>
+            <criterion comment="postgresql-plperl-8.4 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56641"/>
+            <criterion comment="libecpg-compat3 DPKG is earlier than 8.4.4-0ubuntu10.04" test_ref="oval:org.mitre.oval:tst:56773"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:55857"/>
+            <criterion comment="postgresql-client DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:55907"/>
+            <criterion comment="postgresql-contrib DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56711"/>
+            <criterion comment="postgresql DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56737"/>
+            <criterion comment="postgresql-doc DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56590"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56743"/>
+            <criterion comment="postgresql-contrib-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56137"/>
+            <criterion comment="postgresql-client-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56295"/>
+            <criterion comment="libecpg6 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56724"/>
+            <criterion comment="postgresql-pltcl-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56701"/>
+            <criterion comment="postgresql-plpython-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56613"/>
+            <criterion comment="libpq-dev DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56446"/>
+            <criterion comment="postgresql-server-dev-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56592"/>
+            <criterion comment="libecpg-dev DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:55936"/>
+            <criterion comment="libpq5 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56760"/>
+            <criterion comment="libpgtypes3 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56633"/>
+            <criterion comment="postgresql-plperl-8.4 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:56185"/>
+            <criterion comment="libecpg-compat3 DPKG is earlier than 8.4.4-0ubuntu9.10" test_ref="oval:org.mitre.oval:tst:55885"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="postgresql-doc-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56833"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-client-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56614"/>
+            <criterion comment="postgresql-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56631"/>
+            <criterion comment="postgresql-contrib-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56795"/>
+            <criterion comment="libecpg5 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56796"/>
+            <criterion comment="postgresql-pltcl-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56746"/>
+            <criterion comment="postgresql-server-dev-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56625"/>
+            <criterion comment="libpgtypes2 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56293"/>
+            <criterion comment="libecpg-dev DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56389"/>
+            <criterion comment="postgresql-plpython-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56526"/>
+            <criterion comment="libpq4 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56745"/>
+            <criterion comment="libpq-dev DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56605"/>
+            <criterion comment="postgresql-plperl-8.1 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56666"/>
+            <criterion comment="libecpg-compat2 DPKG is earlier than 8.1.21-0ubuntu0.6.06" test_ref="oval:org.mitre.oval:tst:56400"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-doc-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56594"/>
+            <criterion comment="postgresql-doc DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56800"/>
+            <criterion comment="postgresql-client DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56474"/>
+            <criterion comment="postgresql-contrib DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56596"/>
+            <criterion comment="postgresql DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56201"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="postgresql-client-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56115"/>
+            <criterion comment="postgresql-plperl-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56684"/>
+            <criterion comment="postgresql-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56654"/>
+            <criterion comment="libecpg6 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56409"/>
+            <criterion comment="libpq-dev DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56567"/>
+            <criterion comment="postgresql-plpython-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56733"/>
+            <criterion comment="postgresql-contrib-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56250"/>
+            <criterion comment="postgresql-server-dev-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56361"/>
+            <criterion comment="libecpg-dev DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56138"/>
+            <criterion comment="postgresql-pltcl-8.3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56562"/>
+            <criterion comment="libpq5 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56204"/>
+            <criterion comment="libpgtypes3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56799"/>
+            <criterion comment="libecpg-compat3 DPKG is earlier than 8.3.11-0ubuntu9.04" test_ref="oval:org.mitre.oval:tst:56588"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

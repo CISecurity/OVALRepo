@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1245" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>gedit Format String Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>gedit</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1686" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1686"/>
+    <description>Format string vulnerability in gedit 2.10.2 may allow attackers to cause a denial of service (application crash) via a bin file with format string specifiers in the filename.  NOTE: while this issue is triggered on the command line by the gedit user, it has been reported that web browsers and email clients could be configured to provide a file name as an argument to gedit, so there is a valid attack that crosses security boundaries.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-07-11T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2005-07-27T10:36:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-08-18T07:37:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-09-21T01:33:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected version string in ste:929. Implemented by Jon Baker of The MITRE Corporation." date="2007-01-12T13:34:00.798-05:00">
+          <contributor organization="Independent Contributor">Bob Towbes</contributor>
+        </modified>
+        <status_change date="2007-01-12T13:37:39.951-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:39:37.408-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+      <criterion comment="gedit RPM earlier than 1:2.2.2-4rhel3" negate="false" test_ref="oval:org.mitre.oval:tst:1042"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="/usr/bin/gedit is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1041"/>
+    </criteria>
+  </criteria>
+</definition>

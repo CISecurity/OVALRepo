@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2015" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>dtsession(1X) Contains a Buffer Overflow Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3471" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3471"/>
+    <description>Buffer overflow in the dtsession Common Desktop Environment (CDE) Session Manager in Sun Solaris 8, 9, and 10 allows local users to execute arbitrary code via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-07-03T09:00:00.000-04:00">
+          <contributor organization="Opsware, Inc.">Yuzheng Zhou</contributor>
+        </submitted>
+        <status_change date="2007-07-03T21:46:26.557-04:00">DRAFT</status_change>
+        <status_change date="2007-07-18T15:57:52.224-04:00">INTERIM</status_change>
+        <status_change date="2007-08-02T14:47:15.305-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="OR">
+    <criteria operator="AND" comment="Solaris 8 (SPARC)" negate="false">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion comment="Patch 109354-26 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3656"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86)" negate="false">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion comment="Patch 109355-25 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3474"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC)" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 113240-13 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3196"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86)" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 113241-13 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3818"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC)" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 125279-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3803"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86)" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 125280-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3725"/>
+    </criteria>
+  </criteria>
+</definition>

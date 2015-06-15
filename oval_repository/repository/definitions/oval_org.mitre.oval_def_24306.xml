@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24306" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0305: samba security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>samba</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0305-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0305.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-0213" ref_url="http://linux.oracle.com/cve/CVE-2013-0213.html" source="CVE"/>
+    <reference ref_id="CVE-2013-0214" ref_url="http://linux.oracle.com/cve/CVE-2013-0214.html" source="CVE"/>
+    <reference ref_id="CVE-2013-4124" ref_url="http://linux.oracle.com/cve/CVE-2013-4124.html" source="CVE"/>
+    <description>Samba is an open-source implementation of the Server Message Block (SMB) or
+Common Internet File System (CIFS) protocol, which allows PC-compatible
+machines to share files, printers, and other information.
+It was discovered that the Samba Web Administration Tool (SWAT) did not
+protect against being opened in a web page frame. A remote attacker could
+possibly use this flaw to conduct a clickjacking attack against SWAT users
+or users with an active SWAT session. (CVE-2013-0213)
+A flaw was found in the Cross-Site Request Forgery (CSRF) protection
+mechanism implemented in SWAT. An attacker with the knowledge of a victim's
+password could use this flaw to bypass CSRF protections and conduct a CSRF
+attack against the victim SWAT user. (CVE-2013-0214)
+An integer overflow flaw was found in the way Samba handled an Extended
+Attribute (EA) list provided by a client. A malicious client could send a
+specially crafted EA list that triggered an overflow, causing the server to
+loop and reprocess the list using an excessive amount of memory.
+(CVE-2013-4124)
+Note: This issue did not affect the default configuration of the Samba
+server.
+Red Hat would like to thank the Samba project for reporting CVE-2013-0213
+and CVE-2013-0214. Upstream acknowledges Jann Horn as the original reporter
+of CVE-2013-0213 and CVE-2013-0214.
+All users of Samba are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing this
+update, the smb service will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </submitted>
+        <status_change date="2014-04-10T12:16:45.667-04:00">DRAFT</status_change>
+        <status_change date="2014-04-28T04:07:32.207-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24306 - optimisation of Oracle Linux content" date="2014-05-05T18:24:00.075-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-26T04:06:22.447-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="samba-swat is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:113533"/>
+      <criterion comment="libsmbclient-devel is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:113159"/>
+      <criterion comment="libsmbclient is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:113458"/>
+      <criterion comment="samba-client is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:112674"/>
+      <criterion comment="samba is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:113347"/>
+      <criterion comment="samba-common is earlier than 0:3.0.33-3.40.el5_10" test_ref="oval:org.mitre.oval:tst:113269"/>
+    </criteria>
+  </criteria>
+</definition>

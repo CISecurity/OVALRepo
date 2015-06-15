@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6959" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris and OpenSolaris Products /dev/ucode Component Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0453" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0453"/>
+    <description>The ucode_ioctl function in intel/io/ucode_drv.c in Sun Solaris 10 and OpenSolaris snv_69 through snv_133, when running on x86 architectures, allows local users to cause a denial of service (panic) via a request with a 0 size value to the UCODE_GET_VERSION IOCTL, which triggers a NULL pointer dereference in the ucode_get_rev function, related to retrieval of the microcode revision.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-04-21T14:34:00.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-04-22T13:39:57.116-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:00:34.611-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:00:19.634-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+    <criterion comment="Patch 127128-11 installed" test_ref="oval:org.mitre.oval:tst:11295"/>
+    <criterion negate="true" comment="Patch 143913-01 or later installed" test_ref="oval:org.mitre.oval:tst:11675"/>
+  </criteria>
+</definition>

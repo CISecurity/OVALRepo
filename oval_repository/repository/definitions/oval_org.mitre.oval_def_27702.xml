@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27702" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010-2011 -- Unbreakable enterprise kernel security and bug fix update
+          (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+      <product>kernel-debug</product>
+      <product>kernel-debug-devel</product>
+      <product>kernel-devel</product>
+      <product>kernel-doc</product>
+      <product>kernel-firmware</product>
+      <product>kernel-headers</product>
+      <product>ofa</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2010-2011.html" ref_id="ELSA-2010-2011"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3432" ref_id="CVE-2010-3432"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3437" ref_id="CVE-2010-3437"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3442" ref_id="CVE-2010-3442"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3698" ref_id="CVE-2010-3698"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3705" ref_id="CVE-2010-3705"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2955" ref_id="CVE-2010-2955"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2962" ref_id="CVE-2010-2962"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3079" ref_id="CVE-2010-3079"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3084" ref_id="CVE-2010-3084"/>
+    <description>Following Security fixes are included in this unbreakable enterprise kernel
+          errata: CVE-2010-3432 The sctp_packet_config function in net/sctp/output.c in the Linux
+          kernel before 2.6.35.6 performs extraneous initializations of packet data structures,
+          which allows remote attackers to cause a denial of service (panic) via a certain sequence
+          of SCTP traffic. CVE-2010-2962 drivers/gpu/drm/i915/i915_gem.c in the Graphics Execution
+          Manager (GEM) in the Intel i915 driver in the Direct Rendering Manager (DRM) subsystem in
+          the Linux kernel before 2.6.36 does not properly validate pointers to blocks of memory,
+          which allows local users to write to arbitrary kernel memory locations, and consequently
+          gain privileges, via crafted use of the ioctl interface, related to (1) pwrite and (2)
+          pread operations. CVE-2010-2955 The cfg80211_wext_giwessid function in
+          net/wireless/wext-compat.c in the Linux kernel before 2.6.36-rc3-next-20100831 does not
+          properly initialize certain structure members, which allows local users to leverage an
+          off-by-one error in the ioctl_standard_iw_point function in net/wireless/wext-core.c, and
+          obtain potentially sensitive information from kernel heap memory, via vectors involving an
+          SIOCGIWESSID ioctl call that specifies a large buffer size. CVE-2010-3705 The
+          sctp_auth_asoc_get_hmac function in net/sctp/auth.c in the Linux kernel before 2.6.36 does
+          not properly validate the hmac_ids array of an SCTP peer, which allows remote attackers to
+          cause a denial of service (memory corruption and panic) via a crafted value in the last
+          element of this array. CVE-2010-3084 Buffer overflow in the niu_get_ethtool_tcam_all
+          function in drivers/net/niu.c in the Linux kernel before 2.6.36-rc4 allows local users to
+          cause a denial of service or possibly have unspecified other impact via the
+          ETHTOOL_GRXCLSRLALL ethtool command. CVE-2010-3437 Integer signedness error in the
+          pkt_find_dev_from_minor function in drivers/block/pktcdvd.c in the Linux kernel before
+          2.6.36-rc6 allows local users to obtain sensitive information from kernel memory or cause
+          a denial of service (invalid pointer dereference and system crash) via a crafted index
+          value in a PKT_CTRL_CMD_STATUS ioctl call. CVE-2010-3079 kernel/trace/ftrace.c in the
+          Linux kernel before 2.6.35.5, when debugfs is enabled, does not properly handle
+          interaction between mutex possession and llseek operations, which allows local users to
+          cause a denial of service (NULL pointer dereference and outage of all function tracing
+          files) via an lseek call on a file descriptor associated with the set_ftrace_filter file.
+          CVE-2010-3698 The KVM implementation in the Linux kernel before 2.6.36 does not properly
+          reload the FS and GS segment registers, which allows host OS users to cause a denial of
+          service (host OS crash) via a KVM_RUN ioctl call in conjunction with a modified Local
+          Descriptor Table (LDT). CVE-2010-3442 Multiple integer overflows in the snd_ctl_new
+          function in sound/core/control.c in the Linux kernel before 2.6.36-rc5-next-20100929 allow
+          local users to cause a denial of service (heap memory corruption) or possibly have
+          unspecified other impact via a crafted (1) SNDRV_CTL_IOCTL_ELEM_ADD or (2)
+          SNDRV_CTL_IOCTL_ELEM_REPLACE ioctl call.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:26:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:03:45.009-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:43.097-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:41.689-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:37239 - Corrected package names in objects and versions in states." date="2015-02-26T19:47:00.567-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:51:36.600-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:31.101-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:133902"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134841"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134672"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134796"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134194"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134447"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-100.24.1.el5" test_ref="oval:org.mitre.oval:tst:134781"/>
+      <criterion comment="ofa-2.6.32-100.24.1.el5 is earlier than 0:1.5.1-4.0.23" test_ref="oval:org.mitre.oval:tst:134059"/>
+      <criterion comment="ofa-2.6.32-100.24.1.el5debug is earlier than 0:1.5.1-4.0.23" test_ref="oval:org.mitre.oval:tst:134706"/>
+    </criteria>
+  </criteria>
+</definition>

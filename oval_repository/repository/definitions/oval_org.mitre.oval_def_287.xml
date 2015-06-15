@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:287" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Media Player Buffer Overflow via ASF</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Windows Media Player for Windows XP</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2001-0719" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0719"/>
+    <description>Buffer overflow in Microsoft Windows Media Player 6.4 allows remote attackers to execute arbitrary code via a malformed Advanced Streaming Format (ASF) file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-11-26T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <status_change date="2004-03-09T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Windows Media Player for Windows XP is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2727"/>
+    <criterion comment="the version of msdxm.ocx is less than 6.4.9.1121" negate="false" test_ref="oval:org.mitre.oval:tst:2720"/>
+    <criterion comment="the version of dxmasf.dll is less than 6.4.9.1121" negate="false" test_ref="oval:org.mitre.oval:tst:2726"/>
+    <criterion comment="Patch wm308567 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:2719"/>
+  </criteria>
+</definition>

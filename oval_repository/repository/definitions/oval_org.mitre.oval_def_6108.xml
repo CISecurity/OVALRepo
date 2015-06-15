@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6108" version="3" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Blended Threat Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2540" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2540"/>
+    <description>Apple Safari on Mac OS X, and before 3.1.2 on Windows, does not prompt the user before downloading an object that has an unrecognized content type, which allows remote attackers to place malware into the (1) Desktop directory on Windows or (2) Downloads directory on Mac OS X, and subsequently allows remote attackers to execute arbitrary code on Windows by leveraging an untrusted search path vulnerability in (a) Internet Explorer 7 on Windows XP or (b) the SearchPath function in Windows XP, Vista, and Server 2003 and 2008, aka a "Carpet Bomb" and a "Blended Threat Elevation of Privilege Vulnerability," a different issue than CVE-2008-1032. NOTE: Apple considers this a vulnerability only because the Microsoft products can load application libraries from the desktop and, as of 20080619, has not covered the issue in an advisory for Mac OS X.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-14T16:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-04-17T16:44:58.190-04:00">DRAFT</status_change>
+        <status_change date="2009-05-04T04:00:31.172-04:00">INTERIM</status_change>
+        <status_change date="2009-05-25T04:01:59.632-04:00">ACCEPTED</status_change>
+        <modified comment="Added Microsoft Windows Vista, Server 2003, XP, 2000 to the list of affected platforms. Removed Microsoft reference" date="2009-06-01T16:05:28.035-04:00">
+          <contributor organization="The MITRE Corporation">Brendan Miles</contributor>
+        </modified>
+        <status_change date="2009-06-08T04:00:58.571-04:00">INTERIM</status_change>
+        <status_change date="2009-06-29T04:00:57.786-04:00">ACCEPTED</status_change>
+        <status_change date="2010-07-22T10:00:00.000-05:00">DEPRECATED</status_change>
+        <modified comment="Deprecating duplicate definition - use def:8509 instead" date="2010-07-22T10:00:00.000-05:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP1 is installed" definition_ref="oval:org.mitre.oval:def:720"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criterion comment="Mshtml.dll version is greater than 7.0.6000.16000" test_ref="oval:org.mitre.oval:tst:9392"/>
+      <criterion comment="Mshtml.dll version is less than 7.0.6000.16825" test_ref="oval:org.mitre.oval:tst:9976"/>
+    </criteria>
+    <criteria operator="AND">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP1 is installed" definition_ref="oval:org.mitre.oval:def:720"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criterion comment="Mshtml.dll version is greater than 7.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9441"/>
+      <criterion comment="Mshtml.dll version is less than 7.0.6000.21015" test_ref="oval:org.mitre.oval:tst:9705"/>
+    </criteria>
+  </criteria>
+</definition>

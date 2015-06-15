@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1793" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE v6.0 Malformed GIF Image Double-free Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-1048" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1048"/>
+    <description>Double free vulnerability in mshtml.dll for certain versions of Internet Explorer 6.x allows remote attackers to cause a denial of service (application crash) via a malformed GIF image.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-07-30T04:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <status_change date="2004-08-02T04:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-08-25T04:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-09-09T04:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-20T04:00:00.000-04:00" comment="modified wrt-18 - Changed value element to include pattern match">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-21T01:27:00.000-04:00">INTERIM</status_change>
+        <modified date="2005-09-26T12:19:00.000-04:00" comment="modified wft-268 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-10-12T05:49:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:57.979-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:24.154-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software section">
+    <criterion comment="Internet Explorer 6 is installed" test_ref="oval:org.mitre.oval:tst:3090"/>
+    <criterion comment="the version of mshtml.dll is less than 6.0.2743.600" test_ref="oval:org.mitre.oval:tst:2583"/>
+    <criterion negate="true" comment="the patch kb832894 is installed (Installed Components key)" test_ref="oval:org.mitre.oval:tst:2802"/>
+  </criteria>
+</definition>

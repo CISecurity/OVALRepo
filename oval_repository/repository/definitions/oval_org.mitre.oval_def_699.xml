@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:699" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MS FrontPage Server Extensions Chunked Encoded Request Buffer Overflow (Test 4)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Microsoft FrontPage Server Extensions 2000</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0822" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0822"/>
+    <description>Buffer overflow in the debug functionality in fp30reg.dll of Microsoft FrontPage Server Extensions (FPSE) 2000 and 2002 allows remote attackers to execute arbitrary code via a crafted chunked encoded request.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-03-04T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2003-03-05T12:00:00.000-04:00" comment="Changed the definition to test for fp30reg.dll and fp4areg.dll instead of fp4awel.dll.">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </modified>
+        <status_change date="2004-03-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-26T10:50:00.000-04:00" comment="modified wft-114 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <modified date="2005-09-27T01:22:00.000-04:00" comment="modified wft-31 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:56.519-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:50.398-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <criteria operator="OR" comment="a vulnerable version of fp30reg.dll or fp4areg.dll exists">
+        <criterion comment="the version of fp4areg.dll is less than 4.0.02.7523" test_ref="oval:org.mitre.oval:tst:2681"/>
+        <criterion comment="the version of fp30reg.dll is less than 4.00.02.7523" test_ref="oval:org.mitre.oval:tst:2680"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="FrontPage Server Extensions 2000 are enabled (WinNT)" test_ref="oval:org.mitre.oval:tst:2526"/>
+    </criteria>
+  </criteria>
+</definition>

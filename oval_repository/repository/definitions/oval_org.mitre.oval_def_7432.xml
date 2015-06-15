@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7432" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2027 xulrunner -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-2027" ref_id="DSA-2027"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0174" ref_id="CVE-2010-0174"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0175" ref_id="CVE-2010-0175"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0176" ref_id="CVE-2010-0176"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0177" ref_id="CVE-2010-0177"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0178" ref_id="CVE-2010-0178"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0179" ref_id="CVE-2010-0179"/>
+    <description>Several remote vulnerabilities have been discovered in Xulrunner, a runtime environment for XUL applications, such as the Iceweasel web browser. The Common Vulnerabilities and Exposures project identifies the following problems: Jesse Ruderman and Ehsan Akhgari discovered crashes in the layout engine, which might allow the execution of arbitrary code. It was discovered that incorrect memory handling in the XUL event handler might allow the execution of arbitrary code. It was discovered that incorrect memory handling in the XUL event handler might allow the execution of arbitrary code. It was discovered that incorrect memory handling in the plugin code might allow the execution of arbitrary code. Paul Stone discovered that forced drag-and-drop events could lead to Chrome privilege escalation. It was discovered that a programming error in the XMLHttpRequestSpy module could lead to the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:08:20-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:28:51.982-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:52.416-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:52.651-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7432 - Debian Patch Update" date="2014-06-06T16:46:00.520-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:48:08.677-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:25.302-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libmozillainterfaces-java is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26724"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libmozjs-dev is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26795"/>
+          <criterion comment="spidermonkey-bin is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26718"/>
+          <criterion comment="xulrunner-1.9-gnome-support is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26858"/>
+          <criterion comment="xulrunner-1.9 is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26825"/>
+          <criterion comment="libmozjs1d-dbg is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26847"/>
+          <criterion comment="libmozjs1d is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26716"/>
+          <criterion comment="python-xpcom is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26168"/>
+          <criterion comment="xulrunner-1.9-dbg is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26841"/>
+          <criterion comment="xulrunner-dev is earlier than 1.9.0.19-1" test_ref="oval:org.mitre.oval:tst:26691"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

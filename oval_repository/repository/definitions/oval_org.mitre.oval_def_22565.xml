@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22565" version="21" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2007:1059: pcre security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>pcre</product>
+    </affected>
+    <reference ref_id="ELSA-2007:1059-01" ref_url="http://linux.oracle.com/errata/ELSA-2007-1059.html" source="VENDOR"/>
+    <reference ref_id="CVE-2006-7225" ref_url="http://linux.oracle.com/cve/CVE-2006-7225.html" source="CVE"/>
+    <reference ref_id="CVE-2006-7226" ref_url="http://linux.oracle.com/cve/CVE-2006-7226.html" source="CVE"/>
+    <reference ref_id="CVE-2006-7228" ref_url="http://linux.oracle.com/cve/CVE-2006-7228.html" source="CVE"/>
+    <reference ref_id="CVE-2006-7230" ref_url="http://linux.oracle.com/cve/CVE-2006-7230.html" source="CVE"/>
+    <description>Perl-Compatible Regular Expression (PCRE) library before 7.0 does not properly calculate the amount of memory needed for a compiled regular expression pattern when the (1) -x or (2) -i UTF-8 options change within the pattern, which allows context-dependent attackers to cause a denial of service (PCRE or glibc crash) via crafted regular expressions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:47:12.213-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:01.361-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:01:23.692-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22565 - optimisation of Oracle Linux content" date="2014-05-05T18:10:00.932-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:12:16.740-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:29.955-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="pcre-devel is earlier than 0:6.6-2.el5_1.7" test_ref="oval:org.mitre.oval:tst:101312"/>
+      <criterion comment="pcre is earlier than 0:6.6-2.el5_1.7" test_ref="oval:org.mitre.oval:tst:101388"/>
+    </criteria>
+  </criteria>
+</definition>

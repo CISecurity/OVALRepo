@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18311" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1785-1 -- poppler vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 11.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 8.04</platform>
+      <product>poppler</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1785-1/" ref_id="USN-1785-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1788" ref_id="CVE-2013-1788"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1789" ref_id="CVE-2013-1789"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1790" ref_id="CVE-2013-1790"/>
+    <description>Applications using poppler could be made to crash or possibly run program s as your login if they opened a specially crafted file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-15T13:09:53.988-04:00">DRAFT</status_change>
+        <status_change date="2013-09-02T04:05:40.873-04:00">INTERIM</status_change>
+        <status_change date="2013-09-23T04:05:32.659-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23296 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:14:09.471-05:00">INTERIM</status_change>
+        <status_change date="2013-12-16T04:01:20.985-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18311 - added CVE references; also made minor updates" date="2014-06-13T17:30:00.875-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:32:04.391-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:34.756-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpoppler-glib8 DPKG is earlier than 0.20.4-0ubuntu1.2" test_ref="oval:org.mitre.oval:tst:85680"/>
+        <criterion comment="libpoppler28 DPKG is earlier than 0.20.4-0ubuntu1.2" test_ref="oval:org.mitre.oval:tst:85690"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpoppler-glib8 DPKG is earlier than 0.18.4-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:85823"/>
+        <criterion comment="libpoppler19 DPKG is earlier than 0.18.4-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:85024"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 11.10 is installed" definition_ref="oval:org.mitre.oval:def:14657"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpoppler-glib6 DPKG is earlier than 0.16.7-2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:85667"/>
+        <criterion comment="libpoppler13 DPKG is earlier than 0.16.7-2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:85400"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpoppler-glib4 DPKG is earlier than 0.12.4-0ubuntu5.3" test_ref="oval:org.mitre.oval:tst:85820"/>
+        <criterion comment="libpoppler5 DPKG is earlier than 0.12.4-0ubuntu5.3" test_ref="oval:org.mitre.oval:tst:85117"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpoppler-glib2 DPKG is earlier than 0.6.4-1ubuntu3.6" test_ref="oval:org.mitre.oval:tst:85302"/>
+        <criterion comment="libpoppler2 DPKG is earlier than 0.6.4-1ubuntu3.6" test_ref="oval:org.mitre.oval:tst:85306"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

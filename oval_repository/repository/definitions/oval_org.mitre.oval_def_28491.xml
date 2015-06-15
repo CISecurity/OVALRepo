@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28491" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2443-1 -- Linux kernel vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 12.04</platform>
+      <product>linux</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2443-1/" ref_id="USN-2443-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8134" ref_id="CVE-2014-8134"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7826" ref_id="CVE-2014-7826"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7825" ref_id="CVE-2014-7825"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7841" ref_id="CVE-2014-7841"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8884" ref_id="CVE-2014-8884"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9090" ref_id="CVE-2014-9090"/>
+    <description><![CDATA[An information leak in the Linux kernel was discovered that could leak the
+high 16 bits of the kernel stack address on 32-bit Kernel Virtual Machine
+(KVM) paravirt guests. A user in the guest OS could exploit this leak to
+obtain information that could potentially be used to aid in attacking the
+kernel. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-8134">CVE-2014-8134</a>)
+
+Rabin Vincent, Robert Swiecki, Russell King discovered that the ftrace
+subsystem of the Linux kernel does not properly handle private syscall
+numbers. A local user could exploit this flaw to cause a denial of service
+(OOPS). (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-7826">CVE-2014-7826</a>)
+
+Rabin Vincent, Robert Swiecki, Russell Kinglaw discovered a flaw in how the
+perf subsystem of the Linux kernel handles private systecall numbers. A
+local user could exploit this to cause a denial of service (OOPS) or bypass
+ASLR protections via a crafted application. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-7825">CVE-2014-7825</a>)
+
+A null pointer dereference flaw was discovered in the the Linux kernel&#39;s
+SCTP implementation when ASCONF is used. A remote attacker could exploit
+this flaw to cause a denial of service (system crash) via a malformed INIT
+chunk. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-7841">CVE-2014-7841</a>)
+
+A stack buffer overflow was discovered in the ioctl command handling for
+the Technotrend/Hauppauge USB DEC devices driver. A local user could
+exploit this flaw to cause a denial of service (system crash) or possibly
+gain privileges. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-8884">CVE-2014-8884</a>)
+
+Andy Lutomirski discovered that the Linux kernel does not properly handle
+faults associated with the Stack Segment (SS) register on the x86
+architecture. A local attacker could exploit this flaw to cause a denial of
+service (panic). (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-9090">CVE-2014-9090</a>)]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-30T11:13:12">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:23:18.993-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:26.863-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:23.969-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="linux-image-3.2.0-74-highbank is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137385"/>
+      <criterion comment="linux-image-3.2.0-74-generic-pae is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137469"/>
+      <criterion comment="linux-image-3.2.0-74-powerpc64-smp is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137207"/>
+      <criterion comment="linux-image-3.2.0-74-omap is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137288"/>
+      <criterion comment="linux-image-3.2.0-74-generic is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137514"/>
+      <criterion comment="linux-image-3.2.0-74-powerpc-smp is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137202"/>
+      <criterion comment="linux-image-3.2.0-74-virtual is earlier than 0:3.2.0-74.109" test_ref="oval:org.mitre.oval:tst:137216"/>
+    </criteria>
+  </criteria>
+</definition>

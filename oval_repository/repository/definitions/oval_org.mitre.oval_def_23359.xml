@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23359" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:0306: krb5 security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>krb5</product>
+    </affected>
+    <reference ref_id="ELSA-2012:0306-03" ref_url="http://linux.oracle.com/errata/ELSA-2012-0306.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-1526" ref_url="http://linux.oracle.com/cve/CVE-2011-1526.html" source="CVE"/>
+    <description>ftpd.c in the GSS-API FTP daemon in MIT Kerberos Version 5 Applications (aka krb5-appl) 1.0.1 and earlier does not check the krb5_setegid return value, which allows remote authenticated users to bypass intended group access restrictions, and create, overwrite, delete, or read files, via standard FTP commands, related to missing autoconf tests in a configure script.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:17:57.506-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:57.983-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:30.488-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23359 - optimisation of Oracle Linux content" date="2014-05-05T17:43:00.345-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:44:44.618-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:10.004-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="krb5-libs is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105674"/>
+      <criterion comment="krb5-server is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105800"/>
+      <criterion comment="krb5 is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105644"/>
+      <criterion comment="krb5-server-ldap is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105743"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105876"/>
+      <criterion comment="krb5-devel is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:105817"/>
+    </criteria>
+  </criteria>
+</definition>

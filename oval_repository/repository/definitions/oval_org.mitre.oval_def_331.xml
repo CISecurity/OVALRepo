@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:331" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows XP Workstation Service Logging Function Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Windows Workstation Service</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0812" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0812"/>
+    <description>Stack-based buffer overflow in a logging function for Windows Workstation Service (WKSSVC.DLL) allows remote attackers to execute arbitrary code via RPC calls that cause long entries to be written to a debug log file ("NetSetup.LOG"), as demonstrated using the NetAddAlternateComputerName API.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-11-12T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2004-03-08T12:00:00.000-04:00" comment="Added 64-bit edition support to this definition allowing us to deprecated OVAL332">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </modified>
+        <status_change date="2004-03-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2004-09-13T10:26:00.000-04:00" comment="">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2004-09-15T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-09-29T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Multiple corrections and update to POSIX compatibility for ste:2656" date="2010-11-29T16:12:00.873-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2010-11-29T16:12:59.502-05:00">INTERIM</status_change>
+        <status_change date="2010-12-20T04:00:49.873-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:44:37.299-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:02:44.469-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:1448 - Correction of a filename (Spwmp.dll is replaced by wkssvc.dll as per the bulletin info.) in an object oval:org.mitre.oval:obj:1448 along with comments" date="2011-09-14T12:12:00.927-04:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2011-09-14T12:12:56.465-04:00">INTERIM</status_change>
+        <status_change date="2011-10-03T04:00:05.904-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criteria operator="OR" comment="a vulnerable version of wkssvc.dll exists">
+        <criteria operator="AND" comment="no service pack is installed and wkssvc.dll is less than 5.1.2600.120">
+          <criterion negate="true" comment="Win2K/XP/2003 is patched" test_ref="oval:org.mitre.oval:tst:2437"/>
+          <criterion comment="the version of wkssvc.dll is less than 5.1.2600.120" test_ref="oval:org.mitre.oval:tst:2736"/>
+        </criteria>
+        <criteria operator="AND" comment="service pack 1 is installed and wkssvc.dll is less than 5.1.2600.1301">
+          <criterion comment="Win2K/XP/2003 service pack 1 is installed" test_ref="oval:org.mitre.oval:tst:2843"/>
+          <criterion comment="the version of wkssvc.dll is less than 5.1.2600.1301" test_ref="oval:org.mitre.oval:tst:2735"/>
+        </criteria>
+      </criteria>
+      <criterion negate="true" comment="the patch q828035 is installed (Hotfix key)" test_ref="oval:org.mitre.oval:tst:2796"/>
+      <criteria operator="AND" comment="Windows XP (sp1 or earlier) is installed">
+        <criterion comment="Windows XP is installed" test_ref="oval:org.mitre.oval:tst:2838"/>
+        <criterion negate="true" comment="Win2K/XP/2003 service pack 2 (or later) is installed" test_ref="oval:org.mitre.oval:tst:2837"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="the workstation service is enabled" test_ref="oval:org.mitre.oval:tst:2696"/>
+    </criteria>
+  </criteria>
+</definition>

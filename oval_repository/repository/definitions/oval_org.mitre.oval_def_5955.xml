@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5955" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Opera Execution of arbitrary code Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Opera Browser</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0914" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0914"/>
+    <description>Opera before 9.64 allows remote attackers to execute arbitrary code via a crafted JPEG image that triggers memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-02T10:31:31">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </submitted>
+        <status_change date="2009-04-08T14:20:10.986-04:00">DRAFT</status_change>
+        <status_change date="2009-04-27T04:00:14.468-04:00">INTERIM</status_change>
+        <status_change date="2009-05-18T04:00:25.616-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:48:24.501-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:01:48.987-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:9724 - Now path to opera.exe is searched in registry" date="2013-12-04T13:48:00.075-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-04T13:53:09.270-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:01:22.181-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5955 - fixed vulnerabilities with added extend definitions" date="2014-02-26T15:19:00.077-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-26T15:21:37.049-05:00">INTERIM</status_change>
+        <status_change date="2014-03-17T04:00:23.246-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Opera Browser is installed" definition_ref="oval:org.mitre.oval:def:6482"/>
+    <criterion comment="Opera version is less than 9.64 (9.64.10487.0)" test_ref="oval:org.mitre.oval:tst:9724"/>
+    <criterion comment="Check if HKLM\SOFTWARE\Classes\Applications\Opera.exe\shell\open\command exists" test_ref="oval:org.mitre.oval:tst:89007"/>
+  </criteria>
+</definition>

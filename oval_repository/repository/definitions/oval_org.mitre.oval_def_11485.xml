@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11485" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>libpurple in Finch in Pidgin before 2.6.6, when an XMPP multi-user chat (MUC) room is used, does not properly parse nicknames containing br sequences, which allows remote attackers to cause a denial of service (application crash) via a crafted nickname.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0420" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0420"/>
+    <description>libpurple in Finch in Pidgin before 2.6.6, when an XMPP multi-user chat (MUC) room is used, does not properly parse nicknames containing &lt;br> sequences, which allows remote attackers to cause a denial of service (application crash) via a crafted nickname.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:34:20.906-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:09:38.385-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:10:23.651-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11485 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:09:00.343-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:13:56.335-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:14:22.659-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="finch-devel is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:39911"/>
+        <criterion comment="libpurple is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40093"/>
+        <criterion comment="libpurple-perl is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40218"/>
+        <criterion comment="libpurple-tcl is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40181"/>
+        <criterion comment="pidgin-devel is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40052"/>
+        <criterion comment="libpurple-devel is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:39983"/>
+        <criterion comment="finch is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:39933"/>
+        <criterion comment="pidgin-perl is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40004"/>
+        <criterion comment="pidgin is earlier than 0:2.6.6-1.el4" test_ref="oval:org.mitre.oval:tst:40214"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="finch-devel is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:39974"/>
+        <criterion comment="libpurple is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40080"/>
+        <criterion comment="libpurple-perl is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40176"/>
+        <criterion comment="libpurple-tcl is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40248"/>
+        <criterion comment="pidgin-devel is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40202"/>
+        <criterion comment="libpurple-devel is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40141"/>
+        <criterion comment="finch is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:39917"/>
+        <criterion comment="pidgin-perl is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:40306"/>
+        <criterion comment="pidgin is earlier than 0:2.6.6-1.el5" test_ref="oval:org.mitre.oval:tst:39993"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

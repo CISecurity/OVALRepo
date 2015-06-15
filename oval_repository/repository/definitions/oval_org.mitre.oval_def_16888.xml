@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16888" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>NULL pointer crash</title>
+    <affected family="unix">
+      <platform>openSUSE 12.3</platform>
+    </affected>
+    <reference ref_id="CVE-2013-2179" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2179" source="CVE"/>
+    <description>X.Org xdm 1.1.10, 1.1.11, and possibly other versions, when performing authentication using certain implementations of the crypt API function that can return NULL, allows remote attackers to cause a denial of service (NULL pointer dereference and crash) by attempting to log into an account whose password field contains invalid characters, as demonstrated using the crypt function from glibc 2.17 and later with (1) the "!" character in the salt portion of a password field or (2) a password that has been encrypted using DES or MD5 in FIPS-140 mode.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-03T10:26:26.748+04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-07-05T16:52:53.414-04:00">DRAFT</status_change>
+        <status_change date="2013-07-22T04:01:43.507-04:00">INTERIM</status_change>
+        <status_change date="2013-08-12T04:08:51.937-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:16888 - Replace the occurrences of OpenSUSE by openSUSE in Platform" date="2014-06-10T14:43:00.558-04:00">
+          <contributor organization="McAfee, Inc.">Jerome Athias</contributor>
+        </modified>
+        <status_change date="2014-06-10T14:44:50.128-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:06:05.237-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="openSUSE 12.3 is installed" definition_ref="oval:org.mitre.oval:def:17041"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="Package xdm is less than 1.1.10-14.10.1" test_ref="oval:org.mitre.oval:tst:81585"/>
+      <criterion comment="Package xdm-debuginfo is less than 1.1.10-14.10.1" test_ref="oval:org.mitre.oval:tst:81554"/>
+      <criterion comment="Package xdm-debugsource is less than 1.1.10-14.10.1" test_ref="oval:org.mitre.oval:tst:81728"/>
+    </criteria>
+  </criteria>
+</definition>

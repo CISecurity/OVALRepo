@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1482" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Management Console Directory Traversal Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <product>Solaris Management Console (SMC)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1354" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1354"/>
+    <description>The Solaris Management Console (SMC) in Sun Solaris 8 and 9 generates different 404 error messages when a file does not exist versus when a file exists but is otherwise inacessible, which could allow remote attackers to obtain sensitive information in conjunction with a directory traversal (..) attack.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-04-13T04:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-04-20T04:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-05-11T04:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-01T04:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-08-22T04:00:00.000-04:00" comment="Affected product changed to Sun Management Console (SMC); mistakenly was .NET framework">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2005-08-25T10:03:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-09-21T01:33:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-12T05:49:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criteria operator="OR" comment="Solaris 8 or 9 installed">
+        <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+      </criteria>
+      <criterion comment="Solaris Management Console Web Components (SUNWwbmc) installed" negate="false" test_ref="oval:org.mitre.oval:tst:900"/>
+      <criterion comment="Patch 111313-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:899"/>
+      <criterion comment="Patch 116807-01 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:898"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="smcboot running" negate="false" test_ref="oval:org.mitre.oval:tst:897"/>
+    </criteria>
+  </criteria>
+</definition>

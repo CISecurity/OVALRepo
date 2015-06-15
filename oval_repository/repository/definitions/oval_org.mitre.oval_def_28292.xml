@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28292" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-3094-1 -- bind9 security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3094" ref_id="DSA-3094-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8500" ref_id="CVE-2014-8500"/>
+    <description>It was discovered that BIND, a DNS server, is prone to a denial of service vulnerability.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-30T11:21:19">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:09:28.777-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:17.443-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:14.447-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="bind9 is earlier than 1:9.8.4.dfsg.P1-6+nmu2+deb7u3" test_ref="oval:org.mitre.oval:tst:136353"/>
+  </criteria>
+</definition>

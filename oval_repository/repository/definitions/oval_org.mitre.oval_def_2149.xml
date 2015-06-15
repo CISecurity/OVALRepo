@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2149" class="vulnerability" version="3" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Workspace Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Excel</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3890" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3890"/>
+    <description>Microsoft Excel in Office 2000 SP3, Office XP SP3, Office 2003 SP2, and Office 2004 for Mac allows remote attackers to execute arbitrary code via a Workspace with a certain index value that triggers memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-15T12:17:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2007-08-15T16:59:48.501-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:31.443-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:45.353-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3651 - Updating Microsoft Excel content to utilize the windows_view behavior." date="2012-05-10T14:07:00.113-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:24:24.838-04:00">INTERIM</status_change>
+        <status_change date="2012-05-28T04:01:31.255-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Excel 2000" operator="AND">
+      <extend_definition comment="Microsoft Excel 2000 is installed" definition_ref="oval:org.mitre.oval:def:758"/>
+      <criterion comment="the version of excel.exe is less than 9.0.0.8964" test_ref="oval:org.mitre.oval:tst:3651"/>
+    </criteria>
+    <criteria comment="Excel 2002" operator="AND">
+      <extend_definition comment="Microsoft Excel 2002 is installed" definition_ref="oval:org.mitre.oval:def:473"/>
+      <criterion comment="the version of excel.exe is less than 10.0.6834.0" test_ref="oval:org.mitre.oval:tst:3306"/>
+    </criteria>
+    <criteria comment="Excel 2003" operator="AND">
+      <extend_definition comment="Microsoft Excel 2003 is installed" definition_ref="oval:org.mitre.oval:def:764"/>
+      <criterion comment="the version of excel.exe is less than 11.0.8146.0" test_ref="oval:org.mitre.oval:tst:3228"/>
+    </criteria>
+    <criteria comment="Excel Viewer" operator="AND">
+      <extend_definition comment="Microsoft Excel Viewer is installed" definition_ref="oval:org.mitre.oval:def:439"/>
+      <criterion comment="the version of xlview.exe is less than 11.0.8146.0" test_ref="oval:org.mitre.oval:tst:4173"/>
+    </criteria>
+  </criteria>
+</definition>

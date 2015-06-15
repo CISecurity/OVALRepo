@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:10887" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The GDM daemon in GNOME Display Manager (GDM) before 2.14.13, 2.16.x before 2.16.7, 2.18.x before 2.18.4, and 2.19.x before 2.19.5 does not properly handle NULL return values from the g_strsplit function, which allows local users to cause a denial of service (persistent daemon crash) via a crafted command to the daemon's socket, related to (1) gdm.c and (2) gdmconfig.c in daemon/, and (3) gdmconfig.c and (4) gdmflexiserver.c in gui/.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3381" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3381"/>
+    <description>The GDM daemon in GNOME Display Manager (GDM) before 2.14.13, 2.16.x before 2.16.7, 2.18.x before 2.18.4, and 2.19.x before 2.19.5 does not properly handle NULL return values from the g_strsplit function, which allows local users to cause a denial of service (persistent daemon crash) via a crafted command to the daemon's socket, related to (1) gdm.c and (2) gdmconfig.c in daemon/, and (3) gdmconfig.c and (4) gdmflexiserver.c in gui/.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:29:52.101-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:06:08.938-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:06:38.225-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:10887 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:41:00.978-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:43:50.272-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:09:42.989-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    </criteria>
+    <criterion comment="gdm is earlier than 1:2.16.0-31.0.1.el5" test_ref="oval:org.mitre.oval:tst:34885"/>
+  </criteria>
+</definition>

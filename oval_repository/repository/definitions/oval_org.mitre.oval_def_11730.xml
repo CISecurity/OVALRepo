@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11730" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Msxml2.XMLHTTP.3.0 Response Handling Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2561" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2561"/>
+    <description>Microsoft XML Core Services (aka MSXML) 3.0 does not properly handle HTTP responses, which allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted response, aka "Msxml2.XMLHTTP.3.0 Response Handling Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-08-10T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-08-16T12:27:32.846-04:00">DRAFT</status_change>
+        <status_change date="2010-09-06T04:11:19.769-04:00">INTERIM</status_change>
+        <status_change date="2010-09-27T04:00:10.621-04:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:23:54.118-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:23:54.118-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:00:15.826-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft XML Core Services 3 is installed" definition_ref="oval:org.mitre.oval:def:415"/>
+    <criteria operator="OR">
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows XP SP3 x86">
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <criterion comment="msxml3.dll version is less than 8.100.1052.0" test_ref="oval:org.mitre.oval:tst:41023"/>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows XP SP2 x64, Windows Server 2003 x86/x64/ia64 SP2">
+        <criteria operator="OR">
+          <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+          <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+          <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+          <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+        </criteria>
+        <criterion comment="msxml3.dll version is less than 8.100.1051.0" test_ref="oval:org.mitre.oval:tst:40862"/>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86/x64 SP1, Server 2008 x86/x64/ia64">
+        <criteria operator="OR">
+          <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+          <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+        </criteria>
+        <criterion comment="msxml3.dll version is less than 8.100.4002.0" test_ref="oval:org.mitre.oval:tst:41397"/>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86/x64 SP2, Server 2008 x86/x64/ia64 SP2">
+        <criteria operator="OR">
+          <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+          <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+          <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+          <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+        </criteria>
+        <criterion comment="msxml3.dll version is less than 8.100.5003.0" test_ref="oval:org.mitre.oval:tst:41662"/>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64, Windows Server 2008 R2 x64/ia64">
+        <criteria operator="OR">
+          <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+          <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+          <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+          <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+        </criteria>
+        <criteria operator="OR" comment="GDR or LDR Service branch">
+          <criterion comment="msxml3.dll version is less than 8.110.7600.16605" test_ref="oval:org.mitre.oval:tst:41499"/>
+          <criteria operator="AND" comment="LDR">
+            <criterion comment="msxml3.dll version is greater than or equal to 8.110.7600.20000" test_ref="oval:org.mitre.oval:tst:41341"/>
+            <criterion comment="msxml3.dll version is less than 8.110.7600.20728" test_ref="oval:org.mitre.oval:tst:41588"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5511" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability May Allow Firewall Compromise or Creation of Denial of Service (DoS) Condition</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1095" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1095"/>
+    <description>Unspecified vulnerability in the Internet Protocol (IP) implementation in Sun Solaris 8, 9, and 10 allows remote attackers to bypass intended firewall policies or cause a denial of service (panic) via unknown vectors, possibly related to ICMP packets and IP fragment reassembly.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-03-04T08:44:56.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-03-06T08:35:11.775-05:00">DRAFT</status_change>
+        <status_change date="2008-03-24T04:00:48.629-04:00">INTERIM</status_change>
+        <status_change date="2008-04-14T04:00:10.100-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion negate="true" comment="Patch 116965-30 or later installed" test_ref="oval:org.mitre.oval:tst:7533"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion negate="true" comment="Patch 114344-32 or later installed" test_ref="oval:org.mitre.oval:tst:7854"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 118822-27 or later installed" test_ref="oval:org.mitre.oval:tst:7608"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion negate="true" comment="Patch 116966-29 or later installed" test_ref="oval:org.mitre.oval:tst:7656"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion negate="true" comment="Patch 119435-20 or later installed" test_ref="oval:org.mitre.oval:tst:6892"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 200183">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 118844-28 or later installed" test_ref="oval:org.mitre.oval:tst:7175"/>
+    </criteria>
+  </criteria>
+</definition>

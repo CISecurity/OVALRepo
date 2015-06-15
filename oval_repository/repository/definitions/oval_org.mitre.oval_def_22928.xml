@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22928" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0616: dbus-glib security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>NetworkManager</product>
+      <product>dbus-glib</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0616-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0616.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-1172" ref_url="http://linux.oracle.com/cve/CVE-2010-1172.html" source="CVE"/>
+    <description>DBus-GLib 0.73 disregards the access flag of exported GObject properties, which allows local users to bypass intended access restrictions and possibly cause a denial of service by modifying properties, as demonstrated by properties of the (1) DeviceKit-Power, (2) NetworkManager, and (3) ModemManager services.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:05:49.680-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:51.132-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:45.164-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22928 - optimisation of Oracle Linux content" date="2014-05-05T17:57:00.492-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:58:48.354-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:49.251-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="dbus-glib-devel is earlier than 0:0.73-10.el5_5" test_ref="oval:org.mitre.oval:tst:104052"/>
+      <criterion comment="dbus-glib is earlier than 0:0.73-10.el5_5" test_ref="oval:org.mitre.oval:tst:104209"/>
+      <criterion comment="NetworkManager-glib is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:104047"/>
+      <criterion comment="NetworkManager-gnome is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:104286"/>
+      <criterion comment="NetworkManager-devel is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:104281"/>
+      <criterion comment="NetworkManager-glib-devel is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:104118"/>
+      <criterion comment="NetworkManager is earlier than 1:0.7.0-10.el5_5.1" test_ref="oval:org.mitre.oval:tst:104150"/>
+    </criteria>
+  </criteria>
+</definition>

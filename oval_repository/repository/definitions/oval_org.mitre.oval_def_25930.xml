@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25930" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-YU-2013:1162-1 -- YOU update for libzypp</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>libzypp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-yu-20131162-1.html" ref_id="SUSE-YU-2013:1162-1"/>
+    <description>This update for the Software Update Stack provides the
+following fixes and  enhancements:
+
+libzypp:
+
+    * Set log file permission upon file creation only.
+(bnc#825490)
+    * Speedup scanning for modaliases, improving
+performance on machines with large amounts of RAM.
+(bnc#824110)
+    * Implement retrieval of packages from tftp servers.
+(bnc#803316)
+    * Fix file probing via tftp://. (bnc#803316)
+    * Add modalias and multiversion spec to testcase.
+
+zypper:
+
+    * Set default zypper.log mode to 0640. (bnc#825490)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:31:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:31:44.399-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:36.125-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:40.360-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libzypp RPM is earlier than 0:9.36.3-0.7.1" test_ref="oval:org.mitre.oval:tst:119218"/>
+      <criterion comment="zypper RPM is earlier than 0:1.6.308-0.9.16" test_ref="oval:org.mitre.oval:tst:119700"/>
+      <criterion comment="zypper-log RPM is earlier than 0:1.6.308-0.9.16" test_ref="oval:org.mitre.oval:tst:119161"/>
+    </criteria>
+  </criteria>
+</definition>

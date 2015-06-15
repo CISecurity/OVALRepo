@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20547" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware vSphere and vCOps updates to third party libraries</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+    </affected>
+    <reference ref_id="CVE-2010-2761" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2761" source="CVE"/>
+    <description>The multipart_init function in (1) CGI.pm before 3.50 and (2) Simple.pm in CGI::Simple 1.112 and earlier uses a hardcoded value of the MIME boundary string in multipart/x-mixed-replace content, which allows remote attackers to inject arbitrary HTTP headers and conduct HTTP response splitting attacks via crafted input that contains this value, a different vulnerability than CVE-2010-3172.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-05T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:43:20.729-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:45.123-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:55.248-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201208107-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201208107-SG is not installed" test_ref="oval:org.mitre.oval:tst:89539"/>
+    </criteria>
+  </criteria>
+</definition>

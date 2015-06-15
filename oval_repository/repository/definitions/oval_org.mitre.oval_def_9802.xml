@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9802" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Net-SNMP before 5.0.9 allows a user or community to access data in MIB objects, even if that data is not allowed to be viewed.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0935" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0935"/>
+    <description>Net-SNMP before 5.0.9 allows a user or community to access data in MIB objects, even if that data is not allowed to be viewed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:20:55.937-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:14:14.524-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:15:21.535-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9802 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:04:00.787-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:10:16.267-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:22:22.348-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="net-snmp-utils is earlier than 0:5.0.9-2.30E.1" test_ref="oval:org.mitre.oval:tst:30617"/>
+      <criterion comment="net-snmp is earlier than 0:5.0.9-2.30E.1" test_ref="oval:org.mitre.oval:tst:30534"/>
+      <criterion comment="net-snmp-devel is earlier than 0:5.0.9-2.30E.1" test_ref="oval:org.mitre.oval:tst:30077"/>
+    </criteria>
+  </criteria>
+</definition>

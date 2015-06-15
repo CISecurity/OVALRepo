@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:116" class="vulnerability" version="5" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DHTML Script Function Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-5581" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-5581"/>
+    <description>Unspecified vulnerability in Microsoft Internet Explorer 6 allows remote attackers to execute arbitrary code via certain DHTML script functions, such as normalize, and "incorrectly created elements" that trigger memory corruption, aka "DHTML Script Function Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-12-13T08:17:04">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-12-14T20:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-01-03T13:53:48.603-05:00">INTERIM</status_change>
+        <modified comment="Added an anchor to the regex used to check for Internet Explorer 6." date="2007-01-11T20:38:00.950-05:00">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2007-02-20T13:39:33.858-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:2185 - Anchored regular expression" date="2011-02-22T12:51:00.261-05:00">
+          <contributor organization="SecPod Technologies">Preeti Subramanian</contributor>
+        </modified>
+        <status_change date="2011-02-22T12:52:30.743-05:00">INTERIM</status_change>
+        <status_change date="2011-03-14T04:00:08.711-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:34.500-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:09.797-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Server 2003-Gold" operator="AND">
+      <extend_definition comment="Windows Server 2003 (Gold) is installed" definition_ref="oval:org.mitre.oval:def:165"/>
+      <extend_definition comment="Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="the version of mshtml.dll is less than 6.0.3790.605" negate="false" test_ref="oval:org.mitre.oval:tst:92"/>
+    </criteria>
+    <criteria comment="XP,SP1 (64-bit) and Server 2003, SP1" operator="AND">
+      <criteria operator="OR" comment="Windows XP (64-bit,SP1) or Server 2003 (SP1) is installed">
+        <extend_definition comment="Windows XP, SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+        <extend_definition comment="Windows Server 2003, SP1 is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+      </criteria>
+      <extend_definition comment="Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="the version of mshtml.dll is less than 6.0.3790.2817" negate="false" test_ref="oval:org.mitre.oval:tst:90"/>
+    </criteria>
+    <criteria comment="IE 6 on Windows XP,SP2" operator="AND">
+      <extend_definition comment="Windows XP, SP2 is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <extend_definition comment="Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="the version of mshtml.dll is less than 6.0.2900.3020" negate="false" test_ref="oval:org.mitre.oval:tst:132"/>
+    </criteria>
+    <criteria comment="IE 6 on Windows 2000" operator="AND">
+      <extend_definition comment="Windows 2000 SP4 is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Internet Explorer 6 (any patch level) is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2333"/>
+      <extend_definition comment="Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="the version of mshtml.dll is less than 6.0.2800.1586" negate="false" test_ref="oval:org.mitre.oval:tst:89"/>
+    </criteria>
+  </criteria>
+</definition>

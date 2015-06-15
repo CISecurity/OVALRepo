@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7518" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2037 kdebase -- race condition</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>kdebase</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-2037" ref_id="DSA-2037"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0436" ref_id="CVE-2010-0436"/>
+    <description>Sebastian Krahmer discovered that a race condition in the KDE Desktop Environment's KDM display manager, allow a local user to elevate privileges to root.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:09:32-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:29:11.533-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:58.264-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:50:00.656-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7518 - Debian Patch Update" date="2014-06-06T16:44:00.039-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:46:32.492-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:31.667-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:26696 - Modified Debian patches to correct Epochs." date="2015-02-03T13:15:00.798-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-03T13:18:13.119-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:39.935-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="kdeeject is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26696"/>
+          <criterion comment="kdebase-doc-html is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26764"/>
+          <criterion comment="kdebase-data is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26314"/>
+          <criterion comment="kdebase is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26058"/>
+          <criterion comment="kdebase-doc is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26927"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="kdm is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26594"/>
+          <criterion comment="konqueror-nsplugins is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26895"/>
+          <criterion comment="kdebase-bin is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26564"/>
+          <criterion comment="kcontrol is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26983"/>
+          <criterion comment="kmenuedit is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26632"/>
+          <criterion comment="kwin is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26937"/>
+          <criterion comment="libkonq4 is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26810"/>
+          <criterion comment="kdebase-dbg is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26708"/>
+          <criterion comment="kdebase-kio-plugins is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26881"/>
+          <criterion comment="ktip is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26984"/>
+          <criterion comment="kate is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26736"/>
+          <criterion comment="kdepasswd is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26905"/>
+          <criterion comment="khelpcenter is earlier than 4.0.0.really.3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26911"/>
+          <criterion comment="kdebase-dev is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26828"/>
+          <criterion comment="kappfinder is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26630"/>
+          <criterion comment="kdesktop is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26544"/>
+          <criterion comment="klipper is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26973"/>
+          <criterion comment="ksmserver is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26930"/>
+          <criterion comment="konsole is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26978"/>
+          <criterion comment="kdebase-bin-kde3 is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26891"/>
+          <criterion comment="kicker is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26888"/>
+          <criterion comment="kpager is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26838"/>
+          <criterion comment="ksysguard is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26541"/>
+          <criterion comment="kfind is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26940"/>
+          <criterion comment="ksysguardd is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26877"/>
+          <criterion comment="konqueror is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26023"/>
+          <criterion comment="ksplash is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26809"/>
+          <criterion comment="kpersonalizer is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:27019"/>
+          <criterion comment="libkonq4-dev is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26668"/>
+          <criterion comment="kdeprint is earlier than 4:3.5.9.dfsg.1-6+lenny1" test_ref="oval:org.mitre.oval:tst:26488"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

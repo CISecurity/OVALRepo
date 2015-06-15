@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3567" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Patches Disable Basic Security Module Auditing Functionality</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <product>Basic Security Module</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1358" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1358"/>
+    <description>The patches (1) 114332-08 and (2) 114929-06 for Sun Solaris 9 disable the auditing functionality of the Basic Security Module (BSM), which allows attackers to avoid having their activity logged.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-04-13T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-04-20T12:13:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-05-11T05:41:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-01T03:30:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="Patch 114332-08 installed" negate="false" test_ref="oval:org.mitre.oval:tst:406"/>
+      <criterion comment="Patch 114332-10 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:405"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="/etc/system has BSM enabled" negate="false" test_ref="oval:org.mitre.oval:tst:404"/>
+    </criteria>
+  </criteria>
+</definition>

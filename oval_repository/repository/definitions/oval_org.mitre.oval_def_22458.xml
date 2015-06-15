@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22458" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AIX OpenSSH Vulnerability</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.3</platform>
+      <platform>IBM AIX 6.1</platform>
+      <platform>IBM AIX 7.1</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-4548" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4548"/>
+    <description>The mm_newkeys_from_blob function in monitor_wrap.c in sshd in OpenSSH 6.2 and 6.3, when an AES-GCM cipher is used, does not properly initialize memory for a MAC context data structure, which allows remote authenticated users to bypass intended ForceCommand and login-shell restrictions via packet data that provides a crafted callback address.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-03-03T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </submitted>
+        <status_change date="2014-03-06T11:27:48.243-05:00">DRAFT</status_change>
+        <status_change date="2014-03-24T04:01:36.907-04:00">INTERIM</status_change>
+        <status_change date="2014-04-14T04:00:13.126-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS check">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <criterion comment="openssh.base.server less than or equal to 6.0.0.6103" test_ref="oval:org.mitre.oval:tst:100859"/>
+    </criteria>
+    <criteria operator="AND" comment="OS check">
+      <extend_definition comment="IBM AIX 7.1 is installed" definition_ref="oval:org.mitre.oval:def:18828"/>
+      <criterion comment="openssh.base.server less than or equal to 6.0.0.6103" test_ref="oval:org.mitre.oval:tst:100859"/>
+    </criteria>
+  </criteria>
+</definition>

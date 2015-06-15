@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12481" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2141-4 lighttpd -- compatibility problem with updated openssl</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>lighttpd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00006.html" ref_id="DSA-2141-4"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" ref_id="CVE-2009-3555"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4180" ref_id="CVE-2010-4180"/>
+    <description>The openssl update in DSA-2141-1 caused a regression in lighttpd. Due to a bug in lighttpd, the server fails to start in some configurations if using the updated openssl libraries. This update fixes this problem.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T21:55:31-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:11.755-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:12.804-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:00:21.688-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12481 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:16.741-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:19.651-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="lighttpd DPKG is earlier than 1.4.19-5+lenny2" test_ref="oval:org.mitre.oval:tst:43567"/>
+  </criteria>
+</definition>

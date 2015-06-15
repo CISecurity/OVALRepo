@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21759" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:0004: openssl security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>openssl</product>
+      <product>openssl095a</product>
+      <product>openssl096</product>
+      <product>openssl096b</product>
+      <product>openssl097a</product>
+    </affected>
+    <reference ref_id="ELSA-2009:0004-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-0004.html" source="VENDOR"/>
+    <reference ref_id="CVE-2008-5077" ref_url="http://linux.oracle.com/cve/CVE-2008-5077.html" source="CVE"/>
+    <description>OpenSSL 0.9.8i and earlier does not properly check the return value from the EVP_VerifyFinal function, which allows remote attackers to bypass validation of the certificate chain via a malformed SSL/TLS signature for DSA and ECDSA keys.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:55:31.087-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:15.054-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:20.356-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21759 - optimisation of Oracle Linux content" date="2014-05-05T18:23:00.086-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:24:28.563-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:22.008-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="openssl097a is earlier than 0:0.9.7a-9.el5_2.1" test_ref="oval:org.mitre.oval:tst:102609"/>
+      <criterion comment="openssl is earlier than 0:0.9.8b-10.el5_2.1" test_ref="oval:org.mitre.oval:tst:102417"/>
+      <criterion comment="openssl-perl is earlier than 0:0.9.8b-10.el5_2.1" test_ref="oval:org.mitre.oval:tst:102486"/>
+      <criterion comment="openssl-devel is earlier than 0:0.9.8b-10.el5_2.1" test_ref="oval:org.mitre.oval:tst:102055"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26778" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1167: kernel security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1167-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1167.html"/>
+    <reference source="CESA" ref_id="CESA-2014:1167"/>
+    <reference source="CVE" ref_id="CVE-2014-0205" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0205.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3535" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3535.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3917" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3917.html"/>
+    <reference source="CVE" ref_id="CVE-2014-4667" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-4667.html"/>
+    <description>The kernel packages contain the Linux kernel, the core of any Linux
+operating system.
+
+* A flaw was found in the way the Linux kernel's futex subsystem handled
+reference counting when requeuing futexes during futex_wait(). A local,
+unprivileged user could use this flaw to zero out the reference counter of
+an inode or an mm struct that backs up the memory area of the futex, which
+could lead to a use-after-free flaw, resulting in a system crash or,
+potentially, privilege escalation. (CVE-2014-0205, Important)
+
+* A NULL pointer dereference flaw was found in the way the Linux kernel's
+networking implementation handled logging while processing certain invalid
+packets coming in via a VxLAN interface. A remote attacker could use this
+flaw to crash the system by sending a specially crafted packet to such an
+interface. (CVE-2014-3535, Important)
+
+* An out-of-bounds memory access flaw was found in the Linux kernel's
+system call auditing implementation. On a system with existing audit rules
+defined, a local, unprivileged user could use this flaw to leak kernel
+memory to user space or, potentially, crash the system. (CVE-2014-3917,
+Moderate)
+
+* An integer underflow flaw was found in the way the Linux kernel's Stream
+Control Transmission Protocol (SCTP) implementation processed certain
+COOKIE_ECHO packets. By sending a specially crafted SCTP packet, a remote
+attacker could use this flaw to prevent legitimate connections to a
+particular SCTP server socket to be made. (CVE-2014-4667, Moderate)
+
+Red Hat would like to thank Gopal Reddy Kodudula of Nokia Siemens Networks
+for reporting CVE-2014-4667. The security impact of the CVE-2014-0205 issue
+was discovered by Mateusz Guzik of Red Hat.
+
+This update also fixes several bugs. Documentation for these changes will
+be available shortly from the Technical Notes document linked to in the
+References section.
+
+All kernel users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. The system must be
+rebooted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T11:25:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:07:10.303-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:53.064-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:56.984-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="kernel is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123813"/>
+      <criterion comment="kernel-abi-whitelists is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123669"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:122932"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123394"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123755"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123750"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123144"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123779"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123742"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123660"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123872"/>
+      <criterion comment="perf is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:123353"/>
+      <criterion comment="python-perf is earlier than 0:2.6.32-431.29.2.el6" test_ref="oval:org.mitre.oval:tst:122937"/>
+    </criteria>
+  </criteria>
+</definition>

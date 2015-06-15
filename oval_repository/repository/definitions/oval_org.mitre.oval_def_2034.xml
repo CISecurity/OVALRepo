@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2034" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Agent URL Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-1205" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1205"/>
+    <description>Unspecified vulnerability in Microsoft Agent (msagent\agentsvr.exe) in Windows 2000 SP4, XP SP2, and Server 2003, 2003 SP1, and 2003 SP2 allows remote attackers to execute arbitrary code via crafted URLs, which result in memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-04-10T16:31:02">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2007-04-10T16:31:02.000-05:00">DRAFT</status_change>
+        <status_change date="2007-04-25T19:52:22.689-04:00">INTERIM</status_change>
+        <status_change date="2007-05-23T15:05:37.577-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:2034 - Corrected missing platforms and file versions" date="2011-04-07T11:23:00.405-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2011-04-07T11:24:17.205-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:2034 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-09T04:01:25.270-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:2034 - Correcting incorrect references to 64-bit Itanium XP." date="2012-08-23T17:47:00.168-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:52:10.441-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:00:45.839-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows 2000 SP4, Windows Server 2003 x86/x64/ia64, Windows XP SP2 x86 and Agentdpv.dll version is less than 2.0.0.3425">
+      <criteria operator="OR" comment="Windows 2000 SP4, Windows Server 2003 x86/x64/ia64, Windows XP SP2 x86">
+        <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x86) Gold is installed" definition_ref="oval:org.mitre.oval:def:165"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      </criteria>
+      <criterion comment="The version of Agentdpv.dll is less than 2.0.0.3425." test_ref="oval:org.mitre.oval:tst:4156"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Server 2003 Service Pack 2 x86/x64/ia64, Windows Server 2003 SP1, Windows XP SP1/SP2 x64 and Agentdpv.dll version is less than 5.2.3790.1243">
+      <criteria operator="OR" comment="Windows Server 2003 Service Pack 2 x86/x64/ia64, Windows Server 2003 SP1, Windows XP SP1/SP2 x64">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows XP SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+      </criteria>
+      <criterion comment="The version of Agentdpv.dll is less than 5.2.3790.1243." test_ref="oval:org.mitre.oval:tst:3462"/>
+    </criteria>
+  </criteria>
+</definition>

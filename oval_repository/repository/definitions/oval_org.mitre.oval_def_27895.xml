@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27895" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1846 -- gnutls security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>gnutls</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1846.html" ref_id="RHSA-2014:1846"/>
+    <reference source="CESA-2014:1846" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020756.html" ref_id="CESA-2014:1846"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8564" ref_id="CVE-2014-8564"/>
+    <description>The GnuTLS library provides support for cryptographic algorithms and for
+protocols such as Transport Layer Security (TLS). The gnutls packages also
+include the libtasn1 library, which provides Abstract Syntax Notation One
+(ASN.1) parsing and structures management, and Distinguished Encoding Rules
+(DER) encoding and decoding functions.
+
+An out-of-bounds memory write flaw was found in the way GnuTLS parsed
+certain ECC (Elliptic Curve Cryptography) certificates or certificate
+signing requests (CSR). A malicious user could create a specially crafted
+ECC certificate or a certificate signing request that, when processed by an
+application compiled against GnuTLS (for example, certtool), could cause
+that application to crash or execute arbitrary code with the permissions of
+the user running the application. (CVE-2014-8564)
+
+Red Hat would like to thank GnuTLS upstream for reporting this issue.
+Upstream acknowledges Sean Burford as the original reporter.
+
+All gnutls users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue. For the update to take
+effect, all applications linked to the GnuTLS or libtasn1 library must
+be restarted.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T15:38:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:36:09.034-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:15.729-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:16.268-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="gnutls is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:136223"/>
+        <criterion comment="gnutls-c++ is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:136156"/>
+        <criterion comment="gnutls-dane is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:136304"/>
+        <criterion comment="gnutls-devel is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:135898"/>
+        <criterion comment="gnutls-utils is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:135754"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <criterion comment="gnutls-debuginfo is earlier than 0:3.1.18-10.el7_0" test_ref="oval:org.mitre.oval:tst:135946"/>
+    </criteria>
+  </criteria>
+</definition>

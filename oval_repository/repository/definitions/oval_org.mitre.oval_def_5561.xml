@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5561" version="12" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Excel Record Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Excel 2000</product>
+      <product>Microsoft Excel 2002</product>
+      <product>Microsoft Excel 2003</product>
+      <product>Microsoft Excel 2007</product>
+      <product>Microsoft Excel Viewer 2003</product>
+      <product>Microsoft Excel Viewer 2007</product>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft SharePoint Server 2007</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3006" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3006"/>
+    <description>Microsoft Office Excel 2000 SP3, 2002 SP3, 2003 SP2 and SP3, and 2007 Gold and SP1; Office Excel Viewer 2003 Gold and SP3; Office Excel Viewer; Office Compatibility Pack 2007 Gold and SP1; Office SharePoint Server 2007 Gold and SP1; and Office 2004 and 2008 for Mac do not properly parse Country record values when loading Excel files, which allows remote attackers to execute arbitrary code via a crafted Excel file, aka the "Excel Record Parsing Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-13T09:28:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:03:10.600-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:00:58.862-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:24.821-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5561 - def:5885 updated to include extended def for Excel Viewer 2003, def:5837 updated to include only vulnerable products, def:5561 updated to add extended def for Excel Viewer 2003/2007, def:5951 removed all non vulnerable products" date="2011-10-28T20:15:00.476-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2011-10-28T20:30:55.630-04:00">INTERIM</status_change>
+        <status_change date="2011-11-14T04:00:37.752-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6362 - Updating Microsoft Excel content to utilize the windows_view behavior." date="2012-05-10T14:07:00.113-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:24:15.089-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-06-04T04:01:27.405-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5561 - Links to extended definitions were added in criteria to exclude errors." date="2013-12-11T15:49:00.841-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-11T15:50:45.335-05:00">INTERIM</status_change>
+        <status_change date="2013-12-30T04:00:49.031-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5561 - modified comments" date="2014-02-28T15:13:00.247-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-28T15:16:23.182-05:00">INTERIM</status_change>
+        <status_change date="2014-03-17T04:00:21.774-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:30.693-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:11:02.944-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="excel 2000 sp3/version">
+      <extend_definition comment="Microsoft Excel 2000 is installed" definition_ref="oval:org.mitre.oval:def:758"/>
+      <criterion comment="Excel 2000 SP3 or greater is installed" test_ref="oval:org.mitre.oval:tst:8157"/>
+      <criterion comment="Excel.exe version is less than 9.0.0.8971" test_ref="oval:org.mitre.oval:tst:8840"/>
+    </criteria>
+    <criteria operator="AND" comment="excel 2002 sp3/version">
+      <extend_definition comment="Microsoft Excel 2002 is installed" definition_ref="oval:org.mitre.oval:def:473"/>
+      <criterion comment="Excel 2002 SP3 or greater is installed" test_ref="oval:org.mitre.oval:tst:8677"/>
+      <criterion comment="Excel.exe version is less than 10.0.6845.0" test_ref="oval:org.mitre.oval:tst:8819"/>
+    </criteria>
+    <criteria operator="AND" comment="excel 2003 sp3/version">
+      <extend_definition comment="Microsoft Excel 2003 is installed" definition_ref="oval:org.mitre.oval:def:764"/>
+      <criterion comment="Excel 2003 SP3 or greater is installed" test_ref="oval:org.mitre.oval:tst:8903"/>
+      <criterion comment="Excel.exe version is less than 11.0.8220.0" test_ref="oval:org.mitre.oval:tst:9020"/>
+    </criteria>
+    <criteria operator="AND" comment="excel 2007/version">
+      <extend_definition comment="Microsoft Excel 2007 is installed" definition_ref="oval:org.mitre.oval:def:1745"/>
+      <criterion comment="Excel 2007 is installed" test_ref="oval:org.mitre.oval:tst:8518"/>
+      <criterion comment="Excel.exe version is less than 12.0.6323.5000" test_ref="oval:org.mitre.oval:tst:8965"/>
+    </criteria>
+    <criteria operator="AND" comment="office compatibility pack/version">
+      <extend_definition comment="Microsoft Office Compatibility Pack is installed" definition_ref="oval:org.mitre.oval:def:1853"/>
+      <criterion comment="excelcnv.exe version is less than 12.0.6323.5000" test_ref="oval:org.mitre.oval:tst:8642"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server/version">
+      <extend_definition comment="Microsoft Office SharePoint Server 2007 is installed." definition_ref="oval:org.mitre.oval:def:2313"/>
+      <criterion comment="the version of Ecscalcserver.dll is less than 12.0.6300.5000" test_ref="oval:org.mitre.oval:tst:9059"/>
+    </criteria>
+    <criteria operator="AND" comment="excel viewer 2003/version">
+      <extend_definition comment="Microsoft Excel Viewer 2003 is installed" definition_ref="oval:org.mitre.oval:def:439"/>
+      <criterion comment="Xlview.exe version is less than 11.0.8220.0" test_ref="oval:org.mitre.oval:tst:8740"/>
+    </criteria>
+    <criteria operator="AND" comment="excel viewer 2007/version">
+      <extend_definition comment="Microsoft Excel Viewer 2007 is installed" definition_ref="oval:org.mitre.oval:def:6006"/>
+      <criterion comment="Xlview.exe version is less than 12.0.6324.5000" test_ref="oval:org.mitre.oval:tst:8442"/>
+    </criteria>
+  </criteria>
+</definition>

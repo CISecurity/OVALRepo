@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13330" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-893-1 -- samba vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>samba</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-January/001039.html" ref_id="USN-893-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3297" ref_id="CVE-2009-3297"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0787" ref_id="CVE-2010-0787"/>
+    <description>Ronald Volgers discovered that the mount.cifs utility, when installed as a setuid program, suffered from a race condition when verifying user permissions. A local attacker could trick samba into mounting over arbitrary locations, leading to a root privilege escalation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:19:41.310-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:05:45.397-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:04:44.257-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13330 - added CVE references; also made minor updates" date="2014-06-13T15:53:00.659-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:55:15.692-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:02:43.272-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="samba-doc DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56802"/>
+            <criterion comment="samba-doc-pdf DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56583"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="smbfs DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56948"/>
+            <criterion comment="samba DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56435"/>
+            <criterion comment="swat DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56978"/>
+            <criterion comment="libsmbclient DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56784"/>
+            <criterion comment="smbclient DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56971"/>
+            <criterion comment="winbind DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56552"/>
+            <criterion comment="libpam-smbpass DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56989"/>
+            <criterion comment="libsmbclient-dev DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56473"/>
+            <criterion comment="samba-common DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56544"/>
+            <criterion comment="samba-dbg DPKG is earlier than 3.0.28a-1ubuntu4.10" test_ref="oval:org.mitre.oval:tst:56820"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="samba-doc DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56471"/>
+            <criterion comment="samba-doc-pdf DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56003"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="smbfs DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56335"/>
+            <criterion comment="samba DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56999"/>
+            <criterion comment="swat DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56974"/>
+            <criterion comment="samba-tools DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56582"/>
+            <criterion comment="libsmbclient DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56831"/>
+            <criterion comment="smbclient DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56205"/>
+            <criterion comment="winbind DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56531"/>
+            <criterion comment="libwbclient0 DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56981"/>
+            <criterion comment="libpam-smbpass DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56652"/>
+            <criterion comment="libsmbclient-dev DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56704"/>
+            <criterion comment="samba-common DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56049"/>
+            <criterion comment="samba-dbg DPKG is earlier than 3.2.3-1ubuntu3.7" test_ref="oval:org.mitre.oval:tst:56609"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="samba-common DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56966"/>
+            <criterion comment="samba-doc DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:57045"/>
+            <criterion comment="samba-doc-pdf DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56894"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="smbfs DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:57050"/>
+            <criterion comment="samba DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:57046"/>
+            <criterion comment="swat DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56557"/>
+            <criterion comment="samba-tools DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:57006"/>
+            <criterion comment="libsmbclient DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56828"/>
+            <criterion comment="smbclient DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:57023"/>
+            <criterion comment="winbind DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56963"/>
+            <criterion comment="samba-common-bin DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56456"/>
+            <criterion comment="libwbclient0 DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56847"/>
+            <criterion comment="libpam-smbpass DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56985"/>
+            <criterion comment="libsmbclient-dev DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56611"/>
+            <criterion comment="samba-dbg DPKG is earlier than 3.4.0-3ubuntu5.4" test_ref="oval:org.mitre.oval:tst:56627"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="samba-doc DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56934"/>
+            <criterion comment="samba-doc-pdf DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56618"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="smbfs DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56931"/>
+            <criterion comment="samba DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:57019"/>
+            <criterion comment="swat DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56783"/>
+            <criterion comment="libsmbclient DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:57026"/>
+            <criterion comment="smbclient DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56961"/>
+            <criterion comment="winbind DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56352"/>
+            <criterion comment="libpam-smbpass DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56927"/>
+            <criterion comment="libsmbclient-dev DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56826"/>
+            <criterion comment="samba-common DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56888"/>
+            <criterion comment="python2.4-samba DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56744"/>
+            <criterion comment="samba-dbg DPKG is earlier than 3.0.22-1ubuntu3.10" test_ref="oval:org.mitre.oval:tst:56915"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="samba-doc DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:57042"/>
+            <criterion comment="samba-doc-pdf DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:57034"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="smbfs DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56062"/>
+            <criterion comment="samba DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56897"/>
+            <criterion comment="swat DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56891"/>
+            <criterion comment="samba-tools DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56563"/>
+            <criterion comment="libsmbclient DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56679"/>
+            <criterion comment="smbclient DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56070"/>
+            <criterion comment="winbind DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:57053"/>
+            <criterion comment="libwbclient0 DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56823"/>
+            <criterion comment="libpam-smbpass DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56677"/>
+            <criterion comment="libsmbclient-dev DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56812"/>
+            <criterion comment="samba-common DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56872"/>
+            <criterion comment="samba-dbg DPKG is earlier than 3.3.2-1ubuntu3.3" test_ref="oval:org.mitre.oval:tst:56623"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

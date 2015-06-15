@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28645" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Office memory corruption vulnerability – CVE-2015-1682  (MS15-046)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft Excel 2013</product>
+      <product>Microsoft Excel 2010</product>
+      <product>Microsoft Office 2010</product>
+      <product>Microsoft Office 2013</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft Office Web Apps Server 2013</product>
+      <product>Microsoft PowerPoint 2013</product>
+      <product>Microsoft PowerPoint 2010</product>
+      <product>Microsoft SharePoint Foundation 2010</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft SharePoint Server 2013</product>
+      <product>Microsoft Word 2010</product>
+      <product>Microsoft Word 2013</product>
+      <product>Microsoft PowerPoint Viewer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2015-1682" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1682"/>
+    <description>Microsoft Office 2010 SP2, Excel 2010 SP2, PowerPoint 2010 SP2, Word 2010 SP2, Office 2013 SP1, Excel 2013 SP1, PowerPoint 2013 SP1, Word 2013 SP1, Office 2013 RT SP1, Excel 2013 RT SP1, PowerPoint 2013 RT SP1, Word 2013 RT SP1, Office for Mac 2011, Excel for Mac 2011, PowerPoint for Mac 2011, Word for Mac 2011, PowerPoint Viewer, Word Automation Services on SharePoint Server 2010 SP2 and 2013 SP1, Excel Services on SharePoint Server 2010 SP2 and 2013 SP1, Office Web Apps 2010 SP2, Excel Web App 2010 SP2, Office Web Apps Server 2013 SP1, SharePoint Foundation 2010 SP2, and SharePoint Server 2013 SP1 allow remote attackers to execute arbitrary code via a crafted document, aka "Microsoft Office Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-05-20T08:50:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-05-28T14:06:11.059-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Office 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Office 2010 is installed" definition_ref="oval:org.mitre.oval:def:12061"/>
+      <criteria operator="OR" comment="Check for vulnerable files">
+        <criterion comment="Check if the version of oart.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138167"/>
+        <criterion comment="Check if the version of oartconv.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138552"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Excel 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Excel 2010 is installed" definition_ref="oval:org.mitre.oval:def:12658"/>
+      <criterion comment="Check if the version of excel.exe is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138593"/>
+    </criteria>
+    <criteria operator="AND" comment="Powerpoint 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft PowerPoint 2010 is installed" definition_ref="oval:org.mitre.oval:def:12376"/>
+      <criterion comment="Check if the version of ppcore.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:137805"/>
+    </criteria>
+    <criteria operator="AND" comment="Word 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Word 2010 is installed" definition_ref="oval:org.mitre.oval:def:7631"/>
+      <criterion comment="Check if the version of winword.exe is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138611"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft Office 2013 is installed" definition_ref="oval:org.mitre.oval:def:15381"/>
+      <criterion comment="Check if the version of oart.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:137994"/>
+    </criteria>
+    <criteria operator="AND" comment="Excel 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft Excel 2013 is installed" definition_ref="oval:org.mitre.oval:def:15563"/>
+      <criterion comment="Check if the version of excel.exe is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138497"/>
+    </criteria>
+    <criteria operator="AND" comment="Word 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft Word 2013 is installed" definition_ref="oval:org.mitre.oval:def:15560"/>
+      <criterion comment="Check if the version of winword.exe is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138518"/>
+    </criteria>
+    <criteria operator="AND" comment="Powerpoint 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft PowerPoint 2013 is installed" definition_ref="oval:org.mitre.oval:def:15696"/>
+      <criterion comment="Check if the version ppcore.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138571"/>
+    </criteria>
+    <criteria operator="AND" comment="Powerpoint Viewer and vulnerable file version">
+      <extend_definition comment="Microsoft PowerPoint Viewer 2010 is installed" definition_ref="oval:org.mitre.oval:def:12520"/>
+      <criterion comment="Check if the version of pptview.exe is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138354"/>
+    </criteria>
+    <criteria operator="AND" comment="Sharepoint 2010 and vulnerable file versions">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criteria operator="OR" comment="Check for vulnerable versions">
+        <criterion comment="Check if the version of sword.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138017"/>
+        <criterion comment="Check if the version of xlsrv.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:137921"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Office Web Apps 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Office Web Apps 2010 is installed" definition_ref="oval:org.mitre.oval:def:15787"/>
+      <criteria operator="OR" comment="Check for vulnerable versions">
+        <criterion comment="Check if the version of xlsrv.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138194"/>
+        <criterion comment="Check if the version of sword.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138383"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Sharepoint Foundation 2010 and vulnerable file versions">
+      <extend_definition comment="Microsoft SharePoint Foundation 2010 is installed" definition_ref="oval:org.mitre.oval:def:12224"/>
+      <criterion comment="Check if the version of onetutil.dll is less than 14.0.7149.5000" test_ref="oval:org.mitre.oval:tst:138509"/>
+    </criteria>
+    <criteria operator="AND" comment="Sharepoint Server 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft SharePoint Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:16325"/>
+      <criteria operator="OR" comment="Check for vulnerable versions">
+        <criterion comment="Check if the version of sword.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138545"/>
+        <criterion comment="Check if the version of xlsrv.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138628"/>
+        <criterion comment="Check if the version of ppserver.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138519"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Office Web Apps 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft Office Web Apps Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:22312"/>
+      <criterion comment="Check if the version of sword.dll is less than 15.0.4719.1000" test_ref="oval:org.mitre.oval:tst:138525"/>
+    </criteria>
+  </criteria>
+</definition>

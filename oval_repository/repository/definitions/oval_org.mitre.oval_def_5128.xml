@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5128" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability in Solaris 10 involving the sendfilev() system call could result in Denial of Service (DoS) due to System Panic</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3666" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3666"/>
+    <description>Unspecified vulnerability in Sun Solaris 10 and OpenSolaris before snv_96 allows (1) context-dependent attackers to cause a denial of service (panic) via vectors involving creation of a crafted file and use of the sendfilev system call, as demonstrated by a file served by an Apache 2.2.x web server with EnableSendFile configured; and (2) local users to cause a denial of service (panic) via a call to the sendfile system call, as reachable through the sendfilev library.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-14T11:25:43.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:03:16.477-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:00:51.409-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:21.027-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 239186">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 137111-04 or later installed" test_ref="oval:org.mitre.oval:tst:9073"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 239186">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 137112-04 or later installed" test_ref="oval:org.mitre.oval:tst:8753"/>
+    </criteria>
+  </criteria>
+</definition>

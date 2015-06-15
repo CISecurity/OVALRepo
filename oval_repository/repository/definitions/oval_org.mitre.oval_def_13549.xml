@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13549" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-911-1 -- moin vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>moin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-March/001059.html" ref_id="USN-911-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0668" ref_id="CVE-2010-0668"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0717" ref_id="CVE-2010-0717"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0669" ref_id="CVE-2010-0669"/>
+    <description>It was discovered that several wiki actions and preference settings in MoinMoin were not protected from cross-site request forgery . If an authenticated user were tricked into visiting a malicious website while logged into MoinMoin, a remote attacker could change the user�s configuration or wiki content. It was discovered that MoinMoin did not properly sanitize its input when processing user preferences. An attacker could enter malicious content which when viewed by a user, could render in unexpected ways</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:19:30.876-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:08:41.983-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:06:51.569-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13549 - added CVE references; also made minor updates" date="2014-06-13T15:19:00.449-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:21:12.387-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:26.862-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="python-moinmoin DPKG is earlier than 1.5.8-5.1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:56949"/>
+        <criterion comment="moinmoin-common DPKG is earlier than 1.5.8-5.1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:56970"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="python-moinmoin DPKG is earlier than 1.7.1-1ubuntu1.3" test_ref="oval:org.mitre.oval:tst:56835"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="python-moinmoin DPKG is earlier than 1.8.4-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:56430"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="python-moinmoin DPKG is earlier than 1.5.2-1ubuntu2.5" test_ref="oval:org.mitre.oval:tst:56661"/>
+        <criterion comment="moinmoin-common DPKG is earlier than 1.5.2-1ubuntu2.5" test_ref="oval:org.mitre.oval:tst:56960"/>
+        <criterion comment="python2.4-moinmoin DPKG is earlier than 1.5.2-1ubuntu2.5" test_ref="oval:org.mitre.oval:tst:56918"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="python-moinmoin DPKG is earlier than 1.8.2-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:56856"/>
+    </criteria>
+  </criteria>
+</definition>

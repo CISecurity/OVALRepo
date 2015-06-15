@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE Cross-Site Scripting</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0189" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0189"/>
+    <description>Cross-site scripting vulnerability in Internet Explorer 6.0 allows remote attackers to execute scripts in the Local Computer zone via a URL that exploits a local HTML resource file, aka the "Cross-Site Scripting in Local HTML Resource" vulnerability.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-01-27T05:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2005-09-20T04:00:00.000-04:00" comment="Changed IE registry test to wrt-18">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-21T01:27:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-12T05:49:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-07-03T12:56:00.000-04:00" comment="Added negate=true attribute to criteria sub-block to fix conversion error from OVAL 4.2 to OVAL 5.0">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2006-07-03T12:56:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-09-27T12:29:04.771-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed regex in ste:2889.  Implemented by Matthew Wojcik." date="2007-03-06T18:19:00.507-05:00">
+          <contributor organization="BigFix, Inc">Anna Min</contributor>
+        </modified>
+        <status_change date="2007-03-06T18:21:09.603-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:17:07.349-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:45:36.273-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:02:01.640-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:42.879-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:25.465-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="the version of mshtml.dll is less than 6.0.2716.2200" negate="false" test_ref="oval:org.mitre.oval:tst:3086"/>
+    <criterion comment="the patch q321232 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3119"/>
+    <criterion comment="the patch q323759 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3118"/>
+    <criterion comment="the patch q328970 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3117"/>
+    <criterion comment="the patch q324929 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3116"/>
+    <criterion comment="the patch q810847 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3115"/>
+    <criterion comment="the patch q813489 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3114"/>
+    <criterion comment="the patch q818529 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3113"/>
+    <criterion comment="the patch q822925 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3112"/>
+    <criterion comment="the patch q828750 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3111"/>
+    <criterion comment="the patch q824145 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:3110"/>
+    <criteria operator="AND" comment="Windows 2000 Service Pack 4 (or later) is installed" negate="true">
+      <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+      <criterion comment="Win2K/XP/2003 service pack 4 (or later) is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3084"/>
+    </criteria>
+    <criterion comment="Internet Explorer 6 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3090"/>
+  </criteria>
+</definition>

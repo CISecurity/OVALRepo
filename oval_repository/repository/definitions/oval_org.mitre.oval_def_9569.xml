@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9569" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Eval injection vulnerability in PHPXMLRPC 1.1.1 and earlier (PEAR XML-RPC for PHP), as used in multiple products including (1) Drupal, (2) phpAdsNew, (3) phpPgAds, and (4) phpgroupware, allows remote attackers to execute arbitrary PHP code via certain nested XML tags in a PHP document that should not be nested, which are injected into an eval function call, a different vulnerability than CVE-2005-1921.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-2498" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2498"/>
+    <description>Eval injection vulnerability in PHPXMLRPC 1.1.1 and earlier (PEAR XML-RPC for PHP), as used in multiple products including (1) Drupal, (2) phpAdsNew, (3) phpPgAds, and (4) phpgroupware, allows remote attackers to execute arbitrary PHP code via certain nested XML tags in a PHP document that should not be nested, which are injected into an eval function call, a different vulnerability than CVE-2005-1921.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:12:49.732-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:12:42.575-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:13:46.934-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9569 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:27:00.394-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:34:29.809-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:20:20.282-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="php is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:31517"/>
+        <criterion comment="php-pgsql is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:32191"/>
+        <criterion comment="php-mysql is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:32009"/>
+        <criterion comment="php-ldap is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:31823"/>
+        <criterion comment="php-imap is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:31971"/>
+        <criterion comment="php-odbc is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:32008"/>
+        <criterion comment="php-devel is earlier than 0:4.3.2-25.ent" test_ref="oval:org.mitre.oval:tst:31197"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="php-xmlrpc is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32052"/>
+        <criterion comment="php-snmp is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31200"/>
+        <criterion comment="php-domxml is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31503"/>
+        <criterion comment="php-mysql is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32192"/>
+        <criterion comment="php-imap is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31957"/>
+        <criterion comment="php-gd is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31771"/>
+        <criterion comment="php is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31974"/>
+        <criterion comment="php-mbstring is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31734"/>
+        <criterion comment="php-pgsql is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32178"/>
+        <criterion comment="php-pear is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31386"/>
+        <criterion comment="php-ldap is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32029"/>
+        <criterion comment="php-odbc is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:31677"/>
+        <criterion comment="php-ncurses is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32000"/>
+        <criterion comment="php-devel is earlier than 0:4.3.9-3.8" test_ref="oval:org.mitre.oval:tst:32062"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

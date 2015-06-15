@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13644" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1835-1 tiff -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>tiff</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00149.html" ref_id="DSA-1835-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2285" ref_id="CVE-2009-2285"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2347" ref_id="CVE-2009-2347"/>
+    <description>Several vulnerabilities have been discovered in the library for the Tag Image File Format. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-2285 It was discovered that malformed TIFF images can lead to a crash in the decompression code, resulting in denial of service. CVE-2009-2347 Andrea Barisani discovered several integer overflows, which can lead to the execution of arbitrary code if malformed images are passed to the rgb2ycbcr or tiff2rgba tools. For the old stable distribution, these problems have been fixed in version 3.8.2-7+etch3. For the stable distribution, these problems have been fixed in version 3.8.2-11.2. For the unstable distribution, these problems will be fixed soon. We recommend that you upgrade your tiff packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:29:31.670-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:03:34.791-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:09:36.778-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13644 - Debian Patch Update" date="2014-06-06T16:54:00.736-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:56:21.084-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:48.042-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libtiff-doc DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:49297"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libtiff4 DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:49033"/>
+            <criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:49293"/>
+            <criterion comment="libtiff-tools DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:49248"/>
+            <criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:48681"/>
+            <criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-11.2" test_ref="oval:org.mitre.oval:tst:48648"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libtiff4 DPKG is earlier than 3.8.2-7+etch3" test_ref="oval:org.mitre.oval:tst:48768"/>
+        <criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-7+etch3" test_ref="oval:org.mitre.oval:tst:49290"/>
+        <criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-7+etch3" test_ref="oval:org.mitre.oval:tst:48884"/>
+        <criterion comment="libtiff-tools DPKG is earlier than 3.8.2-7+etch3" test_ref="oval:org.mitre.oval:tst:48855"/>
+        <criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-7+etch3" test_ref="oval:org.mitre.oval:tst:49049"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

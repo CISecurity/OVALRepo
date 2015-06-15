@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12604" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2122-1 glibc -- missing input sanitisation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00172.html" ref_id="DSA-2122-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3847" ref_id="CVE-2010-3847"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3856" ref_id="CVE-2010-3856"/>
+    <description>Ben Hawkes and Tavis Ormandy discovered that the dynamic loader in GNU libc allows local users to gain root privileges using a crafted LD_AUDIT environment variable. For the stable distribution, this problem has been fixed in version 2.7-18lenny6. For the upcoming stable distribution, this problem has been fixed in version 2.11.2-6+squeeze1 of the eglibc package. For the unstable distribution, this problem will be fixed soon. We recommend that you upgrade your glibc packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:23:05">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:07.884-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:18.510-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:26.637-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12604 - Debian Patch Update" date="2014-06-06T17:34:00.215-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:36:31.827-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:26.323-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="glibc-doc DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42089"/>
+          <criterion comment="glibc-source DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42946"/>
+          <criterion comment="locales DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42916"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libc6-prof DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42132"/>
+          <criterion comment="nscd DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42755"/>
+          <criterion comment="libc6-dev DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42999"/>
+          <criterion comment="libc6-pic DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:43005"/>
+          <criterion comment="libc6 DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:43103"/>
+          <criterion comment="locales-all DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42156"/>
+          <criterion comment="libc6-dbg DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42765"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libc6-dev-s390x DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42743"/>
+          <criterion comment="libc6-s390x DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:43013"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libc6-mips64 DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42680"/>
+          <criterion comment="libc6-dev-mips64 DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42529"/>
+          <criterion comment="libc6-dev-mipsn32 DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42892"/>
+          <criterion comment="libc6-mipsn32 DPKG is earlier than 2.7-18lenny6" test_ref="oval:org.mitre.oval:tst:42717"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

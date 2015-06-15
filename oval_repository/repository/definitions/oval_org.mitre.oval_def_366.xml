@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:366" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MS FrontPage Server Extensions Chunked Encoded Request Buffer Overflow (Test 2)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft FrontPage Server Extensions 2002</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0822" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0822"/>
+    <description>Buffer overflow in the debug functionality in fp30reg.dll of Microsoft FrontPage Server Extensions (FPSE) 2000 and 2002 allows remote attackers to execute arbitrary code via a crafted chunked encoded request.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-12-09T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2004-03-05T12:00:00.000-04:00" comment="Changed the definition to test for fp30reg.dll and fp5areg.dll instead of fp5awel.dll.">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </modified>
+        <status_change date="2004-03-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2004-09-14T09:51:00.000-04:00" comment="XP SP2 added">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2004-09-15T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-09-29T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:46.496-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:30.912-04:00">ACCEPTED</status_change>
+        <modified comment="Multiple corrections and update to POSIX compatibility for ste:2656" date="2010-11-29T16:12:00.873-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2010-11-29T16:13:02.025-05:00">INTERIM</status_change>
+        <status_change date="2010-12-20T04:00:54.079-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:45:22.763-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:02:50.905-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criteria operator="OR" comment="Windows NT, 2000, or XP is installed">
+        <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+        <criterion comment="Windows 2000 is installed" test_ref="oval:org.mitre.oval:tst:3085"/>
+        <criterion comment="Windows XP is installed" test_ref="oval:org.mitre.oval:tst:2838"/>
+      </criteria>
+      <criteria operator="OR" comment="a vulnerable version of fp30reg.dll or fp5areg.dll exists">
+        <criterion comment="the version of fp5areg.dll is less than 10.00.4205.0000" test_ref="oval:org.mitre.oval:tst:2679"/>
+        <criterion comment="the version of fp30reg.dll is less than 10.00.4205.0000" test_ref="oval:org.mitre.oval:tst:2678"/>
+      </criteria>
+      <criterion negate="true" comment="Win2K/XP/2003 service pack 2 (or later) is installed" test_ref="oval:org.mitre.oval:tst:2837"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="FrontPage Server Extensions 2002 are enabled (NT, 2K, XP)" test_ref="oval:org.mitre.oval:tst:2677"/>
+    </criteria>
+  </criteria>
+</definition>

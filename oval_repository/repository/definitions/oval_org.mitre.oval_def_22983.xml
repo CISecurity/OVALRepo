@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22983" version="21" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:1449: kernel security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1449-01" ref_url="http://linux.oracle.com/errata/ELSA-2013-1449.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-0333" ref_url="http://linux.oracle.com/cve/CVE-2013-0333.html" source="CVE"/>
+    <reference ref_id="CVE-2013-4299" ref_url="http://linux.oracle.com/cve/CVE-2013-4299.html" source="CVE"/>
+    <reference ref_id="CVE-2013-4345" ref_url="http://linux.oracle.com/cve/CVE-2013-4345.html" source="CVE"/>
+    <reference ref_id="CVE-2013-4368" ref_url="http://linux.oracle.com/cve/CVE-2013-4368.html" source="CVE"/>
+    <description>The outs instruction emulation in Xen 3.1.x, 4.2.x, 4.3.x, and earlier, when using FS: or GS: segment override, uses an uninitialized variable as a segment base, which allows local 64-bit PV guests to obtain sensitive information (hypervisor stack content) via unspecified vectors related to stale data in a segment register.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:32:27.716-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:03.407-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:01.705-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22983 - optimisation of Oracle Linux content" date="2014-05-05T17:55:00.751-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:57:13.898-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:04.894-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107589"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107493"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107294"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107434"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107697"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107601"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107645"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107734"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107476"/>
+      <criterion comment="kernel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107822"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107211"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:107616"/>
+    </criteria>
+  </criteria>
+</definition>

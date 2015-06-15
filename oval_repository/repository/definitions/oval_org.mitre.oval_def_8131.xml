@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8131" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1864 linux-2.6.24 -- privilege escalation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>linux-2.6.24</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1864" ref_id="DSA-1864"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2692" ref_id="CVE-2009-2692"/>
+    <description>A vulnerability has been discovered in the Linux kernel that may lead to privilege escalation. The Common Vulnerabilities and Exposures project identifies the following problem: Tavis Ormandy and Julien Tinnes discovered an issue with how the sendpage function is initialised in the proto_ops structure. Local users can exploit this vulnerability to gain elevated privileges.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:57:06.324-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:29.877-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:21.864-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8131 - Debian Patch Update" date="2014-06-06T16:32:00.192-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:34:10.177-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:09.930-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-patch-debian-2.6.24 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18269"/>
+          <criterion comment="linux-support-2.6.24-etchnhalf.1 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18298"/>
+          <criterion comment="linux-doc-2.6.24 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18118"/>
+          <criterion comment="linux-tree-2.6.24 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18022"/>
+          <criterion comment="linux-source-2.6.24 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18151"/>
+          <criterion comment="linux-manual-2.6.24 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18297"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390x is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18274"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-s390 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18245"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all-s390 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17853"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17924"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-s390-tape is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17313"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18101"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18271"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-s390x is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18120"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-amd64 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18248"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-amd64 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17723"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18030"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18063"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc64 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18416"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc-smp is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18295"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc-smp is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18257"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17820"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18099"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all-hppa is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18197"/>
+          <criterion comment="linux-image-2.6.24-etchnhalf.1-parisc64-smp is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17826"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc64-smp is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18173"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-all is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18439"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-common is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:17719"/>
+          <criterion comment="linux-headers-2.6.24-etchnhalf.1-parisc64 is earlier than 2.6.24-6~etchnhalf.8etch3" test_ref="oval:org.mitre.oval:tst:18055"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26940" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-0926 -- kernel security and bug fix update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-0926.html" ref_id="ELSA-2014-0926"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2678" ref_id="CVE-2014-2678"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4021" ref_id="CVE-2014-4021"/>
+    <description>kernel
+[2.6.18-371.11.1]
+- [fs] dcache: fix cleanup on warning in d_splice_alias (Denys Vlasenko) [1109720 1080606]
+- [net] neigh: Make neigh_add_timer symmetrical to neigh_del_timer (Marcelo Ricardo Leitner) [1111195 1109888]
+- [net] neigh: set NUD_INCOMPLETE when probing router reachability (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: router reachability probing (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: probe routes asynchronous in rt6_probe (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ndisc: Update neigh->updated with write lock (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: remove the unnecessary statement in find_match() (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: fix route selection if CONFIG_IPV6_ROUTER_PREF unset (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: Fix def route failover when CONFIG_IPV6_ROUTER_PREF=n (Marcelo Ricardo Leitner) [1106354 1090806]
+- [net] ipv6: Prefer reachable nexthop only if the caller requests (Marcelo Ricardo Leitner) [1106354 1090806]
+- [fs] ext4/jbd2: don't wait forever stale tid caused by wraparound (Eric Sandeen) [1097528 980268]
+- [fs] ext4: Initialize fsync transaction ids in ext4_new_inode() (Eric Sandeen) [1097528 980268]
+- [fs] jbd2: don't wake kjournald unnecessarily (Eric Sandeen) [1097528 980268]
+- [fs] jbd2: fix fsync() tid wraparound bug (Eric Sandeen) [1097528 980268]
+- [infiniband] rds: do not deref NULL dev in rds_iw_laddr_check() (Jacob Tanenbaum) [1093311 1093312] {CVE-2014-2678}
+- [fs] nfs4: Add recovery for individual stateids - partial backport. (Dave Wysochanski) [1113468 867570]
+- [fs] nfs4: Don't start state recovery in nfs4_close_done - clean backport. (Dave Wysochanski) [1113468 867570]
+- [xen] page-alloc: scrub anonymous domain heap pages upon freeing (Vitaly Kuznetsov) [1103648 1103649] {CVE-2014-4021}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:17">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:29:31.303-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:01:24.386-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:31.848-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:126763 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T18:48:30.925-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:03.097-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126735"/>
+      <criterion comment="ocfs2-2.6.18-371.11.1.el5 is earlier than 0:1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:126831"/>
+      <criterion comment="oracleasm-2.6.18-371.11.1.el5 is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:126590"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126810"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:127207"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126912"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:127161"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:127220"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126460"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126691"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:127170"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-371.11.1.el5" test_ref="oval:org.mitre.oval:tst:126795"/>
+      <criterion comment="ocfs2-2.6.18-371.11.1.el5PAE is earlier than 0:1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:127129"/>
+      <criterion comment="ocfs2-2.6.18-371.11.1.el5debug is earlier than 0:1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:126620"/>
+      <criterion comment="ocfs2-2.6.18-371.11.1.el5xen is earlier than 0:1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:126763"/>
+      <criterion comment="oracleasm-2.6.18-371.11.1.el5PAE is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:126371"/>
+      <criterion comment="oracleasm-2.6.18-371.11.1.el5debug is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:127205"/>
+      <criterion comment="oracleasm-2.6.18-371.11.1.el5xen is earlier than 0:2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:126804"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26043" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Internet Explorer Memory Corruption Vulnerability - CVE-2014-2824 (MS14-051)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Internet Explorer 8</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-2824" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2824"/>
+    <description>Microsoft Internet Explorer 8 allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted web site, aka "Internet Explorer Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-19T08:33:30">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-08-26T16:07:33.119-04:00">DRAFT</status_change>
+        <status_change date="2014-09-15T04:00:31.814-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:21.582-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft Internet Explorer 8 is installed" definition_ref="oval:org.mitre.oval:def:6210"/>
+    <criteria operator="OR" comment="vulnerable os and their respective file versions">
+      <criteria operator="AND" comment="2k3(x86 + x64+ ia64) + vulnerable file versions">
+        <criteria operator="OR" comment="2k3(x86 + x64 + ia64)">
+          <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+          <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        </criteria>
+        <criterion comment="Check if the version of mshtml.dll is less than 8.0.6001.23611" test_ref="oval:org.mitre.oval:tst:122198"/>
+      </criteria>
+      <criteria operator="AND" comment="Vista/2k8 + vulnerable file versions">
+        <criteria operator="OR" comment="Vista/ 2k8">
+          <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+          <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        </criteria>
+        <criteria operator="OR" comment="Check for vulnerable version">
+          <criterion comment="Check if the version of mshtml.dll is less than 8.0.6001.19553" test_ref="oval:org.mitre.oval:tst:122307"/>
+          <criteria operator="AND" comment="Check for LDR">
+            <criterion comment="Check for mshtml.dll version greater than or equal to 8.0.6001.23000" test_ref="oval:org.mitre.oval:tst:79301"/>
+            <criterion comment="Check if the version of mshtml.dll is less than 8.0.6001.23611" test_ref="oval:org.mitre.oval:tst:122198"/>
+          </criteria>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Win 7 / R2 and vulnerable file versions">
+        <criteria operator="OR" comment="Win 7 / R2">
+          <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+          <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+          <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+          <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+        </criteria>
+        <criteria operator="OR" comment="Check for vulnerable versions">
+          <criterion comment="Check if the version of mshtml.dll is less than 8.0.7601.18534" test_ref="oval:org.mitre.oval:tst:122429"/>
+          <criteria operator="AND" comment="Check for LDR">
+            <criterion comment="Check if the version of mshtml.dll is greater than or equal to 8.0.7601.22000" test_ref="oval:org.mitre.oval:tst:81176"/>
+            <criterion comment="Check if the version of mshtml.dll is less than 8.0.7601.22745" test_ref="oval:org.mitre.oval:tst:122320"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

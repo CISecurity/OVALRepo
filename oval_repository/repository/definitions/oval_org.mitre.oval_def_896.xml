@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:896" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows 2000 winlogon Remote Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Windows logon process (winlogon)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0806" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0806"/>
+    <description>Buffer overflow in the Windows logon process (winlogon) in Microsoft Windows NT 4.0 SP6a, 2000 SP2 through SP4, and XP SP1, when a member of a domain, allows remote attackers to execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-04-13T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <status_change date="2004-05-05T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-26T10:54:00.000-04:00" comment="modified wft-133 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-09-23T19:48:00.000-04:00" comment="fixed  tst:1493 by changing referrence to obj:862 (msgina.dll) instead of obj:958 (msjet40.dll).">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <modified date="2006-09-23T20:21:00.000-04:00" comment="Replaced use of  tst:3085 to test for Windows 2000 with extended inventory definition def:85.">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2006-09-23T21:48:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-10-10T20:40:01.140-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <extend_definition comment="Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <criterion comment="the version of msgina.dll is less than 5.0.2195.6895" negate="false" test_ref="oval:org.mitre.oval:tst:1493"/>
+      <criterion comment="the patch kb835732 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1510"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="machine is a member of a domain" negate="false" test_ref="oval:org.mitre.oval:tst:1494"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22132" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0362: scsi-target-utils security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>scsi-target-utils</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0362-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0362.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0362"/>
+    <reference source="CVE" ref_id="CVE-2010-0743" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0743.html"/>
+    <description>Multiple format string vulnerabilities in isns.c in (1) Linux SCSI target framework (aka tgt or scsi-target-utils) 1.0.3, 0.9.5, and earlier and (2) iSCSI Enterprise Target (aka iscsitarget) 0.4.16 allow remote attackers to cause a denial of service (tgtd daemon crash) or possibly have unspecified other impact via vectors that involve the isns_attr_query and qry_rsp_handle functions, and are related to (a) client appearance and (b) client disappearance messages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:54.864-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:23.543-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:46.816-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criterion comment="scsi-target-utils is earlier than 0:0.0-6.20091205snap.el5_5.2" test_ref="oval:org.mitre.oval:tst:99338"/>
+  </criteria>
+</definition>

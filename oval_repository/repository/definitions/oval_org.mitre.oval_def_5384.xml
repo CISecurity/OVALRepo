@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5384" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Project Memory Validation Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Project 2000</product>
+      <product>Microsoft Project 2002</product>
+      <product>Microsoft Project 2003</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1088" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1088"/>
+    <description>Microsoft Project 2000 Service Release 1, 2002 SP1, and 2003 SP2 allows user-assisted remote attackers to execute arbitrary code via a crafted Project file, related to improper validation of "memory resource allocations."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-08T16:04:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-04-11T14:11:45.632-04:00">DRAFT</status_change>
+        <status_change date="2008-04-28T04:00:15.830-04:00">INTERIM</status_change>
+        <status_change date="2008-05-19T04:00:13.720-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5384 - Corrected typo in product name" date="2011-04-27T10:11:00.038-04:00">
+          <contributor organization="The MITRE Corporation">Mike Lah</contributor>
+        </modified>
+        <status_change date="2011-04-27T10:11:37.245-04:00">INTERIM</status_change>
+        <status_change date="2011-05-16T04:03:10.313-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:120 - Updating pre-Microsoft Office 2010 content to use windows_view behaviors." date="2012-05-10T14:55:00.075-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:57:21.292-04:00">INTERIM</status_change>
+        <status_change date="2012-05-28T04:01:53.390-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Project 2000 SR1 is installed" definition_ref="oval:org.mitre.oval:def:518"/>
+      <criterion comment="Winproj.exe version is less than 9.0.2008.228" test_ref="oval:org.mitre.oval:tst:7829"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Project 2002 SP1 is installed" definition_ref="oval:org.mitre.oval:def:707"/>
+      <criterion comment="Winproj.exe version is less than 10.0.2108.1228" test_ref="oval:org.mitre.oval:tst:7948"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Project 2003 SP2 is installed" definition_ref="oval:org.mitre.oval:def:4586"/>
+      <criterion comment="Winproj.exe version is less than 11.3.2008.1207" test_ref="oval:org.mitre.oval:tst:7776"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21779" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Win32k window handle vulnerability in Microsoft Windows (CVE-2014-0262) - MS14-003</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-0262" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0262"/>
+    <description>win32k.sys in the kernel-mode drivers in Microsoft Windows 7 SP1 and Server 2008 R2 SP1 does not properly consider thread-owned objects during the processing of window handles, which allows local users to gain privileges via a crafted application, aka "Win32k Window Handle Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-16T14:43:59">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-01-16T10:57:05.237-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:43.201-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:07.756-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Win 7 / R2">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+    </criteria>
+    <criteria operator="OR" comment="Check for vulnerable version">
+      <criterion comment="Check if the version of Win32k.sys is less than 6.1.7601.18327" test_ref="oval:org.mitre.oval:tst:100148"/>
+      <criteria operator="AND" comment="Check for LDR">
+        <criterion comment="Check if the version of Win32k.sys is greater than or equal to 6.1.7601.22000" test_ref="oval:org.mitre.oval:tst:81763"/>
+        <criterion comment="Check if the version of Win32k.sys is less than 6.1.7601.22525" test_ref="oval:org.mitre.oval:tst:99694"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

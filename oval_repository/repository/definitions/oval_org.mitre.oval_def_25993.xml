@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25993" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Critical Patch Update July 2014</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference ref_id="CVE-2014-4215" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4215" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Solaris 10 and 11.1 allows local users to affect availability via vectors related to CPU performance counters (CPC) drivers.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-22T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Manu M G</contributor>
+        </submitted>
+        <status_change date="2014-07-31T12:19:02.112-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:41.249-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:45.440-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch 151355-01 or later installed">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 151355-01 or later installed" test_ref="oval:org.mitre.oval:tst:121297"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch 150401-13 or later installed">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 150401-13 or later installed" test_ref="oval:org.mitre.oval:tst:121371"/>
+    </criteria>
+  </criteria>
+</definition>

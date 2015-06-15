@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22160" version="25" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2007:0068: postgresql security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>postgresql</product>
+    </affected>
+    <reference ref_id="ELSA-2007:0068-02" ref_url="http://linux.oracle.com/errata/ELSA-2007-0068.html" source="VENDOR"/>
+    <reference ref_id="CVE-2006-5540" ref_url="http://linux.oracle.com/cve/CVE-2006-5540.html" source="CVE"/>
+    <reference ref_id="CVE-2006-5541" ref_url="http://linux.oracle.com/cve/CVE-2006-5541.html" source="CVE"/>
+    <reference ref_id="CVE-2006-5542" ref_url="http://linux.oracle.com/cve/CVE-2006-5542.html" source="CVE"/>
+    <reference ref_id="CVE-2007-0555" ref_url="http://linux.oracle.com/cve/CVE-2007-0555.html" source="CVE"/>
+    <reference ref_id="CVE-2007-0556" ref_url="http://linux.oracle.com/cve/CVE-2007-0556.html" source="CVE"/>
+    <description>The query planner in PostgreSQL before 8.0.11, 8.1 before 8.1.7, and 8.2 before 8.2.2 does not verify that a table is compatible with a "previously made query plan," which allows remote authenticated users to cause a denial of service (server crash) and possibly access database content via an "ALTER COLUMN TYPE" SQL statement, which can be leveraged to read arbitrary memory from the server.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:42:04.915-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:34.486-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:49.971-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22160 - optimisation of Oracle Linux content" date="2014-05-05T18:14:00.984-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:15:39.936-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:56.584-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="postgresql-docs is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100600"/>
+      <criterion comment="postgresql-devel is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100837"/>
+      <criterion comment="postgresql-test is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:99948"/>
+      <criterion comment="postgresql-contrib is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100544"/>
+      <criterion comment="postgresql-libs is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100734"/>
+      <criterion comment="postgresql-tcl is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100881"/>
+      <criterion comment="postgresql is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100880"/>
+      <criterion comment="postgresql-server is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100926"/>
+      <criterion comment="postgresql-pl is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100723"/>
+      <criterion comment="postgresql-python is earlier than 0:8.1.8-1.el5" test_ref="oval:org.mitre.oval:tst:100394"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8272" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in rm(1) may Lead to Unauthorized Deletion of Files or Directories</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-0895" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0895"/>
+    <description>Race condition in recursive directory deletion with the (1) -r or (2) -R option in rm in Solaris 8 through 10 before 20070208 allows local users to delete files and directories as the user running rm by moving a low-level directory to a higher level as it is being deleted, which causes rm to chdir to a ".." directory that is higher than expected, possibly up to the root file system, a related issue to CVE-2002-0435.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-06T11:50:11.000-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </submitted>
+        <status_change date="2007-08-08T21:33:23.977-04:00">DRAFT</status_change>
+        <status_change date="2007-08-23T14:55:19.959-04:00">INTERIM</status_change>
+        <status_change date="2007-09-10T14:45:27.362-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion comment="Patch 124969-01 or later installed" test_ref="oval:org.mitre.oval:tst:4414" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 123372-02 or later installed" test_ref="oval:org.mitre.oval:tst:4946" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 124244-01 or later installed" test_ref="oval:org.mitre.oval:tst:4215" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion comment="Patch 124970-01 or later installed" test_ref="oval:org.mitre.oval:tst:4906" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 123373-02 or later installed" test_ref="oval:org.mitre.oval:tst:5133" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102782" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 124245-01 or later installed" test_ref="oval:org.mitre.oval:tst:4576" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

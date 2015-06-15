@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1248" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OLE Automation Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Visual Basic 6.0</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2224" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2224"/>
+    <description>Object linking and embedding (OLE) Automation, as used in Microsoft Windows 2000 SP4, XP SP2, Server 2003 SP1 and SP2, Office 2004 for Mac, and Visual Basic 6.0 allows remote attackers to execute arbitrary code via the substringData method on a TextNode object, which causes an integer overflow that leads to a buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-15T13:16:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2007-08-15T16:59:48.715-04:00">DRAFT</status_change>
+        <modified comment="Corrected cve reference." date="2007-08-28T07:44:00.451-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-09-12T15:04:55.697-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:39.327-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1248 - Correcting incorrect references to 64-bit Itanium XP." date="2012-08-23T17:47:00.168-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:52:57.956-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:00:05.729-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Windows 2000 SP4 and Oleaut32.dll version is less than 2.40.4531.0">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="Oleaut32.dll version is less than 2.40.4531.0" test_ref="oval:org.mitre.oval:tst:4203"/>
+    </criteria>
+    <criteria comment="Windows XP SP2 and Oleaut32.dll version is less than 5.1.2600.3139">
+      <extend_definition comment="Microsoft Windows XP SP2 or later is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <criterion comment="Oleaut32.dll version is less than 5.1.2600.3139" test_ref="oval:org.mitre.oval:tst:3235"/>
+    </criteria>
+    <criteria comment="Windows XP SP1 (64-bit) and Oleaut32.dll version is less than 5.2.3790.2955">
+      <extend_definition comment="Microsoft Windows XP SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+      <criterion comment="Oleaut32.dll version is less than 5.2.3790.2955" test_ref="oval:org.mitre.oval:tst:3380"/>
+    </criteria>
+    <criteria comment="Windows XP SP2 (64-bit) and Oleaut32.dll version is less than 5.2.3790.4098">
+      <criterion comment="Oleaut32.dll version is less than 5.2.3790.4098" test_ref="oval:org.mitre.oval:tst:4174"/>
+      <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+    </criteria>
+    <criteria comment="Windows Server 2003 SP1 and Oleaut32.dll version is less than 5.2.3790.2955">
+      <criteria operator="OR" comment="Windows Server 2003 SP1">
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="Oleaut32.dll version is less than 5.2.3790.2955" test_ref="oval:org.mitre.oval:tst:3380"/>
+    </criteria>
+    <criteria comment="Windows Server 2003 SP2 and Oleaut32.dll version is less than 5.2.3790.4098">
+      <criteria operator="OR" comment="Windows Server 2003 SP2">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="Oleaut32.dll version is less than 5.2.3790.4098" test_ref="oval:org.mitre.oval:tst:4174"/>
+    </criteria>
+  </criteria>
+</definition>

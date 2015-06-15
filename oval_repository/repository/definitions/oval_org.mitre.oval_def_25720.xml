@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25720" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:1209-1 -- Recommended update for yast2-mail</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>yast2-mail</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131209-1.html" ref_id="SUSE-RU-2013:1209-1"/>
+    <description>This update fixes the following issues:
+
+    * ag_postfix_mastercf process freezed the system, when
+saving mail server settings with the YaST2 "Mail Server"
+module (bnc#800788)
+    * AutoYaST configuration of mail services failed
+(bnc#822285)
+    * automatic installation stopped with error during
+Postfix configuration (bnc#821632)
+    * YaST2 mail server enhanced module was not able to
+detect mail domains (bnc#818544)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:30:44">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:08.131-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:59.770-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:05.606-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criterion comment="yast2-mail RPM is earlier than 0:2.17.6-0.13.1" test_ref="oval:org.mitre.oval:tst:119327"/>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="yast2-mail-plugins RPM is earlier than 0:2.17.6-0.13.1" test_ref="oval:org.mitre.oval:tst:118547"/>
+    </criteria>
+  </criteria>
+</definition>

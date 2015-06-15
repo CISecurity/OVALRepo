@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15286" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2390-1 openssl -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2012/msg00012.html" ref_id="DSA-2390-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4108" ref_id="CVE-2011-4108"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4109" ref_id="CVE-2011-4109"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4354" ref_id="CVE-2011-4354"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4576" ref_id="CVE-2011-4576"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4619" ref_id="CVE-2011-4619"/>
+    <description>Several vulnerabilities were discovered in OpenSSL, an implementation of TLS and related protocols. The Common Vulnerabilities and Exposures project identifies the following vulnerabilities: CVE-2011-4108 The DTLS implementation performs a MAC check only if certain padding is valid, which makes it easier for remote attackers to recover plaintext via a padding oracle attack. CVE-2011-4109 A double free vulnerability when X509_V_FLAG_POLICY_CHECK is enabled, allows remote attackers to cause applications crashes and potentially allow execution of arbitrary code by triggering failure of a policy check. CVE-2011-4354 On 32-bit systems, the operations on NIST elliptic curves P-256 and P-384 are not correctly implemented, potentially leaking the private ECC key of a TLS server. CVE-2011-4576 The SSL 3.0 implementation does not properly initialise data structures for block cipher padding, which might allow remote attackers to obtain sensitive information by decrypting the padding data sent by an SSL peer. CVE-2011-4619 The Server Gated Cryptography implementation in OpenSSL does not properly handle handshake restarts, unnecessarily simplifying CPU exhaustion attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:57:10.834-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:23.886-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:49.658-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15286 - Debian Patch Update" date="2014-06-06T17:11:00.221-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:13:14.032-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:40.851-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="openssl DPKG is earlier than 0.9.8g-15+lenny15" test_ref="oval:org.mitre.oval:tst:78681"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="openssl DPKG is earlier than 0.9.8o-4squeeze5" test_ref="oval:org.mitre.oval:tst:78365"/>
+    </criteria>
+  </criteria>
+</definition>

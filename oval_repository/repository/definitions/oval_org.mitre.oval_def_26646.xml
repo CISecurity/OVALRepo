@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26646" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1059: libvirt bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1059-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1059.html"/>
+    <description>The libvirt library is a C API for managing and interacting with the
+virtualization capabilities of Linux and other operating systems. In addition,
+libvirt provides tools for remote management of virtualized systems. 
+
+This update fixes the following bugs:
+
+* Previously, the libvirt API did not properly cancel the migration of QEMU
+domains if it detected an error, which caused QEMU to pause guest CPUs. With
+this update, if libvirt detects an error during a migration process, it informs
+QEMU to cancel the ongoing migration. Now, after a failed migration, libvirt
+resumes a domain, which then remains running, and QEMU no longer pauses guest
+CPUs. (BZ#1100642)
+
+* Prior to this update, the libvirt API canceled migration when it could not
+access a QEMU monitor for more that 30 seconds to get migration status.
+Consequently, when the libvirt user queried some data from QEMU during an
+ongoing migration, the query timed out and libvirt canceled the migration. As a
+workaround, ignore the time-out error and try querying again as libvirt checks
+for migration status every 50ms. As a result, migration in a Red Hat Enterprise
+Virtualization environment is no longer canceled when QEMU is slow to respond.
+(BZ#1100671)
+
+* Previously, a host device located on a PCI bus with a domain other than "0"
+could not be assigned to a virtual guest using PCI passthrough. This bug has
+been fixed, and QEMU is now able to assign non-0 domains in the PCI address. As
+a result, host devices located on a PCI bus with a non-0 domain can now be
+assigned to a guest as intended. (BZ#1100737)
+
+Users of libvirt are advised to upgrade to these updated packages, which fix
+these bugs. After installing the updated packages, libvirtd will be restarted
+automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T11:25:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:07:08.284-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:43.974-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:41.223-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libvirt is earlier than 0:0.10.2-29.el6_5.11" test_ref="oval:org.mitre.oval:tst:123844"/>
+      <criterion comment="libvirt-client is earlier than 0:0.10.2-29.el6_5.11" test_ref="oval:org.mitre.oval:tst:123675"/>
+      <criterion comment="libvirt-devel is earlier than 0:0.10.2-29.el6_5.11" test_ref="oval:org.mitre.oval:tst:123569"/>
+      <criterion comment="libvirt-lock-sanlock is earlier than 0:0.10.2-29.el6_5.11" test_ref="oval:org.mitre.oval:tst:123423"/>
+      <criterion comment="libvirt-python is earlier than 0:0.10.2-29.el6_5.11" test_ref="oval:org.mitre.oval:tst:123783"/>
+    </criteria>
+  </criteria>
+</definition>

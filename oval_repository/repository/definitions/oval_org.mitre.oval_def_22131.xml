@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22131" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0659: httpd security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>httpd</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0659-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0659.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0659"/>
+    <reference source="CVE" ref_id="CVE-2010-1452" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-1452.html"/>
+    <reference source="CVE" ref_id="CVE-2010-2791" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-2791.html"/>
+    <description>mod_proxy in httpd in Apache HTTP Server 2.2.9, when running on Unix, does not close the backend connection if a timeout occurs when reading a response from a persistent connection, which allows remote attackers to obtain a potentially sensitive response intended for a different client in opportunistic circumstances via a normal HTTP request.  NOTE: this is the same issue as CVE-2010-2068, but for a different OS and set of affected versions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:46:34.499-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:23.435-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:46.628-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="httpd-manual is earlier than 0:2.2.3-43.el5_5.3" test_ref="oval:org.mitre.oval:tst:99627"/>
+      <criterion comment="httpd-devel is earlier than 0:2.2.3-43.el5_5.3" test_ref="oval:org.mitre.oval:tst:99244"/>
+      <criterion comment="mod_ssl is earlier than 0:2.2.3-43.el5_5.3" test_ref="oval:org.mitre.oval:tst:99468"/>
+      <criterion comment="httpd is earlier than 0:2.2.3-43.el5_5.3" test_ref="oval:org.mitre.oval:tst:99686"/>
+    </criteria>
+  </criteria>
+</definition>

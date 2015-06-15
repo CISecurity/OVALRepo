@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13430" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-931-2 -- ffmpeg, ffmpeg-debian regression</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>ffmpeg</product>
+      <product>ffmpeg-debian</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-April/001086.html" ref_id="USN-931-2"/>
+    <description>USN-931-1 fixed vulnerabilities in FFmpeg. The update introduced a regression when trying to play certain multimedia files. This update fixes the problem. We apologize for the inconvenience. Original advisory details: It was discovered that FFmpeg contained multiple security issues when handling certain multimedia files. If a user were tricked into opening a crafted multimedia file, an attacker could cause a denial of service via application crash, or possibly execute arbitrary code with the privileges of the user invoking the program.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:23:34.322-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:06:57.660-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:05:32.253-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ffmpeg DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:57934"/>
+            <criterion comment="libavcodec-dev DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58445"/>
+            <criterion comment="libavutil-dev DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58264"/>
+            <criterion comment="libpostproc-dev DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58414"/>
+            <criterion comment="libavformat1d DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58312"/>
+            <criterion comment="libswscale1d DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58321"/>
+            <criterion comment="libavcodec1d DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58227"/>
+            <criterion comment="libswscale-dev DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:57939"/>
+            <criterion comment="libavutil1d DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58446"/>
+            <criterion comment="libpostproc1d DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58018"/>
+            <criterion comment="libavformat-dev DPKG is earlier than 0.cvs20070307-5ubuntu7.5" test_ref="oval:org.mitre.oval:tst:58507"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="ffmpeg-doc DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58375"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ffmpeg-dbg DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58433"/>
+            <criterion comment="libavcodec51 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58118"/>
+            <criterion comment="ffmpeg DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58519"/>
+            <criterion comment="libswscale0 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58043"/>
+            <criterion comment="libavutil-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58415"/>
+            <criterion comment="libavformat52 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58196"/>
+            <criterion comment="libpostproc-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:57654"/>
+            <criterion comment="libpostproc51 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58473"/>
+            <criterion comment="libavdevice52 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58190"/>
+            <criterion comment="libavcodec-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58488"/>
+            <criterion comment="libswscale-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58089"/>
+            <criterion comment="libavutil49 DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:57996"/>
+            <criterion comment="libavformat-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58503"/>
+            <criterion comment="libavdevice-dev DPKG is earlier than 0.svn20080206-12ubuntu3.3" test_ref="oval:org.mitre.oval:tst:58129"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="ffmpeg-doc DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58317"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ffmpeg-dbg DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58277"/>
+            <criterion comment="ffmpeg DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58241"/>
+            <criterion comment="libswscale0 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58117"/>
+            <criterion comment="libavcodec52 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58305"/>
+            <criterion comment="libavformat52 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58427"/>
+            <criterion comment="libpostproc-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58340"/>
+            <criterion comment="libavfilter-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58396"/>
+            <criterion comment="libpostproc51 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58194"/>
+            <criterion comment="libavdevice52 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58274"/>
+            <criterion comment="libavcodec-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58424"/>
+            <criterion comment="libswscale-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58261"/>
+            <criterion comment="libavutil-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:57667"/>
+            <criterion comment="libavutil49 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:57548"/>
+            <criterion comment="libavformat-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58348"/>
+            <criterion comment="libavfilter0 DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58158"/>
+            <criterion comment="libavdevice-dev DPKG is earlier than 0.5+svn20090706-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:58542"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="ffmpeg-doc DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58203"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="ffmpeg-dbg DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58373"/>
+            <criterion comment="ffmpeg DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58482"/>
+            <criterion comment="libswscale0 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58545"/>
+            <criterion comment="libavcodec52 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:57922"/>
+            <criterion comment="libavformat52 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58492"/>
+            <criterion comment="libpostproc-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58516"/>
+            <criterion comment="libavfilter-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58505"/>
+            <criterion comment="libpostproc51 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58252"/>
+            <criterion comment="libavdevice52 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:57994"/>
+            <criterion comment="libavcodec-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58480"/>
+            <criterion comment="libswscale-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58342"/>
+            <criterion comment="libavutil-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58308"/>
+            <criterion comment="libavutil49 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:57905"/>
+            <criterion comment="libavformat-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58529"/>
+            <criterion comment="libavfilter0 DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58333"/>
+            <criterion comment="libavdevice-dev DPKG is earlier than 0.svn20090303-1ubuntu6.2" test_ref="oval:org.mitre.oval:tst:58474"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

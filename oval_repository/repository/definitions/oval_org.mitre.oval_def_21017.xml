@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21017" version="45" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0130: httpd security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>httpd</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0130-00" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0130.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0130"/>
+    <reference source="CVE" ref_id="CVE-2008-0455" ref_url="https://www.redhat.com/security/data/cve/CVE-2008-0455.html"/>
+    <reference source="CVE" ref_id="CVE-2008-0456" ref_url="https://www.redhat.com/security/data/cve/CVE-2008-0456.html"/>
+    <reference source="CVE" ref_id="CVE-2012-2687" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2687.html"/>
+    <description>Multiple cross-site scripting (XSS) vulnerabilities in the make_variant_list function in mod_negotiation.c in the mod_negotiation module in the Apache HTTP Server 2.4.x before 2.4.3, when the MultiViews option is enabled, allow remote attackers to inject arbitrary web script or HTML via a crafted filename that is not properly handled during construction of a variant list.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:19.655-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:54.502-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:05.461-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-74.el5" test_ref="oval:org.mitre.oval:tst:90241"/>
+        <criterion comment="httpd is earlier than 0:2.2.3-74.el5" test_ref="oval:org.mitre.oval:tst:90143"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-74.el5" test_ref="oval:org.mitre.oval:tst:90124"/>
+        <criterion comment="mod_ssl is earlier than 0:2.2.3-74.el5" test_ref="oval:org.mitre.oval:tst:90269"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-74.el5.centos" test_ref="oval:org.mitre.oval:tst:92044"/>
+        <criterion comment="httpd is earlier than 0:2.2.3-74.el5.centos" test_ref="oval:org.mitre.oval:tst:91895"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-74.el5.centos" test_ref="oval:org.mitre.oval:tst:91699"/>
+        <criterion comment="mod_ssl is earlier than 0:2.2.3-74.el5.centos" test_ref="oval:org.mitre.oval:tst:92159"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

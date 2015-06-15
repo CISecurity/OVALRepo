@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7292" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>smbd access control list remote modification vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-1888" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1888"/>
+    <description>The acl_group_override function in smbd/posix_acls.c in smbd in Samba 3.0.x before 3.0.35, 3.1.x and 3.2.x before 3.2.13, and 3.3.x before 3.3.6, when dos filemode is enabled, allows remote attackers to modify access control lists for files via vectors related to read access to uninitialized memory.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-04-01T16:51:44.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-04-05T15:19:52.845-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:00:48.969-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:00:35.155-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7292 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:36.244-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:33.650-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criterion comment="Patch ESX400-201003405-SG is not installed" test_ref="oval:org.mitre.oval:tst:11542"/>
+  </criteria>
+</definition>

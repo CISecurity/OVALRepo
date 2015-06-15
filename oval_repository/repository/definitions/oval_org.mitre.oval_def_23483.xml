@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23483" version="7" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013:0983: curl security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>curl</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0983-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-0983.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-2174" ref_url="http://linux.oracle.com/cve/CVE-2013-2174.html" source="CVE"/>
+    <description>Heap-based buffer overflow in the curl_easy_unescape function in lib/escape.c in cURL and libcurl 7.7 through 7.30.0 allows remote attackers to cause a denial of service (application crash) or possibly execute arbitrary code via a crafted string ending in a "%" (percent) character.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:29:45.778-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:13.847-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:56.281-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23483 - optimisation of Oracle Linux content" date="2014-05-05T17:35:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:37:42.482-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:31.539-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecate duplicates in Oracle Linux patches." date="2014-07-11T17:42:58.917-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-11T17:42:58.917-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="curl is earlier than 0:7.19.7-37.el6_4" test_ref="oval:org.mitre.oval:tst:107253"/>
+        <criterion comment="libcurl-devel is earlier than 0:7.19.7-37.el6_4" test_ref="oval:org.mitre.oval:tst:106843"/>
+        <criterion comment="libcurl is earlier than 0:7.19.7-37.el6_4" test_ref="oval:org.mitre.oval:tst:107585"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="curl is earlier than 0:7.15.5-17.el5_9" test_ref="oval:org.mitre.oval:tst:107567"/>
+        <criterion comment="curl-devel is earlier than 0:7.15.5-17.el5_9" test_ref="oval:org.mitre.oval:tst:107370"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

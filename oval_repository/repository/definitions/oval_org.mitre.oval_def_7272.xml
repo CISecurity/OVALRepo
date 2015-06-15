@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7272" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Comctl32 Heap Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2746" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2746"/>
+    <description>Heap-based buffer overflow in Comctl32.dll (aka the common control library) in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP1 and SP2, Windows Server 2008 Gold, SP2, and R2, and Windows 7, when a third-party SVG viewer is used, allows remote attackers to execute arbitrary code via a crafted HTML document that triggers unspecified messages from this viewer, aka "Comctl32 Heap Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-08-10T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-10-18T21:49:55.409-04:00">DRAFT</status_change>
+        <status_change date="2010-11-08T04:00:15.250-05:00">INTERIM</status_change>
+        <status_change date="2010-11-29T04:00:23.979-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7272 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:04:41.354-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:46.442-04:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:24:01.806-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:24:01.806-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:03:49.654-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows XP SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="The version of Comctl32.dll is less than 5.82.2900.6028" test_ref="oval:org.mitre.oval:tst:11533"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP x64 sp2, Server 2003 x86/x64/ia64 sp2">
+      <criteria operator="OR" comment="Microsoft Windows XP x64 Edition SP2, Server 2003 SP2 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="The version of Comctl32.dll is less than 5.82.3790.4770" test_ref="oval:org.mitre.oval:tst:11557"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista x86/x64 sp1, Windows Server 2008 x86/x64, Windows Server 2008 ia64">
+      <criteria operator="OR" comment="Microsoft Windows Vista SP1 x64/32-bit, Server 2008 32-bit/64-bit/ia-64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Comctl32.dll is less than 5.82.6001.18523" test_ref="oval:org.mitre.oval:tst:11561"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Comctl32.dll is greater than or equal to 5.82.6001.22000" test_ref="oval:org.mitre.oval:tst:11519"/>
+          <criterion comment="The version of Comctl32.dll is less than 5.82.6001.22755" test_ref="oval:org.mitre.oval:tst:11516"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Windows Vista x86/x64 sp2, Windows Server 2008 x86/x64 sp2, Windindows Server 2008 ia64 sp2">
+      <criteria operator="OR" comment="Microsoft Windows Vista SP2 32-bit/x64, Server 2008 SP2 32-bit/x64/Itanium">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Comctl32.dll is less than 5.82.6002.18305" test_ref="oval:org.mitre.oval:tst:11513"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Comctl32.dll is greater than or equal to 5.82.6002.22000" test_ref="oval:org.mitre.oval:tst:11503"/>
+          <criterion comment="The version of Comctl32.dll is less than 5.82.6002.22480" test_ref="oval:org.mitre.oval:tst:11494"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows 7 x86/x64, Windows 2008 R2 x64/ia64">
+      <criteria operator="OR" comment="Microsoft Windows 7 32-bit/x64, Server 2008 R2 x64/Itanium">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Comctl32.dll is less than 5.82.7600.16661" test_ref="oval:org.mitre.oval:tst:11441"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Comctl32.dll is greater than or equal to 5.82.7600.20000" test_ref="oval:org.mitre.oval:tst:11432"/>
+          <criterion comment="The version of Comctl32.dll is less than 5.82.7600.20787" test_ref="oval:org.mitre.oval:tst:11728"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

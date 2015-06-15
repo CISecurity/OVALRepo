@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21898" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0305: samba security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>samba</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0305-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0305.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0719" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0719.html"/>
+    <reference source="CESA-2011:0305" ref_url="http://lists.centos.org/pipermail/centos-announce/2011-April/017389.html" ref_id="CESA-2011:0305-CentOS 5"/>
+    <description>Samba 3.x before 3.3.15, 3.4.x before 3.4.12, and 3.5.x before 3.5.7 does not perform range checks for file descriptors before use of the FD_SET macro, which allows remote attackers to cause a denial of service (stack memory corruption, and infinite loop or daemon crash) by opening a large number of files, related to (1) Winbind or (2) smbd.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:39:07.959-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:59.749-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:17.413-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21898 - RHEL and Centos checks were added where necessary" date="2015-02-16T13:05:00.404-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-16T13:08:22.833-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:18.350-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libsmbclient-devel is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137684"/>
+        <criterion comment="libsmbclient is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137852"/>
+        <criterion comment="samba is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137854"/>
+        <criterion comment="samba-client is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137175"/>
+        <criterion comment="samba-common is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137757"/>
+        <criterion comment="samba-swat is earlier than 0:3.0.33-3.29.el5_6.2" test_ref="oval:org.mitre.oval:tst:137782"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libsmbclient is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97558"/>
+        <criterion comment="libsmbclient-devel is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97294"/>
+        <criterion comment="samba is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97333"/>
+        <criterion comment="samba-client is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97466"/>
+        <criterion comment="samba-common is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97255"/>
+        <criterion comment="samba-debuginfo is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:137366"/>
+        <criterion comment="samba-doc is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97568"/>
+        <criterion comment="samba-domainjoin-gui is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97488"/>
+        <criterion comment="samba-swat is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97542"/>
+        <criterion comment="samba-winbind is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97325"/>
+        <criterion comment="samba-winbind-clients is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97507"/>
+        <criterion comment="samba-winbind-devel is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:97567"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

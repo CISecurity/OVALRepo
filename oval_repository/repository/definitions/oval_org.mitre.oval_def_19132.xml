@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19132" version="11" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Excel Memory Corruption Vulnerability (CVE-2013-3889) - MS13-084, MS13-085</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Excel 2007</product>
+      <product>Microsoft Excel 2010</product>
+      <product>Microsoft Excel 2013</product>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office 2010</product>
+      <product>Microsoft Office 2013</product>
+      <product>Microsoft Excel Viewer 2007</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft SharePoint Server 2007</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft SharePoint Server 2013</product>
+      <product>Microsoft Office Compatibility Pack</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3889" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3889"/>
+    <description>Microsoft Excel 2007 SP3, 2010 SP1 and SP2, 2013, and 2013 RT; Office 2007 SP3, 2010 SP1 and SP2, 2013, and 2013 RT; Office for Mac 2011; Excel Viewer; Office Compatibility Pack SP3; and Excel Services and Word Automation Services in SharePoint Server 2013 allow remote attackers to execute arbitrary code via a crafted Office document, aka "Microsoft Excel Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-10-09T17:48:51">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-10-23T11:49:06.691-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:87122 - If Office 2007 and 2010 both are installed then this object could return wrong path to excel.exe." date="2013-11-01T13:21:00.671-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-11-18T04:00:08.884-05:00">INTERIM</status_change>
+        <status_change date="2013-12-09T04:00:13.263-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19132 - he attached file contains a little modified inventory with dependences displaced" date="2014-03-21T13:27:00.660-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:30:55.324-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:02:06.817-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:05.494-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:51.698-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19132 - Criteria block with tst:87208 returned error. added &quot;Check if oart.dll exists&quot; to exclude error." date="2014-07-30T21:51:00.119-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-07-30T21:53:20.082-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19132 - Fixed def 19132" date="2014-07-31T12:23:00.296-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-08-18T04:02:06.785-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="office excel 2007/versions">
+      <extend_definition comment="Microsoft Excel 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15126"/>
+      <criterion comment="Check if the version of excel.exe is less than 12.0.6683.5002" test_ref="oval:org.mitre.oval:tst:86922"/>
+    </criteria>
+    <criteria operator="AND" comment="office 2007/versions">
+      <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+      <criteria operator="OR" comment="For oart.dll/oartconv.dll">
+        <criterion comment="Check if the version of Oart.dll is less than 12.0.6683.5002" test_ref="oval:org.mitre.oval:tst:87192"/>
+        <criterion comment="Check if the version of Oartconv.dll is less than 12.0.6683.5002" test_ref="oval:org.mitre.oval:tst:86697"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="office excel viewer/versions">
+      <extend_definition comment="Microsoft Excel Viewer 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:18681"/>
+      <criterion comment="Check if the version of xlview.exe is less than 12.0.6683.5005" test_ref="oval:org.mitre.oval:tst:87269"/>
+    </criteria>
+    <criteria operator="AND" comment="compatibility pack/versions">
+      <extend_definition comment="Microsoft Office Compatibility Pack SP3 is installed" definition_ref="oval:org.mitre.oval:def:15035"/>
+      <criterion comment="Check if the version of excelcnv.exe is less than 12.0.6683.5002" test_ref="oval:org.mitre.oval:tst:87032"/>
+    </criteria>
+    <criteria operator="AND" comment="office excel 2010/versions">
+      <criteria operator="OR" comment="2010 sp1/sp2">
+        <extend_definition comment="Microsoft Excel 2010 SP2 is installed" definition_ref="oval:org.mitre.oval:def:17219"/>
+        <extend_definition comment="Microsoft Excel 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15308"/>
+      </criteria>
+      <criterion comment="Check if the version of excel.exe is less than 14.0.7109.5000" test_ref="oval:org.mitre.oval:tst:87122"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2010/versions">
+      <criteria operator="OR" comment="2010 sp1/sp2">
+        <extend_definition comment="Microsoft Office 2010 SP2 is installed" definition_ref="oval:org.mitre.oval:def:17121"/>
+        <extend_definition comment="Microsoft Office 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15198"/>
+      </criteria>
+      <criteria operator="OR" comment="For oart.dll/oartconv.dll">
+        <criterion comment="Check if the version of Oart.dll is less than 14.0.7108.5000" test_ref="oval:org.mitre.oval:tst:86958"/>
+        <criterion comment="Check if the version of Oartconv.dll is less than 14.0.7108.5000" test_ref="oval:org.mitre.oval:tst:87067"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="office excel 2013/versions">
+      <extend_definition comment="Microsoft Excel 2013 is installed" definition_ref="oval:org.mitre.oval:def:15563"/>
+      <criterion comment="Check if the version of excel.exe is less than 15.0.4535.1507" test_ref="oval:org.mitre.oval:tst:86282"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2013/versions">
+      <extend_definition comment="Microsoft Office 2013 is installed" definition_ref="oval:org.mitre.oval:def:15381"/>
+      <criterion comment="Check if the version of oart.dll is less than 15.0.4535.1507" test_ref="oval:org.mitre.oval:tst:87208"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2007 sp3/version">
+      <extend_definition comment="Microsoft Office SharePoint Server 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15537"/>
+      <criterion comment="Check if the version of xlsrv.dll is less than 12.0.6683.5002" test_ref="oval:org.mitre.oval:tst:86848"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2010/version">
+      <criteria operator="OR" comment="sharepoint server 2010 sp1/sp2">
+        <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15614"/>
+        <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:18921"/>
+      </criteria>
+      <criteria operator="OR" comment="either files versions">
+        <criterion comment="Check if the version of xlsrv.dll is less than 14.0.7108.5000" test_ref="oval:org.mitre.oval:tst:86760"/>
+        <criterion comment="Check if the version of WdsrvWorker.dll is less than 14.0.6112.5000" test_ref="oval:org.mitre.oval:tst:87135"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="foundation 2013/version">
+      <extend_definition comment="Microsoft SharePoint Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:16325"/>
+      <criteria operator="OR" comment="either files versions">
+        <criterion comment="Check if the version of xlsrv.dll is less than 15.0.4535.1507" test_ref="oval:org.mitre.oval:tst:86898"/>
+        <criterion comment="Check if the version of WdsrvWorker.dll is less than 15.0.4514.1000" test_ref="oval:org.mitre.oval:tst:87120"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="web apps/version">
+      <criteria operator="OR" comment="office web apps sp1/sp2">
+        <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15860"/>
+        <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:19186"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of msoserver.dll is less than 14.0.7108.5000" test_ref="oval:org.mitre.oval:tst:86842"/>
+        <criterion comment="Check if the version of xlsrv.dll is less than 14.0.7108.5000" test_ref="oval:org.mitre.oval:tst:87226"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

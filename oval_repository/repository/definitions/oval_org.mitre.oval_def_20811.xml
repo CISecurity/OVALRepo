@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20811" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0533: samba and samba3x security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>samba3x</product>
+      <product>samba</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0533-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0533.html"/>
+    <reference source="CESA" ref_id="CESA-2012:0533"/>
+    <reference source="CVE" ref_id="CVE-2012-2111" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2111.html"/>
+    <description>The (1) CreateAccount, (2) OpenAccount, (3) AddAccountRights, and (4) RemoveAccountRights LSA RPC procedures in smbd in Samba 3.4.x before 3.4.17, 3.5.x before 3.5.15, and 3.6.x before 3.6.5 do not properly restrict modifications to the privileges database, which allows remote authenticated users to obtain the "take ownership" privilege via an LSA connection.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:11.148-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:19.813-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:35.220-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="samba3x-doc is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93088"/>
+        <criterion comment="samba3x-winbind is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93296"/>
+        <criterion comment="samba3x-winbind-devel is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93288"/>
+        <criterion comment="samba3x is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93338"/>
+        <criterion comment="samba3x-client is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93339"/>
+        <criterion comment="samba3x-domainjoin-gui is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:92936"/>
+        <criterion comment="samba3x-swat is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93290"/>
+        <criterion comment="samba3x-common is earlier than 0:3.5.10-0.109.el5_8" test_ref="oval:org.mitre.oval:tst:93391"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="samba-client is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:92947"/>
+        <criterion comment="samba-domainjoin-gui is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93091"/>
+        <criterion comment="samba is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:92968"/>
+        <criterion comment="samba-common is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93188"/>
+        <criterion comment="libsmbclient-devel is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93314"/>
+        <criterion comment="samba-doc is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93131"/>
+        <criterion comment="samba-winbind is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:92423"/>
+        <criterion comment="samba-winbind-devel is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:92876"/>
+        <criterion comment="samba-winbind-clients is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93260"/>
+        <criterion comment="samba-swat is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93280"/>
+        <criterion comment="libsmbclient is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93080"/>
+        <criterion comment="samba-winbind-krb5-locator is earlier than 0:3.5.10-116.el6_2" test_ref="oval:org.mitre.oval:tst:93144"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

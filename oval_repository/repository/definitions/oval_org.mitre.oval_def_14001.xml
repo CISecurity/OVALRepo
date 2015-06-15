@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14001" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-782-1 -- thunderbird vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>thunderbird</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-June/000924.html" ref_id="USN-782-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1303" ref_id="CVE-2009-1303"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1305" ref_id="CVE-2009-1305"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1392" ref_id="CVE-2009-1392"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1833" ref_id="CVE-2009-1833"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1838" ref_id="CVE-2009-1838"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1306" ref_id="CVE-2009-1306"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1307" ref_id="CVE-2009-1307"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1309" ref_id="CVE-2009-1309"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1308" ref_id="CVE-2009-1308"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1836" ref_id="CVE-2009-1836"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1841" ref_id="CVE-2009-1841"/>
+    <description>Several flaws were discovered in the JavaScript engine of Thunderbird. If a user had JavaScript enabled and were tricked into viewing malicious web content, a remote attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program. Several flaws were discovered in the way Thunderbird processed malformed URI schemes. If a user were tricked into viewing a malicious website and had JavaScript and plugins enabled, a remote attacker could execute arbitrary JavaScript or steal private data. Cefn Hoile discovered Thunderbird did not adequately protect against embedded third-party stylesheets. If JavaScript were enabled, an attacker could exploit this to perform script injection attacks using XBL bindings. Shuo Chen, Ziqing Mao, Yi-Min Wang, and Ming Zhang discovered that Thunderbird did not properly handle error responses when connecting to a proxy server. If a user had JavaScript enabled while using Thunderbird to view websites and a remote attacker were able to perform a man-in-the-middle attack, this flaw could be exploited to view sensitive information. It was discovered that Thunderbird could be made to run scripts with elevated privileges. If a user had JavaScript enabled while having certain non-default add-ons installed and were tricked into viewing a malicious website, an attacker could cause a chrome privileged object, such as the browser sidebar, to run arbitrary code via interactions with the attacker controlled website</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:09:14.421-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:56.728-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:10:07.833-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14001 - added CVE references; also made minor updates" date="2014-06-13T16:04:00.410-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:06:07.918-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:41.064-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mozilla-thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:73918"/>
+            <criterion comment="mozilla-thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:73862"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:73357"/>
+            <criterion comment="thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:73618"/>
+            <criterion comment="thunderbird-gnome-support DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:73818"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mozilla-thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:73597"/>
+            <criterion comment="mozilla-thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:73795"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:73872"/>
+            <criterion comment="thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:73866"/>
+            <criterion comment="thunderbird-gnome-support DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:73841"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mozilla-thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:73754"/>
+            <criterion comment="mozilla-thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:73896"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="thunderbird-dev DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:73910"/>
+            <criterion comment="thunderbird DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:73523"/>
+            <criterion comment="thunderbird-gnome-support DPKG is earlier than 2.0.0.22+build1+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:73775"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

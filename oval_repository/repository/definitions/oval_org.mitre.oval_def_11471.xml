@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11471" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Directory traversal vulnerability in Mozilla Firefox before 2.0.0.17 and 3.x before 3.0.2, Thunderbird before 2.0.0.17, and SeaMonkey before 1.1.12 allows remote attackers to bypass "restrictions imposed on local HTML files," and obtain sensitive information and prompt users to write this information into a file, via directory traversal sequences in a resource: URI.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4068" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4068"/>
+    <description>Directory traversal vulnerability in Mozilla Firefox before 2.0.0.17 and 3.x before 3.0.2, Thunderbird before 2.0.0.17, and SeaMonkey before 1.1.12 allows remote attackers to bypass "restrictions imposed on local HTML files," and obtain sensitive information and prompt users to write this information into a file, via directory traversal sequences in a resource: URI.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:33:56.709-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:09:34.358-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:10:19.104-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11471 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:27:00.394-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:33:45.304-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:14:17.015-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="seamonkey-nspr is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37411"/>
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:36691"/>
+        <criterion comment="seamonkey-nss-devel is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37031"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37528"/>
+        <criterion comment="seamonkey-nspr-devel is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:36726"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37435"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37680"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:36725"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37449"/>
+        <criterion comment="seamonkey-nss is earlier than 0:1.0.9-0.24.el3" test_ref="oval:org.mitre.oval:tst:37356"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="devhelp-devel is earlier than 0:0.10-0.10.el4" test_ref="oval:org.mitre.oval:tst:37564"/>
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:36913"/>
+        <criterion comment="thunderbird is earlier than 0:1.5.0.12-16.el4" test_ref="oval:org.mitre.oval:tst:37634"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:37609"/>
+        <criterion comment="devhelp is earlier than 0:0.10-0.10.el4" test_ref="oval:org.mitre.oval:tst:37306"/>
+        <criterion comment="firefox is earlier than 0:3.0.2-3.el4" test_ref="oval:org.mitre.oval:tst:37195"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:37499"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:37444"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:37543"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-26.el4" test_ref="oval:org.mitre.oval:tst:37552"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="devhelp-devel is earlier than 0:0.12-19.el5" test_ref="oval:org.mitre.oval:tst:37248"/>
+        <criterion comment="nss-pkcs11-devel is earlier than 0:3.12.1.1-1.el5" test_ref="oval:org.mitre.oval:tst:37486"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.0.2-5.el5" test_ref="oval:org.mitre.oval:tst:37495"/>
+        <criterion comment="nss is earlier than 0:3.12.1.1-1.el5" test_ref="oval:org.mitre.oval:tst:37044"/>
+        <criterion comment="thunderbird is earlier than 0:2.0.0.17-1.el5" test_ref="oval:org.mitre.oval:tst:37230"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.0.2-5.el5" test_ref="oval:org.mitre.oval:tst:37578"/>
+        <criterion comment="yelp is earlier than 0:2.16.0-21.el5" test_ref="oval:org.mitre.oval:tst:37584"/>
+        <criterion comment="devhelp is earlier than 0:0.12-19.el5" test_ref="oval:org.mitre.oval:tst:37353"/>
+        <criterion comment="xulrunner-devel-unstable is earlier than 0:1.9.0.2-5.el5" test_ref="oval:org.mitre.oval:tst:37406"/>
+        <criterion comment="firefox is earlier than 0:3.0.2-3.el5" test_ref="oval:org.mitre.oval:tst:37225"/>
+        <criterion comment="nss-devel is earlier than 0:3.12.1.1-1.el5" test_ref="oval:org.mitre.oval:tst:36664"/>
+        <criterion comment="nss-tools is earlier than 0:3.12.1.1-1.el5" test_ref="oval:org.mitre.oval:tst:37664"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

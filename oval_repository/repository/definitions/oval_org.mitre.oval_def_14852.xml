@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14852" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AfdPoll Elevation of Privilege Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-0148" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0148"/>
+    <description>afd.sys in the Ancillary Function Driver in Microsoft Windows XP SP2, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2, R2, and R2 SP1, and Windows 7 Gold and SP1 on 64-bit platforms does not properly validate user-mode input passed to kernel mode, which allows local users to gain privileges via a crafted application, aka "AfdPoll Elevation of Privilege Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-02-14T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2012-02-21T12:10:15.091-05:00">DRAFT</status_change>
+        <status_change date="2012-03-12T04:00:30.905-04:00">INTERIM</status_change>
+        <status_change date="2012-04-02T04:00:26.024-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14852 - Updating checked versions due to SP2." date="2013-12-30T09:20:00.045-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-30T09:24:29.470-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:10.325-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x64 SP2, Server 2003 x64/ia64 SP2">
+      <criteria operator="OR" comment="Windows XP x64 SP2, Server 2003 x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="The version of afd.sys is less than 5.2.3790.4949" test_ref="oval:org.mitre.oval:tst:77987"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x64 SP2, Server 2008 x64/ia64 SP2">
+      <criteria operator="OR" comment="Windows Vista x64 SP2, Server 2008 x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of afd.sys is less than 6.0.6002.18564" test_ref="oval:org.mitre.oval:tst:77782"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of afd.sys is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:42822"/>
+          <criterion comment="The version of afd.sys is less than 6.0.6002.22770" test_ref="oval:org.mitre.oval:tst:78317"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x64, Server 2008 R2 x64/ia64">
+      <criteria operator="OR" comment="Microsoft Windows 7 x64, Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of afd.sys is less than 6.1.7600.16937" test_ref="oval:org.mitre.oval:tst:78336"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of afd.sys is greater than or equal to 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:42757"/>
+          <criterion comment="The version of afd.sys is less than 6.1.7600.21115" test_ref="oval:org.mitre.oval:tst:77905"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x64 SP1, Server 2008 R2 x64/ia64 SP1">
+      <criteria operator="OR" comment="Microsoft Windows 7 x64 SP1, Server 2008 R2 x64/ia64 SP1">
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of afd.sys is less than 6.1.7601.17752" test_ref="oval:org.mitre.oval:tst:78190"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of afd.sys is greater than or equal to 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:42554"/>
+          <criterion comment="The version of afd.sys is less than 6.1.7601.21887" test_ref="oval:org.mitre.oval:tst:77963"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

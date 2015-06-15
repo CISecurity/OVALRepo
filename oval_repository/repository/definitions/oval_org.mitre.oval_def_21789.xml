@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21789" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0356: krb5 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0356-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0356.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0284" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0284.html"/>
+    <description>Double free vulnerability in the prepare_error_as function in do_as_req.c in the Key Distribution Center (KDC) in MIT Kerberos 5 (aka krb5) 1.7 through 1.9, when the PKINIT feature is enabled, allows remote attackers to cause a denial of service (daemon crash) or possibly execute arbitrary code via an e_data field containing typed data.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:39:18.873-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:43.530-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:08.082-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="krb5-server-ldap is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:96892"/>
+      <criterion comment="krb5-devel is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:97541"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:97500"/>
+      <criterion comment="krb5-libs is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:97622"/>
+      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:97448"/>
+      <criterion comment="krb5-server is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:97404"/>
+      <criterion comment="krb5 is earlier than 0:1.8.2-3.el6_0.6" test_ref="oval:org.mitre.oval:tst:96627"/>
+    </criteria>
+  </criteria>
+</definition>

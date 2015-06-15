@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5552" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware ESX Multiple Code Execution and Denial of Service Vulnerabilities</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-1271" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1271"/>
+    <description>Buffer overflow in VMware ESX Server 3.0.0 and 3.0.1 might allow attackers to gain privileges or cause a denial of service (application crash) via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-25T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-04-30T12:20:01.376-04:00">DRAFT</status_change>
+        <status_change date="2008-05-19T04:00:22.508-04:00">INTERIM</status_change>
+        <status_change date="2008-06-09T04:00:17.201-04:00">ACCEPTED</status_change>
+        <modified comment="All patches must be installed to not be vulnerable." date="2008-06-16T16:47:00.539-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-06-16T16:48:50.555-04:00">INTERIM</status_change>
+        <status_change date="2008-07-07T04:00:26.145-04:00">ACCEPTED</status_change>
+        <modified comment="Changed patch_number entity of patch_object to have datatype of string." date="2010-07-28T13:13:00.552-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2010-07-28T13:19:15.229-04:00">INTERIM</status_change>
+        <status_change date="2010-08-16T04:10:48.730-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="VMWare ESX Server 3.0.1 meets CVE-2007-1271">
+      <extend_definition comment="VMWare ESX Server 3.0.1 is installed" definition_ref="oval:org.mitre.oval:def:5367"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX-1161870 is not installed" test_ref="oval:org.mitre.oval:tst:7901"/>
+        <criterion comment="Patch ESX-3416571 is not installed" test_ref="oval:org.mitre.oval:tst:7837"/>
+        <criterion comment="Patch ESX-5011126 is not installed" test_ref="oval:org.mitre.oval:tst:7715"/>
+        <criterion comment="Patch ESX-7737432 is not installed" test_ref="oval:org.mitre.oval:tst:8046"/>
+        <criterion comment="Patch ESX-7780490 is not installed" test_ref="oval:org.mitre.oval:tst:7872"/>
+        <criterion comment="Patch ESX-8174018 is not installed" test_ref="oval:org.mitre.oval:tst:7862"/>
+        <criterion comment="Patch ESX-8852210 is not installed" test_ref="oval:org.mitre.oval:tst:7925"/>
+        <criterion comment="Patch ESX-9617902 is not installed" test_ref="oval:org.mitre.oval:tst:7077"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="VMWare ESX Server 3.0.0 meets CVE-2007-1271">
+      <extend_definition comment="VMWare ESX Server 3.0.0 is installed" definition_ref="oval:org.mitre.oval:def:5501"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX-131737 is not installed" test_ref="oval:org.mitre.oval:tst:8037"/>
+        <criterion comment="Patch ESX-1870154 is not installed" test_ref="oval:org.mitre.oval:tst:7904"/>
+        <criterion comment="Patch ESX-392718 is not installed" test_ref="oval:org.mitre.oval:tst:7568"/>
+        <criterion comment="Patch ESX-4197945 is not installed" test_ref="oval:org.mitre.oval:tst:7687"/>
+        <criterion comment="Patch ESX-4921691 is not installed" test_ref="oval:org.mitre.oval:tst:7727"/>
+        <criterion comment="Patch ESX-5752668 is not installed" test_ref="oval:org.mitre.oval:tst:8021"/>
+        <criterion comment="Patch ESX-7052426 is not installed" test_ref="oval:org.mitre.oval:tst:8061"/>
+        <criterion comment="Patch ESX-9976400 is not installed" test_ref="oval:org.mitre.oval:tst:7647"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

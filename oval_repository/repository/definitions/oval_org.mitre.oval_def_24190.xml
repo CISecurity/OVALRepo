@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24190" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:1582: python security, bug fix, and enhancement update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>python</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1582-02" ref_url="http://linux.oracle.com/errata/ELSA-2013-1582.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-4238" ref_url="http://linux.oracle.com/cve/CVE-2013-4238.html" source="CVE"/>
+    <description>The ssl.match_hostname function in the SSL module in Python 2.6 through 3.4 does not properly handle a '\0' character in a domain name in the Subject Alternative Name field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority, a related issue to CVE-2009-2408.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:51:15.918-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:52.354-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:29.448-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24190 - optimisation of Oracle Linux content" date="2014-05-05T17:17:00.672-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:19:44.840-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:20.695-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="tkinter is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:112470"/>
+      <criterion comment="python-tools is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:112212"/>
+      <criterion comment="python-test is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:112138"/>
+      <criterion comment="python is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:112473"/>
+      <criterion comment="python-libs is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:112255"/>
+      <criterion comment="python-devel is earlier than 0:2.6.6-51.el6" test_ref="oval:org.mitre.oval:tst:111857"/>
+    </criteria>
+  </criteria>
+</definition>

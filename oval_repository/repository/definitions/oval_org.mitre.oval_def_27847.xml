@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27847" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2010-0237 -- sendmail security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>sendmail</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2010-0237.html" ref_id="ELSA-2010-0237"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-7176" ref_id="CVE-2006-7176"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4565" ref_id="CVE-2009-4565"/>
+    <description>[8.13.8-8]
+
+- rpm attributes S,5,T not recorded for statistics file
+
+[8.13.8-7]
+- fix specfile for passing rpm -V test (#555277)
+
+[8.13.8-6.el5]
+- fix verification of SSL certificate with NUL in name (#553618, CVE-2009-4565)
+- do not accept localhost.localdomain as valid address from smtp (#449391)
+- skip colon separator when parsing service name in ServiceSwitchFile (#512871)
+- exit with non-zero error code when free space is low (#299951)
+- fix -qG description in man page (#250552)
+- fix comments in sendmail.mc to use correct certs path (#244012)
+- add MTA to provides (#494408)
+- fix %dist macro use (#440616)
+- compile with -fno-strict-aliasing
+- skip t-sem test as it doesn't allow parallel testing</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:26:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:05:54.239-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:06:30.892-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:05.055-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T19:19:50.274-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T19:19:50.274-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="sendmail is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:135193"/>
+      <criterion comment="sendmail-cf is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:135279"/>
+      <criterion comment="sendmail-devel is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:135186"/>
+      <criterion comment="sendmail-doc is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:134840"/>
+    </criteria>
+  </criteria>
+</definition>

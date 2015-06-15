@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6824" version="10" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>.NET Framework x64 JIT Compiler Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft .NET Framework</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3228" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3228"/>
+    <description>The JIT compiler in Microsoft .NET Framework 4.0 on 64-bit platforms does not properly perform optimizations, which allows remote attackers to execute arbitrary code via a crafted .NET application that triggers memory corruption, aka ".NET Framework x64 JIT Compiler Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-12T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-10-18T21:49:19.917-04:00">DRAFT</status_change>
+        <modified comment="Added the comments on the non-top level &lt;criteria> tags." date="2010-11-03T13:21:00.547-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2010-11-22T04:00:07.663-05:00">INTERIM</status_change>
+        <status_change date="2010-12-13T04:00:10.998-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:7311 - Corrected repeated hive element in the key" date="2010-12-31T10:57:00.761-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2010-12-31T10:58:58.150-05:00">INTERIM</status_change>
+        <status_change date="2011-01-17T04:00:19.852-05:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:23:46.946-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:23:46.946-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:03:29.198-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6824 - extended definitions of OS are without SP checks" date="2014-07-28T17:49:00.293-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:51:14.227-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:20.188-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="os section">
+      <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+      <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+    </criteria>
+    <extend_definition comment="Microsoft .NET Framework 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6749"/>
+    <criteria operator="OR" comment="GDR or LDR Service branch">
+      <criterion comment="clrjit.dll version is less than 4.0.30319.202" test_ref="oval:org.mitre.oval:tst:11601"/>
+      <criteria operator="AND" comment="LDR">
+        <criterion comment="clrjit.dll version is greater than or equal to 4.0.30319.300" test_ref="oval:org.mitre.oval:tst:11649"/>
+        <criterion comment="clrjit.dll version is less than 4.0.30319.336" test_ref="oval:org.mitre.oval:tst:11626"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

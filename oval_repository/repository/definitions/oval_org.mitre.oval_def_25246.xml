@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25246" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:1789-1 -- Recommended update for timezone</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>timezone</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131789-1.html" ref_id="SUSE-RU-2013:1789-1"/>
+    <description>This update provides the latest timezone information for
+your system. The  changes in detail are:
+
+    * Update to version 2013h (bnc#850462): o Lybia has
+switched back to UTC+2 o Western Sahara uses Morocco's DST
+rules o Acre switches from UTC-4 to UTC-5 on Nov. 10th
+    * Define TM_GMTOFF and TM_ZONE like glibc did
+(bnc#807624)
+    * Correct path expansion for local time link
+(bnc#845530).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:23:43">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:21:01.655-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:37.217-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:26.170-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="timezone RPM is earlier than 0:2013h-0.7.1" test_ref="oval:org.mitre.oval:tst:118263"/>
+      <criterion comment="timezone-java RPM is earlier than 0:2013h-0.7.1" test_ref="oval:org.mitre.oval:tst:117408"/>
+    </criteria>
+  </criteria>
+</definition>

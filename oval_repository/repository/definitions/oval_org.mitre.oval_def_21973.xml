@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21973" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:1243: Oracle Linux 5.x.4 kernel security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="ELSA-2009:1243-03" ref_url="http://linux.oracle.com/errata/ELSA-2009-1243.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-0745" ref_url="http://linux.oracle.com/cve/CVE-2009-0745.html" source="CVE"/>
+    <reference ref_id="CVE-2009-0746" ref_url="http://linux.oracle.com/cve/CVE-2009-0746.html" source="CVE"/>
+    <reference ref_id="CVE-2009-0747" ref_url="http://linux.oracle.com/cve/CVE-2009-0747.html" source="CVE"/>
+    <reference ref_id="CVE-2009-0748" ref_url="http://linux.oracle.com/cve/CVE-2009-0748.html" source="CVE"/>
+    <reference ref_id="CVE-2009-2847" ref_url="http://linux.oracle.com/cve/CVE-2009-2847.html" source="CVE"/>
+    <reference ref_id="CVE-2009-2848" ref_url="http://linux.oracle.com/cve/CVE-2009-2848.html" source="CVE"/>
+    <description>The execve function in the Linux kernel, possibly 2.6.30-rc6 and earlier, does not properly clear the current->clear_child_tid pointer, which allows local users to cause a denial of service (memory corruption) or possibly gain privileges via a clone system call with CLONE_CHILD_SETTID or CLONE_CHILD_CLEARTID enabled, which is not properly handled during thread creation and exit.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:57:29.443-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:27.346-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:40.550-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21973 - optimisation of Oracle Linux content" date="2014-05-05T18:21:00.458-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:23:14.482-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:45.242-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103268"/>
+      <criterion comment="kernel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103046"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103354"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103005"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103289"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103130"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103217"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:102921"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:102562"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:103032"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:102938"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-164.el5" test_ref="oval:org.mitre.oval:tst:102948"/>
+    </criteria>
+  </criteria>
+</definition>

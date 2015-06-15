@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1001" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Integer overflow in the "Max-dotdot" CVS protocol command</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>CVS</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0417" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0417"/>
+    <description>Integer overflow in the "Max-dotdot" CVS protocol command (serve_max_dotdot) for CVS 1.12.x through 1.12.8, and 1.11.x through 1.11.16, may allow remote attackers to cause a server crash, which could cause temporary data to remain undeleted and consume disk space.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-06-29T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2004-07-21T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-08-04T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+      <criterion comment="cvs rpm version prior to 1.11.2-24 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:1347"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="/usr/bin/cvs is executable">
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1381"/>
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1380"/>
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1379"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

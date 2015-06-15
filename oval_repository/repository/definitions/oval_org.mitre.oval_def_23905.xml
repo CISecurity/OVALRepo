@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23905" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2898-1 imagemagick - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>imagemagick</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2898-1" ref_id="DSA-2898-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1947" ref_id="CVE-2014-1947"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1958" ref_id="CVE-2014-1958"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2030" ref_id="CVE-2014-2030"/>
+    <description>Several buffer overflows were found in Imagemagick, a suite of image manipulation programs. Processing malformed PSD files could lead to the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-11T11:52:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-04-23T10:28:35.561-04:00">DRAFT</status_change>
+        <status_change date="2014-05-12T04:00:27.349-04:00">INTERIM</status_change>
+        <status_change date="2014-06-02T04:00:07.169-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23905 - Debian Patch Update" date="2014-07-01T12:12:00.082-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-07-01T12:16:53.186-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:04.590-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 6.0 release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="imagemagick DPKG is earlier than 8:6.6.0.4-3+squeeze4" test_ref="oval:org.mitre.oval:tst:113737"/>
+    </criteria>
+    <criteria comment="Debian 7.x release section">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="imagemagick DPKG is earlier than 8:6.7.7.10-5+deb7u3" test_ref="oval:org.mitre.oval:tst:113839"/>
+    </criteria>
+  </criteria>
+</definition>

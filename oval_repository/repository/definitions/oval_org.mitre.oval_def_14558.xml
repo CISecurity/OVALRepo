@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14558" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>TrueType Font Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office 2010</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1983" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1983"/>
+    <description>Use-after-free vulnerability in Microsoft Office 2007 SP2 and SP3, Office 2010 Gold and SP1, and Office for Mac 2011 allows remote attackers to execute arbitrary code via a crafted Word document, aka "Word Use After Free Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-12-13T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-12-19T22:01:39.722-05:00">DRAFT</status_change>
+        <status_change date="2012-01-09T04:00:25.359-05:00">INTERIM</status_change>
+        <status_change date="2012-01-30T04:00:37.826-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14558 - Microsoft Office 2007 is installed was replased with Microsoft Office 2007 SP1/SP2 is installed" date="2014-05-08T11:06:00.822-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-08T11:08:01.110-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:07.467-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Office 2007 (KB2596785)">
+      <criteria operator="OR" comment="Microsoft Office 2007 SP2/SP3">
+        <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+        <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+      </criteria>
+      <criterion comment="Msptls.dll version is less than 12.0.6654.5000" test_ref="oval:org.mitre.oval:tst:77812"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Office 2010 (KB2589320)">
+      <extend_definition comment="Microsoft Office 2010 is installed" definition_ref="oval:org.mitre.oval:def:12061"/>
+      <criterion comment="Msptls.dll is less than 14.0.6112.5000" test_ref="oval:org.mitre.oval:tst:77787"/>
+    </criteria>
+  </criteria>
+</definition>

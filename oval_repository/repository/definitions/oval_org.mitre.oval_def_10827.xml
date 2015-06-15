@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:10827" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Multiple heap-based buffer overflows in the rc4 (1) encryption (aka exsltCryptoRc4EncryptFunction) and (2) decryption (aka exsltCryptoRc4DecryptFunction) functions in crypto.c in libexslt in libxslt 1.1.8 through 1.1.24 allow context-dependent attackers to execute arbitrary code via an XML file containing a long string as "an argument in the XSL input."</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2935" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2935"/>
+    <description>Multiple heap-based buffer overflows in the rc4 (1) encryption (aka exsltCryptoRc4EncryptFunction) and (2) decryption (aka exsltCryptoRc4DecryptFunction) functions in crypto.c in libexslt in libxslt 1.1.8 through 1.1.24 allow context-dependent attackers to execute arbitrary code via an XML file containing a long string as "an argument in the XSL input."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:26:04.157-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:05:43.065-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:06:09.840-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:10827 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:25:00.657-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:29:07.794-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:09:07.307-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="libxslt-devel is earlier than 0:1.1.11-1.el4_7.2" test_ref="oval:org.mitre.oval:tst:37375"/>
+        <criterion comment="libxslt-python is earlier than 0:1.1.11-1.el4_7.2" test_ref="oval:org.mitre.oval:tst:37068"/>
+        <criterion comment="libxslt is earlier than 0:1.1.11-1.el4_7.2" test_ref="oval:org.mitre.oval:tst:37536"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="libxslt-devel is earlier than 0:1.1.17-2.el5_2.2" test_ref="oval:org.mitre.oval:tst:37418"/>
+        <criterion comment="libxslt-python is earlier than 0:1.1.17-2.el5_2.2" test_ref="oval:org.mitre.oval:tst:37554"/>
+        <criterion comment="libxslt is earlier than 0:1.1.17-2.el5_2.2" test_ref="oval:org.mitre.oval:tst:37304"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

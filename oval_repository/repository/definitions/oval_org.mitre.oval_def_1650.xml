@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1650" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Korean IME Privilege Elevation Vulnerability in Server 2003</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-0008" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0008"/>
+    <description>The ShellAbout API call in Korean Input Method Editor (IME) in Korean versions of Microsoft Windows XP SP1 and SP2, Windows Server 2003 up to SP1, and Office 2003, allows local users to gain privileges by launching the "shell about dialog box" and clicking the "End-User License Agreement" link, which executes Notepad with the privileges of the program that displays the about box.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-02-17T07:36:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-02-22T08:27:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-03-09T12:19:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Removed unneeded ste:2282 from tst:2437. Deprecated ste:2282 since it is no longer used." date="2007-01-12T07:06:00.595-05:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2007-01-12T07:09:00.119-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:39:55.254-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1650 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:06:03.379-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:01:30.656-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Windows Server 2003 is installed" test_ref="oval:org.mitre.oval:tst:2761"/>
+    <criterion negate="true" comment="Win2K/XP/2003 is patched" test_ref="oval:org.mitre.oval:tst:2437"/>
+    <criterion comment="the version of Imekr61.ime is less than 6.1.3790.1 (S03-Gold)" test_ref="oval:org.mitre.oval:tst:791"/>
+  </criteria>
+</definition>

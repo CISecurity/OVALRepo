@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26762" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1281: kernel security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1281-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1281.html"/>
+    <reference source="CESA" ref_id="CESA-2014:1281"/>
+    <reference source="CVE" ref_id="CVE-2014-3917" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3917.html"/>
+    <description>The kernel packages contain the Linux kernel, the core of any Linux
+operating system.
+
+* An out-of-bounds memory access flaw was found in the Linux kernel's
+system call auditing implementation. On a system with existing audit rules
+defined, a local, unprivileged user could use this flaw to leak kernel
+memory to user space or, potentially, crash the system. (CVE-2014-3917,
+Moderate)
+
+This update also fixes the following bugs: 
+
+* A bug in the mtip32xx driver could prevent the Micron P420m PCIe SSD
+devices with unaligned I/O access from completing the submitted I/O
+requests. This resulted in a livelock situation and rendered the Micron
+P420m PCIe SSD devices unusable. To fix this problem, mtip32xx now checks
+whether an I/O access is unaligned and if so, it uses the correct
+semaphore. (BZ#1125776)
+
+* A series of patches has been backported to improve the functionality of
+a touch pad on the latest Lenovo laptops in Red Hat Enterprise Linux 7.
+(BZ#1122559)
+
+* Due to a bug in the bnx2x driver, a network adapter could be unable to
+recover from EEH error injection. The network adapter had to be taken
+offline and rebooted in order to function properly again. With this update,
+the bnx2x driver has been corrected and network adapters now recover from
+EEH errors as expected. (BZ#1107722)
+
+* Previously, if an hrtimer interrupt was delayed, all future pending
+hrtimer events that were queued on the same processor were also delayed
+until the initial hrtimer event was handled. This could cause all hrtimer
+processing to stop for a significant period of time. To prevent this
+problem, the kernel has been modified to handle all expired hrtimer events
+when handling the initially delayed hrtimer event. (BZ#1113175)
+
+* A previous change to the nouveau driver introduced a bit shift error,
+which resulted in a wrong display resolution being set with some models
+of NVIDIA controllers. With this update, the erroneous code has been
+corrected, and the affected NVIDIA controllers can now set the correct
+display resolution. (BZ#1114869)
+
+* Due to a NULL pointer dereference bug in the be2net driver, the system
+could experience a kernel oops and reboot when disabling a network adapter
+after a permanent failure. This problem has been fixed by introducing a
+flag to keep track of the setup state. The failing adapter can now be
+disabled successfully without a kernel crash. (BZ#1122558)
+
+* Previously, the Huge Translation Lookaside Buffer (HugeTLB) allowed
+access to huge pages access by default. However, huge pages may be
+unsupported in some environments, such as a KVM guest on a PowerPC
+architecture, and an attempt to access a huge page in memory would result
+in a kernel oops. This update ensures that HugeTLB denies access to huge
+pages if the huge pages are not supported on the system. (BZ#1122115)
+
+* If an NVMe device becomes ready but fails to create I/O queues, the nvme
+driver creates a character device handle to manage such a device.
+Previously, a character device could be created before a device reference
+counter was initialized, which resulted in a kernel oops. This problem has
+been fixed by calling the relevant initialization function earlier in the
+code. (BZ#1119720)
+
+* On some firmware versions of the BladeEngine 3 (BE3) controller,
+interrupts remain disabled after a hardware reset. This was a problem for
+all Emulex-based network adapters using such a BE3 controller because
+these adapters would fail to recover from an EEH error if it occurred. To
+resolve this problem, the be2net driver has been modified to enable the
+interrupts in the eeh_resume handler explicitly. (BZ#1121712)
+
+All kernel users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. The system must be
+rebooted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T11:25:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:07:05.562-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:49.348-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:50.831-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 7 or Centos 7 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="kernel is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123981"/>
+      <criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123967"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123935"/>
+      <criterion comment="kernel-debug is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123948"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123939"/>
+      <criterion comment="kernel-devel is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123536"/>
+      <criterion comment="kernel-doc is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123271"/>
+      <criterion comment="kernel-headers is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123730"/>
+      <criterion comment="kernel-kdump is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123975"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123973"/>
+      <criterion comment="kernel-tools is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123703"/>
+      <criterion comment="kernel-tools-libs is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123642"/>
+      <criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123692"/>
+      <criterion comment="perf is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123422"/>
+      <criterion comment="python-perf is earlier than 0:3.10.0-123.8.1.el7" test_ref="oval:org.mitre.oval:tst:123720"/>
+    </criteria>
+  </criteria>
+</definition>

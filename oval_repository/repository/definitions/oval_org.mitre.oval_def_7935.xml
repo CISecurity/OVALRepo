@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7935" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1651 ruby1.8 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>ruby1.8</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1651" ref_id="DSA-1651"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3655" ref_id="CVE-2008-3655"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3656" ref_id="CVE-2008-3656"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3657" ref_id="CVE-2008-3657"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3790" ref_id="CVE-2008-3790"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3905" ref_id="CVE-2008-3905"/>
+    <description>Several vulnerabilities have been discovered in the interpreter for the Ruby language, which may lead to denial of service and other security problems. The Common Vulnerabilities and Exposures project identifies the following problems: Keita Yamaguchi discovered that several safe level restrictions are insufficiently enforced. Christian Neukirchen discovered that the WebRick module uses inefficient algorithms for HTTP header splitting, resulting in denial of service through resource exhaustion. It was discovered that the dl module doesn't perform taintness checks. Luka Treiber and Mitja Kolsek discovered that recursively nested XML entities can lead to denial of service through resource exhaustion in rexml. Tanaka Akira discovered that the resolv module uses sequential transaction IDs and a fixed source port for DNS queries, which makes it more vulnerable to DNS spoofing attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:05-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:53:24.183-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:02:52.546-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:03.934-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7935 - Debian Patch Update" date="2014-06-06T16:39:00.749-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:41:19.106-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:29.888-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="rdoc1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14490"/>
+          <criterion comment="ri1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15149"/>
+          <criterion comment="ruby1.8-elisp is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14860"/>
+          <criterion comment="ruby1.8-examples is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15124"/>
+          <criterion comment="irb1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15075"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libreadline-ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15034"/>
+          <criterion comment="libdbm-ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14901"/>
+          <criterion comment="libopenssl-ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14704"/>
+          <criterion comment="ruby1.8-dev is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14278"/>
+          <criterion comment="ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14536"/>
+          <criterion comment="libgdbm-ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14698"/>
+          <criterion comment="libtcltk-ruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15062"/>
+          <criterion comment="libruby1.8-dbg is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:14503"/>
+          <criterion comment="libruby1.8 is earlier than 1.8.5-4etch3" test_ref="oval:org.mitre.oval:tst:15146"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

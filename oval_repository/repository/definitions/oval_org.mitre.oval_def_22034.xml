@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22034" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in Java SE 5.0u55, Java SE 6u65, Java SE 7u45, JavaFX 2.2.45 and Java SE Embedded 7u45 component of Oracle Java SE (subcomponent: 2D)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Java Runtime Environment</product>
+      <product>JavaFX</product>
+    </affected>
+    <reference ref_id="CVE-2014-0417" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0417" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Java SE 5.0u55, 6u65, and 7u45; JavaFX 2.2.45; and Java SE Embedded 7u45 allows remote attackers to affect confidentiality, integrity, and availability via unknown vectors related to 2D.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-17T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2014-01-21T16:46:58.217-05:00">DRAFT</status_change>
+        <status_change date="2014-02-10T04:00:22.891-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:01:03.026-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:24150 - 64-bit registry branch search was added" date="2015-03-04T12:40:00.486-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-03-04T12:42:59.266-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:02.576-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Determine if the version of JavaFX is less than 2.2.45">
+      <criteria operator="OR" comment="Determine if the version of JavaFX is less than 2.2.45">
+        <criterion comment="Determine if the version of JavaFX is less than 2.2.46" test_ref="oval:org.mitre.oval:tst:100044"/>
+        <criterion comment="Determine if the version of JavaFX is less than 2.2.46 (JRE 1.7.0:update_6 and later)" test_ref="oval:org.mitre.oval:tst:100178"/>
+      </criteria>
+      <extend_definition comment="JavaFX 2.x is installed" definition_ref="oval:org.mitre.oval:def:16479"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.5.0:update_56">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.5.0:update_56" test_ref="oval:org.mitre.oval:tst:99707"/>
+      <extend_definition comment="Java SE Runtime Environment 5 is installed" definition_ref="oval:org.mitre.oval:def:15748"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_66">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_66" test_ref="oval:org.mitre.oval:tst:100114"/>
+      <extend_definition comment="Java SE Runtime Environment 6 is installed" definition_ref="oval:org.mitre.oval:def:16362"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_46">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_46" test_ref="oval:org.mitre.oval:tst:100091"/>
+      <extend_definition comment="Java SE Runtime Environment 7 is installed" definition_ref="oval:org.mitre.oval:def:16050"/>
+    </criteria>
+  </criteria>
+</definition>

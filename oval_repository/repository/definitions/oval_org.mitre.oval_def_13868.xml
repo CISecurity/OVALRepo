@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13868" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-784-1 -- imagemagick vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>imagemagick</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-June/000911.html" ref_id="USN-784-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1882" ref_id="CVE-2009-1882"/>
+    <description>It was discovered that ImageMagick did not properly verify the dimensions of TIFF files. If a user or automated system were tricked into opening a crafted TIFF file, an attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:08:48.505-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:16.246-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:25.356-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13868 - added CVE references; also made minor updates" date="2014-06-13T17:32:00.342-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:33:58.363-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:15.630-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="imagemagick DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73351"/>
+        <criterion comment="libmagick9-dev DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73686"/>
+        <criterion comment="perlmagick DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73548"/>
+        <criterion comment="libmagick++9-dev DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73387"/>
+        <criterion comment="libmagick++10 DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73739"/>
+        <criterion comment="libmagick10 DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:73438"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="imagemagick-doc DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73525"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="imagemagick-dbg DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73741"/>
+            <criterion comment="imagemagick DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73737"/>
+            <criterion comment="libmagickcore1 DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73526"/>
+            <criterion comment="libmagickwand-dev DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73767"/>
+            <criterion comment="libmagickwand1 DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73559"/>
+            <criterion comment="libmagick++-dev DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73474"/>
+            <criterion comment="perlmagick DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73513"/>
+            <criterion comment="libmagick++1 DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73327"/>
+            <criterion comment="libmagickcore-dev DPKG is earlier than 7:6.4.5.4.dfsg1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73500"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libmagick9 DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73385"/>
+        <criterion comment="imagemagick DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73522"/>
+        <criterion comment="libmagick9-dev DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73746"/>
+        <criterion comment="libmagick++9c2a DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73651"/>
+        <criterion comment="perlmagick DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73766"/>
+        <criterion comment="libmagick++9-dev DPKG is earlier than 6:6.2.4.5-0.6ubuntu0.9" test_ref="oval:org.mitre.oval:tst:73390"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="imagemagick DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73675"/>
+        <criterion comment="libmagick9-dev DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73417"/>
+        <criterion comment="perlmagick DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73375"/>
+        <criterion comment="libmagick++9-dev DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:72917"/>
+        <criterion comment="libmagick++10 DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73583"/>
+        <criterion comment="libmagick10 DPKG is earlier than 7:6.3.7.9.dfsg1-2ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73624"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

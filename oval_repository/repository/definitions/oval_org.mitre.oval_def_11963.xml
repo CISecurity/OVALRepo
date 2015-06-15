@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11963" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Netlogon RPC Null dereference DOS Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2742" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2742"/>
+    <description>The Netlogon RPC Service in Microsoft Windows Server 2003 SP2 and Server 2008 Gold, SP2, and R2, when the domain controller role is enabled, allows remote attackers to cause a denial of service (NULL pointer dereference and reboot) via a crafted RPC packet, aka "Netlogon RPC Null dereference DOS Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-12-17T20:55:12.092-05:00">DRAFT</status_change>
+        <status_change date="2011-01-03T04:00:10.931-05:00">INTERIM</status_change>
+        <status_change date="2011-01-24T04:00:11.367-05:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:23:54.540-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:23:54.540-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:00:34.969-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:5160 - contains tests with modified comments and all dependences" date="2014-02-13T12:19:00.287-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-13T12:22:59.225-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:00:13.455-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of Netlogon.dll is less than 5.2.3790.4760" test_ref="oval:org.mitre.oval:tst:41018"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 32bit/x64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Netlogon.dll is less than 6.0.6001.18529" test_ref="oval:org.mitre.oval:tst:41885"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Netlogon.dll is greater than 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:41725"/>
+          <criterion comment="the version of Netlogon.dll is less than 6.0.6001.22769" test_ref="oval:org.mitre.oval:tst:41088"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 32bit/x64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Netlogon.dll is less than 6.0.6002.18316" test_ref="oval:org.mitre.oval:tst:41795"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Netlogon.dll is greater than 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:41797"/>
+          <criterion comment="the version of Netlogon.dll is less than 6.0.6002.22496" test_ref="oval:org.mitre.oval:tst:41819"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64">
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Netlogon.dll is less than 6.1.7600.16661" test_ref="oval:org.mitre.oval:tst:41874"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Netlogon.dll is greater than 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:41903"/>
+          <criterion comment="the version of Netlogon.dll is less than 6.1.7600.20787" test_ref="oval:org.mitre.oval:tst:41923"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17723" version="9" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-610-1 -- ltsp vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 7.04</platform>
+      <platform>Ubuntu 7.10</platform>
+      <product>ltsp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-610-1/" ref_id="USN-610-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1293" ref_id="CVE-2008-1293"/>
+    <description>Christian Herzog discovered that it was possible to connect to any LTSP client's X session over the network.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-15T12:41:08.896-04:00">DRAFT</status_change>
+        <status_change date="2013-09-02T04:03:07.719-04:00">INTERIM</status_change>
+        <status_change date="2013-09-23T04:02:19.307-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:21498 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:15:19.029-05:00">INTERIM</status_change>
+        <status_change date="2013-12-16T04:00:42.235-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:21589 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:28.187-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:02:03.983-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17723 - added CVE references; also made minor updates" date="2014-06-13T15:05:00.570-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:07:39.135-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:07:16.520-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criterion comment="ldm DPKG is earlier than 0.87.1" test_ref="oval:org.mitre.oval:tst:83230"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.04 is installed" definition_ref="oval:org.mitre.oval:def:17290"/>
+      <criterion comment="ldm DPKG is earlier than 5.0.7.1" test_ref="oval:org.mitre.oval:tst:83183"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criterion comment="ldm DPKG is earlier than 5.0.39.1" test_ref="oval:org.mitre.oval:tst:83190"/>
+    </criteria>
+  </criteria>
+</definition>

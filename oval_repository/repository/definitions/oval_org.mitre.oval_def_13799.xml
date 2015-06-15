@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13799" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-750-1 -- openssl vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-March/000876.html" ref_id="USN-750-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0590" ref_id="CVE-2009-0590"/>
+    <description>It was discovered that OpenSSL did not properly validate the length of an encoded BMPString or UniversalString when printing ASN.1 strings. If a user or automated system were tricked into processing a crafted certificate, an attacker could cause a denial of service via application crash in applications linked against OpenSSL.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:50:16.124-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:11:34.899-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:08:44.219-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13799 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:17.955-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:31.779-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libcrypto0.9.8-udeb DPKG is earlier than 0.9.8e-5ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67457"/>
+        <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8e-5ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67459"/>
+        <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8e-5ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67265"/>
+        <criterion comment="libssl-dev DPKG is earlier than 0.9.8e-5ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67157"/>
+        <criterion comment="openssl DPKG is earlier than 0.9.8e-5ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67011"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="openssl-doc DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67186"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libcrypto0.9.8-udeb DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67437"/>
+            <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67225"/>
+            <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67483"/>
+            <criterion comment="libssl-dev DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67481"/>
+            <criterion comment="openssl DPKG is earlier than 0.9.8g-4ubuntu3.5" test_ref="oval:org.mitre.oval:tst:67290"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8a-7ubuntu0.7" test_ref="oval:org.mitre.oval:tst:66967"/>
+        <criterion comment="libcrypto0.9.8-udeb DPKG is earlier than 0.9.8a-7ubuntu0.7" test_ref="oval:org.mitre.oval:tst:67436"/>
+        <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8a-7ubuntu0.7" test_ref="oval:org.mitre.oval:tst:66928"/>
+        <criterion comment="openssl DPKG is earlier than 0.9.8a-7ubuntu0.7" test_ref="oval:org.mitre.oval:tst:67296"/>
+        <criterion comment="libssl-dev DPKG is earlier than 0.9.8a-7ubuntu0.7" test_ref="oval:org.mitre.oval:tst:67347"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="openssl-doc DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67139"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libcrypto0.9.8-udeb DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67065"/>
+            <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67199"/>
+            <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67294"/>
+            <criterion comment="libssl-dev DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67242"/>
+            <criterion comment="openssl DPKG is earlier than 0.9.8g-10.1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67009"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

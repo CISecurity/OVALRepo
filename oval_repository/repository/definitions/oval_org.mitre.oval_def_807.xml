@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:807" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Red Hat XFree86 Buffer Overflow in ReadFontAlias II</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <product>XFree86</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0084" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0084"/>
+    <description>Buffer overflow in the ReadFontAlias function in XFree86 4.1.0 to 4.3.0, when using the CopyISOLatin1Lowered function, allows local or remote authenticated users to execute arbitrary code via a malformed entry in the font alias (font.alias) file, a different vulnerability than CVE-2004-0083 and CVE-2004-0106.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-03-20T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="The MITRE Corporation">Matt Busby</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:43.326-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:47.331-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat 9 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3153"/>
+      <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+      <criterion comment="XFree86 version is less than 4.3.0-2.90.55" negate="false" test_ref="oval:org.mitre.oval:tst:1641"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="AND" comment="/usr/X11R6/bin/XFree86 is SUID and executable">
+        <criterion comment="/usr/X11R6/bin/XFree86 is SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:1640"/>
+        <criteria operator="OR" comment="/usr/X11R6/bin/XFree86 is SUID and executable">
+          <criterion comment="/usr/X11R6/bin/XFree86 is SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:1639"/>
+          <criterion comment="/usr/X11R6/bin/XFree86 is SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:1638"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

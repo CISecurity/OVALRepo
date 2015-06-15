@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8421" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HTML Object Memory Corruption Vulnerability (CVE-2010-0491)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Internet Explorer 5.01</product>
+      <product>Microsoft Internet Explorer 6</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0491" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0491"/>
+    <description>Use-after-free vulnerability in Microsoft Internet Explorer 5.01 SP4, 6, and 6 SP1 allows remote attackers to execute arbitrary code by changing unspecified properties of an HTML object that has an onreadystatechange event handler, aka "HTML Object Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-30T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-03-31T14:15:25.732-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:24.442-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:10.622-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Internet Explorer 5.01 Service Pack 4 on Windows 2000">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 5.01 SP4 is installed" definition_ref="oval:org.mitre.oval:def:325"/>
+      <criterion comment="Mshtml.dll version is less than 5.0.3886.1900" test_ref="oval:org.mitre.oval:tst:20983"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 6 on Windows 2000 - RTMGDR">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2800.1646" test_ref="oval:org.mitre.oval:tst:21144"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 6 on XP x86 SP2">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.3676" test_ref="oval:org.mitre.oval:tst:20926"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 6 on XP x86 SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.5945" test_ref="oval:org.mitre.oval:tst:21222"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 6 on XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.3790.4672" test_ref="oval:org.mitre.oval:tst:20919"/>
+    </criteria>
+  </criteria>
+</definition>

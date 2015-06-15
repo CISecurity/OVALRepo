@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27134" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1635 -- firefox security update</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 7</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+      <product>xulrunner-devel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1635.html" ref_id="ELSA-2014-1635"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1574" ref_id="CVE-2014-1574"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1576" ref_id="CVE-2014-1576"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1577" ref_id="CVE-2014-1577"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1578" ref_id="CVE-2014-1578"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1581" ref_id="CVE-2014-1581"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1583" ref_id="CVE-2014-1583"/>
+    <description>firefox
+[31.2.0-3.0.1.el7_0]
+- Add firefox-oracle-default-prefs.js and remove the corresponding Red Hat one
+
+[31.2.0-3]
+- Update to 31.2.0 ESR
+- Fix for mozbz#1042889
+
+[31.1.0-7]
+- Enable WebM on all arches
+
+xulrunner
+[31.2.0-1.0.1]
+- Replaced xulrunner-redhat-default-prefs.js with xulrunner-oracle-default-prefs.js
+- Removed XULRUNNER_VERSION from SOURCE21
+
+[31.2.0-1]
+- Update to 31.2.0
+
+[31.1.0-3]
+- move /sdk/bin to xulrunner libdir
+
+[31.1.0-2]
+- Sync preferences with Firefox package
+
+[31.1.0-1]
+- Update to 31.1.0 ESR
+
+[31.0-2]
+- Fix header wrapper for aarch64
+
+[31.0-1]
+- Update to 31.0 ESR</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-17T17:21:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-17T23:33:15.310-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:27134 - Updated patches for Oracle Linux by switching dpkginfo tests to new rpminfo tests." date="2014-10-31T14:02:00.180-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-11-17T04:01:47.416-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:38.154-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criterion comment="firefox is earlier than 0:31.2.0-3.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:126202"/>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criterion comment="firefox is earlier than 0:31.2.0-3.0.1.el6_6" test_ref="oval:org.mitre.oval:tst:125364"/>
+    </criteria>
+    <criteria comment="Oracle Linux 7 release section">
+      <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="firefox is earlier than 0:31.2.0-3.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:126173"/>
+        <criterion comment="xulrunner is earlier than 0:31.2.0-1.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:126222"/>
+        <criterion comment="xulrunner-devel is earlier than 0:31.2.0-1.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:126100"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

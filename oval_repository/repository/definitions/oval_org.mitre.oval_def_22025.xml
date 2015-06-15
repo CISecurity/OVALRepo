@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22025" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0044: augeas security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>augeas</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0044-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0044.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0044"/>
+    <reference source="CVE" ref_id="CVE-2013-6412" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6412.html"/>
+    <description>The transform_save function in transform.c in Augeas 1.0.0 through 1.1.0 does not properly calculate the permission values when the umask contains a "7," which causes world-writable permissions to be used for new files and allows local users to modify the files via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-28T12:16:52">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-02-11T14:03:38.827-05:00">DRAFT</status_change>
+        <status_change date="2014-03-03T04:01:02.932-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:32.340-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22025 - CentOS was added to RedHat vulnerabilities and products were added were nessesary." date="2014-04-23T10:31:00.517-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-04-23T10:32:52.838-04:00">INTERIM</status_change>
+        <status_change date="2014-05-12T04:00:10.864-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="augeas-libs is earlier than 0:1.0.0-5.el6_5.1" test_ref="oval:org.mitre.oval:tst:100284"/>
+      <criterion comment="augeas is earlier than 0:1.0.0-5.el6_5.1" test_ref="oval:org.mitre.oval:tst:99896"/>
+      <criterion comment="augeas-devel is earlier than 0:1.0.0-5.el6_5.1" test_ref="oval:org.mitre.oval:tst:100343"/>
+    </criteria>
+  </criteria>
+</definition>

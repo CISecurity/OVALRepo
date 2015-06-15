@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12418" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-803-2 -- dhcp3 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>dhcp3</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-January/001037.html" ref_id="USN-803-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0692" ref_id="CVE-2009-0692"/>
+    <description>USN-803-1 fixed a vulnerability in Dhcp. Due to an error, the patch to fix the vulnerability was not properly applied on Ubuntu 8.10 and higher. Even with the patch improperly applied, the default compiler options reduced the vulnerability to a denial of service. Additionally, in Ubuntu 9.04 and higher, users were also protected by the AppArmor dhclient3 profile. This update fixes the problem. Original advisory details: It was discovered that the DHCP client as included in dhcp3 did not verify the length of certain option fields when processing a response from an IPv4 dhcp server. If a user running Ubuntu 6.06 LTS or 8.04 LTS connected to a malicious dhcp server, a remote attacker could cause a denial of service or execute arbitrary code as the user invoking the program, typically the "dhcp" user. For users running Ubuntu 8.10 or 9.04, a remote attacker should only be able to cause a denial of service in the DHCP client. In Ubuntu 9.04, attackers would also be isolated by the AppArmor dhclient3 profile.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T14:58:12.681-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:00:05.407-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:00:05.058-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12418 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:14.449-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:06.815-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="dhcp3-client DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45523"/>
+        <criterion comment="dhcp3-dev DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45138"/>
+        <criterion comment="dhcp3-relay DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45118"/>
+        <criterion comment="dhcp3-common DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45614"/>
+        <criterion comment="dhcp3-server-ldap DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45313"/>
+        <criterion comment="dhcp3-server DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45352"/>
+        <criterion comment="dhcp3-client-udeb DPKG is earlier than 3.1.1-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:44835"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="dhcp-client DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45403"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dhcp3-client DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45379"/>
+            <criterion comment="dhcp3-dev DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45557"/>
+            <criterion comment="dhcp3-relay DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45449"/>
+            <criterion comment="dhcp3-common DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45816"/>
+            <criterion comment="dhcp3-server-ldap DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45642"/>
+            <criterion comment="dhcp3-server DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45725"/>
+            <criterion comment="dhcp3-client-udeb DPKG is earlier than 3.1.2-1ubuntu7.1" test_ref="oval:org.mitre.oval:tst:45197"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="dhcp-client DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45416"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dhcp3-client DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:44930"/>
+            <criterion comment="dhcp3-dev DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45641"/>
+            <criterion comment="dhcp3-relay DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45576"/>
+            <criterion comment="dhcp3-common DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:44909"/>
+            <criterion comment="dhcp3-server-ldap DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45805"/>
+            <criterion comment="dhcp3-server DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45443"/>
+            <criterion comment="dhcp3-client-udeb DPKG is earlier than 3.1.1-5ubuntu8.2" test_ref="oval:org.mitre.oval:tst:45605"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

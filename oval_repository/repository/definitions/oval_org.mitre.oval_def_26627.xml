@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26627" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1122-1 -- Security update for glibc</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141122-1.html" ref_id="SUSE-SU-2014:1122-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5119" ref_id="CVE-2014-5119"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4043" ref_id="CVE-2014-4043"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4332" ref_id="CVE-2013-4332"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4237" ref_id="CVE-2013-4237"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4788" ref_id="CVE-2013-4788"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0242" ref_id="CVE-2013-0242"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4412" ref_id="CVE-2012-4412"/>
+    <description><![CDATA[This glibc update fixes a critical privilege escalation vulnerability and
+the following security and non-security issues:
+
+    * bnc#892073: An off-by-one error leading to a heap-based buffer
+      overflow was found in __gconv_translit_find(). An exploit that
+targets the problem is publicly available. (CVE-2014-5119)
+    * bnc#886416: Avoid redundant shift character in iconv output at block
+      boundary.
+    * bnc#883022: Initialize errcode in sysdeps/unix/opendir.c.
+    * bnc#882600: Copy filename argument in
+      posix_spawn_file_actions_addopen. (CVE-2014-4043)
+    * bnc#864081: Take lock in pthread_cond_wait cleanup handler only when
+      needed.
+    * bnc#843735: Don't crash on unresolved weak symbol reference.
+    * bnc#839870: Fix integer overflows in malloc. (CVE-2013-4332)
+    * bnc#836746: Avoid race between {,__de}allocate_stack and
+      __reclaim_stacks during fork.
+    * bnc#834594: Fix readdir_r with long file names. (CVE-2013-4237)
+    * bnc#830268: Initialize pointer guard also in static executables.
+      (CVE-2013-4788)
+    * bnc#801246: Fix buffer overrun in regexp matcher. (CVE-2013-0242)
+    * bnc#779320: Fix buffer overflow in strcoll. (CVE-2012-4412)
+    * bnc#750741: Use absolute timeout in x86 pthread_cond_timedwait.
+
+Security Issues:
+
+    * CVE-2014-5119
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5119>
+    * CVE-2014-4043
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4043>
+    * CVE-2012-4412
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4412>
+    * CVE-2013-0242
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0242>
+    * CVE-2013-4788
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4788>
+    * CVE-2013-4237
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4237>
+    * CVE-2013-4332
+      <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4332>]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T10:32:38">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:10:31.490-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:42.395-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:38.105-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="glibc RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124068"/>
+      <criterion comment="glibc-devel RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:123674"/>
+      <criterion comment="glibc-html RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124146"/>
+      <criterion comment="glibc-i18ndata RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:123991"/>
+      <criterion comment="glibc-info RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124101"/>
+      <criterion comment="glibc-locale RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124153"/>
+      <criterion comment="glibc-profile RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:123280"/>
+      <criterion comment="nscd RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:123804"/>
+      <criterion comment="glibc-32bit RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:123744"/>
+      <criterion comment="glibc-devel-32bit RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124206"/>
+      <criterion comment="glibc-locale-32bit RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124234"/>
+      <criterion comment="glibc-profile-32bit RPM is earlier than 0:2.11.1-0.58.1" test_ref="oval:org.mitre.oval:tst:124231"/>
+    </criteria>
+  </criteria>
+</definition>

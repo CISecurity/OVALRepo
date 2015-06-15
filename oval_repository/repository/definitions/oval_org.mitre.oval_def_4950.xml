@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:4950" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability in Floating Point Context Switch Implementation May Result in a Denial of Service (DoS) or Data Integrity Issues</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1778" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1778"/>
+    <description>Unspecified vulnerability in the floating point context switch implementation in Sun Solaris 9 and 10 on x86 platforms might allow local users to cause a denial of service (application exit), corrupt data, or trigger incorrect calculations via unknown vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-15T07:48:47.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-04-15T12:06:15.409-04:00">DRAFT</status_change>
+        <status_change date="2008-05-05T04:00:22.388-04:00">INTERIM</status_change>
+        <status_change date="2008-05-26T04:00:19.375-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 233921">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion negate="true" comment="Patch 122301-23 or later installed" test_ref="oval:org.mitre.oval:tst:7682"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 233921">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 127112-10 or later installed" test_ref="oval:org.mitre.oval:tst:7749"/>
+    </criteria>
+  </criteria>
+</definition>

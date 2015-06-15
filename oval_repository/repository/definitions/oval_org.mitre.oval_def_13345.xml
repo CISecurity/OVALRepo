@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13345" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-986-2 -- clamav vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <product>clamav</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-September/001161.html" ref_id="USN-986-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0405" ref_id="CVE-2010-0405"/>
+    <description>USN-986-1 fixed a vulnerability in bzip2. This update provides the corresponding update for ClamAV. Original advisory details: An integer overflow was discovered in bzip2. If a user or automated system were tricked into decompressing a crafted bz2 file, an attacker could cause bzip2 or any application linked against libbz2 to crash or possibly execute code as the user running the program.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:27:56.362-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:05:56.585-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:04:48.385-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13345 - added CVE references; also made minor updates" date="2014-06-13T15:53:00.659-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:55:20.632-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:02:44.716-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="clamav-docs DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59545"/>
+            <criterion comment="clamav-testfiles DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59889"/>
+            <criterion comment="clamav-base DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:58912"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libclamav-dev DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59791"/>
+            <criterion comment="clamav DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59751"/>
+            <criterion comment="libclamav6 DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59660"/>
+            <criterion comment="clamav-dbg DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59035"/>
+            <criterion comment="clamav-daemon DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59718"/>
+            <criterion comment="clamav-milter DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:58953"/>
+            <criterion comment="clamav-freshclam DPKG is earlier than 0.96.1+dfsg-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:59771"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="clamav-docs DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59903"/>
+            <criterion comment="clamav-testfiles DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59569"/>
+            <criterion comment="clamav-base DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59922"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libclamav-dev DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59417"/>
+            <criterion comment="clamav DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59642"/>
+            <criterion comment="libclamav6 DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59871"/>
+            <criterion comment="clamav-dbg DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59936"/>
+            <criterion comment="clamav-daemon DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59921"/>
+            <criterion comment="clamav-milter DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59757"/>
+            <criterion comment="clamav-freshclam DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.04.3" test_ref="oval:org.mitre.oval:tst:59498"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="clamav-docs DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59879"/>
+            <criterion comment="clamav-testfiles DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59932"/>
+            <criterion comment="clamav-base DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59934"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libclamav-dev DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59167"/>
+            <criterion comment="clamav DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59517"/>
+            <criterion comment="libclamav6 DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59492"/>
+            <criterion comment="clamav-dbg DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59648"/>
+            <criterion comment="clamav-daemon DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59383"/>
+            <criterion comment="clamav-milter DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59790"/>
+            <criterion comment="clamav-freshclam DPKG is earlier than 0.95.3+dfsg-1ubuntu0.09.10.3" test_ref="oval:org.mitre.oval:tst:59905"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

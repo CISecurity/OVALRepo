@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6303" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Buffer overflow in autoconf6.</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.3</platform>
+      <platform>IBM AIX 6.1</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-5387" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5387"/>
+    <description>Buffer overflow in autoconf6 in IBM AIX 6.1.0 through 6.1.2, when Role-Based Access Control is enabled, allows local users with aix.network.config.tcpip authorization to gain privileges via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-08-02T14:02:44-04:00">
+          <contributor organization="DTCC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2009-08-06T10:44:06.771-04:00">DRAFT</status_change>
+        <status_change date="2009-08-24T04:00:08.925-04:00">INTERIM</status_change>
+        <status_change date="2009-09-14T04:00:09.374-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6303 - Switched definition reference from one with an incorrect description to redundant definition with a correct description." date="2012-02-28T14:10:00.170-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-02-28T14:13:53.355-05:00">INTERIM</status_change>
+        <status_change date="2012-03-19T04:01:17.334-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="IBM AIX 5300-00 through 5300-05 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 5300-00 through 5300-05 is installed" definition_ref="oval:org.mitre.oval:def:6123"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-06 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 5300-06 is installed" definition_ref="oval:org.mitre.oval:def:4813"/>
+      <criterion negate="true" comment="All filesets for APAR IZ32172 are installed" test_ref="oval:org.mitre.oval:tst:10259"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-07 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 5300-07 is installed" definition_ref="oval:org.mitre.oval:def:5707"/>
+      <criterion negate="true" comment="All filesets for APAR IZ32051 are installed" test_ref="oval:org.mitre.oval:tst:9861"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-08 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 5300-08 is installed" definition_ref="oval:org.mitre.oval:def:5293"/>
+      <criterion negate="true" comment="All filesets for APAR IZ32016 are installed" test_ref="oval:org.mitre.oval:tst:10527"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-09 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 5300-09 is installed" definition_ref="oval:org.mitre.oval:def:6306"/>
+      <criterion negate="true" comment="All filesets for APAR IZ30238 are installed" test_ref="oval:org.mitre.oval:tst:10466"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 6100-00 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 6100-00 is installed" definition_ref="oval:org.mitre.oval:def:5589"/>
+      <criterion negate="true" comment="All filesets for APAR IZ34753 are installed" test_ref="oval:org.mitre.oval:tst:10410"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 6100-01 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 6100-01 is installed" definition_ref="oval:org.mitre.oval:def:5959"/>
+      <criterion negate="true" comment="All filesets for APAR IZ34393 are installed" test_ref="oval:org.mitre.oval:tst:10180"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 6100-02 meets CVE-2008-5387">
+      <extend_definition comment="IBM AIX 6100-02 is installed" definition_ref="oval:org.mitre.oval:def:5685"/>
+      <criterion negate="true" comment="All filesets for APAR IZ30231 are installed" test_ref="oval:org.mitre.oval:tst:10011"/>
+    </criteria>
+  </criteria>
+</definition>

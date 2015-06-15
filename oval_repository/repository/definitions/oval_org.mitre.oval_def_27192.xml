@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27192" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1110 -- glibc security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1110.html" ref_id="ELSA-2014-1110"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0475" ref_id="CVE-2014-0475"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5119" ref_id="CVE-2014-5119"/>
+    <description>An off-by-one heap-based buffer overflow flaw was found in glibc's internal
+          __gconv_translit_find() function. An attacker able to make an application
+          call the iconv_open() function with a specially crafted argument could
+          possibly use this flaw to execute arbitrary code with the privileges of
+          that application. (CVE-2014-5119)
+
+          A directory traveral flaw was found in the way glibc loaded locale files.
+          An attacker able to make an application use a specially crafted locale name
+          value (for example, specified in an LC_* environment variable) could
+          possibly use this flaw to execute arbitrary code with the privileges of
+          that application. (CVE-2014-0475)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:20:44">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:20:27.598-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:02:40.605-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:00.004-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="glibc is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126987"/>
+        <criterion comment="glibc-common is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126587"/>
+        <criterion comment="glibc-devel is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126668"/>
+        <criterion comment="glibc-headers is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126358"/>
+        <criterion comment="glibc-utils is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126898"/>
+        <criterion comment="nscd is earlier than 0:2.5-118.el5_10.3" test_ref="oval:org.mitre.oval:tst:126586"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="glibc is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126330"/>
+        <criterion comment="glibc-common is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126983"/>
+        <criterion comment="glibc-devel is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126239"/>
+        <criterion comment="glibc-headers is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126649"/>
+        <criterion comment="glibc-static is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126715"/>
+        <criterion comment="glibc-utils is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126951"/>
+        <criterion comment="nscd is earlier than 0:2.12-1.132.el6_5.4" test_ref="oval:org.mitre.oval:tst:126479"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

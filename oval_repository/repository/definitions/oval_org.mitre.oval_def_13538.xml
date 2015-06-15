@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13538" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1042-2 -- php5 regression</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <product>php5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-January/001228.html" ref_id="USN-1042-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3436" ref_id="CVE-2010-3436"/>
+    <description>USN-1042-1 fixed vulnerabilities in PHP5. The fix for CVE-2010-3436 introduced a regression in the open_basedir restriction handling code. This update fixes the problem. We apologize for the inconvenience. Original advisory details: It was discovered that attackers might be able to bypass open_basedir restrictions by passing a specially crafted filename</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:31:29.220-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:08:36.253-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:06:49.327-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13538 - added CVE references; also made minor updates" date="2014-06-13T15:35:00.587-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:36:46.339-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:25.934-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php-pear DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60771"/>
+            <criterion comment="php5 DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60943"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php5-cli DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60632"/>
+            <criterion comment="php5-cgi DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60667"/>
+            <criterion comment="php5-tidy DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60957"/>
+            <criterion comment="php5-recode DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60850"/>
+            <criterion comment="php5-sybase DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:59998"/>
+            <criterion comment="php5-pspell DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60984"/>
+            <criterion comment="php5-curl DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60863"/>
+            <criterion comment="php5-snmp DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60618"/>
+            <criterion comment="php5-ldap DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60615"/>
+            <criterion comment="php5-common DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60791"/>
+            <criterion comment="php5-odbc DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60953"/>
+            <criterion comment="php5-dev DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60580"/>
+            <criterion comment="php5-pgsql DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60043"/>
+            <criterion comment="php5-xsl DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60938"/>
+            <criterion comment="php5-mysql DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60718"/>
+            <criterion comment="php5-xmlrpc DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60793"/>
+            <criterion comment="php5-sqlite DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60435"/>
+            <criterion comment="php5-gd DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60690"/>
+            <criterion comment="php5-gmp DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:61003"/>
+            <criterion comment="libapache2-mod-php5 DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:60160"/>
+            <criterion comment="php5-mhash DPKG is earlier than 5.2.4-2ubuntu5.14" test_ref="oval:org.mitre.oval:tst:61039"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php-pear DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60529"/>
+            <criterion comment="php5 DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60382"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php5-recode DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60993"/>
+            <criterion comment="php5-xmlrpc DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60954"/>
+            <criterion comment="php5-enchant DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60869"/>
+            <criterion comment="php5-intl DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60693"/>
+            <criterion comment="php5-snmp DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60829"/>
+            <criterion comment="php5-mysql DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60046"/>
+            <criterion comment="php5-odbc DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60644"/>
+            <criterion comment="php5-xsl DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60950"/>
+            <criterion comment="php5-gd DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60995"/>
+            <criterion comment="libapache2-mod-php5 DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:61037"/>
+            <criterion comment="php5-tidy DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60996"/>
+            <criterion comment="php5-dev DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60879"/>
+            <criterion comment="php5-pgsql DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60906"/>
+            <criterion comment="php5-curl DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60697"/>
+            <criterion comment="php5-gmp DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60972"/>
+            <criterion comment="php5-fpm DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:61026"/>
+            <criterion comment="php5-cgi DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60326"/>
+            <criterion comment="php5-sqlite DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60973"/>
+            <criterion comment="php5-ldap DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60893"/>
+            <criterion comment="php5-cli DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60161"/>
+            <criterion comment="php5-sybase DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:61007"/>
+            <criterion comment="libapache2-mod-php5filter DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60514"/>
+            <criterion comment="php5-pspell DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60939"/>
+            <criterion comment="php5-common DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60767"/>
+            <criterion comment="php5-dbg DPKG is earlier than 5.3.3-1ubuntu9.3" test_ref="oval:org.mitre.oval:tst:60403"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php-pear DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60760"/>
+            <criterion comment="php5 DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60655"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php5-recode DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60757"/>
+            <criterion comment="php5-cgi DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60813"/>
+            <criterion comment="php5-curl DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61009"/>
+            <criterion comment="php5-intl DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60638"/>
+            <criterion comment="php5-snmp DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60915"/>
+            <criterion comment="php5-mysql DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60100"/>
+            <criterion comment="php5-odbc DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60916"/>
+            <criterion comment="php5-xsl DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61042"/>
+            <criterion comment="php5-gd DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60968"/>
+            <criterion comment="libapache2-mod-php5 DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60971"/>
+            <criterion comment="php5-tidy DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60830"/>
+            <criterion comment="php5-dev DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60474"/>
+            <criterion comment="php5-pgsql DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60919"/>
+            <criterion comment="php5-enchant DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60866"/>
+            <criterion comment="php5-gmp DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61043"/>
+            <criterion comment="php5-xmlrpc DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60302"/>
+            <criterion comment="php5-sqlite DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60741"/>
+            <criterion comment="php5-ldap DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61001"/>
+            <criterion comment="php5-cli DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61018"/>
+            <criterion comment="php5-sybase DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60085"/>
+            <criterion comment="libapache2-mod-php5filter DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60974"/>
+            <criterion comment="php5-pspell DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60859"/>
+            <criterion comment="php5-common DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:60940"/>
+            <criterion comment="php5-dbg DPKG is earlier than 5.3.2-1ubuntu4.7" test_ref="oval:org.mitre.oval:tst:61024"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php-pear DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60964"/>
+            <criterion comment="php5 DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60761"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php5-recode DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60650"/>
+            <criterion comment="php5-xmlrpc DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60951"/>
+            <criterion comment="php5-curl DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60818"/>
+            <criterion comment="php5-snmp DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60689"/>
+            <criterion comment="php5-mysql DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60849"/>
+            <criterion comment="php5-odbc DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61000"/>
+            <criterion comment="php5-xsl DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60914"/>
+            <criterion comment="php5-gd DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61084"/>
+            <criterion comment="libapache2-mod-php5 DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61019"/>
+            <criterion comment="php5-mhash DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60854"/>
+            <criterion comment="php5-tidy DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60745"/>
+            <criterion comment="php5-dev DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60832"/>
+            <criterion comment="php5-pgsql DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60629"/>
+            <criterion comment="php5-gmp DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61068"/>
+            <criterion comment="php5-cgi DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60969"/>
+            <criterion comment="php5-sqlite DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60470"/>
+            <criterion comment="php5-ldap DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60443"/>
+            <criterion comment="php5-cli DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60981"/>
+            <criterion comment="php5-sybase DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61013"/>
+            <criterion comment="libapache2-mod-php5filter DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61058"/>
+            <criterion comment="php5-pspell DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60787"/>
+            <criterion comment="php5-common DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:61040"/>
+            <criterion comment="php5-dbg DPKG is earlier than 5.2.10.dfsg.1-2ubuntu6.7" test_ref="oval:org.mitre.oval:tst:60922"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php-pear DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60637"/>
+            <criterion comment="php5 DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61023"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="php5-cli DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61071"/>
+            <criterion comment="php5-cgi DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60945"/>
+            <criterion comment="libapache2-mod-php5 DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61014"/>
+            <criterion comment="php5-recode DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60827"/>
+            <criterion comment="php5-sybase DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60894"/>
+            <criterion comment="php5-xmlrpc DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61075"/>
+            <criterion comment="php5-curl DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61059"/>
+            <criterion comment="php5-snmp DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60576"/>
+            <criterion comment="php5-ldap DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61006"/>
+            <criterion comment="php5-mysqli DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60482"/>
+            <criterion comment="php5-odbc DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61063"/>
+            <criterion comment="php5-pgsql DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60724"/>
+            <criterion comment="php5-sqlite DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61066"/>
+            <criterion comment="php5-mysql DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60864"/>
+            <criterion comment="php5-xsl DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60558"/>
+            <criterion comment="php5-gd DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60857"/>
+            <criterion comment="php5-common DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61065"/>
+            <criterion comment="php5-dev DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:61076"/>
+            <criterion comment="php5-mhash DPKG is earlier than 5.1.2-1ubuntu3.21" test_ref="oval:org.mitre.oval:tst:60121"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21604" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:1256: ghostscript security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>ghostscript</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:1256-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-1256.html"/>
+    <reference source="CESA" ref_id="CESA-2012:1256"/>
+    <reference source="CVE" ref_id="CVE-2012-4405" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-4405.html"/>
+    <description>Multiple integer underflows in the icmLut_allocate function in International Color Consortium (ICC) Format library (icclib), as used in Ghostscript 9.06 and Argyll Color Management System, allow remote attackers to cause a denial of service (crash) and possibly execute arbitrary code via a crafted (1) PostScript or (2) PDF file with embedded images, which triggers a heap-based buffer overflow.  NOTE: this issue is also described as an array index error.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:21:19.288-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:21.960-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:47.067-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="ghostscript-gtk is earlier than 0:8.70-14.el5_8.1" test_ref="oval:org.mitre.oval:tst:94323"/>
+        <criterion comment="ghostscript-devel is earlier than 0:8.70-14.el5_8.1" test_ref="oval:org.mitre.oval:tst:94481"/>
+        <criterion comment="ghostscript is earlier than 0:8.70-14.el5_8.1" test_ref="oval:org.mitre.oval:tst:94158"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="ghostscript-gtk is earlier than 0:8.70-14.el6_3.1" test_ref="oval:org.mitre.oval:tst:94529"/>
+        <criterion comment="ghostscript-devel is earlier than 0:8.70-14.el6_3.1" test_ref="oval:org.mitre.oval:tst:93565"/>
+        <criterion comment="ghostscript-doc is earlier than 0:8.70-14.el6_3.1" test_ref="oval:org.mitre.oval:tst:94516"/>
+        <criterion comment="ghostscript is earlier than 0:8.70-14.el6_3.1" test_ref="oval:org.mitre.oval:tst:93913"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

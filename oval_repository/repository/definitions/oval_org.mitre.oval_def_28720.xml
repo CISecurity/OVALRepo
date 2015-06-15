@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28720" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in IBM SDK Java JSSE affects AIX</title>
+    <affected family="unix">
+      <platform>IBM AIX 6.1</platform>
+      <platform>IBM AIX 7.1</platform>
+    </affected>
+    <reference ref_id="CVE-2015-0138" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0138" source="CVE"/>
+    <description>GSKit in IBM Tivoli Directory Server (ITDS) 6.0 before 6.0.0.73-ISS-ITDS-IF0073, 6.1 before 6.1.0.66-ISS-ITDS-IF0066, 6.2 before 6.2.0.42-ISS-ITDS-IF0042, and 6.3 before 6.3.0.35-ISS-ITDS-IF0035 and IBM Security Directory Server (ISDS) 6.3.1 before 6.3.1.9-ISS-ISDS-IF0009 does not properly restrict TLS state transitions, which makes it easier for remote attackers to conduct cipher-downgrade attacks to EXPORT_RSA ciphers via crafted TLS traffic, related to the "FREAK" issue, a different vulnerability than CVE-2015-0204.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-02-25T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Jaikumar</contributor>
+        </submitted>
+        <status_change date="2015-04-24T09:34:05.070-04:00">DRAFT</status_change>
+        <status_change date="2015-05-11T04:00:19.244-04:00">INTERIM</status_change>
+        <status_change date="2015-06-01T04:00:19.943-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="platforms">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <extend_definition comment="IBM AIX 7.1 is installed" definition_ref="oval:org.mitre.oval:def:18828"/>
+    </criteria>
+    <criteria operator="OR" comment="File Version Exists">
+      <criterion comment="Java5.sdk less than 5.0.0.590" test_ref="oval:org.mitre.oval:tst:137960"/>
+      <criterion comment="Java5_64.sdk less than 5.0.0.590" test_ref="oval:org.mitre.oval:tst:137892"/>
+      <criterion comment="Java6.sdk less than 6.0.0.470" test_ref="oval:org.mitre.oval:tst:138178"/>
+      <criterion comment="Java6_64.sdk less than 6.0.0.470" test_ref="oval:org.mitre.oval:tst:138220"/>
+      <criterion comment="Java7.sdk less than 7.0.0.195" test_ref="oval:org.mitre.oval:tst:138022"/>
+      <criterion comment="Java7_64.sdk less than 7.0.0.195" test_ref="oval:org.mitre.oval:tst:137927"/>
+      <criterion comment="Java71.sdk less than 7.1.0.75" test_ref="oval:org.mitre.oval:tst:138042"/>
+      <criterion comment="Java71_64.sdk less than 7.1.0.75" test_ref="oval:org.mitre.oval:tst:138085"/>
+    </criteria>
+  </criteria>
+</definition>

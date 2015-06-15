@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12806" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Remote Desktop Protocol Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1968" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1968"/>
+    <description>The Remote Desktop Protocol (RDP) implementation in Microsoft Windows XP SP2 and SP3 and Windows Server 2003 SP2 does not properly process packets in memory, which allows remote attackers to cause a denial of service (reboot) by sending crafted RDP packets triggering access to an object that (1) was not properly initialized or (2) is deleted, as exploited in the wild in 2011, aka "Remote Desktop Protocol Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-08-09T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-08-15T08:31:29.189-04:00">DRAFT</status_change>
+        <status_change date="2011-09-05T04:00:14.090-04:00">INTERIM</status_change>
+        <status_change date="2011-09-26T04:00:14.153-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Affected software: Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of rdpwd.sys is less than 5.1.2600.6128" test_ref="oval:org.mitre.oval:tst:43554"/>
+    </criteria>
+    <criteria operator="AND" comment="Affected software: Microsoft Windows XP x64 SP2, Windows Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Microsoft Windows XP x64 SP2, Windows Server 2003 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of rdpwd.sys is less than 5.2.3790.4881" test_ref="oval:org.mitre.oval:tst:43761"/>
+    </criteria>
+  </criteria>
+</definition>

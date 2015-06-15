@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20582" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0301: ImageMagick security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>ImageMagick</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0301-03" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0301.html"/>
+    <reference source="CVE" ref_id="CVE-2010-4167" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-4167.html"/>
+    <description>Untrusted search path vulnerability in configure.c in ImageMagick before 6.6.5-5, when MAGICKCORE_INSTALLED_SUPPORT is defined, allows local users to gain privileges via a Trojan horse configuration file in the current working directory.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:03.790-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:14.934-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:28.555-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="ImageMagick-devel is earlier than 0:6.2.8.0-12.el5" test_ref="oval:org.mitre.oval:tst:92941"/>
+      <criterion comment="ImageMagick is earlier than 0:6.2.8.0-12.el5" test_ref="oval:org.mitre.oval:tst:92848"/>
+      <criterion comment="ImageMagick-c++ is earlier than 0:6.2.8.0-12.el5" test_ref="oval:org.mitre.oval:tst:92994"/>
+      <criterion comment="ImageMagick-c++-devel is earlier than 0:6.2.8.0-12.el5" test_ref="oval:org.mitre.oval:tst:93034"/>
+      <criterion comment="ImageMagick-perl is earlier than 0:6.2.8.0-12.el5" test_ref="oval:org.mitre.oval:tst:92425"/>
+    </criteria>
+  </criteria>
+</definition>

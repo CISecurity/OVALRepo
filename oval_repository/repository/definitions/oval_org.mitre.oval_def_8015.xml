@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8015" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1476 pulseaudio -- programming error</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>pulseaudio</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1476" ref_id="DSA-1476"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0008" ref_id="CVE-2008-0008"/>
+    <description>Marcus Meissner discovered that the PulseAudio sound server performed insufficient checks when dropping privileges, which could lead to local privilege escalation. The old stable distribution (sarge) doesn't contain pulseaudio.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:04-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:52:06.166-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:33.097-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:37.778-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8015 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:37:44.580-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:47.128-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libpulse0 is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13190"/>
+      <criterion comment="pulseaudio-module-lirc is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13863"/>
+      <criterion comment="libpulse-dev is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13807"/>
+      <criterion comment="pulseaudio-utils is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13768"/>
+      <criterion comment="pulseaudio is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13911"/>
+      <criterion comment="pulseaudio-module-hal is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13362"/>
+      <criterion comment="pulseaudio-module-x11 is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13835"/>
+      <criterion comment="pulseaudio-esound-compat is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13864"/>
+      <criterion comment="libpulse-mainloop-glib0 is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13849"/>
+      <criterion comment="pulseaudio-module-gconf is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13904"/>
+      <criterion comment="pulseaudio-module-zeroconf is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13521"/>
+      <criterion comment="pulseaudio-module-jack is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13247"/>
+      <criterion comment="libpulse-browse0 is earlier than 0.9.5-5etch1" test_ref="oval:org.mitre.oval:tst:13797"/>
+    </criteria>
+  </criteria>
+</definition>

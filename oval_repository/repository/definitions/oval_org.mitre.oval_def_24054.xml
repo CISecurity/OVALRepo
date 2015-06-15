@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24054" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware ESXi and ESX unauthorized file access through vCenter Server and ESX</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference ref_id="CVE-2013-5973" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5973" source="CVE"/>
+    <description>VMware ESXi 4.0 through 5.5 and ESX 4.0 and 4.1 allow local users to read or modify arbitrary files by leveraging the Virtual Machine Power User or Resource Pool Administrator role for a vCenter Server Add Existing Disk action with a (1) -flat, (2) -rdm, or (3) -rdmp filename.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-02-25T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-19T10:19:01.237-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:42.259-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:13.255-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201312401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201312401-SG is not installed" test_ref="oval:org.mitre.oval:tst:112932"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX400-201310401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criterion comment="Patch ESX400-201310401-SG is not installed" test_ref="oval:org.mitre.oval:tst:112640"/>
+    </criteria>
+  </criteria>
+</definition>

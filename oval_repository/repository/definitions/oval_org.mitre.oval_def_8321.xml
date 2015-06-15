@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8321" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1731 ndiswrapper -- buffer overflow</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>ndiswrapper</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1731" ref_id="DSA-1731"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4395" ref_id="CVE-2008-4395"/>
+    <description>Anders Kaseorg discovered that ndiswrapper suffers from buffer overflows via specially crafted wireless network traffic, due to incorrectly handling long ESSIDs. This could lead to the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:28.447-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:26.294-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:04:08.265-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8321 - Debian Patch Update" date="2014-06-06T17:29:00.238-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:31:06.482-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:34.204-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="ndiswrapper-source is earlier than 1.28-1+etch1" test_ref="oval:org.mitre.oval:tst:19350"/>
+          <criterion comment="ndiswrapper-common is earlier than 1.28-1+etch1" test_ref="oval:org.mitre.oval:tst:19601"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criterion comment="ndiswrapper-utils-1.9 is earlier than 1.28-1+etch1" test_ref="oval:org.mitre.oval:tst:19457"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

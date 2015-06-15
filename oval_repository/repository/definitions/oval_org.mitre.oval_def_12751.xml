@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12751" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1877-1 mysql-dfsg-5.0 -- denial of service/execution of arbitrary code</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>mysql-dfsg-5.0</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00196.html" ref_id="DSA-1877-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2446" ref_id="CVE-2009-2446"/>
+    <description>In MySQL 4.0.0 through 5.0.83, multiple format string vulnerabilities in the dispatch_command function in libmysqld/sql_parse.cc in mysqld allow remote authenticated users to cause a denial of service and potentially the execution of arbitrary code via format string specifiers in a database name in a COM_CREATE_DB or COM_DROP_DB request. For the stable distribution, this problem has been fixed in version 5.0.51a-24+lenny2. For the old stable distribution, this problem has been fixed in version 5.0.32-7etch11. We recommend that you upgrade your mysql packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:29:28.430-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:00:42.437-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:01:02.358-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12751 - Debian Patch Update" date="2014-06-06T17:07:00.556-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:09:27.178-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:43.809-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:48483"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:48939"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:49411"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:49392"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:48962"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:49272"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.51a-24+lenny2" test_ref="oval:org.mitre.oval:tst:48566"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49184"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49207"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49268"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49291"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49433"/>
+            <criterion comment="mysql-server-4.1 DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49115"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49318"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.32-7etch11" test_ref="oval:org.mitre.oval:tst:49449"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

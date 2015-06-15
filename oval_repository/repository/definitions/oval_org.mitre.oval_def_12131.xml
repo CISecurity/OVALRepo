@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12131" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2129-1 krb5 -- checksum verification weakness</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00180.html" ref_id="DSA-2129-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1323" ref_id="CVE-2010-1323"/>
+    <description>A vulnerability has been found in krb5, the MIT implementation of Kerberos. MIT krb5 clients incorrectly accept an unkeyed checksums in the SAM-2 preauthentication challenge: An unauthenticated remote attacker could alter a SAM-2 challenge, affecting the prompt text seen by the user or the kind of response sent to the KDC. Under some circumstances, this can negate the incremental security benefit of using a single-use authentication mechanism token. MIT krb5 incorrectly accepts RFC 3961 key-derivation checksums using RC4 keys when verifying KRB-SAFE messages: An unauthenticated remote attacker has a 1/256 chance of forging KRB-SAFE messages in an application protocol if the targeted pre-existing session uses an RC4 session key. Few application protocols use KRB-SAFE messages. The Common Vulnerabilities and Exposures project has assigned CVE-2010-1323 to these issues. For the stable distribution, these problems have been fixed in version 1.6.dfsg.4~beta1-5lenny6. The builds for the mips architecture are not included in this advisory. They will be released as soon as they are available. For the testing distribution and the unstable distribution, these problem have been fixed in version 1.8.3+dfsg-3. We recommend that you upgrade your krb5 packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:23:05">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:02.382-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:07.774-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:15.732-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12131 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:19.030-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:10.992-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="krb5-doc DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42056"/>
+      </criteria>
+      <criterion comment="krb5-rsh-server DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42809"/>
+      <criterion comment="krb5-kdc-ldap DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42937"/>
+      <criterion comment="krb5-telnetd DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42986"/>
+      <criterion comment="libkrb5-dev DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:43041"/>
+      <criterion comment="libkrb53 DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:43034"/>
+      <criterion comment="krb5-ftpd DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42687"/>
+      <criterion comment="krb5-pkinit DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42956"/>
+      <criterion comment="krb5-admin-server DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:43057"/>
+      <criterion comment="libkadm55 DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42211"/>
+      <criterion comment="libkrb5-dbg DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42710"/>
+      <criterion comment="krb5-user DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42744"/>
+      <criterion comment="krb5-clients DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42076"/>
+      <criterion comment="krb5-kdc DPKG is earlier than 1.6.dfsg.4~beta1-5lenny6" test_ref="oval:org.mitre.oval:tst:42912"/>
+    </criteria>
+  </criteria>
+</definition>

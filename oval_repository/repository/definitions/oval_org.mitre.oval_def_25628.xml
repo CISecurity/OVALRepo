@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25628" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1095-1 -- Security update for xorg-x11-libXrender</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>xorg-x11-libXrender</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131095-1.html" ref_id="SUSE-SU-2013:1095-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1987" ref_id="CVE-2013-1987"/>
+    <description>This update of xorg-x11-libXrender fixes several integer
+overflow issues  (bnc#815451, bnc#821669, CVE-2013-1987).
+
+Security Issue reference:
+
+    * CVE-2013-1987
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1987
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:33:35">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:31:46.371-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:46.888-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:51.893-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xorg-x11-libXrender RPM is earlier than 0:7.4-1.16.1" test_ref="oval:org.mitre.oval:tst:119926"/>
+        <criterion comment="xorg-x11-libXrender-32bit RPM is earlier than 0:7.4-1.16.1" test_ref="oval:org.mitre.oval:tst:119278"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criterion comment="xorg-x11-libXrender-devel RPM is earlier than 0:7.4-1.16.1" test_ref="oval:org.mitre.oval:tst:119398"/>
+    </criteria>
+  </criteria>
+</definition>

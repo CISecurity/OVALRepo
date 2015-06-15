@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22253" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0533: pcsc-lite security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>pcsc-lite</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0533-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0533.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0533"/>
+    <reference source="CVE" ref_id="CVE-2009-4901" ref_url="https://www.redhat.com/security/data/cve/CVE-2009-4901.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0407" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0407.html"/>
+    <description>Multiple buffer overflows in the MSGFunctionDemarshall function in winscard_svc.c in the PC/SC Smart Card daemon (aka PCSCD) in MUSCLE PCSC-Lite before 1.5.4 allow local users to gain privileges via crafted message data, which is improperly demarshalled.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:44.954-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:34.746-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:00.958-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="pcsc-lite-libs is earlier than 0:1.4.4-4.el5_5" test_ref="oval:org.mitre.oval:tst:99319"/>
+      <criterion comment="pcsc-lite-doc is earlier than 0:1.4.4-4.el5_5" test_ref="oval:org.mitre.oval:tst:99643"/>
+      <criterion comment="pcsc-lite is earlier than 0:1.4.4-4.el5_5" test_ref="oval:org.mitre.oval:tst:99618"/>
+      <criterion comment="pcsc-lite-devel is earlier than 0:1.4.4-4.el5_5" test_ref="oval:org.mitre.oval:tst:99387"/>
+    </criteria>
+  </criteria>
+</definition>

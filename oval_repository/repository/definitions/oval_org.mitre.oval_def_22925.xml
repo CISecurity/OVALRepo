@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22925" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0556: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0556-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0556.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-2755" ref_url="http://linux.oracle.com/cve/CVE-2010-2755.html" source="CVE"/>
+    <description>layout/generic/nsObjectFrame.cpp in Mozilla Firefox 3.6.7 does not properly free memory in the parameter array of a plugin instance, which allows remote attackers to cause a denial of service (memory corruption) or possibly execute arbitrary code via a crafted HTML document, related to the DATA and SRC attributes of an OBJECT element. NOTE: this vulnerability exists because of an incorrect fix for CVE-2010-1214.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:05:58.067-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:50.680-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:44.507-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22925 - optimisation of Oracle Linux content" date="2014-05-05T17:57:00.492-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:58:49.749-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:48.649-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="xulrunner is earlier than 0:1.9.2.7-3.el5" test_ref="oval:org.mitre.oval:tst:104197"/>
+      <criterion comment="xulrunner-devel is earlier than 0:1.9.2.7-3.el5" test_ref="oval:org.mitre.oval:tst:104182"/>
+      <criterion comment="firefox is earlier than 0:3.6.7-3.el5" test_ref="oval:org.mitre.oval:tst:104181"/>
+    </criteria>
+  </criteria>
+</definition>

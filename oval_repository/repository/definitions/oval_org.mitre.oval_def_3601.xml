@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3601" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Runtime linker, ld.so.1 LD_PRELOAD Envvar Buffer Overflow</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>Solaris Runtime Linker</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0609" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0609"/>
+    <description>Stack-based buffer overflow in the runtime linker, ld.so.1, on Solaris 2.6 through 9 allows local users to gain root privileges via a long LD_PRELOAD environment variable.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-12-29T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-01-12T12:41:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-02T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-02-23T09:25:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criteria operator="OR" comment="Solaris 7,8,or 9 installed">
+      <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="Solaris 7 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3045"/>
+      <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+    </criteria>
+    <criteria operator="OR" comment="Solaris 9 OR Patch 106950-14+ OR Patch 109147-07+ installed">
+      <criterion comment="Patch 106950-14 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:397"/>
+      <criterion comment="Patch 109147-07 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:396"/>
+      <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+    </criteria>
+    <criterion comment="Patch 106950-14 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:397"/>
+    <criterion comment="Patch 109147-07 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:396"/>
+    <criterion comment="Patch 112963-09 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:395"/>
+  </criteria>
+</definition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:4629" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Mozilla, Netscape SOAPParameter Integer Overflow</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <product>mozilla</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0722" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0722"/>
+    <description>Integer overflow in the SOAPParameter object constructor in (1) Netscape version 7.0 and 7.1 and (2) Mozilla 1.6, and possibly earlier versions, allows remote attackers to execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-19T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-01-24T03:40:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criteria operator="OR" comment="Solaris 8 or 9 installed">
+      <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+    </criteria>
+    <criteria operator="OR" comment="Mozilla components (any SUNWmoznav/SUNWmozmail) installed">
+      <criterion comment="Mozilla (SUNWmoznav) installed" negate="false" test_ref="oval:org.mitre.oval:tst:1070"/>
+      <criterion comment="Mozilla Mail (SUNWmozmail) installed" negate="false" test_ref="oval:org.mitre.oval:tst:1069"/>
+    </criteria>
+    <criterion comment="Patch 117765-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1068"/>
+    <criterion comment="Patch 117767-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1067"/>
+  </criteria>
+</definition>

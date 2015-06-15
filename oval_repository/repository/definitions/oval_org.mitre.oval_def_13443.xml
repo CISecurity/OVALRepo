@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13443" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1863-1 zope2.10/zope2.9 -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>zope2.10/zope2.9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00180.html" ref_id="DSA-1863-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0668" ref_id="CVE-2009-0668"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0669" ref_id="CVE-2009-0669"/>
+    <description>Several remote vulnerabilities have been discovered in the zope, a feature-rich web application server written in python, that could lead to arbitrary code execution in the worst case. The Common Vulnerabilities and Exposures project identified the following problems: Due to a programming error an authorisation method in the StorageServer component of ZEO was not used as an internal method. This allows a malicious client to bypass authentication when connecting to a ZEO server by simply calling this authorisation method. The ZEO server doesn’t restrict the callables when unpickling data received from a malicious client which can be used by an attacker to execute arbitrary python code on the server by sending certain exception pickles. This also allows an attacker to import any importable module as ZEO is importing the module containing a callable specified in a pickle to test for a certain flag. The update also limits the number of new object ids a client can request to 100 as it would be possible to consume huge amounts of resources by requesting a big batch of new object ids. No CVE id has been assigned to this. The oldstable distribution, this problem has been fixed in version 2.9.6-4etch2 of zope2.9. For the stable distribution, this problem has been fixed in version 2.10.6-1+lenny1 of zope2.10. For the testing distribution, this problem will be fixed soon. For the unstable distribution, this problem has been fixed in version 2.10.9-1 of zope2.10. We recommend that you upgrade your zope2.10/zope2.9 packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:32:43.382-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:39.238-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:07:13.318-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13443 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:30.571-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:15.570-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="zope2.10-sandbox DPKG is earlier than 2.10.6-1+lenny1" test_ref="oval:org.mitre.oval:tst:51744"/>
+        </criteria>
+        <criterion comment="zope2.10 DPKG is earlier than 2.10.6-1+lenny1" test_ref="oval:org.mitre.oval:tst:51873"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="zope2.9-sandbox DPKG is earlier than 2.9.6-4etch2" test_ref="oval:org.mitre.oval:tst:50920"/>
+        </criteria>
+        <criterion comment="zope2.9 DPKG is earlier than 2.9.6-4etch2" test_ref="oval:org.mitre.oval:tst:51782"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

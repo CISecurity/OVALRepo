@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14976" version="13" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in HTML Sanitization Component Could Allow Elevation of Privilege - MS12-066</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Communicator 2007 R2</product>
+      <product>Microsoft Groove Server 2010</product>
+      <product>Microsoft InfoPath 2007</product>
+      <product>Microsoft InfoPath 2010</product>
+      <product>Microsoft Lync 2010</product>
+      <product>Microsoft Lync 2010 Attendee</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft SharePoint Foundation 2010</product>
+      <product>Microsoft SharePoint Server 2007</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft SharePoint Services 3.0</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-2520" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2520"/>
+    <description>Cross-site scripting (XSS) vulnerability in Microsoft InfoPath 2007 SP2 and SP3 and 2010 SP1, Communicator 2007 R2, Lync 2010 and 2010 Attendee, SharePoint Server 2007 SP2 and SP3 and 2010 SP1, Groove Server 2010 SP1, Windows SharePoint Services 3.0 SP2, SharePoint Foundation 2010 SP1, and Office Web Apps 2010 SP1 allows remote attackers to inject arbitrary web script or HTML via a crafted string, aka "HTML Sanitization Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-10-17T14:14:25">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-10-19T16:11:35.679-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14976 - Updates based on revised bulletin for MS12-066." date="2012-10-25T16:35:00.524-04:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2012-11-12T04:00:07.293-05:00">INTERIM</status_change>
+        <status_change date="2012-12-03T04:00:05.564-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:157 - New defs for Office 2010 SP2 and multiple platform updates" date="2013-08-14T09:59:00.133-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-08-14T10:04:56.361-04:00">INTERIM</status_change>
+        <status_change date="2013-09-02T04:00:19.763-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:05.340-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:05:19.050-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:23843 - In some &quot;pattern match&quot; strings added &quot;\&quot; before &quot;.&quot; to clarify if &quot;point&quot; or &quot;any symbol&quot; needed." date="2014-07-28T18:11:00.493-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-07-28T18:12:38.707-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:10.950-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1390 - November 2014 bulletins." date="2014-11-17T17:25:00.386-05:00">
+          <contributor organization="SecPod Technologies">Kumarswamy S</contributor>
+        </modified>
+        <status_change date="2014-11-17T17:29:49.149-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:09.098-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="infopath 2007/version">
+      <criterion comment="Check if the version of ipeditor.dll is less than 12.0.6662.5004" test_ref="oval:org.mitre.oval:tst:80069"/>
+      <extend_definition comment="Microsoft InfoPath 2007 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:15522"/>
+    </criteria>
+    <criteria operator="AND" comment="infopath 2010/version">
+      <extend_definition comment="Microsoft InfoPath 2010 is installed" definition_ref="oval:org.mitre.oval:def:11846"/>
+      <criterion comment="Check if the version of ipeditor.dll is less than 14.0.6126.5000" test_ref="oval:org.mitre.oval:tst:80221"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint foundation 2010/version">
+      <criterion comment="Check if the version of onfda.dll is less than 14.0.6123.5000" test_ref="oval:org.mitre.oval:tst:80157"/>
+      <extend_definition comment="Microsoft SharePoint Foundation 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15661"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2007/version">
+      <criterion comment="Check if the version of Microsoft.office.server.dll is less than 12.0.6650.5000" test_ref="oval:org.mitre.oval:tst:79429"/>
+      <criteria operator="OR" comment="sharepoint server 2007 sp2/sp3">
+        <extend_definition comment="Microsoft Office SharePoint Server 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15502"/>
+        <extend_definition comment="Microsoft Office SharePoint Server 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15537"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2010/version">
+      <criterion comment="Check if the version of Microsoft.office.server.dll is less than 14.0.6114.5000" test_ref="oval:org.mitre.oval:tst:80132"/>
+      <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15614"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint services 3.0/version">
+      <criterion comment="Check if the version of onetutil.dll is less than 12.0.6665.5000" test_ref="oval:org.mitre.oval:tst:79711"/>
+      <criteria operator="OR" comment="sharepoint services 3.0 sp2/sp3">
+        <extend_definition comment="Microsoft SharePoint Services 3.0 SP3 is installed" definition_ref="oval:org.mitre.oval:def:14966"/>
+        <extend_definition comment="Microsoft Windows SharePoint Services 3.0 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15516"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="groove server 2010/version">
+      <criterion comment="Check if the version of groovers.dll is less than 14.0.6123.5005" test_ref="oval:org.mitre.oval:tst:79870"/>
+      <extend_definition comment="Microsoft Groove Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15227"/>
+    </criteria>
+    <criteria operator="AND" comment="microsoft lync 2010/version">
+      <criterion comment="Check if the version of communicator.exe is less than 4.0.7577.4109 (for Lync 2010)" test_ref="oval:org.mitre.oval:tst:79363"/>
+      <extend_definition comment="Microsoft Lync 2010 is installed" definition_ref="oval:org.mitre.oval:def:15099"/>
+    </criteria>
+    <criteria operator="AND" comment="lync 2010 attendee (user)">
+      <criterion comment="Check if the version of uc.dll is less than 4.0.7577.4103  (user install)" test_ref="oval:org.mitre.oval:tst:80198"/>
+      <extend_definition comment="Microsoft Lync 2010 Attendee (user level install) is installed" definition_ref="oval:org.mitre.oval:def:15641"/>
+    </criteria>
+    <criteria operator="AND" comment="lync 2010 attendee (admin)">
+      <criterion comment="CHeck if the version of uc.dll is less than 4.0.7577.4103 (admin install)" test_ref="oval:org.mitre.oval:tst:79832"/>
+      <extend_definition comment="Microsoft Lync 2010 Attendee (admin level install) is installed" definition_ref="oval:org.mitre.oval:def:15556"/>
+    </criteria>
+    <criteria operator="AND" comment="communicator 2007 R2/version">
+      <criterion comment="Check if the version of communicator.exe is less than 3.5.6907.261" test_ref="oval:org.mitre.oval:tst:80230"/>
+      <extend_definition comment="Microsoft Communicator 2007 R2 is installed" definition_ref="oval:org.mitre.oval:def:15613"/>
+    </criteria>
+    <criteria operator="AND" comment="infopath 2007 sp3/version">
+      <criterion comment="Check if the version of infopath.exe is less than 12.0.6662.5004" test_ref="oval:org.mitre.oval:tst:80214"/>
+      <extend_definition comment="Microsoft InfoPath 2007 Service Pack 3 is installed" definition_ref="oval:org.mitre.oval:def:15461"/>
+    </criteria>
+    <criteria operator="AND" comment="office web apps 2010/version">
+      <criterion comment="Check if the version of Msoserver.dll is less than 14.0.6123.5001" test_ref="oval:org.mitre.oval:tst:80146"/>
+      <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15860"/>
+    </criteria>
+    <criteria operator="AND" comment="infopath 2010 sp1/version">
+      <extend_definition comment="Microsoft InfoPath 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15934"/>
+      <criterion comment="Check if the version of infopath.exe is less than 14.0.6123.5006" test_ref="oval:org.mitre.oval:tst:79678"/>
+    </criteria>
+  </criteria>
+</definition>

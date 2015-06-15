@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9943" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Multiple vulnerabilities in libXpm for 6.8.1 and earlier, as used in XFree86 and other packages, include (1) multiple integer overflows, (2) out-of-bounds memory accesses, (3) directory traversal, (4) shell metacharacter, (5) endless loops, and (6) memory leaks, which could allow remote attackers to obtain sensitive information, cause a denial of service (application crash), or execute arbitrary code via a certain XPM image file. NOTE: it is highly likely that this candidate will be SPLIT into other candidates in the future, per CVE's content decisions.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0914" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0914"/>
+    <description>Multiple vulnerabilities in libXpm for 6.8.1 and earlier, as used in XFree86 and other packages, include (1) multiple integer overflows, (2) out-of-bounds memory accesses, (3) directory traversal, (4) shell metacharacter, (5) endless loops, and (6) memory leaks, which could allow remote attackers to obtain sensitive information, cause a denial of service (application crash), or execute arbitrary code via a certain XPM image file. NOTE: it is highly likely that this candidate will be SPLIT into other candidates in the future, per CVE's content decisions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:18:21.628-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:15:05.198-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:16:13.375-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9943 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:02:00.876-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:07:38.482-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:23:30.970-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="XFree86-cyrillic-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30653"/>
+      <criterion comment="XFree86-Xvfb is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30795"/>
+      <criterion comment="XFree86-ISO8859-14-100dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31038"/>
+      <criterion comment="XFree86-libs is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30973"/>
+      <criterion comment="XFree86-75dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30713"/>
+      <criterion comment="XFree86-truetype-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30995"/>
+      <criterion comment="XFree86-twm is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31069"/>
+      <criterion comment="XFree86-ISO8859-9-75dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30155"/>
+      <criterion comment="XFree86-libs-data is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31142"/>
+      <criterion comment="XFree86-doc is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31107"/>
+      <criterion comment="openmotif21 is earlier than 0:2.1.30-9.RHEL3.4" test_ref="oval:org.mitre.oval:tst:30867"/>
+      <criterion comment="XFree86-ISO8859-15-100dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30816"/>
+      <criterion comment="XFree86-base-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30980"/>
+      <criterion comment="openmotif is earlier than 0:2.2.3-4.RHEL3.4" test_ref="oval:org.mitre.oval:tst:31105"/>
+      <criterion comment="XFree86-100dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30942"/>
+      <criterion comment="XFree86-ISO8859-15-75dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30994"/>
+      <criterion comment="XFree86-ISO8859-2-75dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30972"/>
+      <criterion comment="XFree86-font-utils is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30197"/>
+      <criterion comment="XFree86-Mesa-libGL is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30720"/>
+      <criterion comment="XFree86-ISO8859-2-100dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30777"/>
+      <criterion comment="XFree86-xdm is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30811"/>
+      <criterion comment="XFree86-sdk is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30529"/>
+      <criterion comment="XFree86 is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31025"/>
+      <criterion comment="XFree86-ISO8859-9-100dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30781"/>
+      <criterion comment="XFree86-Xnest is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30607"/>
+      <criterion comment="XFree86-xfs is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30885"/>
+      <criterion comment="XFree86-tools is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30637"/>
+      <criterion comment="XFree86-syriac-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:31060"/>
+      <criterion comment="XFree86-ISO8859-14-75dpi-fonts is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30699"/>
+      <criterion comment="openmotif-devel is earlier than 0:2.2.3-4.RHEL3.4" test_ref="oval:org.mitre.oval:tst:30744"/>
+      <criterion comment="XFree86-xauth is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30991"/>
+      <criterion comment="XFree86-Mesa-libGLU is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30327"/>
+      <criterion comment="XFree86-devel is earlier than 0:4.3.0-78.EL" test_ref="oval:org.mitre.oval:tst:30499"/>
+    </criteria>
+  </criteria>
+</definition>

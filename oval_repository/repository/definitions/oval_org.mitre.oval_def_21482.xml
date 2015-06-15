@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21482" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:1208: glibc security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:1208-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-1208.html"/>
+    <reference source="CESA" ref_id="CESA-2012:1208"/>
+    <reference source="CVE" ref_id="CVE-2012-3480" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-3480.html"/>
+    <description>Multiple integer overflows in the (1) strtod, (2) strtof, (3) strtold, (4) strtod_l, and other unspecified "related functions" in stdlib in GNU C Library (aka glibc or libc6) 2.16 allow local users to cause a denial of service (application crash) and possibly execute arbitrary code via a long string, which triggers a stack-based buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:20:15.164-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:02:43.986-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:32.460-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="glibc-devel is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:93938"/>
+      <criterion comment="glibc-utils is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:94367"/>
+      <criterion comment="glibc is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:94274"/>
+      <criterion comment="nscd is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:94209"/>
+      <criterion comment="glibc-static is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:94471"/>
+      <criterion comment="glibc-common is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:94347"/>
+      <criterion comment="glibc-headers is earlier than 0:2.12-1.80.el6_3.5" test_ref="oval:org.mitre.oval:tst:93965"/>
+    </criteria>
+  </criteria>
+</definition>

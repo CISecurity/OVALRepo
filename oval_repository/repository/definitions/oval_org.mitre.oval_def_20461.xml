@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20461" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware vSphere security updates for the authentication service and third party libraries</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference ref_id="CVE-2013-1405" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1405" source="CVE"/>
+    <description>VMware vCenter Server 4.0 before Update 4b and 4.1 before Update 3a, VMware VirtualCenter 2.5, VMware vSphere Client 4.0 before Update 4b and 4.1 before Update 3a, VMware VI-Client 2.5, VMware ESXi 3.5 through 4.1, and VMware ESX 3.5 through 4.1 do not properly implement the management authentication protocol, which allow remote servers to execute arbitrary code or cause a denial of service (memory corruption) via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-05T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:44:26.525-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:41.821-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:46.056-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201301401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201301401-SG is not installed" test_ref="oval:org.mitre.oval:tst:89666"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX400-201302401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criterion comment="Patch ESX400-201302401-SG is not installed" test_ref="oval:org.mitre.oval:tst:89417"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX350-201302401-SG is not installed">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criterion comment="Patch ESX350-201302401-SG is not installed" test_ref="oval:org.mitre.oval:tst:89502"/>
+    </criteria>
+  </criteria>
+</definition>

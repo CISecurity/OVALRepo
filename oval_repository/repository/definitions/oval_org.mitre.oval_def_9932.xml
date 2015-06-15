@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9932" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The Linux Kernel before 2.6.15.5 allows local users to cause a denial of service (NFS client panic) via unknown attack vectors related to the use of O_DIRECT (direct I/O).</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-0555" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0555"/>
+    <description>The Linux Kernel before 2.6.15.5 allows local users to cause a denial of service (NFS client panic) via unknown attack vectors related to the use of O_DIRECT (direct I/O).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:19:06.862-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:15:01.619-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:16:09.674-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9932 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:36:00.135-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:40:41.945-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:23:25.458-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+      <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="kernel-hugemem is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32235"/>
+      <criterion comment="kernel-hugemem-devel is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32371"/>
+      <criterion comment="kernel-smp-devel is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32703"/>
+      <criterion comment="kernel-largesmp-devel is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32314"/>
+      <criterion comment="kernel is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32614"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32295"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32310"/>
+      <criterion comment="kernel-largesmp is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32611"/>
+      <criterion comment="kernel-smp is earlier than 0:2.6.9-34.0.1.EL" test_ref="oval:org.mitre.oval:tst:32305"/>
+    </criteria>
+  </criteria>
+</definition>

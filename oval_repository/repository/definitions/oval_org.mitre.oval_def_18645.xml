@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18645" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Unspecified vulnerability in Oracle Java SE 7u40 and earlier, Java SE 6u60 and earlier, Java SE 5.0u51 and earlier, JRockit R28.2.8 and earlier, JRockit R27.7.6 and earlier</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Java Runtime Environment</product>
+      <product>JRockit</product>
+    </affected>
+    <reference ref_id="CVE-2013-5782" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5782" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Java SE 7u40 and earlier, Java SE 6u60 and earlier, Java SE 5.0u51 and earlier, JRockit R28.2.8 and earlier, JRockit R27.7.6 and earlier, and Java SE Embedded 7u40 and earlier allows remote attackers to affect confidentiality, integrity, and availability via unknown vectors related to 2D.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-10-24T16:31:26.748+04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-10-25T10:07:32.470-04:00">DRAFT</status_change>
+        <status_change date="2013-11-11T04:00:18.589-05:00">INTERIM</status_change>
+        <status_change date="2013-11-26T13:49:08.795-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18645 - tests had wrong objects, replaced and tests and states modified, comment change in obj:24238" date="2014-01-21T16:36:00.034-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2014-01-21T16:44:10.814-05:00">INTERIM</status_change>
+        <status_change date="2014-02-10T04:00:08.981-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:24150 - 64-bit registry branch search was added" date="2015-03-04T12:40:00.486-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-03-04T12:43:08.607-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:01:01.789-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Determine if the version of JRockit is less than R28.2.9 and is greater than or equal to R28.0.0">
+      <criterion comment="Determine if the version of JRockit is less than R28.2.9" test_ref="oval:org.mitre.oval:tst:87188"/>
+      <criterion comment="JRockit R28 is installed" test_ref="oval:org.mitre.oval:tst:86346"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of JRockit is less than R27.7.6 and is greater than or equal to R27.0.0">
+      <criterion comment="Determine if the version of JRockit is less than R27.7.6" test_ref="oval:org.mitre.oval:tst:87273"/>
+      <criterion comment="JRockit R27 is installed" test_ref="oval:org.mitre.oval:tst:87244"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.5.0:update_52 and is greater than or equal to 1.5.0">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.5.0:update_52" test_ref="oval:org.mitre.oval:tst:99921"/>
+      <extend_definition comment="Java SE Runtime Environment 5 is installed" definition_ref="oval:org.mitre.oval:def:15748"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_61 and is greater than or equal to 1.6.0">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.6.0:update_61" test_ref="oval:org.mitre.oval:tst:100078"/>
+      <extend_definition comment="Java SE Runtime Environment 6 is installed" definition_ref="oval:org.mitre.oval:def:16362"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_41 and is greater than or equal to 1.7.0">
+      <criterion comment="Determine if the version of Java Runtime Environment is less than 1.7.0:update_41" test_ref="oval:org.mitre.oval:tst:100060"/>
+      <extend_definition comment="Java SE Runtime Environment 7 is installed" definition_ref="oval:org.mitre.oval:def:16050"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27733" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2012-0973 -- nss, nss-util, and nspr security, bug fix, and enhancement update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>nspr</product>
+      <product>nss</product>
+      <product>nss-util</product>
+      <product>nspr-devel</product>
+      <product>nss-devel</product>
+      <product>nss-pkcs11-devel</product>
+      <product>nss-sysinit</product>
+      <product>nss-tools</product>
+      <product>nss-util-devel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0973.html" ref_id="ELSA-2012-0973"/>
+    <description>nspr
+[4.9-1]
+- Resolves: rhbz#799193 - Update to 4.9
+
+nss
+[3.13.3-6.0.1.el6]
+- Added nss-vendor.patch to change vendor
+- Use blank image instead of clean.gif in tar ball
+
+[3.13.3-6]
+- Resolves: #rhbz#805232 PEM module may attempt to free uninitialized pointer
+
+[3.13.3-5]
+- Resolves: rhbz#717913 - [PEM] various flaws detected by Coverity
+- Require nss-util 3.13.3
+
+[3.13.3-4]
+- Resolves: rhbz#772628 nss_Init leaks memory
+
+[3.13.3-3]
+- Resolves: rhbz#746632 - pem_CreateObject mem leak on non existing file name
+- Use completed patch per code review
+
+[3.13.3-2]
+- Resolves: rhbz#746632 - pem_CreateObject mem leak on non existing file name
+- Resolves: rhbz#768669 - PEM unregistered callback causes SIGSEGV
+
+[3.13.3-1]
+- Update to 3.13.3
+- Resolves: rhbz#798539 - Distrust MITM subCAs issued by TrustWave
+- Remove builtins-nssckbi_1_88_rtm.patch which the rebase obsoletes
+
+nss-util
+[3.13.3-2]
+- Resolves: rhbz#799192 - Update to 3.13.3
+- Update minimum nspr version for Requires and BuildRequires to 4.9
+- Fix version/release in changelog to match the Version and Release tags, now 3.13.3-2
+
+[3.13.1-5]
+- Resolves: rhbz#799192 - Update to 3.13.3</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:24:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:25:34.405-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:54.084-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:47.815-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T12:38:07.271-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T12:38:07.271-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="nspr is earlier than 0:4.9-1.el6" test_ref="oval:org.mitre.oval:tst:131820"/>
+      <criterion comment="nss is earlier than 0:3.13.3-6.0.1.el6" test_ref="oval:org.mitre.oval:tst:131705"/>
+      <criterion comment="nss-util is earlier than 0:3.13.3-2.el6" test_ref="oval:org.mitre.oval:tst:131815"/>
+      <criterion comment="nspr-devel is earlier than 0:4.9-1.el6" test_ref="oval:org.mitre.oval:tst:131640"/>
+      <criterion comment="nss-devel is earlier than 0:3.13.3-6.0.1.el6" test_ref="oval:org.mitre.oval:tst:131649"/>
+      <criterion comment="nss-pkcs11-devel is earlier than 0:3.13.3-6.0.1.el6" test_ref="oval:org.mitre.oval:tst:131743"/>
+      <criterion comment="nss-sysinit is earlier than 0:3.13.3-6.0.1.el6" test_ref="oval:org.mitre.oval:tst:131517"/>
+      <criterion comment="nss-tools is earlier than 0:3.13.3-6.0.1.el6" test_ref="oval:org.mitre.oval:tst:131501"/>
+      <criterion comment="nss-util-devel is earlier than 0:3.13.3-2.el6" test_ref="oval:org.mitre.oval:tst:131406"/>
+    </criteria>
+  </criteria>
+</definition>

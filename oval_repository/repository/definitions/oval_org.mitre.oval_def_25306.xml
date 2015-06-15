@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25306" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0410-1 -- Security update for Mozilla Firefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Mozilla Firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130410-1.html" ref_id="SUSE-SU-2013:0410-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0780" ref_id="CVE-2013-0780"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0782" ref_id="CVE-2013-0782"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0776" ref_id="CVE-2013-0776"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0775" ref_id="CVE-2013-0775"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0774" ref_id="CVE-2013-0774"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0773" ref_id="CVE-2013-0773"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0765" ref_id="CVE-2013-0765"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0772" ref_id="CVE-2013-0772"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0783" ref_id="CVE-2013-0783"/>
+    <description>MozillaFirefox has been updated to the 17.0.3ESR release.
+
+Important: due to compatibility issues, the Beagle plug-in
+for  MozillaFirefox is temporarily disabled by this update.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:40:42">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:38:25.448-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:49.404-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:43.810-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:25306 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:18:44.646-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:00:27.806-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="MozillaFirefox RPM is earlier than 0:17.0.3esr-0.4.4.1" test_ref="oval:org.mitre.oval:tst:120807"/>
+        <criterion comment="MozillaFirefox-branding-SLED RPM is earlier than 0:7-0.6.9.5" test_ref="oval:org.mitre.oval:tst:120452"/>
+        <criterion comment="MozillaFirefox-translations RPM is earlier than 0:17.0.3esr-0.4.4.1" test_ref="oval:org.mitre.oval:tst:120188"/>
+        <criterion comment="libfreebl3 RPM is earlier than 0:3.14.2-0.4.3.2" test_ref="oval:org.mitre.oval:tst:120873"/>
+        <criterion comment="mozilla-nspr RPM is earlier than 0:4.9.5-0.3.2" test_ref="oval:org.mitre.oval:tst:120639"/>
+        <criterion comment="mozilla-nss RPM is earlier than 0:3.14.2-0.4.3.2" test_ref="oval:org.mitre.oval:tst:120534"/>
+        <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.14.2-0.4.3.2" test_ref="oval:org.mitre.oval:tst:120769"/>
+        <criterion comment="libfreebl3-32bit RPM is earlier than 0:3.14.2-0.4.3.2" test_ref="oval:org.mitre.oval:tst:120866"/>
+        <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.9.5-0.3.2" test_ref="oval:org.mitre.oval:tst:120779"/>
+        <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.14.2-0.4.3.2" test_ref="oval:org.mitre.oval:tst:120318"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="beagle RPM is earlier than 0:0.3.8-56.51.1" test_ref="oval:org.mitre.oval:tst:120805"/>
+        <criterion comment="beagle-evolution RPM is earlier than 0:0.3.8-56.51.1" test_ref="oval:org.mitre.oval:tst:120278"/>
+        <criterion comment="beagle-firefox RPM is earlier than 0:0.3.8-56.51.1" test_ref="oval:org.mitre.oval:tst:120447"/>
+        <criterion comment="beagle-gui RPM is earlier than 0:0.3.8-56.51.1" test_ref="oval:org.mitre.oval:tst:120893"/>
+        <criterion comment="beagle-lang RPM is earlier than 0:0.3.8-56.51.1" test_ref="oval:org.mitre.oval:tst:120584"/>
+        <criterion comment="mhtml-firefox RPM is earlier than 0:0.5-1.47.51.5" test_ref="oval:org.mitre.oval:tst:120696"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

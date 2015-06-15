@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5985" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security vulnerability in the HttpServletResponse.sendError method in Tomcat 5.5 bundled with Solaris 9 and Solaris 10 may lead to Cross Site Scripting (XSS).</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1232" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1232"/>
+    <description>Cross-site scripting (XSS) vulnerability in Apache Tomcat 4.1.0 through 4.1.37, 5.5.0 through 5.5.26, and 6.0.0 through 6.0.16 allows remote attackers to inject arbitrary web script or HTML via a crafted string that is used in the message argument to the HttpServletResponse.sendError method.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-02-26T10:58:29.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-02-27T16:20:22.464-05:00">DRAFT</status_change>
+        <status_change date="2009-03-16T04:00:16.102-04:00">INTERIM</status_change>
+        <status_change date="2009-04-06T04:00:17.059-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software Section">
+    <criteria operator="OR">
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 251986">
+        <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+        <criterion negate="true" comment="Patch 114016-03 or later installed" test_ref="oval:org.mitre.oval:tst:9634"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 251986">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criterion negate="true" comment="Patch 122911-15 or later installed" test_ref="oval:org.mitre.oval:tst:9605"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 251986">
+        <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+        <criterion negate="true" comment="Patch 114017-03 or later installed" test_ref="oval:org.mitre.oval:tst:9480"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 251986">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criterion negate="true" comment="Patch 122912-15 or later installed" test_ref="oval:org.mitre.oval:tst:9406"/>
+      </criteria>
+    </criteria>
+    <criterion comment="SUNWtcatr is installed" test_ref="oval:org.mitre.oval:tst:9550"/>
+  </criteria>
+</definition>

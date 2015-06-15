@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20789" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Adobe Flash Player before 10.3.183.29 and 11.x before 11.4.402.287 and Adobe AIR before 3.4.0.2710 on Windows, allow attackers to execute arbitrary code or cause a denial of service (memory corruption) via unspecified vectors, a different vulnerability than other Flash Player memory corruption CVEs listed in APSB12-22</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Adobe Flash Player</product>
+      <product>Adobe Air</product>
+    </affected>
+    <reference ref_id="CVE-2012-5272" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5272" source="CVE"/>
+    <description>Adobe Flash Player before 10.3.183.29 and 11.x before 11.4.402.287 on Windows and Mac OS X, before 10.3.183.29 and 11.x before 11.2.202.243 on Linux, before 11.1.111.19 on Android 2.x and 3.x, and before 11.1.115.20 on Android 4.x; Adobe AIR before 3.4.0.2710; and Adobe AIR SDK before 3.4.0.2710 allow attackers to execute arbitrary code or cause a denial of service (memory corruption) via unspecified vectors, a different vulnerability than other Flash Player memory corruption CVEs listed in APSB12-22.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-10T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:49:04.778-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:54.657-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:11.354-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:88837 - The test that checks the version of Flash.*.ocx file has been added in all Adobe Flash Player vulnerabilities" date="2014-09-05T14:30:00.797-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-05T14:33:44.571-04:00">INTERIM</status_change>
+        <status_change date="2014-09-22T04:00:29.309-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Determine if the version of Adobe Flash Player is less than or equal 11.4.402.278 and is greater than or equal 11.0">
+      <extend_definition comment="Adobe Flash Player 11 is installed" definition_ref="oval:org.mitre.oval:def:13071"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is less than or equal 11.4.402.278" test_ref="oval:org.mitre.oval:tst:89710"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is greater than or equal 11.0" test_ref="oval:org.mitre.oval:tst:78330"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Adobe Flash Player is less than or equal 10.3.183.23 and is greater than or equal 10.0">
+      <extend_definition comment="Adobe Flash Player 10 is installed" definition_ref="oval:org.mitre.oval:def:7610"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is less than or equal 10.3.183.23" test_ref="oval:org.mitre.oval:tst:89236"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is greater than or equal 10.0" test_ref="oval:org.mitre.oval:tst:89130"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Adobe Air is less than or equal 3.4.0.2540 and is greater than or equal 1.0">
+      <extend_definition comment="Adobe AIR is installed" definition_ref="oval:org.mitre.oval:def:7479"/>
+      <criterion comment="Determine if the version of Adobe Air is less than or equal 3.4.0.2540" test_ref="oval:org.mitre.oval:tst:89629"/>
+      <criterion comment="Determine if the version of Adobe Air is greater than or equal 1.0" test_ref="oval:org.mitre.oval:tst:88837"/>
+    </criteria>
+    <criteria operator="AND" comment="Flash.ocx 11 section">
+      <criterion comment="Determine if the version of Flash.ocx is less than or equal 11.4.402.278" test_ref="oval:org.mitre.oval:tst:122527"/>
+      <criterion comment="Determine if the version of Flash.ocx is greater than or equal 11.0" test_ref="oval:org.mitre.oval:tst:122279"/>
+    </criteria>
+    <criteria operator="AND" comment="Flash.ocx 10 section">
+      <criterion comment="Determine if the version of Flash.ocx is less than or equal 10.3.183.23" test_ref="oval:org.mitre.oval:tst:122443"/>
+      <criterion comment="Determine if the version of Flash.ocx is greater than or equal 10.0" test_ref="oval:org.mitre.oval:tst:122601"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20095" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1510-1 gs-esp gs-gpl - arbitrary code execution</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>gs-esp</product>
+      <product>gs-gpl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1510-1" ref_id="DSA-1510-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0411" ref_id="CVE-2008-0411"/>
+    <description>Chris Evans discovered a buffer overflow in the color space handling code of the Ghostscript PostScript/PDF interpreter, which might result in the execution of arbitrary code if a user is tricked into processing a malformed file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:23:14">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:51.664-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:35.228-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:13.194-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20095 - Debian Patch Update" date="2014-06-06T17:24:00.692-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:26:34.834-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:39.310-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="gs-esp DPKG is earlier than 0:8.15.3.dfsg.1-1etch1" test_ref="oval:org.mitre.oval:tst:89261"/>
+      <criterion comment="gs-gpl DPKG is earlier than 0:8.54.dfsg.1-5etch1" test_ref="oval:org.mitre.oval:tst:89247"/>
+    </criteria>
+  </criteria>
+</definition>

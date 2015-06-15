@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12149" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2091-1 squirrelmail -- No user-specific token implemented</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>squirrelmail</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00136.html" ref_id="DSA-2091-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2964" ref_id="CVE-2009-2964"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2813" ref_id="CVE-2010-2813"/>
+    <description>SquirrelMail, a webmail application, does not employ a user-specific token for webforms. This allows a remote attacker to perform a Cross Site Request Forgery attack. The attacker may hijack the authentication of unspecified victims and send messages or change user preferences among other actions, by tricking the victim into following a link controled by the offender. In addition, a denial-of-service was fixed, which could be triggered when a passwords containing 8-bit characters was used to log in. For the stable distribution, these problems have been fixed in version 2:1.4.15-4+lenny3.1. For the testing distribution and the unstable distribution, these problems have been fixed in version 1.4.21-1. We recommend that you upgrade your squirrelmail packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:16:26">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:42.288-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:08.292-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:16.237-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12149 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:14.282-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:11.557-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:43476 - Modified Debian patches to correct Epochs." date="2015-02-04T10:32:00.631-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-04T10:36:24.166-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:00:11.247-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="squirrelmail DPKG is earlier than 2:1.4.15-4+lenny3.1" test_ref="oval:org.mitre.oval:tst:43476"/>
+  </criteria>
+</definition>

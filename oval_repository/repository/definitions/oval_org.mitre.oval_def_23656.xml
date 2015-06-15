@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23656" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0934: acroread security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>acroread</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0934-02" ref_url="http://linux.oracle.com/errata/ELSA-2010-0934.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-3654" ref_url="http://linux.oracle.com/cve/CVE-2010-3654.html" source="CVE"/>
+    <reference ref_id="CVE-2010-4091" ref_url="http://linux.oracle.com/cve/CVE-2010-4091.html" source="CVE"/>
+    <description>The EScript.api plugin in Adobe Reader and Acrobat 10.x before 10.0.1, 9.x before 9.4.1, and 8.x before 8.2.6 on Windows and Mac OS X allows remote attackers to execute arbitrary code or cause a denial of service (application crash) via a crafted PDF document that triggers memory corruption, involving the printSeps function. NOTE: some of these details are obtained from third party information.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:21:30.064-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:44.496-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:05:40.741-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23656 - optimisation of Oracle Linux content" date="2014-05-05T17:30:00.036-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:32:27.603-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:05.801-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="acroread is earlier than 0:9.4.1-1.el5" test_ref="oval:org.mitre.oval:tst:108034"/>
+        <criterion comment="acroread-plugin is earlier than 0:9.4.1-1.el5" test_ref="oval:org.mitre.oval:tst:107655"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="acroread is earlier than 0:9.4.1-1.el6" test_ref="oval:org.mitre.oval:tst:107969"/>
+        <criterion comment="acroread-plugin is earlier than 0:9.4.1-1.el6" test_ref="oval:org.mitre.oval:tst:107774"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

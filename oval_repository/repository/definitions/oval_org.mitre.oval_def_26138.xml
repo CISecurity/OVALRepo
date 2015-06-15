@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26138" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0824-1 -- Security update for MozillaFirefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>MozillaFirefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140824-1.html" ref_id="SUSE-SU-2014:0824-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1533" ref_id="CVE-2014-1533"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1534" ref_id="CVE-2014-1534"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1536" ref_id="CVE-2014-1536"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1537" ref_id="CVE-2014-1537"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1538" ref_id="CVE-2014-1538"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1541" ref_id="CVE-2014-1541"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1545" ref_id="CVE-2014-1545"/>
+    <description>MozillaFirefox was updated to version 24.6.0 to fix six security issues.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-06T15:03:59">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-08-07T15:08:25.065-04:00">DRAFT</status_change>
+        <status_change date="2014-08-25T04:01:32.861-04:00">INTERIM</status_change>
+        <status_change date="2014-09-15T04:00:39.904-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:122100 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:18:39.149-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:00:49.804-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="MozillaFirefox RPM is earlier than 0:24.6.0esr-0.8.1" test_ref="oval:org.mitre.oval:tst:121477"/>
+        <criterion comment="MozillaFirefox-branding-SLED RPM is earlier than 0:24-0.7.48" test_ref="oval:org.mitre.oval:tst:122100"/>
+        <criterion comment="MozillaFirefox-translations RPM is earlier than 0:24.6.0esr-0.8.1" test_ref="oval:org.mitre.oval:tst:121650"/>
+        <criterion comment="libfreebl3 RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:121962"/>
+        <criterion comment="libsoftokn3 RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:121943"/>
+        <criterion comment="mozilla-nspr RPM is earlier than 0:4.10.6-0.3.1" test_ref="oval:org.mitre.oval:tst:122092"/>
+        <criterion comment="mozilla-nss RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:122022"/>
+        <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:122096"/>
+        <criterion comment="libfreebl3-32bit RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:121930"/>
+        <criterion comment="libsoftokn3-32bit RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:122121"/>
+        <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.10.6-0.3.1" test_ref="oval:org.mitre.oval:tst:122141"/>
+        <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.16.1-0.8.1" test_ref="oval:org.mitre.oval:tst:122154"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 10 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="mozilla-nspr RPM is earlier than 0:4.10.6-0.5.1" test_ref="oval:org.mitre.oval:tst:121786"/>
+        <criterion comment="mozilla-nspr-devel RPM is earlier than 0:4.10.6-0.5.1" test_ref="oval:org.mitre.oval:tst:122078"/>
+        <criterion comment="mozilla-nss RPM is earlier than 0:3.16.1-0.5.1" test_ref="oval:org.mitre.oval:tst:122021"/>
+        <criterion comment="mozilla-nss-devel RPM is earlier than 0:3.16.1-0.5.1" test_ref="oval:org.mitre.oval:tst:122159"/>
+        <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.16.1-0.5.1" test_ref="oval:org.mitre.oval:tst:121899"/>
+        <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.10.6-0.5.1" test_ref="oval:org.mitre.oval:tst:121673"/>
+        <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.16.1-0.5.1" test_ref="oval:org.mitre.oval:tst:121802"/>
+        <criterion comment="MozillaFirefox RPM is earlier than 0:24.6.0esr-0.5.2" test_ref="oval:org.mitre.oval:tst:121665"/>
+        <criterion comment="MozillaFirefox-branding-SLED RPM is earlier than 0:24-0.12.1" test_ref="oval:org.mitre.oval:tst:121329"/>
+        <criterion comment="MozillaFirefox-translations RPM is earlier than 0:24.6.0esr-0.5.2" test_ref="oval:org.mitre.oval:tst:121405"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

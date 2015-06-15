@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12905" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2142-1 dpkg -- directory traversal</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>dpkg</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00004.html" ref_id="DSA-2142-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1679" ref_id="CVE-2010-1679"/>
+    <description>Jakub Wilk discovered that the dpkg-source component of dpkg, the Debian package management system, doesn't correctly handle paths in patches of source packages, which could make it traverse directories. Rapha&amp;#xEB;l Hertzog additionally discovered that symbolic links in the .pc directory are followed, which could make it traverse directories too. Both issues only affect source packages using the &amp;quot;3.0 quilt&amp;quot; format at unpack-time.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T21:20:18-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:11.551-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:38.266-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:05.267-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:12939 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:36.418-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:00:14.632-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12905 - Debian Patch Update" date="2014-06-06T17:07:00.556-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:09:38.097-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:05.799-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="dpkg DPKG is earlier than 1.14.31" test_ref="oval:org.mitre.oval:tst:43264"/>
+  </criteria>
+</definition>

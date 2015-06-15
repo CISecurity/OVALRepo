@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:881" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Bourne Shell Local-DoS Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-1780" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1780"/>
+    <description>The Bourne shell (sh) in Solaris 8, 9, and 10 allows local users to cause a denial of service (sh crash) via an unspecified attack vector that causes sh processes to crash during creation of temporary files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-04-14T06:41:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-04-19T10:08:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-05-10T08:33:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-31T09:45:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Changed criterion to check for the patch or later being installed instead of simply checking if the patch is installed." date="2009-07-17T11:04:00.601-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </modified>
+        <status_change date="2009-07-17T11:07:21.610-04:00">INTERIM</status_change>
+        <status_change date="2009-08-03T04:00:04.542-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="sparc architecture" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Patch 109324-09 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1520"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="sparc architecture" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Patch 118535-03 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1519"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 10 Installed" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="sparc architecture" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion comment="Patch 121004-01 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1518"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion comment="Patch 109325-09 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1517"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion comment="Patch 118536-03 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1516"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert ID 102282 criteria.">
+      <criterion comment="Solaris 10 Installed" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion comment="Patch 121005-01 or later is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1515"/>
+    </criteria>
+  </criteria>
+</definition>

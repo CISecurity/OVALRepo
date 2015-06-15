@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5321" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IBM AIX Multiple Privilege Escalation and Security Bypass Vulnerabilities</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.2</platform>
+      <platform>IBM AIX 5.3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1595" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1595"/>
+    <description>The proc filesystem in the kernel in IBM AIX 5.2 and 5.3 does not properly enforce directory permissions when a file executing from a directory has weaker permissions than the directory itself, which allows local users to obtain sensitive information.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-18T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-04-30T12:21:08.997-04:00">DRAFT</status_change>
+        <status_change date="2008-05-19T04:00:12.079-04:00">INTERIM</status_change>
+        <status_change date="2008-06-09T04:00:10.226-04:00">ACCEPTED</status_change>
+        <modified comment="Modified the tests to apply to specific versions of AIX" date="2008-06-20T15:20:00.858-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-06-20T15:38:08.873-04:00">INTERIM</status_change>
+        <status_change date="2008-07-07T04:00:20.843-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="IBM AIX 5200-10 meets CVE-2008-1595">
+      <extend_definition comment="IBM AIX 5200-10 is installed" definition_ref="oval:org.mitre.oval:def:5076"/>
+      <criterion negate="true" comment="All filesets for APAR IZ06022 are installed" test_ref="oval:org.mitre.oval:tst:7136"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-06 meets CVE-2008-1595">
+      <extend_definition comment="IBM AIX 5300-06 is installed" definition_ref="oval:org.mitre.oval:def:4813"/>
+      <criterion negate="true" comment="All filesets for APAR IZ06663 are installed" test_ref="oval:org.mitre.oval:tst:7896"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-07 meets CVE-2008-1595">
+      <extend_definition comment="IBM AIX 5300-07 is installed" definition_ref="oval:org.mitre.oval:def:5707"/>
+      <criterion negate="true" comment="All filesets for APAR IZ06505 are installed" test_ref="oval:org.mitre.oval:tst:7599"/>
+    </criteria>
+  </criteria>
+</definition>

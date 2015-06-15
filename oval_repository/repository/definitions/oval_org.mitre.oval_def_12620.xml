@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12620" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SQL Injection vulnerability in PHP 5.3.2 and 5.3.3, when the MySQLi extension is used.</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>PHP</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-4700" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4700"/>
+    <description>The set_magic_quotes_runtime function in PHP 5.3.2 and 5.3.3, when the MySQLi extension is used, does not properly interact with use of the mysqli_fetch_assoc function, which might make it easier for context-dependent attackers to conduct SQL injection attacks via crafted input that had been properly handled in earlier PHP versions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-03-22T15:12:59">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-03-22T13:47:56.314-04:00">DRAFT</status_change>
+        <status_change date="2011-04-11T04:00:13.337-04:00">INTERIM</status_change>
+        <status_change date="2011-05-02T04:00:09.234-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="PHP is installed" definition_ref="oval:org.mitre.oval:def:12410"/>
+    <criterion comment="Check if the version of PHP is equal to 5.3.2 or equal to 5.3.3" test_ref="oval:org.mitre.oval:tst:42438"/>
+  </criteria>
+</definition>

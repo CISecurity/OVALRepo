@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12758" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1015-1 -- libvpx vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <product>libvpx</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-November/001198.html" ref_id="USN-1015-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4203" ref_id="CVE-2010-4203"/>
+    <description>Christoph Diehl discovered that libvpx did not properly perform bounds checking. If an application using libvpx opened a specially crafted WebM file, an attacker could cause a denial of service or possibly execute code as the user invoking the program.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:08:16.209-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:03.251-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:00:48.214-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12758 - added CVE references; also made minor updates" date="2014-06-13T15:24:00.249-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:26:15.198-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:00:47.034-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libvpx-doc DPKG is earlier than 0.9.2-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:52838"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libvpx-dev DPKG is earlier than 0.9.2-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:52238"/>
+          <criterion comment="libvpx0-dbg DPKG is earlier than 0.9.2-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:52752"/>
+          <criterion comment="libvpx0 DPKG is earlier than 0.9.2-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:51972"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

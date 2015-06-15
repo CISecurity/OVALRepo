@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22825" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:1097: glibc security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>glibc</product>
+    </affected>
+    <reference ref_id="ELSA-2012:1097-00" ref_url="http://linux.oracle.com/errata/ELSA-2012-1097.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-3406" ref_url="http://linux.oracle.com/cve/CVE-2012-3406.html" source="CVE"/>
+    <description>The vfprintf function in stdio-common/vfprintf.c in GNU C Library (aka glibc) 2.5, 2.12, and probably other versions does not "properly restrict the use of" the alloca function when allocating the SPECS array, which allows context-dependent attackers to bypass the FORTIFY_SOURCE format-string protection mechanism and cause a denial of service (crash) or possibly execute arbitrary code via a crafted format string using positional parameters and a large number of format specifiers, a different vulnerability than CVE-2012-3404 and CVE-2012-3405.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:22:01.160-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:34.805-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:15.553-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22825 - optimisation of Oracle Linux content" date="2014-05-05T18:01:00.702-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:03:03.019-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:22.637-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="glibc-common is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106069"/>
+      <criterion comment="glibc is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106513"/>
+      <criterion comment="glibc-devel is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106517"/>
+      <criterion comment="glibc-utils is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106515"/>
+      <criterion comment="nscd is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106363"/>
+      <criterion comment="glibc-headers is earlier than 0:2.5-81.el5_8.4" test_ref="oval:org.mitre.oval:tst:106541"/>
+    </criteria>
+  </criteria>
+</definition>

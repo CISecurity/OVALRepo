@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14227" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Office Web Components URL Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Office 2000</product>
+      <product>Microsoft Office XP</product>
+      <product>Microsoft Visual Studio .NET 2002</product>
+      <product>Microsoft Visual Studio .NET 2003</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-4695" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-4695"/>
+    <description>Unspecified vulnerability in certain COM objects in Microsoft Office Web Components 2000 allows user-assisted remote attackers to execute arbitrary code via a crafted URL, aka "Office Web Components URL Parsing Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-11-18T09:52:01">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-22T11:36:21.518-05:00">DRAFT</status_change>
+        <status_change date="2011-12-12T04:10:19.214-05:00">INTERIM</status_change>
+        <status_change date="2012-01-02T04:00:36.335-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:47:58.878-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:00:44.764-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:10.202-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:53.808-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Office 2000">
+      <extend_definition comment="Microsoft Office 2000 is installed" definition_ref="oval:org.mitre.oval:def:93"/>
+      <criterion comment="the version of Msowc.dll is less than 9.0.0.8966" test_ref="oval:org.mitre.oval:tst:7609"/>
+    </criteria>
+    <criteria operator="AND" comment="Office XP or Visual Studio .NET 2002">
+      <criteria operator="OR" comment="Office XP or Visual Studio .NET 2002">
+        <extend_definition comment="Microsoft Office XP is installed" definition_ref="oval:org.mitre.oval:def:663"/>
+        <extend_definition comment="Microsoft Visual Studio .NET 2002 is installed" definition_ref="oval:org.mitre.oval:def:1131"/>
+      </criteria>
+      <criterion comment="the version of Msowc.dll is less than 9.0.0.8966" test_ref="oval:org.mitre.oval:tst:7293"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Visual Studio .NET 2003">
+      <extend_definition comment="Microsoft Visual Studio .NET 2003 is installed" definition_ref="oval:org.mitre.oval:def:166"/>
+      <criterion comment="the version of Msowc.dll is less than 9.0.0.8966" test_ref="oval:org.mitre.oval:tst:7511"/>
+    </criteria>
+  </criteria>
+</definition>

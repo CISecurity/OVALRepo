@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11774" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2118-1 subversion -- logic flaw</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>subversion</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00167.html" ref_id="DSA-2118-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3315" ref_id="CVE-2010-3315"/>
+    <description>Kamesh Jayachandran and C. Michael Pilat discovered that the mod_dav_svn module of subversion, a version control system, is not properly enforcing access rules which are scope-limited to named repositories. If the SVNPathAuthz option is set to &amp;quot;short_circuit&amp;quot; set this may enable an unprivileged attacker to bypass intended access restrictions and disclose or modify repository content. As a workaround it is also possible to set SVNPathAuthz to &amp;quot;on&amp;quot; but be advised that this can result in a performance decrease for large repositories. For the stable distribution, this problem has been fixed in version 1.5.1dfsg1-5. For the testing distribution, this problem has been fixed in version 1.6.12dfsg-2. For the unstable distribution, this problem has been fixed in version 1.6.12dfsg-2. We recommend that you upgrade your samba packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:21:19">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:11.089-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:03.870-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:05.547-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11774 - Debian Patch Update" date="2014-06-06T17:11:00.221-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:13:13.454-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:17.638-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="subversion-tools DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:42964"/>
+          <criterion comment="libsvn-doc DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:42844"/>
+          <criterion comment="libsvn-ruby DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:42189"/>
+        </criteria>
+      </criteria>
+      <criterion comment="libsvn-dev DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:42246"/>
+      <criterion comment="libapache2-svn DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43006"/>
+      <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43052"/>
+      <criterion comment="python-subversion DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43216"/>
+      <criterion comment="libsvn1 DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43154"/>
+      <criterion comment="subversion DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43239"/>
+      <criterion comment="libsvn-perl DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43100"/>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+        </criteria>
+        <criterion comment="libsvn-java DPKG is earlier than 1.5.1dfsg1-5" test_ref="oval:org.mitre.oval:tst:43092"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22407" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2008:0145: ImageMagick security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>ImageMagick</product>
+    </affected>
+    <reference ref_id="ELSA-2008:0145-01" ref_url="http://linux.oracle.com/errata/ELSA-2008-0145.html" source="VENDOR"/>
+    <reference ref_id="CVE-2007-1797" ref_url="http://linux.oracle.com/cve/CVE-2007-1797.html" source="CVE"/>
+    <reference ref_id="CVE-2007-4985" ref_url="http://linux.oracle.com/cve/CVE-2007-4985.html" source="CVE"/>
+    <reference ref_id="CVE-2007-4986" ref_url="http://linux.oracle.com/cve/CVE-2007-4986.html" source="CVE"/>
+    <reference ref_id="CVE-2007-4988" ref_url="http://linux.oracle.com/cve/CVE-2007-4988.html" source="CVE"/>
+    <reference ref_id="CVE-2008-1096" ref_url="http://linux.oracle.com/cve/CVE-2008-1096.html" source="CVE"/>
+    <reference ref_id="CVE-2008-1097" ref_url="http://linux.oracle.com/cve/CVE-2008-1097.html" source="CVE"/>
+    <description>Heap-based buffer overflow in the ReadPCXImage function in the PCX coder in coders/pcx.c in (1) ImageMagick 6.2.4-5 and 6.2.8-0 and (2) GraphicsMagick (aka gm) 1.1.7 allows user-assisted remote attackers to cause a denial of service (crash) or possibly execute arbitrary code via a crafted .pcx file that triggers incorrect memory allocation for the scanline array, leading to memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:49:00.396-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:46.159-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:01:06.554-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22407 - optimisation of Oracle Linux content" date="2014-05-05T18:12:00.186-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:14:04.018-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:12.599-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="ImageMagick-c++-devel is earlier than 0:6.2.8.0-4.el5_1.1" test_ref="oval:org.mitre.oval:tst:101619"/>
+      <criterion comment="ImageMagick-devel is earlier than 0:6.2.8.0-4.el5_1.1" test_ref="oval:org.mitre.oval:tst:101476"/>
+      <criterion comment="ImageMagick-perl is earlier than 0:6.2.8.0-4.el5_1.1" test_ref="oval:org.mitre.oval:tst:101961"/>
+      <criterion comment="ImageMagick is earlier than 0:6.2.8.0-4.el5_1.1" test_ref="oval:org.mitre.oval:tst:101862"/>
+      <criterion comment="ImageMagick-c++ is earlier than 0:6.2.8.0-4.el5_1.1" test_ref="oval:org.mitre.oval:tst:101640"/>
+    </criteria>
+  </criteria>
+</definition>

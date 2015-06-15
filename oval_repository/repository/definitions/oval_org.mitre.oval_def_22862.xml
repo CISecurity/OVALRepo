@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22862" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:1235: kvm security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference ref_id="ELSA-2012:1235-00" ref_url="http://linux.oracle.com/errata/ELSA-2012-1235.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-3515" ref_url="http://linux.oracle.com/cve/CVE-2012-3515.html" source="CVE"/>
+    <description>Qemu, as used in Xen 4.0, 4.1 and possibly other products, when emulating certain devices with a virtual console backend, allows local OS guest users to gain privileges via a crafted escape VT100 sequence that triggers the overwrite of a "device model's address space."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:24:35.295-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:40.735-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:25.956-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22862 - optimisation of Oracle Linux content" date="2014-05-05T18:01:00.702-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:03:02.494-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:32.438-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kmod-kvm-debug is earlier than 0:83-249.el5_8.5" test_ref="oval:org.mitre.oval:tst:106778"/>
+      <criterion comment="kvm is earlier than 0:83-249.el5_8.5" test_ref="oval:org.mitre.oval:tst:106409"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-249.el5_8.5" test_ref="oval:org.mitre.oval:tst:106775"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-249.el5_8.5" test_ref="oval:org.mitre.oval:tst:106654"/>
+      <criterion comment="kvm-tools is earlier than 0:83-249.el5_8.5" test_ref="oval:org.mitre.oval:tst:106519"/>
+    </criteria>
+  </criteria>
+</definition>

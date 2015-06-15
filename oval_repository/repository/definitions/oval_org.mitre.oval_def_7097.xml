@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7097" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2030 mahara -- sql injection</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>mahara</product>
+    </affected>
+    <reference source="DSA" ref_url="http://www.debian.org/security/2010/dsa-2030" ref_id="DSA-2030"/>
+    <description>It was discovered that mahara, an electronic portfolio, weblog, and resume builder is not properly escaping input when generating a unique username based on a remote user name from a single sign-on application. An attacker can use this to compromise the mahara database via crafted user names.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:10:14-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:29:16.966-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:34.397-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:21.553-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Debian 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="mahara-apache2 is earlier than 1.0.4-4+lenny5" test_ref="oval:org.mitre.oval:tst:26530"/>
+          <criterion comment="mahara is earlier than 1.0.4-4+lenny5" test_ref="oval:org.mitre.oval:tst:26817"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

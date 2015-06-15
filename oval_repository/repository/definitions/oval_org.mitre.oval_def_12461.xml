@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12461" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Kernel NDProxy Buffer Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3963" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3963"/>
+    <description>Buffer overflow in the Routing and Remote Access NDProxy component in the kernel in Microsoft Windows XP SP2 and SP3 and Server 2003 SP2 allows local users to gain privileges via a crafted application, related to the Routing and Remote Access service (RRAS) and improper copying from user mode to the kernel, aka "Kernel NDProxy Buffer Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-01-04T11:16:02.908-05:00">DRAFT</status_change>
+        <status_change date="2011-01-24T04:00:30.537-05:00">INTERIM</status_change>
+        <status_change date="2011-02-14T04:00:02.430-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of Ndproxy.sys is less than 5.1.2600.6048" test_ref="oval:org.mitre.oval:tst:42003"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of Ndproxy.sys is less than 5.2.3790.4795" test_ref="oval:org.mitre.oval:tst:41778"/>
+    </criteria>
+  </criteria>
+</definition>

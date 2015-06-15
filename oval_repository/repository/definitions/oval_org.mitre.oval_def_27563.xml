@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27563" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2012-0107 -- kernel security and bug fix update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0107.html" ref_id="ELSA-2012-0107"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0207" ref_id="CVE-2012-0207"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3638" ref_id="CVE-2011-3638"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4127" ref_id="CVE-2011-4127"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4086" ref_id="CVE-2011-4086"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0028" ref_id="CVE-2012-0028"/>
+    <description>This update fixes the following security issues:
+
+* Using the SG_IO ioctl to issue SCSI requests to partitions or LVM volumes
+resulted in the requests being passed to the underlying block device. If a
+privileged user only had access to a single partition or LVM volume, they
+could use this flaw to bypass those restrictions and gain read and write
+access (and be able to issue other SCSI commands) to the entire block
+device. Refer to Red Hat Knowledgebase article DOC-67874, linked to in the
+References, for further details about this issue. (CVE-2011-4127,
+Important)
+
+* A flaw was found in the way the Linux kernel handled robust list pointers
+of user-space held futexes across exec() calls. A local, unprivileged user
+could use this flaw to cause a denial of service or, eventually, escalate
+their privileges. (CVE-2012-0028, Important)
+
+* A flaw was found in the Linux kernel in the way splitting two extents in
+ext4_ext_convert_to_initialized() worked. A local, unprivileged user with
+the ability to mount and unmount ext4 file systems could use this flaw to
+cause a denial of service. (CVE-2011-3638, Moderate)
+
+* A flaw was found in the way the Linux kernel's journal_unmap_buffer()
+function handled buffer head states. On systems that have an ext4 file
+system with a journal mounted, a local, unprivileged user could use this
+flaw to cause a denial of service. (CVE-2011-4086, Moderate)
+
+* A divide-by-zero flaw was found in the Linux kernel's igmp_heard_query()
+function. An attacker able to send certain IGMP (Internet Group Management
+Protocol) packets to a target system could use this flaw to cause a denial
+of service. (CVE-2012-0207, Moderate)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:20">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:45:07.918-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:04.298-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:15.807-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T17:59:32.635-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T17:59:32.635-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132669"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-274.18.1.0.1.el5-1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:132688"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-274.18.1.0.1.el5-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132624"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132526"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132777"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:131850"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132236"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132423"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132453"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132785"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132784"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-274.18.1.0.1.el5" test_ref="oval:org.mitre.oval:tst:132359"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-274.18.1.0.1.el5PAE-1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:132691"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-274.18.1.0.1.el5debug-1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:131921"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-274.18.1.0.1.el5xen-1.4.9-1.el5" test_ref="oval:org.mitre.oval:tst:132604"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-274.18.1.0.1.el5PAE-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132398"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-274.18.1.0.1.el5debug-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132490"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-274.18.1.0.1.el5xen-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:132429"/>
+    </criteria>
+  </criteria>
+</definition>

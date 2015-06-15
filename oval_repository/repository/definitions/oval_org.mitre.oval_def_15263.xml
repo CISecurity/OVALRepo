@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15263" version="3" class="compliance" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Kaspersky Endpoint Security 8: Advanced Disinfection technology is enabled</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Kaspersky Endpoint Security 8</product>
+    </affected>
+    <description>Kaspersky Endpoint Security 8: Advanced Disinfection technology is enabled.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-10-03T11:26:26.748+04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2012-10-05T16:14:58.936-04:00">DRAFT</status_change>
+        <status_change date="2012-10-22T04:06:12.188-04:00">INTERIM</status_change>
+        <status_change date="2012-11-12T04:00:08.976-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Kaspersky Endpoint Security 8 is installed" definition_ref="oval:org.mitre.oval:def:15396"/>
+    <criterion comment="Check if Kaspersky Endpoint Security 8: System Watcher is installed" test_ref="oval:org.mitre.oval:tst:79903"/>
+    <criteria operator="OR">
+      <criterion comment="Kaspersky Endpoint Security 8: Advanced Disinfection technology is enabled (current value)" test_ref="oval:org.mitre.oval:tst:80269"/>
+      <criteria>
+        <criterion negate="true" comment="Parameter UseActiveDisinfection does not exist in HKEY_LOCAL_MACHINE\SOFTWARE\KasperskyLab\protected\KES8\profiles\AVService\settings" test_ref="oval:org.mitre.oval:tst:80156"/>
+        <criterion comment="Kaspersky Endpoint Security 8: Advanced Disinfection technology is enabled (default value)" test_ref="oval:org.mitre.oval:tst:80140"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

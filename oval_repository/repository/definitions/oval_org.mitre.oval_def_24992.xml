@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24992" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0689-1 -- Security update for Ruby</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Ruby</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140689-1.html" ref_id="SUSE-SU-2014:0689-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1821" ref_id="CVE-2013-1821"/>
+    <description>This Ruby update fixes the following security issue:
+
+    * bnc#808137: Fixed entity expansion DoS vulnerability in REXML
+      (CVE-2013-1821).
+
+Security Issue reference:
+
+    * CVE-2013-1821
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1821></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:11:53">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:26.134-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:03.679-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:00:44.545-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criterion comment="ruby RPM is earlier than 0:1.8.7.p357-0.9.15.1" test_ref="oval:org.mitre.oval:tst:116291"/>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="ruby-doc-html RPM is earlier than 0:1.8.7.p357-0.9.15.1" test_ref="oval:org.mitre.oval:tst:116522"/>
+        <criterion comment="ruby-tk RPM is earlier than 0:1.8.7.p357-0.9.15.1" test_ref="oval:org.mitre.oval:tst:116339"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

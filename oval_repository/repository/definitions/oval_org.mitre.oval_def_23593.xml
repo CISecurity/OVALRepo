@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23593" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:0305: samba security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>samba</product>
+    </affected>
+    <reference ref_id="ELSA-2011:0305-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-0305.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-0719" ref_url="http://linux.oracle.com/cve/CVE-2011-0719.html" source="CVE"/>
+    <description>Samba 3.x before 3.3.15, 3.4.x before 3.4.12, and 3.5.x before 3.5.7 does not perform range checks for file descriptors before use of the FD_SET macro, which allows remote attackers to cause a denial of service (stack memory corruption, and infinite loop or daemon crash) by opening a large number of files, related to (1) Winbind or (2) smbd.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:23:20.783-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:34.822-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:05:24.908-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23593 - optimisation of Oracle Linux content" date="2014-05-05T17:32:00.187-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:34:06.072-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:53.948-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="samba-client is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108310"/>
+      <criterion comment="samba-domainjoin-gui is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108620"/>
+      <criterion comment="samba is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108696"/>
+      <criterion comment="libsmbclient-devel is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108226"/>
+      <criterion comment="samba-winbind is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108499"/>
+      <criterion comment="samba-doc is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108677"/>
+      <criterion comment="samba-common is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108162"/>
+      <criterion comment="samba-winbind-clients is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108726"/>
+      <criterion comment="samba-winbind-devel is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108368"/>
+      <criterion comment="samba-swat is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:107742"/>
+      <criterion comment="libsmbclient is earlier than 0:3.5.4-68.el6_0.2" test_ref="oval:org.mitre.oval:tst:108583"/>
+    </criteria>
+  </criteria>
+</definition>

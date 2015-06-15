@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24517" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0594: gnutls security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>gnutls</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0594-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0594.html" source="VENDOR"/>
+    <reference ref_id="CVE-2014-3466" ref_url="http://linux.oracle.com/cve/CVE-2014-3466.html" source="CVE"/>
+    <reference ref_id="CVE-2014-3467" ref_url="http://linux.oracle.com/cve/CVE-2014-3467.html" source="CVE"/>
+    <reference ref_id="CVE-2014-3468" ref_url="http://linux.oracle.com/cve/CVE-2014-3468.html" source="CVE"/>
+    <reference ref_id="CVE-2014-3469" ref_url="http://linux.oracle.com/cve/CVE-2014-3469.html" source="CVE"/>
+    <description>The GnuTLS library provides support for cryptographic algorithms and for
+protocols such as Transport Layer Security (TLS). The gnutls packages also
+include the libtasn1 library, which provides Abstract Syntax Notation One
+(ASN.1) parsing and structures management, and Distinguished Encoding Rules
+(DER) encoding and decoding functions.
+A flaw was found in the way GnuTLS parsed session IDs from ServerHello
+messages of the TLS/SSL handshake. A malicious server could use this flaw
+to send an excessively long session ID value, which would trigger a buffer
+overflow in a connecting TLS/SSL client application using GnuTLS, causing
+the client application to crash or, possibly, execute arbitrary code.
+(CVE-2014-3466)
+It was discovered that the asn1_get_bit_der() function of the libtasn1
+library incorrectly reported the length of ASN.1-encoded data. Specially
+crafted ASN.1 input could cause an application using libtasn1 to perform
+an out-of-bounds access operation, causing the application to crash or,
+possibly, execute arbitrary code. (CVE-2014-3468)
+Multiple incorrect buffer boundary check issues were discovered in
+libtasn1. Specially crafted ASN.1 input could cause an application using
+libtasn1 to crash. (CVE-2014-3467)
+Multiple NULL pointer dereference flaws were found in libtasn1's
+asn1_read_value() function. Specially crafted ASN.1 input could cause an
+application using libtasn1 to crash, if the application used the
+aforementioned function in a certain way. (CVE-2014-3469)
+Red Hat would like to thank GnuTLS upstream for reporting these issues.
+Upstream acknowledges Joonas Kuorilehto of Codenomicon as the original
+reporter of CVE-2014-3466.
+Users of GnuTLS are advised to upgrade to these updated packages, which
+correct these issues. For the update to take effect, all applications
+linked to the GnuTLS or libtasn1 library must be restarted.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-25T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </submitted>
+        <status_change date="2014-07-10T11:45:55.494-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24517 - modified Oracle Linux content" date="2014-07-23T14:34:00.918-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-11T04:00:23.598-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:02:43.212-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="gnutls is earlier than 0:1.4.1-16.el5_10" test_ref="oval:org.mitre.oval:tst:115598"/>
+      <criterion comment="gnutls-devel is earlier than 0:1.4.1-16.el5_10" test_ref="oval:org.mitre.oval:tst:115639"/>
+      <criterion comment="gnutls-utils is earlier than 0:1.4.1-16.el5_10" test_ref="oval:org.mitre.oval:tst:114828"/>
+    </criteria>
+  </criteria>
+</definition>

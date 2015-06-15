@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14879" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>CSRSS Elevation of Privilege Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-0005" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0005"/>
+    <description>The Client/Server Run-time Subsystem (aka CSRSS) in the Win32 subsystem in Microsoft Windows XP SP2 and SP3, Server 2003 SP2, Vista SP2, and Server 2008 SP2, when a Chinese, Japanese, or Korean system locale is used, can access uninitialized memory during the processing of Unicode characters, which allows local users to gain privileges via a crafted application, aka "CSRSS Elevation of Privilege Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-01-10T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2012-01-13T18:08:40.685-05:00">DRAFT</status_change>
+        <status_change date="2012-01-30T04:00:57.134-05:00">INTERIM</status_change>
+        <status_change date="2012-02-20T04:00:07.462-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of Winsrv.dll is less than 5.1.2600.6179" test_ref="oval:org.mitre.oval:tst:78052"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP (x64) SP2, Windows Server 2003 x64/x86/ia64 SP2">
+      <criteria operator="OR" comment="Windows XP (x64) SP2, Windows Server 2003 x64/x86/ia64 SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of Winsrv.dll is less than 5.2.3790.4940" test_ref="oval:org.mitre.oval:tst:77993"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP2 x86/x64, Server 2008 SP2 32bit/x64/ia64">
+      <criteria operator="OR" comment="Windows Vista SP2 x86/x64, Server 2008 SP2 32bit/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Winsrv.dll is less than 6.0.6002.18545" test_ref="oval:org.mitre.oval:tst:77946"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Winsrv.dll is less than 6.0.6002.22747" test_ref="oval:org.mitre.oval:tst:77645"/>
+          <criterion comment="the version of Winsrv.dll is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:43863"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

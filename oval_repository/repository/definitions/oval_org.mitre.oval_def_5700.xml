@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5700" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OnLineJFS sticky bit does not function properly.</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-1618" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1618"/>
+    <description>JFS (JFS3.1 and OnlineJFS) in HP-UX 10.20, 11.00, and 11.04 does not properly implement the sticky bit functionality, which could allow attackers to bypass intended restrictions on filesystems.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-10T16:22:36.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-14T10:51:52.820-04:00">DRAFT</status_change>
+        <status_change date="2008-08-04T04:00:33.081-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:28.948-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Criteria meets Security Bulletin HPSBUX0210-223">
+    <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+    <criterion negate="true" comment="Patch PHKL_24201 is installed" test_ref="oval:org.mitre.oval:tst:7939"/>
+  </criteria>
+</definition>

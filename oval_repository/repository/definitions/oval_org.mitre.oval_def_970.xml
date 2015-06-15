@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:970" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>CVS pserver BO</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0396" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0396"/>
+    <description>Heap-based buffer overflow in CVS 1.11.x up to 1.11.15, and 1.12.x up to 1.12.7, when using the pserver mechanism allows remote attackers to execute arbitrary code via Entry lines.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-05-20T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2004-06-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-06-30T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:47.770-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:53:11.394-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+      <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+      <criterion comment="cvs version is less than 1.11.2-22" negate="false" test_ref="oval:org.mitre.oval:tst:1382"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="/usr/bin/cvs is executable">
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1381"/>
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1380"/>
+        <criterion comment="/usr/bin/cvs is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1379"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

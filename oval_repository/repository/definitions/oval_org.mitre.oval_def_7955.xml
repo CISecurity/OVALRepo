@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7955" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1532 xulrunner -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1532" ref_id="DSA-1532"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4879" ref_id="CVE-2007-4879"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1233" ref_id="CVE-2008-1233"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1234" ref_id="CVE-2008-1234"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1235" ref_id="CVE-2008-1235"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1236" ref_id="CVE-2008-1236"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1237" ref_id="CVE-2008-1237"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1238" ref_id="CVE-2008-1238"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1240" ref_id="CVE-2008-1240"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1241" ref_id="CVE-2008-1241"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3738" ref_id="CVE-2007-3738"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5338" ref_id="CVE-2007-5338"/>
+    <description>Several remote vulnerabilities have been discovered in Xulrunner, a runtime environment for XUL applications. The Common Vulnerabilities and Exposures project identifies the following problems: Peter Brodersen and Alexander Klink discovered that the autoselection of SSL client certificates could lead to users being tracked, resulting in a loss of privacy. moz_bug_r_a4 discovered that variants of CVE-2007-3738 and CVE-2007-5338 allow the execution of arbitrary code through XPCNativeWrapper. moz_bug_r_a4 discovered that insecure handling of event handlers could lead to cross-site scripting. Boris Zbarsky, Johnny Stenback and moz_bug_r_a4 discovered that incorrect principal handling could lead to cross-site scripting and the execution of arbitrary code. Tom Ferris, Seth Spitzer, Martin Wargers, John Daggett and Mats Palmgren discovered crashes in the layout engine, which might allow the execution of arbitrary code. georgi, tgirmann and Igor Bukanov discovered crashes in the Javascript engine, which might allow the execution of arbitrary code. Gregory Fleischer discovered that HTTP Referrer headers were handled incorrectly in combination with URLs containing Basic Authentication credentials with empty usernames, resulting in potential Cross-Site Request Forgery attacks. Gregory Fleischer discovered that web content fetched through the jar: protocol can use Java to connect to arbitrary ports. This is only an issue in combination with the non-free Java plugin. Chris Thomas discovered that background tabs could generate XUL popups overlaying the current tab, resulting in potential spoofing attacks. The Mozilla products from the old stable distribution (sarge) are no longer supported.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:50:33.201-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:01.393-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:12.422-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7955 - Debian Patch Update" date="2014-06-06T16:37:00.188-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:39:30.635-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:34.769-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libxul-dev is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12677"/>
+          <criterion comment="libmozjs-dev is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12840"/>
+          <criterion comment="libsmjs1 is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13027"/>
+          <criterion comment="libmozillainterfaces-java is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13128"/>
+          <criterion comment="libxul-common is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13173"/>
+          <criterion comment="libsmjs-dev is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12907"/>
+          <criterion comment="libnspr4-dev is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13107"/>
+          <criterion comment="libnss3-dev is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13178"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libxul0d is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13066"/>
+          <criterion comment="libnss3-0d-dbg is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13176"/>
+          <criterion comment="libmozjs0d-dbg is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13187"/>
+          <criterion comment="libnss3-0d is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13015"/>
+          <criterion comment="spidermonkey-bin is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13010"/>
+          <criterion comment="libnspr4-0d-dbg is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13225"/>
+          <criterion comment="xulrunner-gnome-support is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13228"/>
+          <criterion comment="libxul0d-dbg is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13135"/>
+          <criterion comment="libmozjs0d is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:13147"/>
+          <criterion comment="xulrunner is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12996"/>
+          <criterion comment="libnss3-tools is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12482"/>
+          <criterion comment="python-xpcom is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12967"/>
+          <criterion comment="libnspr4-0d is earlier than 1.8.0.15~pre080323b-0etch1" test_ref="oval:org.mitre.oval:tst:12269"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21987" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2008:0855: openssh security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>openssh</product>
+    </affected>
+    <reference ref_id="ELSA-2008:0855-01" ref_url="http://linux.oracle.com/errata/ELSA-2008-0855.html" source="VENDOR"/>
+    <reference ref_id="CVE-2007-4752" ref_url="http://linux.oracle.com/cve/CVE-2007-4752.html" source="CVE"/>
+    <reference ref_id="CVE-2008-3844" ref_url="http://linux.oracle.com/cve/CVE-2008-3844.html" source="CVE"/>
+    <description>Certain Red Hat Enterprise Linux (RHEL) 4 and 5 packages for OpenSSH, as signed in August 2008 using a legitimate Red Hat GPG key, contain an externally introduced modification (Trojan Horse) that allows the package authors to have an unknown impact.	 NOTE: since the malicious packages were not distributed from any official Red Hat sources, the scope of this issue is restricted to users who may have obtained these packages through unofficial distribution points.	 As of 20080827, no unofficial distributions of this software are known.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:53:32.421-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:27.684-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:40.977-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21987 - optimisation of Oracle Linux content" date="2014-05-05T18:21:00.458-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:23:11.290-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:45.813-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="openssh is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:101818"/>
+      <criterion comment="openssh-clients is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:102509"/>
+      <criterion comment="openssh-server is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:102331"/>
+      <criterion comment="openssh-askpass is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:102515"/>
+    </criteria>
+  </criteria>
+</definition>

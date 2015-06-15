@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18006" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1516-1 dovecot - privilege escalation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>dovecot</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1516-1" ref_id="DSA-1516-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1199" ref_id="CVE-2008-1199"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1218" ref_id="CVE-2008-1218"/>
+    <description>Prior to this update, the default configuration for Dovecot used by Debian runs the server daemons with group mail privileges. This means that users with write access to their mail directory on the server (for example, through an SSH login) could read and also delete via a symbolic link mailboxes owned by other users for which they do not have direct access (&lt;a href="http://security-tracker.debian.org/tracker/CVE-2008-1199">CVE-2008-1199&lt;/a>). In addition, an internal interpretation conflict in password handling has been addressed proactively, even though it is not known to be exploitable (&lt;a href="http://security-tracker.debian.org/tracker/CVE-2008-1218">CVE-2008-1218&lt;/a>).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:13:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:12:21.949-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:00:33.282-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:09:35.811-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23801 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:31:47.164-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:29.383-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18006 - Debian Patch Update" date="2014-06-06T17:20:00.187-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:22:14.274-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:57.575-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="dovecot DPKG is earlier than 1.0.rc15-2etch4" test_ref="oval:org.mitre.oval:tst:86047"/>
+  </criteria>
+</definition>

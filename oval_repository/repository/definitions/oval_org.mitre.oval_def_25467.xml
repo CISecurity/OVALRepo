@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25467" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0744-1 -- Security update for xorg-x11-server</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>xorg-x11-server</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140744-1.html" ref_id="SUSE-SU-2014:0744-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6424" ref_id="CVE-2013-6424"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4396" ref_id="CVE-2013-4396"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1940" ref_id="CVE-2013-1940"/>
+    <description>This is a SLES 11 SP1 LTSS rollup update for the X.Org Server package.
+
+The following security issues have been fixed:
+
+    * CVE-2013-6424: Integer underflow in the xTrapezoidValid macro in
+      render/picture.h in X.Org allowed context-dependent attackers to
+      cause a denial of service (crash) via a negative bottom value.
+    * CVE-2013-4396: Use-after-free vulnerability in the doImageText
+      function in dix/dixfonts.c in the xorg-server module before 1.14.4
+      in X.Org X11 allowed remote authenticated users to cause a denial of
+      service (daemon crash) or possibly execute arbitrary code via a
+      crafted ImageText request that triggers memory-allocation failure.
+    * CVE-2013-1940: X.Org X server did not properly restrict access to
+      input events when adding a new hot-plug device, which might have
+      allowed physically proximate attackers to obtain sensitive
+      information, as demonstrated by reading passwords from a tty.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:09:37">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:48.281-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:24.221-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:27.619-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="xorg-x11-Xvnc RPM is earlier than 0:7.4-27.40.70.1" test_ref="oval:org.mitre.oval:tst:115477"/>
+      <criterion comment="xorg-x11-server RPM is earlier than 0:7.4-27.40.70.1" test_ref="oval:org.mitre.oval:tst:115773"/>
+      <criterion comment="xorg-x11-server-extra RPM is earlier than 0:7.4-27.40.70.1" test_ref="oval:org.mitre.oval:tst:115969"/>
+    </criteria>
+  </criteria>
+</definition>

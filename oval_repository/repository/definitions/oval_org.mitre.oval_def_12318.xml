@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12318" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>TCP/IP QOS Denial of Service Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1965" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1965"/>
+    <description>Tcpip.sys in the TCP/IP stack in Microsoft Windows 7 Gold and SP1 and Windows Server 2008 R2 and R2 SP1 does not properly implement URL-based QoS, which allows remote attackers to cause a denial of service (reboot) via a crafted URL to a web server, aka "TCP/IP QOS Denial of Service Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-08-10T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-08-15T08:30:54.858-04:00">DRAFT</status_change>
+        <status_change date="2011-09-05T04:00:03.031-04:00">INTERIM</status_change>
+        <status_change date="2011-09-26T04:00:05.155-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows 7 x86/x64, Windows Server 2008 R2 x64/ia64">
+      <criteria operator="OR" comment="Windows 7 x86/x64, Windows Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Tcpip.sys is less than 6.1.7600.16839" test_ref="oval:org.mitre.oval:tst:43738"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Tcpip.sys is greater than or equal 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:41643"/>
+          <criterion comment="The version of Tcpip.sys is less than 6.1.7600.20992" test_ref="oval:org.mitre.oval:tst:43278"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Windows 7 x86/x64 SP1, Windows Server 2008 R2 x64/ia64 SP1">
+      <criteria operator="OR" comment="Vulnerable Microsoft Windows 7 x86/x64 SP1, Windows Server 2008 R2 x64 SP1">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Tcpip.sys is less than 6.1.7601.17638" test_ref="oval:org.mitre.oval:tst:43810"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Tcpip.sys is greater than or equal 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:43898"/>
+          <criterion comment="The version of Tcpip.sys is less than 6.1.7601.21754" test_ref="oval:org.mitre.oval:tst:43671"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

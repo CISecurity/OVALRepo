@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21127" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0250: elinks security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>elinks</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0250-01" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0250.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0250"/>
+    <reference source="CVE" ref_id="CVE-2012-4545" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-4545.html"/>
+    <description>The http_negotiate_create_context function in protocol/http/http_negotiate.c in ELinks 0.12 before 0.12pre6, when using HTTP Negotiate or GSS-Negotiate authentication, delegates user credentials through GSSAPI, which allows remote servers to authenticate as the client via the delegated credentials.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:51.639-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:01:06.185-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:18.251-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criterion comment="elinks is earlier than 0:0.12-0.21.pre5.el6_3" test_ref="oval:org.mitre.oval:tst:90393"/>
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criterion comment="elinks is earlier than 0:0.11.1-8.el5_9" test_ref="oval:org.mitre.oval:tst:90270"/>
+    </criteria>
+  </criteria>
+</definition>

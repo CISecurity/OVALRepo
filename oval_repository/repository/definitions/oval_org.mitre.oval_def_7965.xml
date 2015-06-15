@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7965" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1586 xine-lib -- multiple vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>xine-lib</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1586" ref_id="DSA-1586"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1482" ref_id="CVE-2008-1482"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1686" ref_id="CVE-2008-1686"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1878" ref_id="CVE-2008-1878"/>
+    <description>Multiple vulnerabilities have been discovered in xine-lib, a library which supplies most of the application functionality of the xine multimedia player. The Common Vulnerabilities and Exposures project identifies the following three problems: Integer overflow vulnerabilities exist in xine's FLV, QuickTime, RealMedia, MVE and CAK demuxers, as well as the EBML parser used by the Matroska demuxer. These weaknesses allow an attacker to overflow heap buffers and potentially execute arbitrary code by supplying a maliciously crafted file of those types. Insufficient input validation in the Speex implementation used by this version of xine enables an invalid array access and the execution of arbitrary code by supplying a maliciously crafted Speex file. Inadequate bounds checking in the NES Sound Format (NSF) demuxer enables a stack buffer overflow and the execution of arbitrary code through a maliciously crafted NSF file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:08-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:56:43.167-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:06.627-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:17.503-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7965 - Debian Patch Update" date="2014-06-06T16:37:00.188-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:39:28.941-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:36.607-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libxine1 is earlier than 1.1.2+dfsg-7" test_ref="oval:org.mitre.oval:tst:17749"/>
+      <criterion comment="libxine1-dbg is earlier than 1.1.2+dfsg-7" test_ref="oval:org.mitre.oval:tst:17740"/>
+      <criterion comment="libxine-dev is earlier than 1.1.2+dfsg-7" test_ref="oval:org.mitre.oval:tst:17583"/>
+    </criteria>
+  </criteria>
+</definition>

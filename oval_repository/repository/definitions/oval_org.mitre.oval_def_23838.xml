@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23838" version="17" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:1778: gimp security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>gimp</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1778-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-1778.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-5576" ref_url="http://linux.oracle.com/cve/CVE-2012-5576.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1913" ref_url="http://linux.oracle.com/cve/CVE-2013-1913.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1978" ref_url="http://linux.oracle.com/cve/CVE-2013-1978.html" source="CVE"/>
+    <description>Heap-based buffer overflow in the read_xwd_cols function in file-xwd.c in the X Window Dump (XWD) plug-in in GIMP 2.6.9 and earlier allows remote attackers to cause a denial of service (crash) and possibly execute arbitrary code via an X Window System (XWD) image dump with more colors than color map entries.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:51:16.585-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:14.521-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:26.448-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23838 - optimisation of Oracle Linux content" date="2014-05-05T17:23:00.551-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:25:58.661-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:35.244-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="gimp-libs is earlier than 2:2.2.13-3.el5_10" test_ref="oval:org.mitre.oval:tst:111598"/>
+        <criterion comment="gimp-devel is earlier than 2:2.2.13-3.el5_10" test_ref="oval:org.mitre.oval:tst:112330"/>
+        <criterion comment="gimp is earlier than 2:2.2.13-3.el5_10" test_ref="oval:org.mitre.oval:tst:112531"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="gimp-libs is earlier than 2:2.6.9-6.el6_5" test_ref="oval:org.mitre.oval:tst:112435"/>
+        <criterion comment="gimp-devel-tools is earlier than 2:2.6.9-6.el6_5" test_ref="oval:org.mitre.oval:tst:112451"/>
+        <criterion comment="gimp-devel is earlier than 2:2.6.9-6.el6_5" test_ref="oval:org.mitre.oval:tst:112413"/>
+        <criterion comment="gimp is earlier than 2:2.6.9-6.el6_5" test_ref="oval:org.mitre.oval:tst:111649"/>
+        <criterion comment="gimp-help-browser is earlier than 2:2.6.9-6.el6_5" test_ref="oval:org.mitre.oval:tst:112498"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

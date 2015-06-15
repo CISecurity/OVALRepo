@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22167" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1790: krb5 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1790-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1790.html"/>
+    <reference source="CESA" ref_id="CESA-2011:1790"/>
+    <reference source="CVE" ref_id="CVE-2011-1530" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1530.html"/>
+    <description>The process_tgs_req function in do_tgs_req.c in the Key Distribution Center (KDC) in MIT Kerberos 5 (aka krb5) 1.9 through 1.9.2 allows remote authenticated users to cause a denial of service (NULL pointer dereference and daemon crash) via a crafted TGS request that triggers an error other than the KRB5_KDB_NOENTRY error.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:38:56.818-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:28.563-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:52.052-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="krb5-devel is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98886"/>
+      <criterion comment="krb5-server-ldap is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98629"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98783"/>
+      <criterion comment="krb5-libs is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98784"/>
+      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98669"/>
+      <criterion comment="krb5-server is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98360"/>
+      <criterion comment="krb5 is earlier than 0:1.9-22.el6_2.1" test_ref="oval:org.mitre.oval:tst:98208"/>
+    </criteria>
+  </criteria>
+</definition>

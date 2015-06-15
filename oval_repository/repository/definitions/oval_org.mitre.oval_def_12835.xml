@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12835" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>XSS in SharePoint Calendar Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft SharePoint Foundation 2010</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-0653" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0653"/>
+    <description>Cross-site scripting (XSS) vulnerability in Microsoft Office SharePoint Server 2010 Gold and SP1, and SharePoint Foundation 2010, allows remote attackers to inject arbitrary web script or HTML via the URI, aka "XSS in SharePoint Calendar Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-13T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-09-20T09:24:27.187-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:30.316-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:00:53.708-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Vulnerable Microsoft Office SharePoint Server 2010 (osrchwfe)">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Microsoft.SharePoint.Taxonomy.dll version is less than 14.0.6106.5001" test_ref="oval:org.mitre.oval:tst:43686"/>
+    </criteria>
+    <criteria comment="Vulnerable Microsoft Office SharePoint Server 2010 (osrv/wosrv)">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Microsoft.office.server.dll version is less than 14.0.6106.5001" test_ref="oval:org.mitre.oval:tst:43358"/>
+    </criteria>
+    <criteria comment="Vulnerable Microsoft Office SharePoint Server 2010 (ppsmawfe)">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Eawfap.dll version is less than 14.0.6106.5001" test_ref="oval:org.mitre.oval:tst:43900"/>
+    </criteria>
+    <criteria comment="Vulnerable Microsoft Office SharePoint Server 2010 (dlc)">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Microsoft.office.policy.dll version is less than 14.0.6106.5001" test_ref="oval:org.mitre.oval:tst:43892"/>
+    </criteria>
+    <criteria comment="Vulnerable Microsoft Office SharePoint Server 2010 (ppsmamui)">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Microsoft.SharePoint.Client.dll version is less than 14.0.6106.5001" test_ref="oval:org.mitre.oval:tst:43419"/>
+    </criteria>
+    <criteria comment="Vulnerable Microsoft SharePoint Foundation 2010">
+      <extend_definition comment="Microsoft SharePoint Foundation 2010 is installed" definition_ref="oval:org.mitre.oval:def:12224"/>
+      <criterion comment="OWSSVR.DLL version is less than 14.0.6106.5008" test_ref="oval:org.mitre.oval:tst:43889"/>
+    </criteria>
+  </criteria>
+</definition>

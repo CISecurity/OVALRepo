@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1381" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability With Loading Arbitrary Kernel Modules in Solaris Kernel</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 7</platform>
+      <platform>Sun Solaris 2.6</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-2686" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2686"/>
+    <description>Directory traversal vulnerability in the vfs_getvfssw function in Solaris 2.6, 7, 8, and 9 allows local users to load arbitrary kernel modules via crafted (1) mount or (2) sysfs system calls.  NOTE: this might be the same issue as CVE-2004-1767, but there are insufficient details to be sure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-09-25T11:24:50.000-04:00">
+          <contributor organization="Opsware, Inc.">Nicholas Hansen</contributor>
+        </submitted>
+        <status_change date="2007-09-27T10:35:10.155-04:00">DRAFT</status_change>
+        <status_change date="2007-10-12T07:56:13.245-04:00">INTERIM</status_change>
+        <status_change date="2007-10-28T20:27:10.742-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 7 (SPARC) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 7 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:2107"/>
+      <criterion comment="Patch 106541-29 or later installed" test_ref="oval:org.mitre.oval:tst:4002" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion comment="Patch 108528-27 or later installed" test_ref="oval:org.mitre.oval:tst:4228" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 112233-11 or later installed" test_ref="oval:org.mitre.oval:tst:3814" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 7 (x86) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 7 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2036"/>
+      <criterion comment="Patch 106542-29 or later installed" test_ref="oval:org.mitre.oval:tst:3686" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion comment="Patch 108529-27 or later installed" test_ref="oval:org.mitre.oval:tst:4247" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 112234-11 or later installed" test_ref="oval:org.mitre.oval:tst:3937" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 2.6 (SPARC) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 2.6 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1361"/>
+      <criterion comment="Patch 105181-37 or later installed" test_ref="oval:org.mitre.oval:tst:3794" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 2.6 (x86) meets Sun Alert 57479" negate="false">
+      <extend_definition comment="Solaris 2.6 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1967"/>
+      <criterion comment="Patch 105182-37 or later installed" test_ref="oval:org.mitre.oval:tst:3479" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

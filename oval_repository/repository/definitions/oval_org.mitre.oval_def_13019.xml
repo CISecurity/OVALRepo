@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13019" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2233-1 postfix -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>postfix</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00102.html" ref_id="DSA-2233-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2939" ref_id="CVE-2009-2939"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0411" ref_id="CVE-2011-0411"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1720" ref_id="CVE-2011-1720"/>
+    <description>Several vulnerabilities were discovered in Postfix, a mail transfer agent. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-2939 The postinst script grants the postfix user write access to /var/spool/postfix/pid, which might allow local users to conduct symlink attacks that overwrite arbitrary files. CVE-2011-0411 The STARTTLS implementation does not properly restrict I/O buffering, which allows man-in-the-middle attackers to insert commands into encrypted SMTP sessions by sending a cleartext command that is processed after TLS is in place. CVE-2011-1720 A heap-based read-only buffer overflow allows malicious clients to crash the smtpd server process using a crafted SASL authentication request.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T11:47:01-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:32.331-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:49.299-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:21.622-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13019 - Debian Patch Update" date="2014-06-06T17:05:00.860-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:07:28.951-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:23.486-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="postfix DPKG is earlier than 2.5.5-1.1+lenny1" test_ref="oval:org.mitre.oval:tst:44041"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="postfix DPKG is earlier than 2.7.1-1+squeeze1" test_ref="oval:org.mitre.oval:tst:43894"/>
+    </criteria>
+  </criteria>
+</definition>

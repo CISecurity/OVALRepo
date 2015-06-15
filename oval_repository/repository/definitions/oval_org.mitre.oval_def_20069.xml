@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20069" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1556-2 perl - denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>perl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1556-2" ref_id="DSA-1556-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1927" ref_id="CVE-2008-1927"/>
+    <description>It has been discovered that the Perl interpreter may encounter a buffer overflow condition when compiling certain regular expressions containing Unicode characters. This also happens if the offending characters are contained in a variable reference protected by the \Q...\E quoting construct. When encountering this condition, the Perl interpreter typically crashes, but arbitrary code execution cannot be ruled out.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:23:10">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:40.227-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:34.050-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:11.440-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20069 - Debian Patch Update" date="2014-06-06T17:24:00.692-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:26:37.314-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:34.667-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="perl DPKG is earlier than 0:5.8.8-7etch3" test_ref="oval:org.mitre.oval:tst:89270"/>
+  </criteria>
+</definition>

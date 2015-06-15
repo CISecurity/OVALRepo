@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5468" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IBM AIX 'nddstat' Commands Let Local Users Gain Root Privileges</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.2</platform>
+      <platform>IBM AIX 5.3</platform>
+      <platform>IBM AIX 6.1</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1599" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1599"/>
+    <description>The nddstat programs on IBM AIX 5.2, 5.3, and 6.1 do not properly handle environment variables, which allows local users to gain privileges by invoking (1) atmstat, (2) entstat, (3) fddistat, (4) hdlcstat, or (5) tokstat.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-18T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-04-30T12:21:20.476-04:00">DRAFT</status_change>
+        <status_change date="2008-05-19T04:00:19.422-04:00">INTERIM</status_change>
+        <status_change date="2008-06-09T04:00:14.415-04:00">ACCEPTED</status_change>
+        <modified comment="Modified the tests to apply to specific versions of AIX and added in IBM AIX 6.1 support" date="2008-06-20T15:20:00.892-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-06-20T15:36:54.910-04:00">INTERIM</status_change>
+        <status_change date="2008-07-07T04:00:24.289-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="IBM AIX 5200-10 meets CVE-2008-1599">
+      <extend_definition comment="IBM AIX 5200-10 is installed" definition_ref="oval:org.mitre.oval:def:5076"/>
+      <criterion negate="true" comment="All filesets for APAR IZ16991 are installed" test_ref="oval:org.mitre.oval:tst:7553"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-06 meets CVE-2008-1599">
+      <extend_definition comment="IBM AIX 5300-06 is installed" definition_ref="oval:org.mitre.oval:def:4813"/>
+      <criterion negate="true" comment="All filesets for APAR IZ17058 are installed" test_ref="oval:org.mitre.oval:tst:7479"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-07 meets CVE-2008-1599">
+      <extend_definition comment="IBM AIX 5300-07 is installed" definition_ref="oval:org.mitre.oval:def:5707"/>
+      <criterion negate="true" comment="All filesets for APAR IZ17059 are installed" test_ref="oval:org.mitre.oval:tst:7959"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-08 meets CVE-2008-1599">
+      <extend_definition comment="IBM AIX 5300-08 is installed" definition_ref="oval:org.mitre.oval:def:5293"/>
+      <criterion negate="true" comment="All filesets for APAR IZ14508 are installed" test_ref="oval:org.mitre.oval:tst:8136"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 6100-00 meets CVE-2008-1599">
+      <extend_definition comment="IBM AIX 6100-00 is installed" definition_ref="oval:org.mitre.oval:def:5589"/>
+      <criterion negate="true" comment="All filesets for APAR IZ16975 are installed" test_ref="oval:org.mitre.oval:tst:7993"/>
+    </criteria>
+  </criteria>
+</definition>

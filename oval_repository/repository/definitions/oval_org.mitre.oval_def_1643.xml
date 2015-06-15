@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1643" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Win32 API Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2219" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2219"/>
+    <description>Unspecified vulnerability in the Win32 API on Microsoft Windows 2000, XP SP2, and Server 2003 SP1 and SP2 allows remote attackers to execute arbitrary code via certain parameters to an unspecified function.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-06-12T03:29:54.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2007-06-12T20:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-06-29T09:41:58.776-04:00">INTERIM</status_change>
+        <status_change date="2007-07-16T09:55:09.144-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:3731 - Corrected trailing dot in version" date="2011-04-19T14:59:00.980-04:00">
+          <contributor organization="The MITRE Corporation">Dan Haynes</contributor>
+        </modified>
+        <status_change date="2011-04-19T14:59:41.119-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:18.017-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1643 - Correcting incorrect references to 64-bit Itanium XP." date="2012-08-23T17:47:00.168-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:52:56.645-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:00:39.549-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Win2K,SP4">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="The version of Kernel32.dll is less than 5.0.2195.7135." test_ref="oval:org.mitre.oval:tst:3738"/>
+    </criteria>
+    <criteria operator="AND" comment="WinXP,SP2">
+      <extend_definition comment="Microsoft Windows XP SP2 or later is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <criterion comment="The version of Kernel32.dll is less than 5.1.2600.3119." test_ref="oval:org.mitre.oval:tst:3304"/>
+    </criteria>
+    <criteria operator="AND" comment="WinXP,SP1 (64-bit)">
+      <extend_definition comment="Microsoft Windows XP SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+      <criterion comment="The version of Kernel32.dll is less than 5.2.3790.2919." test_ref="oval:org.mitre.oval:tst:3630"/>
+    </criteria>
+    <criteria operator="AND" comment="WinXP,SP2 (64-bit)">
+      <criterion comment="The version of Kernel32.dll is less than 5.2.3790.4062." test_ref="oval:org.mitre.oval:tst:3786"/>
+      <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+    </criteria>
+    <criteria operator="AND" comment="S03,SP1">
+      <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+      <criterion comment="The version of Kernel32.dll is less than 5.2.3790.2919." test_ref="oval:org.mitre.oval:tst:3630"/>
+    </criteria>
+    <criteria operator="AND" comment="S03,SP2">
+      <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+      <criterion comment="The version of Kernel32.dll is less than 5.2.3790.4062." test_ref="oval:org.mitre.oval:tst:3786"/>
+    </criteria>
+  </criteria>
+</definition>

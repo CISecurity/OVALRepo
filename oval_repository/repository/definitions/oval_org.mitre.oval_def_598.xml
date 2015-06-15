@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:598" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running xterm Local Unauthorized Access</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-3779" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3779"/>
+    <description>Unspecified vulnerability in xterm for HP-UX 11.00, 11.11, and 11.23 allows local users to gain privileges via unknown vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-11-30T12:00:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2005-12-20T11:03:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-01-04T08:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-01-25T07:30:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="modified patch test to only check for specific patch, checking for supersedence was incorrect and need a language change" date="2007-09-13T00:00:00.000-05:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-09-13T14:05:30.676-04:00">INTERIM</status_change>
+        <status_change date="2007-10-02T08:08:12.645-04:00">ACCEPTED</status_change>
+        <modified comment="Criteria meets HP Security Bulletin HPSBUX02075" date="2008-07-14T10:21:00.902-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-07-14T10:23:55.918-04:00">INTERIM</status_change>
+        <status_change date="2008-08-04T04:00:42.071-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:36.379-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:49.414-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02075">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="X11.X11-RUN-CL is installed" test_ref="oval:org.mitre.oval:tst:8371"/>
+      <criterion negate="true" comment="Patch PHSS_34102 is installed" test_ref="oval:org.mitre.oval:tst:8317"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02075">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criterion comment="X11.X11-RUN-CL is installed" test_ref="oval:org.mitre.oval:tst:8371"/>
+      <criterion negate="true" comment="Patch PHSS_34160 is installed" test_ref="oval:org.mitre.oval:tst:8362"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02075">
+      <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      <criterion comment="X11.X11-RUN-CL is installed" test_ref="oval:org.mitre.oval:tst:8371"/>
+      <criterion negate="true" comment="Patch PHSS_34159 is installed" test_ref="oval:org.mitre.oval:tst:8389"/>
+    </criteria>
+  </criteria>
+</definition>

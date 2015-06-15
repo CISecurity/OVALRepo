@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20748" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware vSphere security updates for the authentication service and third party libraries</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference ref_id="CVE-2012-4244" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4244" source="CVE"/>
+    <description>ISC BIND 9.x before 9.7.6-P3, 9.8.x before 9.8.3-P3, 9.9.x before 9.9.1-P3, and 9.4-ESV and 9.6-ESV before 9.6-ESV-R7-P3 allows remote attackers to cause a denial of service (assertion failure and named daemon exit) via a query for a long resource record.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-05T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:44:26.878-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:52.617-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:10.238-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201301402-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201301402-SG is not installed" test_ref="oval:org.mitre.oval:tst:88816"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX400-201305402-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criterion comment="Patch ESX400-201305402-SG is not installed" test_ref="oval:org.mitre.oval:tst:89591"/>
+    </criteria>
+  </criteria>
+</definition>

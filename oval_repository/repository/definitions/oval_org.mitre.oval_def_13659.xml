@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13659" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1066-1 -- python-django vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>python-django</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001250.html" ref_id="USN-1066-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0696" ref_id="CVE-2011-0696"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0697" ref_id="CVE-2011-0697"/>
+    <description>It was discovered that Django did not properly validate HTTP requests that contain an X-Requested-With header. An attacker could exploit this vulnerability to perform cross-site request forgery attacks. It was discovered that Django did not properly sanitize its input when performing file uploads, resulting in cross-site scripting vulnerabilities. With cross-site scripting vulnerabilities, if a user were tricked into viewing server output during a crafted server request, a remote attacker could exploit this to modify the contents, or steal confidential data, within the same domain</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:37:17.666-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:09:46.198-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:22.618-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13659 - added CVE references; also made minor updates" date="2014-06-13T15:44:00.630-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:46:13.774-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:36.774-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="python-django-doc DPKG is earlier than 1.2.3-1ubuntu0.2.10.10.2" test_ref="oval:org.mitre.oval:tst:62913"/>
+        <criterion comment="python-django DPKG is earlier than 1.2.3-1ubuntu0.2.10.10.2" test_ref="oval:org.mitre.oval:tst:62808"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="python-django-doc DPKG is earlier than 1.1.1-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:63040"/>
+        <criterion comment="python-django DPKG is earlier than 1.1.1-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62936"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="python-django-doc DPKG is earlier than 1.1.1-2ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62968"/>
+        <criterion comment="python-django DPKG is earlier than 1.1.1-2ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62921"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

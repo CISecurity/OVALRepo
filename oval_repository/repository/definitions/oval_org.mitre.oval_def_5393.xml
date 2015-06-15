@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5393" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in the Solaris X Server May Lead to Unauthorized Disclosure of Information on Access Restricted Files and Directories</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-5958" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5958"/>
+    <description>X.Org Xserver before 1.4.1 allows local users to determine the existence of arbitrary files via a filename argument in the -sp option to the X program, which produces different error messages depending on whether the filename exists.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-02-12T08:48:34.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-02-13T09:26:36.813-05:00">DRAFT</status_change>
+        <status_change date="2008-03-03T04:00:16.207-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:46.668-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 230901">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion negate="true" comment="Patch 119067-09 or later installed" test_ref="oval:org.mitre.oval:tst:7606"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 230901">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion negate="true" comment="Patch 112785-63 or later installed" test_ref="oval:org.mitre.oval:tst:7770"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criteria operator="OR">
+        <criteria operator="AND">
+          <criterion comment="File Xsun exists" test_ref="oval:org.mitre.oval:tst:3109"/>
+          <criterion negate="true" comment="Patch 119059-38 or later installed" test_ref="oval:org.mitre.oval:tst:7694"/>
+        </criteria>
+        <criteria operator="AND">
+          <criterion comment="File Xorg exists" test_ref="oval:org.mitre.oval:tst:1336"/>
+          <criterion negate="true" comment="Patch 125719-07 or later installed" test_ref="oval:org.mitre.oval:tst:7744"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 230901">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion negate="true" comment="Patch 119068-09 or later installed" test_ref="oval:org.mitre.oval:tst:7681"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criteria operator="OR">
+        <criteria operator="AND">
+          <criterion comment="File Xsun exists" test_ref="oval:org.mitre.oval:tst:3109"/>
+          <criterion negate="true" comment="Patch 112786-52 or later installed" test_ref="oval:org.mitre.oval:tst:7415"/>
+        </criteria>
+        <criteria operator="AND">
+          <criterion comment="File Xorg exists" test_ref="oval:org.mitre.oval:tst:1336"/>
+          <criterion negate="true" comment="Patch 118908-04 or later installed" test_ref="oval:org.mitre.oval:tst:7428"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criteria operator="OR">
+        <criteria operator="AND">
+          <criterion comment="File Xsun exists" test_ref="oval:org.mitre.oval:tst:3109"/>
+          <criterion negate="true" comment="Patch 119060-37 or later installed" test_ref="oval:org.mitre.oval:tst:7764"/>
+        </criteria>
+        <criteria operator="AND">
+          <criterion comment="File Xorg exists" test_ref="oval:org.mitre.oval:tst:1336"/>
+          <criterion negate="true" comment="Patch 125720-17 or later installed" test_ref="oval:org.mitre.oval:tst:7423"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

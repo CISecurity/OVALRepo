@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26421" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1013: php security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>php</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1013-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1013.html"/>
+    <reference source="CESA" ref_id="CESA-2014:1013"/>
+    <reference source="CVE" ref_id="CVE-2013-7345" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-7345.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0207" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0207.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0237" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0237.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0238" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0238.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3479" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3479.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3480" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3480.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3487" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3487.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3515" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3515.html"/>
+    <reference source="CVE" ref_id="CVE-2014-4049" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-4049.html"/>
+    <reference source="CVE" ref_id="CVE-2014-4721" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-4721.html"/>
+    <description>PHP is an HTML-embedded scripting language commonly used with the Apache
+HTTP Server. PHP's fileinfo module provides functions used to identify a
+particular file according to the type of data contained by the file.
+
+A denial of service flaw was found in the File Information (fileinfo)
+extension rules for detecting AWK files. A remote attacker could use this
+flaw to cause a PHP application using fileinfo to consume an excessive
+amount of CPU. (CVE-2013-7345)
+
+Multiple denial of service flaws were found in the way the File Information
+(fileinfo) extension parsed certain Composite Document Format (CDF) files.
+A remote attacker could use either of these flaws to crash a PHP
+application using fileinfo via a specially crafted CDF file.
+(CVE-2014-0207, CVE-2014-0237, CVE-2014-0238, CVE-2014-3479, CVE-2014-3480,
+CVE-2014-3487)
+
+A heap-based buffer overflow flaw was found in the way PHP parsed DNS TXT
+records. A malicious DNS server or a man-in-the-middle attacker could
+possibly use this flaw to execute arbitrary code as the PHP interpreter if
+a PHP application used the dns_get_record() function to perform a DNS
+query. (CVE-2014-4049)
+
+A type confusion issue was found in PHP's phpinfo() function. A malicious
+script author could possibly use this flaw to disclose certain portions of
+server memory. (CVE-2014-4721)
+
+A type confusion issue was found in the SPL ArrayObject and
+SPLObjectStorage classes' unserialize() method. A remote attacker able to
+submit specially crafted input to a PHP application, which would then
+unserialize this input using one of the aforementioned methods, could use
+this flaw to execute arbitrary code with the privileges of the user running
+that PHP application. (CVE-2014-3515)
+
+The CVE-2014-0207, CVE-2014-0237, CVE-2014-0238, CVE-2014-3479,
+CVE-2014-3480, and CVE-2014-3487 issues were discovered by Francisco Alonso
+of Red Hat Product Security.
+
+All php users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing the
+updated packages, the httpd daemon must be restarted for the update to
+take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-18T12:09:18">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-05T14:28:55.318-04:00">DRAFT</status_change>
+        <status_change date="2014-09-22T04:00:53.978-04:00">INTERIM</status_change>
+        <status_change date="2014-10-13T04:00:36.038-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 7 or Centos 7 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="php is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122174"/>
+      <criterion comment="php-bcmath is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:121856"/>
+      <criterion comment="php-cli is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122464"/>
+      <criterion comment="php-common is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122526"/>
+      <criterion comment="php-dba is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122505"/>
+      <criterion comment="php-devel is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122199"/>
+      <criterion comment="php-embedded is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122344"/>
+      <criterion comment="php-enchant is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122451"/>
+      <criterion comment="php-fpm is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122217"/>
+      <criterion comment="php-gd is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122393"/>
+      <criterion comment="php-intl is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122515"/>
+      <criterion comment="php-ldap is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122412"/>
+      <criterion comment="php-mbstring is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122181"/>
+      <criterion comment="php-mysql is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122461"/>
+      <criterion comment="php-mysqlnd is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122467"/>
+      <criterion comment="php-odbc is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122282"/>
+      <criterion comment="php-pdo is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122389"/>
+      <criterion comment="php-pgsql is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122292"/>
+      <criterion comment="php-process is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122287"/>
+      <criterion comment="php-pspell is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122540"/>
+      <criterion comment="php-recode is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122375"/>
+      <criterion comment="php-snmp is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:121672"/>
+      <criterion comment="php-soap is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122549"/>
+      <criterion comment="php-xml is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122525"/>
+      <criterion comment="php-xmlrpc is earlier than 0:5.4.16-23.el7_0" test_ref="oval:org.mitre.oval:tst:122548"/>
+    </criteria>
+  </criteria>
+</definition>

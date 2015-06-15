@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5586" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Unspecified vulnerability in the NFSv4 module in the kernel in Sun Solaris 10."</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2488" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2488"/>
+    <description>Unspecified vulnerability in the NFSv4 module in the kernel in Sun Solaris 10, and OpenSolaris snv_102 through snv_119, allows local users to cause a denial of service (client panic) via vectors involving "file operations."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-08-09T17:59:08-04:00">
+          <contributor organization="DTCC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2009-08-12T09:49:45.817-04:00">DRAFT</status_change>
+        <status_change date="2009-08-31T04:00:04.652-04:00">INTERIM</status_change>
+        <status_change date="2009-09-21T04:00:04.218-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (X86) meets Sun Alert ID 262788 criteria.">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 141734-03 or later installed" test_ref="oval:org.mitre.oval:tst:10132"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert ID 262788 criteria.">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 141733-03 or later installed" test_ref="oval:org.mitre.oval:tst:10550"/>
+    </criteria>
+  </criteria>
+</definition>

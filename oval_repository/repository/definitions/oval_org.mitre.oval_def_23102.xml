@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23102" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:0051: kvm security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference ref_id="ELSA-2012:0051-01" ref_url="http://linux.oracle.com/errata/ELSA-2012-0051.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-4622" ref_url="http://linux.oracle.com/cve/CVE-2011-4622.html" source="CVE"/>
+    <reference ref_id="CVE-2012-0029" ref_url="http://linux.oracle.com/cve/CVE-2012-0029.html" source="CVE"/>
+    <description>Heap-based buffer overflow in the process_tx_desc function in the e1000 emulation (hw/e1000.c) in qemu-kvm 0.12, and possibly other versions, allows guest OS users to cause a denial of service (QEMU crash) and possibly execute arbitrary code via crafted legacy mode packets.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:18:00.047-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:17.948-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:26.113-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23102 - optimisation of Oracle Linux content" date="2014-05-05T17:51:00.117-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:53:18.881-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:23.454-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kvm is earlier than 0:83-239.el5_7.1" test_ref="oval:org.mitre.oval:tst:105580"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-239.el5_7.1" test_ref="oval:org.mitre.oval:tst:105434"/>
+      <criterion comment="kvm-tools is earlier than 0:83-239.el5_7.1" test_ref="oval:org.mitre.oval:tst:105559"/>
+      <criterion comment="kmod-kvm-debug is earlier than 0:83-239.el5_7.1" test_ref="oval:org.mitre.oval:tst:105555"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-239.el5_7.1" test_ref="oval:org.mitre.oval:tst:105399"/>
+    </criteria>
+  </criteria>
+</definition>

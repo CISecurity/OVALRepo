@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25718" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1250-1 -- Security update for lcms2</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>lcms2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131250-1.html" ref_id="SUSE-SU-2013:1250-1"/>
+    <description>lcms2 has been updated to the version 2.5 which is a
+maintenance release to  fix various security and other bugs.
+
+    * User defined parametric curves can now be saved in
+ICC profiles.
+    * RGB profiles using same tone curves for several
+channels are storing now only one copy of the curve
+    * update black point detection algorithm to reflect ICC
+changes
+    * Added new cmsPlugInTHR() and fixed some race
+conditions
+    * Added error descriptions on cmsSmoothToneCurve
+    * Several improvements in cgats parser.
+    * Fixed devicelink generation for 8 bits
+    * Added a reference for Mac MLU tag
+    * Added a way to read the profile creator from header
+    * Added identity curves support for write V2 LUT
+    * Added TIFF Lab16 handling on tifficc
+    * Fixed a bug in parametric curves
+    * Rendering intent used when creating the transform is
+now propagated to profile header in cmsTransform2Devicelink.
+    * Transform2Devicelink now keeps white point when
+guessing deviceclass is enabled
+    * Added some checks for non-happy path, mostly failing
+mallocs (bnc#826097).
+
+For further changes please see the ChangeLog in the RPM.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:30:18">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:22.678-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:58.125-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:04.104-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="lcms2 RPM is earlier than 0:2.5-0.7.1" test_ref="oval:org.mitre.oval:tst:119080"/>
+      <criterion comment="liblcms2-2 RPM is earlier than 0:2.5-0.7.1" test_ref="oval:org.mitre.oval:tst:119461"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2114" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows 2000 Enhanced Metafile Image Format Rendering Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Enhanced Metafile (EMF)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0209" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0209"/>
+    <description>Unknown vulnerability in the Graphics Rendering Engine processes of Microsoft Windows 2000, Windows XP, and Windows Server 2003 allows remote attackers to execute arbitrary code via (1) Windows Metafile (WMF) or (2) Enhanced Metafile (EMF) image formats that involve "an unchecked buffer."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-13T11:11:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Ingrid Skoog</contributor>
+        </submitted>
+        <status_change date="2004-10-13T01:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-10-27T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-11-17T10:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+    <criterion comment="the patch KB840987 is installed (Hotfix key)" negate="true" test_ref="oval:org.mitre.oval:tst:2356"/>
+    <criterion comment="the version of gdi32.dll is less than 5.0.2195.6945" negate="false" test_ref="oval:org.mitre.oval:tst:620"/>
+  </criteria>
+</definition>

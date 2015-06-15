@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18438" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1910-1 -- bind9 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 13.04</platform>
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1910-1/" ref_id="USN-1910-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4854" ref_id="CVE-2013-4854"/>
+    <description>Bind could be made to crash if it received specially crafted network traffic.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-16T10:18:45">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-22T10:34:04.573-04:00">DRAFT</status_change>
+        <status_change date="2013-09-09T04:03:39.570-04:00">INTERIM</status_change>
+        <status_change date="2013-09-30T04:01:14.539-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18438 - added CVE references; also made minor updates" date="2014-06-13T15:11:00.891-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:14:06.817-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:39.584-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 13.04 is installed" definition_ref="oval:org.mitre.oval:def:16014"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bind9 DPKG is earlier than 1:9.9.2.dfsg.P1-2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:86099"/>
+        <criterion comment="libdns95 DPKG is earlier than 1:9.9.2.dfsg.P1-2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:86091"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bind9 DPKG is earlier than 1:9.8.1.dfsg.P1-4.2ubuntu3.3" test_ref="oval:org.mitre.oval:tst:86195"/>
+        <criterion comment="libdns81 DPKG is earlier than 1:9.8.1.dfsg.P1-4.2ubuntu3.3" test_ref="oval:org.mitre.oval:tst:85862"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bind9 DPKG is earlier than 1:9.8.1.dfsg.P1-4ubuntu0.7" test_ref="oval:org.mitre.oval:tst:85829"/>
+        <criterion comment="libdns81 DPKG is earlier than 1:9.8.1.dfsg.P1-4ubuntu0.7" test_ref="oval:org.mitre.oval:tst:85800"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bind9 DPKG is earlier than 1:9.7.0.dfsg.P1-1ubuntu0.10" test_ref="oval:org.mitre.oval:tst:86069"/>
+        <criterion comment="libdns64 DPKG is earlier than 1:9.7.0.dfsg.P1-1ubuntu0.10" test_ref="oval:org.mitre.oval:tst:86218"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

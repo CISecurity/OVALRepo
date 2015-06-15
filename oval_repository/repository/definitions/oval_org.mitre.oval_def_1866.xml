@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1866" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ART Image Rendering Vulnerability (WinS03)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-2378" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-2378"/>
+    <description>Buffer overflow in the ART Image Rendering component (jgdw400.dll) in Microsoft Windows XP SP1 and Sp2, Server 2003 SP1 and earlier, and Windows 98 and Me allows remote attackers to execute arbitrary code via a crafted ART image that causes heap corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-06-14T09:55:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-06-14T07:51:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-10-07T09:15:35.894-04:00">INTERIM</status_change>
+        <status_change date="2006-10-24T09:15:36.010-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1866 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:05:36.282-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:22.805-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Windows Server 2003 is installed" test_ref="oval:org.mitre.oval:tst:2761"/>
+    <criteria operator="OR" comment="Either jgdw400.dll or Wjgdw400.dll exist with a file version less than 106.0.0.0">
+      <criterion comment="the version of jgdw400.dll is less than 106.0.0.0" test_ref="oval:org.mitre.oval:tst:835"/>
+      <criterion comment="the version of Wjgdw400.dll is less than 106.0.0.0" test_ref="oval:org.mitre.oval:tst:782"/>
+    </criteria>
+  </criteria>
+</definition>

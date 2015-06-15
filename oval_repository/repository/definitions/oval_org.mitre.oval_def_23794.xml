@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23794" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0126: openldap security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>openldap</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0126-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0126.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-4449" ref_url="http://linux.oracle.com/cve/CVE-2013-4449.html" source="CVE"/>
+    <description>The rwm overlay in OpenLDAP 2.4.23, 2.4.36, and earlier does not properly count references, which allows remote attackers to cause a denial of service (slapd crash) by unbinding immediately after a search request, which triggers rwm_conn_destroy to free the session context while it is being used by rwm_op_search.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:53:40.787-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:06.147-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:16.473-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23794 - optimisation of Oracle Linux content" date="2014-05-05T17:26:00.915-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:27:55.097-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:28.653-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="openldap-servers is earlier than 0:2.4.23-34.el6_5.1" test_ref="oval:org.mitre.oval:tst:112792"/>
+      <criterion comment="openldap-servers-sql is earlier than 0:2.4.23-34.el6_5.1" test_ref="oval:org.mitre.oval:tst:112865"/>
+      <criterion comment="openldap is earlier than 0:2.4.23-34.el6_5.1" test_ref="oval:org.mitre.oval:tst:112635"/>
+      <criterion comment="openldap-clients is earlier than 0:2.4.23-34.el6_5.1" test_ref="oval:org.mitre.oval:tst:112837"/>
+      <criterion comment="openldap-devel is earlier than 0:2.4.23-34.el6_5.1" test_ref="oval:org.mitre.oval:tst:112829"/>
+    </criteria>
+  </criteria>
+</definition>

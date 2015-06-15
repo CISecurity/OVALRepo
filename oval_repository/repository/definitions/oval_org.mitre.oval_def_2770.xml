@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2770" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 9 CDE ToolTalk Database Server Symbolic Link Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <product>Common Desktop Environment</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0678" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0678"/>
+    <description>CDE ToolTalk database server (ttdbserver) allows local users to overwrite arbitrary files via a symlink attack on the transaction log file used by the _TT_TRANSACTION RPC procedure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-15T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2004-10-20T12:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-11-03T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-12-09T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-01-11T12:00:00.000-04:00" comment="modified sat-6 - Changed test to pattern match and added check for 64bit version">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </modified>
+        <modified date="2005-01-14T12:00:00.000-04:00" comment="modified sat-6 - Changed regular expression test to properly check for 64bit package">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </modified>
+        <status_change date="2005-01-24T02:39:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="fixed the service_name entity used in the inetd_object" date="2007-04-10T15:17:00.627-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:17:29.208-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:24.787-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed incorrect user_id element value in process_state.  Incorrect value was 'root', updated to value of '0'." date="2010-09-02T15:11:00.501-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2010-09-02T15:13:53.201-04:00">INTERIM</status_change>
+        <status_change date="2010-09-20T04:00:20.686-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="Toolktalk (SUNWtltk/SUNWtltkx) installed" negate="false" test_ref="oval:org.mitre.oval:tst:1169"/>
+      <criterion comment="Patch 112808-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1168"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="inetd running" negate="false" test_ref="oval:org.mitre.oval:tst:3135"/>
+      <criterion comment="inetd.conf contains rpc.ttdbserverd" negate="false" test_ref="oval:org.mitre.oval:tst:3103"/>
+    </criteria>
+  </criteria>
+</definition>

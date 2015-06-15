@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25070" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0220-1 -- Recommended update for openCryptoki</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>openCryptoki</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140220-1.html" ref_id="SUSE-RU-2014:0220-1"/>
+    <description>This update provides openCryptoki 2.4.3.1 which brings
+fixes and  enhancements:
+
+    * The IBM Cryptographic Architecture (ICA) token now
+supports RSA with SHA-2 hashes with the new mechanisms
+CKM_SHA256_RSA_PKCS, CKM_SHA384_RSA_PKCS, and
+CKM_SHA512_RSA_PKCS. (FATE#316176, bnc#847645)
+    * Allow import of RSA public and private keys into CCA
+token.
+    * Allow imported RSA private keys in CCA to also
+decrypt.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:19:01">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:19:08.919-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:09.789-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:00:52.050-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="openCryptoki RPM is earlier than 0:2.4.3.1-0.7.1" test_ref="oval:org.mitre.oval:tst:117516"/>
+      <criterion comment="openCryptoki-64bit RPM is earlier than 0:2.4.3.1-0.7.1" test_ref="oval:org.mitre.oval:tst:117481"/>
+      <criterion comment="openCryptoki-32bit RPM is earlier than 0:2.4.3.1-0.7.1" test_ref="oval:org.mitre.oval:tst:117594"/>
+    </criteria>
+  </criteria>
+</definition>

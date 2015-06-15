@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25379" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0920: httpd security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>httpd</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0920-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0920.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0920"/>
+    <reference source="CVE" ref_id="CVE-2014-0118" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0118.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0226" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0226.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0231" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0231.html"/>
+    <description>The httpd packages provide the Apache HTTP Server, a powerful, efficient,
+and extensible web server.
+
+A race condition flaw, leading to heap-based buffer overflows, was found in
+the mod_status httpd module. A remote attacker able to access a status page
+served by mod_status on a server using a threaded Multi-Processing Module
+(MPM) could send a specially crafted request that would cause the httpd
+child process to crash or, possibly, allow the attacker to execute
+arbitrary code with the privileges of the "apache" user. (CVE-2014-0226)
+
+A denial of service flaw was found in the way httpd's mod_deflate module
+handled request body decompression (configured via the "DEFLATE" input
+filter). A remote attacker able to send a request whose body would be
+decompressed could use this flaw to consume an excessive amount of system
+memory and CPU on the target system. (CVE-2014-0118)
+
+A denial of service flaw was found in the way httpd's mod_cgid module
+executed CGI scripts that did not read data from the standard input.
+A remote attacker could submit a specially crafted request that would cause
+the httpd child process to hang indefinitely. (CVE-2014-0231)
+
+All httpd users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing the
+updated packages, the httpd daemon will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-28T15:03:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:01:11.071-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:06.499-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:07.085-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd is earlier than 0:2.2.3-87.el5_10" test_ref="oval:org.mitre.oval:tst:116175"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-87.el5_10" test_ref="oval:org.mitre.oval:tst:116210"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-87.el5_10" test_ref="oval:org.mitre.oval:tst:116201"/>
+        <criterion comment="mod_ssl is earlier than 1:2.2.3-87.el5_10" test_ref="oval:org.mitre.oval:tst:116271"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd is earlier than 0:2.2.3-87.el5.centos" test_ref="oval:org.mitre.oval:tst:115938"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-87.el5.centos" test_ref="oval:org.mitre.oval:tst:115372"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-87.el5.centos" test_ref="oval:org.mitre.oval:tst:116114"/>
+        <criterion comment="mod_ssl is earlier than 1:2.2.3-87.el5.centos" test_ref="oval:org.mitre.oval:tst:116196"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Redhat 6 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd is earlier than 0:2.2.15-31.el6_5" test_ref="oval:org.mitre.oval:tst:115650"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.15-31.el6_5" test_ref="oval:org.mitre.oval:tst:116136"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.15-31.el6_5" test_ref="oval:org.mitre.oval:tst:115382"/>
+        <criterion comment="httpd-tools is earlier than 0:2.2.15-31.el6_5" test_ref="oval:org.mitre.oval:tst:116334"/>
+        <criterion comment="mod_ssl is earlier than 1:2.2.15-31.el6_5" test_ref="oval:org.mitre.oval:tst:116330"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 6 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="httpd is earlier than 0:2.2.15-31.el6.centos" test_ref="oval:org.mitre.oval:tst:116217"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.15-31.el6.centos" test_ref="oval:org.mitre.oval:tst:116354"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.15-31.el6.centos" test_ref="oval:org.mitre.oval:tst:116323"/>
+        <criterion comment="httpd-tools is earlier than 0:2.2.15-31.el6.centos" test_ref="oval:org.mitre.oval:tst:115768"/>
+        <criterion comment="mod_ssl is earlier than 1:2.2.15-31.el6.centos" test_ref="oval:org.mitre.oval:tst:116289"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

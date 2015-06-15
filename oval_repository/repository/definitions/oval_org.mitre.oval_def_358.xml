@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:358" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>cpio Race Condition</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>cpio</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1111" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1111"/>
+    <description>Race condition in cpio 2.6 and earlier allows local users to modify permissions of arbitrary files via a hard link attack on a file while it is being decompressed, whose permissions are changed by cpio after the decompression is complete.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-08-08T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2005-08-09T07:56:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-08-24T09:56:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-09-21T01:33:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+      <criterion comment="cpio rpm is older than 0:2.5-4.RHEL3" negate="false" test_ref="oval:org.mitre.oval:tst:2683"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="/bin/cpio is executable by all" negate="false" test_ref="oval:org.mitre.oval:tst:2682"/>
+    </criteria>
+  </criteria>
+</definition>

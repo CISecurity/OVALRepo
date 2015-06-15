@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13466" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-829-1 -- qt4-x11 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>qt4-x11</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-September/000973.html" ref_id="USN-829-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2700" ref_id="CVE-2009-2700"/>
+    <description>It was discovered that Qt did not properly handle certificates with NULL characters in the Subject Alternative Name field of X.509 certificates. An attacker could exploit this to perform a man in the middle attack to view sensitive information or alter encrypted communications</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:09:57.808-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:07:24.304-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:05:51.428-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13466 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:37.478-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:24.121-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="qt4-doc DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73744"/>
+            <criterion comment="qt4-doc-html DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73580"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libqtgui4 DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73284"/>
+            <criterion comment="libqt4-core DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73904"/>
+            <criterion comment="libqt4-designer DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73784"/>
+            <criterion comment="libqt4-webkit DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74074"/>
+            <criterion comment="libqt4-sql-sqlite2 DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73906"/>
+            <criterion comment="libqt4-svg DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73119"/>
+            <criterion comment="qt4-qtconfig DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74118"/>
+            <criterion comment="qt4-designer DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73999"/>
+            <criterion comment="qt4-demos DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73677"/>
+            <criterion comment="libqt4-gui DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74112"/>
+            <criterion comment="libqt4-xmlpatterns DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74085"/>
+            <criterion comment="libqt4-dbus DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73738"/>
+            <criterion comment="libqt4-sql-odbc DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74018"/>
+            <criterion comment="libqt4-script DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74072"/>
+            <criterion comment="libqt4-xml DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73413"/>
+            <criterion comment="libqt4-network DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73790"/>
+            <criterion comment="libqt4-sql-sqlite DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74109"/>
+            <criterion comment="libqt4-assistant DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73724"/>
+            <criterion comment="libqt4-dev DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74082"/>
+            <criterion comment="libqt4-xmlpatterns-dbg DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73666"/>
+            <criterion comment="libqt4-qt3support DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74060"/>
+            <criterion comment="libqt4-sql-mysql DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73903"/>
+            <criterion comment="libqt4-test DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73761"/>
+            <criterion comment="libqt4-opengl-dev DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74012"/>
+            <criterion comment="libqt4-webkit-dbg DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73714"/>
+            <criterion comment="libqt4-opengl DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73913"/>
+            <criterion comment="libqt4-sql DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73889"/>
+            <criterion comment="libqt4-help DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:74086"/>
+            <criterion comment="libqt4-dbg DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73970"/>
+            <criterion comment="libqtcore4 DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73964"/>
+            <criterion comment="qt4-dev-tools DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73665"/>
+            <criterion comment="libqt4-sql-psql DPKG is earlier than 4.4.3-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:73626"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="qt4-doc DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74022"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="qt4-dev-tools DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73969"/>
+            <criterion comment="libqt4-core DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74078"/>
+            <criterion comment="libqt4-debug DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74068"/>
+            <criterion comment="libqt4-dev DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74105"/>
+            <criterion comment="qt4-qtconfig DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73687"/>
+            <criterion comment="qt4-designer DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74069"/>
+            <criterion comment="libqt4-gui DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73952"/>
+            <criterion comment="libqt4-qt3support DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73517"/>
+            <criterion comment="libqt4-sql DPKG is earlier than 4.3.4-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:74088"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="qt4-doc DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74108"/>
+            <criterion comment="qt4-doc-html DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73864"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libqtgui4 DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74037"/>
+            <criterion comment="libqt4-core DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74002"/>
+            <criterion comment="libqt4-designer DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73972"/>
+            <criterion comment="qt4-demos-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74081"/>
+            <criterion comment="libqt4-webkit DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74038"/>
+            <criterion comment="libqt4-sql-sqlite2 DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73414"/>
+            <criterion comment="libqt4-svg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73890"/>
+            <criterion comment="qt4-dev-tools-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73776"/>
+            <criterion comment="qt4-qtconfig DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73594"/>
+            <criterion comment="qt4-designer DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73884"/>
+            <criterion comment="qt4-demos DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73743"/>
+            <criterion comment="libqt4-gui DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73137"/>
+            <criterion comment="libqt4-xmlpatterns DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74099"/>
+            <criterion comment="libqt4-dbus DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73860"/>
+            <criterion comment="libqt4-sql-odbc DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74135"/>
+            <criterion comment="libqt4-script DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73144"/>
+            <criterion comment="libqt4-xml DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73871"/>
+            <criterion comment="libqt4-network DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73643"/>
+            <criterion comment="libqt4-sql-sqlite DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73680"/>
+            <criterion comment="libqt4-assistant DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73907"/>
+            <criterion comment="libqt4-dev DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74076"/>
+            <criterion comment="qt4-qmake DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73641"/>
+            <criterion comment="libqt4-xmlpatterns-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74054"/>
+            <criterion comment="libqt4-qt3support DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74091"/>
+            <criterion comment="libqt4-sql-mysql DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74052"/>
+            <criterion comment="libqt4-test DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73255"/>
+            <criterion comment="libqt4-opengl-dev DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73941"/>
+            <criterion comment="libqt4-webkit-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73891"/>
+            <criterion comment="libqt4-opengl DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74050"/>
+            <criterion comment="libqt4-sql DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73358"/>
+            <criterion comment="libqt4-help DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73169"/>
+            <criterion comment="libqt4-dev-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73978"/>
+            <criterion comment="libqt4-dbg DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73962"/>
+            <criterion comment="libqtcore4 DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73320"/>
+            <criterion comment="libqt4-scripttools DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73518"/>
+            <criterion comment="qt4-dev-tools DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:73736"/>
+            <criterion comment="libqt4-sql-psql DPKG is earlier than 4.5.0-0ubuntu4.2" test_ref="oval:org.mitre.oval:tst:74049"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

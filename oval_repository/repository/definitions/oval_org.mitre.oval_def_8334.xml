@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8334" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability in lbxproxy(1) may Allow Unauthorized Read Access to Files</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-4070" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4070"/>
+    <description>Unspecified vulnerability in Low Bandwidth X proxy (lbxproxy) on Sun Solaris 8 through 10 before 20070725 allows local users to read arbitrary files with root group ownership via unknown vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-01T13:14:10.000-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </submitted>
+        <status_change date="2007-08-01T22:21:39.310-04:00">DRAFT</status_change>
+        <status_change date="2007-08-20T08:04:42.437-04:00">INTERIM</status_change>
+        <status_change date="2007-09-06T09:13:34.971-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion comment="Patch 119067-08 or later installed" test_ref="oval:org.mitre.oval:tst:5089" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 112785-62 or later installed" test_ref="oval:org.mitre.oval:tst:4378" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 119059-28 or later installed" test_ref="oval:org.mitre.oval:tst:4559" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion comment="Patch 119068-08 or later installed" test_ref="oval:org.mitre.oval:tst:4495" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 112786-51 or later installed" test_ref="oval:org.mitre.oval:tst:4915" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102948" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 119060-27 or later installed" test_ref="oval:org.mitre.oval:tst:5067" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

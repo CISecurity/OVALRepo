@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22405" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2007:0354: samba security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>samba</product>
+    </affected>
+    <reference ref_id="ELSA-2007:0354-02" ref_url="http://linux.oracle.com/errata/ELSA-2007-0354.html" source="VENDOR"/>
+    <reference ref_id="CVE-2007-2446" ref_url="http://linux.oracle.com/cve/CVE-2007-2446.html" source="CVE"/>
+    <reference ref_id="CVE-2007-2447" ref_url="http://linux.oracle.com/cve/CVE-2007-2447.html" source="CVE"/>
+    <description>The MS-RPC functionality in smbd in Samba 3.0.0 through 3.0.25rc3 allows remote attackers to execute arbitrary commands via shell metacharacters involving the (1) SamrChangePassword function, when the "username map script" smb.conf option is enabled, and allows remote authenticated users to execute commands via shell metacharacters involving other MS-RPC functions in the (2) remote printer and (3) file share management.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:41:57.732-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:45.984-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:01:06.393-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22405 - optimisation of Oracle Linux content" date="2014-05-05T18:12:00.186-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:14:02.753-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:12.322-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="samba-client is earlier than 0:3.0.23c-2.el5.2.0.2" test_ref="oval:org.mitre.oval:tst:101167"/>
+      <criterion comment="samba-common is earlier than 0:3.0.23c-2.el5.2.0.2" test_ref="oval:org.mitre.oval:tst:100273"/>
+      <criterion comment="samba is earlier than 0:3.0.23c-2.el5.2.0.2" test_ref="oval:org.mitre.oval:tst:100924"/>
+      <criterion comment="samba-swat is earlier than 0:3.0.23c-2.el5.2.0.2" test_ref="oval:org.mitre.oval:tst:100865"/>
+    </criteria>
+  </criteria>
+</definition>

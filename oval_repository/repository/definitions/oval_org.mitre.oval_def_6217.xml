@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6217" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SQL Server sp_replwritetovarbin Limited Memory Overwrite Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft SQL Server 2000</product>
+      <product>Microsoft SQL Server 2005</product>
+      <product>Microsoft SQL Server 2000 Desktop Engine (WMSDE)</product>
+      <product>Windows Internal Database (WYukon)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-5416" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5416"/>
+    <description>Heap-based buffer overflow in Microsoft SQL Server 2000 SP4, 8.00.2050, 8.00.2039, and earlier; SQL Server 2000 Desktop Engine (MSDE 2000) SP4; SQL Server 2005 SP2 and 9.00.1399.06; SQL Server 2000 Desktop Engine (WMSDE) on Windows Server 2003 SP1 and SP2; and Windows Internal Database (WYukon) SP2 allows remote authenticated users to cause a denial of service (access violation exception) or execute arbitrary code by calling the sp_replwritetovarbin extended stored procedure with a set of invalid parameters that trigger memory overwrite, aka "SQL Server sp_replwritetovarbin Limited Memory Overwrite Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-02-10T16:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-02-13T17:01:34.508-05:00">DRAFT</status_change>
+        <status_change date="2009-03-02T04:00:27.061-05:00">INTERIM</status_change>
+        <status_change date="2009-03-23T04:00:20.949-04:00">ACCEPTED</status_change>
+        <modified comment="Added tests that check against multiple instances of MS SQL 2005" date="2010-03-25T17:17:00.739-04:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-03-25T17:18:02.830-04:00">INTERIM</status_change>
+        <status_change date="2010-05-17T04:00:12.213-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:9191 - Submitting 4 CVE definitions for MS08-040 bulletin that were missed in oval repo" date="2011-11-15T14:47:00.058-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2011-11-15T14:49:16.956-05:00">INTERIM</status_change>
+        <status_change date="2011-12-05T04:00:37.226-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:12103 - Fixed several false positives by setting negate = true.  Also fixed several style issues." date="2011-12-28T21:13:00.551-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2011-12-28T21:21:33.580-05:00">INTERIM</status_change>
+        <status_change date="2012-01-16T04:03:13.996-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:12081 - string var_check=&quot;all&quot; was replaced with var_check=&quot;at least one&quot;" date="2013-09-19T17:46:00.990-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-19T17:49:02.882-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:11:53.587-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="SQL Server 2000 SP4 32-bit editions - GDR">
+      <criterion comment="SQL Server 2000 is installed" test_ref="oval:org.mitre.oval:tst:2977"/>
+      <criterion comment="SQL Server 2000 GDR - the version of sqlservr.exe is greater than 2000.80.2000.0" test_ref="oval:org.mitre.oval:tst:9683"/>
+      <criterion comment="the version of sqlservr.exe is less than 2000.80.2055.0" test_ref="oval:org.mitre.oval:tst:9466"/>
+    </criteria>
+    <criteria operator="AND" comment="SQL Server 2000 SP4 32-bit editions - QFE">
+      <criterion comment="SQL Server 2000 is installed" test_ref="oval:org.mitre.oval:tst:2977"/>
+      <criterion comment="SQL Server 2000 QFE - the version of sqlservr.exe is greater than 2000.80.2000.0" test_ref="oval:org.mitre.oval:tst:9191"/>
+      <criterion comment="the version of sqlservr.exe is less than 2000.80.2282.0" test_ref="oval:org.mitre.oval:tst:9490"/>
+    </criteria>
+    <criteria operator="OR" comment="SQL Server 2005 SP2 - GDR">
+      <criteria operator="AND">
+        <extend_definition comment="Microsoft SQL Server 2005 SP2 is installed" definition_ref="oval:org.mitre.oval:def:8397"/>
+        <criterion comment="the version of sqlservr.exe is less than 2005.90.3077.0" test_ref="oval:org.mitre.oval:tst:21185"/>
+        <criterion comment="the version of sqlservr.exe is greater than or equal to 2005.90.3042.0" test_ref="oval:org.mitre.oval:tst:21203"/>
+      </criteria>
+      <criteria operator="AND">
+        <extend_definition comment="Microsoft SQL Server 2005 is installed" definition_ref="oval:org.mitre.oval:def:6082"/>
+        <criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\90\DTS\Setup\\SP equals 2" test_ref="oval:org.mitre.oval:tst:9558"/>
+        <criterion comment="SQL Server 2005 GDR - the version of msdtssrvr.exe is greater than 9.0.3000.0" test_ref="oval:org.mitre.oval:tst:8842"/>
+        <criterion comment="the version of msdtssrvr.exe is less than 9.0.3077.0" test_ref="oval:org.mitre.oval:tst:9525"/>
+      </criteria>
+    </criteria>
+    <criteria operator="OR" comment="SQL Server 2005 SP2 - QFE">
+      <criteria operator="AND">
+        <extend_definition comment="Microsoft SQL Server 2005 SP2 is installed" definition_ref="oval:org.mitre.oval:def:8397"/>
+        <criterion comment="the version of sqlservr.exe is less than 2005.90.3310.0" test_ref="oval:org.mitre.oval:tst:20842"/>
+        <criterion comment="the version of sqlservr.exe is greater than or equal to 2005.90.3150.0" test_ref="oval:org.mitre.oval:tst:21007"/>
+      </criteria>
+      <criteria operator="AND">
+        <extend_definition comment="Microsoft SQL Server 2005 is installed" definition_ref="oval:org.mitre.oval:def:6082"/>
+        <criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\90\DTS\Setup\\SP equals 2" test_ref="oval:org.mitre.oval:tst:9558"/>
+        <criterion comment="SQL Server 2005 QFE - the version of msdtssrvr.exe is greater than 9.0.3300.0" test_ref="oval:org.mitre.oval:tst:9434"/>
+        <criterion comment="the version of msdtssrvr.exe is less than 9.0.3310.0" test_ref="oval:org.mitre.oval:tst:9454"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

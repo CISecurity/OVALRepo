@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17607" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1547-1 -- libgdata, evolution-data-server vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 11.10</platform>
+      <platform>Ubuntu 11.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>libgdata</product>
+      <product>evolution-data-server</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1547-1/" ref_id="USN-1547-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1177" ref_id="CVE-2012-1177"/>
+    <description>Applications using GData services could be made to expose sensitive information over the network.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-15T12:54:59.711-04:00">DRAFT</status_change>
+        <status_change date="2013-09-02T04:02:08.649-04:00">INTERIM</status_change>
+        <status_change date="2013-09-23T04:01:40.985-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:22678 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:14:39.377-05:00">INTERIM</status_change>
+        <status_change date="2013-12-16T04:00:34.923-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17607 - added CVE references; also made minor updates" date="2014-06-13T15:05:00.570-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:07:37.977-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:06:57.980-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 11.10 is installed" definition_ref="oval:org.mitre.oval:def:14657"/>
+      <criterion comment="libgdata13 DPKG is earlier than 0.9.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:84595"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 11.04 is installed" definition_ref="oval:org.mitre.oval:def:14150"/>
+      <criterion comment="libgdata11 DPKG is earlier than 0.8.0-0ubuntu1.1" test_ref="oval:org.mitre.oval:tst:84614"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libgdata-google1.2-1 DPKG is earlier than 2.28.3.1-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:84334"/>
+        <criterion comment="libgdata1.2-1 DPKG is earlier than 2.28.3.1-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:84289"/>
+        <criterion comment="libgdata6 DPKG is earlier than 0.5.2-0ubuntu1.1" test_ref="oval:org.mitre.oval:tst:84154"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

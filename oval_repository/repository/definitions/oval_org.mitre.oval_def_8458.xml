@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8458" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware Network Security Services (NSS) does not properly handle '\0' character</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2408" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2408"/>
+    <description>Mozilla Network Security Services (NSS) before 3.12.3, Firefox before 3.0.13, Thunderbird before 2.0.0.23, and SeaMonkey before 1.1.18 do not properly handle a '\0' character in a domain name in the subject's Common Name (CN) field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority. NOTE: this was originally reported for Firefox before 3.5.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-18T13:00:53.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-03-22T11:00:26.964-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:27.963-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:13.753-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8458 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:23.437-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:39.342-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criterion comment="Patch ESX400-200912403-SG is not installed" test_ref="oval:org.mitre.oval:tst:21044"/>
+  </criteria>
+</definition>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7721" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE v6.0 Drag-and-Drop Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0839" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0839"/>
+    <description>Internet Explorer in Windows XP SP2, and other versions including 5.01 and 5.5, allows remote attackers to install arbitrary programs via a web page that uses certain styles and the AnchorClick behavior, popup windows, and drag-and-drop capabilities to drop the program in the local startup folder, as demonstrated by "wottapoop.html".</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-25T04:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2004-10-27T04:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-11-17T05:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-12-09T05:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-20T04:00:00.000-04:00" comment="Changed IE registry test to wrt-18">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-21T01:27:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-12T05:49:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed obj:491: Removed HKEY_LOCAL_MACHINE\ from the key, as it's specified as the hive.  Implemented by Harvey Rubinovitz." date="2007-01-22T00:36:00.756-05:00">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2007-01-22T00:37:49.862-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:40:57.431-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:33.885-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:26.955-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="the version of mshtml.dll is less than 6.0.2745.2800" negate="false" test_ref="oval:org.mitre.oval:tst:590"/>
+      <criterion comment="the patch kb834707 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:589"/>
+      <criterion comment="Internet Explorer 6 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3090"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

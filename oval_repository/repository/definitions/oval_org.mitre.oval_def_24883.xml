@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24883" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0865: tomcat6 security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>tomcat6</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0865-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0865.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0865"/>
+    <reference source="CVE" ref_id="CVE-2014-0075" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0075.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0096" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0096.html"/>
+    <reference source="CVE" ref_id="CVE-2014-0099" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0099.html"/>
+    <description>Apache Tomcat is a servlet container for the Java Servlet and JavaServer
+Pages (JSP) technologies.
+
+It was discovered that Apache Tomcat did not limit the length of chunk
+sizes when using chunked transfer encoding. A remote attacker could use
+this flaw to perform a denial of service attack against Tomcat by streaming
+an unlimited quantity of data, leading to excessive consumption of server
+resources. (CVE-2014-0075)
+
+It was found that Apache Tomcat did not check for overflowing values when
+parsing request content length headers. A remote attacker could use this
+flaw to perform an HTTP request smuggling attack on a Tomcat server located
+behind a reverse proxy that processed the content length header correctly.
+(CVE-2014-0099)
+
+It was found that the org.apache.catalina.servlets.DefaultServlet
+implementation in Apache Tomcat allowed the definition of XML External
+Entities (XXEs) in provided XSLTs. A malicious application could use this
+to circumvent intended security restrictions to disclose sensitive
+information. (CVE-2014-0096)
+
+The CVE-2014-0075 issue was discovered by David Jorm of Red Hat Product
+Security.
+
+This update also fixes the following bugs:
+
+* The patch that resolved the CVE-2014-0050 issue contained redundant code.
+This update removes the redundant code. (BZ#1094528)
+
+* The patch that resolved the CVE-2013-4322 issue contained an invalid
+check that triggered a java.io.EOFException while reading trailer headers
+for chunked requests. This update fixes the check and the aforementioned
+exception is no longer triggered in the described scenario. (BZ#1095602)
+
+All Tomcat 6 users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. Tomcat must be
+restarted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-21T11:31:59">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-25T11:59:59.875-04:00">DRAFT</status_change>
+        <status_change date="2014-08-11T04:00:34.270-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:02:51.631-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="tomcat6-lib is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115943"/>
+      <criterion comment="tomcat6-servlet-2.5-api is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115266"/>
+      <criterion comment="tomcat6-javadoc is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:114945"/>
+      <criterion comment="tomcat6-docs-webapp is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115879"/>
+      <criterion comment="tomcat6 is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115920"/>
+      <criterion comment="tomcat6-el-2.1-api is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115099"/>
+      <criterion comment="tomcat6-jsp-2.1-api is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115736"/>
+      <criterion comment="tomcat6-webapps is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115110"/>
+      <criterion comment="tomcat6-admin-webapps is earlier than 0:6.0.24-72.el6_5" test_ref="oval:org.mitre.oval:tst:115510"/>
+    </criteria>
+  </criteria>
+</definition>

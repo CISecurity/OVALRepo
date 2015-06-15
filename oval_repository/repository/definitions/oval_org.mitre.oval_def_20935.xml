@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20935" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0124: net-snmp security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>net-snmp</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0124-00" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0124.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0124"/>
+    <reference source="CVE" ref_id="CVE-2012-2141" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-2141.html"/>
+    <description>Array index error in the handle_nsExtendOutput2Table function in agent/mibgroup/agent/extend.c in Net-SNMP 5.7.1 allows remote authenticated users to cause a denial of service (out-of-bounds read and snmpd crash) via an SNMP GET request for an entry not in the extension table.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:13.708-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:44.720-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:00:55.353-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="net-snmp-utils is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:90158"/>
+      <criterion comment="net-snmp-devel is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:89543"/>
+      <criterion comment="net-snmp-perl is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:89967"/>
+      <criterion comment="net-snmp-libs is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:90060"/>
+      <criterion comment="net-snmp is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:89996"/>
+    </criteria>
+  </criteria>
+</definition>

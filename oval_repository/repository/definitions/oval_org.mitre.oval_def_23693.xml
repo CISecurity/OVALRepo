@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23693" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2866-1 gnutls26 - certificate verification flaw</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>gnutls26</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2866-1" ref_id="DSA-2866-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1959" ref_id="CVE-2014-1959"/>
+    <description>Suman Jana reported that GnuTLS, deviating from the documented behavior, considers a version 1 intermediate certificate as a CA certificate by default.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-03-07T12:51:35">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-03-21T13:24:30.307-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:50.463-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:05:51.484-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23693 - Debian Patch Update" date="2014-06-06T17:29:00.238-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:31:03.953-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:38.432-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="gnutls26 DPKG is earlier than 0:2.12.20-8" test_ref="oval:org.mitre.oval:tst:112154"/>
+  </criteria>
+</definition>

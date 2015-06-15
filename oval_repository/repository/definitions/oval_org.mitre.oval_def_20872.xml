@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20872" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>WinVerifyTrust Signature Validation Vulnerability (CVE-2013-3900) - MS13-098</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3900" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3900"/>
+    <description>The WinVerifyTrust function in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows 7 SP1, Windows 8, Windows 8.1, Windows Server 2012 Gold and R2, and Windows RT Gold and 8.1 does not properly validate PE file digests during Authenticode signature verification, which allows remote attackers to execute arbitrary code via a crafted PE file, aka "WinVerifyTrust Signature Validation Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-13T08:15:54">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-12-16T12:19:08.816-05:00">DRAFT</status_change>
+        <status_change date="2014-01-06T04:00:45.856-05:00">INTERIM</status_change>
+        <status_change date="2014-01-06T04:00:31.791-05:00">INTERIM</status_change>
+        <status_change date="2014-01-27T04:00:38.866-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Windows XP x86 and vulnerable file version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="Check if the version of Imagehlp.dll is less than 5.1.2600.6479" test_ref="oval:org.mitre.oval:tst:90009"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows 2003/XP x64 and vulnerable file version">
+      <criteria operator="OR" comment="Microsoft Windows 2003/XP x64">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="Check if the version of Imagehlp.dll is less than 5.2.3790.5240" test_ref="oval:org.mitre.oval:tst:89829"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows Vista/2008 and vulnerable file version">
+      <criteria operator="OR" comment="Microsoft Windows Vista/2008">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="vulnerable file version">
+        <criterion comment="Check if the version of Imagehlp.dll is less than 6.0.6002.18971" test_ref="oval:org.mitre.oval:tst:89832"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Imagehlp.dll is greater than or equal to 6.0.6002.23000" test_ref="oval:org.mitre.oval:tst:89925"/>
+          <criterion comment="Check if the version of Imagehlp.dll is less than 6.0.6002.23248" test_ref="oval:org.mitre.oval:tst:90024"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows 7/2008 R2 SP1 and vulnerable file version">
+      <criteria operator="OR" comment="Microsoft Windows 7/R2 SP1">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="vulnerable file version">
+        <criterion comment="Check if the version of Imagehlp.dll is less than 6.1.7601.18288" test_ref="oval:org.mitre.oval:tst:89921"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Imagehlp.dll is greater than or equal to 6.1.7601.22000" test_ref="oval:org.mitre.oval:tst:89106"/>
+          <criterion comment="Check if the version of Imagehlp.dll is less than 6.1.7601.22484" test_ref="oval:org.mitre.oval:tst:90102"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows 8/2012 and vulnerable file version">
+      <criteria operator="OR" comment="Microsoft Windows 8/2012">
+        <extend_definition comment="Microsoft Windows 8 is installed" definition_ref="oval:org.mitre.oval:def:15732"/>
+        <extend_definition comment="Microsoft Windows Server 2012 is installed" definition_ref="oval:org.mitre.oval:def:16359"/>
+      </criteria>
+      <criteria operator="OR" comment="vulnerable file version">
+        <criterion comment="Check if the version of Imagehlp.dll is less than 6.2.9200.16745" test_ref="oval:org.mitre.oval:tst:90022"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Imagehlp.dll is greater than or equal to 6.2.9200.20000" test_ref="oval:org.mitre.oval:tst:90089"/>
+          <criterion comment="Check if the version of Imagehlp.dll is less than 6.2.9200.20856" test_ref="oval:org.mitre.oval:tst:89256"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows 8/2012 and vulnerable file version">
+      <criteria operator="OR" comment="Microsoft Windows 8.1/2012 R2">
+        <extend_definition comment="Microsoft Windows 8.1 is installed" definition_ref="oval:org.mitre.oval:def:18863"/>
+        <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+      </criteria>
+      <criterion comment="Check if the version of Imagehlp.dll is less than 6.3.9600.16438" test_ref="oval:org.mitre.oval:tst:89904"/>
+    </criteria>
+  </criteria>
+</definition>

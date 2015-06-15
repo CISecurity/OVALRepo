@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22768" version="5" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2011:1268: firefox security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Oracle Linux 5</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2011:1268-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-1268.html" source="VENDOR"/>
+    <description>Mozilla Firefox is an open source web browser. XULRunner provides the XUL
+Runtime environment for Mozilla Firefox.
+The RHSA-2011:1242 Firefox update rendered HTTPS certificates signed by a
+certain Certificate Authority (CA) as untrusted, but made an exception for
+a select few. This update removes that exception, rendering every HTTPS
+certificate signed by that CA as untrusted. (BZ#735483)
+All Firefox users should upgrade to these updated packages, which contain
+Firefox version 3.6.22. After installing the update, Firefox must be
+restarted for the changes to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:28:11.310-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:27.915-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:03.217-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22768 - optimisation of Oracle Linux content" date="2014-07-03T11:23:00.792-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-03T11:29:16.322-04:00">INTERIM</status_change>
+        <modified comment="Deprecate duplicates in Oracle Linux patches." date="2014-07-11T14:59:21.470-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-11T14:59:21.470-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.22-1.el5_7" test_ref="oval:org.mitre.oval:tst:109161"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.22-1.el5_7" test_ref="oval:org.mitre.oval:tst:109288"/>
+        <criterion comment="firefox is earlier than 0:3.6.22-1.el5_7" test_ref="oval:org.mitre.oval:tst:109421"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.22-1.el6_1" test_ref="oval:org.mitre.oval:tst:108479"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.22-1.el6_1" test_ref="oval:org.mitre.oval:tst:108945"/>
+        <criterion comment="firefox is earlier than 0:3.6.22-1.el6_1" test_ref="oval:org.mitre.oval:tst:109281"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

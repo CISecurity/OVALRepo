@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28867" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VBScript memory corruption vulnerability - CVE-2015-1684 (MS15-043 and MS15-053)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft VBScript 5.6</product>
+      <product>Microsoft VBScript 5.7</product>
+      <product>Microsoft VBScript 5.8</product>
+    </affected>
+    <reference ref_id="CVE-2015-1684" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1684" source="CVE"/>
+    <description>VBScript.dll in the Microsoft VBScript 5.6 through 5.8 engine, as used in Internet Explorer 8 through 11 and other products, allows remote attackers to bypass the ASLR protection mechanism via a crafted web site, aka "VBScript ASLR Bypass."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-05-20T17:44:26.144+05:30">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-05-28T14:16:17.374-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="VBScript 5.6 and 2K3 vulnerable version">
+      <criterion comment="vbscript.dll 5.6 or later is installed" test_ref="oval:org.mitre.oval:tst:100534"/>
+      <criteria operator="OR" comment=" 2K3 + vulnerable file version">
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1867"/>
+      </criteria>
+      <criterion comment="Check if the version of VBScript.dll is less than 5.6.0.8855" test_ref="oval:org.mitre.oval:tst:138604"/>
+      <criterion comment="Internet Explorer 6 (any patch level) is installed" test_ref="oval:org.mitre.oval:tst:2333"/>
+    </criteria>
+    <criteria operator="AND" comment="VBScript 5.7 and 2K3/Vista/2k8 vulnerable version">
+      <criterion comment="Vbscript.dll 5.7 or later is installed" test_ref="oval:org.mitre.oval:tst:11558"/>
+      <criteria operator="OR" comment="2K3/Vista/2k8 vulnerable version">
+        <criteria operator="AND" comment="2k3 and vulnerable file version">
+          <criteria operator="OR" comment="2K3">
+            <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+            <extend_definition comment="Microsoft Windows Server 2003 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1867"/>
+          </criteria>
+          <criterion comment="Check if the version of VBScript.dll is less than 5.7.6002.23659" test_ref="oval:org.mitre.oval:tst:138320"/>
+        </criteria>
+        <criteria operator="AND" comment="Vista / 2k8 and vulnerable file version">
+          <criteria operator="OR" comment="Vista / 2K8">
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable version">
+            <criterion comment="Check if the version of VBScript.dll is less than 5.7.6002.19351" test_ref="oval:org.mitre.oval:tst:138602"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if the version of VBScript.dll is less than 5.7.6002.23659" test_ref="oval:org.mitre.oval:tst:138320"/>
+              <criterion comment="Check if the version of vbscript.dll is greater than or equal to 5.7.6002.23000" test_ref="oval:org.mitre.oval:tst:100298"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+      <criterion comment="Internet Explorer 7 is installed" test_ref="oval:org.mitre.oval:tst:178"/>
+    </criteria>
+    <criteria operator="AND" comment="Vbscript.dll 5.8 and vul version">
+      <criterion comment="Vbscript.dll 5.8 or later is installed" test_ref="oval:org.mitre.oval:tst:11329"/>
+      <criteria operator="OR" comment="2k8/Win7/2k8 R2/Win 8/Win 8.1/Win 2k12/Win 2k12 R2 vulnerable version">
+        <criteria operator="AND" comment="VBScript 5.8 and 2K3/Vista/2k8/Win7/2k8 R2 + IE 8 vulnerable version">
+          <criteria operator="OR" comment="2K3/Vista/2K8/Win7/R2 + VBScript 5.8 + vulnerable version">
+            <criteria operator="AND" comment="2k3 and vulnerable version">
+              <criteria operator="OR" comment="2K3">
+                <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+                <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+              </criteria>
+              <criterion comment="Check if the version of vbscript.dll is less than 5.8.6001.23671" test_ref="oval:org.mitre.oval:tst:138609"/>
+            </criteria>
+            <criteria operator="AND" comment="Vista / 2K8 and vulnerable file version">
+              <criteria operator="OR" comment="Vista / 2K8">
+                <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+                <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+                <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+                <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+              </criteria>
+              <criteria operator="OR" comment="Check for vulnerable version">
+                <criterion comment="Check if the version of vbscript.dll is less than 5.8.6001.19612" test_ref="oval:org.mitre.oval:tst:138153"/>
+                <criteria operator="AND" comment="Check for LDR">
+                  <criterion comment="Check if the version of vbscript.dll is less than 5.8.6001.23671" test_ref="oval:org.mitre.oval:tst:138609"/>
+                  <criterion comment="Check if the version of Vbcript.dll is greater than or equal to 5.8.6001.23000" test_ref="oval:org.mitre.oval:tst:99962"/>
+                </criteria>
+              </criteria>
+            </criteria>
+            <criteria operator="AND" comment="Win7/R2 + vulnerable file version">
+              <criteria operator="OR" comment="Win7/R2">
+                <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+                <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+                <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+                <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+              </criteria>
+              <criteria operator="OR" comment="vulnerable file version">
+                <criterion comment="Check if the version of vbscript.dll is less than 5.8.7601.18806" test_ref="oval:org.mitre.oval:tst:137926"/>
+                <criteria operator="AND" comment="Check for LDR">
+                  <criterion comment="Check if the version of vbscript.dll is less than 5.8.7601.23010" test_ref="oval:org.mitre.oval:tst:138242"/>
+                  <criterion comment="Check if the version of vbscript.dll is greater than or equal to 5.8.7601.23000" test_ref="oval:org.mitre.oval:tst:138193"/>
+                </criteria>
+              </criteria>
+            </criteria>
+          </criteria>
+          <criterion comment="Internet Explorer 8 is installed" test_ref="oval:org.mitre.oval:tst:9082"/>
+        </criteria>
+        <criteria operator="AND" comment="Vista/2k8/Win7/R2 and IE 9 + vulnerable file version">
+          <criteria operator="OR" comment="Vista / 2K8">
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+            <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+            <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable version">
+            <criterion comment="Check if the version of vbscript.dll is less than 5.8.7601.17141" test_ref="oval:org.mitre.oval:tst:138375"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Vbscript.dll version is greater than or equal 5.8.7601.20000" test_ref="oval:org.mitre.oval:tst:41925"/>
+              <criterion comment="Check if the version of vbscript.dll is less than 5.8.7601.20751" test_ref="oval:org.mitre.oval:tst:138459"/>
+            </criteria>
+          </criteria>
+          <criterion comment="Internet Explorer 9 is installed" test_ref="oval:org.mitre.oval:tst:42359"/>
+        </criteria>
+        <criteria operator="AND" comment="Win7/R2/Win8/2k12 and IE 10 + vulnerable file version">
+          <criterion comment="Check if Microsoft Internet Explorer 10 is installed" test_ref="oval:org.mitre.oval:tst:80429"/>
+          <criteria operator="OR" comment="Win7/R2/Win8/2k12 + VBScript 5.8 + vulnerable version">
+            <criteria operator="AND" comment="Win7/R2 and IE 10 + vulnerable file version">
+              <criteria operator="OR" comment="Win7/R2">
+                <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+                <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+                <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+                <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+                <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+                <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+              </criteria>
+              <criteria operator="OR" comment="Check for vulnerable version">
+                <criterion comment="Check if the version of vbscript.dll is less than 5.8.9200.17296" test_ref="oval:org.mitre.oval:tst:138269"/>
+                <criteria operator="AND" comment="Check for LDR">
+                  <criterion comment="Check if the version of vbscript.dll is greater than or equal to 5.8.9200.21000" test_ref="oval:org.mitre.oval:tst:135738"/>
+                  <criterion comment="Check if the version of vbscript.dll is less than 5.8.9200.21413" test_ref="oval:org.mitre.oval:tst:138512"/>
+                </criteria>
+              </criteria>
+            </criteria>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Win7/R2/Win8.1/2k12 R2 and IE 11 + vulnerable file version">
+          <criteria operator="OR" comment="Win7/R2">
+            <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+            <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+            <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924"/>
+            <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956"/>
+            <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+          </criteria>
+          <criterion comment="Check if the version of vbscript.dll is less than 5.8.9600.17728" test_ref="oval:org.mitre.oval:tst:138586"/>
+          <criterion comment="Check if Microsoft Internet Explorer 11 is installed" test_ref="oval:org.mitre.oval:tst:87142"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16073" version="13" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Word RTF 'listoverridecount' Remote Code Execution Vulnerability - MS12-079</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft Office Word Viewer</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft Word 2003</product>
+      <product>Microsoft Word 2007</product>
+      <product>Microsoft Word 2010</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-2539" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2539"/>
+    <description>Microsoft Word 2003 SP3, 2007 SP2 and SP3, and 2010 SP1; Word Viewer; Office Compatibility Pack SP2 and SP3; and Office Web Apps 2010 SP1 allow remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via crafted RTF data, aka "Word RTF 'listoverridecount' Remote Code Execution Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-12-12T09:41:18">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-12-12T19:32:37.126-05:00">DRAFT</status_change>
+        <status_change date="2012-12-31T04:01:52.167-05:00">INTERIM</status_change>
+        <status_change date="2013-01-21T04:00:27.876-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15263 - added new criteria and 32 bit checks." date="2013-01-31T09:01:00.731-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-01-31T09:03:26.642-05:00">INTERIM</status_change>
+        <status_change date="2013-02-18T04:00:10.931-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:221 - New defs for Office 2010 SP2 and multiple platform updates" date="2013-08-14T09:59:00.133-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-08-14T10:04:47.203-04:00">INTERIM</status_change>
+        <status_change date="2013-09-02T04:00:31.395-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:80393 - If Office 2007 and 2010 both are installed, this object could return wrong path to winword.exe." date="2013-09-20T13:35:00.560-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-20T13:36:53.407-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:80377 - fixed version test for winword (bug when both 2003, 2007 installed)" date="2013-09-24T10:04:00.773-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:tst:80181 - fixed version test for winword (bug when both 2003, 2007 installed)" date="2013-09-24T10:06:00.546-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-10-14T04:00:08.898-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:03.128-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:05:58.092-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="word 2003/version">
+      <criterion comment="Check if the version of winword.exe is less than 11.0.8350" test_ref="oval:org.mitre.oval:tst:80377"/>
+      <extend_definition comment="Microsoft Word 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15863"/>
+    </criteria>
+    <criteria operator="AND" comment="word 2007/version">
+      <criterion comment="Check if the version of winword.exe is less than 12.0.6668.5000" test_ref="oval:org.mitre.oval:tst:80181"/>
+      <criteria operator="OR" comment="word 2007 sp2/sp3">
+        <extend_definition comment="Microsoft Word 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15826"/>
+        <extend_definition comment="Microsoft Word 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15946"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="word 2010/version">
+      <criterion comment="Check if the version of winword.exe is less than 14.0.6129.5000" test_ref="oval:org.mitre.oval:tst:80393"/>
+      <extend_definition comment="Microsoft Word 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:14953"/>
+    </criteria>
+    <criteria operator="AND" comment="word viewer/version">
+      <extend_definition comment="Microsoft Word Viewer is installed" definition_ref="oval:org.mitre.oval:def:737"/>
+      <criterion comment="Check if the version of wordview.exe is less than 11.0.8350" test_ref="oval:org.mitre.oval:tst:80501"/>
+    </criteria>
+    <criteria operator="AND" comment="office compatibility pack/version">
+      <criterion comment="Check if the version of wordcnv.dll is less than 12.0.6668.5000" test_ref="oval:org.mitre.oval:tst:80549"/>
+      <criteria operator="OR" comment="compatibility pack sp2/sp3">
+        <extend_definition comment="Microsoft Office Compatibility Pack SP2 is installed" definition_ref="oval:org.mitre.oval:def:15640"/>
+        <extend_definition comment="Microsoft Office Compatibility Pack SP3 is installed" definition_ref="oval:org.mitre.oval:def:15035"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="web apps/version">
+      <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15860"/>
+      <criterion comment="Check if the version of msoserver.dll is less than 14.0.6129.5000 (web apps)" test_ref="oval:org.mitre.oval:tst:80474"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server/version">
+      <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15614"/>
+      <criterion comment="Check if the version of msoserver.dll is less than 14.0.6129.5000 (sharepoint server)" test_ref="oval:org.mitre.oval:tst:80395"/>
+    </criteria>
+  </criteria>
+</definition>

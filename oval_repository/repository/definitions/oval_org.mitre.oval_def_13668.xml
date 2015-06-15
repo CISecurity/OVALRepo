@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13668" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1875-1 ikiwiki -- missing input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>ikiwiki</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00194.html" ref_id="DSA-1875-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2944" ref_id="CVE-2009-2944"/>
+    <description>Josh Triplett discovered that the blacklist for potentially harmful TeX code of the teximg module of the Ikiwiki wiki compiler was incomplete, resulting in information disclosure. The old stable distribution is not affected. For the stable distribution, this problem has been fixed in version 2.53.4. For the unstable distribution, this problem has been fixed in version 3.1415926. We recommend that you upgrade your ikiwiki package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:46.299-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:03:40.345-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:09:49.866-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:13713 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:41.261-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:00:23.612-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13668 - Debian Patch Update" date="2014-06-06T16:54:00.736-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:56:20.870-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:51.084-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="ikiwiki DPKG is earlier than 2.53.4" test_ref="oval:org.mitre.oval:tst:51467"/>
+  </criteria>
+</definition>

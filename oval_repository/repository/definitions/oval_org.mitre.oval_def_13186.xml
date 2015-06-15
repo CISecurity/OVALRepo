@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13186" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1070-1 -- bind9 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001254.html" ref_id="USN-1070-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0414" ref_id="CVE-2011-0414"/>
+    <description>It was discovered that Bind incorrectly handled IXFR transfers and dynamic updates while under heavy load when used as an authoritative server. A remote attacker could use this flaw to cause Bind to stop responding, resulting in a denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:37:22.011-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:03:44.957-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:02:56.721-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13186 - added CVE references; also made minor updates" date="2014-06-13T15:17:00.283-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:19:32.882-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:56.551-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="host DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:63019"/>
+          <criterion comment="bind9-doc DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:63054"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="dnsutils DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:63051"/>
+          <criterion comment="libbind-dev DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62693"/>
+          <criterion comment="libisccc60 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62983"/>
+          <criterion comment="libisccfg60 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62657"/>
+          <criterion comment="bind9utils DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62768"/>
+          <criterion comment="bind9-host DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62853"/>
+          <criterion comment="libbind9-60 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62759"/>
+          <criterion comment="liblwres60 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62837"/>
+          <criterion comment="libdns66 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:63076"/>
+          <criterion comment="bind9 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62605"/>
+          <criterion comment="libisc60 DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62816"/>
+          <criterion comment="lwresd DPKG is earlier than 1:9.7.1.dfsg.P2-2ubuntu0.2" test_ref="oval:org.mitre.oval:tst:62548"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

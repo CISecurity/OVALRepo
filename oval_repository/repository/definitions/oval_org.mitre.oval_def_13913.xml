@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13913" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-742-1 -- jasper vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>jasper</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-March/000866.html" ref_id="USN-742-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3520" ref_id="CVE-2008-3520"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3521" ref_id="CVE-2008-3521"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3522" ref_id="CVE-2008-3522"/>
+    <description>It was discovered that JasPer did not correctly handle memory allocation when parsing certain malformed JPEG2000 images. If a user were tricked into opening a specially crafted image with an application that uses libjasper, an attacker could cause a denial of service and possibly execute arbitrary code with the user�s privileges. It was discovered that JasPer created temporary files in an insecure way. Local users could exploit a race condition and cause a denial of service in libjasper applications. It was discovered that JasPer did not correctly handle certain formatting operations. If a user were tricked into opening a specially crafted image with an application that uses libjasper, an attacker could cause a denial of service and possibly execute arbitrary code with the user�s privileges</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:56:10.916-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:33.883-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:43.979-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13913 - added CVE references; also made minor updates" date="2014-06-13T17:32:00.342-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:34:02.604-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:24.406-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libjasper-runtime DPKG is earlier than 1.900.1-3ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69317"/>
+        <criterion comment="libjasper-dev DPKG is earlier than 1.900.1-3ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:68420"/>
+        <criterion comment="libjasper1 DPKG is earlier than 1.900.1-3ubuntu0.7.10.1" test_ref="oval:org.mitre.oval:tst:69119"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libjasper-runtime DPKG is earlier than 1.900.1-3ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:69188"/>
+        <criterion comment="libjasper-dev DPKG is earlier than 1.900.1-3ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:69199"/>
+        <criterion comment="libjasper1 DPKG is earlier than 1.900.1-3ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:69276"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libjasper-runtime DPKG is earlier than 1.701.0-2ubuntu0.6.06.1" test_ref="oval:org.mitre.oval:tst:69007"/>
+        <criterion comment="libjasper-1.701-dev DPKG is earlier than 1.701.0-2ubuntu0.6.06.1" test_ref="oval:org.mitre.oval:tst:68874"/>
+        <criterion comment="libjasper-1.701-1 DPKG is earlier than 1.701.0-2ubuntu0.6.06.1" test_ref="oval:org.mitre.oval:tst:69170"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libjasper-runtime DPKG is earlier than 1.900.1-5ubuntu0.1" test_ref="oval:org.mitre.oval:tst:69239"/>
+        <criterion comment="libjasper-dev DPKG is earlier than 1.900.1-5ubuntu0.1" test_ref="oval:org.mitre.oval:tst:68435"/>
+        <criterion comment="libjasper1 DPKG is earlier than 1.900.1-5ubuntu0.1" test_ref="oval:org.mitre.oval:tst:69413"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

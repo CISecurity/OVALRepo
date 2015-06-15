@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23511" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0894: systemtap security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>systemtap</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0894-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0894.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-4170" ref_url="http://linux.oracle.com/cve/CVE-2010-4170.html" source="CVE"/>
+    <reference ref_id="CVE-2010-4171" ref_url="http://linux.oracle.com/cve/CVE-2010-4171.html" source="CVE"/>
+    <description>The staprun runtime tool in SystemTap 1.3 does not verify that a module to unload was previously loaded by SystemTap, which allows local users to cause a denial of service (unloading of arbitrary kernel modules).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:21:36.368-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:17.470-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:05:02.206-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23511 - optimisation of Oracle Linux content" date="2014-05-05T17:35:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:37:42.834-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:36.375-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="systemtap-client is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108173"/>
+        <criterion comment="systemtap-runtime is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108312"/>
+        <criterion comment="systemtap-testsuite is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:107817"/>
+        <criterion comment="systemtap-sdt-devel is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108176"/>
+        <criterion comment="systemtap is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108205"/>
+        <criterion comment="systemtap-initscript is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108266"/>
+        <criterion comment="systemtap-server is earlier than 0:1.1-3.el5_5.3" test_ref="oval:org.mitre.oval:tst:108025"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="systemtap-runtime is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:107915"/>
+        <criterion comment="systemtap-client is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:107944"/>
+        <criterion comment="systemtap-testsuite is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:107878"/>
+        <criterion comment="systemtap-sdt-devel is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:108255"/>
+        <criterion comment="systemtap is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:108144"/>
+        <criterion comment="systemtap-grapher is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:108098"/>
+        <criterion comment="systemtap-initscript is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:108282"/>
+        <criterion comment="systemtap-server is earlier than 0:1.2-11.el6_0" test_ref="oval:org.mitre.oval:tst:107874"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

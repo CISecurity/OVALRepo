@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12480" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Remote Desktop Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-0029" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0029"/>
+    <description>Untrusted search path vulnerability in the client in Microsoft Remote Desktop Connection 5.2, 6.0, 6.1, and 7.0 allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .rdp file, aka "Remote Desktop Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-03-08T14:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-03-14T11:41:30.920-04:00">DRAFT</status_change>
+        <status_change date="2011-04-04T04:00:18.980-04:00">INTERIM</status_change>
+        <status_change date="2011-04-25T04:00:14.661-04:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:24:08.994-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:24:08.994-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:01:53.312-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Remote Desktop Connection 5.2 Client on Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of 2k3mstscax.dll is less than 5.2.3790.4807" test_ref="oval:org.mitre.oval:tst:42096"/>
+    </criteria>
+    <criteria operator="AND" comment="Remote Desktop Connection 6.1 Client on Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criteria operator="OR" comment="GDR or QFE Service branch">
+        <criterion comment="the version of Mstscax.dll is less than 6.0.6001.18589" test_ref="oval:org.mitre.oval:tst:41999"/>
+        <criteria operator="AND" comment="QFE">
+          <criterion comment="the version of Mstscax.dll is less than 6.0.6001.22840" test_ref="oval:org.mitre.oval:tst:42329"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:10355"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Remote Desktop Connection 6.0 Client on Microsoft Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Microsoft Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or QFE Service branch">
+        <criteria operator="AND" comment="GDR">
+          <criterion comment="the version of Mstscax.dll is less than 6.0.6001.18564" test_ref="oval:org.mitre.oval:tst:42276"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.0.6001.18000" test_ref="oval:org.mitre.oval:tst:10536"/>
+        </criteria>
+        <criteria operator="AND" comment="QFE">
+          <criterion comment="the version of Mstscax.dll is less than 6.0.6001.22815" test_ref="oval:org.mitre.oval:tst:42434"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:10355"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Remote Desktop Connection 6.1 Client on Microsoft Windows Vista x86/x64 SP1, Server 2008 x86/x64/ia64">
+      <criteria operator="OR" comment="Microsoft Windows Vista x86/x64 SP1, Server 2008 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Mstscax.dll is less than 6.0.6001.18564" test_ref="oval:org.mitre.oval:tst:42276"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Mstscax.dll is less than 6.0.6001.22815" test_ref="oval:org.mitre.oval:tst:42434"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:10355"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Remote Desktop Connection 6.1 Client on Microsoft Windows Vista x86/x64 SP2, Server 2008 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Microsoft Windows Vista x86/x64 SP2, Server 2008 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Mstscax.dll is less than 6.0.6002.18356" test_ref="oval:org.mitre.oval:tst:42267"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Mstscax.dll is less than 6.0.6002.22550" test_ref="oval:org.mitre.oval:tst:42398"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:10179"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Remote Desktop Connection 7.0 Client on Microsoft Windows XP (x86) SP2, Windows Vista x86/x64 SP1/SP2, Windows 7 x86/x64, Windows Server 2008 R2 x64/ia64">
+      <criteria operator="OR" comment="Microsoft Windows XP (x86) SP2, Windows Vista x86/x64 SP1/SP2, Windows 7 x86/x64, Windows Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criteria operator="AND" comment="GDR">
+          <criterion comment="the version of Mstscax.dll is less than 6.1.7600.16722" test_ref="oval:org.mitre.oval:tst:41887"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.1.7600.16000" test_ref="oval:org.mitre.oval:tst:41946"/>
+        </criteria>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Mstscax.dll is less than 6.1.7600.20861" test_ref="oval:org.mitre.oval:tst:41650"/>
+          <criterion comment="the version of Mstscax.dll is greater than or equal 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:42075"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

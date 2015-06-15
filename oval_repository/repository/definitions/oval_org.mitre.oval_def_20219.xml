@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20219" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1571-1 openssl - predictable random number generator</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1571-1" ref_id="DSA-1571-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0166" ref_id="CVE-2008-0166"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4995" ref_id="CVE-2007-4995"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3108" ref_id="CVE-2007-3108"/>
+    <description>Luciano Bello discovered that the random number generator in Debian's openssl package is predictable. This is caused by an incorrect Debian-specific change to the openssl package (&lt;a href="http://security-tracker.debian.org/tracker/CVE-2008-0166">CVE-2008-0166&lt;/a>). As a result, cryptographic key material may be guessable.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:23:08">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:39.603-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:40.177-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:19.650-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20219 - Debian Patch Update" date="2014-06-06T17:24:00.692-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:26:35.309-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:01.397-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="openssl DPKG is earlier than 0:0.9.8c-4etch3" test_ref="oval:org.mitre.oval:tst:88877"/>
+  </criteria>
+</definition>

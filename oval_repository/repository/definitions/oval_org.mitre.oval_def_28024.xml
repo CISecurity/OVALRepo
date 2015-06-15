@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28024" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2011-0677 -- openssl security, bug fix, and enhancement update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2011-0677.html" ref_id="ELSA-2011-0677"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0014" ref_id="CVE-2011-0014"/>
+    <description>[1.0.0-10]
+- fix OCSP stapling vulnerability - CVE-2011-0014 (#676063)
+- correct the README.FIPS document
+
+[1.0.0-8]
+- add -x931 parameter to openssl genrsa command to use the ANSI X9.31
+  key generation method
+- use FIPS-186-3 method for DSA parameter generation
+- add OPENSSL_FIPS_NON_APPROVED_MD5_ALLOW environment variable
+  to allow using MD5 when the system is in the maintenance state
+  even if the /proc fips flag is on
+- make openssl pkcs12 command work by default in the FIPS mode
+
+[1.0.0-7]
+- listen on ipv6 wildcard in s_server so we accept connections
+  from both ipv4 and ipv6 (#601612)
+- fix openssl speed command so it can be used in the FIPS mode
+  with FIPS allowed ciphers (#619762)
+
+[1.0.0-6]
+- disable code for SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG - CVE-2010-3864
+  (#649304)
+
+[1.0.0-5]
+- fix race in extension parsing code - CVE-2010-3864 (#649304)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:58:45.351-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:07:11.964-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:24.703-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T16:50:51.417-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T16:50:51.417-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="openssl is earlier than 0:1.0.0-10.el6" test_ref="oval:org.mitre.oval:tst:133525"/>
+      <criterion comment="openssl-devel is earlier than 0:1.0.0-10.el6" test_ref="oval:org.mitre.oval:tst:133831"/>
+      <criterion comment="openssl-perl is earlier than 0:1.0.0-10.el6" test_ref="oval:org.mitre.oval:tst:133771"/>
+      <criterion comment="openssl-static is earlier than 0:1.0.0-10.el6" test_ref="oval:org.mitre.oval:tst:133653"/>
+    </criteria>
+  </criteria>
+</definition>

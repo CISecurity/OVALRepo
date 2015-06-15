@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25695" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:1874-1 -- Recommended update for Mesa, libdrm and xorg-x11-driver-video</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Mesa</product>
+      <product>libdrm</product>
+      <product>xorg-x11-driver-video</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131874-1.html" ref_id="SUSE-RU-2013:1874-1"/>
+    <description>This collective update for Mesa, xorg-x11-driver-video and
+libdrm adds  support for new Intel Haswell video chipsets.
+
+Additionally, the following issues have been fixed:
+
+    * Fix intel_reg_dumper tool for Intel Gen2/3 platforms.
+(bnc#808855)
+    * Do not change DPMS mode on unconnected outputs.
+(bnc#817998)
+    * Remove GLU debug output on normal builds. (bnc#845820)
+    * Add missing initialization of return status in
+i830CreateContext(). (bnc#847068)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:23:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:20:52.039-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:56.289-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:01.923-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="Mesa RPM is earlier than 0:9.0.3-0.25.1" test_ref="oval:org.mitre.oval:tst:117427"/>
+      <criterion comment="libdrm RPM is earlier than 0:2.4.41-0.10.8" test_ref="oval:org.mitre.oval:tst:118083"/>
+      <criterion comment="xorg-x11-driver-video RPM is earlier than 0:7.4.0.1-0.85.5" test_ref="oval:org.mitre.oval:tst:117958"/>
+      <criterion comment="Mesa-32bit RPM is earlier than 0:9.0.3-0.25.1" test_ref="oval:org.mitre.oval:tst:118018"/>
+      <criterion comment="libdrm-32bit RPM is earlier than 0:2.4.41-0.10.8" test_ref="oval:org.mitre.oval:tst:118032"/>
+    </criteria>
+  </criteria>
+</definition>

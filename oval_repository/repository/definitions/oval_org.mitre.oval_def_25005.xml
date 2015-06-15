@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25005" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0741: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 5</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0741-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0741.html" source="VENDOR"/>
+    <reference ref_id="CVE-2014-1533" ref_url="http://linux.oracle.com/cve/CVE-2014-1533.html" source="CVE"/>
+    <reference ref_id="CVE-2014-1538" ref_url="http://linux.oracle.com/cve/CVE-2014-1538.html" source="CVE"/>
+    <reference ref_id="CVE-2014-1541" ref_url="http://linux.oracle.com/cve/CVE-2014-1541.html" source="CVE"/>
+    <description>Mozilla Firefox is an open source web browser. XULRunner provides the XUL
+Runtime environment for Mozilla Firefox.
+Several flaws were found in the processing of malformed web content. A web
+page containing malicious content could cause Firefox to crash or,
+potentially, execute arbitrary code with the privileges of the user running
+Firefox. (CVE-2014-1533, CVE-2014-1538, CVE-2014-1541)
+Red Hat would like to thank the Mozilla project for reporting these issues.
+Upstream acknowledges Gary Kwong, Christoph Diehl, Christian Holler, Hannes
+Verschore, Jan de Mooij, Ryan VanderMeulen, Jeff Walden, Kyle Huey,
+Abhishek Arya, and Nils as the original reporters of these issues.
+For technical details regarding these flaws, refer to the Mozilla security
+advisories for Firefox 24.6.0 ESR. You can find a link to the Mozilla
+advisories in the References section of this erratum.
+All Firefox users should upgrade to these updated packages, which contain
+Firefox version 24.6.0 ESR, which corrects these issues. After installing
+the update, Firefox must be restarted for the changes to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-25T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </submitted>
+        <status_change date="2014-07-10T11:45:59.127-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:25005 - modified Oracle Linux content" date="2014-07-23T14:34:00.918-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-11T04:00:43.145-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:02:55.401-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criterion comment="firefox is earlier than 0:24.6.0-1.el5_10" test_ref="oval:org.mitre.oval:tst:115530"/>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <criterion comment="firefox is earlier than 0:24.6.0-1.el6_5" test_ref="oval:org.mitre.oval:tst:115118"/>
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="firefox is earlier than 0:24.6.0-1.el7_0" test_ref="oval:org.mitre.oval:tst:115529"/>
+        <criterion comment="xulrunner-devel is earlier than 0:24.6.0-1.el7_0" test_ref="oval:org.mitre.oval:tst:115454"/>
+        <criterion comment="xulrunner is earlier than 0:24.6.0-1.el7_0" test_ref="oval:org.mitre.oval:tst:115428"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

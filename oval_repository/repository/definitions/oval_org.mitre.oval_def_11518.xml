@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11518" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Memory corruption in dirapi.dll in Adobe Shockwave Player before 11.5.9.615 via unspecified vectors</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Adobe Shockwave Player</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-4085" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4085"/>
+    <description>dirapi.dll in Adobe Shockwave Player before 11.5.9.615 allows attackers to execute arbitrary code or cause a denial of service (memory corruption) via unspecified vectors, a different vulnerability than CVE-2010-2581, CVE-2010-4084, CVE-2010-4086, and CVE-2010-4088.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-11-22T12:30:17">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-11-24T11:52:56.473-05:00">DRAFT</status_change>
+        <status_change date="2010-12-13T04:00:03.483-05:00">INTERIM</status_change>
+        <status_change date="2011-01-03T04:00:05.025-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1240 - Removed the trailing \ from all local_variables that are used as paths in a file_object" date="2011-08-03T08:25:00.425-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-08-03T08:28:24.742-04:00">INTERIM</status_change>
+        <status_change date="2011-08-22T04:00:06.596-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:41765 - For 64-bit systems, all files are placed in syswow64-branch. And also check=&quot;all&quot; was replaced on check=&quot;at least one&quot; in tests." date="2014-10-24T13:15:00.008-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-10-24T13:16:58.892-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:00:16.423-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Adobe Shockwave Player is installed" definition_ref="oval:org.mitre.oval:def:5990"/>
+    <criteria operator="OR" comment="Version of dirapi.dll in either Adobe or Macromedia Shockwave Player is less than 11.5.9.615">
+      <criterion comment="Check if the version of dirapi.dll in Macromedia Shockwave Player is less than 11.5.9.615" test_ref="oval:org.mitre.oval:tst:41165"/>
+      <criterion comment="Check if the version of dirapi.dll in Adobe Shockwave Player is less than 11.5.9.615" test_ref="oval:org.mitre.oval:tst:41765"/>
+    </criteria>
+  </criteria>
+</definition>

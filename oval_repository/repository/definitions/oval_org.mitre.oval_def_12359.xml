@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12359" version="10" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Hyper-V VMBus Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3960" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3960"/>
+    <description>Hyper-V in Microsoft Windows Server 2008 Gold, SP2, and R2 allows guest OS users to cause a denial of service (host OS hang) by sending a crafted encapsulated packet over the VMBus, aka "Hyper-V VMBus Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-12-17T20:55:16.895-05:00">DRAFT</status_change>
+        <status_change date="2011-01-03T04:00:29.918-05:00">INTERIM</status_change>
+        <status_change date="2011-01-24T04:00:28.621-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12359 - Updated the OVAL definitions to check if Hyper-V role is enabled.  Also, I've combined the GDR and LDR criteria for the last definition." date="2011-07-26T13:32:00.032-04:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2011-07-26T13:33:41.658-04:00">INTERIM</status_change>
+        <status_change date="2011-08-15T04:00:06.398-04:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:23:50.431-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:23:50.431-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:01:31.529-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:5160 - contains tests with modified comments and all dependences" date="2014-02-13T12:19:00.287-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-13T12:22:56.319-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:00:25.815-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Hyper-V role is enabled" test_ref="oval:org.mitre.oval:tst:43509"/>
+    <criteria operator="OR" comment="Affected Software">
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 x64">
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <criteria operator="OR" comment="GDR or LDR Service branch">
+          <criterion comment="the version of Storvsp.sys is less than 6.0.6001.18538" test_ref="oval:org.mitre.oval:tst:41744"/>
+          <criteria operator="AND" comment="LDR">
+            <criterion comment="the version of Storvsp.sys is greater than 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:41518"/>
+            <criterion comment="the version of Storvsp.sys is less than 6.0.6001.22777" test_ref="oval:org.mitre.oval:tst:41774"/>
+          </criteria>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 SP2 x64">
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <criteria operator="OR" comment="GDR or LDR Service branch">
+          <criterion comment="the version of Storvsp.sys is less than 6.0.6002.18327" test_ref="oval:org.mitre.oval:tst:41809"/>
+          <criteria operator="AND" comment="LDR">
+            <criterion comment="the version of Storvsp.sys is greater than 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:40954"/>
+            <criterion comment="the version of Storvsp.sys is less than 6.0.6002.22505" test_ref="oval:org.mitre.oval:tst:41751"/>
+          </criteria>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64">
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <criteria operator="OR" comment="GDR or LDR Service branch">
+          <criterion comment="the version of Storvsp.sys is less than 6.1.7600.16701" test_ref="oval:org.mitre.oval:tst:41930"/>
+          <criteria operator="AND" comment="LDR">
+            <criterion comment="the version of Storvsp.sys is greater than 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:41159"/>
+            <criterion comment="the version of Storvsp.sys is less than 6.1.7600.20834" test_ref="oval:org.mitre.oval:tst:41808"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

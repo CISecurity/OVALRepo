@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15146" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2415-1 libmodplug -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>libmodplug</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2012/msg00042.html" ref_id="DSA-2415-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1761" ref_id="CVE-2011-1761"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2911" ref_id="CVE-2011-2911"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2912" ref_id="CVE-2011-2912"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2913" ref_id="CVE-2011-2913"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2914" ref_id="CVE-2011-2914"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2915" ref_id="CVE-2011-2915"/>
+    <description>Several vulnerabilities that can lead to the execution of arbitrary code have been discovered in libmodplug, a library for mod music based on ModPlug. The Common Vulnerabilities and Exposures project identifies the following issues: CVE-2011-1761 epiphant discovered that the abc file parser is vulnerable to several stack-based buffer overflows that potentially lead to the execution of arbitrary code. CVE-2011-2911 Hossein Lotfi of Secunia discovered that the CSoundFile::ReadWav function is vulnerable to an integer overflow which leads to a heap-based buffer overflow. An attacker can exploit this flaw to potentially execute arbitrary code by tricking a victim into opening crafted WAV files. CVE-2011-2912 Hossein Lotfi of Secunia discovered that the CSoundFile::ReadS3M function is vulnerable to a stack-based buffer overflow. An attacker can exploit this flaw to potentially execute arbitrary code by tricking a victim into opening crafted S3M files. CVE-2011-2913 Hossein Lotfi of Secunia discovered that the CSoundFile::ReadAMS function suffers from an off-by-one vulnerability that leads to memory corruption. An attacker can exploit this flaw to potentially execute arbitrary code by tricking a victim into opening crafted AMS files. CVE-2011-2914 It was discovered that the CSoundFile::ReadDSM function suffers from an off-by-one vulnerability that leads to memory corruption. An attacker can exploit this flaw to potentially execute arbitrary code by tricking a victim into opening crafted DSM files. CVE-2011-2915 It was discovered that the CSoundFile::ReadAMS2 function suffers from an off-by-one vulnerability that leads to memory corruption. An attacker can exploit this flaw to potentially execute arbitrary code by tricking a victim into opening crafted AMS files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:57:19.552-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:01.222-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:22.437-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:18649 - Debian patch definition fixes to epoch value in states." date="2012-08-23T17:05:00.375-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:08:06.163-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:00:13.915-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15146 - Debian Patch Update" date="2014-06-06T17:13:00.482-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:15:06.761-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:29.890-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="libmodplug DPKG is earlier than 0.8.8.1-1+squeeze2" test_ref="oval:org.mitre.oval:tst:78122"/>
+  </criteria>
+</definition>

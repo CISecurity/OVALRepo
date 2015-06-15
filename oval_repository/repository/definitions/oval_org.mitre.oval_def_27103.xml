@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27103" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1540 -- evolution security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>cheese</product>
+      <product>control-center</product>
+      <product>ekiga</product>
+      <product>evolution</product>
+      <product>evolution-data-server</product>
+      <product>evolution-exchange</product>
+      <product>evolution-mapi</product>
+      <product>gnome-panel</product>
+      <product>gnome-python2-desktop</product>
+      <product>gtkhtml3</product>
+      <product>libgdata</product>
+      <product>nautilus-sendto</product>
+      <product>openchange</product>
+      <product>pidgin</product>
+      <product>planner</product>
+      <product>totem</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1540.html" ref_id="RHSA-2013:1540"/>
+    <reference source="CESA-2013:1540" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-November/000906.html" ref_id="CESA-2013:1540"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4166" ref_id="CVE-2013-4166"/>
+    <description><![CDATA[Evolution is the integrated collection of email, calendaring, contact
+management, communications, and personal information management (PIM) tools
+for the GNOME desktop environment.
+
+A flaw was found in the way Evolution selected GnuPG public keys when
+encrypting emails. This could result in emails being encrypted with public
+keys other than the one belonging to the intended recipient.
+(CVE-2013-4166)
+
+The Evolution packages have been upgraded to upstream version 2.32.3, which
+provides a number of bug fixes and enhancements over the previous version.
+These changes include implementation of Gnome XDG Config Folders, and
+support for Exchange Web Services (EWS) protocol to connect to Microsoft
+Exchange servers. EWS support has been added as a part of the
+evolution-exchange packages. (BZ#883010, BZ#883014, BZ#883015, BZ#883017,
+BZ#524917, BZ#524921, BZ#883044)
+
+The gtkhtml3 packages have been upgraded to upstream version 2.32.2, which
+provides a number of bug fixes and enhancements over the previous version.
+(BZ#883019)
+
+The libgdata packages have been upgraded to upstream version 0.6.4, which
+provides a number of bug fixes and enhancements over the previous version.
+(BZ#883032)
+
+This update also fixes the following bug:
+
+* The Exchange Calendar could not fetch the &quot;Free&quot; and &quot;Busy&quot; information
+for meeting attendees when using Microsoft Exchange 2010 servers, and this
+information thus could not be displayed. This happened because Microsoft
+Exchange 2010 servers use more strict rules for &quot;Free&quot; and &quot;Busy&quot;
+information fetching. With this update, the respective code in the
+openchange packages has been modified so the &quot;Free&quot; and &quot;Busy&quot; information
+fetching now complies with the fetching rules on Microsoft Exchange 2010
+servers. The &quot;Free&quot; and &quot;Busy&quot; information can now be displayed as expected
+in the Exchange Calendar. (BZ#665967)
+
+All Evolution users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues and add these
+enhancements. All running instances of Evolution must be restarted for this
+update to take effect.]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:15:05">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:48:01.988-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:43.466-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:36.635-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cheese is earlier than 0:2.28.1-8.el6" test_ref="oval:org.mitre.oval:tst:125694"/>
+        <criterion comment="control-center is earlier than 0:2.28.1-39.el6" test_ref="oval:org.mitre.oval:tst:125797"/>
+        <criterion comment="control-center-devel is earlier than 0:2.28.1-39.el6" test_ref="oval:org.mitre.oval:tst:126059"/>
+        <criterion comment="control-center-extra is earlier than 0:2.28.1-39.el6" test_ref="oval:org.mitre.oval:tst:125994"/>
+        <criterion comment="control-center-filesystem is earlier than 0:2.28.1-39.el6" test_ref="oval:org.mitre.oval:tst:126108"/>
+        <criterion comment="ekiga is earlier than 0:3.2.6-4.el6" test_ref="oval:org.mitre.oval:tst:125539"/>
+        <criterion comment="evolution is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125975"/>
+        <criterion comment="evolution-data-server is earlier than 0:2.32.3-18.el6" test_ref="oval:org.mitre.oval:tst:125677"/>
+        <criterion comment="evolution-data-server-devel is earlier than 0:2.32.3-18.el6" test_ref="oval:org.mitre.oval:tst:125610"/>
+        <criterion comment="evolution-data-server-doc is earlier than 0:2.32.3-18.el6" test_ref="oval:org.mitre.oval:tst:126010"/>
+        <criterion comment="evolution-devel is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125967"/>
+        <criterion comment="evolution-devel-docs is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:126018"/>
+        <criterion comment="evolution-exchange is earlier than 0:2.32.3-16.el6" test_ref="oval:org.mitre.oval:tst:126073"/>
+        <criterion comment="evolution-help is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125686"/>
+        <criterion comment="evolution-mapi is earlier than 0:0.32.2-12.el6" test_ref="oval:org.mitre.oval:tst:126050"/>
+        <criterion comment="evolution-mapi-devel is earlier than 0:0.32.2-12.el6" test_ref="oval:org.mitre.oval:tst:126063"/>
+        <criterion comment="evolution-perl is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125759"/>
+        <criterion comment="evolution-pst is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125553"/>
+        <criterion comment="evolution-spamassassin is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125909"/>
+        <criterion comment="finch is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125908"/>
+        <criterion comment="finch-devel is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125757"/>
+        <criterion comment="gnome-panel is earlier than 0:2.30.2-15.el6" test_ref="oval:org.mitre.oval:tst:125282"/>
+        <criterion comment="gnome-panel-devel is earlier than 0:2.30.2-15.el6" test_ref="oval:org.mitre.oval:tst:126044"/>
+        <criterion comment="gnome-panel-libs is earlier than 0:2.30.2-15.el6" test_ref="oval:org.mitre.oval:tst:125346"/>
+        <criterion comment="gnome-python2-applet is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125712"/>
+        <criterion comment="gnome-python2-brasero is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:126049"/>
+        <criterion comment="gnome-python2-bugbuddy is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125625"/>
+        <criterion comment="gnome-python2-desktop is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125743"/>
+        <criterion comment="gnome-python2-evince is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125752"/>
+        <criterion comment="gnome-python2-evolution is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125850"/>
+        <criterion comment="gnome-python2-gnomedesktop is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125785"/>
+        <criterion comment="gnome-python2-gnomekeyring is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125298"/>
+        <criterion comment="gnome-python2-gnomeprint is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125935"/>
+        <criterion comment="gnome-python2-gtksourceview is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125554"/>
+        <criterion comment="gnome-python2-libgtop2 is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:126069"/>
+        <criterion comment="gnome-python2-libwnck is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125865"/>
+        <criterion comment="gnome-python2-metacity is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125599"/>
+        <criterion comment="gnome-python2-rsvg is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125939"/>
+        <criterion comment="gnome-python2-totem is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125997"/>
+        <criterion comment="gtkhtml3 is earlier than 0:3.32.2-2.el6" test_ref="oval:org.mitre.oval:tst:125992"/>
+        <criterion comment="gtkhtml3-devel is earlier than 0:3.32.2-2.el6" test_ref="oval:org.mitre.oval:tst:125720"/>
+        <criterion comment="libgdata is earlier than 0:0.6.4-2.el6" test_ref="oval:org.mitre.oval:tst:125273"/>
+        <criterion comment="libgdata-devel is earlier than 0:0.6.4-2.el6" test_ref="oval:org.mitre.oval:tst:125978"/>
+        <criterion comment="libpurple is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125915"/>
+        <criterion comment="libpurple-devel is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125332"/>
+        <criterion comment="libpurple-perl is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125861"/>
+        <criterion comment="libpurple-tcl is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125509"/>
+        <criterion comment="nautilus-sendto is earlier than 0:2.28.2-4.el6" test_ref="oval:org.mitre.oval:tst:125889"/>
+        <criterion comment="nautilus-sendto-devel is earlier than 0:2.28.2-4.el6" test_ref="oval:org.mitre.oval:tst:125572"/>
+        <criterion comment="openchange is earlier than 0:1.0-6.el6" test_ref="oval:org.mitre.oval:tst:125835"/>
+        <criterion comment="openchange-client is earlier than 0:1.0-6.el6" test_ref="oval:org.mitre.oval:tst:125816"/>
+        <criterion comment="openchange-devel is earlier than 0:1.0-6.el6" test_ref="oval:org.mitre.oval:tst:125896"/>
+        <criterion comment="openchange-devel-docs is earlier than 0:1.0-6.el6" test_ref="oval:org.mitre.oval:tst:125393"/>
+        <criterion comment="pidgin is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:126030"/>
+        <criterion comment="pidgin-devel is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125957"/>
+        <criterion comment="pidgin-docs is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:126035"/>
+        <criterion comment="pidgin-perl is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125789"/>
+        <criterion comment="planner is earlier than 0:0.14.4-10.el6" test_ref="oval:org.mitre.oval:tst:125969"/>
+        <criterion comment="planner-devel is earlier than 0:0.14.4-10.el6" test_ref="oval:org.mitre.oval:tst:125584"/>
+        <criterion comment="planner-eds is earlier than 0:0.14.4-10.el6" test_ref="oval:org.mitre.oval:tst:126075"/>
+        <criterion comment="totem is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125638"/>
+        <criterion comment="totem-devel is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125932"/>
+        <criterion comment="totem-jamendo is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125949"/>
+        <criterion comment="totem-mozplugin is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:126054"/>
+        <criterion comment="totem-nautilus is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125972"/>
+        <criterion comment="totem-upnp is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125611"/>
+        <criterion comment="totem-youtube is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125890"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cheese-debuginfo is earlier than 0:2.28.1-8.el6" test_ref="oval:org.mitre.oval:tst:125710"/>
+        <criterion comment="control-center-debuginfo is earlier than 0:2.28.1-39.el6" test_ref="oval:org.mitre.oval:tst:126003"/>
+        <criterion comment="ekiga-debuginfo is earlier than 0:3.2.6-4.el6" test_ref="oval:org.mitre.oval:tst:125619"/>
+        <criterion comment="evolution-data-server-debuginfo is earlier than 0:2.32.3-18.el6" test_ref="oval:org.mitre.oval:tst:126085"/>
+        <criterion comment="evolution-debuginfo is earlier than 0:2.32.3-30.el6" test_ref="oval:org.mitre.oval:tst:125845"/>
+        <criterion comment="evolution-exchange-debuginfo is earlier than 0:2.32.3-16.el6" test_ref="oval:org.mitre.oval:tst:126014"/>
+        <criterion comment="evolution-mapi-debuginfo is earlier than 0:0.32.2-12.el6" test_ref="oval:org.mitre.oval:tst:125188"/>
+        <criterion comment="gnome-panel-debuginfo is earlier than 0:2.30.2-15.el6" test_ref="oval:org.mitre.oval:tst:126104"/>
+        <criterion comment="gnome-python2-desktop-debuginfo is earlier than 0:2.28.0-5.el6" test_ref="oval:org.mitre.oval:tst:125794"/>
+        <criterion comment="gtkhtml3-debuginfo is earlier than 0:3.32.2-2.el6" test_ref="oval:org.mitre.oval:tst:125960"/>
+        <criterion comment="libgdata-debuginfo is earlier than 0:0.6.4-2.el6" test_ref="oval:org.mitre.oval:tst:125445"/>
+        <criterion comment="nautilus-sendto-debuginfo is earlier than 0:2.28.2-4.el6" test_ref="oval:org.mitre.oval:tst:125375"/>
+        <criterion comment="openchange-debuginfo is earlier than 0:1.0-6.el6" test_ref="oval:org.mitre.oval:tst:125400"/>
+        <criterion comment="pidgin-debuginfo is earlier than 0:2.7.9-11.el6" test_ref="oval:org.mitre.oval:tst:125996"/>
+        <criterion comment="planner-debuginfo is earlier than 0:0.14.4-10.el6" test_ref="oval:org.mitre.oval:tst:125706"/>
+        <criterion comment="totem-debuginfo is earlier than 0:2.28.6-4.el6" test_ref="oval:org.mitre.oval:tst:125238"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

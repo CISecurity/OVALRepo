@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8118" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1592 linux-2.6 -- heap overflow</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>linux-2.6</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1592" ref_id="DSA-1592"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1673" ref_id="CVE-2008-1673"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2358" ref_id="CVE-2008-2358"/>
+    <description>Two vulnerabilities have been discovered in the Linux kernel that may lead to a denial of service or arbitrary code execution. The Common Vulnerabilities and Exposures project identifies the following problems: Wei Wang from McAfee reported a potential heap overflow in the ASN.1 decode code that is used by the SNMP NAT and CIFS subsystem. Exploitation of this issue may lead to arbitrary code execution. This issue is not believed to be exploitable with the pre-built kernel images provided by Debian, but it might be an issue for custom images built from the Debian-provided source package. Brandon Edwards of McAfee Avert labs discovered an issue in the DCCP subsystem. Due to missing feature length checks it is possible to cause an overflow that may result in remote arbitrary code execution.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:46.199-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:21.771-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:15.005-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:6299 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:58.406-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:06:59.797-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8118 - Debian Patch Update" date="2014-06-06T16:32:00.192-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:34:09.025-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:06.386-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-support-2.6.18-6 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19701"/>
+          <criterion comment="linux-patch-debian-2.6.18 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19681"/>
+          <criterion comment="linux-source-2.6.18 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19397"/>
+          <criterion comment="linux-manual-2.6.18 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19520"/>
+          <criterion comment="linux-tree-2.6.18 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19751"/>
+          <criterion comment="linux-doc-2.6.18 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19404"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19600"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver-s390x is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19053"/>
+          <criterion comment="linux-headers-2.6.18-6-s390 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19577"/>
+          <criterion comment="linux-image-2.6.18-6-s390-tape is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19618"/>
+          <criterion comment="linux-image-2.6.18-6-s390x is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19296"/>
+          <criterion comment="linux-image-2.6.18-6-vserver-s390x is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19382"/>
+          <criterion comment="linux-image-2.6.18-6-s390 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19752"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19749"/>
+          <criterion comment="linux-headers-2.6.18-6-all-s390 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19308"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19711"/>
+          <criterion comment="linux-headers-2.6.18-6-s390x is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19341"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19742"/>
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19631"/>
+          <criterion comment="fai-kernels is earlier than 1.17+etch.18etch6" test_ref="oval:org.mitre.oval:tst:19766"/>
+          <criterion comment="xen-linux-system-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19137"/>
+          <criterion comment="linux-image-2.6.18-6-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19384"/>
+          <criterion comment="linux-image-2.6.18-6-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19502"/>
+          <criterion comment="linux-image-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19335"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19746"/>
+          <criterion comment="xen-linux-system-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19596"/>
+          <criterion comment="linux-headers-2.6.18-6-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19739"/>
+          <criterion comment="linux-headers-2.6.18-6-xen is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19721"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19297"/>
+          <criterion comment="linux-modules-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19656"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19640"/>
+          <criterion comment="linux-headers-2.6.18-6-all-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19236"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19478"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19487"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-vserver is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:18845"/>
+          <criterion comment="linux-modules-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19624"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.18-6-parisc64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19685"/>
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19715"/>
+          <criterion comment="linux-image-2.6.18-6-parisc64-smp is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19804"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19845"/>
+          <criterion comment="linux-headers-2.6.18-6-all-hppa is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19446"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc64-smp is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19782"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc-smp is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19717"/>
+          <criterion comment="linux-image-2.6.18-6-parisc64 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:18911"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19813"/>
+          <criterion comment="linux-image-2.6.18-6-parisc is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19625"/>
+          <criterion comment="linux-image-2.6.18-6-parisc-smp is earlier than 2.6.18.dfsg.1-18etch6" test_ref="oval:org.mitre.oval:tst:19828"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

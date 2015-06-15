@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17635" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-593-1 -- dovecot vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 6.10</platform>
+      <platform>Ubuntu 7.04</platform>
+      <platform>Ubuntu 7.10</platform>
+      <product>dovecot</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-593-1/" ref_id="USN-593-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1199" ref_id="CVE-2008-1199"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1218" ref_id="CVE-2008-1218"/>
+    <description>It was discovered that the default configuration of dovecot could allow access to any email files with group "mail" without verifying that a user had valid rights.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-02T15:58:52.949-04:00">DRAFT</status_change>
+        <status_change date="2013-08-19T04:04:41.151-04:00">INTERIM</status_change>
+        <status_change date="2013-09-09T04:02:32.655-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:21153 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:14:06.104-05:00">INTERIM</status_change>
+        <status_change date="2013-12-16T04:00:37.048-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17635 - added CVE references; also made minor updates" date="2014-06-13T17:27:00.092-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:29:49.166-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:07:03.015-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dovecot-common DPKG is earlier than 1.0.beta3-3ubuntu5.6" test_ref="oval:org.mitre.oval:tst:81965"/>
+        <criterion comment="dovecot-imapd DPKG is earlier than 1.0.beta3-3ubuntu5.6" test_ref="oval:org.mitre.oval:tst:82533"/>
+        <criterion comment="dovecot-pop3d DPKG is earlier than 1.0.beta3-3ubuntu5.6" test_ref="oval:org.mitre.oval:tst:82635"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 6.10 is installed" definition_ref="oval:org.mitre.oval:def:17043"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dovecot-common DPKG is earlier than 1.0.rc2-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:82513"/>
+        <criterion comment="dovecot-imapd DPKG is earlier than 1.0.rc2-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:82647"/>
+        <criterion comment="dovecot-pop3d DPKG is earlier than 1.0.rc2-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:82297"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.04 is installed" definition_ref="oval:org.mitre.oval:def:17290"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dovecot-common DPKG is earlier than 1.0.rc17-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:81754"/>
+        <criterion comment="dovecot-imapd DPKG is earlier than 1.0.rc17-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:82033"/>
+        <criterion comment="dovecot-pop3d DPKG is earlier than 1.0.rc17-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:82069"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dovecot-common DPKG is earlier than 1:1.0.5-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:81787"/>
+        <criterion comment="dovecot-imapd DPKG is earlier than 1:1.0.5-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:82588"/>
+        <criterion comment="dovecot-pop3d DPKG is earlier than 1:1.0.5-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:82521"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

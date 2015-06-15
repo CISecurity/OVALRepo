@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19442" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>CRITICAL PATCH UPDATE JULY 2013</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference ref_id="CVE-2013-3745" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3745" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Solaris 8, 9, 10, and 11 allows local users to affect availability via unknown vectors related to Libraries/Libc.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-11-20T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-11-22T14:31:57.507-05:00">DRAFT</status_change>
+        <status_change date="2013-12-09T04:00:18.756-05:00">INTERIM</status_change>
+        <status_change date="2013-12-30T04:00:27.903-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch 147147-26 or later installed">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 147147-26 or later installed" test_ref="oval:org.mitre.oval:tst:87633"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch 147148-26 or later installed">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 147148-26 or later installed" test_ref="oval:org.mitre.oval:tst:87490"/>
+    </criteria>
+  </criteria>
+</definition>

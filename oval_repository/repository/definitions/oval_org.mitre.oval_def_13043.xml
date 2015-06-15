@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13043" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2224-1 openjdk-6 -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>openjdk-6</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00093.html" ref_id="DSA-2224-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4351" ref_id="CVE-2010-4351"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4448" ref_id="CVE-2010-4448"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4450" ref_id="CVE-2010-4450"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4465" ref_id="CVE-2010-4465"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4469" ref_id="CVE-2010-4469"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4470" ref_id="CVE-2010-4470"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4471" ref_id="CVE-2010-4471"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4472" ref_id="CVE-2010-4472"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0025" ref_id="CVE-2011-0025"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0706" ref_id="CVE-2011-0706"/>
+    <description>Several security vulnerabilities were discovered in OpenJDK, an implementation of the Java platform. CVE-2010-4351 The JNLP SecurityManager returns from the checkPermission method instead of throwing an exception in certain circumstances, which might allow context-dependent attackers to bypass the intended security policy by creating instances of ClassLoader. CVE-2010-4448 Malicious applets can perform DNS cache poisoning. CVE-2010-4450 An empty LD_LIBRARY_PATH environment variable results in a misconstructed library search path, resulting in code execution from possibly untrusted sources. CVE-2010-4465 Malicious applets can extend their privileges by abusing Swing timers. CVE-2010-4469 The Hotspot just-in-time compiler miscompiles crafted byte sequences, resulting in heap corruption. CVE-2010-4470 JAXP can be exploited by untrusted code to elevate privileges. CVE-2010-4471 Java2D can be exploited by untrusted code to elevate privileges. CVE-2010-4472 Untrusted code can replace the XML DSIG implementation. CVE-2011-0025 Signatures on JAR files are not properly verified, which allows remote attackers to trick users into executing code that appears to come from a trusted source. CVE-2011-0706 The JNLPClassLoader class allows remote attackers to gain privileges via unknown vectors related to multiple signers and the assignment of &amp;quot;an inappropriate security descriptor In addition, this security update contains stability fixes, such as switching to the recommended Hotspot version for this particular version of OpenJDK.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T22:52:08-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:38.702-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:51.077-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:24.680-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13043 - Debian Patch Update" date="2014-06-06T17:05:00.860-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:07:21.935-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:26.932-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="openjdk-6 DPKG is earlier than 6b18-1.8.7-2~lenny1" test_ref="oval:org.mitre.oval:tst:44053"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="openjdk-6 DPKG is earlier than 6b18-1.8.7-2~squeeze1" test_ref="oval:org.mitre.oval:tst:43745"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24055" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0630: kernel security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0630-01" ref_url="http://linux.oracle.com/errata/ELSA-2013-0630.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-0228" ref_url="http://linux.oracle.com/cve/CVE-2013-0228.html" source="CVE"/>
+    <reference ref_id="CVE-2013-0268" ref_url="http://linux.oracle.com/cve/CVE-2013-0268.html" source="CVE"/>
+    <description>The msr_open function in arch/x86/kernel/msr.c in the Linux kernel before 3.7.6 allows local users to bypass intended capability restrictions by executing a crafted application as root, as demonstrated by msr32.c.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:44:43.630-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:42.329-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:13.347-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24055 - optimisation of Oracle Linux content" date="2014-05-05T17:19:00.903-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:22:05.179-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:09.870-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111502"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111852"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111772"/>
+      <criterion comment="python-perf is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111809"/>
+      <criterion comment="perf is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111776"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111071"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111838"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111699"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111789"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111333"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111287"/>
+      <criterion comment="kernel is earlier than 0:2.6.32-358.2.1.el6" test_ref="oval:org.mitre.oval:tst:111250"/>
+    </criteria>
+  </criteria>
+</definition>
