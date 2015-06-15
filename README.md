@@ -2,7 +2,7 @@
 
 ### Serialization Directory Structure
 * (file) full_repository.txt
-	This file contains the full path to every definition in the repository.  This allows for the construction of the full OVAL repository bulk download, as per http://oval.mitre.org/rep-data/5.10/org.mitre.oval/oval.xml.
+	This file contains the file name for every definition in the repository.  The relative file path to each definition's XML file is /oval_repository/repository/definitions.  This allows for the construction of the full OVAL repository bulk download, as per http://oval.mitre.org/rep-data/5.10/org.mitre.oval/oval.xml.
 
 The various "class" sub-folders (compliance, inventory, patch, vulnerability, miscellaneous) contain sets of text files containing lists of definitions filenames.
 * \<classname\>.txt
