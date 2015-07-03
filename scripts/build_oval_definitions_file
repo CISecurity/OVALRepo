@@ -1,0 +1,98 @@
+#!/usr/bin/env/ python3
+"""Builds a schema-valid OVAL definitions file.
+
+Authors: David Ries <ries@jovalcm.com>
+
+For usage information, please see the command line help:
+    python3 build_oval_definitions_file -h
+
+TODO:
+- implement validation
+- implement reference, class, and other definition selection options
+"""
+
+import argparse, pprint, os, os.path, datetime, sys
+import lib_repo, lib_xml
+
+
+def main():
+    """ parse command line options and generate file """
+
+    # parse command line options
+    parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
+    output_options = parser.add_argument_group('output')
+    output_options.add_argument('-f', '--filename', required=True, help='file name for output OVAL definitions file')
+    output_options.add_argument('-v', '--validate', default=False, action="store_true",
+                        help='schema and schematron validate the output file')
+    source_options = parser.add_argument_group('definitions',
+                                               'Provide at least one of the following options to determine which definition(s) ' +
+                                               'will be included. Results will include the intersection of matches for each parameter ' +
+                                               'supplied. When multiple values are supplied for one paramater, the parameter will ' +
+                                               'match definitions that match any provided value.')
+    source_options.add_argument('-i', '--definiton_id', 
+                                help='build file for 1 OVAL definition id')
+    """ TODO:
+    source_options.add_argument('-r', '--reference_id', nargs='*', dest='references',
+                                help='include definitions matching one or more references, such as CVE-2015-3306.')
+    source_options.add_argument('-c', '--class', nargs='*', dest='classes',
+                                help='include definitions matching: {0}'.format(', '.join(lib_repo.supported_definition_classes)))
+    """
+    args = parser.parse_args()
+
+    # additional validation: at least one definition selection option is provided
+    if not (args.definiton_id):
+        message('error','At least one definitions argument must be provided.')
+        parser.print_help()
+        sys.exit(0)
+
+    # get list of all ids including provided id and all downstream ids
+    message('info','finding OVAL ids downstream from {0}'.format(args.definiton_id))
+    oval_ids = [args.definiton_id]
+    oval_ids = lib_repo.find_downstream_ids(args.definiton_id, oval_ids)
+
+    # create generator
+    OvalGenerator = lib_xml.OvalGenerator(message)
+
+    # add each OVAL definition to generator
+    message('info','generating OVAL definition file with {0} elements'.format(len(oval_ids)))
+    for oval_id in oval_ids:
+        file_path = lib_repo.oval_id_to_path(oval_id)
+        element_type = lib_repo.get_element_type_from_oval_id(oval_id)
+        OvalGenerator.queue_element_file(element_type, file_path)
+
+    # write output file
+    message('info','writing OVAL definitions to {0}'.format(args.filename))
+    OvalGenerator.write(args.filename)
+
+    # validate
+    if args.validate:
+        message('info','performing schema validation')
+        schemas_path = lib_repo.get_schema_root_path('5.11.1')
+        lib_xml.schema_validate(args.filename, schemas_path)
+
+    message('info','done!')
+
+
+def message(type, message):
+    """ print a message """
+    sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
+
+
+def progress_bar(current, total, size=20):
+    """ show a simple progress bar on the CLI """
+    
+    current_percent = float(current) / total
+    hashes = '#' * int(round(current_percent * size))
+    spaces = ' ' * (size - len(hashes))
+    sys.stdout.write('\rProgress: [{0}] {1}% ({2} of {3} CVEs processed)'.format(hashes + spaces, int(round(current_percent * 100)), current, total))
+    if (current == total):
+        sys.stdout.write('\n')
+
+    sys.stdout.flush()
+
+
+if __name__ == '__main__':
+    main()
+
+
+
