@@ -68,7 +68,11 @@ def main():
     if args.validate:
         message('info','performing schema validation')
         schemas_path = lib_repo.get_schema_root_path('5.11.1')
-        lib_xml.schema_validate(args.filename, schemas_path)
+        try:
+            lib_xml.schema_validate(args.filename, schemas_path)
+            message('info','schema validation successful')
+        except lib_xml.SchemaValidationError as e:
+            message('error','schema validation failed:\n\t{0}'.format(e.message))
 
     message('info','done!')
 

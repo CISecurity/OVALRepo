@@ -12,11 +12,15 @@ Available functions:
 Available classes:
 - OvalGenerator: methods to assist in building an OVAL definitions file
 
+Available exceptions:
+- Error: base class for exceptions in this module
+- SchemaValidationError: raised for schema valdiation errors
+
 TODO:
-- line 102-108: fix namespaces and schemaLocation to represent doc or include all or ??
+- TBD
 """
 
-import os, os.path, datetime, random, re
+import os, os.path, datetime, random, re, pprint
 from xml.sax.saxutils import escape
 from lxml import etree
 
@@ -34,28 +38,55 @@ def schema_validate(filepath, schemas_path):
     oval_tree = etree.parse(filepath)
     schema_location = ' '.join(oval_tree.xpath('//@xsi:schemaLocation', namespaces={'xsi': 'http://www.w3.org/2001/XMLSchema-instance'})).strip()
 
-    # construct an empty schema
+    # construct an schema that includes all schemas
     schema_tree = etree.XML("""<xsd:schema xmlns="http://com.cisecurity.ovalrepo" targetNamespace="http://com.cisecurity.ovalrepo"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.11"></xsd:schema>""")
-    
-    # iterate through schemaLocation pairs, importing each into schema
-    schema_locations = re.sub('\s+', ' ', schema_location).split(' ')
-    for i in range(0, len(schema_locations), 2):
-        uri = schema_locations[i]
-        filename = schema_locations[i + 1]
-        filepath = '{0}/{1}'.format(schemas_path, filename)
-
-        import_element = etree.Element('{http://www.w3.org/2001/XMLSchema}import')
-        import_element.attrib['namespace'] = uri
-        import_element.attrib['schemaLocation'] = filepath
-        schema_tree.append(import_element)
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.11">
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="{0}oval-common-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="{0}oval-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aix" schemaLocation="{0}aix-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#android" schemaLocation="{0}android-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apache" schemaLocation="{0}apache-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apple_ios" schemaLocation="{0}apple-ios-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#asa" schemaLocation="{0}asa-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#catos" schemaLocation="{0}catos-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#esx" schemaLocation="{0}esx-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#freebsd" schemaLocation="{0}freebsd-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#hpux" schemaLocation="{0}hpux-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" schemaLocation="{0}independent-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#ios" schemaLocation="{0}ios-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe" schemaLocation="{0}iosxe-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos" schemaLocation="{0}junos-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" schemaLocation="{0}linux-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos" schemaLocation="{0}macos-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf" schemaLocation="{0}netconf-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#pixos" schemaLocation="{0}pixos-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint" schemaLocation="{0}sharepoint-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#solaris" schemaLocation="{0}solaris-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" schemaLocation="{0}unix-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" schemaLocation="{0}windows-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-directives-5" schemaLocation="{0}oval-directives-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-variables-5" schemaLocation="{0}oval-variables-schema.xsd"/>
+      <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="{0}xmldsig-core-schema.xsd"/>
+    </xsd:schema>""".format(schemas_path + '/'))
 
     # create XMLSchema validator and validate
     # print(etree.tostring(schema_tree))
     schema_validator = etree.XMLSchema(schema_tree)
-    schema_validator.assertValid(oval_tree)
+    if not schema_validator.validate(oval_tree):
+        error_msg = schema_validator.error_log.last_error.message
+        raise SchemaValidationError(error_msg)
 
+
+class Error(Exception):
+    """Base class for exceptions in this module."""
+    pass
+
+
+class SchemaValidationError(Error):
+    """Exception raised for schema validation errors. """
+    def __init__(self, message):
+        self.message = message
 
 class OvalGenerator:
     """ Methods to assist in the building of an OVAL definitions file. """
@@ -101,11 +132,9 @@ class OvalGenerator:
             oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
             f.write("""<oval_definitions 
                 xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" 
-                xmlns:ind-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" 
                 xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" 
-                xmlns:unix-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" 
-                xmlns:linux-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" 
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd   http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd   http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd   http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd   http://oval.mitre.org/XMLSchema/oval-definitions-5#macos linux-definitions-schema.xsd">
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd">
 
                 <generator>
                     <oval:product_name>{0}</oval:product_name>
