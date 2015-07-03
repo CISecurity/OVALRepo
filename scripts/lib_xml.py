@@ -33,7 +33,7 @@ def get_id_refs_in_file(filepath):
     return id_refs
 
 def schema_validate(filepath, schemas_path):
-    """ Schema validate an xml document based on its schemaLocation attribute. """
+    """ Schema validate an OVAL definitions file using schemas in the provided location. """
     # extract schemaLocation attribute
     oval_tree = etree.parse(filepath)
     schema_location = ' '.join(oval_tree.xpath('//@xsi:schemaLocation', namespaces={'xsi': 'http://www.w3.org/2001/XMLSchema-instance'})).strip()
