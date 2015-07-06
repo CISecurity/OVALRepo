@@ -65,7 +65,7 @@ def schematron_validate(filepath, schematron_path):
 
     # extract results from svrl
     successes = svrl_root.xpath('//svrl:successful-report', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
-    failures = svrl_root.xpath('//svrl:failed-asser', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
+    failures = svrl_root.xpath('//svrl:failed-assert', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
 
     print('INFO: {0} schematron successes'.format(len(successes)))
     print('INFO: {0} schematron failures'.format(len(failures)))
