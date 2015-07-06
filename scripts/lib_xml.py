@@ -53,51 +53,81 @@ def schema_validate(filepath, schema_path):
         raise SchemaValidationError(error_msg)
 
 
-def schematron_validate(filepath, schematron_path):
-    """ NOTE: this does not work!! """
+def schematron_validate(filepath, schema_path):
     """ Schematron validate an XML file. """
     # parse target xml
     xml_tree = etree.parse(filepath)
+    
+    # get schematron path
+    schematron_path = get_schematron_xsl_from_schema(schema_path)
 
     # apply schematron xsl to create svrl result
     svrl = apply_xslt(xml_tree, schematron_path)
     svrl_root = svrl.getroot()
 
     # extract results from svrl
-    successes = svrl_root.xpath('//svrl:successful-report', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
     failures = svrl_root.xpath('//svrl:failed-assert', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
-
-    print('INFO: {0} schematron successes'.format(len(successes)))
-    print('INFO: {0} schematron failures'.format(len(failures)))
-
-    return
+    messages = []
+    if failures:
+        for failure in failures:
+            #test = failure.get('test')
+            message = failure[0].text if len(failure) else 'no message output by schematron'
+            messages.append(message)
+        raise SchematronValidationError(messages)
 
 
 def get_schematron_xsl_from_schema(schema_path, force_generate=False):
     """ NOTE: this does not work!! """
     """ Gets path to schematron from schema_path, creating if necessary """
-    schematron_path = schema_path.replace('.xsd','-schematron.xslt')
+    sch_path = schema_path.replace('.xsd','-schematron.sch')
+    xsl_path = schema_path.replace('.xsd','-schematron.xslt')
 
-    # generate if it doesn't exist or force_generate
-    if (not os.path.isfile(schematron_path) or force_generate):
+    # generate sch if it doesn't exist or force_generate
+    if (not os.path.isfile(sch_path) or force_generate):
+        print('INFO: extracting schematron from schema\n\t...this may take 10+ minutes...')
+        
         # get path to schematron tools
         scripts_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         schematron_tools_path = os.path.realpath(scripts_path + '/lib/iso-schematron-xslt1')
 
-        # parse schema, preprocess, convert to xsl
+        # parse schema
         schema_tree = etree.parse(schema_path)
-        # 1. preprocess schema with iso_dsdl_include.xsl to assemble the schema from parts
-        schema_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_dsdl_include.xsl')
-        # 2. preprocess with iso_abstract_expand.xsl to convert abstract patterns to real patterns
-        schema_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_abstract_expand.xsl')
-        # 3. compile to XSLT script using iso_svrl_for_xslt1.xsl
-        xslt_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_svrl_for_xslt1.xsl')
+
+        # extract schematron from schema
+        sch_tree = apply_xslt(schema_tree, schematron_tools_path + '/ExtractSchFromXSD.xsl')
         
         # write to file
-        with open(schematron_path, mode='wt', encoding='utf-8') as f:
+        with open(sch_path, mode='wt', encoding='utf-8') as f:
+          f.write(str(sch_tree))
+
+        # force regenerate of xsl
+        force_generate = True
+
+    # generate xsl from sch if it doesn't exist or force_generate
+    if (not os.path.isfile(xsl_path) or force_generate):
+        print('INFO: generating schematron xsl from sch')
+
+        # get path to schematron tools
+        scripts_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+        schematron_tools_path = os.path.realpath(scripts_path + '/lib/iso-schematron-xslt1')
+
+        # parse sch
+        sch_tree = etree.parse(sch_path)
+
+        # these preprocessing steps don't seem to be necessary:
+        # preprocess schema with iso_dsdl_include.xsl to assemble the schema from parts
+        # schematron_tree = apply_xslt(schematron_tree, schematron_tools_path + '/iso_dsdl_include.xsl')
+        # preprocess with iso_abstract_expand.xsl to convert abstract patterns to real patterns
+        # schematron_tree = apply_xslt(schematron_tree, schematron_tools_path + '/iso_abstract_expand.xsl')
+
+        # convert sch to XSLT script using iso_svrl_for_xslt1.xsl
+        xslt_tree = apply_xslt(sch_tree, schematron_tools_path + '/iso_svrl_for_xslt1.xsl')
+        
+        # write to file
+        with open(xsl_path, mode='wt', encoding='utf-8') as f:
           f.write(str(xslt_tree))
 
-    return schematron_path
+    return xsl_path
 
 
 def apply_xslt(xml_tree, xslt_path):
@@ -121,8 +151,8 @@ class SchemaValidationError(Error):
 
 class SchematronValidationError(Error):
     """Exception raised for schematron validation errors. """
-    def __init__(self, message):
-        self.message = message
+    def __init__(self, messages):
+        self.messages = messages
 
 class OvalGenerator:
     """ Methods to assist in the building of an OVAL definitions file. """
