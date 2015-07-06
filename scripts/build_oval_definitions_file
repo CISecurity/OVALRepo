@@ -7,7 +7,7 @@ For usage information, please see the command line help:
     python3 build_oval_definitions_file -h
 
 TODO:
-- implement validation
+- implement schematron validation
 - implement reference, class, and other definition selection options
 """
 
@@ -47,7 +47,7 @@ def main():
 
     # get list of all ids including provided id and all downstream ids
     message('info','finding OVAL ids downstream from {0}'.format(args.definiton_id))
-    oval_ids = [args.definiton_id]
+    oval_ids = set([args.definiton_id])
     oval_ids = lib_repo.find_downstream_ids(args.definiton_id, oval_ids)
 
     # create generator
@@ -67,12 +67,24 @@ def main():
     # validate
     if args.validate:
         message('info','performing schema validation')
-        schemas_path = lib_repo.get_schema_root_path('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema('5.11.1')
         try:
-            lib_xml.schema_validate(args.filename, schemas_path)
+            lib_xml.schema_validate(args.filename, schema_path)
             message('info','schema validation successful')
         except lib_xml.SchemaValidationError as e:
             message('error','schema validation failed:\n\t{0}'.format(e.message))
+
+        # skip schematron validation until it's working!
+        if True:
+            message('info','skipping schematron validation, not implemented')
+        else:
+            message('info','performing schematron validation')
+            schematron_path = lib_repo.get_oval_def_schematron('5.11.1')
+            try:
+                lib_xml.schematron_validate(args.filename, schematron_path)
+                message('info','schematron validation successful')
+            except lib_xml.SchematronValidationError as e:
+                message('error','schematron validation failed:\n\t{0}'.format(e.message))
 
     message('info','done!')
 

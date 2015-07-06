@@ -8,6 +8,11 @@ validate OVAL definitions and other XML-related functions TBD.
 
 Available functions:
 - get_id_refs_in_file: gets all OVAL id_refs in a file
+- schema_validate: schema validate an XML file
+- schematron_validate: schematron validate an XML file
+- get_schematron_xsl_from_schema: gets path to schematron from schema_path, creating if necessary 
+- apply_xslt: applies an xslt to an XML tree
+
 
 Available classes:
 - OvalGenerator: methods to assist in building an OVAL definitions file
@@ -15,12 +20,13 @@ Available classes:
 Available exceptions:
 - Error: base class for exceptions in this module
 - SchemaValidationError: raised for schema valdiation errors
+- SchematronValidationError: raised for schematron valdiation errors
 
 TODO:
 - TBD
 """
 
-import os, os.path, datetime, random, re, pprint
+import os, os.path, inspect, datetime, random, re, pprint
 from xml.sax.saxutils import escape
 from lxml import etree
 
@@ -32,43 +38,12 @@ def get_id_refs_in_file(filepath):
     id_refs = root.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
     return id_refs
 
-def schema_validate(filepath, schemas_path):
-    """ Schema validate an OVAL definitions file using schemas in the provided location. """
-    # extract schemaLocation attribute
-    oval_tree = etree.parse(filepath)
-    schema_location = ' '.join(oval_tree.xpath('//@xsi:schemaLocation', namespaces={'xsi': 'http://www.w3.org/2001/XMLSchema-instance'})).strip()
 
-    # construct an schema that includes all schemas
-    schema_tree = etree.XML("""<xsd:schema xmlns="http://com.cisecurity.ovalrepo" targetNamespace="http://com.cisecurity.ovalrepo"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.11">
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="{0}oval-common-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="{0}oval-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aix" schemaLocation="{0}aix-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#android" schemaLocation="{0}android-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apache" schemaLocation="{0}apache-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apple_ios" schemaLocation="{0}apple-ios-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#asa" schemaLocation="{0}asa-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#catos" schemaLocation="{0}catos-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#esx" schemaLocation="{0}esx-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#freebsd" schemaLocation="{0}freebsd-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#hpux" schemaLocation="{0}hpux-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" schemaLocation="{0}independent-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#ios" schemaLocation="{0}ios-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe" schemaLocation="{0}iosxe-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos" schemaLocation="{0}junos-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" schemaLocation="{0}linux-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos" schemaLocation="{0}macos-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf" schemaLocation="{0}netconf-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#pixos" schemaLocation="{0}pixos-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint" schemaLocation="{0}sharepoint-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#solaris" schemaLocation="{0}solaris-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" schemaLocation="{0}unix-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" schemaLocation="{0}windows-definitions-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-directives-5" schemaLocation="{0}oval-directives-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-variables-5" schemaLocation="{0}oval-variables-schema.xsd"/>
-      <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="{0}xmldsig-core-schema.xsd"/>
-    </xsd:schema>""".format(schemas_path + '/'))
+def schema_validate(filepath, schema_path):
+    """ Schema validate an XML file. """
+    # parse xml and schema
+    oval_tree = etree.parse(filepath)
+    schema_tree = etree.parse(schema_path)
 
     # create XMLSchema validator and validate
     # print(etree.tostring(schema_tree))
@@ -78,6 +53,61 @@ def schema_validate(filepath, schemas_path):
         raise SchemaValidationError(error_msg)
 
 
+def schematron_validate(filepath, schematron_path):
+    """ NOTE: this does not work!! """
+    """ Schematron validate an XML file. """
+    # parse target xml
+    xml_tree = etree.parse(filepath)
+
+    # apply schematron xsl to create svrl result
+    svrl = apply_xslt(xml_tree, schematron_path)
+    svrl_root = svrl.getroot()
+
+    # extract results from svrl
+    successes = svrl_root.xpath('//svrl:successful-report', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
+    failures = svrl_root.xpath('//svrl:failed-asser', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
+
+    print('INFO: {0} schematron successes'.format(len(successes)))
+    print('INFO: {0} schematron failures'.format(len(failures)))
+
+    return
+
+
+def get_schematron_xsl_from_schema(schema_path, force_generate=False):
+    """ NOTE: this does not work!! """
+    """ Gets path to schematron from schema_path, creating if necessary """
+    schematron_path = schema_path.replace('.xsd','-schematron.xslt')
+
+    # generate if it doesn't exist or force_generate
+    if (not os.path.isfile(schematron_path) or force_generate):
+        # get path to schematron tools
+        scripts_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+        schematron_tools_path = os.path.realpath(scripts_path + '/lib/iso-schematron-xslt1')
+
+        # parse schema, preprocess, convert to xsl
+        schema_tree = etree.parse(schema_path)
+        # 1. preprocess schema with iso_dsdl_include.xsl to assemble the schema from parts
+        schema_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_dsdl_include.xsl')
+        # 2. preprocess with iso_abstract_expand.xsl to convert abstract patterns to real patterns
+        schema_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_abstract_expand.xsl')
+        # 3. compile to XSLT script using iso_svrl_for_xslt1.xsl
+        xslt_tree = apply_xslt(schema_tree, schematron_tools_path + '/iso_svrl_for_xslt1.xsl')
+        
+        # write to file
+        with open(schematron_path, mode='wt', encoding='utf-8') as f:
+          f.write(str(xslt_tree))
+
+    return schematron_path
+
+
+def apply_xslt(xml_tree, xslt_path):
+    """ Apply xslt to an XML tree """
+    xslt_root = etree.parse(xslt_path)
+    transformer = etree.XSLT(xslt_root)
+    result_tree = transformer(xml_tree)
+    return result_tree
+
+
 class Error(Exception):
     """Base class for exceptions in this module."""
     pass
@@ -85,6 +115,12 @@ class Error(Exception):
 
 class SchemaValidationError(Error):
     """Exception raised for schema validation errors. """
+    def __init__(self, message):
+        self.message = message
+
+
+class SchematronValidationError(Error):
+    """Exception raised for schematron validation errors. """
     def __init__(self, message):
         self.message = message
 
