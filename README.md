@@ -1,4 +1,24 @@
-# OVALRepo
+# OVAL Repository
+
+## Getting Started ##
+
+### Windows
+
+1. Install python 3.4.3 from https://www.python.org/downloads/
+2. Add ```C:\Python34``` to ```PATH``` (or wherever you installed it)
+3. Upgrade ```pip``` via CLI: ```python -m pip install -U pip```
+4. Download unofficial Python 3.4 ```lxml``` wheel from http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+5. Install via ```pip``` on CLI: ```python -m pip install```
+
+### OSX
+
+1. Install Python 3.4
+2. Install lxml
+
+```
+$ brew install python3
+$ pip3 install lxml
+```
 
 ### Serialization Directory Structure
 * (file) full_repository.txt
