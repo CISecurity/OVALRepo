@@ -7,12 +7,12 @@ This library provides methods to parse OVAL XML, create OVAL definitions,
 validate OVAL definitions and other XML-related functions TBD.
 
 Available functions:
-- get_id_refs_in_file: gets all OVAL id_refs in a file
+- get_definition_metadata: takes a filepath for an OVAL definition file and returns dictionary of metadata
+- get_element_metadata: takes a filepath for an OVAL element file and returns dictionary of metadata
 - schema_validate: schema validate an XML file
 - schematron_validate: schematron validate an XML file
 - get_schematron_xsl_from_schema: gets path to schematron from schema_path, creating if necessary 
 - apply_xslt: applies an xslt to an XML tree
-
 
 Available classes:
 - OvalGenerator: methods to assist in building an OVAL definitions file
@@ -26,17 +26,66 @@ TODO:
 - TBD
 """
 
-import os, os.path, inspect, datetime, random, re, pprint
+import sys, os, os.path, inspect, datetime, random, re
 from xml.sax.saxutils import escape
 from lxml import etree
 
 
-def get_id_refs_in_file(filepath):
-    """ Takes a filepath for an XML fragment and returns ids referenced therein. """
+def get_definition_metadata(filepath):
+    """ Takes a filepath for an OVAL definition file and returns dictionary of metadata. """
     tree = etree.parse(filepath)
     root = tree.getroot()
-    id_refs = root.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
-    return id_refs
+    ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
+    
+    contributors = root.findall('./oval-def:metadata/oval-def:oval_repository//oval-def:contributor', namespaces=ns_map)
+    return {
+        'oval_id': root.get('id'),
+        'oval_version' : root.get('version'),
+        'title': root.findtext('./oval-def:metadata/oval-def:title', namespaces=ns_map),
+        'description': root.findtext('./oval-def:metadata/oval-def:description', namespaces=ns_map),
+        'class': root.get('class'),
+        'status': root.findtext('./oval-def:metadata/oval-def:oval_repository/oval-def:status', namespaces=ns_map),
+        'family': ''.join([ affected.get('family') for affected in root.iterfind('./oval-def:metadata/oval-def:affected', namespaces=ns_map) ]),
+        'platforms': { platform.text for platform in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:platform', namespaces=ns_map) },
+        'products': { product.text for product in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:product', namespaces=ns_map) },
+        'contributors': { contributor.text for contributor in contributors },
+        'organizations': { contributor.get('organization') for contributor in contributors },
+        'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) }
+    }
+
+
+def get_element_metadata(filepath):
+    """ Takes a filepath for an OVAL element file and returns dictionary of metadata. """
+    tree = etree.parse(filepath)
+    root = tree.getroot()
+    ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
+
+    tag_name = str(root.tag).rsplit('}',1)[1]
+    tag_components = tag_name.rsplit('_',1)
+    element_type = tag_components[0]
+    
+    # get all *_refs attributes
+    attribute_id_refs = root.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
+    # get filter, object_reference
+    text_id_refs = root.xpath("//*[name()='filter' or name()='object_reference']/text()", smart_strings=False)
+    # combine, unique
+    id_refs = set(attribute_id_refs + text_id_refs)
+    
+    if element_type == 'definition':
+        predicate = ''
+        description = root.findtext('./oval-def:metadata/oval-def:title', namespaces=ns_map)
+    else:
+        predicate = tag_components[1]
+        description = root.get('comment') or ''
+        #sys.exit(0)
+
+    return {
+        'oval_id': root.get('id'),
+        'element_type': element_type,
+        'description': description,
+        'predicate': predicate,
+        'oval_refs': id_refs
+    }
 
 
 def schema_validate(filepath, schema_path):

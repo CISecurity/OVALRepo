@@ -7,11 +7,13 @@ For usage information, please see the command line help:
     python3 build_oval_definitions_file -h
 
 TODO:
-- implement reference, class, and other definition selection options
+- testing
+- improve performance of schematron validation (if possible)
+- add options to zip/tar the result file
 """
 
 import argparse, pprint, os, os.path, datetime, sys
-import lib_repo, lib_xml
+import lib_repo, lib_xml, lib_search
 
 
 def main():
@@ -19,35 +21,60 @@ def main():
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
-    output_options = parser.add_argument_group('output')
+    output_options = parser.add_argument_group('output options')
     output_options.add_argument('-f', '--filename', required=True, help='file name for output OVAL definitions file')
     output_options.add_argument('-v', '--validate', default=False, action="store_true",
-                        help='schema and schematron validate the output file')
-    source_options = parser.add_argument_group('definitions',
+                        help='schema validate the output file')
+    output_options.add_argument('-s', '--schematron', default=False, action="store_true",
+                        help='schematron validate the output file')
+    source_options = parser.add_argument_group('definitions filtering',
                                                'Provide at least one of the following options to determine which definition(s) ' +
                                                'will be included. Results will include the intersection of matches for each parameter ' +
                                                'supplied. When multiple values are supplied for one paramater, the parameter will ' +
                                                'match definitions that match any provided value.')
-    source_options.add_argument('-i', '--definiton_id', 
-                                help='build file for 1 OVAL definition id')
-    """ TODO:
-    source_options.add_argument('-r', '--reference_id', nargs='*', dest='references',
-                                help='include definitions matching one or more references, such as CVE-2015-3306.')
-    source_options.add_argument('-c', '--class', nargs='*', dest='classes',
-                                help='include definitions matching: {0}'.format(', '.join(lib_repo.supported_definition_classes)))
-    """
-    args = parser.parse_args()
+    source_options.add_argument('--definition_id', nargs='*', dest='oval_id', help='match OVAL definition id(s)')
+    source_options.add_argument('--title', nargs='*', dest='title', metavar='PHRASE', help='match phrase(s) in definition titles')
+    source_options.add_argument('--description', nargs='*', dest='description', metavar='PHRASE', help='match phrase(s) in definition titles')
+    source_options.add_argument('--class', nargs='*', dest='class', help='filter by class(es): {0}'.format(', '.join(lib_repo.supported_definition_classes)))
+    source_options.add_argument('--status', nargs='*', dest='status', help='filter by status(es): {0}'.format(', '.join(lib_repo.supported_definition_statuses)))
+    source_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
+    source_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
+    source_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
+    source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
+    source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
+    source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    args = vars(parser.parse_args())
 
-    # additional validation: at least one definition selection option is provided
-    if not (args.definiton_id):
-        message('error','At least one definitions argument must be provided.')
+    # get definitions index
+    definitions_index = lib_search.DefinitionsIndex(message)
+
+    # contruct query from args
+    query = {}
+    for field in definitions_index.get_fieldnames():
+        if field in args and args[field]:
+            query[field] = args[field]
+
+    # at least one definition selection option must be specified
+    if not query:
+        message('error','At least one definitions filtering argument must be provided.')
         parser.print_help()
         sys.exit(0)
 
-    # get list of all ids including provided id and all downstream ids
-    message('info','finding OVAL ids downstream from {0}'.format(args.definiton_id))
-    oval_ids = set([args.definiton_id])
-    oval_ids = lib_repo.find_downstream_ids(args.definiton_id, oval_ids)
+    # query index
+    query_results = definitions_index.query(query)
+    message('info','Found {0} matching OVAL definitions'.format(len(query_results)))
+    if not query_results:
+        message('info','Aborting')
+        sys.exit(0)
+
+    # get set of all definition ids found
+    definition_ids = { document['oval_id'] for document in query_results }
+
+    # add all downstream element ids
+    message('info','Finding downstream OVAL ids for all definitions')
+    elements_index = lib_search.ElementsIndex(message)
+    oval_ids = elements_index.find_downstream_ids(definition_ids)
+    message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
 
     # create generator
     OvalGenerator = lib_xml.OvalGenerator(message)
@@ -60,24 +87,26 @@ def main():
         OvalGenerator.queue_element_file(element_type, file_path)
 
     # write output file
-    message('info','writing OVAL definitions to {0}'.format(args.filename))
-    OvalGenerator.write(args.filename)
+    message('info','writing OVAL definitions to {0}'.format(args['filename']))
+    OvalGenerator.write(args['filename'])
 
     # validate
-    if args.validate:
+    if args['validate']:
         # schema validate
         schema_path = lib_repo.get_oval_def_schema('5.11.1')
         message('info','performing schema validation')
         try:
-            lib_xml.schema_validate(args.filename, schema_path)
+            lib_xml.schema_validate(args['filename'], schema_path)
             message('info','schema validation successful')
         except lib_xml.SchemaValidationError as e:
             message('error','schema validation failed:\n\t{0}'.format(e.message))
 
+    if args['schematron']:
         # schematron validate
+        schema_path = lib_repo.get_oval_def_schema('5.11.1')
         message('info','performing schematron validation')
         try:
-            lib_xml.schematron_validate(args.filename, schema_path)
+            lib_xml.schematron_validate(args['filename'], schema_path)
             message('info','schematron validation successful')
         except lib_xml.SchematronValidationError as e:
             message('error','schematron validation failed:\n\t{0}'.format('\n\t'.join(e.messages)))

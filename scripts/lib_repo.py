@@ -8,11 +8,13 @@ and other files stored in this repository. Other code should use this library
 instead of making assumptions about how the repository content is organized.
 
 Available functions:
-- find_downstream_ids: gets list of ids downstream from provided OVAL id
 - oval_id_to_path: gets filepath corresponding to provided OVAL id
 - get_element_type_from_oval_id: gets element type from OVAL id string
-- get_root_path: gets root path for all files in this git repo
-- get_repository_root_path: returns full/real path to repo content root
+- get_definition_paths_iterator: get an iterator of all definition paths
+- get_element_paths_iterator: get an iterator of all OVAL element paths.
+- get_root_path: get full/real path for all files in this git repo
+- get_repository_root_path: get full/real path to repo content root
+- get_scripts_path: get full/real path for scripts folder
 - get_oval_def_schema: gets OVAL definitions schema file for specified schema version
 - get_oval_def_schematron: gets OVAL definitions schema file for specified schematron version
 - message: outputs a message to the CLI
@@ -22,31 +24,12 @@ TODO:
 """
 
 
-import pprint, inspect, os, os.path, sys
+import pprint, inspect, os, os.path, sys, glob
 import lib_xml
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
-
-
-def find_downstream_ids(parent_id, oval_ids=set()):
-    """ Recursively find a list of all OVAL ids downstream from the provided OVAL id. """
-    #message('info','checking {0} for oval refs'.format(parent_id))
-
-    # get oval refs in current OVAL element
-    path = oval_id_to_path(parent_id)
-    ids_in_file = lib_xml.get_id_refs_in_file(path)
-
-    for oval_id in ids_in_file:
-        # if already in set, skip it
-        if oval_id in oval_ids:
-            continue
-
-        # add id and all ids downstream from it
-        oval_ids.add(oval_id)
-        oval_ids = find_downstream_ids(oval_id, oval_ids)
-
-    return oval_ids
+supported_definition_statuses = ('ACCEPTED', 'DEPRECATED', 'DRAFT', 'INTERIM')
 
 
 def oval_id_to_path(oval_id):
@@ -81,6 +64,20 @@ def get_element_type_from_oval_id(oval_id):
     return element_type
 
 
+def get_definition_paths_iterator():
+    """ Returns an iterator of all definition paths. """
+    definitions_root = os.path.join(get_repository_root_path(), 'definitions')
+    for dirpath, dirnames, filenames in os.walk(definitions_root):
+        for filename in filenames:
+            yield os.path.join(dirpath, filename)
+
+def get_element_paths_iterator():
+    """ Returns an iterator of all OVAL element paths. """
+    elements_root = os.path.join(get_repository_root_path())
+    for dirpath, dirnames, filenames in os.walk(elements_root):
+        for filename in filenames:
+            yield os.path.join(dirpath, filename)
+
 def get_root_path():
     """ Gets root path. """
     global root_path
@@ -93,6 +90,11 @@ def get_root_path():
 def get_repository_root_path():
     """ Gets repository root path. """
     return os.path.realpath(get_root_path() + '/oval_repository/repository' )
+
+
+def get_scripts_path():
+    """ Gets scripts folder root path. """
+    return os.path.realpath(get_root_path() + '/scripts' )
 
 
 def get_oval_def_schema(schema_version='5.11.1'):
