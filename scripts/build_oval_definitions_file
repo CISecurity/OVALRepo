@@ -62,13 +62,13 @@ def main():
 
     # query index
     query_results = definitions_index.query(query)
-    message('info','Found {0} matching OVAL definitions'.format(len(query_results)))
     if not query_results:
-        message('info','Aborting')
+        message('info','No matching OVAL definitions found. Aborting.')
         sys.exit(0)
 
     # get set of all definition ids found
     definition_ids = { document['oval_id'] for document in query_results }
+    message('info','Found {0} matching OVAL definitions'.format(len(definition_ids)))
 
     # add all downstream element ids
     message('info','Finding downstream OVAL ids for all definitions')

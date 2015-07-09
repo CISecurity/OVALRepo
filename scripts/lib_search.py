@@ -209,9 +209,9 @@ class SearchIndex:
         position = count % length
         spinner = '|' + ('-' * position) + (' ' * (length - position)) + '>'
 
-        sys.stdout.write('\r{0}: {1} {2} {3}s'.format(task, spinner, count, label))
+        sys.stdout.write('\rINFO: {0} {1} {2} {3}s'.format(task, spinner, count, label))
         if (done):
-            sys.stdout.write('{0}\r{1} completed: {2} {3}s\n'.format('\b'*10, task, count, label))
+            sys.stdout.write('{0}\rINFO:{1} completed: {2} {3}s\n'.format('\b'*10, task, count, label))
 
         sys.stdout.flush()
 
