@@ -12,12 +12,14 @@ TODO:
 - add options to zip/tar the result file
 """
 
-import argparse, pprint, os, os.path, datetime, sys
+import argparse, pprint, os, os.path, datetime, sys, time
 import lib_repo, lib_xml, lib_search
 
 
 def main():
     """ parse command line options and generate file """
+    # get start_time
+    start_time = time.time()
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
@@ -111,7 +113,17 @@ def main():
         except lib_xml.SchematronValidationError as e:
             message('error','schematron validation failed:\n\t{0}'.format('\n\t'.join(e.messages)))
 
-    message('info','done!')
+    seconds_elapsed = time.time() - start_time
+    message('info','Completed in {0}!'.format(format_duration(seconds_elapsed)))
+
+
+def format_duration(seconds):
+    """ format a duration in seconds """
+    hours = int(seconds // 3600)
+    seconds = seconds - (hours * 3600)
+    minutes = int(seconds // 60)
+    seconds = int(seconds - (minutes * 60))
+    return '{0}:{1}:{2}'.format(hours, minutes, seconds)
 
 
 def message(type, message):
