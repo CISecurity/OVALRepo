@@ -20,7 +20,7 @@ $ brew install python3
 $ pip3 install lxml
 ```
 
-Prerequisites:
+Prerequisites for OSX:
  * Homebrew (http://brew.sh/) -- or install via command line:
  
  ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
