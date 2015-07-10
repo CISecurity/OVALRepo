@@ -50,7 +50,8 @@ def get_definition_metadata(filepath):
         'products': { product.text for product in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:product', namespaces=ns_map) },
         'contributors': { contributor.text for contributor in contributors },
         'organizations': { contributor.get('organization') for contributor in contributors },
-        'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) }
+        'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) },
+        'path' : filepath
     }
 
 
@@ -84,7 +85,8 @@ def get_element_metadata(filepath):
         'element_type': element_type,
         'description': description,
         'predicate': predicate,
-        'oval_refs': id_refs
+        'oval_refs': id_refs,
+        'path' : filepath
     }
 
 

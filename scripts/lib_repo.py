@@ -8,8 +8,9 @@ and other files stored in this repository. Other code should use this library
 instead of making assumptions about how the repository content is organized.
 
 Available functions:
-- oval_id_to_path: gets filepath corresponding to provided OVAL id
+- path_to_oval_id: gets OVAL id corresponding to provided path
 - get_element_type_from_oval_id: gets element type from OVAL id string
+- get_element_type_from_path: gets element type from path
 - get_definition_paths_iterator: get an iterator of all definition paths
 - get_element_paths_iterator: get an iterator of all OVAL element paths.
 - get_root_path: get full/real path for all files in this git repo
@@ -32,13 +33,11 @@ supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerabili
 supported_definition_statuses = ('ACCEPTED', 'DEPRECATED', 'DRAFT', 'INTERIM')
 
 
-def oval_id_to_path(oval_id):
-    """ Transform an oval_id to a path in the repo. """
-    repo_root = get_repository_root_path()
-    folder = get_element_type_from_oval_id(oval_id) + 's'
-    filename = oval_id.replace(':','_') + '.xml'
-
-    return '{0}/{1}/{2}'.format(repo_root, folder, filename)
+def path_to_oval_id(path):
+    """ Transform a path to an oval_id. """
+    file_name = os.path.basename(path)
+    oval_id = file_name.replace('_', ':')
+    return oval_id
 
 
 def get_element_type_from_oval_id(oval_id):
@@ -64,6 +63,11 @@ def get_element_type_from_oval_id(oval_id):
     return element_type
 
 
+def get_element_type_from_path(path):
+    """ Gets element type from path. """
+    return get_element_type_from_oval_id(path_to_oval_id(path))
+
+
 def get_definition_paths_iterator():
     """ Returns an iterator of all definition paths. """
     definitions_root = os.path.join(get_repository_root_path(), 'definitions')
@@ -71,12 +75,14 @@ def get_definition_paths_iterator():
         for filename in filenames:
             yield os.path.join(dirpath, filename)
 
+
 def get_element_paths_iterator():
     """ Returns an iterator of all OVAL element paths. """
     elements_root = os.path.join(get_repository_root_path())
     for dirpath, dirnames, filenames in os.walk(elements_root):
         for filename in filenames:
             yield os.path.join(dirpath, filename)
+
 
 def get_root_path():
     """ Gets root path. """
@@ -89,7 +95,7 @@ def get_root_path():
 
 def get_repository_root_path():
     """ Gets repository root path. """
-    return os.path.realpath(get_root_path() + '/oval_repository/repository' )
+    return os.path.realpath(get_root_path() + '/repository' )
 
 
 def get_scripts_path():

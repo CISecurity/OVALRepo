@@ -21,7 +21,13 @@ Available exceptions:
 - IndexQueryError: raised for index query errors.
 
 TODO:
-- TBD
+- Improve process for determining when/how to rebuild/update index so it doesn't require
+  everything to be committed, for example:
+    - when commit changes, delete all and rebuild all
+    - if commit is same, just update/rebuild all uncommitted files
+- the escaping and _stored value approach is working, but lame
+    - currently removing all special characters
+    - stored values don't seem to work for multi-value fields (KEYWORDS)
 """
 
 import os, os.path, shutil, inspect, datetime, random, re, pprint, sys
@@ -253,7 +259,8 @@ class DefinitionsIndex(SearchIndex):
             'products': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'contributors': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'organizations': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
-            'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True)
+            'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
+            'path': whoosh.fields.ID(stored=True)
         }
 
     def document_iterator(self):
@@ -278,7 +285,8 @@ class ElementsIndex(SearchIndex):
             'element_type': whoosh.fields.ID(stored=True),
             'description': whoosh.fields.STORED(),
             'predicate': whoosh.fields.ID(stored=True),
-            'oval_refs': whoosh.fields.KEYWORD(commas=True,scorable=True,stored=True)
+            'oval_refs': whoosh.fields.KEYWORD(commas=True,scorable=True,stored=True),
+            'path': whoosh.fields.ID(stored=True)
         }
 
     def document_iterator(self):
@@ -314,6 +322,23 @@ class ElementsIndex(SearchIndex):
             all_ids = self.find_downstream_ids(found_ids, all_ids)
 
         return all_ids
+
+    def get_paths_from_ids(self, ids):
+        """ Returns a list of paths for all given ids. """
+
+        # get unique ids as a set
+        if isinstance(ids, str):
+            ids = set([ids])
+        elif isinstance(ids, list):
+            ids = set(ids)
+
+        self.update()
+
+        # get all elements from index and extract their paths
+        documents = self.query({ 'oval_id': ids})
+        paths = [ document['path'] for document in documents ]
+        
+        return paths
 
 
 class Error(Exception):
