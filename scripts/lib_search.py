@@ -25,7 +25,7 @@ TODO:
 """
 
 import os, os.path, shutil, inspect, datetime, random, re, pprint, sys
-import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query
+import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query, whoosh.sorting
 import lib_repo, lib_xml, lib_git
 
 
@@ -44,8 +44,9 @@ class SearchIndex:
         """ constructor, set defaults for instances """
         self.message = message_method or self.message
         self.index_updated = False
+        self.no_output = False
 
-    def query(self, query_dict={}):
+    def query(self, query_dict={}, group_by=[]):
         """ Perform a query against an index. 
 
             query_dict: {
@@ -80,18 +81,27 @@ class SearchIndex:
                 # OR field values together and add to query_fields list
                 query_fields.append(whoosh.query.Or(field_values))
 
-        if not query_fields:
-            raise IndexQueryError('No fields with values found in query.')
+        if query_fields:
+            # create query by ANDing query_fields together
+            query = query_fields[0] if len(query_fields) == 1 else whoosh.query.And(query_fields)
+            #this.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
+        else:
+            query = whoosh.query.Every()
 
-        # create query by ANDing query_fields together
-        query = query_fields[0] if len(query_fields) == 1 else whoosh.query.And(query_fields)
-        #this.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
+        # assemble query args
+        query_kwargs = { 'scored': False, 'sortedby': False, 'terms': False }
+        if group_by:
+            query_kwargs['groupedby'] = group_by
+            query_kwargs['maptype'] = whoosh.sorting.Count
 
         # run query against index
         index = self.get_index()
         with index.searcher() as index_searcher:
-            results = index_searcher.search(query, scored=False, sortedby=False, terms=False)
-            return [result.fields() for result in results]
+            results = index_searcher.search(query, **query_kwargs)
+            if group_by:
+                return results.groups().copy()
+            else:
+                return [result.fields() for result in results]
             
     def update(self, force_rebuild=False):
         """ Adds/updates all items in repo to index. Note: querying will call this automatically."""
@@ -179,8 +189,8 @@ class SearchIndex:
 
     def whoosh_escape(self, s):
         """ Escape a string for whoosh. """
-        s = s.replace(',','')
-        return re.sub('[ :\[\]]','_', s)
+        s = s.replace(',','').strip()
+        return re.sub('[\s:\[\]]+','_', s)
 
     def whoosh_escape_document(self, document):
         """ Escape all document fields, adding _stored values where necessary. """
@@ -204,20 +214,23 @@ class SearchIndex:
         return document
 
     def status_spinner(self, count, task, label, done=False):
-        """ show a simple progress bar on the CLI """
+        """ show a simple spinner status update on the CLI """
         length = 5
         position = count % length
         spinner = '|' + ('-' * position) + (' ' * (length - position)) + '>'
 
         sys.stdout.write('\rINFO: {0} {1} {2} {3}s'.format(task, spinner, count, label))
-        if (done):
+        if done and self.no_output:
+            sys.stdout.write('\r{0}{1}'.format(' '*80, '\b'*80))
+        elif done:
             sys.stdout.write('{0}\rINFO: {1} completed ({2} {3}s)\n'.format('\b'*10, task, count, label))
 
         sys.stdout.flush()
 
     def message(type, message):
         """ print a message """
-        sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
+        if not self.no_output:
+            sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
 
 
 class DefinitionsIndex(SearchIndex):
@@ -248,6 +261,7 @@ class DefinitionsIndex(SearchIndex):
         for path in lib_repo.get_definition_paths_iterator():
             document = lib_xml.get_definition_metadata(path)
             document = self.whoosh_escape_document(document)
+    
             yield document
 
 

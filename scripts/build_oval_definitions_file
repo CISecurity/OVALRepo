@@ -18,17 +18,14 @@ import lib_repo, lib_xml, lib_search
 
 def main():
     """ parse command line options and generate file """
-    # get start_time
     start_time = time.time()
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
     output_options = parser.add_argument_group('output options')
     output_options.add_argument('-f', '--filename', required=True, help='file name for output OVAL definitions file')
-    output_options.add_argument('-v', '--validate', default=False, action="store_true",
-                        help='schema validate the output file')
-    output_options.add_argument('-s', '--schematron', default=False, action="store_true",
-                        help='schematron validate the output file')
+    output_options.add_argument('-v', '--validate', default=False, action="store_true", help='schema validate the output file')
+    output_options.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the output file')
     source_options = parser.add_argument_group('definitions filtering',
                                                'Provide at least one of the following options to determine which definition(s) ' +
                                                'will be included. Results will include the intersection of matches for each parameter ' +

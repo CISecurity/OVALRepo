@@ -75,9 +75,9 @@ def get_element_metadata(filepath):
         predicate = ''
         description = root.findtext('./oval-def:metadata/oval-def:title', namespaces=ns_map)
     else:
-        predicate = tag_components[1]
+        predicate = tag_components[0]
+        element_type = tag_components[1]
         description = root.get('comment') or ''
-        #sys.exit(0)
 
     return {
         'oval_id': root.get('id'),
