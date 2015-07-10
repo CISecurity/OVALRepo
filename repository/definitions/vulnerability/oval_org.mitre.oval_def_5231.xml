@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5231" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Parameter Validation Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4258" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4258"/>
+    <description>Microsoft Internet Explorer 5.01 SP4 and 6 SP1 does not properly validate parameters during calls to navigation methods, which allows remote attackers to execute arbitrary code via a crafted HTML document that triggers memory corruption, aka "Parameter Validation Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-12-09T13:31:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-12-12T16:42:51.615-05:00">DRAFT</status_change>
+        <status_change date="2008-12-29T04:00:18.065-05:00">INTERIM</status_change>
+        <status_change date="2009-01-19T04:00:06.589-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2800.1617" test_ref="oval:org.mitre.oval:tst:9607"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 5.01 SP4 is installed" definition_ref="oval:org.mitre.oval:def:325"/>
+      <criterion comment="Mshtml.dll version is less than 5.0.3870.1500" test_ref="oval:org.mitre.oval:tst:9553"/>
+    </criteria>
+  </criteria>
+</definition>

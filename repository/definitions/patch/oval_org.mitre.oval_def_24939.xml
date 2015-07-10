@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24939" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0474: struts security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>struts</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0474-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0474.html" source="VENDOR"/>
+    <reference ref_id="CVE-2014-0114" ref_url="http://linux.oracle.com/cve/CVE-2014-0114.html" source="CVE"/>
+    <description>Apache Struts is a framework for building web applications with Java.
+It was found that the Struts 1 ActionForm object allowed access to the
+'class' parameter, which is directly mapped to the getClass() method. A
+remote attacker could use this flaw to manipulate the ClassLoader used by
+an application server running Struts 1. This could lead to remote code
+execution under certain conditions. (CVE-2014-0114)
+All struts users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue. All running applications
+using struts must be restarted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-25T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </submitted>
+        <status_change date="2014-07-10T11:45:54.733-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24939 - modified Oracle Linux content" date="2014-07-23T14:34:00.918-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-11T04:00:38.586-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:02:53.597-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="struts-manual is earlier than 0:1.2.9-4jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:115352"/>
+      <criterion comment="struts is earlier than 0:1.2.9-4jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:115666"/>
+      <criterion comment="struts-javadoc is earlier than 0:1.2.9-4jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:115045"/>
+      <criterion comment="struts-webapps-tomcat5 is earlier than 0:1.2.9-4jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:115613"/>
+    </criteria>
+  </criteria>
+</definition>

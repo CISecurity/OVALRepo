@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12168" version="11" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running OpenSSL, Remote Unauthorized Information Disclosure, Unauthorized Data Modification, Denial of Service (DoS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-4355" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4355"/>
+    <description>Memory leak in the zlib_stateful_finish function in crypto/comp/c_zlib.c in OpenSSL 0.9.8l and earlier and 1.0.0 Beta through Beta 4 allows remote attackers to cause a denial of service (memory consumption) via vectors that trigger incorrect calls to the CRYPTO_cleanup_all_ex_data function, as demonstrated by use of SSLv3 and PHP with the Apache HTTP Server, a related issue to CVE-2008-1678.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-25T16:38:57.000-05:00">
+          <contributor organization="Hewlett-Packard">Varun Narula</contributor>
+        </submitted>
+        <status_change date="2010-10-29T13:17:15.272-04:00">DRAFT</status_change>
+        <status_change date="2010-11-15T04:00:22.087-05:00">INTERIM</status_change>
+        <status_change date="2010-12-06T04:00:32.899-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:40.860-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:00:20.709-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:35:10.526-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:00:14.754-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:37:02.531-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:00:17.491-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02517">
+      <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="openssl.OPENSSL-CER version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41559"/>
+        <criterion comment="openssl.OPENSSL-CONF version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41618"/>
+        <criterion comment="openssl.OPENSSL-DOC version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41085"/>
+        <criterion comment="openssl.OPENSSL-INC version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41789"/>
+        <criterion comment="openssl.OPENSSL-LIB version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41466"/>
+        <criterion comment="openssl.OPENSSL-MAN version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41257"/>
+        <criterion comment="openssl.OPENSSL-MIS version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41057"/>
+        <criterion comment="openssl.OPENSSL-PRNG version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41422"/>
+        <criterion comment="openssl.OPENSSL-PVT version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41130"/>
+        <criterion comment="openssl.OPENSSL-SRC version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41058"/>
+        <criterion comment="openssl.OPENSSL-RUN version is less than A.00.09.08n.002" test_ref="oval:org.mitre.oval:tst:41452"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02517">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="openssl.OPENSSL-CER version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:40874"/>
+        <criterion comment="openssl.OPENSSL-CONF version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41619"/>
+        <criterion comment="openssl.OPENSSL-DOC version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41791"/>
+        <criterion comment="openssl.OPENSSL-INC version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:40969"/>
+        <criterion comment="openssl.OPENSSL-LIB version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41711"/>
+        <criterion comment="openssl.OPENSSL-MAN version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41414"/>
+        <criterion comment="openssl.OPENSSL-MIS version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41668"/>
+        <criterion comment="openssl.OPENSSL-PRNG version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41120"/>
+        <criterion comment="openssl.OPENSSL-SRC version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41439"/>
+        <criterion comment="openssl.OPENSSL-PVT version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:41451"/>
+        <criterion comment="openssl.OPENSSL-RUN version is less than A.00.09.08n.001" test_ref="oval:org.mitre.oval:tst:40891"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02517">
+      <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="openssl.OPENSSL-CER version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41851"/>
+        <criterion comment="openssl.OPENSSL-CONF version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:40958"/>
+        <criterion comment="openssl.OPENSSL-DOC version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41206"/>
+        <criterion comment="openssl.OPENSSL-INC version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41092"/>
+        <criterion comment="openssl.OPENSSL-LIB version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41026"/>
+        <criterion comment="openssl.OPENSSL-MAN version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41806"/>
+        <criterion comment="openssl.OPENSSL-MIS version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41710"/>
+        <criterion comment="openssl.OPENSSL-PRNG version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41066"/>
+        <criterion comment="openssl.OPENSSL-PVT version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41078"/>
+        <criterion comment="openssl.OPENSSL-SRC version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41038"/>
+        <criterion comment="openssl.OPENSSL-RUN version is less than A.00.09.08n.003" test_ref="oval:org.mitre.oval:tst:41763"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

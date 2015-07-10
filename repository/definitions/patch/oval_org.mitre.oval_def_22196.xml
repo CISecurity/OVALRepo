@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22196" version="42" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0162: openssl security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0162-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0162.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0162"/>
+    <reference source="CVE" ref_id="CVE-2009-3245" ref_url="https://www.redhat.com/security/data/cve/CVE-2009-3245.html"/>
+    <reference source="CVE" ref_id="CVE-2009-3555" ref_url="https://www.redhat.com/security/data/cve/CVE-2009-3555.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0433" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0433.html"/>
+    <description>The kssl_keytab_is_available function in ssl/kssl.c in OpenSSL before 0.9.8n, when Kerberos is enabled but Kerberos configuration files cannot be opened, does not check a certain return value, which allows remote attackers to cause a denial of service (NULL pointer dereference and daemon crash) via SSL cipher negotiation, as demonstrated by a chroot installation of Dovecot or stunnel without Kerberos configuration files inside the chroot.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:46:08.770-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:30.311-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:54.783-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="openssl is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:98756"/>
+      <criterion comment="openssl-perl is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:99266"/>
+      <criterion comment="openssl-devel is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:99133"/>
+    </criteria>
+  </criteria>
+</definition>

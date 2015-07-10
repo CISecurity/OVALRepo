@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16599" version="10" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in HTML sanitization component could allow elevation of privilege - MS13-035</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft InfoPath 2010</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft SharePoint Foundation 2010</product>
+      <product>Microsoft SharePoint Server 2010</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-1289" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1289"/>
+    <description>Cross-site scripting (XSS) vulnerability in Microsoft SharePoint Server 2010 SP1, Groove Server 2010 SP1, SharePoint Foundation 2010 SP1, and Office Web Apps 2010 SP1 allows remote attackers to inject arbitrary web script or HTML via a crafted string, aka "HTML Sanitization Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-04-12T08:44:03">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-04-15T21:15:15.578-04:00">DRAFT</status_change>
+        <status_change date="2013-05-06T04:02:35.630-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:16599 - This update will prevent a false negative when MS Office 2010 is installed but not InfoPath." date="2013-05-09T09:43:00.911-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-05-27T04:00:12.991-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:157 - New defs for Office 2010 SP2 and multiple platform updates" date="2013-08-14T09:59:00.133-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-08-14T10:04:55.144-04:00">INTERIM</status_change>
+        <status_change date="2013-09-02T04:00:36.552-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:11.552-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:06:00.283-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1390 - November 2014 bulletins." date="2014-11-17T17:25:00.386-05:00">
+          <contributor organization="SecPod Technologies">Kumarswamy S</contributor>
+        </modified>
+        <status_change date="2014-11-17T17:29:48.842-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:13.349-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="groove server/versions">
+      <criterion comment="Check if the version of groovers.dll is less than 14.0.6126.5000" test_ref="oval:org.mitre.oval:tst:81041"/>
+      <extend_definition comment="Microsoft Groove Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15227"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2010/version">
+      <criterion comment="Check if the version of Microsoft.office.server.dll is less than 14.0.6128.5000" test_ref="oval:org.mitre.oval:tst:81040"/>
+      <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15614"/>
+    </criteria>
+    <criteria operator="AND" comment="office web apps 2010/version">
+      <criterion comment="Check if the version of Msoserver.dll is less than 14.0.6134.5000" test_ref="oval:org.mitre.oval:tst:80364"/>
+      <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15860"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint foundation 2010/version">
+      <criterion comment="Check if the version of Onfda.dll is less than 14.0.6137.5000" test_ref="oval:org.mitre.oval:tst:81001"/>
+      <extend_definition comment="Microsoft SharePoint Foundation 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15661"/>
+    </criteria>
+    <criteria operator="AND" comment="office infopath 2010/version (KB2687422)">
+      <criterion comment="Check if the version of infopath.exe is less than 14.0.6134.5004" test_ref="oval:org.mitre.oval:tst:80688"/>
+      <extend_definition comment="Microsoft InfoPath 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15934"/>
+    </criteria>
+    <criteria operator="AND" comment="Ipeditor.dll shared component of Microsoft Office (KB2760406)">
+      <criterion comment="Check if the version of Ipeditor.dll is less than 14.0.6134.5004" test_ref="oval:org.mitre.oval:tst:80968"/>
+    </criteria>
+  </criteria>
+</definition>

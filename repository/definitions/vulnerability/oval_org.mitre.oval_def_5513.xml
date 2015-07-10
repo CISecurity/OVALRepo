@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5513" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX running Apache, Remote Arbitrary Code Execution, Cross Site Scripting (XSS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-0774" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0774"/>
+    <description>Stack-based buffer overflow in the map_uri_to_worker function (native/common/jk_uri_worker_map.c) in mod_jk.so for Apache Tomcat JK Web Server Connector 1.2.19 and 1.2.20, as used in Tomcat 4.1.34 and 5.5.20, allows remote attackers to execute arbitrary code via a long URL that triggers the overflow in a URI worker map routine.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-10-30T17:10:24.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-10-31T15:25:07.894-04:00">DRAFT</status_change>
+        <status_change date="2008-11-17T04:00:28.471-05:00">INTERIM</status_change>
+        <status_change date="2008-12-08T04:00:53.959-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:54.689-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:41.684-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:35:52.916-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:27.071-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:37:21.974-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:02:25.877-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02262">
+      <criteria operator="OR" comment="platforms">
+        <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+        <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+        <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      </criteria>
+      <criterion comment="hpuxwsAPACHE version is less than B.2.0.59.00" test_ref="oval:org.mitre.oval:tst:9217"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02262">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="hpuxwsAPACHE version is less than A.2.0.59.00" test_ref="oval:org.mitre.oval:tst:9178"/>
+    </criteria>
+  </criteria>
+</definition>

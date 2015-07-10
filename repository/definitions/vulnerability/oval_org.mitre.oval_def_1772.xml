@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1772" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in the rcp(1) Command May Allow Execution of Unintended Commands</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3717" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3717"/>
+    <description>rcp on Sun Solaris 8, 9, and 10 before 20070710 does not properly call certain helper applications, which allows local users to gain privileges by creating files with certain names, possibly containing shell metacharacters or spaces, a similar issue to CVE-2006-0225.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-07-12T12:19:52.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-07-16T08:59:43.133-04:00">DRAFT</status_change>
+        <status_change date="2007-08-01T22:26:14.652-04:00">INTERIM</status_change>
+        <status_change date="2007-08-20T08:04:38.771-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 8 Installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criteria operator="AND" comment="Patch 110670-04 and 114669-04 or later installed" negate="true">
+        <criterion comment="Patch 110670-04 or later installed" test_ref="oval:org.mitre.oval:tst:3292" negate="false"/>
+        <criterion comment="Patch 114669-04 or later installed" test_ref="oval:org.mitre.oval:tst:3763" negate="false"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 8 Installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criteria operator="AND" comment="Patch 110671-04 and 114670-04 or later installed" negate="true">
+        <criterion comment="Patch 110671-04 or later installed" test_ref="oval:org.mitre.oval:tst:3592" negate="false"/>
+        <criterion comment="Patch 114670-04 or later installed" test_ref="oval:org.mitre.oval:tst:3608" negate="false"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 9 Installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 114716-05 or later installed" test_ref="oval:org.mitre.oval:tst:3667" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 9 Installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 114717-05 or later installed" test_ref="oval:org.mitre.oval:tst:3799" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 10 Installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 121132-03 or later installed" test_ref="oval:org.mitre.oval:tst:3927" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102978" negate="false">
+      <extend_definition comment="Solaris 10 Installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 125794-02 or later installed" test_ref="oval:org.mitre.oval:tst:4051" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

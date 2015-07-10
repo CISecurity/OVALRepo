@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27147" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1749 -- libxml2 security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1749.html" ref_id="RHSA-2011:1749"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4008" ref_id="CVE-2010-4008"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4494" ref_id="CVE-2010-4494"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0216" ref_id="CVE-2011-0216"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1944" ref_id="CVE-2011-1944"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2821" ref_id="CVE-2011-2821"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2834" ref_id="CVE-2011-2834"/>
+    <description>The libxml2 library is a development toolbox providing the implementation
+of various XML standards. One of those standards is the XML Path Language
+(XPath), which is a language for addressing parts of an XML document.
+
+An off-by-one error, leading to a heap-based buffer overflow, was found in
+the way libxml2 parsed certain XML files. A remote attacker could provide
+a specially-crafted XML file that, when opened in an application linked
+against libxml2, would cause the application to crash or, potentially,
+execute arbitrary code with the privileges of the user running the
+application. (CVE-2011-0216)
+
+An integer overflow flaw, leading to a heap-based buffer overflow, was
+found in the way libxml2 parsed certain XPath expressions. If an attacker
+were able to supply a specially-crafted XML file to an application using
+libxml2, as well as an XPath expression for that application to run against
+the crafted file, it could cause the application to crash or, possibly,
+execute arbitrary code. (CVE-2011-1944)
+
+Multiple flaws were found in the way libxml2 parsed certain XPath
+expressions. If an attacker were able to supply a specially-crafted XML
+file to an application using libxml2, as well as an XPath expression for
+that application to run against the crafted file, it could cause the
+application to crash. (CVE-2010-4008, CVE-2010-4494, CVE-2011-2821,
+CVE-2011-2834)
+
+Note: Red Hat does not ship any applications that use libxml2 in a way that
+would allow the CVE-2011-1944, CVE-2010-4008, CVE-2010-4494, CVE-2011-2821,
+and CVE-2011-2834 flaws to be exploited; however, third-party applications
+may allow XPath expressions to be passed which could trigger these flaws.
+
+Red Hat would like to thank the Google Security Team for reporting the
+CVE-2010-4008 issue. Upstream acknowledges Bui Quang Minh from Bkis as the
+original reporter of CVE-2010-4008.
+
+This update also fixes the following bugs:
+
+* A number of patches have been applied to harden the XPath processing code
+in libxml2, such as fixing memory leaks, rounding errors, XPath numbers
+evaluations, and a potential error in encoding conversion. (BZ#732335)
+
+All users of libxml2 are advised to upgrade to these updated packages,
+which contain backported patches to correct these issues. The desktop must
+be restarted (log out, then log back in) for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:16:08">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:47:48.711-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:50.318-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:39.463-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libxml2 is earlier than 0:2.7.6-4.el6" test_ref="oval:org.mitre.oval:tst:125769"/>
+      <criterion comment="libxml2-debuginfo is earlier than 0:2.7.6-4.el6" test_ref="oval:org.mitre.oval:tst:126231"/>
+      <criterion comment="libxml2-devel is earlier than 0:2.7.6-4.el6" test_ref="oval:org.mitre.oval:tst:126052"/>
+      <criterion comment="libxml2-python is earlier than 0:2.7.6-4.el6" test_ref="oval:org.mitre.oval:tst:126157"/>
+      <criterion comment="libxml2-static is earlier than 0:2.7.6-4.el6" test_ref="oval:org.mitre.oval:tst:126278"/>
+    </criteria>
+  </criteria>
+</definition>

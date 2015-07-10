@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9782" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The APOP protocol allows remote attackers to guess the first 3 characters of a password via man-in-the-middle (MITM) attacks that use crafted message IDs and MD5 collisions.  NOTE: this design-level issue potentially affects all products that use APOP, including (1) Thunderbird 1.x before 1.5.0.12 and 2.x before 2.0.0.4, (2) Evolution, (3) mutt, (4) fetchmail before 6.3.8, (5) SeaMonkey 1.0.x before 1.0.9 and 1.1.x before 1.1.2, (6) Balsa 2.3.16 and earlier, (7) Mailfilter before 0.8.2, and possibly other products.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-1558" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1558"/>
+    <description>The APOP protocol allows remote attackers to guess the first 3 characters of a password via man-in-the-middle (MITM) attacks that use crafted message IDs and MD5 collisions.  NOTE: this design-level issue potentially affects all products that use APOP, including (1) Thunderbird 1.x before 1.5.0.12 and 2.x before 2.0.0.4, (2) Evolution, (3) mutt, (4) fetchmail before 6.3.8, (5) SeaMonkey 1.0.x before 1.0.9 and 1.1.x before 1.1.2, (6) Balsa 2.3.16 and earlier, (7) Mailfilter before 0.8.2, and possibly other products.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:16:09.833-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:14:04.090-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:15:10.847-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9782 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:24:00.823-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:30:51.507-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:22:08.786-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="seamonkey-nspr is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34409"/>
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34257"/>
+        <criterion comment="seamonkey-nss-devel is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34432"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:33988"/>
+        <criterion comment="seamonkey-nspr-devel is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:33721"/>
+        <criterion comment="evolution is earlier than 0:1.4.5-20.el3" test_ref="oval:org.mitre.oval:tst:34258"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:33693"/>
+        <criterion comment="fetchmail is earlier than 0:6.2.0-3.el3.4" test_ref="oval:org.mitre.oval:tst:34132"/>
+        <criterion comment="mutt is earlier than 5:1.4.1-5.el3" test_ref="oval:org.mitre.oval:tst:34296"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34313"/>
+        <criterion comment="seamonkey-nss is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34228"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:34281"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-0.1.el3" test_ref="oval:org.mitre.oval:tst:33894"/>
+        <criterion comment="evolution-devel is earlier than 0:1.4.5-20.el3" test_ref="oval:org.mitre.oval:tst:33933"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:33844"/>
+        <criterion comment="seamonkey-nss-devel is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34334"/>
+        <criterion comment="irb is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38549"/>
+        <criterion comment="seamonkey-nss is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34366"/>
+        <criterion comment="devhelp-devel is earlier than 0:0.10-0.8.el4" test_ref="oval:org.mitre.oval:tst:33625"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38591"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38694"/>
+        <criterion comment="seamonkey-nspr is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:33931"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38715"/>
+        <criterion comment="thunderbird is earlier than 0:1.5.0.12-0.1.el4" test_ref="oval:org.mitre.oval:tst:34331"/>
+        <criterion comment="ruby is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38864"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38837"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34021"/>
+        <criterion comment="seamonkey-nspr-devel is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34249"/>
+        <criterion comment="devhelp is earlier than 0:0.10-0.8.el4" test_ref="oval:org.mitre.oval:tst:34293"/>
+        <criterion comment="evolution is earlier than 0:2.0.2-35.0.2.el4" test_ref="oval:org.mitre.oval:tst:34046"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34446"/>
+        <criterion comment="mutt is earlier than 5:1.4.1-12.0.3.el4" test_ref="oval:org.mitre.oval:tst:34260"/>
+        <criterion comment="fetchmail is earlier than 0:6.2.5-6.0.1.el4" test_ref="oval:org.mitre.oval:tst:33955"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38523"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34262"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:33994"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-2.el4" test_ref="oval:org.mitre.oval:tst:34322"/>
+        <criterion comment="evolution-devel is earlier than 0:2.0.2-35.0.2.el4" test_ref="oval:org.mitre.oval:tst:34116"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="ruby-ri is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38178"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38751"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38045"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38362"/>
+        <criterion comment="thunderbird is earlier than 0:1.5.0.12-1.el5" test_ref="oval:org.mitre.oval:tst:33979"/>
+        <criterion comment="ruby is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38133"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38911"/>
+        <criterion comment="evolution-data-server-devel is earlier than 0:1.8.0-15.0.3.el5" test_ref="oval:org.mitre.oval:tst:33399"/>
+        <criterion comment="evolution-data-server is earlier than 0:1.8.0-15.0.3.el5" test_ref="oval:org.mitre.oval:tst:34181"/>
+        <criterion comment="fetchmail is earlier than 0:6.3.6-1.0.1.el5" test_ref="oval:org.mitre.oval:tst:34122"/>
+        <criterion comment="mutt is earlier than 5:1.4.2.2-3.0.2.el5" test_ref="oval:org.mitre.oval:tst:34241"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38738"/>
+        <criterion comment="ruby-rdoc is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38762"/>
+        <criterion comment="ruby-irb is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38574"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

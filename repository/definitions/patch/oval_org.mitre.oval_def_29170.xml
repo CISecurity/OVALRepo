@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29170" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1561 -- libvorbis security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>libvorbis</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1561.html" ref_id="RHSA-2009:1561"/>
+    <reference source="CESA-2009:1561" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-November/016308.html" ref_id="CESA-2009:1561-CentOS 3"/>
+    <reference source="CESA-2009:1561" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-November/016323.html" ref_id="CESA-2009:1561-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3379" ref_id="CVE-2009-3379"/>
+    <description>Updated libvorbis packages that fix multiple security issues are now
+available for Red Hat Enterprise Linux 3, 4, and 5.
+This update has been rated as having important security impact by the Red
+Hat Security Response Team.
+The libvorbis packages contain runtime libraries for use in programs that
+support Ogg Vorbis. Ogg Vorbis is a fully open, non-proprietary, patent-and
+royalty-free, general-purpose compressed audio format.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:52:35">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:49.325-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libvorbis-devel is earlier than 1:1.1.2-3.el5_4.4" test_ref="oval:org.mitre.oval:tst:139939"/>
+        <criterion comment="libvorbis is earlier than 1:1.1.2-3.el5_4.4" test_ref="oval:org.mitre.oval:tst:139936"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 3 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libvorbis is earlier than 1:1.0-12.el3" test_ref="oval:org.mitre.oval:tst:140266"/>
+        <criterion comment="libvorbis-devel is earlier than 1:1.0-12.el3" test_ref="oval:org.mitre.oval:tst:140206"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libvorbis is earlier than 1:1.1.0-3.el4_8.3" test_ref="oval:org.mitre.oval:tst:140124"/>
+        <criterion comment="libvorbis-devel is earlier than 1:1.1.0-3.el4_8.3" test_ref="oval:org.mitre.oval:tst:140011"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24663" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2164-1 -- openssh vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 13.10</platform>
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>openssh</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2164-1/" ref_id="USN-2164-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2653" ref_id="CVE-2014-2653"/>
+    <description>A malicious server could bypass OpenSSH SSHFP DNS record checking.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-11T10:30:03">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-04-23T10:31:03.925-04:00">DRAFT</status_change>
+        <status_change date="2014-05-12T04:00:59.614-04:00">INTERIM</status_change>
+        <status_change date="2014-06-02T04:00:19.782-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24663 - Ubuntu Patch Update" date="2014-07-01T12:10:00.247-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-07-01T12:12:32.131-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:29.857-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 13.10 release section">
+      <extend_definition comment="Ubuntu 13.10 is installed" definition_ref="oval:org.mitre.oval:def:19244"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:6.2p2-6ubuntu0.3" test_ref="oval:org.mitre.oval:tst:113891"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.10 release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:6.0p1-3ubuntu1.2" test_ref="oval:org.mitre.oval:tst:113924"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:5.9p1-5ubuntu1.3" test_ref="oval:org.mitre.oval:tst:113936"/>
+    </criteria>
+  </criteria>
+</definition>

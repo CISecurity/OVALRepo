@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19214" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2504-1 libspring-2.5-java - information disclosure</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>libspring-2.5-java</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2504-1" ref_id="DSA-2504-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2730" ref_id="CVE-2011-2730"/>
+    <description>It was discovered that the Spring Framework contains an information disclosure vulnerability in the processing of certain Expression Language (EL) patterns, allowing attackers to access sensitive information using HTTP requests.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T10:22:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-06T14:49:35.292-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:04.380-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:00:15.821-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19214 - Debian Patch Update" date="2014-06-06T17:29:00.238-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:31:11.052-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:05:35.142-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="libspring-2.5-java DPKG is earlier than 0:2.5.6.SEC02-2+squeeze1" test_ref="oval:org.mitre.oval:tst:89313"/>
+  </criteria>
+</definition>

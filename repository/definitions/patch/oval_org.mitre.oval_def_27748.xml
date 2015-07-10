@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27748" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2010-0162 -- openssl security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2010-0162.html" ref_id="ELSA-2010-0162"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0433" ref_id="CVE-2010-0433"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3245" ref_id="CVE-2009-3245"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" ref_id="CVE-2009-3555"/>
+    <description>[0.9.8e-12.6]
+- fix CVE-2009-3245 - add missing bn_wexpand return checks (#570924)
+
+[0.9.8e-12.5]
+- fix CVE-2010-0433 - do not pass NULL princ to krb5_kt_get_entry which
+  in the RHEL-5 and newer versions will crash in such case (#569774)
+
+[0.9.8e-12.4]
+- do not disable SSLv2 in the renegotiation patch - SSLv2 does
+  not support renegotiation
+- allow unsafe renegotiation on clients with SSL_OP_LEGACY_SERVER_CONNECT
+
+[0.9.8e-12.3]
+- mention the RFC5746 in the CVE-2009-3555 doc
+
+[0.9.8e-12.2]
+- fix CVE-2009-3555 - support the safe renegotiation extension and
+  do not allow legacy renegotiation on the server by default (#533125)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:26:14">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:05:49.342-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:06:01.092-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:51.141-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T19:24:25.951-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T19:24:25.951-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="openssl is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:134773"/>
+      <criterion comment="openssl-devel is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:135228"/>
+      <criterion comment="openssl-perl is earlier than 0:0.9.8e-12.el5_4.6" test_ref="oval:org.mitre.oval:tst:135263"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11748" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IML32.dll in Adobe Shockwave Player before 11.5.9.615 allows attackers to arbitrary code execution or cause a denial of service</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Adobe Shockwave Player</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-4089" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4089"/>
+    <description>IML32.dll in Adobe Shockwave Player before 11.5.9.615 allows attackers to execute arbitrary code or cause a denial of service (memory corruption) via a .dir file containing "duplicated LCSM entries in mmap record," a different vulnerability than CVE-2010-4087.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-11-22T12:30:17">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-11-24T11:52:57.321-05:00">DRAFT</status_change>
+        <status_change date="2010-12-13T04:00:04.555-05:00">INTERIM</status_change>
+        <status_change date="2011-01-03T04:00:07.193-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1240 - Removed the trailing \ from all local_variables that are used as paths in a file_object" date="2011-08-03T08:25:00.425-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-08-03T08:28:26.910-04:00">INTERIM</status_change>
+        <status_change date="2011-08-22T04:00:12.018-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15325 - For 64-bit systems, all files are placed in syswow64-branch. And also check=&quot;all&quot; was replaced on check=&quot;at least one&quot; in tests." date="2014-10-24T13:15:00.008-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-10-24T13:16:57.999-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:00:19.641-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Adobe Shockwave Player is installed" definition_ref="oval:org.mitre.oval:def:5990"/>
+    <criteria operator="OR" comment="Version of iml32.dll in either Adobe or Macromedia Shockwave Player is less than 11.5.9.615">
+      <criterion comment="Check if the version of iml32.dll in Macromedia Shockwave Player is less than 11.5.9.615" test_ref="oval:org.mitre.oval:tst:41645"/>
+      <criterion comment="Check if the version of iml32.dll in Adobe Shockwave Player is less than 11.5.9.615" test_ref="oval:org.mitre.oval:tst:41642"/>
+    </criteria>
+  </criteria>
+</definition>

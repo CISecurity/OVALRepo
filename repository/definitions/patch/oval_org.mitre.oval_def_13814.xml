@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13814" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1755-1 systemtap -- race condition</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>systemtap</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00065.html" ref_id="DSA-1755-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0784" ref_id="CVE-2009-0784"/>
+    <description>Erik Sjoelund discovered that a race condition in the stap tool shipped by Systemtap, an instrumentation system for Linux 2.6, allows local privilege escalation for members of the stapusr group. The old stable distribution isn’t affected. For the stable distribution, this problem has been fixed in version 0.0.20080705-1+lenny1. For the unstable distribution, this problem has been fixed in version 0.0.20090314-2. We recommend that you upgrade your systemtap package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:22.845-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:04:05.818-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:11:43.769-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13814 - Debian Patch Update" date="2014-06-06T16:51:00.206-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:52:57.368-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:07.143-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Supported architectures section">
+      <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+      <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+      <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+      <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+      <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+    </criteria>
+    <criterion comment="systemtap DPKG is earlier than 0.0.20080705-1+lenny1" test_ref="oval:org.mitre.oval:tst:52330"/>
+  </criteria>
+</definition>

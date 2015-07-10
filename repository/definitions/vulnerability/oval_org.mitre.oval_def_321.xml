@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:321" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Media Player Directory Traversal</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Windows Media Player for Windows XP</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0228" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0228"/>
+    <description>Directory traversal vulnerability in Microsoft Windows Media Player 7.1 and Windows Media Player for Windows XP allows remote attackers to execute arbitrary code via a skins file with a URL containing hex-encoded backslash characters (%5C) that causes an executable to be placed in an arbitrary location.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-11-26T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <status_change date="2004-03-09T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:48:19.187-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:01:17.759-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:15.825-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:10:59.886-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Windows Media Player for Windows XP is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2727"/>
+    <criterion comment="the version of wmplayer.exe is less than 8.0.0.4490" negate="false" test_ref="oval:org.mitre.oval:tst:2700"/>
+    <criterion comment="Patch WindowsMedia8-KB817787-x86-ENU.exe Installed" negate="true" test_ref="oval:org.mitre.oval:tst:2699"/>
+  </criteria>
+</definition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11779" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX running AudFilter rules enabled, Local Denial of Service (DoS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-1030" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1030"/>
+    <description>Unspecified vulnerability in HP-UX B.11.31, with AudFilter rules enabled, allows local users to cause a denial of service via unknown vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-27T13:20:29.000-05:00">
+          <contributor organization="Hewlett-Packard">Aslesha Nargolkar</contributor>
+        </submitted>
+        <status_change date="2010-10-29T13:16:47.734-04:00">DRAFT</status_change>
+        <status_change date="2010-11-15T04:00:09.349-05:00">INTERIM</status_change>
+        <status_change date="2010-12-06T04:00:12.937-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:33:42.151-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:00:08.659-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:36:25.565-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:00:09.914-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+    <criteria operator="OR" comment="filesets tests">
+      <criterion comment="ProgSupport.C-INC is installed" test_ref="oval:org.mitre.oval:tst:41807"/>
+      <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:41847"/>
+    </criteria>
+    <criterion negate="true" comment="Patch PHKL_40845 is installed" test_ref="oval:org.mitre.oval:tst:41497"/>
+  </criteria>
+</definition>

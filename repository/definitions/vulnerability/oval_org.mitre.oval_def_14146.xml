@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14146" version="13" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Multiple unspecified vulnerabilities in the Macromedia Flash ActiveX control in Adobe Flash Player 6, as distributed in Microsoft Windows XP SP2 and SP3, might allow remote attackers to execute arbitrary code via unspecified vectors that are not related to the use-after-free "Movie Unloading Vulnerability" (CVE-2010-0378).  NOTE: due to lack of details, it is not clear whether this overlaps any other CVE item.</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <product>Adobe Flash Player</product>
+    </affected>
+    <reference ref_id="CVE-2010-0379" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0379" source="CVE"/>
+    <description>Multiple unspecified vulnerabilities in the Macromedia Flash ActiveX control in Adobe Flash Player 6, as distributed in Microsoft Windows XP SP2 and SP3, might allow remote attackers to execute arbitrary code via unspecified vectors that are not related to the use-after-free "Movie Unloading Vulnerability" (CVE-2010-0378).  NOTE: due to lack of details, it is not clear whether this overlaps any other CVE item.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-11-25T18:28:26.000-05:00">
+          <contributor organization="DTCC">Scott Quint</contributor>
+        </submitted>
+        <status_change date="2011-12-05T11:24:11.673-05:00">DRAFT</status_change>
+        <status_change date="2011-12-26T04:01:07.979-05:00">INTERIM</status_change>
+        <status_change date="2012-01-16T04:01:19.480-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:77656 - Replaced references to duplicate Objects. Fixed references to Adobe Flash Player that incorrectly checked Adobe Acrobat 9." date="2012-12-12T17:23:00.847-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-12-12T17:28:22.147-05:00">INTERIM</status_change>
+        <status_change date="2012-12-31T04:00:51.369-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:7290 - Check 32 and 64 bit registries." date="2013-06-11T12:05:00.215-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-06-11T12:09:45.244-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:77137 - the attached files contain vulnerability for Adobe Flash Player (CVE-2013-3343)" date="2013-06-19T16:29:00.976-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-07-08T04:00:51.543-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:7290 - Modificated object oval:org.mitre.oval:obj:7290" date="2013-12-02T15:23:00.894-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:25:17.667-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:24.666-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:77656 - The test that checks the version of Flash.*.ocx file has been added in all Adobe Flash Player vulnerabilities" date="2014-09-05T14:30:00.797-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-05T14:33:48.843-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14146 - checks the version of Flash .ocx" date="2014-09-19T14:57:00.696-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-10-06T04:01:13.395-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Determine if the version of Adobe Flash Player is less than or equal 6.0.79 and is greater than or equal 6.0.21.0">
+      <extend_definition comment="Adobe Flash Player is installed" definition_ref="oval:org.mitre.oval:def:6700"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is less than or equal 6.0.79" test_ref="oval:org.mitre.oval:tst:77137"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is greater than or equal 6.0.21.0" test_ref="oval:org.mitre.oval:tst:77656"/>
+    </criteria>
+    <criteria operator="AND" comment="Flash.ocx 6 section">
+      <criterion comment="Determine if the version of Flash.ocx is less than or equal 6.0.79" test_ref="oval:org.mitre.oval:tst:123705"/>
+      <criterion comment="Determine if the version of Flash.ocx is greater than or equal 6.0.21.0" test_ref="oval:org.mitre.oval:tst:123224"/>
+    </criteria>
+  </criteria>
+</definition>

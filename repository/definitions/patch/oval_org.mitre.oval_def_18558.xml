@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18558" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2555-1 libxslt - several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>libxslt</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2555-1" ref_id="DSA-2555-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2870" ref_id="CVE-2012-2870"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2871" ref_id="CVE-2012-2871"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2893" ref_id="CVE-2012-2893"/>
+    <description>Nicholas Gregoire and Cris Neckar discovered several memory handling bugs in libxslt, which could lead to denial of service or the execution of arbitrary code if a malformed document is processed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:12:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:10:30.892-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:01:50.175-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:10:30.398-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23604 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:31:41.499-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:38.834-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18558 - Debian Patch Update" date="2014-06-06T17:17:00.167-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:20:01.107-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:04:52.150-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="libxslt DPKG is earlier than 1.1.26-6+squeeze2" test_ref="oval:org.mitre.oval:tst:85933"/>
+  </criteria>
+</definition>

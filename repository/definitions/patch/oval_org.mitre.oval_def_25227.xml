@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25227" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0638-2 -- Security update for Mozilla Firefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>Mozilla Firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140638-2.html" ref_id="SUSE-SU-2014:0638-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1518" ref_id="CVE-2014-1518"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1523" ref_id="CVE-2014-1523"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1524" ref_id="CVE-2014-1524"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1529" ref_id="CVE-2014-1529"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1530" ref_id="CVE-2014-1530"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1531" ref_id="CVE-2014-1531"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1532" ref_id="CVE-2014-1532"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1492" ref_id="CVE-2014-1492"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1520" ref_id="CVE-2014-1520"/>
+    <description>This MozillaFirefox and mozilla-nss update fixes several security and
+non-security issues.
+
+MozillaFirefox has been updated to version 24.5.0esr which fixes the
+following issues:
+
+    * MFSA 2014-34/CVE-2014-1518 Miscellaneous memory safety hazards
+    * MFSA 2014-37/CVE-2014-1523 Out of bounds read while decoding JPG
+      images
+    * MFSA 2014-38/CVE-2014-1524 Buffer overflow when using non-XBL object
+      as XBL
+    * MFSA 2014-42/CVE-2014-1529 Privilege escalation through Web
+      Notification API
+    * MFSA 2014-43/CVE-2014-1530 Cross-site scripting (XSS) using history
+      navigations
+    * MFSA 2014-44/CVE-2014-1531 Use-after-free in imgLoader while
+      resizing images
+    * MFSA 2014-46/CVE-2014-1532 Use-after-free in nsHostResolver
+
+Mozilla NSS has been updated to version 3.16
+
+    * required for Firefox 29
+    * CVE-2014-1492_ In a wildcard certificate, the wildcard character
+      should not be embedded within the U-label of an internationalized
+      domain name. See the last bullet point in RFC 6125, Section 7.2.
+    * Update of root certificates.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:12:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:30.183-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:33.509-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:19.574-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:116287 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:18:41.351-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:00:26.824-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="MozillaFirefox RPM is earlier than 0:24.5.0esr-0.3.1" test_ref="oval:org.mitre.oval:tst:116553"/>
+      <criterion comment="MozillaFirefox-branding-SLED RPM is earlier than 0:24-0.4.10.14" test_ref="oval:org.mitre.oval:tst:116287"/>
+      <criterion comment="MozillaFirefox-translations RPM is earlier than 0:24.5.0esr-0.3.1" test_ref="oval:org.mitre.oval:tst:116186"/>
+      <criterion comment="libfreebl3 RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116565"/>
+      <criterion comment="mozilla-nspr RPM is earlier than 0:4.10.4-0.3.1" test_ref="oval:org.mitre.oval:tst:116580"/>
+      <criterion comment="mozilla-nspr-devel RPM is earlier than 0:4.10.4-0.3.1" test_ref="oval:org.mitre.oval:tst:116488"/>
+      <criterion comment="mozilla-nss RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116588"/>
+      <criterion comment="mozilla-nss-devel RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116603"/>
+      <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116632"/>
+      <criterion comment="libfreebl3-32bit RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116427"/>
+      <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.10.4-0.3.1" test_ref="oval:org.mitre.oval:tst:116640"/>
+      <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.16-0.3.1" test_ref="oval:org.mitre.oval:tst:116709"/>
+    </criteria>
+  </criteria>
+</definition>

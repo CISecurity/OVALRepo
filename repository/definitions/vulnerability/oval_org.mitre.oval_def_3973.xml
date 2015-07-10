@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3973" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HyperTerminal Session File Vulnerability (NT 4.0)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>HyperTerminal</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0568" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0568"/>
+    <description>HyperTerminal application for Windows NT 4.0, Windows 2000, Windows XP, and Windows Server 2003 does not properly validate the length of a value that is saved in a session file, which allows remote attackers to execute arbitrary code via a malicious HyperTerminal session file (.ht), web site, or Telnet URL contained in an e-mail message, triggering a buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-12-21T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2005-01-18T12:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-02T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2005-03-02T12:00:00.000-04:00" comment="modified wft-226 - access DLL via HKLM">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </modified>
+        <status_change date="2005-03-23T08:09:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-10-31T04:13:00.000-04:00" comment="Replaced reference to obj:1374 with reference to obj:1550 since it references Product\Options and not ProductOptions in the controlset registry key.  Modified by Harvey Rubinovitz">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2006-11-21T04:13:00.000-04:00">INTERIM</status_change>
+        <status_change date="2007-01-03T13:53:56.114-05:00">ACCEPTED</status_change>
+        <modified comment="Fixed obj:337: removed blank after the word Hotfix in the Key.  Modified by Harvey Rubinovitz." date="2007-01-22T00:02:00.552-05:00">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2007-01-22T00:05:06.646-05:00">INTERIM</status_change>
+        <modified comment="Fixed obj:337: changed Hive from HKEY_CLASSES_ROOT to HKEY_LOCAL_MACHINE.  Implemented by Harvey Rubinovitz." date="2007-01-22T01:11:00.631-05:00">
+          <contributor organization="GFI Software">Daniel Tarnu</contributor>
+        </modified>
+        <status_change date="2007-02-20T13:40:29.243-05:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:47.935-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:32.193-04:00">ACCEPTED</status_change>
+        <modified comment="Updated ste:741 to use regex pattern match instead of hardcoded path" date="2009-10-19T16:07:00.879-04:00">
+          <contributor organization="The MITRE Corporation">Mike Lah</contributor>
+        </modified>
+        <status_change date="2009-10-19T16:09:06.068-04:00">INTERIM</status_change>
+        <modified comment="Fixed registry key reference in obj:625" date="2009-10-19T16:09:00.553-04:00">
+          <contributor organization="The MITRE Corporation">Mike Lah</contributor>
+        </modified>
+        <status_change date="2009-11-09T04:00:15.916-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:741 - obj/ste updates to conform to authoring style guide" date="2013-03-26T09:53:00.500-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-03-26T09:56:22.626-04:00">INTERIM</status_change>
+        <status_change date="2013-04-15T04:00:20.487-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="the version of hypertrm.dll is less than 4.0.1381.7323" test_ref="oval:org.mitre.oval:tst:370"/>
+      <criterion negate="true" comment="the patch NT Server kb873339 is installed" test_ref="oval:org.mitre.oval:tst:369"/>
+      <criteria operator="AND" comment="Windows NT Server 4.0 is installed">
+        <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+        <criteria operator="OR" comment="Windows NT server product option">
+          <criterion comment="this is an NT Server (stand-alone)" test_ref="oval:org.mitre.oval:tst:2408"/>
+          <criterion comment="this is an NT Server (domain controller)" test_ref="oval:org.mitre.oval:tst:3035"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="If key present hyperterminal will automatically open session files" test_ref="oval:org.mitre.oval:tst:827"/>
+      <criterion comment="If the Hyperterminal client is registered as the default telnet client" test_ref="oval:org.mitre.oval:tst:826"/>
+    </criteria>
+  </criteria>
+</definition>

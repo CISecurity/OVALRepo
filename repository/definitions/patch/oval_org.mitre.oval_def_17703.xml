@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17703" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1938-1 php-mail - insufficient input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>php-mail</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1938-1" ref_id="DSA-1938-1"/>
+    <description>It was discovered that php-mail, a PHP PEAR module for sending email, has insufficient input sanitising, which might be used to obtain sensitive data from the system that uses php-mail.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:12:52">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:12:00.083-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:00:24.254-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:09:28.825-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23200 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:31:21.706-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:27.752-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17703 - Debian Patch Update" date="2014-06-06T17:36:00.316-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:38:27.368-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:49.842-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="php-mail DPKG is earlier than 1.1.6-2+etch1" test_ref="oval:org.mitre.oval:tst:86345"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="php-mail DPKG is earlier than 1.1.14-1+lenny1" test_ref="oval:org.mitre.oval:tst:86203"/>
+    </criteria>
+  </criteria>
+</definition>

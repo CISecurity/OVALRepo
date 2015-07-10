@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:10169" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Zebra 0.93b and earlier, and quagga before 0.95, allows local users to cause a denial of service by sending spoofed messages as other users to the kernel netlink interface.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0858" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0858"/>
+    <description>Zebra 0.93b and earlier, and quagga before 0.95, allows local users to cause a denial of service by sending spoofed messages as other users to the kernel netlink interface.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:21:47.398-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:01:21.425-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:01:27.789-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:10169 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T14:46:00.236-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:20:36.110-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:02:35.924-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="quagga-devel is earlier than 0:0.96.2-8.3E" test_ref="oval:org.mitre.oval:tst:30551"/>
+      <criterion comment="quagga is earlier than 0:0.96.2-8.3E" test_ref="oval:org.mitre.oval:tst:30411"/>
+      <criterion comment="quagga-contrib is earlier than 0:0.96.2-8.3E" test_ref="oval:org.mitre.oval:tst:30149"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7232" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1646 squid -- array bounds check</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>squid</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1646" ref_id="DSA-1646"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1612" ref_id="CVE-2008-1612"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6239" ref_id="CVE-2007-6239"/>
+    <description>A weakness has been discovered in squid, a caching proxy server. The flaw was introduced upstream in response to CVE-2007-6239, and announced by Debian in DSA-1482-1. The flaw involves an over-aggressive bounds check on an array resize, and could be exploited by an authorised client to induce a denial of service condition against squid.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:08-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:56:27.625-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:00:31.281-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:19.206-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7232 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:34:43.482-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:13.845-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="squid-common is earlier than 2.6.5-6etch2" test_ref="oval:org.mitre.oval:tst:17686"/>
+      </criteria>
+      <criterion comment="squidclient is earlier than 2.6.5-6etch2" test_ref="oval:org.mitre.oval:tst:17407"/>
+      <criterion comment="squid is earlier than 2.6.5-6etch2" test_ref="oval:org.mitre.oval:tst:17678"/>
+      <criterion comment="squid-cgi is earlier than 2.6.5-6etch2" test_ref="oval:org.mitre.oval:tst:17651"/>
+    </criteria>
+  </criteria>
+</definition>

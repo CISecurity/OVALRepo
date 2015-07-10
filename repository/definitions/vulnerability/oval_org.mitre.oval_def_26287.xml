@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26287" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft SQL Server stack overrun vulnerability - CVE-2014-4061 (MS14-044)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft SQL Server 2008</product>
+      <product>Microsoft SQL Server 2008 R2</product>
+      <product>Microsoft SQL Server 2012</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-4061" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4061"/>
+    <description>Microsoft SQL Server 2008 SP3, 2008 R2 SP2, and 2012 SP1 does not properly control use of stack memory for processing of T-SQL batch commands, which allows remote authenticated users to cause a denial of service (daemon hang) via a crafted T-SQL statement, aka "Microsoft SQL Server Stack Overrun Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-19T11:47:08">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-08-26T15:53:44.055-04:00">DRAFT</status_change>
+        <status_change date="2014-09-15T04:00:53.654-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:30.618-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:122184 - Fixed/New Inventory Definitions, and fixed Vulnerability Definitions for Microsoft SQL Server 2012 and 2014." date="2014-10-10T18:35:00.565-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-10-10T19:58:49.409-04:00">INTERIM</status_change>
+        <status_change date="2014-10-27T04:00:37.857-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft SQL Server 2008 and vulnerable file version">
+      <extend_definition comment="Microsoft SQL Server 2008 is installed" definition_ref="oval:org.mitre.oval:def:12454"/>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version Microsoft.sqlserver.chainer.infrastructure.dll is less than 10.0.5520 and greater than 10.0.0" test_ref="oval:org.mitre.oval:tst:122285"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is greater than or equal to 10.0.5750.0" test_ref="oval:org.mitre.oval:tst:121683"/>
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is less than 10.0.5869" test_ref="oval:org.mitre.oval:tst:122230"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft SQL Server 2008 R2 and vulnerable file version">
+      <extend_definition comment="Microsoft SQL Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12596"/>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is less than 10.50.4033 and greater than 10.5.0" test_ref="oval:org.mitre.oval:tst:121397"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is greater than or equal to 10.50.4251" test_ref="oval:org.mitre.oval:tst:122178"/>
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is less than 10.50.4321" test_ref="oval:org.mitre.oval:tst:122173"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="2012 vulnerable version">
+      <extend_definition comment="Microsoft SQL Server 2012 is installed" definition_ref="oval:org.mitre.oval:def:15044"/>
+      <criteria operator="OR" comment="Check for vulnerable range">
+        <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is less than 11.0.3153 and greater than 11.0.0" test_ref="oval:org.mitre.oval:tst:122233"/>
+        <criteria operator="AND" comment="Check for LDR range">
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is greater than or equal to 11.0.3300" test_ref="oval:org.mitre.oval:tst:122379"/>
+          <criterion comment="Check if the version of Microsoft.sqlserver.chainer.infrastructure.dll is less than 11.0.3460" test_ref="oval:org.mitre.oval:tst:122184"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

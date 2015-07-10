@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20991" version="31" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0869: tomcat6 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>tomcat6</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0869-01" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0869.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0869"/>
+    <reference source="CVE" ref_id="CVE-2013-1976" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-1976.html"/>
+    <reference source="CVE" ref_id="CVE-2013-2051" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-2051.html"/>
+    <description>The Tomcat 6 DIGEST authentication functionality as used in Red Hat Enterprise Linux 6 allows remote attackers to bypass intended access restrictions by performing a replay attack after a nonce becomes stale.  NOTE: this issue is due to an incomplete fix for CVE-2012-5887.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:57:50.502-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:52.255-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:02.525-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="tomcat6-jsp-2.1-api is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:91039"/>
+      <criterion comment="tomcat6-webapps is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:91307"/>
+      <criterion comment="tomcat6-docs-webapp is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:91127"/>
+      <criterion comment="tomcat6-lib is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:90906"/>
+      <criterion comment="tomcat6-javadoc is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:90981"/>
+      <criterion comment="tomcat6-el-2.1-api is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:91303"/>
+      <criterion comment="tomcat6-servlet-2.5-api is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:91135"/>
+      <criterion comment="tomcat6-admin-webapps is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:90731"/>
+      <criterion comment="tomcat6 is earlier than 0:6.0.24-55.el6_4" test_ref="oval:org.mitre.oval:tst:90632"/>
+    </criteria>
+  </criteria>
+</definition>

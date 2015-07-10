@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13247" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ESX third party update for Service Console kernel</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2240" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2240"/>
+    <description>The do_anonymous_page function in mm/memory.c in the Linux kernel before 2.6.27.52, 2.6.32.x before 2.6.32.19, 2.6.34.x before 2.6.34.4, and 2.6.35.x before 2.6.35.2 does not properly separate the stack and the heap, which allows context-dependent attackers to execute arbitrary code by writing to the bottom page of a shared memory segment, as demonstrated by a memory-exhaustion attack against the X.Org X server.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-30T10:46:17.000-05:00">
+          <contributor organization="Hewlett-Packard">Aslesha Nargolkar</contributor>
+        </submitted>
+        <status_change date="2011-10-24T17:01:48.753-04:00">DRAFT</status_change>
+        <status_change date="2011-11-14T04:00:16.576-05:00">INTERIM</status_change>
+        <status_change date="2011-12-05T04:00:15.348-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+    <criterion comment="Patch ESX350-201105404-SG does not exist" test_ref="oval:org.mitre.oval:tst:44307"/>
+  </criteria>
+</definition>

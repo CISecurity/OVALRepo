@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6621" version="1" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ATL COM Initialization Vulnerability (CVE-2009-2493)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2493" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2493"/>
+    <description>The Active Template Library (ATL) in Microsoft Visual Studio .NET 2003 SP1, Visual Studio 2005 SP1 and 2008 Gold and SP1, and Visual C++ 2005 SP1 and 2008 Gold and SP1; and Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP2, Vista Gold, SP1, and SP2, and Server 2008 Gold and SP2; does not properly restrict use of OleLoadFromStream in instantiating objects from data streams, which allows remote attackers to execute arbitrary code via a crafted HTML document with an ATL (1) component or (2) control, related to ATL headers and bypassing security policies, aka "ATL COM Initialization Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-08T13:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-12-11T11:36:01.737-05:00">DRAFT</status_change>
+        <status_change date="2009-12-28T04:00:38.986-05:00">INTERIM</status_change>
+        <modified comment="Deprecated after consolidating other definitions for the same CVE. The new consolidated definition is oval:org.mitre.oval:def:6716" date="2010-01-03T18:00:11.513-04:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-01-03T18:00:11.513-04:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 5.01 SP4 is installed" definition_ref="oval:org.mitre.oval:def:325"/>
+      <criterion comment="Mshtml.dll version is less than 5.0.3882.2700" test_ref="oval:org.mitre.oval:tst:11030"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2800.1642" test_ref="oval:org.mitre.oval:tst:10363"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.3640" test_ref="oval:org.mitre.oval:tst:11188"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.5897" test_ref="oval:org.mitre.oval:tst:11032"/>
+    </criteria>
+    <criteria operator="AND">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.3790.4611" test_ref="oval:org.mitre.oval:tst:11149"/>
+    </criteria>
+  </criteria>
+</definition>

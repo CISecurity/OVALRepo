@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26259" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2989-1 -- apache2 - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>apache2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2989-1" ref_id="DSA-2989-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0118" ref_id="CVE-2014-0118"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0226" ref_id="CVE-2014-0226"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0231" ref_id="CVE-2014-0231"/>
+    <description>Several security issues were found in the Apache HTTP server.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-08-05T10:11:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-08-07T15:04:30.957-04:00">DRAFT</status_change>
+        <status_change date="2014-08-25T04:01:45.721-04:00">INTERIM</status_change>
+        <status_change date="2014-09-15T04:00:52.140-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26259 - modified patches on Debian: corrected platform" date="2014-09-19T15:03:00.435-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-19T15:04:26.278-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:30.219-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="AND" comment="Debian 7">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+    </criteria>
+    <criterion comment="apache2 DPKG is earlier than 0:2.2.22-13+deb7u3" test_ref="oval:org.mitre.oval:tst:121293"/>
+  </criteria>
+</definition>

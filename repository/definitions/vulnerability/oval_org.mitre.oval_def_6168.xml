@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6168" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Race Condition Security Vulnerability in Solaris Auditing Related to Extended File Attributes May Allow Local Unprivileged Users to Panic the System</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-2644" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2644"/>
+    <description>Race condition in the Solaris Auditing subsystem in Sun Solaris 9 and 10 and OpenSolaris before snv_121, when extended file attributes are used, allows local users to cause a denial of service (panic) via vectors related to "pathnames for invalid fds."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-08-10T16:40:08.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-08-12T09:49:57.004-04:00">DRAFT</status_change>
+        <status_change date="2009-08-31T04:00:08.660-04:00">INTERIM</status_change>
+        <status_change date="2009-09-21T04:00:05.908-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 264429">
+        <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+        <criterion negate="true" comment="Patch 122300-42 or later installed" test_ref="oval:org.mitre.oval:tst:10143"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 264429">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criterion negate="true" comment="Patch 140921-02 or later installed" test_ref="oval:org.mitre.oval:tst:10518"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 264429">
+        <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+        <criterion negate="true" comment="Patch 122301-42 or later installed" test_ref="oval:org.mitre.oval:tst:10507"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 264429">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criterion negate="true" comment="Patch 140922-02 or later installed" test_ref="oval:org.mitre.oval:tst:9991"/>
+      </criteria>
+    </criteria>
+    <criterion comment="Solaris Auditing is enabled" test_ref="oval:org.mitre.oval:tst:10368"/>
+  </criteria>
+</definition>

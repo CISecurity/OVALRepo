@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1718" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Virtual DOS Machine Local Privilege Escalation Vulnerability (Test 2)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>VDM</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0118" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0118"/>
+    <description>The component for the Virtual DOS Machine (VDM) subsystem in Windows NT 4.0 and Windows 2000 does not properly validate system structures, which allows local users to access protected kernel memory and execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-06-11T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Ingrid Skoog</contributor>
+        </submitted>
+        <status_change date="2004-08-04T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+    <criterion comment="the patch kb835732 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1510"/>
+    <criteria operator="OR" comment="Version check of Ntoskrnl for NT Terminal Server or NT Workstation">
+      <criteria operator="AND" comment="Version Ntoskrnl.exe is less than 4.0.1381.7265 and this is an NT Workstation">
+        <criterion comment="The version of Ntoskrnl.exe is less than 4.0.1381.7265" negate="false" test_ref="oval:org.mitre.oval:tst:759"/>
+        <criterion comment="this is an NT Workstation" negate="false" test_ref="oval:org.mitre.oval:tst:2703"/>
+      </criteria>
+      <criteria operator="AND" comment="This is an NT Terminal Server and the version of Ntoskrnl.exe is less than 4.0.1381.33563">
+        <criterion comment="The version of Ntoskrnl.exe is less than 4.0.1381.33563" negate="false" test_ref="oval:org.mitre.oval:tst:758"/>
+        <criterion comment="this is an NT Terminal Server" negate="false" test_ref="oval:org.mitre.oval:tst:3097"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

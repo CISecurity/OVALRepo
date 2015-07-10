@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28666" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Internet Explorer memory corruption vulnerability  - CVE-2015-0019 (MS15-009)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Microsoft Internet Explorer 9</product>
+      <product>Microsoft Internet Explorer 10</product>
+    </affected>
+    <reference ref_id="CVE-2015-0019" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0019" source="CVE"/>
+    <description>Microsoft Internet Explorer 9 and 10 allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted web site, aka "Internet Explorer Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-02-13T10:59:59">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-02-16T13:11:38.283-05:00">DRAFT</status_change>
+        <status_change date="2015-03-09T04:01:48.274-04:00">INTERIM</status_change>
+        <status_change date="2015-03-30T04:00:23.779-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="IE 9 + vulnerable os and file version">
+      <extend_definition comment="Microsoft Internet Explorer 9 is installed" definition_ref="oval:org.mitre.oval:def:11985"/>
+      <criteria operator="OR" comment="vista/2k8/win7/R2">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable versions">
+        <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.16609" test_ref="oval:org.mitre.oval:tst:138073"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check for mshtml.dll version greater than or equal to 9.0.8112.20000" test_ref="oval:org.mitre.oval:tst:79777"/>
+          <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.20725" test_ref="oval:org.mitre.oval:tst:137846"/>
+        </criteria>
+        <criterion comment="Check if the version of Jscript9.dll is less than 9.0.8112.16620" test_ref="oval:org.mitre.oval:tst:137873"/>
+        <criteria operator="AND" comment="Jscript and LDR">
+          <criterion comment="Check if the version of Jscript9.dll is less than 9.0.8112.20730" test_ref="oval:org.mitre.oval:tst:137974"/>
+          <criterion comment="Check if the version of Jscript9.dll is greater than or equal to 9.0.8112.20000" test_ref="oval:org.mitre.oval:tst:137868"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="IE 10 + vulnerable os and file version">
+      <extend_definition comment="Microsoft Internet Explorer 10 is installed" definition_ref="oval:org.mitre.oval:def:15751"/>
+      <criteria operator="OR" comment="Win 7/R2 Win 8/ 2k12">
+        <criteria operator="AND" comment="Win 7/R2">
+          <criteria operator="OR" comment="Win 7/R2">
+            <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+            <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable versions">
+            <criterion comment="Check if the version of mshtml.dll is less than 10.0.9200.17229" test_ref="oval:org.mitre.oval:tst:137987"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if the version of mshtml.dll is greater than or equal to 10.0.9200.21000" test_ref="oval:org.mitre.oval:tst:114527"/>
+              <criterion comment="Check if the version of mshtml.dll is less than 10.0.9200.21345" test_ref="oval:org.mitre.oval:tst:137107"/>
+            </criteria>
+            <criterion comment="Check if the version of Jscript9.dll is less than 10.0.9200.17241" test_ref="oval:org.mitre.oval:tst:137700"/>
+            <criteria operator="AND" comment="Jscript.dll and LDR">
+              <criterion comment="Check if the version of Jscript9.dll is less than 10.0.9200.21359" test_ref="oval:org.mitre.oval:tst:137021"/>
+              <criterion comment="Check if the version of Jscript9.dll is greater than or equal to 10.0.9200.21000" test_ref="oval:org.mitre.oval:tst:137516"/>
+            </criteria>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Win 8/ 2012 R2">
+          <criteria operator="OR" comment="Win 8/ 2012">
+            <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+            <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+            <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable versions">
+            <criterion comment="Check if the version of mshtml.dll is less than 10.0.9200.17228" test_ref="oval:org.mitre.oval:tst:137876"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if the version of mshtml.dll is greater than or equal to 10.0.9200.21000" test_ref="oval:org.mitre.oval:tst:114527"/>
+              <criterion comment="Check if the version of mshtml.dll is less than 10.0.9200.21345" test_ref="oval:org.mitre.oval:tst:137107"/>
+            </criteria>
+            <criterion comment="Check if the version of Jscript9.dll is less than 10.0.9200.17241" test_ref="oval:org.mitre.oval:tst:137700"/>
+            <criteria operator="AND" comment="Jscript.dll and LDR">
+              <criterion comment="Check if the version of Jscript9.dll is less than 10.0.9200.21359" test_ref="oval:org.mitre.oval:tst:137021"/>
+              <criterion comment="Check if the version of Jscript9.dll is greater than or equal to 10.0.9200.21000" test_ref="oval:org.mitre.oval:tst:137516"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

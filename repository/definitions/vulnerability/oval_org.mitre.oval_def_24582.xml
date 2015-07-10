@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24582" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Office chinese grammar checking vulnerability (CVE-2014-1756) - MS14-023</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft Office 2013</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-1756" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1756"/>
+    <description>Untrusted search path vulnerability in Microsoft Office 2007 SP3, 2010 SP1 and SP2, and 2013 Gold, SP1, RT, and RT SP1, when the Simplified Chinese Proofing Tool is enabled, allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .docx file, aka "Microsoft Office Chinese Grammar Checking Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-05-16T15:12:43">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-05-20T12:48:39.057-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1647 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-30T04:10:25.282-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:24.812-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:114083 - check=&quot;all&quot; was replaced with check=&quot;at least one&quot; and the same variables were combined" date="2014-09-05T14:21:00.047-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-05T14:22:58.331-04:00">INTERIM</status_change>
+        <status_change date="2014-09-22T04:00:31.998-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Office 2013">
+      <criteria operator="OR" comment="Office 2013 x86/64">
+        <extend_definition comment="Microsoft Office 2013 SP1 x64 is installed" definition_ref="oval:org.mitre.oval:def:21966"/>
+        <extend_definition comment="Microsoft Office 2013 SP1 x86 is installed" definition_ref="oval:org.mitre.oval:def:22392"/>
+        <extend_definition comment="Microsoft Office 2013 is installed" definition_ref="oval:org.mitre.oval:def:15381"/>
+      </criteria>
+      <criterion comment="Check if the version of Msgr3en.dll is less than 15.0.4454.1000" test_ref="oval:org.mitre.oval:tst:114083"/>
+      <criterion comment="Check if Chinese(simplified) language pack for Microsoft office 2013 is installed" test_ref="oval:org.mitre.oval:tst:114186"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2010">
+      <criteria operator="OR" comment="Office 2010 SP1/SP2">
+        <extend_definition comment="Microsoft Office 2010 SP2 is installed" definition_ref="oval:org.mitre.oval:def:17121"/>
+        <extend_definition comment="Microsoft Office 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:15198"/>
+      </criteria>
+      <criterion comment="Check if the version of Msgr3en.dll is less than 3.1.0.17519" test_ref="oval:org.mitre.oval:tst:114592"/>
+      <criterion comment="Check if Chinese(simplified) language pack for Microsoft Office 2010 is installed" test_ref="oval:org.mitre.oval:tst:114904"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21776" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1385: kdelibs and kdelibs3 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>kdelibs</product>
+      <product>kdelibs3</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1385-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1385.html"/>
+    <reference source="CESA" ref_id="CESA-2011:1385"/>
+    <reference source="CVE" ref_id="CVE-2011-3365" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-3365.html"/>
+    <description>The KDE SSL Wrapper (KSSL) API in KDE SC 4.6.0 through 4.7.1, and possibly earlier versions, does not use a certain font when rendering certificate fields in a security dialog, which allows remote attackers to spoof the common name (CN) of a certificate via rich text.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:47.308-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:42.838-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:07.221-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="kdelibs-apidocs is earlier than 6:3.5.4-26.el5_7.1" test_ref="oval:org.mitre.oval:tst:98337"/>
+        <criterion comment="kdelibs-devel is earlier than 6:3.5.4-26.el5_7.1" test_ref="oval:org.mitre.oval:tst:98646"/>
+        <criterion comment="kdelibs is earlier than 6:3.5.4-26.el5_7.1" test_ref="oval:org.mitre.oval:tst:97744"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="kdelibs3-apidocs is earlier than 0:3.5.10-24.el6_1.1" test_ref="oval:org.mitre.oval:tst:98739"/>
+        <criterion comment="kdelibs3-devel is earlier than 0:3.5.10-24.el6_1.1" test_ref="oval:org.mitre.oval:tst:98386"/>
+        <criterion comment="kdelibs3 is earlier than 0:3.5.10-24.el6_1.1" test_ref="oval:org.mitre.oval:tst:98274"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

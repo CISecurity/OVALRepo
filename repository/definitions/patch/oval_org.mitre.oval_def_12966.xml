@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12966" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2190-1 wordpress -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>wordpress</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00057.html" ref_id="DSA-2190-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0700" ref_id="CVE-2011-0700"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0701" ref_id="CVE-2011-0701"/>
+    <description><![CDATA[Two XSS bugs and one potential information disclosure issue were discovered in wordpress, a weblog manager. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2011-0700 Input passed via the post title when performing a &quot;Quick Edit&quot; or &quot;Bulk Edit&quot; action and via the &quot;post_status&quot;, &quot;comment_status&quot;, and &quot;ping_status&quot; parameters is not properly sanitised before being used. Certain input passed via tags in the tags meta-box is not properly sanitised before being returned to the user. CVE-2011-0701 Wordpress incorrectly enforces user access restrictions when accessing posts via the media uploader and can be exploited to disclose the contents of e.g. private or draft posts. The oldstable distribution is not affected by these problems.]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T21:48:10-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:24.925-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:43.236-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:12.673-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12966 - Debian Patch Update" date="2014-06-06T17:15:00.740-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:17:21.087-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:12.007-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="wordpress DPKG is earlier than 3.0.5+dfsg-0+squeeze1" test_ref="oval:org.mitre.oval:tst:44047"/>
+  </criteria>
+</definition>

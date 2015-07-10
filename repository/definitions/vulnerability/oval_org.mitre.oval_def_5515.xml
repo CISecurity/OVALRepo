@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5515" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running the Ignite-UX or the DynRootDisk (DRD) get_system_info Command, Local Unqualified Configuration Change</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-4590" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4590"/>
+    <description>The get_system_info command in Ignite-UX C.7.0 through C.7.3, and DynRootDisk (DRD) A.1.0.16.417 through A.2.0.0.592, on HP-UX B.11.11, B.11.23, and B.11.31 does not inform local users of networking changes made by the command, which has unknown impact and attack vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-03T16:09:04.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-07T14:19:41.038-04:00">DRAFT</status_change>
+        <modified comment="Criteria meets HP Security Bulletin HPSBUX02249" date="2008-07-14T10:21:00.168-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-08-04T04:00:20.086-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:14.670-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:55.320-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:41.772-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:35:54.300-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:27.149-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:37:22.729-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:02:25.978-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02249">
+      <criteria operator="OR" comment="platforms">
+        <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+        <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      </criteria>
+      <criterion comment="DRD.DRD-RUN version is less than A.3.0.0" test_ref="oval:org.mitre.oval:tst:8445"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02249">
+      <criteria operator="OR" comment="platforms">
+        <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+        <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+        <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+      </criteria>
+      <criterion comment="Ignite-UX.MGMT-TOOLS version is less than C.7.3.148" test_ref="oval:org.mitre.oval:tst:8468"/>
+    </criteria>
+  </criteria>
+</definition>

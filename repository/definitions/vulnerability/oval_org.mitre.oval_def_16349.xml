@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16349" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Win32k Race Condition Vulnerability CVE-2013-1270 - MS13-016</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-1270" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1270"/>
+    <description>Race condition in win32k.sys in the kernel-mode drivers in Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2, R2, and R2 SP1, and Windows 7 Gold and SP1 allows local users to gain privileges, and consequently read the contents of arbitrary kernel memory locations, via a crafted application, a different vulnerability than other CVEs listed in MS13-016.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-02-15T12:25:47">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-02-15T16:37:25.281-05:00">DRAFT</status_change>
+        <status_change date="2013-03-04T04:00:50.702-05:00">INTERIM</status_change>
+        <status_change date="2013-03-25T04:00:29.818-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:12547 - Submission on Microsoft Bulletin for the month April 2013." date="2013-04-15T21:59:00.487-04:00">
+          <contributor organization="SecPod Technologies">Sharath S</contributor>
+        </modified>
+        <status_change date="2013-04-15T22:08:43.137-04:00">INTERIM</status_change>
+        <status_change date="2013-05-06T04:02:08.949-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for vulnerable XP x86">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="Check if the version of win32k.sys is less than 5.1.2600.6334" test_ref="oval:org.mitre.oval:tst:80678"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable XP x64/2003">
+      <criteria operator="OR" comment="Check for XP x64/2003">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="Check if the version of win32k.sys is less than 5.2.3790.5106" test_ref="oval:org.mitre.oval:tst:80583"/>
+    </criteria>
+    <criteria operator="AND" comment="2k8/Vista and vulnerable file version">
+      <criteria operator="OR" comment="Vista/2K8">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of win32k.sys is less than 6.0.6002.18764" test_ref="oval:org.mitre.oval:tst:80886"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="the version of win32k.sys is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:43635"/>
+          <criterion comment="Check if the version of win32k.sys is less than 6.0.6002.23013" test_ref="oval:org.mitre.oval:tst:80750"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win7/R2 and vulnerable file version">
+      <criteria operator="OR" comment="Win7/R2">
+        <extend_definition comment="Microsoft Windows 7 is installed" definition_ref="oval:org.mitre.oval:def:12541"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12754"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of win32k.sys is less than 6.1.7600.17206" test_ref="oval:org.mitre.oval:tst:79911"/>
+        <criteria operator="AND" comment="Check for LDR range">
+          <criterion comment="the version of win32k.sys is greater than or equal to 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:27587"/>
+          <criterion comment="Check if the version of win32k.sys is less than 6.1.7600.21416" test_ref="oval:org.mitre.oval:tst:80639"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win7 / R2 SP1 and vulnerable file version">
+      <criteria operator="OR" comment="Win 7 / R2 SP1">
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of win32k.sys is less than 6.1.7601.18043" test_ref="oval:org.mitre.oval:tst:80602"/>
+        <criteria operator="AND" comment="Check for vulnerable version">
+          <criterion comment="the version of win32k.sys is greater than or equal to 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:42715"/>
+          <criterion comment="Check if the version of win32k.sys is less than 6.1.7601.22209" test_ref="oval:org.mitre.oval:tst:80551"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12915" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Access of Unallocated Memory DoS Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Host Integration Server 2004</product>
+      <product>Microsoft Host Integration Server 2006</product>
+      <product>Microsoft Host Integration Server 2009</product>
+      <product>Microsoft Host Integration Server 2010</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-2008" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2008"/>
+    <description>Microsoft Host Integration Server (HIS) 2004 SP1, 2006 SP1, 2009, and 2010 allows remote attackers to cause a denial of service (SNA Server service outage) via crafted TCP or UDP traffic, aka "Access of Unallocated Memory DoS Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-10-17T09:26:40.632-04:00">DRAFT</status_change>
+        <status_change date="2011-11-07T04:00:44.214-05:00">INTERIM</status_change>
+        <status_change date="2011-11-28T04:00:16.447-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Host Integration Server 2004 SP1">
+      <extend_definition comment="Microsoft Host Integration Server 2004 SP1 is installed" definition_ref="oval:org.mitre.oval:def:5430"/>
+      <criterion comment="Snadmod.dll version is less than 6.0.2445.0" test_ref="oval:org.mitre.oval:tst:43888"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Host Integration Server 2006">
+      <extend_definition comment="Microsoft Host Integration Server 2006 is installed" definition_ref="oval:org.mitre.oval:def:5373"/>
+      <criterion comment="Snadmod.dll version is less than 7.0.4220.0" test_ref="oval:org.mitre.oval:tst:44254"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Host Integration Server 2009">
+      <extend_definition comment="Microsoft Host Integration Server 2009 is installed" definition_ref="oval:org.mitre.oval:def:12766"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Snadmod.dll version is less than 8.0.3850.1" test_ref="oval:org.mitre.oval:tst:44027"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Snadmod.dll version is less than 8.0.3872.2" test_ref="oval:org.mitre.oval:tst:43857"/>
+          <criterion comment="Snadmod.dll version is greater than or equal to 8.0.3870.0" test_ref="oval:org.mitre.oval:tst:44243"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Host Integration Server 2010">
+      <extend_definition comment="Microsoft Host Integration Server 2010 is installed" definition_ref="oval:org.mitre.oval:def:12165"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Snadmod.dll version is less than 8.5.4317.1" test_ref="oval:org.mitre.oval:tst:44232"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Snadmod.dll version is less than 8.5.4369.2" test_ref="oval:org.mitre.oval:tst:44184"/>
+          <criterion comment="Snadmod.dll version is greater than or equal to 8.5.4360.0" test_ref="oval:org.mitre.oval:tst:43281"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

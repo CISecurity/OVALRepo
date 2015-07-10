@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2164" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability Due to Buffer Overflow in The format(1M) Command May Allow Privilege Elevation For Certain RBAC Profiles</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-4319" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-4319"/>
+    <description>Buffer overflow in the format command in Solaris 8, 9, and 10 allows local users with access to format (such as the "File System Management" RBAC profile) to execute arbitrary code via unknown vectors, a different vulnerability than CVE-2006-4307.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:25.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:13.779-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:31.628-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:45.469-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+      <criterion comment="Patch 108975-10 or later installed" test_ref="oval:org.mitre.oval:tst:3837" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 113072-08 or later installed" test_ref="oval:org.mitre.oval:tst:4119" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 118833-18 or later installed" test_ref="oval:org.mitre.oval:tst:3220" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+      <criterion comment="Patch 108976-10 or later installed" test_ref="oval:org.mitre.oval:tst:3332" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 114423-07 or later installed" test_ref="oval:org.mitre.oval:tst:3870" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102519" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 118997-09 or later installed" test_ref="oval:org.mitre.oval:tst:3445" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

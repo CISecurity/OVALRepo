@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:979" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Utempter Directory Traversal Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0233" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0233"/>
+    <description>Utempter allows device names that contain .. (dot dot) directory traversal sequences, which allows local users to overwrite arbitrary files via a symlink attack on device names in combination with an application that trusts the utmp or wtmp files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-06-10T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2004-06-30T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-07-12T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+      <criterion comment="utempter version is less than 0.5.5-1.3EL.0" negate="false" test_ref="oval:org.mitre.oval:tst:1366"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="AND" comment="/usr/sbin/utempter is executable">
+        <criterion comment="/usr/sbin/utempter is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1365"/>
+        <criteria operator="OR" comment="/usr/sbin/utempter is executable">
+          <criterion comment="/usr/sbin/utempter is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1364"/>
+          <criterion comment="/usr/sbin/utempter is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1363"/>
+          <criterion comment="/usr/sbin/utempter is executable" negate="false" test_ref="oval:org.mitre.oval:tst:1362"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

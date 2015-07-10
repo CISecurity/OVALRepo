@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13848" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-728-3 -- firefox vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 6.06</platform>
+      <product>firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-March/000852.html" ref_id="USN-728-3"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0772" ref_id="CVE-2009-0772"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0774" ref_id="CVE-2009-0774"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0776" ref_id="CVE-2009-0776"/>
+    <description>Jesse Ruderman and Gary Kwong discovered flaws in the browser engine. If a user were tricked into viewing a malicious website, a remote attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program. Georgi Guninski discovered a flaw when Firefox performed a cross-domain redirect. An attacker could bypass the same-origin policy in Firefox by utilizing nsIRDFService and steal private data from users authenticated to the redirected website</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:53:37.230-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:08.230-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:17.097-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13848 - added CVE references; also made minor updates" date="2014-06-13T15:07:00.368-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:09:54.800-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:10.758-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="mozilla-firefox DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:67544"/>
+          <criterion comment="mozilla-firefox-dev DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68477"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="firefox-dbg DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68008"/>
+          <criterion comment="firefox DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68514"/>
+          <criterion comment="firefox-dom-inspector DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68335"/>
+          <criterion comment="firefox-dev DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68345"/>
+          <criterion comment="libnss-dev DPKG is earlier than 1.firefox1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68482"/>
+          <criterion comment="libnspr-dev DPKG is earlier than 1.firefox1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68486"/>
+          <criterion comment="libnspr4 DPKG is earlier than 1.firefox1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:67954"/>
+          <criterion comment="libnss3 DPKG is earlier than 1.firefox1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68423"/>
+          <criterion comment="firefox-gnome-support DPKG is earlier than 1.5.dfsg+1.5.0.15~prepatch080614k-0ubuntu1" test_ref="oval:org.mitre.oval:tst:68389"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

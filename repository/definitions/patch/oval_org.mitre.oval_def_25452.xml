@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25452" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0524-1 -- Security update for net-snmp</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>net-snmp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140524-1.html" ref_id="SUSE-SU-2014:0524-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2284" ref_id="CVE-2014-2284"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2285" ref_id="CVE-2014-2285"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2310" ref_id="CVE-2014-2310"/>
+    <description>The net-snmp remote service received security and bugfixes:
+
+    * 
+
+      A remote denial of service flaw in Linux
+implementation of ICMP-MIB has been fixed (CVE-2014-2284)
+
+    * 
+
+      snmptrapd could have crashed when using a trap with
+empty community string. This has been fixed. (CVE-2014-2285)
+
+    * 
+
+      The AgentX subagent of net-snmp could have been
+stalled when a manager sent a multi-object request with a
+different number of subids. (CVE-2014-2310)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:14:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:13:07.032-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:20.402-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:22.497-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libsnmp15 RPM is earlier than 0:5.4.2.1-8.12.20.1" test_ref="oval:org.mitre.oval:tst:117323"/>
+      <criterion comment="net-snmp RPM is earlier than 0:5.4.2.1-8.12.20.1" test_ref="oval:org.mitre.oval:tst:116831"/>
+      <criterion comment="perl-SNMP RPM is earlier than 0:5.4.2.1-8.12.20.1" test_ref="oval:org.mitre.oval:tst:117324"/>
+      <criterion comment="snmp-mibs RPM is earlier than 0:5.4.2.1-8.12.20.1" test_ref="oval:org.mitre.oval:tst:117191"/>
+      <criterion comment="libsnmp15-32bit RPM is earlier than 0:5.4.2.1-8.12.20.1" test_ref="oval:org.mitre.oval:tst:117254"/>
+    </criteria>
+  </criteria>
+</definition>

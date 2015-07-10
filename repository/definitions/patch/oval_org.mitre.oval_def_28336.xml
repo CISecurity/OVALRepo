@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28336" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2428-1 -- Thunderbird vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.10</platform>
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>thunderbird</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2428-1/" ref_id="USN-2428-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1587" ref_id="CVE-2014-1587"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1590" ref_id="CVE-2014-1590"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1592" ref_id="CVE-2014-1592"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1593" ref_id="CVE-2014-1593"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1594" ref_id="CVE-2014-1594"/>
+    <description><![CDATA[Gary Kwong, Randell Jesup, Nils Ohlmeier, Jesse Ruderman, and Max Jonas
+Werner discovered multiple memory safety issues in Thunderbird. If a user
+were tricked in to opening a specially crafted message with scripting
+enabled, an attacker could potentially exploit these to cause a denial of
+service via application crash, or execute arbitrary code with the
+privileges of the user invoking Thunderbird. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-1587">CVE-2014-1587</a>)
+
+Joe Vennix discovered a crash when using XMLHttpRequest in some
+circumstances. If a user were tricked in to opening a specially crafted
+message with scripting enabled, an attacker could potentially exploit this
+to cause a denial of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-1590">CVE-2014-1590</a>)
+
+Berend-Jan Wever discovered a use-after-free during HTML parsing. If a
+user were tricked in to opening a specially crafted message with scripting
+enabled, an attacker could potentially exploit this to cause a denial of
+service via application crash or execute arbitrary code with the
+privileges of the user invoking Thunderbird. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-1592">CVE-2014-1592</a>)
+
+Abhishek Arya discovered a buffer overflow when parsing media content. If
+a user were tricked in to opening a specially crafted message with
+scripting enabled, an attacker could potentially exploit this to cause a
+denial of service via application crash or execute arbitrary code with the
+privileges of the user invoking Thunderbird. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-1593">CVE-2014-1593</a>)
+
+Byoungyoung Lee, Chengyu Song, and Taesoo Kim discovered a bad cast in the
+compositor. If a user were tricked in to opening a specially crafted
+message, an attacker could potentially exploit this to cause undefined
+behaviour, a denial of service via application crash or execute abitrary
+code with the privileges of the user invoking Thunderbird. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-1594">CVE-2014-1594</a>)]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T10:53:06">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:45:54.877-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:32.867-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:36.209-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:28336 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-20T10:53:17.168-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:34.851-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 14.10 release section">
+      <extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174"/>
+      <criterion comment="thunderbird is earlier than 1:31.3.0+build1-0ubuntu0.14.10.1" test_ref="oval:org.mitre.oval:tst:136607"/>
+    </criteria>
+    <criteria comment="Ubuntu 14.04 release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criterion comment="thunderbird is earlier than 1:31.3.0+build1-0ubuntu0.14.04.1" test_ref="oval:org.mitre.oval:tst:135991"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="thunderbird is earlier than 1:31.3.0+build1-0ubuntu0.12.04.1" test_ref="oval:org.mitre.oval:tst:136558"/>
+    </criteria>
+  </criteria>
+</definition>

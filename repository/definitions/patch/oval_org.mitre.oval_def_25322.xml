@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25322" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0115-1 -- Security update for wireshark</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>wireshark</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140115-1.html" ref_id="SUSE-SU-2014:0115-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7112" ref_id="CVE-2013-7112"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7114" ref_id="CVE-2013-7114"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7113" ref_id="CVE-2013-7113"/>
+    <description>wireshark was updated to security update version 1.8.12,
+fixing bugs and  security issues.
+
+    * The SIP dissector could go into an infinite loop.
+wnpa-sec-2013-66 CVE-2013-7112
+    * The NTLMSSP v2 dissector could crash. Discovered by
+Garming Sam. wnpa-sec-2013-68 CVE-2013-7114
+
+Further bug fixes and updated protocol support as listed in:
+
+https://www.wireshark.org/docs/relnotes/wireshark-1.8.12.htm
+l
+&lt;https://www.wireshark.org/docs/relnotes/wireshark-1.8.12.ht
+ml></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:20:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:18:39.688-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:55.131-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:52.776-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criterion comment="wireshark RPM is earlier than 0:1.8.12-0.2.1" test_ref="oval:org.mitre.oval:tst:116987"/>
+  </criteria>
+</definition>

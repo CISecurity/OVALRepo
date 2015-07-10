@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11917" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2064 xulrunner -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-2064" ref_id="DSA-2064"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0183" ref_id="CVE-2010-0183"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1196" ref_id="CVE-2010-1196"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1197" ref_id="CVE-2010-1197"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1198" ref_id="CVE-2010-1198"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1199" ref_id="CVE-2010-1199"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1200" ref_id="CVE-2010-1200"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1201" ref_id="CVE-2010-1201"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1202" ref_id="CVE-2010-1202"/>
+    <description>Several remote vulnerabilities have been discovered in Xulrunner, a runtime environment for XUL applications. The Common Vulnerabilities and Exposures project identifies the following problems: "wushi" discovered that incorrect pointer handling in the frame processing code could lead to the execution of arbitrary code. "Nils" discovered that an integer overflow in DOM node parsing could lead to the execution of arbitrary code. Ilja von Sprundel discovered that incorrect parsing of Content-Disposition headers could lead to cross-site scripting. Microsoft engineers discovered that incorrect memory handling in the interaction of browser plugins could lead to the execution of arbitrary code. Martin Barbella discovered that an integer overflow in XSLT node parsing could lead to the execution of arbitrary code. Olli Pettay, Martijn Wargers, Justin Lebar, Jesse Ruderman, Ben Turner, Jonathan Kew and David Humphrey discovered crashes in the layout engine, which might allow the execution of arbitrary code. "boardraider" and "stedenon" discovered crashes in the layout engine, which might allow the execution of arbitrary code. Bob Clary, Igor Bukanov, Gary Kwong and Andreas Gal discovered crashes in the Javascript engine, which might allow the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-31T15:50:52-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-08-03T12:18:48.469-04:00">DRAFT</status_change>
+        <status_change date="2010-08-23T04:00:31.735-04:00">INTERIM</status_change>
+        <status_change date="2010-09-13T04:00:36.989-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11917 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:08.119-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:07.868-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libmozillainterfaces-java is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:40535"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libmozjs-dev is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41292"/>
+          <criterion comment="spidermonkey-bin is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41501"/>
+          <criterion comment="xulrunner-1.9-gnome-support is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41515"/>
+          <criterion comment="xulrunner-1.9 is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41349"/>
+          <criterion comment="libmozjs1d-dbg is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41479"/>
+          <criterion comment="libmozjs1d is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41191"/>
+          <criterion comment="python-xpcom is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41448"/>
+          <criterion comment="xulrunner-1.9-dbg is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41436"/>
+          <criterion comment="xulrunner-dev is earlier than 1.9.0.19-2" test_ref="oval:org.mitre.oval:tst:41387"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

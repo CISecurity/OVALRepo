@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16393" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Internet Explorer Memory Corruption Vulnerability (CVE-2013-3117) - MS13-047</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Internet Explorer 9</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3117" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3117"/>
+    <description>Microsoft Internet Explorer 9 allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted web site, aka "Internet Explorer Memory Corruption Vulnerability," a different vulnerability than CVE-2013-3122 and CVE-2013-3124.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-06-13T13:15:31">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-06-13T14:21:11.742-04:00">DRAFT</status_change>
+        <status_change date="2013-07-01T04:00:38.876-04:00">INTERIM</status_change>
+        <status_change date="2013-07-22T04:00:42.854-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:16393 - extended definitions of OS are without SP checks" date="2014-07-28T17:57:00.076-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:59:08.279-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:36.919-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Microsoft Internet Explorer 9 is installed" definition_ref="oval:org.mitre.oval:def:11985"/>
+    <criteria operator="OR" comment="Vista/2K8/Win7/R2">
+      <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+    </criteria>
+    <criteria operator="OR" comment="Check for vulnerable versions">
+      <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.16490" test_ref="oval:org.mitre.oval:tst:81066"/>
+      <criteria operator="AND" comment="Check for LDR range">
+        <criterion comment="Mshtml.dll version is greater than or equal to 9.0.8112.20000" test_ref="oval:org.mitre.oval:tst:42899"/>
+        <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.20600" test_ref="oval:org.mitre.oval:tst:81015"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

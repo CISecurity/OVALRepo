@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:194" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows NT RPCSS DCOM Buffer Overflow (Blaster, Test 2)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Remote Procedure Call (RPC)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0352" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0352"/>
+    <description>Buffer overflow in a certain DCOM interface for RPC in Microsoft Windows NT 4.0, 2000, XP, and Server 2003 allows remote attackers to execute arbitrary code via a malformed message, as exploited by the Blaster/MSblast/LovSAN and Nachi/Welchia worms.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-11-02T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-11-03T12:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-12-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-01-06T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-06-02T12:00:00.000-04:00" comment="Added product">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-06-08T03:17:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-29T06:49:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-09-27T10:53:00.000-04:00" comment="modified wft-567 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:36.769-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:20.434-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software section">
+    <criterion negate="true" comment="Patch Q823980 Installed" test_ref="oval:org.mitre.oval:tst:2822"/>
+    <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+    <criterion comment="the version of rpcss.dll is less than 4.0.1381.7224" test_ref="oval:org.mitre.oval:tst:2821"/>
+  </criteria>
+</definition>

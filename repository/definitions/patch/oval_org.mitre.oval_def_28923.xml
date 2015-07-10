@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28923" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0046 -- ntp security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>ntp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0046.html" ref_id="RHSA-2009:0046"/>
+    <reference source="CESA-2009:0046" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-April/015755.html" ref_id="CESA-2009:0046-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0021" ref_id="CVE-2009-0021"/>
+    <description>Updated ntp packages to correct a security issue are now available for Red
+Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The Network Time Protocol (NTP) is used to synchronize a computer's time
+with a referenced time source.
+A flaw was discovered in the way the ntpd daemon checked the return value
+of the OpenSSL EVP_VerifyFinal function. On systems using NTPv4
+authentication, this could lead to an incorrect verification of
+cryptographic signatures, allowing time-spoofing attacks. (CVE-2009-0021)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:03">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:26.533-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criterion comment="ntp is earlier than 0:4.2.0.a.20040617-8.el4_7.1" test_ref="oval:org.mitre.oval:tst:139913"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="ntp is earlier than 0:4.2.2p1-9.el5_3.1" test_ref="oval:org.mitre.oval:tst:140492"/>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criterion comment="ntp is earlier than 0:4.2.2p1-9.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140430"/>
+    </criteria>
+  </criteria>
+</definition>

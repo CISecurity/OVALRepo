@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20116" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2747-1 cacti - several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>cacti</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2747-1" ref_id="DSA-2747-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5588" ref_id="CVE-2013-5588"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5589" ref_id="CVE-2013-5589"/>
+    <description>Two vulnerabilities were discovered in Cacti, a web interface for graphing of monitoring systems</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-05T15:31:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-12-05T10:54:29.363-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:36.043-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:01:14.361-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:20116 - Debian Patch Update" date="2014-06-06T17:22:00.920-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:24:16.817-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:06:43.143-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="cacti DPKG is earlier than 0:0.8.7g-1+squeeze3" test_ref="oval:org.mitre.oval:tst:88666"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="cacti DPKG is earlier than 0:0.8.8a+dfsg-5+deb7u2" test_ref="oval:org.mitre.oval:tst:89065"/>
+    </criteria>
+  </criteria>
+</definition>

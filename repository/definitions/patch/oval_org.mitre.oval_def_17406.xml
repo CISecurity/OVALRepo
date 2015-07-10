@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17406" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-597-1 -- openssh vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 6.10</platform>
+      <platform>Ubuntu 7.04</platform>
+      <platform>Ubuntu 7.10</platform>
+      <product>openssh</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-597-1/" ref_id="USN-597-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1483" ref_id="CVE-2008-1483"/>
+    <description>Timo Juhani Lindfors discovered that the OpenSSH client, when port forwarding was requested, would listen on any available address family.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-02T15:58:55.211-04:00">DRAFT</status_change>
+        <status_change date="2013-08-19T04:04:03.659-04:00">INTERIM</status_change>
+        <status_change date="2013-09-09T04:01:45.144-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17406 - added CVE references; also made minor updates" date="2014-06-13T17:30:00.875-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:32:11.513-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:06:37.145-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:4.2p1-7ubuntu3.3" test_ref="oval:org.mitre.oval:tst:81813"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 6.10 is installed" definition_ref="oval:org.mitre.oval:def:17043"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:4.3p2-5ubuntu1.2" test_ref="oval:org.mitre.oval:tst:82308"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.04 is installed" definition_ref="oval:org.mitre.oval:def:17290"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:4.3p2-8ubuntu1.2" test_ref="oval:org.mitre.oval:tst:82615"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criterion comment="openssh-client DPKG is earlier than 1:4.6p1-5ubuntu0.2" test_ref="oval:org.mitre.oval:tst:81932"/>
+    </criteria>
+  </criteria>
+</definition>

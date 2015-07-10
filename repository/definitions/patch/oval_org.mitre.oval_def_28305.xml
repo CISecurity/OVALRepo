@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28305" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-3103 -- Unbreakable Enterprise kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 7</platform>
+      <product>kernel-uek</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-3103.html" ref_id="ELSA-2014-3103"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3182" ref_id="CVE-2014-3182"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3186" ref_id="CVE-2014-3186"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3688" ref_id="CVE-2014-3688"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4027" ref_id="CVE-2014-4027"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4652" ref_id="CVE-2014-4652"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4656" ref_id="CVE-2014-4656"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6410" ref_id="CVE-2014-6410"/>
+    <description>kernel-uek [3.8.13-55.1.1] - ALSA: control: Protect user controls against
+          concurrent access (Lars-Peter Clausen) [Orabug: 20192540] {CVE-2014-4652} - target/rd:
+          Refactor rd_build_device_space + rd_release_device_space (Nicholas Bellinger) [Orabug:
+          20192516] {CVE-2014-4027} - HID: logitech: perform bounds checking on device_id early
+          enough (Jiri Kosina) [Orabug: 20192477] {CVE-2014-3182} - udf: Avoid infinite loop when
+          processing indirect ICBs (Jan Kara) [Orabug: 20192448] {CVE-2014-6410} - ALSA: control:
+          Make sure that id->index does not overflow (Lars-Peter Clausen) [Orabug: 20192416]
+          {CVE-2014-4656} - ALSA: control: Handle numid overflow (Lars-Peter Clausen) [Orabug:
+          20192367] {CVE-2014-4656} - HID: picolcd: sanity check report size in raw_event() callback
+          (Jiri Kosina) [Orabug: 20192208] {CVE-2014-3186} - net: sctp: fix remote memory pressure
+          from excessive queueing (Daniel Borkmann) [Orabug: 20192058] {CVE-2014-3688}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-22T10:48:43">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:12:17.072-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:18.347-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:15.061-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:136940 - Corrected package names in objects and versions in states." date="2015-02-26T20:03:00.822-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T20:05:53.229-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:50.396-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dtrace-modules-3.8.13-55.1.1.el6uek is earlier than 0:0.4.3-4.el6" test_ref="oval:org.mitre.oval:tst:136940"/>
+        <criterion comment="kernel-uek is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:136730"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:136969"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:137133"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:136929"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:137089"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:3.8.13-55.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:136966"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 7 release section">
+      <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="dtrace-modules-3.8.13-55.1.1.el7uek is earlier than 0:0.4.3-4.el7" test_ref="oval:org.mitre.oval:tst:136939"/>
+        <criterion comment="kernel-uek is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:136741"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:136772"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:137041"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:136430"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:136742"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:3.8.13-55.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:136754"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

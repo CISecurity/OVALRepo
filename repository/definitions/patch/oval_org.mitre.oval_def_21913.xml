@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21913" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0918: curl security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>curl</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0918-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0918.html"/>
+    <reference source="CVE" ref_id="CVE-2011-2192" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-2192.html"/>
+    <reference source="CESA-2011:0918" ref_url="http://lists.centos.org/pipermail/centos-announce/2011-July/017641.html" ref_id="CESA-2011:0918-CentOS 5"/>
+    <description>The Curl_input_negotiate function in http_negotiate.c in libcurl 7.10.6 through 7.21.6, as used in curl and other products, always performs credential delegation during GSSAPI authentication, which allows remote servers to impersonate clients via GSSAPI requests.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:38:50.782-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:01.735-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:20.090-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21913 - RHEL and Centos checks were added where necessary" date="2015-02-16T13:05:00.404-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-16T13:08:34.392-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:19.065-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="curl-devel is earlier than 0:7.15.5-9.el5_6.3" test_ref="oval:org.mitre.oval:tst:137150"/>
+        <criterion comment="curl is earlier than 0:7.15.5-9.el5_6.3" test_ref="oval:org.mitre.oval:tst:137724"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="curl is earlier than 0:7.19.7-26.el6_1.1" test_ref="oval:org.mitre.oval:tst:97809"/>
+        <criterion comment="curl-debuginfo is earlier than 0:7.19.7-26.el6_1.1" test_ref="oval:org.mitre.oval:tst:137578"/>
+        <criterion comment="libcurl is earlier than 0:7.19.7-26.el6_1.1" test_ref="oval:org.mitre.oval:tst:97421"/>
+        <criterion comment="libcurl-devel is earlier than 0:7.19.7-26.el6_1.1" test_ref="oval:org.mitre.oval:tst:98175"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

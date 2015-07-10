@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25870" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1217-1 -- Security update for subversion</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Desktop 10</platform>
+      <product>subversion</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131217-1.html" ref_id="SUSE-SU-2013:1217-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1968" ref_id="CVE-2013-1968"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2112" ref_id="CVE-2013-2112"/>
+    <description>This update of subversion fixes two potential DoS
+vulnerabilities  (bug#821505, CVE-2013-1968, CVE-2013-2112).
+
+    * 
+
+      Server-side bugfixes:
+
+          o fix FSFS repository corruption due to newline
+in filename (issue #4340) o fix svnserve exiting when a
+client connection is aborted (r1482759)
+    * 
+
+      Other tool improvements and bugfixes:
+
+          o fix argument processing in contrib hook scripts
+(r1485350)
+
+Security Issues:
+
+    * CVE-2013-1968
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1968
+>
+    * CVE-2013-2112
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2112
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:30:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:35.877-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:26.116-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:30.863-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Desktop 10 is installed" definition_ref="oval:org.mitre.oval:def:2106"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="subversion RPM is earlier than 0:1.3.1-1.24.1" test_ref="oval:org.mitre.oval:tst:119502"/>
+      <criterion comment="subversion-devel RPM is earlier than 0:1.3.1-1.24.1" test_ref="oval:org.mitre.oval:tst:119504"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:893" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows 2000 RPCSS DCOM Buffer Overflow (Blaster, Test 3)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Remote Procedure Call (RPC)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0813" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0813"/>
+    <description>A multi-threaded race condition in the Windows RPC DCOM functionality with the MS03-039 patch installed allows remote attackers to cause a denial of service (crash or reboot) by causing two threads to process the same RPC request, which causes one thread to use memory after it has been freed, a different vulnerability than CVE-2003-0352 (Blaster/Nachi), CVE-2003-0715, and CVE-2003-0528, and as demonstrated by certain exploits against those vulnerabilities.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-04-20T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-05-25T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-06-16T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+    <criterion comment="the version of rpcrt4.dll is less than 5.0.2195.6904" negate="false" test_ref="oval:org.mitre.oval:tst:1500"/>
+    <criterion comment="the patch kb828741 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1499"/>
+  </criteria>
+</definition>

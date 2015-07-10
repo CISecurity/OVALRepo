@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13445" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-763-1 -- xine-lib vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>xine-lib</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-April/000888.html" ref_id="USN-763-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1274" ref_id="CVE-2009-1274"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0698" ref_id="CVE-2009-0698"/>
+    <description>It was discovered that the QT demuxer in xine-lib did not correctly handle a large count value in an STTS atom, resulting in a heap-based buffer overflow. If a user or automated system were tricked into opening a specially crafted MOV file, an attacker could execute arbitrary code as the user invoking the program. USN-746-1 provided updated xine-lib packages to fix multiple security vulnerabilities. The security patch to fix CVE-2009-0698 was incomplete. This update corrects the problem. Original advisory details: It was discovered that the 4xm demuxer in xine-lib did not correctly handle a large current_track value in a 4xm file, resulting in an integer overflow. If a user or automated system were tricked into opening a specially crafted 4xm movie file, an attacker could crash xine-lib or possibly execute arbitrary code with the privileges of the user invoking the program</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:50:23.773-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:07:14.093-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:05:46.614-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13445 - added CVE references; also made minor updates" date="2014-06-13T15:57:00.040-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:58:49.441-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:03.786-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libxine1-plugins DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:66657"/>
+            <criterion comment="libxine1-doc DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67270"/>
+            <criterion comment="libxine1-all-plugins DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:66564"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libxine-dev DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67120"/>
+            <criterion comment="libxine1-misc-plugins DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67353"/>
+            <criterion comment="libxine1-console DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67382"/>
+            <criterion comment="libxine1 DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:66887"/>
+            <criterion comment="libxine1-dbg DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67115"/>
+            <criterion comment="libxine1-gnome DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:66981"/>
+            <criterion comment="libxine1-bin DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67272"/>
+            <criterion comment="libxine1-x DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67259"/>
+            <criterion comment="libxine1-ffmpeg DPKG is earlier than 1.1.11.1-1ubuntu3.4" test_ref="oval:org.mitre.oval:tst:67381"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libxine-dev DPKG is earlier than 1.1.1+ubuntu2-7.12" test_ref="oval:org.mitre.oval:tst:67431"/>
+        <criterion comment="libxine-main1 DPKG is earlier than 1.1.1+ubuntu2-7.12" test_ref="oval:org.mitre.oval:tst:66496"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libxine1-plugins DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:66589"/>
+            <criterion comment="libxine1-doc DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67430"/>
+            <criterion comment="libxine1-all-plugins DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:66885"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libxine-dev DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67330"/>
+            <criterion comment="libxine1-misc-plugins DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:66948"/>
+            <criterion comment="libxine1-console DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67081"/>
+            <criterion comment="libxine1 DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67326"/>
+            <criterion comment="libxine1-dbg DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67372"/>
+            <criterion comment="libxine1-gnome DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67307"/>
+            <criterion comment="libxine1-bin DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67316"/>
+            <criterion comment="libxine1-x DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:67250"/>
+            <criterion comment="libxine1-ffmpeg DPKG is earlier than 1.1.15-0ubuntu3.3" test_ref="oval:org.mitre.oval:tst:66752"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27058" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1307 -- nss security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>nss</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1307.html" ref_id="ELSA-2014-1307"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1568" ref_id="CVE-2014-1568"/>
+    <description>Network Security Services (NSS) is a set of libraries designed to support
+the cross-platform development of security-enabled client and server
+applications. Netscape Portable Runtime (NSPR) provides platform
+independence for non-GUI operating system facilities.
+
+A flaw was found in the way NSS parsed ASN.1 (Abstract Syntax Notation One)
+input from certain RSA signatures. A remote attacker could use this flaw to
+forge RSA certificates by providing a specially crafted signature to an
+application using NSS. (CVE-2014-1568)
+
+Red Hat would like to thank the Mozilla project for reporting this issue.
+Upstream acknowledges Antoine Delignat-Lavaud and Intel Product Security
+Incident Response Team as the original reporters.
+
+All NSS users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue. After installing this
+update, applications using NSS must be restarted for this update to
+take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-01T10:21:45">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-10T18:35:25.755-04:00">DRAFT</status_change>
+        <status_change date="2014-10-27T04:01:52.544-04:00">INTERIM</status_change>
+        <status_change date="2014-11-17T04:01:38.059-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 7 release section">
+      <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="nss RPM is earlier than 0:3.16.2-7.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:124938"/>
+        <criterion comment="nss-devel RPM is earlier than 0:3.16.2-7.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:123989"/>
+        <criterion comment="nss-pkcs11-devel RPM is earlier than 0:3.16.2-7.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:124894"/>
+        <criterion comment="nss-softokn RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124420"/>
+        <criterion comment="nss-softokn-devel RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124946"/>
+        <criterion comment="nss-softokn-freebl RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124472"/>
+        <criterion comment="nss-softokn-freebl-devel RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124947"/>
+        <criterion comment="nss-sysinit RPM is earlier than 0:3.16.2-7.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:124029"/>
+        <criterion comment="nss-tools RPM is earlier than 0:3.16.2-7.0.1.el7_0" test_ref="oval:org.mitre.oval:tst:124933"/>
+        <criterion comment="nss-util RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124771"/>
+        <criterion comment="nss-util-devel RPM is earlier than 0:3.16.2-2.el7_0" test_ref="oval:org.mitre.oval:tst:124963"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="nss RPM is earlier than 0:3.16.1-4.el5_11" test_ref="oval:org.mitre.oval:tst:125010"/>
+        <criterion comment="nss-devel RPM is earlier than 0:3.16.1-4.el5_11" test_ref="oval:org.mitre.oval:tst:124167"/>
+        <criterion comment="nss-pkcs11-devel RPM is earlier than 0:3.16.1-4.el5_11" test_ref="oval:org.mitre.oval:tst:124494"/>
+        <criterion comment="nss-tools RPM is earlier than 0:3.16.1-4.el5_11" test_ref="oval:org.mitre.oval:tst:124690"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="nss RPM is earlier than 0:3.16.1-7.0.1.el6_5" test_ref="oval:org.mitre.oval:tst:124964"/>
+        <criterion comment="nss-devel RPM is earlier than 0:3.16.1-7.0.1.el6_5" test_ref="oval:org.mitre.oval:tst:125008"/>
+        <criterion comment="nss-pkcs11-devel RPM is earlier than 0:3.16.1-7.0.1.el6_5" test_ref="oval:org.mitre.oval:tst:125003"/>
+        <criterion comment="nss-softokn RPM is earlier than 0:3.14.3-12.el6_5" test_ref="oval:org.mitre.oval:tst:124461"/>
+        <criterion comment="nss-softokn-devel RPM is earlier than 0:3.14.3-12.el6_5" test_ref="oval:org.mitre.oval:tst:124965"/>
+        <criterion comment="nss-softokn-freebl RPM is earlier than 0:3.14.3-12.el6_5" test_ref="oval:org.mitre.oval:tst:125025"/>
+        <criterion comment="nss-softokn-freebl-devel RPM is earlier than 0:3.14.3-12.el6_5" test_ref="oval:org.mitre.oval:tst:124638"/>
+        <criterion comment="nss-sysinit RPM is earlier than 0:3.16.1-7.0.1.el6_5" test_ref="oval:org.mitre.oval:tst:125018"/>
+        <criterion comment="nss-tools RPM is earlier than 0:3.16.1-7.0.1.el6_5" test_ref="oval:org.mitre.oval:tst:124086"/>
+        <criterion comment="nss-util RPM is earlier than 0:3.16.1-2.el6_5" test_ref="oval:org.mitre.oval:tst:124471"/>
+        <criterion comment="nss-util-devel RPM is earlier than 0:3.16.1-2.el6_5" test_ref="oval:org.mitre.oval:tst:124323"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13604" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-818-1 -- curl vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>curl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-August/000951.html" ref_id="USN-818-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2417" ref_id="CVE-2009-2417"/>
+    <description>Scott Cantor discovered that Curl did not correctly handle SSL certificates with zero bytes in the Common Name. A remote attacker could exploit this to perform a man in the middle attack to view sensitive information or alter encrypted communications.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:59:37.390-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:09:18.567-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:12.015-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13604 - added CVE references; also made minor updates" date="2014-06-13T15:44:00.630-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:46:16.518-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:32.528-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libcurl4-gnutls-dev DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:69975"/>
+        <criterion comment="libcurl4-openssl-dev DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:69599"/>
+        <criterion comment="libcurl3-gnutls DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:70320"/>
+        <criterion comment="libcurl3-dbg DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:70201"/>
+        <criterion comment="libcurl3 DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:70500"/>
+        <criterion comment="curl DPKG is earlier than 7.18.0-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:70055"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libcurl4-gnutls-dev DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70399"/>
+        <criterion comment="libcurl4-openssl-dev DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70582"/>
+        <criterion comment="libcurl3-gnutls DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70476"/>
+        <criterion comment="libcurl3-dbg DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70519"/>
+        <criterion comment="libcurl3 DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70462"/>
+        <criterion comment="curl DPKG is earlier than 7.18.2-8ubuntu4.1" test_ref="oval:org.mitre.oval:tst:70159"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libcurl3-dev DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70268"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libcurl3-gnutls DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70128"/>
+            <criterion comment="libcurl3-dbg DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70257"/>
+            <criterion comment="libcurl3-gnutls-dev DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70435"/>
+            <criterion comment="libcurl3 DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70590"/>
+            <criterion comment="curl DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70050"/>
+            <criterion comment="libcurl3-openssl-dev DPKG is earlier than 7.15.1-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:70528"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libcurl4-gnutls-dev DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:69995"/>
+        <criterion comment="libcurl4-openssl-dev DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:70586"/>
+        <criterion comment="libcurl3-gnutls DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:70525"/>
+        <criterion comment="libcurl3-dbg DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:70591"/>
+        <criterion comment="libcurl3 DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:69621"/>
+        <criterion comment="curl DPKG is earlier than 7.18.2-1ubuntu4.4" test_ref="oval:org.mitre.oval:tst:70359"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

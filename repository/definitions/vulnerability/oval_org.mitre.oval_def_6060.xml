@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6060" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IPsec Policy Information Disclosure Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2246" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2246"/>
+    <description>Microsoft Windows Vista through SP1 and Server 2008 do not properly import the default IPsec policy from a Windows Server 2003 domain to a Windows Server 2008 domain, which prevents IPsec rules from being enforced and allows remote attackers to bypass intended access restrictions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-13T09:28:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:02:24.930-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:23.688-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:40.331-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6060 - def:6060 updated for Vista x64 &amp; SP1 and Win2008 x64 and ia-64. Also added LDR version check for vista &amp; 008." date="2011-10-28T21:07:00.784-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2011-10-28T21:14:29.709-04:00">INTERIM</status_change>
+        <status_change date="2011-11-14T04:00:56.756-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:43983 - modified comments" date="2014-02-28T15:13:00.247-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-28T15:16:24.175-05:00">INTERIM</status_change>
+        <status_change date="2014-03-17T04:00:24.146-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows Vista (32-bit)/(x64)">
+      <criteria operator="OR" comment="Windows Vista (32-bit)/(x64)">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR/GDR">
+        <criterion comment="the version of Ipsecsvc.dll is less than 6.0.6000.16705" test_ref="oval:org.mitre.oval:tst:9135"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if version of Ipsecsvc.dll is less than 6.0.6000.20861" test_ref="oval:org.mitre.oval:tst:43803"/>
+          <criterion comment="Check if version of Ipsecsvc.dll is greater than or equal to 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:44081"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista SP1 (32-bit)/(x64)/Server 2008 (x86)/(x64)/(ia-64)">
+      <criteria operator="OR" comment="Windows Vista SP1 (32-bit)/(x64)/Server 2008 (x86)/(x64)/(ia-64)">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR/GDR">
+        <criterion comment="the version of Ipsecsvc.dll is less than 6.0.6001.18094" test_ref="oval:org.mitre.oval:tst:8911"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if version of Ipsecsvc.dll is less than 6.0.6001.22206" test_ref="oval:org.mitre.oval:tst:44333"/>
+          <criterion comment="Check if verson of Ipsecsvc.dll is greater than or equal to 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:43983"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

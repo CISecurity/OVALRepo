@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6380" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OpenSSL DSA and ECDSA "EVP_VerifyFinal()" Spoofing Vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-5077" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5077"/>
+    <description>OpenSSL 0.9.8i and earlier does not properly check the return value from the EVP_VerifyFinal function, which allows remote attackers to bypass validation of the certificate chain via a malformed SSL/TLS signature for DSA and ECDSA keys.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-09-28T06:56:17.688-04:00">DRAFT</status_change>
+        <modified comment="Extra criteria blocks added to handle multiple patch logic in def:6380" date="2009-10-20T14:03:00.107-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2009-11-09T04:00:52.347-05:00">INTERIM</status_change>
+        <status_change date="2009-11-30T04:00:36.828-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.3 is installed" definition_ref="oval:org.mitre.oval:def:6026"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX303-200903406-SG is not installed" test_ref="oval:org.mitre.oval:tst:10431"/>
+        <criterion comment="Patch ESX303-200903405-SG is not installed" test_ref="oval:org.mitre.oval:tst:10817"/>
+        <criterion comment="Patch ESX303-200903403-SG is not installed" test_ref="oval:org.mitre.oval:tst:10649"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.2 is installed" definition_ref="oval:org.mitre.oval:def:5613"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX-1008409 is not installed" test_ref="oval:org.mitre.oval:tst:9873"/>
+        <criterion comment="Patch ESX-1008408 is not installed" test_ref="oval:org.mitre.oval:tst:10772"/>
+        <criterion comment="Patch ESX-1008406 is not installed" test_ref="oval:org.mitre.oval:tst:10589"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+        <criterion comment="Patch ESX350-200904408-SG is not installed" test_ref="oval:org.mitre.oval:tst:10852"/>
+        <criterion comment="Patch ESX350-200904407-SG is not installed" test_ref="oval:org.mitre.oval:tst:10730"/>
+        <criterion comment="Patch ESX350-200904406-SG is not installed" test_ref="oval:org.mitre.oval:tst:10114"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

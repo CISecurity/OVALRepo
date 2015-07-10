@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18517" version="10" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Entity Expansion Vulnerability (CVE-2013-3860) - MS13-082</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Microsoft .NET Framework 2.0</product>
+      <product>Microsoft .NET Framework 3.5</product>
+      <product>Microsoft .NET Framework 3.5.1</product>
+      <product>Microsoft .NET Framework 4.0</product>
+      <product>Microsoft .NET Framework 4.5</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3860" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3860"/>
+    <description>Microsoft .NET Framework 2.0 SP2, 3.5, 3.5 SP1, 3.5.1, 4, and 4.5 does not properly parse a DTD during XML digital-signature validation, which allows remote attackers to cause a denial of service (application crash or hang) via a crafted signed XML document, aka "Entity Expansion Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-10-15T15:40:52">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-10-17T11:49:16.017-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:86268 - System.Security.dll should be searched in .NET Framework 4 directory but not in .NET Framework 2" date="2013-10-29T16:05:00.700-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-11-14T10:21:29.022-05:00">INTERIM</status_change>
+        <status_change date="2013-12-02T04:00:07.405-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18517 - .NET Framework 3.5.1 instead .NET Framework 3.5 in Windows 8 and Windows Server 2012" date="2014-03-31T14:51:00.481-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-03-31T14:53:46.056-04:00">INTERIM</status_change>
+        <status_change date="2014-04-21T04:00:19.312-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:05.692-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:39.974-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18517 - extended definitions of OS are without SP checks" date="2014-07-28T18:03:00.291-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T18:04:47.038-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:02:00.289-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment=".Net Framework 2.0 SP2 and vulnerable file version">
+      <extend_definition comment="Microsoft .NET Framework 2.0 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6158"/>
+      <criteria operator="OR" comment="XP/2k3/2k8/Vista and vulnerable files version">
+        <criteria operator="AND" comment="XP/2K3 and vulnerable files versions">
+          <criteria operator="OR" comment="XP / 2K3">
+            <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+            <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+          </criteria>
+          <criteria operator="OR" comment="LDR/GDR">
+            <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.3652" test_ref="oval:org.mitre.oval:tst:86606"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if System.Security.dll version is greater than or equal to 2.0.50727.4000" test_ref="oval:org.mitre.oval:tst:81021"/>
+              <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.7032" test_ref="oval:org.mitre.oval:tst:86051"/>
+            </criteria>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Vista/2K8 and vulnerable files versions">
+          <criteria operator="OR" comment="Vista / 2k8">
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable versions">
+            <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.4245" test_ref="oval:org.mitre.oval:tst:87005"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if System.Security.dll version is greater than or equal to 2.0.50727.5000" test_ref="oval:org.mitre.oval:tst:80869"/>
+              <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.7032" test_ref="oval:org.mitre.oval:tst:86051"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 3.5 sp1 + win xp/2k3/vista/2k8">
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="XP/2k3/2k8/Vista/Win8/2k12 and vulnerable files version">
+        <criteria operator="AND" comment="XP/2k3/2k8/Vista and vulnerable files version">
+          <criteria operator="OR" comment="XP/2k3/2k8/Vista">
+            <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+            <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+            <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable versions">
+            <criterion comment="Check if the version of System.Web.Extensions.dll is less than 3.5.30729.4056" test_ref="oval:org.mitre.oval:tst:86970"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="the version of System.Web.Extensions.dll is greater than or equal to 3.5.30729.5000" test_ref="oval:org.mitre.oval:tst:42377"/>
+              <criterion comment="Check if the version of System.Web.Extensions.dll is less than 3.5.30729.7056" test_ref="oval:org.mitre.oval:tst:86957"/>
+            </criteria>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Win 7 / R2 and vulnerable files version">
+          <criteria operator="OR" comment="Win 7 / R2">
+            <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+            <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable version">
+            <criterion comment="Check if the version of system.web.extensions.dll is less than 3.5.30729.5458" test_ref="oval:org.mitre.oval:tst:86506"/>
+            <criteria operator="AND" comment="Check for LDR">
+              <criterion comment="Check if the version of system.web.extensions.dll is greater than or equal to 3.5.30729.6000" test_ref="oval:org.mitre.oval:tst:86995"/>
+              <criterion comment="Check if the version of system.web.extensions.dll is less than 3.5.30729.7057" test_ref="oval:org.mitre.oval:tst:86052"/>
+            </criteria>
+            <criterion comment="Check if the version of system.security.dll is less than 2.0.50727.5475" test_ref="oval:org.mitre.oval:tst:86715"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if the version of system.security.dll is greater than or equal to 2.0.50727.6000" test_ref="oval:org.mitre.oval:tst:86994"/>
+              <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.7032" test_ref="oval:org.mitre.oval:tst:86051"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 4.0 + win xp/2k3/vista/2k8/win7/R2">
+      <extend_definition comment="Microsoft .NET Framework 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6749"/>
+      <criteria operator="OR" comment="XP/2k3/2k8/Vista/Win7/R2">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable versions">
+        <criterion comment="Check if the version of System.Security.dll is less than 4.0.30319.1016" test_ref="oval:org.mitre.oval:tst:86812"/>
+        <criteria operator="AND" comment="LDR range">
+          <criterion comment="Check if version of System.Security.dll is greater than or equal to 4.0.30319.2000" test_ref="oval:org.mitre.oval:tst:80978"/>
+          <criterion comment="Check if the version of System.Security.dll is less than 4.0.30319.2026" test_ref="oval:org.mitre.oval:tst:86268"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 4.5 + win 8/2k12/vista/2k8/win7/R2">
+      <extend_definition comment="Microsoft .NET Framework 4.5 is installed" definition_ref="oval:org.mitre.oval:def:15925"/>
+      <criteria operator="OR" comment="Win8/2k12/2k8/Vista/Win7/R2 and vulnerable files version">
+        <criteria operator="AND" comment="Win 8 / 2k12 and vulnerable file version">
+          <criteria operator="OR" comment="Win 8 / 2k12">
+            <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+            <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+            <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable version">
+            <criterion comment="Check if the version of system.security.dll is less than 4.0.30319.18056" test_ref="oval:org.mitre.oval:tst:87008"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if the version of system.security.dll is less than 4.0.30319.19109" test_ref="oval:org.mitre.oval:tst:86914"/>
+              <criterion comment="Check if version of System.Security.dll is greater than or equal to 4.0.30319.19000" test_ref="oval:org.mitre.oval:tst:81085"/>
+            </criteria>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Win 7 /R2 /Vista / 2k8 and vulnerable file version">
+          <criteria operator="OR" comment="XP/2k3/2k8/Vista/Win7/R2">
+            <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+            <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+            <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+            <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+            <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+            <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+          </criteria>
+          <criteria operator="OR" comment="Check for vulnerable version">
+            <criterion comment="Check if the version of System.Security.dll is less than 4.0.30319.18055" test_ref="oval:org.mitre.oval:tst:86865"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if version of System.Security.dll is greater than or equal to 4.0.30319.19000" test_ref="oval:org.mitre.oval:tst:81085"/>
+              <criterion comment="Check if the version of System.Security.dll is less than 4.0.30319.19108" test_ref="oval:org.mitre.oval:tst:86989"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".Net 3.5 + Win 8 /2k12 and vulnerable file version">
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="Windows 8 / 2k12">
+        <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+        <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+        <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of system.security.dll is less than 2.0.50727.6410" test_ref="oval:org.mitre.oval:tst:86823"/>
+        <criteria operator="AND" comment="LDR range">
+          <criterion comment="Check if version of System.Security.dll is greater than or equal to 2.0.50727.7000" test_ref="oval:org.mitre.oval:tst:80839"/>
+          <criterion comment="Check if the version of System.Security.dll is less than 2.0.50727.7032" test_ref="oval:org.mitre.oval:tst:86051"/>
+        </criteria>
+        <criterion comment="Check if the version of system.web.extensions.dll is less than 3.5.30729.6407" test_ref="oval:org.mitre.oval:tst:87009"/>
+        <criteria operator="AND" comment="LDR range">
+          <criterion comment="Check if the version of system.web.extensions.dll is greater than or equal to 3.5.30729.7000" test_ref="oval:org.mitre.oval:tst:86721"/>
+          <criterion comment="Check if the version of system.web.extensions.dll is less than 3.5.30729.7057" test_ref="oval:org.mitre.oval:tst:86052"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

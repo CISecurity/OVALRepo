@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26641" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1243: automake security update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>automake</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1243-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1243.html"/>
+    <reference source="CVE" ref_id="CVE-2012-3386" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-3386.html"/>
+    <reference source="CESA-2014:1243" ref_id="CESA-2014:1243" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-September/020607.html"/>
+    <description>Automake is a tool for automatically generating Makefile.in files compliant
+with the GNU Coding Standards.
+
+It was found that the distcheck rule in Automake-generated Makefiles made a
+directory world-writable when preparing source archives. If a malicious,
+local user could access this directory, they could execute arbitrary code
+with the privileges of the user running "make distcheck". (CVE-2012-3386)
+
+Red Hat would like to thank Jim Meyering for reporting this issue. Upstream
+acknowledges Stefano Lattarini as the original reporter.
+
+All automake users are advised to upgrade to this updated package, which
+contains a backported patch to correct this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-26T11:25:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-29T12:07:02.950-04:00">DRAFT</status_change>
+        <status_change date="2014-10-20T04:00:43.612-04:00">INTERIM</status_change>
+        <status_change date="2014-11-10T04:01:40.764-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26641 - CentOS criteria were added where necessary, descriptions were shortened." date="2015-03-23T14:40:00.799-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-03-23T14:45:50.602-04:00">INTERIM</status_change>
+        <status_change date="2015-04-13T04:00:09.452-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criterion comment="automake is earlier than 0:1.9.6-3.el5" test_ref="oval:org.mitre.oval:tst:123229"/>
+  </criteria>
+</definition>

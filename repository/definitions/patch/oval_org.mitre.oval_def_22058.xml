@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22058" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0237: sendmail security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>sendmail</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0237-05" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0237.html"/>
+    <reference source="CVE" ref_id="CVE-2006-7176" ref_url="https://www.redhat.com/security/data/cve/CVE-2006-7176.html"/>
+    <reference source="CVE" ref_id="CVE-2009-4565" ref_url="https://www.redhat.com/security/data/cve/CVE-2009-4565.html"/>
+    <description>sendmail before 8.14.4 does not properly handle a '\0' character in a Common Name (CN) field of an X.509 certificate, which (1) allows man-in-the-middle attackers to spoof arbitrary SSL-based SMTP servers via a crafted server certificate issued by a legitimate Certification Authority, and (2) allows remote attackers to bypass intended access restrictions via a crafted client certificate issued by a legitimate Certification Authority, a related issue to CVE-2009-2408.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:23.387-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:15.776-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:37.901-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="sendmail is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:98900"/>
+      <criterion comment="sendmail-doc is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:99031"/>
+      <criterion comment="sendmail-devel is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:99035"/>
+      <criterion comment="sendmail-cf is earlier than 0:8.13.8-8.el5" test_ref="oval:org.mitre.oval:tst:98980"/>
+    </criteria>
+  </criteria>
+</definition>

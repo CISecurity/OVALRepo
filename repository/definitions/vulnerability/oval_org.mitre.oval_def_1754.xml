@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1754" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX su(1) Local Unauthorized Access</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-1689" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1689"/>
+    <description>Unspecified vulnerability in su in HP HP-UX B.11.11, when using the LDAP netgroup feature, allows local users to gain unspecified access.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-04-06T06:39:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-04-12T05:16:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-31T09:45:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Added CVE reference. Implemented by Jon Baker of The MITRE Corporation." date="2007-03-19T21:15:00.392-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-03-19T21:23:35.434-04:00">INTERIM</status_change>
+        <status_change date="2007-04-10T13:44:22.733-04:00">ACCEPTED</status_change>
+        <modified comment="modified patch test to only check for specific patch, checking for supersedence was incorrect and need a language change" date="2007-09-13T00:00:00.000-05:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-09-13T14:05:29.390-04:00">INTERIM</status_change>
+        <status_change date="2007-10-02T08:08:10.899-04:00">ACCEPTED</status_change>
+        <modified comment="Criteria meets Security Bulletin HPSBUX02111" date="2008-07-14T10:21:00.768-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2008-07-14T10:23:14.802-04:00">INTERIM</status_change>
+        <status_change date="2008-08-04T04:00:09.946-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:33:02.767-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:00:40.221-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Criteria meets Security Bulletin HPSBUX02111">
+    <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+    <criterion comment="OS-Core.UX-CORE is installed" test_ref="oval:org.mitre.oval:tst:8404"/>
+    <criterion negate="true" comment="Patch PHCO_34545 is installed" test_ref="oval:org.mitre.oval:tst:8166"/>
+  </criteria>
+</definition>

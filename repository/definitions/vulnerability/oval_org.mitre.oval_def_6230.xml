@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6230" version="3" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Opera Unspecified Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Opera Browser</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0914" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0914"/>
+    <description>Opera before 9.64 allows remote attackers to execute arbitrary code via a crafted JPEG image that triggers memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-02T10:31:31">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </submitted>
+        <status_change date="2009-04-08T14:19:58.387-04:00">DRAFT</status_change>
+        <status_change date="2009-04-27T04:00:18.981-04:00">INTERIM</status_change>
+        <status_change date="2009-05-18T04:00:28.944-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecating duplicate definition" date="2010-01-12T12:00:00.000-05:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-01-12T12:00:00.000-05:00">DEPRECATED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:tst:9724 - Now path to opera.exe is searched in registry" date="2013-12-04T13:48:00.075-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Check Windows version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+    </criteria>
+    <criterion comment="Opera version is less than 9.64 (9.64.10487.0)" test_ref="oval:org.mitre.oval:tst:9724"/>
+    <criterion comment="Check if HKLM\SOFTWARE\Classes\Applications\Opera.exe\shell\open\command exists" test_ref="oval:org.mitre.oval:tst:89007"/>
+  </criteria>
+</definition>

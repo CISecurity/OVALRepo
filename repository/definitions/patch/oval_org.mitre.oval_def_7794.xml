@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7794" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1794 linux-2.6 -- denial of service/privilege escalation/information leak</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>linux-2.6</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1794" ref_id="DSA-1794"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4307" ref_id="CVE-2008-4307"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5395" ref_id="CVE-2008-5395"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5701" ref_id="CVE-2008-5701"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5702" ref_id="CVE-2008-5702"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5713" ref_id="CVE-2008-5713"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0028" ref_id="CVE-2009-0028"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0029" ref_id="CVE-2009-0029"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0031" ref_id="CVE-2009-0031"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0065" ref_id="CVE-2009-0065"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0322" ref_id="CVE-2009-0322"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0675" ref_id="CVE-2009-0675"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0676" ref_id="CVE-2009-0676"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0834" ref_id="CVE-2009-0834"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0859" ref_id="CVE-2009-0859"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1192" ref_id="CVE-2009-1192"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1265" ref_id="CVE-2009-1265"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1336" ref_id="CVE-2009-1336"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1337" ref_id="CVE-2009-1337"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1439" ref_id="CVE-2009-1439"/>
+    <description>Several vulnerabilities have been discovered in the Linux kernel that may lead to denial of service, privilege escalation, or information leak. The Common Vulnerabilities and Exposures project identifies the following problems: Bryn M. Reeves reported a denial of service in the NFS filesystem. Local users can trigger a kernel BUG() due to a race condition in the do_setlk function. Helge Deller discovered a denial of service condition that allows local users on PA-RISC to crash the system by attempting to unwind a stack containing userspace addresses. Vlad Malov reported an issue on 64-bit MIPS where a local user could cause a system crash by crafting a malicious binary which makes o32 syscalls with a number less than 4000. Zvonimir Rakamaric reported an off-by-one error in the ib700wdt watchdog driver which allows local users to cause a buffer underflow by making a specially crafted WDIOC_SETTIMEOUT ioctl call. Flavio Leitner discovered that a local user can cause a denial of service by generating large amounts of traffic on a large SMP system, resulting in soft lockups. Chris Evans discovered a situation in which a child process can send an arbitrary signal to its parent. Christian Borntraeger discovered an issue effecting the alpha, mips, powerpc, s390 and sparc64 architectures that allows local users to cause a denial of service or potentially gain elevated privileges. Vegard Nossum discovered a memory leak in the keyctl subsystem that allows local users to cause a denial of service by consuming all available kernel memory. Wei Yongjun discovered a memory overflow in the SCTP implementation that can be triggered by remote users, permitting remote code execution. Pavel Roskin provided a fix for an issue in the dell_rbu driver that allows a local user to cause a denial of service (oops) by reading 0 bytes from a sysfs entry. Roel Kluin discovered inverted logic in the skfddi driver that permits local, unprivileged users to reset the driver statistics. Clement LECIGNE discovered a bug in the sock_getsockopt function that may result in leaking sensitive kernel memory. Roland McGrath discovered an issue on amd64 kernels that allows local users to circumvent system call audit configurations which filter based on the syscall numbers or argument details. Jiri Olsa discovered that a local user can cause a denial of service (system hang) using a SHM_INFO shmctl call on kernels compiled with CONFIG_SHMEM disabled. This issue does not affect prebuilt Debian kernels. Shaohua Li reported an issue in the AGP subsystem that may allow local users to read sensitive kernel memory due to a leak of uninitialised memory. Thomas Pollet reported an overflow in the af_rose implementation that allows remote attackers to retrieve uninitialised kernel memory that may contain sensitive data. Trond Myklebust reported an issue in the encode_lookup() function in the nfs server subsystem that allows local users to cause a denial of service (oops in encode_lookup()) by use of a long filename. Oleg Nesterov discovered an issue in the exit_notify function that allows local users to send an arbitrary signal to a process by running a program that modifies the exit_signal field and then uses an exec system call to launch a setuid application. Pavan Naregundi reported an issue in the CIFS filesystem code that allows remote users to overwrite memory via a long nativeFileSystem field in a Tree Connect response during mount.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:49:12.855-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:44.786-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:15.947-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:5699 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:30.011-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:06:57.821-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7794 - Debian Patch Update" date="2014-06-06T16:43:00.922-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:44:40.944-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:54.207-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-support-2.6.18-6 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12103"/>
+          <criterion comment="linux-patch-debian-2.6.18 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12026"/>
+          <criterion comment="linux-source-2.6.18 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12199"/>
+          <criterion comment="linux-manual-2.6.18 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11974"/>
+          <criterion comment="linux-tree-2.6.18 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11987"/>
+          <criterion comment="linux-doc-2.6.18 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12126"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.18-6-vserver-s390x is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11971"/>
+          <criterion comment="linux-image-2.6.18-6-s390-tape is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12175"/>
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12159"/>
+          <criterion comment="linux-image-2.6.18-6-s390x is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12135"/>
+          <criterion comment="linux-image-2.6.18-6-vserver-s390x is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12176"/>
+          <criterion comment="linux-image-2.6.18-6-s390 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11900"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11951"/>
+          <criterion comment="linux-headers-2.6.18-6-all-s390 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11425"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11702"/>
+          <criterion comment="linux-headers-2.6.18-6-s390x is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12084"/>
+          <criterion comment="linux-headers-2.6.18-6-s390 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11556"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-image-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11606"/>
+          <criterion comment="fai-kernels is earlier than 1.17+etch.24etch2" test_ref="oval:org.mitre.oval:tst:11770"/>
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12180"/>
+          <criterion comment="xen-linux-system-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11644"/>
+          <criterion comment="linux-image-2.6.18-6-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12110"/>
+          <criterion comment="linux-image-2.6.18-6-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12115"/>
+          <criterion comment="linux-image-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12033"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12184"/>
+          <criterion comment="xen-linux-system-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12145"/>
+          <criterion comment="linux-headers-2.6.18-6-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11947"/>
+          <criterion comment="linux-headers-2.6.18-6-xen is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12189"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11932"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:11886"/>
+          <criterion comment="linux-headers-2.6.18-6-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12213"/>
+          <criterion comment="linux-headers-2.6.18-6-all-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11972"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12144"/>
+          <criterion comment="linux-modules-2.6.18-6-xen-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12025"/>
+          <criterion comment="linux-headers-2.6.18-6-xen-vserver is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12127"/>
+          <criterion comment="linux-modules-2.6.18-6-xen-vserver-amd64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12203"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.18-6-parisc64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12190"/>
+          <criterion comment="linux-headers-2.6.18-6-all is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12022"/>
+          <criterion comment="linux-image-2.6.18-6-parisc64-smp is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:11797"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12284"/>
+          <criterion comment="linux-headers-2.6.18-6-all-hppa is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12319"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc-smp is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12391"/>
+          <criterion comment="linux-image-2.6.18-6-parisc is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12419"/>
+          <criterion comment="linux-headers-2.6.18-6 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12368"/>
+          <criterion comment="linux-headers-2.6.18-6-parisc64-smp is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12315"/>
+          <criterion comment="linux-image-2.6.18-6-parisc64 is earlier than 2.6.18.dfsg.1-24etch1" test_ref="oval:org.mitre.oval:tst:12292"/>
+          <criterion comment="linux-image-2.6.18-6-parisc-smp is earlier than 2.6.18.dfsg.1-24etch2" test_ref="oval:org.mitre.oval:tst:12347"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5751" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running Portable File System (PFS), Remote Increase in Privilege</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-1993" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1993"/>
+    <description>Buffer overflow in the pfs_mountd.rpc RPC daemon in the Portable File System (PFS) in HP-UX B.11.00, B.11.11, and B.11.23 allows remote attackers to execute arbitrary code by sending "a call to procedure 5, followed by a crafted payload to procedure 2."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-10-30T17:10:23.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-10-31T15:25:04.257-04:00">DRAFT</status_change>
+        <status_change date="2008-11-17T04:00:32.583-05:00">INTERIM</status_change>
+        <status_change date="2008-12-08T04:00:57.209-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:32:28.109-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:46.291-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02203">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="OS-Core.CORE-KRN is installed" test_ref="oval:org.mitre.oval:tst:9159"/>
+        <criterion comment="ProgSupport.C-INC is installed" test_ref="oval:org.mitre.oval:tst:9446"/>
+        <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8495"/>
+        <criterion comment="OS-Core.UX-CORE is installed" test_ref="oval:org.mitre.oval:tst:9309"/>
+      </criteria>
+      <criteria negate="true" operator="OR" comment="Patch PHKL_28025 and PHKL_26269 and PHCO_25841 are installed">
+        <criterion comment="Patch PHKL_28025 is installed" test_ref="oval:org.mitre.oval:tst:9431"/>
+        <criterion comment="Patch PHKL_26269 is installed" test_ref="oval:org.mitre.oval:tst:8488"/>
+        <criterion comment="Patch PHCO_25841 is installed" test_ref="oval:org.mitre.oval:tst:9439"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02203">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="OS-Core.CORE-KRN is installed" test_ref="oval:org.mitre.oval:tst:9159"/>
+        <criterion comment="ProgSupport.C-INC is installed" test_ref="oval:org.mitre.oval:tst:9446"/>
+        <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8495"/>
+        <criterion comment="OS-Core.UX-CORE is installed" test_ref="oval:org.mitre.oval:tst:9309"/>
+      </criteria>
+      <criteria negate="true" operator="OR" comment="Patch PHKL_28060 and PHKL_26450 and PHCO_26449 are installed">
+        <criterion comment="Patch PHKL_28060 is installed" test_ref="oval:org.mitre.oval:tst:9468"/>
+        <criterion comment="Patch PHKL_26450 is installed" test_ref="oval:org.mitre.oval:tst:9413"/>
+        <criterion comment="Patch PHCO_26449 is installed" test_ref="oval:org.mitre.oval:tst:9349"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

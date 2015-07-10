@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13733" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1079-2 -- openjdk-6b18 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>openjdk-6b18</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-March/001278.html" ref_id="USN-1079-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4448" ref_id="CVE-2010-4448"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4450" ref_id="CVE-2010-4450"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4465" ref_id="CVE-2010-4465"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4469" ref_id="CVE-2010-4469"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4470" ref_id="CVE-2010-4470"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4471" ref_id="CVE-2010-4471"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4472" ref_id="CVE-2010-4472"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4476" ref_id="CVE-2010-4476"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0706" ref_id="CVE-2011-0706"/>
+    <description>USN-1079-1 fixed vulnerabilities in OpenJDK 6 for non-armel architectures. This update provides the corresponding updates for OpenJDK 6 for use with the armel architectures. In order to build the armel OpenJDK 6 update for Ubuntu 10.04 LTS, it was necessary to rebuild binutils and gcj-4.4 from Ubuntu 10.04 LTS updates. Original advisory details: It was discovered that untrusted Java applets could create domain name resolution cache entries, allowing an attacker to manipulate name resolution within the JVM. It was discovered that the Java launcher did not did not properly setup the LD_LIBRARY_PATH environment variable. A local attacker could exploit this to execute arbitrary code as the user invoking the program. It was discovered that within the Swing library, forged timer events could allow bypass of SecurityManager checks. This could allow an attacker to access restricted resources. It was discovered that certain bytecode combinations confused memory management within the HotSpot JVM. This could allow an attacker to cause a denial of service through an application crash or possibly inject code. It was discovered that the way JAXP components were handled allowed them to be manipulated by untrusted applets. An attacker could use this to bypass XML processing restrictions and elevate privileges. It was discovered that the Java2D subcomponent, when processing broken CFF fonts could leak system properties. It was discovered that a flaw in the XML Digital Signature component could allow an attacker to cause untrusted code to replace the XML Digital Signature Transform or C14N algorithm implementations. Konstantin Prei&amp;#223;er and others discovered that specific double literals were improperly handled, allowing a remote attacker to cause a denial of service. It was discovered that the JNLPClassLoader class when handling multiple signatures allowed remote attackers to gain privileges due to the assignment of an inappropriate security descriptor</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:41:41.870-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:10:29.247-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:49.207-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13733 - added CVE references; also made minor updates" date="2014-06-13T15:35:00.587-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:36:45.534-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:47.413-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64507"/>
+        <criterion comment="openjdk-6-demo DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64505"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64484"/>
+        <criterion comment="openjdk-6-dbg DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64304"/>
+        <criterion comment="openjdk-6-jdk DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64231"/>
+        <criterion comment="icedtea6-plugin DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64475"/>
+        <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64174"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b18-1.8.7-0ubuntu1~9.10.1" test_ref="oval:org.mitre.oval:tst:64537"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:64523"/>
+        <criterion comment="openjdk-6-demo DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:64337"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:64357"/>
+        <criterion comment="openjdk-6-dbg DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:64418"/>
+        <criterion comment="openjdk-6-jdk DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:63640"/>
+        <criterion comment="icedtea6-plugin DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:63668"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b18-1.8.7-0ubuntu1~10.04.2" test_ref="oval:org.mitre.oval:tst:64156"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

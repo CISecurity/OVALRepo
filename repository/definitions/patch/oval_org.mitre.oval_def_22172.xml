@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22172" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0273: curl security, bug fix and enhancement update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>curl</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0273-05" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0273.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0734" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0734.html"/>
+    <description>content_encoding.c in libcurl 7.10.5 through 7.19.7, when zlib is enabled, does not properly restrict the amount of callback data sent to an application that requests automatic decompression, which might allow remote attackers to cause a denial of service (application crash) or have unspecified other impact by sending crafted compressed data to an application that relies on the intended data-length limit.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:08.314-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:28.797-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:52.392-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="curl is earlier than 0:7.15.5-9.el5" test_ref="oval:org.mitre.oval:tst:99291"/>
+      <criterion comment="curl-devel is earlier than 0:7.15.5-9.el5" test_ref="oval:org.mitre.oval:tst:99290"/>
+    </criteria>
+  </criteria>
+</definition>

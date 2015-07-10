@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29262" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0361 -- NetworkManager security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>NetworkManager</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0361.html" ref_id="RHSA-2009:0361"/>
+    <reference source="CESA-2009:0361" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-April/015742.html" ref_id="CESA-2009:0361-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0365" ref_id="CVE-2009-0365"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0578" ref_id="CVE-2009-0578"/>
+    <description>Updated NetworkManager packages that fix two security issues are now
+available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+NetworkManager is a network link manager that attempts to keep a wired or
+wireless network connection active at all times.
+An information disclosure flaw was found in NetworkManager's D-Bus
+interface. A local attacker could leverage this flaw to discover sensitive
+information, such as network connection passwords and pre-shared keys.
+(CVE-2009-0365)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:52">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:27.810-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="NetworkManager-devel is earlier than 1:0.7.0-4.el5_3" test_ref="oval:org.mitre.oval:tst:140088"/>
+      <criterion comment="NetworkManager-glib-devel is earlier than 1:0.7.0-4.el5_3" test_ref="oval:org.mitre.oval:tst:140376"/>
+      <criterion comment="NetworkManager is earlier than 1:0.7.0-4.el5_3" test_ref="oval:org.mitre.oval:tst:140366"/>
+      <criterion comment="NetworkManager-glib is earlier than 1:0.7.0-4.el5_3" test_ref="oval:org.mitre.oval:tst:139966"/>
+      <criterion comment="NetworkManager-gnome is earlier than 1:0.7.0-4.el5_3" test_ref="oval:org.mitre.oval:tst:140085"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22558" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0565: w3m security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>w3m</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0565-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0565.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-2074" ref_url="http://linux.oracle.com/cve/CVE-2010-2074.html" source="CVE"/>
+    <description>istream.c in w3m 0.5.2 and possibly other versions, when ssl_verify_server is enabled, does not properly handle a '\0' character in a domain name in the (1) subject's Common Name or (2) Subject Alternative Name field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority, a related issue to CVE-2009-2408.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:05:57.422-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:00.641-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:01:22.639-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22558 - optimisation of Oracle Linux content" date="2014-05-05T18:10:00.932-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:12:20.743-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:28.922-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="w3m is earlier than 0:0.5.1-17.el5_5" test_ref="oval:org.mitre.oval:tst:104141"/>
+      <criterion comment="w3m-img is earlier than 0:0.5.1-17.el5_5" test_ref="oval:org.mitre.oval:tst:104100"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26898" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013-1319 -- sssd security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>sssd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-1319.html" ref_id="ELSA-2013-1319"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0219" ref_id="CVE-2013-0219"/>
+    <description>[1.5.1-70]
+
+- Fix IPA provider performance issue when storing large host groups
+
+- Resolves: rhbz#979047 - sssd_be goes to 99% CPU and causes significant
+
+                          login delays when client is under load</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:58:54.858-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:01:11.090-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:00:29.390-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="sssd is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:128643"/>
+      <criterion comment="libipa_hbac is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:128988"/>
+      <criterion comment="libipa_hbac-devel is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:128560"/>
+      <criterion comment="libipa_hbac-python is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:128616"/>
+      <criterion comment="sssd-client is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:128511"/>
+      <criterion comment="sssd-tools is earlier than 0:1.5.1-70.el5" test_ref="oval:org.mitre.oval:tst:129079"/>
+    </criteria>
+  </criteria>
+</definition>

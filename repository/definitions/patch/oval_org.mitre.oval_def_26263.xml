@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26263" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0441-1 -- Security update for Perl</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Perl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130441-1.html" ref_id="SUSE-SU-2013:0441-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1667" ref_id="CVE-2013-1667"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5526" ref_id="CVE-2012-5526"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2728" ref_id="CVE-2011-2728"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6329" ref_id="CVE-2012-6329"/>
+    <description>This update of Perl 5 fixes the following security issues:
+
+    * fix rehash DoS [bnc#804415] [CVE-2013-1667]
+    * improve CGI crlf escaping [bnc#789994] [CVE-2012-5526]
+    * fix glob denial of service [bnc#796014]
+[CVE-2011-2728]
+    * sanitize input in Maketext.pm [bnc#797060]
+[CVE-2012-6329]</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:40:31">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:38:28.368-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:54.503-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:58.159-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="perl RPM is earlier than 0:5.10.0-64.61.61.1" test_ref="oval:org.mitre.oval:tst:120742"/>
+      <criterion comment="perl-base RPM is earlier than 0:5.10.0-64.61.61.1" test_ref="oval:org.mitre.oval:tst:120621"/>
+      <criterion comment="perl-doc RPM is earlier than 0:5.10.0-64.61.61.1" test_ref="oval:org.mitre.oval:tst:120632"/>
+      <criterion comment="perl-32bit RPM is earlier than 0:5.10.0-64.61.61.1" test_ref="oval:org.mitre.oval:tst:120625"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11754" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The ProcGetReservedColormapEntries function in the TOG-CUP extension in X.Org Xserver before 1.4.1 allows context-dependent attackers to read the contents of arbitrary memory locations via a request containing a 32-bit value that is improperly used as an array index.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-6428" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6428"/>
+    <description>The ProcGetReservedColormapEntries function in the TOG-CUP extension in X.Org Xserver before 1.4.1 allows context-dependent attackers to read the contents of arbitrary memory locations via a request containing a 32-bit value that is improperly used as an array index.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:34:33.811-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:10:33.007-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:11:23.152-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11754 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T15:59:00.488-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:03:12.235-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:15:38.122-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="XFree86-cyrillic-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35923"/>
+        <criterion comment="XFree86-Xvfb is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35665"/>
+        <criterion comment="XFree86-ISO8859-14-100dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:36014"/>
+        <criterion comment="XFree86-libs is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35929"/>
+        <criterion comment="XFree86-75dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:36011"/>
+        <criterion comment="XFree86-truetype-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35836"/>
+        <criterion comment="XFree86-twm is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35726"/>
+        <criterion comment="XFree86-ISO8859-9-75dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35715"/>
+        <criterion comment="XFree86-libs-data is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35610"/>
+        <criterion comment="XFree86-doc is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:36025"/>
+        <criterion comment="XFree86-ISO8859-15-100dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35789"/>
+        <criterion comment="XFree86-base-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35804"/>
+        <criterion comment="XFree86-100dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35865"/>
+        <criterion comment="XFree86-ISO8859-15-75dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35793"/>
+        <criterion comment="XFree86-ISO8859-2-75dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35903"/>
+        <criterion comment="XFree86-font-utils is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35965"/>
+        <criterion comment="XFree86-Mesa-libGL is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35922"/>
+        <criterion comment="XFree86-ISO8859-2-100dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35504"/>
+        <criterion comment="XFree86-xdm is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35045"/>
+        <criterion comment="XFree86-sdk is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35914"/>
+        <criterion comment="XFree86 is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35831"/>
+        <criterion comment="XFree86-ISO8859-9-100dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35998"/>
+        <criterion comment="XFree86-Xnest is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35975"/>
+        <criterion comment="XFree86-xfs is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:36031"/>
+        <criterion comment="XFree86-tools is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35971"/>
+        <criterion comment="XFree86-syriac-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35711"/>
+        <criterion comment="XFree86-ISO8859-14-75dpi-fonts is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35933"/>
+        <criterion comment="XFree86-xauth is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35826"/>
+        <criterion comment="XFree86-Mesa-libGLU is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35753"/>
+        <criterion comment="XFree86-devel is earlier than 0:4.3.0-126.EL" test_ref="oval:org.mitre.oval:tst:35678"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="xorg-x11-doc is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35795"/>
+        <criterion comment="xorg-x11-libs is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35934"/>
+        <criterion comment="xorg-x11-xauth is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35467"/>
+        <criterion comment="xorg-x11-Mesa-libGLU is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35946"/>
+        <criterion comment="xorg-x11-twm is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36116"/>
+        <criterion comment="xorg-x11-Mesa-libGL is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35116"/>
+        <criterion comment="xorg-x11-Xdmx is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36004"/>
+        <criterion comment="xorg-x11-xfs is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35483"/>
+        <criterion comment="xorg-x11-deprecated-libs-devel is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36103"/>
+        <criterion comment="xorg-x11-devel is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36060"/>
+        <criterion comment="xorg-x11-Xvfb is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36074"/>
+        <criterion comment="xorg-x11-deprecated-libs is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35895"/>
+        <criterion comment="xorg-x11-sdk is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35905"/>
+        <criterion comment="xorg-x11-xdm is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:36012"/>
+        <criterion comment="xorg-x11-Xnest is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35984"/>
+        <criterion comment="xorg-x11 is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35857"/>
+        <criterion comment="xorg-x11-font-utils is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35681"/>
+        <criterion comment="xorg-x11-tools is earlier than 0:6.8.2-1.EL.33.0.2" test_ref="oval:org.mitre.oval:tst:35909"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="xorg-x11-server-sdk is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35517"/>
+        <criterion comment="xorg-x11-server-Xnest is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35690"/>
+        <criterion comment="xorg-x11-server-Xvfb is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35399"/>
+        <criterion comment="xorg-x11-server-Xdmx is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35908"/>
+        <criterion comment="xorg-x11-server-Xephyr is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35987"/>
+        <criterion comment="xorg-x11-server is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35861"/>
+        <criterion comment="xorg-x11-server-Xorg is earlier than 0:1.1.1-48.26.el5_1.5" test_ref="oval:org.mitre.oval:tst:35935"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

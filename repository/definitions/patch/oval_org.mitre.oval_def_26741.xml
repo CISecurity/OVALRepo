@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26741" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-3050-1 iceweasel - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>iceweasel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3050-1" ref_id="DSA-3050-1"/>
+    <description>iceweasel security update</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-17T10:35:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-17T23:37:41.443-04:00">DRAFT</status_change>
+        <status_change date="2014-11-03T04:00:16.545-05:00">INTERIM</status_change>
+        <status_change date="2014-11-24T04:00:47.457-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="iceweasel DPKG is earlier than 0:31.2.0esr-1~deb7u1" test_ref="oval:org.mitre.oval:tst:125559"/>
+  </criteria>
+</definition>

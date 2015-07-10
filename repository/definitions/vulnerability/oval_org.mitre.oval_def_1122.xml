@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1122" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Linux Kernel elf_core_dump() Buffer Overflow</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>Linux kernel</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1263" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1263"/>
+    <description>The elf_core_dump function in binfmt_elf.c for Linux kernel 2.x.x to 2.2.27-rc2, 2.4.x to 2.4.31-pre1, and 2.6.x to 2.6.12-rc4 allows local users to execute arbitrary code via an ELF binary that, in certain conditions involving the create_elf_tables function, causes a negative length argument to pass a signed integer comparison, leading to a buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-06-29T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2005-06-29T06:49:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-07-27T10:37:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-08-18T07:37:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+    <criteria operator="OR" comment="kernel, kernel-smp or kernel-hugemem RPM earlier than 0:2.4.21-32.0.1.EL">
+      <criterion comment="kernel RPM earlier than 0:2.4.21-32.0.1.EL" negate="false" test_ref="oval:org.mitre.oval:tst:1148"/>
+      <criterion comment="kernel-hugemem RPM earlier than 0:2.4.21-32.0.1.EL" negate="false" test_ref="oval:org.mitre.oval:tst:1147"/>
+      <criterion comment="kernel-smp RPM earlier than 0:2.4.21-32.0.1.EL" negate="false" test_ref="oval:org.mitre.oval:tst:1146"/>
+    </criteria>
+  </criteria>
+</definition>

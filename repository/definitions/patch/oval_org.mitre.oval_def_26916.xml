@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26916" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1537 -- augeas security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>augeas</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1537.html" ref_id="RHSA-2013:1537"/>
+    <reference source="CESA-2013:1537" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-November/000897.html" ref_id="CESA-2013:1537"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0786" ref_id="CVE-2012-0786"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0787" ref_id="CVE-2012-0787"/>
+    <description><![CDATA[Augeas is a utility for editing configuration. Augeas parses configuration
+files in their native formats and transforms them into a tree.
+Configuration changes are made by manipulating this tree and saving it back
+into native configuration files. Augeas also uses &quot;lenses&quot; as basic
+building blocks for establishing the mapping from files into the Augeas
+tree and back.
+
+Multiple flaws were found in the way Augeas handled configuration files
+when updating them. An application using Augeas to update configuration
+files in a directory that is writable to by a different user (for example,
+an application running as root that is updating files in a directory owned
+by a non-root service user) could have been tricked into overwriting
+arbitrary files or leaking information via a symbolic link or mount point
+attack. (CVE-2012-0786, CVE-2012-0787)
+
+The augeas package has been upgraded to upstream version 1.0.0, which
+provides a number of bug fixes and enhancements over the previous version.
+(BZ#817753)
+
+This update also fixes the following bugs:
+
+* Previously, when single quotes were used in an XML attribute, Augeas was
+unable to parse the file with the XML lens. An upstream patch has been
+provided ensuring that single quotes are handled as valid characters and
+parsing no longer fails. (BZ#799885)
+
+* Prior to this update, Augeas was unable to set up the &quot;require_ssl_reuse&quot;
+option in the vsftpd.conf file. The updated patch fixes the vsftpd lens to
+properly recognize this option, thus fixing this bug. (BZ#855022)
+
+* Previously, the XML lens did not support non-Unix line endings.
+Consequently, Augeas was unable to load any files containing such line
+endings. The XML lens has been fixed to handle files with CRLF line
+endings, thus fixing this bug. (BZ#799879)
+
+* Previously, Augeas was unable to parse modprobe.conf files with spaces
+around &quot;=&quot; characters in option directives. The modprobe lens has been
+updated and parsing no longer fails. (BZ#826752)
+
+All Augeas users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues and add these
+enhancements.]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:15:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:47:39.611-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:07.788-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:26.288-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="augeas is earlier than 0:1.0.0-5.el6" test_ref="oval:org.mitre.oval:tst:126099"/>
+        <criterion comment="augeas-devel is earlier than 0:1.0.0-5.el6" test_ref="oval:org.mitre.oval:tst:126098"/>
+        <criterion comment="augeas-libs is earlier than 0:1.0.0-5.el6" test_ref="oval:org.mitre.oval:tst:125418"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criterion comment="augeas-debuginfo is earlier than 0:1.0.0-5.el6" test_ref="oval:org.mitre.oval:tst:125940"/>
+    </criteria>
+  </criteria>
+</definition>

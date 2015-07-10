@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3496" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows NT IE HTML Help ActiveX control Cross Domain Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>HTML Help ActiveX Control</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1043" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1043"/>
+    <description>Internet Explorer 6.0 on Windows XP SP2 allows remote attackers to execute arbitrary code by using the "Related Topics" command in the Help ActiveX Control (hhctrl.ocx) to open a Help popup window containing the PCHealth tools.htm file in the local zone and injecting Javascript to be executed, as demonstrated using "writehta.txt" and the ADODB recordset, which saves a .HTA file to the local system, aka the "HTML Help ActiveX control Cross Domain Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-03-30T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Matthew Burton</contributor>
+        </submitted>
+        <status_change date="2005-04-12T08:26:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-04-27T12:07:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-01T03:30:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-10-31T04:13:00.000-04:00" comment="Replaced reference to obj:1374 with reference to obj:1550 since it references Product\Options and not ProductOptions in the controlset registry key.  Modified by Harvey Rubinovitz">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2006-11-21T04:13:00.000-04:00">INTERIM</status_change>
+        <status_change date="2007-01-03T13:53:54.357-05:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:44.787-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:29.486-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criteria operator="AND" comment="Windows NT Server 4.0 is installed">
+        <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+        <criteria operator="OR" comment="Windows NT server product option">
+          <criterion comment="this is an NT Server (stand-alone)" test_ref="oval:org.mitre.oval:tst:2408"/>
+          <criterion comment="this is an NT Server (domain controller)" test_ref="oval:org.mitre.oval:tst:3035"/>
+        </criteria>
+      </criteria>
+      <criterion comment="the version of hhctrl.ocx is less than 5.2.3790.233" test_ref="oval:org.mitre.oval:tst:971"/>
+      <criterion negate="true" comment="the patch Q890175 is installed" test_ref="oval:org.mitre.oval:tst:418"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion negate="true" comment="use machine settings rather than individual user settings" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

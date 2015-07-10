@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28741" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0354 -- evolution-data-server security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <product>evolution28-evolution-data-server</product>
+      <product>evolution-data-server</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0354.html" ref_id="RHSA-2009:0354"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0547" ref_id="CVE-2009-0547"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0582" ref_id="CVE-2009-0582"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0587" ref_id="CVE-2009-0587"/>
+    <description>Updated evolution-data-server and evolution28-evolution-data-server
+packages that fix multiple security issues are now available for Red Hat
+Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Evolution Data Server provides a unified back-end for applications which
+interact with contacts, task, and calendar information. Evolution Data
+Server was originally developed as a back-end for Evolution, but is now
+used by multiple other applications.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:56">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:30.232-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="evolution-data-server-devel is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:140255"/>
+        <criterion comment="evolution-data-server is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:139962"/>
+        <criterion comment="evolution-data-server-doc is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:140218"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="evolution28-evolution-data-server is earlier than 0:1.8.0-37.el4_7.2" test_ref="oval:org.mitre.oval:tst:140413"/>
+        <criterion comment="evolution28-evolution-data-server-devel is earlier than 0:1.8.0-37.el4_7.2" test_ref="oval:org.mitre.oval:tst:140474"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15464" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cached Object Remote Code Execution Vulnerability - MS12-044</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Internet Explorer 9</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-1522" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1522"/>
+    <description>Microsoft Internet Explorer 9 does not properly handle objects in memory, which allows remote attackers to execute arbitrary code by accessing a deleted object, aka "Cached Object Remote Code Execution Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-07-13T08:39:35">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-07-13T11:27:47.110-04:00">DRAFT</status_change>
+        <status_change date="2012-07-30T04:00:21.396-04:00">INTERIM</status_change>
+        <status_change date="2012-08-20T04:00:07.891-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15464 - extended definitions of OS are without SP checks" date="2014-07-28T17:48:00.175-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:49:40.892-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:15.233-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Vulnerable OS">
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      <extend_definition comment="Microsoft Windows 7 is installed" definition_ref="oval:org.mitre.oval:def:12541"/>
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+    </criteria>
+    <criteria operator="OR" comment="Check for vulnerable version">
+      <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.16447" test_ref="oval:org.mitre.oval:tst:79596"/>
+      <criteria operator="AND" comment="Check for LDR">
+        <criterion comment="Mshtml.dll version is greater than or equal to 9.0.8112.20000" test_ref="oval:org.mitre.oval:tst:42899"/>
+        <criterion comment="Check if the version of mshtml.dll is less than 9.0.8112.20553" test_ref="oval:org.mitre.oval:tst:79495"/>
+      </criteria>
+    </criteria>
+    <extend_definition comment="Microsoft Internet Explorer 9 is installed" definition_ref="oval:org.mitre.oval:def:11985"/>
+  </criteria>
+</definition>

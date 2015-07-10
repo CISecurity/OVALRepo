@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5694" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running ARPA Transport, Local Denial of Service (DoS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-2665" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2665"/>
+    <description>Unspecified vulnerability in the Address and Routing Parameter Area (ARPA) transport software in HP-UX B.11.00, B.11.04, and B.11.11 before 20040628 allows local users to cause a denial of service via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-07T16:38:37.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-14T10:51:57.129-04:00">DRAFT</status_change>
+        <status_change date="2008-08-04T04:00:32.725-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:28.595-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:32:51.316-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:45.160-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX01054">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="Networking.NET-KRN is installed" test_ref="oval:org.mitre.oval:tst:8422"/>
+        <criterion comment="Networking.NET-RUN is installed" test_ref="oval:org.mitre.oval:tst:8288"/>
+        <criterion comment="Networking.NET2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8224"/>
+        <criterion comment="Networking.NMS2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8289"/>
+        <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:7902"/>
+      </criteria>
+      <criterion negate="true" comment="Patch PHNE_29887 is installed" test_ref="oval:org.mitre.oval:tst:7915"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX01054">
+      <criterion comment="HP Release B.11.04" test_ref="oval:org.mitre.oval:tst:3294"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="Networking.NET-KRN is installed" test_ref="oval:org.mitre.oval:tst:8422"/>
+        <criterion comment="Networking.NET-RUN is installed" test_ref="oval:org.mitre.oval:tst:8288"/>
+        <criterion comment="Networking.NET2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8224"/>
+        <criterion comment="Networking.NMS2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8289"/>
+        <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:7902"/>
+      </criteria>
+      <criterion negate="true" comment="Patch PHNE_30905 is installed" test_ref="oval:org.mitre.oval:tst:8438"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX01054">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="Networking.NET-KRN is installed" test_ref="oval:org.mitre.oval:tst:8422"/>
+        <criterion comment="Networking.NET-RUN is installed" test_ref="oval:org.mitre.oval:tst:8288"/>
+        <criterion comment="Networking.NET2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8224"/>
+        <criterion comment="Networking.NMS2-KRN is installed" test_ref="oval:org.mitre.oval:tst:8289"/>
+        <criterion comment="OS-Core.CORE2-KRN is installed" test_ref="oval:org.mitre.oval:tst:7902"/>
+      </criteria>
+      <criterion negate="true" comment="Patch PHNE_29473 is installed" test_ref="oval:org.mitre.oval:tst:7722"/>
+    </criteria>
+  </criteria>
+</definition>

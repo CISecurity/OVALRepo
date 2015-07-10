@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29208" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:1077-1 -- Security update for openldap2 (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>openldap2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20151077-1.html" ref_id="SUSE-SU-2015:1077-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1545" ref_id="CVE-2015-1545"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1546" ref_id="CVE-2015-1546"/>
+    <description>openldap2 was updated to fix two security issues and one non-security bug.
+The following vulnerabilities were fixed:
+* A remote attacker could cause a denial of service through a NULL pointer
+  dereference and crash via an empty attribute list in a deref control in
+  a search request. (bnc#916897 CVE-2015-1545)
+* A remote attacker could cause a denial of service (crash) via a crafted
+  search query with a matched values control. (bnc#916914 CVE-2015-1546)
+The following non-security issue was fixed:
+* Prevent connection-0 (internal connection) from showing up in the
+  monitor backend (bnc#905959)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:32:51">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:16.742-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 12 and SUSE Linux Enterprise Desktop 12 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libldap-2_4-2 is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:140024"/>
+        <criterion comment="libldap-2_4-2-32bit is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139064"/>
+        <criterion comment="libldap-2_4-2-debuginfo is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139794"/>
+        <criterion comment="libldap-2_4-2-debuginfo-32bit is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:140014"/>
+        <criterion comment="openldap2-client is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:140039"/>
+        <criterion comment="openldap2-client-debuginfo is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139874"/>
+        <criterion comment="openldap2-client-debugsource is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139788"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 12 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="openldap2 is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:140022"/>
+        <criterion comment="openldap2-back-meta is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139887"/>
+        <criterion comment="openldap2-back-meta-debuginfo is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139076"/>
+        <criterion comment="openldap2-debuginfo is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139740"/>
+        <criterion comment="openldap2-debugsource is earlier than 0:2.4.39-16.1" test_ref="oval:org.mitre.oval:tst:139786"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

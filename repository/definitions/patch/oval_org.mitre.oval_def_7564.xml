@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7564" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1621 icedove -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>icedove</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1621" ref_id="DSA-1621"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0304" ref_id="CVE-2008-0304"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2785" ref_id="CVE-2008-2785"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2798" ref_id="CVE-2008-2798"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2799" ref_id="CVE-2008-2799"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2802" ref_id="CVE-2008-2802"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2803" ref_id="CVE-2008-2803"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2807" ref_id="CVE-2008-2807"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2809" ref_id="CVE-2008-2809"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2811" ref_id="CVE-2008-2811"/>
+    <description>Several remote vulnerabilities have been discovered in the Icedove mail client, an unbranded version of the Thunderbird client. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered that a buffer overflow in MIME decoding can lead to the execution of arbitrary code. It was discovered that missing boundary checks on a reference counter for CSS objects can lead to the execution of arbitrary code. Devon Hubbard, Jesse Ruderman and Martijn Wargers discovered crashes in the layout engine, which might allow the execution of arbitrary code. Igor Bukanov, Jesse Ruderman and Gary Kwong discovered crashes in the Javascript engine, which might allow the execution of arbitrary code. "moz_bug_r_a4" discovered that XUL documents can escalate privileges by accessing the pre-compiled "fastload" file. "moz_bug_r_a4" discovered that missing input sanitising in the mozIJSSubScriptLoader.loadSubScript() function could lead to the execution of arbitrary code. Iceweasel itself is not affected, but some addons are. Daniel Glazman discovered that a programming error in the code for parsing .properties files could lead to memory content being exposed to addons, which could lead to information disclosure. John G. Myers, Frank Benkstein and Nils Toedtmann discovered that alternate names on self-signed certificates were handled insufficiently, which could lead to spoofings secure connections. Greg McManus discovered discovered a crash in the block reflow code, which might allow the execution of arbitrary code. For the stable distribution (etch), these problems have been fixed in version 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1. Packages for s390 are not yet available and will be provided later. For the unstable distribution (sid), these problems have been fixed in version 2.0.0.16-1. We recommend that you upgrade your icedove package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:04-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:50:55.611-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:05.100-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:44.103-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7564 - Debian Patch Update" date="2014-06-06T16:44:00.039-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:46:30.046-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:35.776-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="thunderbird-gnome-support is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13074"/>
+          <criterion comment="thunderbird-dev is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13466"/>
+          <criterion comment="mozilla-thunderbird is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13170"/>
+          <criterion comment="thunderbird is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13412"/>
+          <criterion comment="mozilla-thunderbird-dev is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13299"/>
+          <criterion comment="mozilla-thunderbird-typeaheadfind is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13285"/>
+          <criterion comment="thunderbird-dbg is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:12901"/>
+          <criterion comment="thunderbird-typeaheadfind is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:12796"/>
+          <criterion comment="mozilla-thunderbird-inspector is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:12800"/>
+          <criterion comment="thunderbird-inspector is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13337"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="icedove-typeaheadfind is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13196"/>
+          <criterion comment="icedove is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13468"/>
+          <criterion comment="icedove-dev is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13336"/>
+          <criterion comment="icedove-inspector is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13115"/>
+          <criterion comment="icedove-dbg is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13481"/>
+          <criterion comment="icedove-gnome-support is earlier than 1.5.0.13+1.5.0.15b.dfsg1+prepatch080614d-0etch1" test_ref="oval:org.mitre.oval:tst:13333"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

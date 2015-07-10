@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18619" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1608-1 mysql-dfsg-5.0 - authorisation bypass</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>mysql-dfsg-5.0</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1608-1" ref_id="DSA-1608-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2079" ref_id="CVE-2008-2079"/>
+    <description>Sergei Golubchik discovered that MySQL, a widely-deployed database server, did not properly validate optional data or index directory paths given in a CREATE TABLE statement, nor would it (under proper conditions) prevent two databases from using the same paths for data or index files. This permits an authenticated user with authorisation to create tables in one database to read, write or delete data from tables subsequently created in other databases, regardless of other GRANT authorisations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:13:12">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:11:48.831-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:02:08.910-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:10:42.260-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23390 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:31:47.685-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:40.685-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18619 - Debian Patch Update" date="2014-06-06T17:17:00.167-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:19:57.671-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:05:05.373-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="mysql-dfsg-5.0 DPKG is earlier than 5.0.32-7etch6" test_ref="oval:org.mitre.oval:tst:85773"/>
+  </criteria>
+</definition>

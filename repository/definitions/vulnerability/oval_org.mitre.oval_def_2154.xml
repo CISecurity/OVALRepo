@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2154" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in BIND 8 May Allow Cache Poisoning Attack</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2930" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2930"/>
+    <description>The (1) NSID_SHUFFLE_ONLY and (2) NSID_USE_POOL PRNG algorithms in ISC BIND 8 before 8.4.7-P1 generate predictable DNS query identifiers when sending outgoing queries such as NOTIFY messages when answering questions as a resolver, which allows remote attackers to poison DNS caches via unknown vectors.  NOTE: this issue is different from CVE-2007-2926.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-10-16T10:34:50.000-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </submitted>
+        <status_change date="2007-10-16T14:50:58.416-04:00">DRAFT</status_change>
+        <status_change date="2007-11-02T07:17:39.538-04:00">INTERIM</status_change>
+        <status_change date="2007-11-19T04:01:00.472-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software and Criteria Section">
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 103063" negate="false">
+        <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+        <criterion comment="Patch 109326-20 or later installed" test_ref="oval:org.mitre.oval:tst:4282" negate="true"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 103063" negate="false">
+        <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+        <criterion comment="Patch 109327-20 or later installed" test_ref="oval:org.mitre.oval:tst:4431" negate="true"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 103063" negate="false">
+        <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+        <criterion comment="Patch 112837-14 or later installed" test_ref="oval:org.mitre.oval:tst:4470" negate="true"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 103063" negate="false">
+        <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+        <criterion comment="Patch 114265-13 or later installed" test_ref="oval:org.mitre.oval:tst:4525" negate="true"/>
+      </criteria>
+    </criteria>
+    <criterion comment="in.named running" negate="false" test_ref="oval:org.mitre.oval:tst:2624"/>
+  </criteria>
+</definition>

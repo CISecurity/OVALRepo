@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12798" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1053-1 -- subversion vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <product>subversion</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001237.html" ref_id="USN-1053-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2448" ref_id="CVE-2007-2448"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3315" ref_id="CVE-2010-3315"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4539" ref_id="CVE-2010-4539"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4644" ref_id="CVE-2010-4644"/>
+    <description>It was discovered that Subversion incorrectly handled certain "partial access" privileges in rare scenarios. Remote authenticated users could use this flaw to obtain sensitive information . This issue only applied to Ubuntu 6.06 LTS. It was discovered that the Subversion mod_dav_svn module for Apache did not properly handle a named repository as a rule scope. Remote authenticated users could use this flaw to bypass intended restrictions. This issue only applied to Ubuntu 9.10, 10.04 LTS, and 10.10. It was discovered that the Subversion mod_dav_svn module for Apache incorrectly handled the walk function. Remote authenticated users could use this flaw to cause the service to crash, leading to a denial of service. It was discovered that Subversion incorrectly handled certain memory operations. Remote authenticated users could use this flaw to consume large quantities of memory and cause the service to crash, leading to a denial of service. This issue only applied to Ubuntu 9.10, 10.04 LTS, and 10.10</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:36:48.141-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:09.992-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:00:49.794-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12798 - added CVE references; also made minor updates" date="2014-06-13T16:26:00.686-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:28:06.217-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:00:51.737-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="subversion-tools DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62444"/>
+            <criterion comment="libsvn-doc DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62460"/>
+            <criterion comment="libsvn-javahl DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62839"/>
+            <criterion comment="libsvn-ruby DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62712"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libsvn-dev DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62607"/>
+            <criterion comment="python-subversion-dbg DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62810"/>
+            <criterion comment="libapache2-svn DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62813"/>
+            <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62355"/>
+            <criterion comment="python-subversion DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62737"/>
+            <criterion comment="libsvn1 DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62800"/>
+            <criterion comment="subversion DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62844"/>
+            <criterion comment="libsvn-java DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62490"/>
+            <criterion comment="libsvn-perl DPKG is earlier than 1.4.6dfsg1-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:62534"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="subversion-tools DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62578"/>
+            <criterion comment="libsvn-doc DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62787"/>
+            <criterion comment="libsvn-ruby DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62303"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libsvn-dev DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62843"/>
+            <criterion comment="python-subversion-dbg DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62371"/>
+            <criterion comment="libapache2-svn DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62101"/>
+            <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62792"/>
+            <criterion comment="python-subversion DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62516"/>
+            <criterion comment="libsvn-java DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62716"/>
+            <criterion comment="subversion DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62669"/>
+            <criterion comment="libsvn1 DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62567"/>
+            <criterion comment="libsvn-perl DPKG is earlier than 1.6.12dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62849"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="subversion-tools DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62865"/>
+            <criterion comment="libsvn-doc DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62506"/>
+            <criterion comment="libsvn-ruby DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62802"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libsvn-dev DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62250"/>
+            <criterion comment="python-subversion-dbg DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62751"/>
+            <criterion comment="libapache2-svn DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62866"/>
+            <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62197"/>
+            <criterion comment="python-subversion DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62788"/>
+            <criterion comment="libsvn-java DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62530"/>
+            <criterion comment="subversion DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62771"/>
+            <criterion comment="libsvn1 DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62616"/>
+            <criterion comment="libsvn-perl DPKG is earlier than 1.6.6dfsg-2ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62674"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="subversion-tools DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62597"/>
+            <criterion comment="libsvn-doc DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62441"/>
+            <criterion comment="libsvn-ruby DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62486"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libsvn-dev DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62750"/>
+            <criterion comment="python-subversion-dbg DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62451"/>
+            <criterion comment="libapache2-svn DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:61915"/>
+            <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62390"/>
+            <criterion comment="python-subversion DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62823"/>
+            <criterion comment="libsvn-java DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62464"/>
+            <criterion comment="subversion DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62842"/>
+            <criterion comment="libsvn1 DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62846"/>
+            <criterion comment="libsvn-perl DPKG is earlier than 1.6.5dfsg-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:62619"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="subversion-tools DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62418"/>
+            <criterion comment="python2.4-subversion DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62762"/>
+            <criterion comment="libsvn-doc DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62285"/>
+            <criterion comment="libsvn-ruby DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62914"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libsvn0-dev DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62827"/>
+            <criterion comment="libsvn-core-perl DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62715"/>
+            <criterion comment="libapache2-svn DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62821"/>
+            <criterion comment="libsvn-ruby1.8 DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62705"/>
+            <criterion comment="python-subversion DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62818"/>
+            <criterion comment="libsvn0 DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62560"/>
+            <criterion comment="subversion DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62052"/>
+            <criterion comment="libsvn-javahl DPKG is earlier than 1.3.1-3ubuntu1.3" test_ref="oval:org.mitre.oval:tst:62361"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

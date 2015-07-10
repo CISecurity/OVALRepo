@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13441" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1987-1 lighttpd -- denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>lighttpd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00025.html" ref_id="DSA-1987-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0295" ref_id="CVE-2010-0295"/>
+    <description>Li Ming discovered that lighttpd, a small and fast webserver with minimal memory footprint, is vulnerable to a denial of service attack due to bad memory handling. Slowly sending very small chunks of request data causes lighttpd to allocate new buffers for each read instead of appending to old ones. An attacker can abuse this behaviour to cause denial of service conditions due to memory exhaustion. For the oldstable distribution, this problem has been fixed in version 1.4.13-4etch12. For the stable distribution, this problem has been fixed in version 1.4.19-5+lenny1. For the testing and unstable distribution, this problem will be fixed soon. We recommend that you upgrade your lighttpd packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:26:35.986-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:38.463-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:07:11.596-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13441 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:35.783-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:15.357-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="lighttpd-doc DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:46188"/>
+        </criteria>
+        <criterion comment="lighttpd-mod-mysql-vhost DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:46159"/>
+        <criterion comment="lighttpd-mod-magnet DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:46356"/>
+        <criterion comment="lighttpd DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:45880"/>
+        <criterion comment="lighttpd-mod-cml DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:45828"/>
+        <criterion comment="lighttpd-mod-webdav DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:46254"/>
+        <criterion comment="lighttpd-mod-trigger-b4-dl DPKG is earlier than 1.4.19-5+lenny1" test_ref="oval:org.mitre.oval:tst:46116"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="lighttpd-doc DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46341"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="lighttpd-mod-mysql-vhost DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46124"/>
+            <criterion comment="lighttpd-mod-magnet DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46332"/>
+            <criterion comment="lighttpd DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46329"/>
+            <criterion comment="lighttpd-mod-cml DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46207"/>
+            <criterion comment="lighttpd-mod-webdav DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46346"/>
+            <criterion comment="lighttpd-mod-trigger-b4-dl DPKG is earlier than 1.4.13-4etch12" test_ref="oval:org.mitre.oval:tst:46330"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

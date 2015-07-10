@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1618" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>pagedata Subsystem Local DoS Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-1092" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1092"/>
+    <description>Unspecified vulnerability in the pagedata subsystem of the process file system (/proc) in Solaris 8 through 10 allows local users to cause a denial of service (system hang or panic) via unknown attack vectors that cause cause the kmem_oversize arena to allocate a large amount of system memory that does not get freed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-03-04T10:16:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-09T12:19:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected CVE reference. Implemented by Jon Baker of The MITRE Corporation." date="2007-02-13T13:58:00.691-05:00">
+          <contributor organization="Security-Database">Nabil Ouchn</contributor>
+        </modified>
+        <status_change date="2007-02-13T14:00:20.779-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:16:56.595-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1618 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:06:25.779-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:16.703-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion negate="true" comment="Patch 117350-33 or later installed (SPARC-8)" test_ref="oval:org.mitre.oval:tst:808"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion negate="true" comment="Patch 118558-22 or later installed (SPARC-9)" test_ref="oval:org.mitre.oval:tst:807"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 10 Installed" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+      <criterion negate="true" comment="Patch 118822-29 or later installed (SPARC-10)" test_ref="oval:org.mitre.oval:tst:806"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion negate="true" comment="Patch 117351-33 or later installed (x86-8)" test_ref="oval:org.mitre.oval:tst:805"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion negate="true" comment="Patch 118559-22 or later installed (x86-9)" test_ref="oval:org.mitre.oval:tst:804"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert ID 102159 criteria.">
+      <criterion comment="Solaris 10 Installed" test_ref="oval:org.mitre.oval:tst:2459"/>
+      <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+      <criterion negate="true" comment="Patch 118844-29 or later installed (x86-10)" test_ref="oval:org.mitre.oval:tst:803"/>
+    </criteria>
+  </criteria>
+</definition>

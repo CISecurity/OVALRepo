@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:199" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Weak Encryption in RDP Protocol</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Remote Data Protocol (RDP)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0863" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0863"/>
+    <description>Remote Data Protocol (RDP) version 5.0 in Microsoft Windows 2000 and RDP 5.1 in Windows XP does not encrypt the checksums of plaintext session data, which could allow a remote attacker to determine the contents of encrypted sessions via sniffing, aka "Weak Encryption in RDP Protocol."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-10-10T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <modified date="2005-03-07T12:00:00.000-04:00" comment="modified wrt-222 - changed pattern match">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-03-09T07:55:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-29T07:59:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Multiple corrections and update to POSIX compatibility for ste:2878" date="2010-11-29T16:13:00.904-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2010-11-29T16:14:04.221-05:00">INTERIM</status_change>
+        <status_change date="2010-12-20T04:00:39.390-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:45:07.963-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:02:14.604-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:2636 - Definitions for numerous CVEs" date="2012-03-27T14:22:00.237-04:00">
+          <contributor organization="DTCC">Scott Quint</contributor>
+        </modified>
+        <status_change date="2012-03-27T14:37:33.872-04:00">INTERIM</status_change>
+        <status_change date="2012-04-16T04:07:56.223-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Terminal Server Version" negate="false" test_ref="oval:org.mitre.oval:tst:2816"/>
+      <criterion comment="File %windir%\system32\drivers\rdpwd.sys version is less than 5.0.2195.5880" negate="false" test_ref="oval:org.mitre.oval:tst:2815"/>
+      <criterion comment="Patch Q324380 installed" negate="true" test_ref="oval:org.mitre.oval:tst:2814"/>
+      <criterion comment="SP4 or later Installed" negate="true" test_ref="oval:org.mitre.oval:tst:3073"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="RDP Enabled" negate="false" test_ref="oval:org.mitre.oval:tst:2813"/>
+    </criteria>
+  </criteria>
+</definition>

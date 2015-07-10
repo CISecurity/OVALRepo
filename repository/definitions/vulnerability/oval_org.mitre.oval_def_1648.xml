@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1648" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability With RSA Signature Affects Solaris Applications Utilizing the libike Library</title>
+    <affected family="unix">
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-7140" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-7140"/>
+    <description>The libike library, as used by in.iked, elfsign, and kcfd in Sun Solaris 9 and 10, when using an RSA key with exponent 3, removes PKCS-1 padding before generating a hash, which allows remote attackers to forge a PKCS #1 v1.5 signature that is signed by that RSA key and prevents libike from correctly verifying X.509 and other certificates that use PKCS #1, a similar issue to CVE-2006-4339.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:20.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:12.117-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:27.779-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:40.937-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 102722" negate="false">
+      <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+      <criterion comment="Patch 113451-12 or later installed" test_ref="oval:org.mitre.oval:tst:3311" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102722" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 118371-08 or later installed" test_ref="oval:org.mitre.oval:tst:3260" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 102722" negate="false">
+      <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+      <criterion comment="Patch 114435-11 or later installed" test_ref="oval:org.mitre.oval:tst:3665" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102722" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 118372-08 or later installed" test_ref="oval:org.mitre.oval:tst:4168" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

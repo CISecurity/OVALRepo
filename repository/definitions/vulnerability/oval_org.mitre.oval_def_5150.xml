@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5150" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE v5.01, SP4 SSL Cached Content Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0845" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0845"/>
+    <description>Internet Explorer 5.01, 5.5, and 6 does not properly cache SSL content, which allows remote attackers to obtain information or spoof content via a web site with the same host name as the target web site, whose content is cached and reused when the user visits the target web site.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-18T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2005-01-20T02:31:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-06-23T12:49:00.000-04:00" comment="modified obj:490 - Chagned the pattern match operation to equals since there was no need for a regular expression.">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2006-06-23T11:35:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-09-27T12:29:29.549-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed ste:2614: set datatype to version.  Implemented by Harvey Rubinovitz." date="2007-01-25T16:54:00.319-05:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-01-25T16:59:42.093-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:40:42.366-05:00">ACCEPTED</status_change>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.853-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+        <status_change date="2007-10-25T16:53:30.687-04:00">INTERIM</status_change>
+        <status_change date="2007-11-13T12:01:18.516-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:47.802-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:21.476-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Internet Explorer 5.01 Service Pack 4 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2794"/>
+      <criterion comment="the version of mshtml.dll is less than 5.0.3534.2800" negate="false" test_ref="oval:org.mitre.oval:tst:519"/>
+      <criterion comment="the patch kb834707-ie501sp4 is installed (Hotfix key)" negate="true" test_ref="oval:org.mitre.oval:tst:518"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="Users not saving encrypted pages to disk  (DisableCachingOfSSLPages)" negate="false" test_ref="oval:org.mitre.oval:tst:588"/>
+    </criteria>
+  </criteria>
+</definition>

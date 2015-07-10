@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21247" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:1764: ruby security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>ruby</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:1764-00" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1764.html"/>
+    <reference source="CESA" ref_id="CESA-2013:1764"/>
+    <reference source="CVE" ref_id="CVE-2013-4164" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-4164.html"/>
+    <description>Heap-based buffer overflow in Ruby 1.8, 1.9 before 1.9.3-p484, 2.0 before 2.0.0-p353, 2.1 before 2.1.0 preview2, and trunk before revision 43780 allows context-dependent attackers to cause a denial of service (segmentation fault) and possibly execute arbitrary code via a string that is converted to a floating point value, as demonstrated using (1) the to_f method or (2) JSON.parse.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:42.505-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:01:23.748-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:01:37.082-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="ruby-tcltk is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91832"/>
+      <criterion comment="ruby-static is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91168"/>
+      <criterion comment="ruby-rdoc is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91876"/>
+      <criterion comment="ruby-ri is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91653"/>
+      <criterion comment="ruby-irb is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91592"/>
+      <criterion comment="ruby-devel is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91371"/>
+      <criterion comment="ruby-libs is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91749"/>
+      <criterion comment="ruby-docs is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91429"/>
+      <criterion comment="ruby is earlier than 0:1.8.7.352-13.el6" test_ref="oval:org.mitre.oval:tst:91509"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5400" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in Solaris 10 Related to the dotoprocs() Routine</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-0269" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0269"/>
+    <description>Unspecified vulnerability in the dotoprocs function in Sun Solaris 10 allows local users to cause a denial of service (panic) via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-01-16T09:18:15.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2008-01-17T09:53:53.580-05:00">DRAFT</status_change>
+        <status_change date="2008-02-04T10:19:21.179-05:00">INTERIM</status_change>
+        <status_change date="2008-02-25T04:00:10.927-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 103188">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 127111-06 or later installed" test_ref="oval:org.mitre.oval:tst:7472"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 103188">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 127112-06 or later installed" test_ref="oval:org.mitre.oval:tst:7670"/>
+    </criteria>
+  </criteria>
+</definition>

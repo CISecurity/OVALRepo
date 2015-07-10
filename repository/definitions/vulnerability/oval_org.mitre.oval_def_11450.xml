@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11450" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ext/openssl/ossl_ocsp.c in Ruby 1.8 and 1.9 does not properly check the return value from the OCSP_basic_verify function, which might allow remote attackers to successfully present an invalid X.509 certificate, possibly involving a revoked certificate.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0642" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0642"/>
+    <description>ext/openssl/ossl_ocsp.c in Ruby 1.8 and 1.9 does not properly check the return value from the OCSP_basic_verify function, which might allow remote attackers to successfully present an invalid X.509 certificate, possibly involving a revoked certificate.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:33:24.949-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:09:27.936-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:10:12.485-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11450 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:09:00.343-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:13:09.106-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:14:07.568-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="ruby-mode is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38694"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38591"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38715"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38523"/>
+        <criterion comment="ruby is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38864"/>
+        <criterion comment="irb is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38549"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.1-7.el4_8.3" test_ref="oval:org.mitre.oval:tst:38837"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="ruby-ri is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38178"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38751"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38045"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38362"/>
+        <criterion comment="ruby is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38133"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38911"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38738"/>
+        <criterion comment="ruby-irb is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38574"/>
+        <criterion comment="ruby-rdoc is earlier than 0:1.8.5-5.el5_3.7" test_ref="oval:org.mitre.oval:tst:38762"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

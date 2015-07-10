@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29396" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1095 -- firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1095.html" ref_id="RHSA-2009:1095"/>
+    <reference source="CESA-2009:1095" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-June/015993.html" ref_id="CESA-2009:1095-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1392" ref_id="CVE-2009-1392"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1832" ref_id="CVE-2009-1832"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1833" ref_id="CVE-2009-1833"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1834" ref_id="CVE-2009-1834"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1835" ref_id="CVE-2009-1835"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1836" ref_id="CVE-2009-1836"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1837" ref_id="CVE-2009-1837"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1838" ref_id="CVE-2009-1838"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1839" ref_id="CVE-2009-1839"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1840" ref_id="CVE-2009-1840"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1841" ref_id="CVE-2009-1841"/>
+    <description>Updated firefox packages that fix several security issues are now available
+for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having critical security impact by the Red
+Hat Security Response Team.
+Mozilla Firefox is an open source Web browser. XULRunner provides the XUL
+Runtime environment for Mozilla Firefox.
+Several flaws were found in the processing of malformed web content. A web
+page containing malicious content could cause Firefox to crash or,
+potentially, execute arbitrary code as the user running Firefox.
+(CVE-2009-1392, CVE-2009-1832, CVE-2009-1833, CVE-2009-1837, CVE-2009-1838,
+CVE-2009-1841)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:04.719-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.0.11-3.el5_3" test_ref="oval:org.mitre.oval:tst:140443"/>
+        <criterion comment="xulrunner-devel-unstable is earlier than 0:1.9.0.11-3.el5_3" test_ref="oval:org.mitre.oval:tst:140856"/>
+        <criterion comment="firefox is earlier than 0:3.0.11-2.el5_3" test_ref="oval:org.mitre.oval:tst:140701"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.0.11-3.el5_3" test_ref="oval:org.mitre.oval:tst:140702"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criterion comment="firefox is earlier than 0:3.0.11-4.el4" test_ref="oval:org.mitre.oval:tst:141044"/>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="firefox is earlier than 0:3.0.11-2.el5.centos" test_ref="oval:org.mitre.oval:tst:140819"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.0.11-3.el5" test_ref="oval:org.mitre.oval:tst:140998"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.0.11-3.el5" test_ref="oval:org.mitre.oval:tst:141077"/>
+        <criterion comment="xulrunner-devel-unstable is earlier than 0:1.9.0.11-3.el5" test_ref="oval:org.mitre.oval:tst:140919"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26549" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2338-1 -- lua5.1 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>lua5.1</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2338-1/" ref_id="USN-2338-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5461" ref_id="CVE-2014-5461"/>
+    <description>Lua could be made to crash or run programs.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-08T15:27:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-17T10:46:01.010-04:00">DRAFT</status_change>
+        <status_change date="2014-10-06T04:03:44.915-04:00">INTERIM</status_change>
+        <status_change date="2014-10-27T04:01:01.582-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 14.04 release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="liblua5.1-0 DPKG is earlier than 0:5.1.5-5ubuntu0.1" test_ref="oval:org.mitre.oval:tst:123182"/>
+        <criterion comment="lua5.1 DPKG is earlier than 0:5.1.5-5ubuntu0.1" test_ref="oval:org.mitre.oval:tst:123140"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="liblua5.1-0 DPKG is earlier than 0:5.1.4-12ubuntu1.1" test_ref="oval:org.mitre.oval:tst:123055"/>
+        <criterion comment="lua5.1 DPKG is earlier than 0:5.1.4-12ubuntu1.1" test_ref="oval:org.mitre.oval:tst:123098"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

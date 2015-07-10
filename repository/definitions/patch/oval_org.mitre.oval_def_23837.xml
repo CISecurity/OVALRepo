@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23837" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0213: nss, nss-util, and nspr security, bug fix, and enhancement update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>nss</product>
+      <product>nspr</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0213-01" ref_url="http://linux.oracle.com/errata/ELSA-2013-0213.html" source="VENDOR"/>
+    <description>Network Security Services (NSS) is a set of libraries designed to support
+the cross-platform development of security-enabled client and server
+applications. Netscape Portable Runtime (NSPR) provides platform
+independence for non-GUI operating system facilities.
+It was found that a Certificate Authority (CA) mis-issued two intermediate
+certificates to customers. These certificates could be used to launch
+man-in-the-middle attacks. This update renders those certificates as
+untrusted. This covers all uses of the certificates, including SSL, S/MIME,
+and code signing. (BZ#890605)
+Note: This fix only applies to applications using the NSS Builtin Object
+Token. It does not render the certificates untrusted for applications that
+use the NSS library, but do not use the NSS Builtin Object Token.
+In addition, the nss package has been upgraded to upstream version 3.13.6,
+the nss-util package has been upgraded to upstream version 3.13.6, and the
+nspr package has been upgraded to upstream version 4.9.2. These updates
+provide a number of bug fixes and enhancements over the previous versions.
+(BZ#891663, BZ#891670, BZ#891661)
+Users of NSS, NSPR, and nss-util are advised to upgrade to these updated
+packages, which fix these issues and add these enhancements. After
+installing this update, applications using NSS, NSPR, or nss-util must be
+restarted for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:42:24.209-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:14.455-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:26.356-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23837 - optimisation of Oracle Linux content" date="2014-05-05T17:23:00.551-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:25:56.897-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:35.160-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="nss-util is earlier than 0:3.13.6-1.el6_3" test_ref="oval:org.mitre.oval:tst:110670"/>
+      <criterion comment="nss-util-devel is earlier than 0:3.13.6-1.el6_3" test_ref="oval:org.mitre.oval:tst:111292"/>
+      <criterion comment="nss-tools is earlier than 0:3.13.6-2.el6_3" test_ref="oval:org.mitre.oval:tst:110901"/>
+      <criterion comment="nss-pkcs11-devel is earlier than 0:3.13.6-2.el6_3" test_ref="oval:org.mitre.oval:tst:110534"/>
+      <criterion comment="nss-sysinit is earlier than 0:3.13.6-2.el6_3" test_ref="oval:org.mitre.oval:tst:111311"/>
+      <criterion comment="nss is earlier than 0:3.13.6-2.el6_3" test_ref="oval:org.mitre.oval:tst:111261"/>
+      <criterion comment="nss-devel is earlier than 0:3.13.6-2.el6_3" test_ref="oval:org.mitre.oval:tst:110428"/>
+      <criterion comment="nspr is earlier than 0:4.9.2-0.el6_3.1" test_ref="oval:org.mitre.oval:tst:110927"/>
+      <criterion comment="nspr-devel is earlier than 0:4.9.2-0.el6_3.1" test_ref="oval:org.mitre.oval:tst:110972"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27550" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012-2020 -- Unbreakable Enterprise kernel security and bugfix update
+          (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+      <product>mlnx_en</product>
+      <product>ofa</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+      <product>kernel-uek-headers</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-2020.html" ref_id="ELSA-2012-2020"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2123" ref_id="CVE-2012-2123"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2136" ref_id="CVE-2012-2136"/>
+    <description>kernel-uek: [2.6.32-300.27.1.el6uek] - net: sock: validate data_len before
+          allocating skb (Jason Wang) [Bugdb: 13966]{CVE-2012-2136} - fcaps: clear the same
+          personality flags as suid when fcaps are used (Eric Paris) [Bugdb: 13966] {CVE-2012-2123}
+          - Revert 'nfs: when attempting to open a directory, fall back on normal lookup (Todd
+          Vierling) [Orabug 14141154] [2.6.32-300.26.1.el6uek] - mptsas: do not call __mptsas_probe
+          in kthread (Maxim Uvarov) [Orabug: 14175509] - mm: check if any page in a pageblock is
+          reserved before marking it MIGRATE_RESERVE (Maxim Uvarov) [Orabug: 14073214] - mm: reduce
+          the amount of work done when updating min_free_kbytes (Mel Gorman) [Orabug: 14073214] -
+          vmxnet3: Updated to el6-u2 (Guangyu Sun) [Orabug: 14027961] - xen: expose host uuid via
+          sysfs. (Zhigang Wang) - sched: Fix cgroup movement of waking process (Daisuke Nishimura)
+          [Orabug: 13946210] - sched: Fix cgroup movement of newly created process (Daisuke
+          Nishimura) [Orabug: 13946210] - sched: Fix cgroup movement of forking process (Daisuke
+          Nishimura) [Orabug: 13946210] - x86, boot: Wait for boot cpu to show up if nr_cpus limit
+          is about to hit (Zhenzhong Duan) [Orabug: 13629087] - smp: Use nr_cpus= to set nr_cpu_ids
+          early (Zhenzhong Duan) [Orabug: 13629087] - net: ipv4: relax AF_INET check in bind()
+          (Maxim Uvarov) [Orabug: 14054411] ofa-2.6.32-300.27.1.el6uek: [1.5.1-4.0.58] - Add Patch
+          158-169</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:24:59">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:25:38.809-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:01.334-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:13.137-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:36582 - Corrected package names in objects and versions in states." date="2015-02-26T19:47:00.567-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:51:38.710-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:23.976-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131839"/>
+        <criterion comment="mlnx_en-2.6.32-300.27.1.el5uek is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:131914"/>
+        <criterion comment="ofa-2.6.32-300.27.1.el5uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:131604"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131880"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131574"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131692"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131561"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:131931"/>
+        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-300.27.1.el5uek" test_ref="oval:org.mitre.oval:tst:130973"/>
+        <criterion comment="mlnx_en-2.6.32-300.27.1.el5uekdebug is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:131822"/>
+        <criterion comment="ofa-2.6.32-300.27.1.el5uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:131897"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131849"/>
+        <criterion comment="mlnx_en-2.6.32-300.27.1.el6uek is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:131765"/>
+        <criterion comment="ofa-2.6.32-300.27.1.el6uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:131319"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131936"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131865"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131797"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131934"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131520"/>
+        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-300.27.1.el6uek" test_ref="oval:org.mitre.oval:tst:131482"/>
+        <criterion comment="mlnx_en-2.6.32-300.27.1.el6uekdebug is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:131852"/>
+        <criterion comment="ofa-2.6.32-300.27.1.el6uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:131719"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

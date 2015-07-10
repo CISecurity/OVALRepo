@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13004" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2271-1 curl -- improper delegation of client credentials</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>curl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00143.html" ref_id="DSA-2271-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2192" ref_id="CVE-2011-2192"/>
+    <description>Richard Silverman discovered that when doing GSSAPI authentication, libcurl unconditionally performs credential delegation. This hands the server a copy of the client's security credentials, allowing the server to impersonate the client to any other using the same GSSAPI mechanism. This is obviously a very sensitive operation, which should only be done when the user explicitly so directs.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T13:56:24-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:42.695-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:47.689-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:19.687-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13004 - Debian Patch Update" date="2014-06-06T17:34:00.215-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:36:29.859-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:20.550-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="curl DPKG is earlier than 7.18.2-8lenny5" test_ref="oval:org.mitre.oval:tst:44036"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="curl DPKG is earlier than 7.21.0-2" test_ref="oval:org.mitre.oval:tst:44197"/>
+    </criteria>
+  </criteria>
+</definition>

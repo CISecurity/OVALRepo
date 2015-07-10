@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:131" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Heap Overflow in Solaris 7 xlock</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>xlock</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2001-0652" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0652"/>
+    <description>Heap overflow in xlock in Solaris 2.6 through 8 allows local users to gain root privileges via a long (1) XFILESEARCHPATH or (2) XUSERFILESEARCHPATH environmental variable.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2002-10-17T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 7 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3045"/>
+      <criterion comment="File xlock exists" negate="false" test_ref="oval:org.mitre.oval:tst:3130"/>
+      <criterion comment="Patch 108376-30 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:2912"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="AND" comment="File xlock SUID and executable">
+        <criterion comment="File xlock SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:3128"/>
+        <criterion comment="File xlock SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:3127"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

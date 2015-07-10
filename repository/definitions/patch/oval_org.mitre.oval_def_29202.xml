@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29202" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:0515-1 -- Security update for gnome-settings-daemon (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>gnome-settings-daemon</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20150515-1.html" ref_id="SUSE-SU-2015:0515-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7300" ref_id="CVE-2014-7300"/>
+    <description>gnome-settings-daemon was updated to fix a bug and a security issue:
+Security issue fixed:
+- CVE-2014-7300: The lockscreen can be bypassed with the Print Screen
+  button.
+Bug fixed:
+- Do not hide the cursor while there was no mutter running (bsc#905158).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:36:07">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:15.136-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="gnome-settings-daemon is earlier than 0:3.10.2-20.1" test_ref="oval:org.mitre.oval:tst:139832"/>
+      <criterion comment="gnome-settings-daemon-debuginfo is earlier than 0:3.10.2-20.1" test_ref="oval:org.mitre.oval:tst:139905"/>
+      <criterion comment="gnome-settings-daemon-debugsource is earlier than 0:3.10.2-20.1" test_ref="oval:org.mitre.oval:tst:139882"/>
+      <criterion comment="gnome-settings-daemon-lang is earlier than 0:3.10.2-20.1" test_ref="oval:org.mitre.oval:tst:140050"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26516" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1292 -- haproxy security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <product>haproxy</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1292.html" ref_id="ELSA-2014-1292"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6269" ref_id="CVE-2014-6269"/>
+    <description>HAProxy provides high availability, load balancing, and proxying for TCP
+and HTTP-based applications.
+
+A buffer overflow flaw was discovered in the way HAProxy handled, under
+very specific conditions, data uploaded from a client. A remote attacker
+could possibly use this flaw to crash HAProxy. (CVE-2014-6269)
+
+All haproxy users are advised to upgrade to this updated package, which
+contains a backported patch to correct this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-01T10:21:26">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-10T18:35:27.388-04:00">DRAFT</status_change>
+        <status_change date="2014-10-27T04:00:57.058-04:00">INTERIM</status_change>
+        <status_change date="2014-11-17T04:00:34.673-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+    <criterion comment="haproxy RPM is earlier than 0:1.5.2-3.el7_0" test_ref="oval:org.mitre.oval:tst:124694"/>
+  </criteria>
+</definition>

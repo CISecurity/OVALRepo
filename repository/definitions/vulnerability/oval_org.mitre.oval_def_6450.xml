@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6450" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running Tomcat Servlet Engine, Remote Denial of Service (DoS), Unauthorized Access</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0783" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0783"/>
+    <description>Apache Tomcat 4.1.0 through 4.1.39, 5.5.0 through 5.5.27, and 6.0.0 through 6.0.18 permits web applications to replace an XML parser used for other web applications, which allows local users to read or modify the (1) web.xml, (2) context.xml, or (3) tld files of arbitrary web applications via a crafted application that is loaded earlier than the target application.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-11-13T16:45:29.000-05:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-12-09T17:16:23.316-05:00">DRAFT</status_change>
+        <status_change date="2009-12-28T04:00:34.783-05:00">INTERIM</status_change>
+        <status_change date="2010-01-18T04:00:09.152-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:05.330-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:52.180-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:33:25.544-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:32.098-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:36:17.802-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:02:31.847-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02466">
+      <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      <criterion comment="hpuxws22TOMCAT.TOMCAT version is less than B.5.5.27.03" test_ref="oval:org.mitre.oval:tst:11062"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02466">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="hpuxwsTOMCAT.TOMCAT version is less than B.5.5.27.03" test_ref="oval:org.mitre.oval:tst:11215"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02466">
+      <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+      <criterion comment="hpuxws22TOMCAT.TOMCAT version is less than B.5.5.27.03" test_ref="oval:org.mitre.oval:tst:11062"/>
+    </criteria>
+  </criteria>
+</definition>

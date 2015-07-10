@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6667" version="11" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running Apache with PHP, Remote Denial of Service (DoS), Unauthorized Access, Privileged Access, Cross Site Scripting (XSS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-4017" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4017"/>
+    <description>PHP before 5.2.12 and 5.3.x before 5.3.1 does not restrict the number of temporary files created when handling a multipart/form-data POST request, which allows remote attackers to cause a denial of service (resource exhaustion), and makes it easier for remote attackers to exploit local file inclusion vulnerabilities, via multiple requests, related to lack of support for the max_file_uploads directive.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-25T11:50:46.000-05:00">
+          <contributor organization="Hewlett-Packard">Chandan M C</contributor>
+        </submitted>
+        <status_change date="2010-10-26T21:06:49.102-04:00">DRAFT</status_change>
+        <status_change date="2010-11-15T04:00:30.004-05:00">INTERIM</status_change>
+        <status_change date="2010-12-06T04:00:45.405-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:05.152-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:52.911-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - PFA Vulnerability Definitions for February HP-UX security advisory" date="2015-03-06T12:24:00.373-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </modified>
+        <status_change date="2015-03-06T12:33:25.102-05:00">INTERIM</status_change>
+        <status_change date="2015-03-23T04:02:32.773-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:8260 - Fixed erroneous modification made to tst:8260 on 3/6/2015" date="2015-03-31T13:26:00.992-04:00">
+          <contributor organization="The MITRE Corporation">Mike Cokus</contributor>
+        </modified>
+        <status_change date="2015-03-31T13:36:17.593-04:00">INTERIM</status_change>
+        <status_change date="2015-04-20T04:02:32.498-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02543">
+      <criteria operator="OR" comment="platforms">
+        <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+        <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      </criteria>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="hpuxws22APCH32.PHP version is less than B.2.2.8.10" test_ref="oval:org.mitre.oval:tst:21433"/>
+        <criterion comment="hpuxws22APCH32.PHP2 version is less than B.2.2.8.10" test_ref="oval:org.mitre.oval:tst:21494"/>
+        <criterion comment="hpuxws22APACHE.PHP version is less than B.2.2.8.10" test_ref="oval:org.mitre.oval:tst:21310"/>
+        <criterion comment="hpuxws22APACHE.PHP2 version is less than B.2.2.8.10" test_ref="oval:org.mitre.oval:tst:21341"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02543">
+      <criteria operator="OR" comment="platforms">
+        <criterion comment="HP-UX B.11.31" test_ref="oval:org.mitre.oval:tst:8260"/>
+        <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+        <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      </criteria>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="hpuxwsAPCH32.PHP version is less than B.2.0.59.16" test_ref="oval:org.mitre.oval:tst:21353"/>
+        <criterion comment="hpuxwsAPCH32.PHP2 version is less than B.2.0.59.16" test_ref="oval:org.mitre.oval:tst:20889"/>
+        <criterion comment="hpuxwsAPACHE.PHP version is less than B.2.0.59.16" test_ref="oval:org.mitre.oval:tst:21450"/>
+        <criterion comment="hpuxwsAPACHE.PHP2 version is less than B.2.0.59.16" test_ref="oval:org.mitre.oval:tst:21415"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

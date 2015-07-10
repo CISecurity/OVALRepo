@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:477" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MS Exchange / OWA NTLM Authentication Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Exchange Server</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0904" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0904"/>
+    <description>Microsoft Exchange 2003 and Outlook Web Access (OWA), when configured to use NTLM authentication, does not properly reuse HTTP connections, which can cause OWA users to view mailboxes of other users when Kerberos has been disabled as an authentication method for IIS 6.0, e.g. when SharePoint Services 2.0 is installed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-01-20T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <status_change date="2004-03-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-08-28T12:00:00.000-04:00" comment="modified obj 1480 to use xsi:nil instead of a .* pattern match">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2006-08-28T12:00:00.000-04:00">INTERIM</status_change>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.093-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.038-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="Exchange Server 2003 (gold edition) is installed" test_ref="oval:org.mitre.oval:tst:2760"/>
+      <criterion comment="the version of exprox.dll is less than 6.5.6980.57" test_ref="oval:org.mitre.oval:tst:2605"/>
+      <criterion negate="true" comment="the patch KB832759 is installed" test_ref="oval:org.mitre.oval:tst:2604"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="this is a front-end server providing Outlook Web Access" test_ref="oval:org.mitre.oval:tst:2603"/>
+      <criterion comment="the back-end server is Exchange Server 2003 running on Windows 2003" test_ref="oval:org.mitre.oval:tst:2602"/>
+      <criterion negate="true" comment="HTTP connection reuse is disabled" test_ref="oval:org.mitre.oval:tst:2601"/>
+      <criterion comment="Kerberos is disabled on the virtual server that hosts OWA on the Exchange Server 2003 back-end server" test_ref="oval:org.mitre.oval:tst:2600"/>
+    </criteria>
+  </criteria>
+</definition>

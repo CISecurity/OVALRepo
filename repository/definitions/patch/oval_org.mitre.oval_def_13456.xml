@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13456" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1796-1 libwmf -- pointer use-after-free</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>libwmf</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00107.html" ref_id="DSA-1796-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1364" ref_id="CVE-2009-1364"/>
+    <description>Tavis Ormandy discovered that the embedded GD library copy in libwmf, a library to parse windows metafiles, makes use of a pointer after it was already freed. An attacker using a crafted WMF file can cause a denial of service or possibly the execute arbitrary code via applications using this library. For the oldstable distribution, this problem has been fixed in version 0.2.8.4-2+etch1. For the stable distribution, this problem has been fixed in version 0.2.8.4-6+lenny1. For the testing distribution, this problem will be fixed soon. For the unstable distribution, this problem has been fixed in version 0.2.8.4-6.1. We recommend that you upgrade your libwmf packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:31:38.661-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:43.008-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:07:19.436-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13456 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:34.158-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:17.522-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libwmf-doc DPKG is earlier than 0.2.8.4-6+lenny1" test_ref="oval:org.mitre.oval:tst:51383"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libwmf-dev DPKG is earlier than 0.2.8.4-6+lenny1" test_ref="oval:org.mitre.oval:tst:50819"/>
+            <criterion comment="libwmf0.2-7 DPKG is earlier than 0.2.8.4-6+lenny1" test_ref="oval:org.mitre.oval:tst:51195"/>
+            <criterion comment="libwmf-bin DPKG is earlier than 0.2.8.4-6+lenny1" test_ref="oval:org.mitre.oval:tst:51367"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libwmf-doc DPKG is earlier than 0.2.8.4-2+etch1" test_ref="oval:org.mitre.oval:tst:51445"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libwmf-dev DPKG is earlier than 0.2.8.4-2+etch1" test_ref="oval:org.mitre.oval:tst:51130"/>
+            <criterion comment="libwmf0.2-7 DPKG is earlier than 0.2.8.4-2+etch1" test_ref="oval:org.mitre.oval:tst:50992"/>
+            <criterion comment="libwmf-bin DPKG is earlier than 0.2.8.4-2+etch1" test_ref="oval:org.mitre.oval:tst:51244"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

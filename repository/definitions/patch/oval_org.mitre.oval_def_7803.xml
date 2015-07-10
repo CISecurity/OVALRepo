@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7803" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1666 libxml2 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1666" ref_id="DSA-1666"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4225" ref_id="CVE-2008-4225"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4226" ref_id="CVE-2008-4226"/>
+    <description>Several vulnerabilities have been discovered in the GNOME XML library. The Common Vulnerabilities and Exposures project identifies the following problems: Drew Yao discovered that missing input sanitising in the xmlBufferResize() function may lead to an infinite loop, resulting in denial of service. Drew Yao discovered that an integer overflow in the xmlSAX2Characters() function may lead to denial of service or the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:49:43.064-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:47.816-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:18.605-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7803 - Debian Patch Update" date="2014-06-06T16:43:00.922-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:44:43.500-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:56.261-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libxml2-doc is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12539"/>
+      </criteria>
+      <criterion comment="libxml2 is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12287"/>
+      <criterion comment="libxml2-dev is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12584"/>
+      <criterion comment="python-libxml2 is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12557"/>
+      <criterion comment="libxml2-dbg is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12641"/>
+      <criterion comment="libxml2-utils is earlier than 2.6.27.dfsg-6" test_ref="oval:org.mitre.oval:tst:12602"/>
+    </criteria>
+  </criteria>
+</definition>

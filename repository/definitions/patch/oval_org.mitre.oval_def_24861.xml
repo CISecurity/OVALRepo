@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24861" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2942-1 typo3-src - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>typo3-src</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2942-1" ref_id="DSA-2942-1"/>
+    <description>Multiple security issues have been discovered in the Typo3 CMS.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-09T16:18:19">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-06-13T14:58:19.948-04:00">DRAFT</status_change>
+        <status_change date="2014-06-30T04:10:58.009-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:44.657-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="typo3-src DPKG is earlier than 0:4.5.19+dfsg1-5+wheezy3" test_ref="oval:org.mitre.oval:tst:114743"/>
+  </criteria>
+</definition>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21922" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0534: qemu-kvm security, bug fix, and enhancement update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>qemu-kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0534-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0534.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1750" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1750.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1751" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1751.html"/>
+    <description>The pciej_write function in hw/acpi_piix4.c in the PIIX4 Power Management emulation in qemu-kvm does not check if a device is hotpluggable before unplugging the PCI-ISA bridge, which allows privileged guest users to cause a denial of service (guest crash) and possibly execute arbitrary code by sending a crafted value to the 0xae08 (PCI_EJ_BASE) I/O port, which leads to a use-after-free related to "active qemu timers."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:48.969-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:02.726-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:21.437-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="qemu-kvm is earlier than 2:0.12.1.2-2.160.el6" test_ref="oval:org.mitre.oval:tst:96982"/>
+      <criterion comment="qemu-img is earlier than 2:0.12.1.2-2.160.el6" test_ref="oval:org.mitre.oval:tst:97967"/>
+      <criterion comment="qemu-kvm-tools is earlier than 2:0.12.1.2-2.160.el6" test_ref="oval:org.mitre.oval:tst:97842"/>
+    </criteria>
+  </criteria>
+</definition>

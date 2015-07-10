@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6734" version="10" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Outlook Express and Windows Mail Integer Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <product>Microsoft Outlook Express</product>
+      <product>Microsoft Windows Mail</product>
+      <product>Microsoft Windows Live Mail</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0816" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0816"/>
+    <description>Integer overflow in inetcomm.dll in Microsoft Outlook Express 5.5 SP2, 6, and 6 SP1; Windows Live Mail on Windows XP SP2 and SP3, Windows Vista SP1 and SP2, Windows Server 2008 Gold, SP2, and R2, and Windows 7; and Windows Mail on Windows Vista SP1 and SP2, Windows Server 2008 Gold, SP2, and R2, and Windows 7 allows remote e-mail servers and man-in-the-middle attackers to execute arbitrary code via a crafted (1) POP3 or (2) IMAP response, as demonstrated by a certain +OK response on TCP port 110, aka "Outlook Express and Windows Mail Integer Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-11T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-05-12T12:23:25.542-04:00">DRAFT</status_change>
+        <status_change date="2010-05-31T04:00:28.757-04:00">INTERIM</status_change>
+        <status_change date="2010-06-21T04:00:05.608-04:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:24:06.244-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:24:06.244-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:03:24.920-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6734 - Correcting incorrect references to 64-bit Itanium XP." date="2012-08-23T17:47:00.168-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:52:29.064-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:01:08.691-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6734 - extended definitions of OS are without SP checks" date="2014-07-28T17:49:00.293-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:51:13.458-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:18.815-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Outlook Express 5.5 SP2 on Windows 2000">
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <extend_definition comment="Microsoft Outlook Express 5.5 SP2 is installed." definition_ref="oval:org.mitre.oval:def:504"/>
+      <criterion comment="the version of Inetcomm.dll is less than 5.50.5010.200" test_ref="oval:org.mitre.oval:tst:11816"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Outlook Express 6 SP1 on Windows 2000">
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <extend_definition comment="Microsoft Outlook Express 6 SP1 is installed." definition_ref="oval:org.mitre.oval:def:488"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.2800.2001" test_ref="oval:org.mitre.oval:tst:11216"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Outlook Express 6 on Windows XP x86">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <extend_definition comment="Microsoft Outlook Express 6.0 for Windows XP/2003 is installed" definition_ref="oval:org.mitre.oval:def:208"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.2900.3664" test_ref="oval:org.mitre.oval:tst:11320"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Outlook Express 6 on Windows XP x86">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <extend_definition comment="Microsoft Outlook Express 6.0 for Windows XP/2003 is installed" definition_ref="oval:org.mitre.oval:def:208"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.2900.5931" test_ref="oval:org.mitre.oval:tst:10972"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Outlook Express 6 on Windows XP (64-bit), Server 2003 x86/x64/ia64">
+      <criteria operator="OR" comment="XP (64-bit), Server 2003 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      </criteria>
+      <extend_definition comment="Microsoft Outlook Express 6.0 for Windows XP/2003 is installed" definition_ref="oval:org.mitre.oval:def:208"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.3790.4657" test_ref="oval:org.mitre.oval:tst:11267"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Vista x86/x64, Windows Server 2008 x86/x64 - GDR">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.6001.18416" test_ref="oval:org.mitre.oval:tst:11337"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Vista x86/x64, Windows Server 2008 x86/x64 - LDR">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.6001.22621" test_ref="oval:org.mitre.oval:tst:11718"/>
+      <criterion comment="the version of Inetcomm.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:11476"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Vista x86/x64, Windows Server 2008 x86/x64 - GDR">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="The version of Inetcomm.dll is less than 6.0.6002.18197" test_ref="oval:org.mitre.oval:tst:11803"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Vista x86/x64, Windows Server 2008 x86/x64 - LDR">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is greater than or equal 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:11786"/>
+      <criterion comment="The version of Inetcomm.dll is less than 6.0.6002.22325" test_ref="oval:org.mitre.oval:tst:11524"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail Windows Server 2008 ia64 - GDR">
+      <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.6001.18427" test_ref="oval:org.mitre.oval:tst:11799"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Server 2008 ia64 - LDR">
+      <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.0.6001.22636" test_ref="oval:org.mitre.oval:tst:11536"/>
+      <criterion comment="the version of Inetcomm.dll is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:11476"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Server 2008 ia64 - GDR">
+      <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="The version of Inetcomm.dll is less than 6.0.6002.18209" test_ref="oval:org.mitre.oval:tst:11316"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows Server 2008 ia64 - LDR">
+      <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is greater than or equal 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:11786"/>
+      <criterion comment="The version of Inetcomm.dll is less than 6.0.6002.22341" test_ref="oval:org.mitre.oval:tst:11688"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows 7 x86/x64, Server 2008 R2 x64/ia64 - GDR">
+      <criteria operator="OR" comment="7 x86/x64, Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.1.7600.16543" test_ref="oval:org.mitre.oval:tst:11904"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Mail on Windows 7 x86/x64, Server 2008 R2 x64/ia64 - LDR">
+      <criteria operator="OR" comment="7 x86/x64, Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <extend_definition comment="Microsoft Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+      <criterion comment="the version of Inetcomm.dll is greater than or equal 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:11895"/>
+      <criterion comment="the version of Inetcomm.dll is less than 6.1.7600.20659" test_ref="oval:org.mitre.oval:tst:11232"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12733" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2106-1 xulrunner -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00153.html" ref_id="DSA-2106-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2760" ref_id="CVE-2010-2760"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2763" ref_id="CVE-2010-2763"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2765" ref_id="CVE-2010-2765"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2766" ref_id="CVE-2010-2766"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2767" ref_id="CVE-2010-2767"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2768" ref_id="CVE-2010-2768"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2769" ref_id="CVE-2010-2769"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3167" ref_id="CVE-2010-3167"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3168" ref_id="CVE-2010-3168"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3169" ref_id="CVE-2010-3169"/>
+    <description>Several remote vulnerabilities have been discovered in Xulrunner, a runtime environment for XUL applications. The Common Vulnerabilities and Exposures project identifies the following problems: - - Implementation errors in XUL processing allow the execution of arbitrary code - - An implementation error in the XPCSafeJSObjectWrapper wrapper allows the bypass of the same origin policy - - An integer overflow in frame handling allows the execution of arbitrary code - - An implementation error in DOM handling allows the execution of arbitrary code - - Incorrect pointer handling in the plugin code allow the execution of arbitrary code - - Incorrect handling of an object tag may lead to the bypass of cross site scripting filters - - Incorrect copy and paste handling could lead to cross site scripting - - Crashes in the layout engine may lead to the execution of arbitrary code For the stable distribution, these problems have been fixed in version 1.9.0.19-4. For the unstable distribution, these problems have been fixed in version 3.5.12-1 of the iceweasel source package. For the experimental distribution, these problems have been fixed in version 3.6.9-1 of the iceweasel source package. We recommend that you upgrade your xulrunner packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:19:30">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:58.969-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:27.331-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:34.179-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12733 - Debian Patch Update" date="2014-06-06T17:07:00.556-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:09:34.885-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:40.874-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libmozillainterfaces-java DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43187"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libmozjs-dev DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43078"/>
+          <criterion comment="spidermonkey-bin DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:42932"/>
+          <criterion comment="xulrunner-dev DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43292"/>
+          <criterion comment="xulrunner-1.9 DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43452"/>
+          <criterion comment="libmozjs1d-dbg DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43648"/>
+          <criterion comment="libmozjs1d DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43061"/>
+          <criterion comment="python-xpcom DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43561"/>
+          <criterion comment="xulrunner-1.9-dbg DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43174"/>
+          <criterion comment="xulrunner-1.9-gnome-support DPKG is earlier than 1.9.0.19-4" test_ref="oval:org.mitre.oval:tst:43250"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

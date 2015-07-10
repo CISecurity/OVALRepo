@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6027" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows HTTP Services Certificate Name Mismatch Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0089" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0089"/>
+    <description>Windows HTTP Services (aka WinHTTP) in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP1 and SP2, and Vista Gold allows remote web servers to impersonate arbitrary https web sites by using DNS spoofing to "forward a connection" to a different https web site that has a valid certificate matching its own domain name, but not a certificate matching the domain name of the host requested by the user, aka "Windows HTTP Services Certificate Name Mismatch Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-14T16:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Kyle Key</contributor>
+        </submitted>
+        <status_change date="2009-04-17T16:45:14.167-04:00">DRAFT</status_change>
+        <status_change date="2009-05-04T04:00:26.586-04:00">INTERIM</status_change>
+        <status_change date="2009-05-25T04:01:53.877-04:00">ACCEPTED</status_change>
+        <modified comment="Removed CVE from title. Removed Microsoft reference" date="2009-06-01T16:05:28.035-04:00">
+          <contributor organization="The MITRE Corporation">Brendan Miles</contributor>
+        </modified>
+        <status_change date="2009-06-08T04:00:53.875-04:00">INTERIM</status_change>
+        <status_change date="2009-06-29T04:00:48.766-04:00">ACCEPTED</status_change>
+        <modified comment="Edited var:306 - Added beginning anchor to local_variable used in pattern match" date="2010-05-13T15:50:00.065-04:00">
+          <contributor organization="The MITRE Corporation">Mike Lah</contributor>
+        </modified>
+        <status_change date="2010-05-13T15:50:58.886-04:00">INTERIM</status_change>
+        <status_change date="2010-05-31T04:00:13.657-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:306 - Added closing anchors for variable regex" date="2013-04-08T11:01:00.574-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2013-04-08T11:03:33.727-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:17:38.036-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="winhttp.dll version 5.1.2600.3490 or later on Windows 2000 sp4">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="system32\winhttp.dll version less than 5.1.2600.3490" test_ref="oval:org.mitre.oval:tst:9822"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.1.2600.3494 or later on windows xp sp2 x86">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="system32\winhttp.dll version less than 5.1.2600.3494" test_ref="oval:org.mitre.oval:tst:9877"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.1.2600.5727 or later on windows xp sp3 x86">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="system32\winhttp.dll version less than 5.1.2600.5727" test_ref="oval:org.mitre.oval:tst:9540"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.2.3790.3262 or later on windows xp sp1 x64">
+      <extend_definition comment="Microsoft Windows XP SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+      <criterion comment="system32\winhttp.dll version less than 5.2.3790.3262" test_ref="oval:org.mitre.oval:tst:9795"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.2.3790.4427 or later on windows xp sp2 x64">
+      <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+      <criterion comment="system32\winhttp.dll version less than 5.2.3790.4427" test_ref="oval:org.mitre.oval:tst:9649"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.2.3790.3262 or later on windows server 2003 sp1 (x86)(x64)(ia64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:4386"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP1 is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="Winsxs\winhttp.dll version less than 5.2.3790.3262" test_ref="oval:org.mitre.oval:tst:9580"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 5.2.3790.4427 or later on windows server 2003 sp2 (x86)(x64)(ia64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="Winsxs\winhttp.dll version less than 5.2.3790.4427" test_ref="oval:org.mitre.oval:tst:9985"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 6.0.6000.16786 or later on windows vista GDR (x86)(x64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="system32\winhttp.dll version greater than or equal 6.0.6000.16000" test_ref="oval:org.mitre.oval:tst:9951"/>
+      <criterion comment="system32\winhttp.dll version less than 6.0.6000.16786" test_ref="oval:org.mitre.oval:tst:9981"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 6.0.6000.20971 or later on windows vista LDR (x86)(x64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="system32\winhttp.dll version greater than or equal 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9442"/>
+      <criterion comment="system32\winhttp.dll version less than 6.0.6000.20971" test_ref="oval:org.mitre.oval:tst:9594"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 6.0.6001.18178 or later on windows server 2008 sp1 GDR (x86)(x64)(ia64) and windows vista sp1 GDR (x86)(x64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+      </criteria>
+      <criterion comment="system32\winhttp.dll version greater than or equal 6.0.6001.18000" test_ref="oval:org.mitre.oval:tst:9762"/>
+      <criterion comment="system32\winhttp.dll version less than 6.0.6001.18178" test_ref="oval:org.mitre.oval:tst:9801"/>
+    </criteria>
+    <criteria operator="AND" comment="winhttp.dll versin 6.0.6001.22323 or later on windows server 2008 sp1 LDR (x86)(x64)(ia64) and windows vista sp1 GDR (x86)(x64)">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+      </criteria>
+      <criterion comment="system32\winhttp.dll version greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:9825"/>
+      <criterion comment="system32\winhttp.dll version less than 6.0.6001.22323" test_ref="oval:org.mitre.oval:tst:9119"/>
+    </criteria>
+  </criteria>
+</definition>

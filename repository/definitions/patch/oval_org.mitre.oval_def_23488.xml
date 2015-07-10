@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23488" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0124: net-snmp security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>net-snmp</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0124-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-0124.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-2141" ref_url="http://linux.oracle.com/cve/CVE-2012-2141.html" source="CVE"/>
+    <description>Array index error in the handle_nsExtendOutput2Table function in agent/mibgroup/agent/extend.c in Net-SNMP 5.7.1 allows remote authenticated users to cause a denial of service (out-of-bounds read and snmpd crash) via an SNMP GET request for an entry not in the extension table.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:26:59.356-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:14.358-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:57.024-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23488 - optimisation of Oracle Linux content" date="2014-05-05T17:35:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:37:44.996-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:32.196-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="net-snmp-utils is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:106109"/>
+      <criterion comment="net-snmp-devel is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:107084"/>
+      <criterion comment="net-snmp-perl is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:106761"/>
+      <criterion comment="net-snmp-libs is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:107070"/>
+      <criterion comment="net-snmp is earlier than 1:5.3.2.2-20.el5" test_ref="oval:org.mitre.oval:tst:106923"/>
+    </criteria>
+  </criteria>
+</definition>

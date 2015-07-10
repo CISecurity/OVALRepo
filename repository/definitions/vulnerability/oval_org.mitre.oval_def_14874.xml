@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14874" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Lync Insecure Library Loading Vulnerability (CVE-2012-1849)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Lync 2010</product>
+      <product>Microsoft Lync 2010 Attendant</product>
+      <product>Microsoft Lync 2010 Attendee</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-1849" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1849"/>
+    <description>Untrusted search path vulnerability in Microsoft Lync 2010, 2010 Attendee, and 2010 Attendant allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .ocsmeet file, aka "Lync Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-06-18T15:13:15">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-06-19T12:05:11.993-04:00">DRAFT</status_change>
+        <status_change date="2012-07-09T04:00:07.855-04:00">INTERIM</status_change>
+        <status_change date="2012-07-30T04:00:11.569-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:23843 - In some &quot;pattern match&quot; strings added &quot;\&quot; before &quot;.&quot; to clarify if &quot;point&quot; or &quot;any symbol&quot; needed." date="2014-07-28T18:11:00.493-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-07-28T18:12:38.326-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:09.686-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for vulnerable lync 2010">
+      <extend_definition comment="Microsoft Lync 2010 is installed" definition_ref="oval:org.mitre.oval:def:15099"/>
+      <criterion comment="Check if version of Communicator.exe (Lync 2010) is less than 4.0.7577.4098" test_ref="oval:org.mitre.oval:tst:79972"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable lync 2010 attendee (admin)">
+      <extend_definition comment="Microsoft Lync 2010 Attendee (user level install) is installed" definition_ref="oval:org.mitre.oval:def:15641"/>
+      <criterion comment="Check if version of ogl.dll (Lync 2010 Attendee for admin) is less than 4.0.7577.4098" test_ref="oval:org.mitre.oval:tst:79522"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable lync 2010 attendee (user)">
+      <extend_definition comment="Microsoft Lync 2010 Attendee (admin level install) is installed" definition_ref="oval:org.mitre.oval:def:15556"/>
+      <criterion comment="Check if version of ogl.dll (Lync 2010 Attendee for user) is less than 4.0.7577.4098" test_ref="oval:org.mitre.oval:tst:79686"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable lync 2010 attendant">
+      <extend_definition comment="Microsoft Lync 2010 Attendant is installed" definition_ref="oval:org.mitre.oval:def:15600"/>
+      <criterion comment="Check if version of Attendantconsole.exe is less than 4.0.7577.4098" test_ref="oval:org.mitre.oval:tst:80016"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25845" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2339-2 -- libgcrypt11 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>libgcrypt11</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2339-2/" ref_id="USN-2339-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5270" ref_id="CVE-2014-5270"/>
+    <description>Libgcrypt could expose sensitive information when performing decryption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-08T15:27:38">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-17T10:45:55.875-04:00">DRAFT</status_change>
+        <status_change date="2014-10-06T04:03:18.276-04:00">INTERIM</status_change>
+        <status_change date="2014-10-27T04:00:19.760-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 14.04 release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criterion comment="libgcrypt11 DPKG is earlier than 0:1.5.3-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:123149"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="libgcrypt11 DPKG is earlier than 0:1.5.0-3ubuntu0.3" test_ref="oval:org.mitre.oval:tst:123050"/>
+    </criteria>
+    <criteria comment="Ubuntu 10.04 release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="libgcrypt11 DPKG is earlier than 0:1.4.4-5ubuntu2.3" test_ref="oval:org.mitre.oval:tst:123243"/>
+    </criteria>
+  </criteria>
+</definition>

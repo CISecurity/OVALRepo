@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27027" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1391 -- glibc security, bug fix, and enhancement update</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>glibc</product>
+      <product>glibc-common</product>
+      <product>glibc-devel</product>
+      <product>glibc-headers</product>
+      <product>glibc-static</product>
+      <product>glibc-utils</product>
+      <product>nscd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1391.html" ref_id="ELSA-2014-1391"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4237" ref_id="CVE-2013-4237"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4458" ref_id="CVE-2013-4458"/>
+    <description>[2.12-1.149]
+
+- Remove gconv transliteration loadable modules support (CVE-2014-5119,
+
+  - _nl_find_locale: Improve handling of crafted locale names (CVE-2014-0475,
+
+
+
+[2.12-1.148]
+
+- Switch gettimeofday from INTUSE to libc_hidden_proto (#1099025).
+
+
+
+[2.12-1.147]
+
+- Fix stack overflow due to large AF_INET6 requests (CVE-2013-4458, #1111460).
+
+- Fix buffer overflow in readdir_r (CVE-2013-4237, #1111460).
+
+
+
+[2.12-1.146]
+
+- Fix memory order when reading libgcc handle (#905941).
+
+- Fix format specifier in malloc_info output (#1027261).
+
+- Fix nscd lookup for innetgr when netgroup has wildcards (#1054846).
+
+
+
+[2.12-1.145]
+
+- Add mmap usage to malloc_info output (#1027261).
+
+
+
+[2.12-1.144]
+
+- Use NSS_STATUS_TRYAGAIN to indicate insufficient buffer (#1087833).
+
+
+
+[2.12-1.143]
+
+- [ppc] Add VDSO IFUNC for gettimeofday (#1028285).
+
+- [ppc] Fix ftime gettimeofday internal call returning bogus data (#1099025).
+
+
+
+[2.12-1.142]
+
+- Also relocate in dependency order when doing symbol dependency testing
+
+  (#1019916).
+
+
+
+[2.12-1.141]
+
+- Fix infinite loop in nscd when netgroup is empty (#1085273).
+
+- Provide correct buffer length to netgroup queries in nscd (#1074342).
+
+- Return NULL for wildcard values in getnetgrent from nscd (#1085289).
+
+- Avoid overlapping addresses to stpcpy calls in nscd (#1082379).
+
+- Initialize all of datahead structure in nscd (#1074353).
+
+
+
+[2.12-1.140]
+
+- Return EAI_AGAIN for AF_UNSPEC when herrno is TRY_AGAIN (#1044628).
+
+
+
+[2.12-1.139]
+
+- Do not fail if one of the two responses to AF_UNSPEC fails (#845218).
+
+
+
+[2.12-1.138]
+
+- nscd: Make SELinux checks dynamic (#1025933).
+
+
+
+[2.12-1.137]
+
+- Fix race in free() of fastbin chunk (#1027101).
+
+
+
+[2.12-1.136]
+
+- Fix copy relocations handling of unique objects (#1032628).
+
+
+
+[2.12-1.135]
+
+- Fix encoding name for IDN in getaddrinfo (#981942).
+
+
+
+[2.12-1.134]
+
+- Fix return code from getent netgroup when the netgroup is not found (#1039988).
+
+- Fix handling of static TLS in dlopen'ed objects (#995972).
+
+
+
+[2.12-1.133]
+
+- Don't use alloca in addgetnetgrentX (#1043557).
+
+- Adjust pointers to triplets in netgroup query data (#1043557).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-17T17:21:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-17T23:33:19.941-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:27027 - Updated patches for Oracle Linux by switching dpkginfo tests to new rpminfo tests." date="2014-10-31T14:02:00.180-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-11-17T04:01:32.654-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:32.422-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="glibc is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126364"/>
+      <criterion comment="glibc-common is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126184"/>
+      <criterion comment="glibc-devel is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126015"/>
+      <criterion comment="glibc-headers is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126229"/>
+      <criterion comment="glibc-static is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126359"/>
+      <criterion comment="glibc-utils is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:125420"/>
+      <criterion comment="nscd is earlier than 0:2.12-1.149.el6" test_ref="oval:org.mitre.oval:tst:126228"/>
+    </criteria>
+  </criteria>
+</definition>

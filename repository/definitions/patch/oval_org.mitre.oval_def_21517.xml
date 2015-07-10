@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21517" version="55" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:1225: java-1.7.0-oracle security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>java-1.7.0-oracle</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:1225-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-1225.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0547" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0547.html"/>
+    <reference source="CVE" ref_id="CVE-2012-1682" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-1682.html"/>
+    <reference source="CVE" ref_id="CVE-2012-3136" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-3136.html"/>
+    <reference source="CVE" ref_id="CVE-2012-4681" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-4681.html"/>
+    <description>Multiple vulnerabilities in the Java Runtime Environment (JRE) component in Oracle Java SE 7 Update 6 and earlier allow remote attackers to execute arbitrary code via a crafted applet that bypasses SecurityManager restrictions by (1) using com.sun.beans.finder.ClassFinder.findClass and leveraging an exception with the forName method to access restricted classes from arbitrary packages such as sun.awt.SunToolkit, then (2) using "reflection with a trusted immediate caller" to leverage the getField method to access and modify private fields, as exploited in the wild in August 2012 using Gondzz.class and Gondvv.class.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:20:34.407-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:02:52.459-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:36.467-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="java-1.7.0-oracle is earlier than 1:1.7.0.7-1jpp.5.el6_3" test_ref="oval:org.mitre.oval:tst:94239"/>
+      <criterion comment="java-1.7.0-oracle-src is earlier than 1:1.7.0.7-1jpp.5.el6_3" test_ref="oval:org.mitre.oval:tst:94180"/>
+      <criterion comment="java-1.7.0-oracle-plugin is earlier than 1:1.7.0.7-1jpp.5.el6_3" test_ref="oval:org.mitre.oval:tst:94498"/>
+      <criterion comment="java-1.7.0-oracle-jdbc is earlier than 1:1.7.0.7-1jpp.5.el6_3" test_ref="oval:org.mitre.oval:tst:94176"/>
+      <criterion comment="java-1.7.0-oracle-devel is earlier than 1:1.7.0.7-1jpp.5.el6_3" test_ref="oval:org.mitre.oval:tst:94443"/>
+    </criteria>
+  </criteria>
+</definition>

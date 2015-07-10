@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28941" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1484 -- postgresql security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>postgresql</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1484.html" ref_id="RHSA-2009:1484"/>
+    <reference source="CESA-2009:1484" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-October/016272.html" ref_id="CESA-2009:1484-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0922" ref_id="CVE-2009-0922"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3230" ref_id="CVE-2009-3230"/>
+    <description>Updated postgresql packages that fix two security issues are now available
+for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+PostgreSQL is an advanced object-relational database management system
+(DBMS).
+It was discovered that the upstream patch for CVE-2007-6600 included in the
+Red Hat Security Advisory RHSA-2008:0038 did not include protection against
+misuse of the RESET ROLE and RESET SESSION AUTHORIZATION commands. An
+authenticated user could use this flaw to install malicious code that would
+later execute with superuser privileges. (CVE-2009-3230)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:52:39">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:07.609-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postgresql-devel is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140499"/>
+        <criterion comment="postgresql-pl is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140622"/>
+        <criterion comment="postgresql-server is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140651"/>
+        <criterion comment="postgresql-test is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140606"/>
+        <criterion comment="postgresql is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140485"/>
+        <criterion comment="postgresql-contrib is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140601"/>
+        <criterion comment="postgresql-docs is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140554"/>
+        <criterion comment="postgresql-libs is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140709"/>
+        <criterion comment="postgresql-python is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140652"/>
+        <criterion comment="postgresql-tcl is earlier than 0:8.1.18-2.el5_4.1" test_ref="oval:org.mitre.oval:tst:140005"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postgresql is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140239"/>
+        <criterion comment="postgresql-contrib is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140789"/>
+        <criterion comment="postgresql-devel is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140115"/>
+        <criterion comment="postgresql-docs is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140713"/>
+        <criterion comment="postgresql-jdbc is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140805"/>
+        <criterion comment="postgresql-libs is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140611"/>
+        <criterion comment="postgresql-pl is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140742"/>
+        <criterion comment="postgresql-python is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140770"/>
+        <criterion comment="postgresql-server is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140740"/>
+        <criterion comment="postgresql-tcl is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140506"/>
+        <criterion comment="postgresql-test is earlier than 0:7.4.26-1.el4_8.1" test_ref="oval:org.mitre.oval:tst:140775"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

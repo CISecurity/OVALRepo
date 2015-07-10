@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23983" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Word RTF memory corruption vulnerability (CVE-2014-1761) - MS14-017</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft Word 2003</product>
+      <product>Microsoft Word 2007</product>
+      <product>Microsoft Word 2010</product>
+      <product>Microsoft Word 2013</product>
+      <product>Microsoft Word Viewer</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft Office Web Apps Server 2013</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft SharePoint Server 2013</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-1761" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1761"/>
+    <description>Microsoft Word 2003 SP3, 2007 SP3, 2010 SP1 and SP2, 2013, and 2013 RT; Word Viewer; Office Compatibility Pack SP3; Office for Mac 2011; Word Automation Services on SharePoint Server 2010 SP1 and SP2 and 2013; Office Web Apps 2010 SP1 and SP2; and Office Web Apps Server 2013 allow remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via crafted RTF data, as exploited in the wild in March 2014.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-11T09:30:33">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-04-11T13:09:51.727-04:00">DRAFT</status_change>
+        <status_change date="2014-04-28T04:07:00.885-04:00">INTERIM</status_change>
+        <status_change date="2014-05-19T04:00:10.534-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:18.991-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:59.604-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="word 2003/version">
+      <extend_definition comment="Microsoft Word 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15863"/>
+      <criterion comment="Check if the version of winword.exe is less than 11.0.8411" test_ref="oval:org.mitre.oval:tst:113833"/>
+    </criteria>
+    <criteria operator="AND" comment="word 2007/version">
+      <extend_definition comment="Microsoft Word 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15946"/>
+      <criterion comment="Check if the version of winword.exe is less than 12.0.6695.5000" test_ref="oval:org.mitre.oval:tst:113827"/>
+    </criteria>
+    <criteria operator="AND" comment="word viewer/version">
+      <criterion comment="Check if the version of wordview.exe is less than 11.0.8411" test_ref="oval:org.mitre.oval:tst:113762"/>
+      <extend_definition comment="Microsoft Word Viewer 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:18663"/>
+    </criteria>
+    <criteria operator="AND" comment="compatibility pack/version">
+      <extend_definition comment="Microsoft Office Compatibility Pack SP3 is installed" definition_ref="oval:org.mitre.oval:def:15035"/>
+      <criterion comment="Check if the version of wordcnv.dll is less than 12.0.6695.5000" test_ref="oval:org.mitre.oval:tst:113709"/>
+    </criteria>
+    <criteria operator="AND" comment="word 2010 sp1/sp2/version">
+      <criteria operator="OR" comment="word 2010 sp1/sp2">
+        <extend_definition comment="Microsoft Word 2010 SP1 is installed" definition_ref="oval:org.mitre.oval:def:14953"/>
+        <extend_definition comment="Microsoft Word 2010 SP2 is installed" definition_ref="oval:org.mitre.oval:def:17454"/>
+      </criteria>
+      <criterion comment="Check if the version of winword.exe is less than 14.0.7121.5004" test_ref="oval:org.mitre.oval:tst:113438"/>
+    </criteria>
+    <criteria operator="AND" comment="word 2013/version">
+      <criteria operator="OR" comment="word 2013/sp1">
+        <extend_definition comment="Microsoft Word 2013 SP1 is installed" definition_ref="oval:org.mitre.oval:def:24680"/>
+        <extend_definition comment="Microsoft Word 2013 is installed" definition_ref="oval:org.mitre.oval:def:15560"/>
+      </criteria>
+      <criterion comment="Check if the version of winword.exe is less than 15.0.4605.1001" test_ref="oval:org.mitre.oval:tst:113403"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2010/version">
+      <criteria operator="OR" comment="sp1/sp2">
+        <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:18921"/>
+        <extend_definition comment="Microsoft SharePoint Server 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15614"/>
+      </criteria>
+      <criterion comment="Check if the version of oartserver.dll is less than 14.0.7118.5000" test_ref="oval:org.mitre.oval:tst:113007"/>
+    </criteria>
+    <criteria operator="AND" comment="web apps 2010/version">
+      <criteria operator="OR" comment="sp1/sp2">
+        <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:19186"/>
+        <extend_definition comment="Microsoft Office Web Apps 2010 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:15860"/>
+      </criteria>
+      <criterion comment="Check if the version of msoserver.dll is less than 14.0.7119.5000" test_ref="oval:org.mitre.oval:tst:113801"/>
+    </criteria>
+    <criteria operator="AND" comment="web apps 2013/version">
+      <extend_definition comment="Microsoft Office Web Apps Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:22312"/>
+      <criterion comment="Check if the version of msoserver.dll is less than 15.0.4605.1000" test_ref="oval:org.mitre.oval:tst:113807"/>
+    </criteria>
+    <criteria operator="AND" comment="sharepoint server 2013/version">
+      <extend_definition comment="Microsoft SharePoint Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:16325"/>
+      <criterion comment="Check if the version of SWORD.DLL is less than 15.0.4605.1001" test_ref="oval:org.mitre.oval:tst:113495"/>
+    </criteria>
+  </criteria>
+</definition>

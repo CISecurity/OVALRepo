@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13917" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-754-1 -- clamav vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <product>clamav</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-April/000880.html" ref_id="USN-754-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1270" ref_id="CVE-2009-1270"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-6680" ref_id="CVE-2008-6680"/>
+    <description>It was discovered that ClamAV did not properly verify its input when processing TAR archives. A remote attacker could send a specially crafted TAR file and cause a denial of service via infinite loop. It was discovered that ClamAV did not properly validate Portable Executable files. A remote attacker could send a crafted PE file and cause a denial of service .</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:53:43.699-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:35.246-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:45.557-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13917 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:17.719-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:33.263-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="clamav-docs DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68444"/>
+          <criterion comment="clamav-testfiles DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68188"/>
+          <criterion comment="clamav-base DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68544"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libclamav-dev DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:67903"/>
+          <criterion comment="clamav DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68439"/>
+          <criterion comment="clamav-dbg DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68151"/>
+          <criterion comment="libclamav5 DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68490"/>
+          <criterion comment="clamav-daemon DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68456"/>
+          <criterion comment="clamav-milter DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68354"/>
+          <criterion comment="clamav-freshclam DPKG is earlier than 0.94.dfsg.2-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:68418"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14951" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>.NET Framework Serialization Vulnerability (CVE-2012-0161)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <product>Microsoft .NET Framework 1.0</product>
+      <product>Microsoft .NET Framework 1.1</product>
+      <product>Microsoft .NET Framework 2.0</product>
+      <product>Microsoft .NET Framework 3.0</product>
+      <product>Microsoft .NET Framework 3.5.1</product>
+      <product>Microsoft .NET Framework 4</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-0161" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0161"/>
+    <description>Microsoft .NET Framework 1.0 SP3, 1.1 SP1, 2.0 SP2, 3.0 SP2, 3.5 SP1, 3.5.1, and 4 does not properly handle an unspecified exception during use of partially trusted assemblies to serialize input data, which allows remote attackers to execute arbitrary code via (1) a crafted XAML browser application (aka XBAP) or (2) a crafted .NET Framework application, aka ".NET Framework Serialization Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-05-08T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2012-05-18T17:36:50.462-04:00">DRAFT</status_change>
+        <status_change date="2012-06-04T04:00:53.143-04:00">INTERIM</status_change>
+        <status_change date="2012-06-25T04:00:06.914-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:07.565-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:05:18.168-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:14951 - extended definitions of OS are without SP checks" date="2014-07-28T17:52:00.359-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:54:18.640-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:09.942-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment=".NET Framework 1.0 SP3 KB2604042">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criterion comment="Media Center is installed" test_ref="oval:org.mitre.oval:tst:42482"/>
+      <extend_definition comment="Microsoft .NET Framework 1.0 (Service Pack 3 or later) is Installed" definition_ref="oval:org.mitre.oval:def:2136"/>
+      <criterion comment="System.web.dll version is less than 1.0.3705.6098" test_ref="oval:org.mitre.oval:tst:79810"/>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 1.1 SP1 KB2656353">
+      <criteria operator="OR" comment="affected Operating System">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 1.1 Service Pack 1 is Installed" definition_ref="oval:org.mitre.oval:def:1834"/>
+      <criterion comment="the version of Mscorlib.dll is less than 1.1.4322.2494" test_ref="oval:org.mitre.oval:tst:77805"/>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 1.1 SP1 (KB2604078)">
+      <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+      <extend_definition comment="Microsoft .NET Framework 1.1 Service Pack 1 is Installed" definition_ref="oval:org.mitre.oval:def:1834"/>
+      <criterion comment="the version of Mscorlib.dll is less than 1.1.4322.2494" test_ref="oval:org.mitre.oval:tst:77805"/>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 3.0 SP2 (KB2604105)">
+      <criteria operator="OR" comment="affected Operating System">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.0 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15312"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of WindowsBase.dll is less than 3.0.6920.4206" test_ref="oval:org.mitre.oval:tst:79661"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of WindowsBase.dll is greater than or equal to 3.0.6920.5600" test_ref="oval:org.mitre.oval:tst:79974"/>
+          <criterion comment="the version of WindowsBase.dll is less than 3.0.6920.5738" test_ref="oval:org.mitre.oval:tst:79782"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 3.0 SP2 (KB2604110)">
+      <criteria operator="OR" comment="affected Operating System">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.0 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15312"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of WindowsBase.dll is less than 3.0.6920.4021" test_ref="oval:org.mitre.oval:tst:79356"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of WindowsBase.dll is greater than or equal to 3.0.6920.5600" test_ref="oval:org.mitre.oval:tst:79974"/>
+          <criterion comment="the version of WindowsBase.dll is less than 3.0.6920.5810" test_ref="oval:org.mitre.oval:tst:79710"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 2.0 on XP x86/x64, Server 2003 x86/x64/ia64 (KB2604092)">
+      <criteria operator="OR" comment="XP x86/x64, Server 2003 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 2.0 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6158"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.dll is less than 2.0.50727.3634" test_ref="oval:org.mitre.oval:tst:79802"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.dll is less than 2.0.50727.5710" test_ref="oval:org.mitre.oval:tst:79526"/>
+          <criterion comment="the version of System.dll is greater than or equal to 2.0.50727.5600" test_ref="oval:org.mitre.oval:tst:42783"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 2.0 SP2 on Vista x86/x64, Server 2008 x86/x64/ia64 (KB2604094)">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 2.0 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6158"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.dll is less than 2.0.50727.4223" test_ref="oval:org.mitre.oval:tst:79918"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.dll is less than 2.0.50727.5710" test_ref="oval:org.mitre.oval:tst:79785"/>
+          <criterion comment="the version of System.dll is greater than or equal to 2.0.50727.5600" test_ref="oval:org.mitre.oval:tst:42783"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 3.5 SP1 (KB2604111)">
+      <criteria operator="OR" comment="affected Operating System">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.AddIn.dll is less than 3.5.30729.3676" test_ref="oval:org.mitre.oval:tst:79797"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.AddIn.dll is greater than or equal to 3.5.30729.5600" test_ref="oval:org.mitre.oval:tst:79976"/>
+          <criterion comment="the version of System.AddIn.dll is less than 3.5.30729.5766" test_ref="oval:org.mitre.oval:tst:79949"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 3.5.1 on Windows 7 x86/x64, Server 2008 r2 x64/ia64 (KB2604114)">
+      <criteria operator="OR" comment="Windows 7 x86/x64, Server 2008 r2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.dll is less than 2.0.50727.4971" test_ref="oval:org.mitre.oval:tst:79034"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.dll is less than 2.0.50727.5710" test_ref="oval:org.mitre.oval:tst:79785"/>
+          <criterion comment="the version of System.dll is greater than or equal to 2.0.50727.5600" test_ref="oval:org.mitre.oval:tst:42783"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 3.5.1 on Windows 7 x86/x64, Server 2008 R2 x64/ia64 (KB2604115)">
+      <criteria operator="OR" comment="Windows 7 x86/x64, Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.dll is less than 2.0.50727.5456" test_ref="oval:org.mitre.oval:tst:79913"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.dll is less than 2.0.50727.5710" test_ref="oval:org.mitre.oval:tst:79785"/>
+          <criterion comment="the version of System.dll is greater than or equal to 2.0.50727.5600" test_ref="oval:org.mitre.oval:tst:42783"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".NET Framework 4.0 on Windows XP x86/x64, Server 2003 x86/x64/ia64, Vista x86/x64, Server 2008 x86/x64/ia64, Windows 7 x86/x64, Server 2008 r2 x64/ia64 (KB2604121)">
+      <criteria operator="OR" comment="Windows XP x86/x64, Windows Server 2003 x86/x64/ia64, Vista x86/x64, Server 2008 x86/x64/ia64, Windows 7 x86/x64, Server 2008 r2 x64/ia64">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6749"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of System.dll is less than 4.0.30319.269" test_ref="oval:org.mitre.oval:tst:79705"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of System.dll is less than 4.0.30319.544" test_ref="oval:org.mitre.oval:tst:80027"/>
+          <criterion comment="the version of System.dll is greater than or equal to 4.0.30319.400" test_ref="oval:org.mitre.oval:tst:42727"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

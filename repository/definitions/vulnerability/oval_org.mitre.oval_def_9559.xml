@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9559" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MySQL before 4.1.23, 5.0.x before 5.0.42, and 5.1.x before 5.1.18 does not require the DROP privilege for RENAME TABLE statements, which allows remote authenticated users to rename arbitrary tables.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-2691" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2691"/>
+    <description>MySQL before 4.1.23, 5.0.x before 5.0.42, and 5.1.x before 5.1.18 does not require the DROP privilege for RENAME TABLE statements, which allows remote authenticated users to rename arbitrary tables.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:13:14.656-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:12:38.952-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:13:43.233-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9559 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:36:00.135-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:40:21.778-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:20:15.505-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="mysql is earlier than 0:4.1.22-2.el4" test_ref="oval:org.mitre.oval:tst:37045"/>
+        <criterion comment="mysql-devel is earlier than 0:4.1.22-2.el4" test_ref="oval:org.mitre.oval:tst:37456"/>
+        <criterion comment="mysql-bench is earlier than 0:4.1.22-2.el4" test_ref="oval:org.mitre.oval:tst:36967"/>
+        <criterion comment="mysql-server is earlier than 0:4.1.22-2.el4" test_ref="oval:org.mitre.oval:tst:37224"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="mysql is earlier than 0:5.0.45-7.el5" test_ref="oval:org.mitre.oval:tst:36197"/>
+        <criterion comment="mysql-devel is earlier than 0:5.0.45-7.el5" test_ref="oval:org.mitre.oval:tst:36749"/>
+        <criterion comment="mysql-test is earlier than 0:5.0.45-7.el5" test_ref="oval:org.mitre.oval:tst:36750"/>
+        <criterion comment="mysql-bench is earlier than 0:5.0.45-7.el5" test_ref="oval:org.mitre.oval:tst:36831"/>
+        <criterion comment="mysql-server is earlier than 0:5.0.45-7.el5" test_ref="oval:org.mitre.oval:tst:36646"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

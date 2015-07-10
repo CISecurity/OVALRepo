@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5774" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Access Control Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Office SharePoint Server 2007</product>
+      <product>Microsoft Search Server 2008</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-4032" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4032"/>
+    <description>Microsoft Office SharePoint Server 2007 Gold and SP1 and Microsoft Search Server 2008 do not properly perform authentication and authorization for administrative functions, which allows remote attackers to cause a denial of service (server load), obtain sensitive information, and "create scripts that would run in the context of the site" via requests to administrative URIs, aka "Access Control Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-12-10T10:44:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-12-12T16:42:49.941-05:00">DRAFT</status_change>
+        <status_change date="2008-12-29T04:00:24.315-05:00">INTERIM</status_change>
+        <status_change date="2009-01-19T04:00:10.275-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5774 - Added Search Server 2008 inventory criteria, new object is created for tst:9391 &amp; corrected tst:9391 comment" date="2011-11-14T13:29:00.007-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2011-11-14T13:30:54.533-05:00">INTERIM</status_change>
+        <status_change date="2011-12-05T04:00:31.168-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Check for Office SharePoint Server 2007 or Search Server 2008">
+      <extend_definition comment="Microsoft Office SharePoint Server 2007 is installed." definition_ref="oval:org.mitre.oval:def:2313"/>
+      <extend_definition comment="Microsoft Search Server 2008 is installed" definition_ref="oval:org.mitre.oval:def:14104"/>
+    </criteria>
+    <criterion comment="the version of Mssdmn.exe is less than 12.0.6318.5000" test_ref="oval:org.mitre.oval:tst:9391"/>
+  </criteria>
+</definition>

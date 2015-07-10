@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28007" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011-1635 -- cups security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>cups</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2011-1635.html" ref_id="ELSA-2011-1635"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2896" ref_id="CVE-2011-2896"/>
+    <description>[1.4.2-44]
+- Init script should source /etc/sysconfig/cups (bug #744791)
+
+[1.4.2-43]
+- The scheduler might leave old job data files in the spool directory
+  (STR #3795, STR #3880, bug #735505).
+
+[1.4.2-42]
+- A further fix for imageto* filters crashing with bad GIF files
+  (STR #3914, bug #714118).
+
+[1.4.2-41]
+- The imageto* filters could crash with bad GIF files (STR #3867, bug #714118).
+
+[1.4.2-40]
+- Map ASCII to ISO-8859-1 in the transcoding code (STR #3832, bug #681836).
+- Check for empty values for some configuration directives (STR #3861, bug #706673).
+- The network backends no longer try to collect SNMP supply and status
+  information for raw queues (STR #3809, bug #709896).
+- Handle EAI_NONAME when resolving hostnames (bug #712430).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:53:15.039-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:07:06.162-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:22.297-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="cups is earlier than 0:1.4.2-44.el6" test_ref="oval:org.mitre.oval:tst:133126"/>
+      <criterion comment="cups-devel is earlier than 0:1.4.2-44.el6" test_ref="oval:org.mitre.oval:tst:133044"/>
+      <criterion comment="cups-libs is earlier than 0:1.4.2-44.el6" test_ref="oval:org.mitre.oval:tst:132758"/>
+      <criterion comment="cups-lpd is earlier than 0:1.4.2-44.el6" test_ref="oval:org.mitre.oval:tst:133064"/>
+      <criterion comment="cups-php is earlier than 0:1.4.2-44.el6" test_ref="oval:org.mitre.oval:tst:132895"/>
+    </criteria>
+  </criteria>
+</definition>

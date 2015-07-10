@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:689" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE v5.5,SP2 Travel Log Cross Domain Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows ME</platform>
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-1026" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1026"/>
+    <description>Internet Explorer 5.01 through 6 SP1 allows remote attackers to bypass zone restrictions via a javascript protocol URL in a sub-frame, which is added to the history list and executed in the top window's zone when the history.back (back) function is called, as demonstrated by BackToFramedJpu, aka the "Travel Log Cross Domain Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-02-03T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2004-03-04T12:00:00.000-04:00" comment="Added the configuration check to see if ActiveX controls and active scripting are enabled by the current user when local machine settings are not in use.">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </modified>
+        <status_change date="2004-03-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:37.129-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:25.546-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Internet Explorer 5.5 Service Pack 2 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3123"/>
+      <criterion comment="the version of mshtml.dll is less than 5.50.4937.800" negate="false" test_ref="oval:org.mitre.oval:tst:2581"/>
+      <criterion comment="the patch q832894 is installed (Installed Components key)" negate="true" test_ref="oval:org.mitre.oval:tst:2588"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

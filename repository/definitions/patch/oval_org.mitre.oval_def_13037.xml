@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13037" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1116-1 -- krb5 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-April/001310.html" ref_id="USN-1116-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0285" ref_id="CVE-2011-0285"/>
+    <description>krb5: MIT Kerberos services An unauthenticated remote user could crash the Kerberos service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:12:17.581-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:02:29.786-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:56.163-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13037 - added CVE references; also made minor updates" date="2014-06-13T16:14:00.881-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:16:18.992-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:26.427-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="krb5-admin-server DPKG is earlier than 1.8.1+dfsg-5ubuntu0.7" test_ref="oval:org.mitre.oval:tst:74131"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="krb5-admin-server DPKG is earlier than 1.7dfsg~beta3-1ubuntu0.13" test_ref="oval:org.mitre.oval:tst:74833"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="krb5-admin-server DPKG is earlier than 1.8.1+dfsg-2ubuntu0.9" test_ref="oval:org.mitre.oval:tst:74161"/>
+    </criteria>
+  </criteria>
+</definition>

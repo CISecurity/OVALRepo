@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1194" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Agent Security Prompt Spoofing Vulnerability (Windows XP)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Agent</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1214" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1214"/>
+    <description>Microsoft Agent allows remote attackers to spoof trusted Internet content and execute arbitrary code by disguising security prompts on a malicious Web page.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-06-22T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2005-06-22T03:21:00.000-04:00">DRAFT</status_change>
+        <modified date="2005-06-24T12:00:00.000-04:00" comment="added description">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </modified>
+        <status_change date="2005-07-27T10:37:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-08-18T07:37:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2006-11-17T09:54:00.000-04:00" comment="Updated obj:1000 to use new variable var:759 for path reference rather than var:200.  Now uses 'msagent' subdir of SystemRoot instead of System32.">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2006-11-17T09:54:00.000-04:00">INTERIM</status_change>
+        <status_change date="2007-01-03T13:53:48.946-05:00">ACCEPTED</status_change>
+        <modified comment="the version of Agentdpv.dll is 2.0.0.3423" date="2008-08-11T10:51:00.463-04:00">
+          <contributor organization="Secure Elements, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2008-08-11T10:52:20.512-04:00">INTERIM</status_change>
+        <status_change date="2008-09-01T04:00:48.055-04:00">ACCEPTED</status_change>
+        <modified comment="Updated comment to include Vista and Server 2008" date="2009-05-07T10:32:00.713-04:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2009-05-07T10:34:04.033-04:00">INTERIM</status_change>
+        <status_change date="2009-05-25T04:00:48.348-04:00">ACCEPTED</status_change>
+        <modified comment="Multiple corrections and update to POSIX compatibility for ste:2656" date="2010-11-29T16:12:00.873-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2010-11-29T16:13:00.326-05:00">INTERIM</status_change>
+        <status_change date="2010-12-20T04:00:18.999-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2011-04-25T14:45:52.975-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:00:30.901-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="Windows XP is installed" test_ref="oval:org.mitre.oval:tst:2838"/>
+      <criteria operator="OR" comment=" a vulnerable version of agentdpv exists">
+        <criteria operator="AND" comment=" a vulnerable version of agentdpv exists">
+          <criteria operator="OR" comment="32-bit version of Windows or 64-bit (itanium architecture) version of Windows is installed">
+            <criterion comment="32-Bit version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2748"/>
+            <criterion comment="a version of Windows for the ia64 architecture is installed" test_ref="oval:org.mitre.oval:tst:2747"/>
+          </criteria>
+          <criterion negate="true" comment="Win2K/XP/2003 service pack 2 (or later) is installed" test_ref="oval:org.mitre.oval:tst:2837"/>
+          <criterion comment="the version of agentdpv.dll is less than 2.0.0.3423" test_ref="oval:org.mitre.oval:tst:2425"/>
+        </criteria>
+        <criteria operator="AND" comment=" a vulnerable version of agentdpv exists">
+          <criterion comment="32-Bit version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2748"/>
+          <criterion comment="Win2K/XP/2003/Vista/2008 Service Pack 2 is installed" test_ref="oval:org.mitre.oval:tst:3019"/>
+          <criterion comment="the version of agentdpv.dll is less than 2.0.0.3423" test_ref="oval:org.mitre.oval:tst:2425"/>
+        </criteria>
+        <criteria operator="AND" comment=" a vulnerable version of agentdpv exists for Windows Gold 64-bit (x64)">
+          <criterion comment="64-Bit (x64 architecture) version of Windows is installed" test_ref="oval:org.mitre.oval:tst:2744"/>
+          <criterion negate="true" comment="Win2K/XP/2003 is patched" test_ref="oval:org.mitre.oval:tst:2437"/>
+          <criterion comment="the version of agentdpv.dll is less than 5.2.3790.1241" test_ref="oval:org.mitre.oval:tst:1476"/>
+        </criteria>
+      </criteria>
+      <criterion negate="true" comment="the patch kb890046 is installed" test_ref="oval:org.mitre.oval:tst:2424"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion negate="true" comment="use machine settings rather than individual user settings" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

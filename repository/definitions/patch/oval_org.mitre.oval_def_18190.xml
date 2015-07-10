@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18190" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1721-1 -- curl vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 12.10</platform>
+      <product>curl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1721-1/" ref_id="USN-1721-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0249" ref_id="CVE-2013-0249"/>
+    <description>curl could be made to crash or run programs if it opened a malicious URL. Software Description: - curl: HTTP, HTTPS, and FTP client and client libraries Details: It was discovered that curl incorrectly handled SASL authentication when communicating over POP3, SMTP or IMAP.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-07-22T12:08:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-15T13:05:36.649-04:00">DRAFT</status_change>
+        <status_change date="2013-09-02T04:05:20.074-04:00">INTERIM</status_change>
+        <status_change date="2013-09-23T04:05:08.989-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:22171 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:13:57.725-05:00">INTERIM</status_change>
+        <status_change date="2013-12-16T04:01:15.566-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18190 - added CVE references; also made minor updates" date="2014-06-13T17:34:00.805-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:35:55.214-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:20.086-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libcurl3 DPKG is earlier than 7.27.0-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:85150"/>
+      <criterion comment="libcurl3-gnutls DPKG is earlier than 7.27.0-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:84539"/>
+      <criterion comment="libcurl3-nss DPKG is earlier than 7.27.0-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:85244"/>
+    </criteria>
+  </criteria>
+</definition>

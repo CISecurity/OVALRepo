@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28256" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0839 -- postfix security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>postfix</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0839.html" ref_id="RHSA-2008:0839"/>
+    <reference source="CESA-2008:0839" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-August/015185.html" ref_id="CESA-2008:0839-CentOS 3"/>
+    <reference source="CESA-2008:0839" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-August/015187.html" ref_id="CESA-2008:0839-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2936" ref_id="CVE-2008-2936"/>
+    <description>Updated postfix packages that fix a security issue are now available for
+Red Hat Enterprise Linux 3, 4, and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Postfix is a Mail Transport Agent (MTA), supporting LDAP, SMTP AUTH (SASL),
+and TLS.
+A flaw was found in the way Postfix dereferences symbolic links. If a local
+user has write access to a mail spool directory with no root mailbox, it
+may be possible for them to append arbitrary data to files that root has
+write permission to. (CVE-2008-2936)
+Red Hat would like to thank Sebastian Krahmer for responsibly disclosing
+this issue.
+All users of postfix should upgrade to these updated packages, which
+contain a backported patch that resolves this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:50.001-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 3 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <criterion comment="postfix is earlier than 2:2.0.16-14.1.RHEL3" test_ref="oval:org.mitre.oval:tst:139219"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postfix is earlier than 2:2.2.10-1.2.1.el4_7" test_ref="oval:org.mitre.oval:tst:138999"/>
+        <criterion comment="postfix-pflogsumm is earlier than 2:2.2.10-1.2.1.el4_7" test_ref="oval:org.mitre.oval:tst:138922"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postfix is earlier than 2:2.3.3-2.1.el5_2" test_ref="oval:org.mitre.oval:tst:138734"/>
+        <criterion comment="postfix-pflogsumm is earlier than 2:2.3.3-2.1.el5_2" test_ref="oval:org.mitre.oval:tst:139225"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

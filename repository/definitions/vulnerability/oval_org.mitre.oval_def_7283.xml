@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7283" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Win32k TrueType Font Parsing Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-1255" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1255"/>
+    <description>The Windows kernel-mode drivers in win32k.sys in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP2, Vista SP1 and SP2, Server 2008 Gold and SP2, Windows 7, and Server 2008 R2 allows local users to execute arbitrary code via vectors related to "glyph outline information" and TrueType fonts, aka "Win32k TrueType Font Parsing Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-06-14T11:31:25.000-04:00">DRAFT</status_change>
+        <status_change date="2010-06-29T11:49:36.500-04:00">INTERIM</status_change>
+        <status_change date="2010-07-19T04:00:37.735-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7283 - Modified GDR/LDR service branch format to read easier, removed duplicate, and updated extended def for Vista." date="2011-01-31T15:59:00.878-05:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2011-01-31T16:00:06.146-05:00">INTERIM</status_change>
+        <status_change date="2011-02-21T04:01:13.412-05:00">ACCEPTED</status_change>
+        <status_change date="2012-03-05T14:24:00.744-05:00">INTERIM</status_change>
+        <modified comment="Added Windows Server 2008 R2 platform" date="2012-03-05T14:24:00.744-05:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-03-26T04:03:50.446-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:5160 - contains tests with modified comments and all dependences" date="2014-02-13T12:19:00.287-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-13T12:22:57.050-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:01:21.536-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 2000 SP4">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of win32k.sys is less than 5.0.2195.7397" test_ref="oval:org.mitre.oval:tst:27601"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP2">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="the version of win32k.sys is less than 5.1.2600.3706" test_ref="oval:org.mitre.oval:tst:27275"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of win32k.sys is less than 5.1.2600.5976" test_ref="oval:org.mitre.oval:tst:27640"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of win32k.sys is less than 5.2.3790.4702" test_ref="oval:org.mitre.oval:tst:27693"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista x86/x64 SP1, all Server 2008 x86/x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:5254"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of win32k.sys is less than 6.0.6001.18468" test_ref="oval:org.mitre.oval:tst:27353"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of win32k.sys is less than 6.0.6001.22682" test_ref="oval:org.mitre.oval:tst:27380"/>
+          <criterion comment="the version of win32k.sys is greater than 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:10142"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista x86/x64 SP2, Server 2008 x86/64/ia64 SP2">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5594"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of win32k.sys is less than 6.0.6002.18253" test_ref="oval:org.mitre.oval:tst:27138"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of win32k.sys is less than 6.0.6002.22396" test_ref="oval:org.mitre.oval:tst:27022"/>
+          <criterion comment="the version of win32k.sys is greater than 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:10124"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64, Windows Server 2008 R2 x86/x64/ia64">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of win32k.sys is less than 6.1.7600.16585" test_ref="oval:org.mitre.oval:tst:27474"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of win32k.sys is greater than or equal to 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:27587"/>
+          <criterion comment="the version of win32k.sys is less than 6.1.7600.20704" test_ref="oval:org.mitre.oval:tst:27593"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

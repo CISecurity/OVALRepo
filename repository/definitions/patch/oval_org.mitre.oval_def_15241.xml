@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15241" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2368-1 lighttpd -- multiple</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>lighttpd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00247.html" ref_id="DSA-2368-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4362" ref_id="CVE-2011-4362"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3389" ref_id="CVE-2011-3389"/>
+    <description>Several vulnerabilities have been discovered in lighttpd, a small and fast webserver with minimal memory footprint. CVE-2011-4362 Xi Wang discovered that the base64 decoding routine which is used to decode user input during an HTTP authentication, suffers of a signedness issue when processing user input. As a result it is possible to force lighttpd to perform an out-of-bounds read which results in Denial of Service conditions. CVE-2011-3389 When using CBC ciphers on an SSL enabled virtual host to communicate with certain client, a so called &amp;quot;BEAST&amp;quot; attack allows man-in-the-middle attackers to obtain plaintext HTTP traffic via a blockwise chosen-boundary attack on an HTTPS session. Technically this is no lighttpd vulnerability. However, lighttpd offers a workaround to mitigate this problem by providing a possibility to disable CBC ciphers. This updates includes this option by default. System administrators are advised to read the NEWS file of this update.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:57:09.242-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:15.807-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:39.199-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:18753 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:55.495-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:01:55.795-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15241 - Debian Patch Update" date="2014-06-06T17:13:00.482-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:15:06.348-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:37.890-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="lighttpd DPKG is earlier than 1.4.19+lenny3" test_ref="oval:org.mitre.oval:tst:78684"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="lighttpd DPKG is earlier than 1.4.28-2+squeeze1" test_ref="oval:org.mitre.oval:tst:78311"/>
+    </criteria>
+  </criteria>
+</definition>

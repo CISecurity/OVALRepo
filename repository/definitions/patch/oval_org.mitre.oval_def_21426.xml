@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21426" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0373: firefox security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0373-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0373.html"/>
+    <reference source="CESA-2011:0373" ref_url="http://lists.centos.org/pipermail/centos-announce/2011-April/017409.html" ref_id="CESA-2011:0373-CentOS 5"/>
+    <description>Mozilla Firefox is an open source web browser. XULRunner provides the XUL
+Runtime environment for Mozilla Firefox.
+
+This erratum blacklists a small number of HTTPS certificates. (BZ#689430)
+
+All Firefox users should upgrade to these updated packages, which contain
+a backported patch. After installing the update, Firefox must be restarted
+for the changes to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:32.183-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:02:39.594-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:26.289-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21426 - Products and Centos critera added" date="2014-06-13T17:47:00.365-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:50:42.298-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:38.750-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21426 - RHEL and Centos checks were added where necessary" date="2015-02-16T13:05:00.404-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-16T13:08:28.683-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:03.739-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.15-2.el5_6" test_ref="oval:org.mitre.oval:tst:137088"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.15-2.el5_6" test_ref="oval:org.mitre.oval:tst:137891"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xulrunner is earlier than 0:1.9.2.15-2.el6_0" test_ref="oval:org.mitre.oval:tst:97163"/>
+        <criterion comment="xulrunner-debuginfo is earlier than 0:1.9.2.15-2.el6_0" test_ref="oval:org.mitre.oval:tst:137776"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.15-2.el6_0" test_ref="oval:org.mitre.oval:tst:97565"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

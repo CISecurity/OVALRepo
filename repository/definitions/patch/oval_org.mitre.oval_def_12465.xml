@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12465" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2092-1 lxr-cvs -- missing input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>lxr-cvs</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00137.html" ref_id="DSA-2092-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1625" ref_id="CVE-2010-1625"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1738" ref_id="CVE-2010-1738"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1448" ref_id="CVE-2010-1448"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4497" ref_id="CVE-2009-4497"/>
+    <description>Dan Rosenberg discovered that in lxr-cvs, a code-indexing tool with a web frontend, not enough sanitation of user input is performed; an attacker can take advantage of this and pass script code in order to perform cross-site scripting attacks. For the stable distribution, this problem has been fixed in version 0.9.5+cvs20071020-1+lenny1. For the testing distribution, this problem has been fixed in version 0.9.5+cvs20071020-1.1. We recommend that you upgrade your lxr-cvs packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:16:26">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:55.115-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:14.660-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:22.979-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12465 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:07.238-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:18.589-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="lxr-cvs DPKG is earlier than 0.9.5+cvs20071020-1+lenny1" test_ref="oval:org.mitre.oval:tst:43458"/>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12307" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft-discovered variant of Chunked Encoding buffer overrun</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Internet Information Server (IIS)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0147" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0147"/>
+    <description>Buffer overflow in the ASP data transfer mechanism in Internet Information Server (IIS) 4.0, 5.0, and 5.1 allows remote attackers to cause a denial of service or execute code, aka "Microsoft-discovered variant of Chunked Encoding buffer overrun."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-16T12:00:00.000-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-01-12T13:28:44.851-05:00">DRAFT</status_change>
+        <status_change date="2011-01-31T04:00:07.524-05:00">INTERIM</status_change>
+        <status_change date="2011-02-21T04:00:21.259-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="vulnerable IIS 4.0 on Windows NT">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <extend_definition comment="Microsoft IIS 4.0 is installed" definition_ref="oval:org.mitre.oval:def:12482"/>
+      <criterion comment="the version of w3svc.dll is less than 4.2.775.1" test_ref="oval:org.mitre.oval:tst:42232"/>
+      <criterion comment="FTP Enabled" test_ref="oval:org.mitre.oval:tst:3074"/>
+    </criteria>
+    <criteria operator="AND" comment="vulnerable IIS 5.0 on Windows 2000">
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <extend_definition comment="Microsoft IIS 5.0 is installed" definition_ref="oval:org.mitre.oval:def:731"/>
+      <criterion comment="the version of w3svc.dll is less than 5.0.2195.5269" test_ref="oval:org.mitre.oval:tst:42203"/>
+      <criterion comment="FTP Enabled" test_ref="oval:org.mitre.oval:tst:3074"/>
+    </criteria>
+    <criteria operator="AND" comment="vulnerable IIS 5.1 on Windows XP">
+      <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+      <extend_definition comment="Microsoft IIS 5.1 is installed" definition_ref="oval:org.mitre.oval:def:460"/>
+      <criterion comment="the version of w3svc.dll is less than 5.1.2600.41" test_ref="oval:org.mitre.oval:tst:41232"/>
+      <criterion comment="FTP Enabled" test_ref="oval:org.mitre.oval:tst:3074"/>
+    </criteria>
+  </criteria>
+</definition>

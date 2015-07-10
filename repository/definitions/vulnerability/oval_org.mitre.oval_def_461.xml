@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:461" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Klima-Pokorny-Rosa Attack Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0131" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0131"/>
+    <description>The SSL and TLS components for OpenSSL 0.9.6i and earlier, 0.9.7, and 0.9.7a allow remote attackers to perform an unauthorized RSA private key operation via a modified Bleichenbacher attack that uses a large number of SSL or TLS connections using PKCS #1 v1.5 padding that cause OpenSSL to leak information regarding the relationship between ciphertext and the associated plaintext, aka the "Klima-Pokorny-Rosa attack."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-08-11T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2004-03-25T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </modified>
+        <modified date="2004-05-11T12:00:00.000-04:00" comment="Added cmp-914 which uses an or to combine the 5 version tests. Previously the tests had been combined with an and.">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:51.829-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:32.405-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat 9 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3153"/>
+    <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+    <criteria operator="OR" comment="affected version of SSL and TLS components for OpenSSL">
+      <criterion comment="openssl version is less than 0.9.7a-5" negate="false" test_ref="oval:org.mitre.oval:tst:2618"/>
+      <criterion comment="openssl-devel version is less than 0.9.7a-5" negate="false" test_ref="oval:org.mitre.oval:tst:2617"/>
+      <criterion comment="openssl-perl version is less than 0.9.7a-5" negate="false" test_ref="oval:org.mitre.oval:tst:2616"/>
+      <criterion comment="openssl096 version is less than 0.9.6-17" negate="false" test_ref="oval:org.mitre.oval:tst:2615"/>
+      <criterion comment="openssl096b version is less than 0.9.6b-6" negate="false" test_ref="oval:org.mitre.oval:tst:2614"/>
+    </criteria>
+  </criteria>
+</definition>

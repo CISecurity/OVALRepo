@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13350" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1768-1 openafs -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>openafs</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00079.html" ref_id="DSA-1768-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1250" ref_id="CVE-2009-1250"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1251" ref_id="CVE-2009-1251"/>
+    <description>Two vulnerabilities were discovered in the client part of OpenAFS, a distributed file system. An attacker with control of a file server or the ability to forge RX packets may be able to execute arbitrary code in kernel mode on an OpenAFS client, due to avulnerability in XDR array decoding. An attacker with control of a file server or the ability to forge RX packets may crash OpenAFS clients because of wrongly handled error return codes in the kernel module. Note that in order to apply this security update, you must rebuild the OpenAFS kernel module. Be sure to also upgrade openafs-modules-source, build a new kernel module for your system following the instructions in /usr/share/doc/openafs-client/README.modules.gz, and then either stop and restart openafs-client or reboot the system to reload the kernel module. For the old stable distribution, these problems have been fixed in version 1.4.2-6etch2. For the stable distribution, these problems have been fixed in version 1.4.7.dfsg1-6+lenny1. For the unstable distribution, these problems have been fixed in version 1.4.10+dfsg1-1. We recommend that you upgrade your openafs packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:41.527-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:12.211-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:05:59.657-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13350 - Debian Patch Update" date="2014-06-06T17:34:00.215-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:36:25.728-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:02.166-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="openafs-modules-source DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:51750"/>
+            <criterion comment="openafs-doc DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52220"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="openafs-client DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52028"/>
+            <criterion comment="openafs-dbserver DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52311"/>
+            <criterion comment="openafs-dbg DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52134"/>
+            <criterion comment="openafs-fileserver DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52386"/>
+            <criterion comment="openafs-krb5 DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:51981"/>
+            <criterion comment="libpam-openafs-kaserver DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52281"/>
+            <criterion comment="openafs-kpasswd DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:51662"/>
+            <criterion comment="libopenafs-dev DPKG is earlier than 1.4.7.dfsg1-6+lenny1" test_ref="oval:org.mitre.oval:tst:52338"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="openafs-modules-source DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:51670"/>
+            <criterion comment="openafs-doc DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52287"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="openafs-client DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52228"/>
+            <criterion comment="openafs-dbserver DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52390"/>
+            <criterion comment="openafs-dbg DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52333"/>
+            <criterion comment="openafs-fileserver DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52077"/>
+            <criterion comment="libpam-openafs-kaserver DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52397"/>
+            <criterion comment="libopenafs-dev DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52361"/>
+            <criterion comment="openafs-krb5 DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52306"/>
+            <criterion comment="openafs-kpasswd DPKG is earlier than 1.4.2-6etch2" test_ref="oval:org.mitre.oval:tst:52144"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

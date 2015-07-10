@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21823" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2007:0403: freetype security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>freetype</product>
+    </affected>
+    <reference ref_id="ELSA-2007:0403-02" ref_url="http://linux.oracle.com/errata/ELSA-2007-0403.html" source="VENDOR"/>
+    <reference ref_id="CVE-2007-2754" ref_url="http://linux.oracle.com/cve/CVE-2007-2754.html" source="CVE"/>
+    <description>Integer signedness error in truetype/ttgload.c in Freetype 2.3.4 and earlier might allow remote attackers to execute arbitrary code via a crafted TTF image with a negative n_points value, which leads to an integer overflow and heap-based buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:44:52.487-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:20.360-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:30.546-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21823 - optimisation of Oracle Linux content" date="2014-05-05T18:23:00.086-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:24:28.646-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:33.046-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="freetype is earlier than 0:2.2.1-19.el5" test_ref="oval:org.mitre.oval:tst:100492"/>
+      <criterion comment="freetype-demos is earlier than 0:2.2.1-19.el5" test_ref="oval:org.mitre.oval:tst:101024"/>
+      <criterion comment="freetype-devel is earlier than 0:2.2.1-19.el5" test_ref="oval:org.mitre.oval:tst:101235"/>
+    </criteria>
+  </criteria>
+</definition>

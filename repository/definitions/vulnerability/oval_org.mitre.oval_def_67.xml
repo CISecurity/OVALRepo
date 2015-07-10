@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:67" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 8 admintool Local Buffer Overflow</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <product>Admintool</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0089" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0089"/>
+    <description>Buffer overflow in admintool in Solaris 2.5 through 8 allows local users to gain root privileges via long arguments to (1) the -d command line option, or (2) the PRODVERS argument in the .cdtoc file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2002-09-17T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+        <modified date="2006-06-13T02:02:00.000-04:00" comment="modified uft-15 - admintool is either /bin/admintool or /usr/bin/admintool (or both).  Regular expression had been ^.*/bin/admintool$, which could cause arbitrary-depth search.  Changed to ^(/usr)?/bin/admintool$, which bounds the search properly.">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <modified date="2006-06-13T02:20:00.000-04:00" comment="modified upt-845 - admintool is either /bin/admintool or /usr/bin/admintool (or both). Regular expression had been ^.*/bin/admintool$, which could cause arbitrary-depth search. Changed to ^(/usr)?/bin/admintool$, which bounds the search properly.  Also modified to test for both SUID and OEXEC bits, so a second test is not needed.">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <modified date="2006-06-13T02:24:00.000-04:00" comment="Removed compound test for &quot;admintool SUID and executable&quot; because new version of upt-845 does both.">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2006-06-14T07:41:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-09-27T12:29:34.346-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed obj:1726, which had been badly mangled during conversion from OVAL 4.2 to 5.0.  Operation set to pattern match on path, and terminal regexp anchor moved from filename to path." date="2007-01-22T16:24:00.728-05:00">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2007-01-22T16:26:01.442-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:40:52.089-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="File admintool exists" negate="false" test_ref="oval:org.mitre.oval:tst:3017"/>
+      <criterion comment="Patch 110453-01 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:2987"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="File admintool SUID and executable" negate="false" test_ref="oval:org.mitre.oval:tst:3016"/>
+    </criteria>
+  </criteria>
+</definition>

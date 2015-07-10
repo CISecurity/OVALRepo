@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28050" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1885 -- libxml2 security update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1885.html" ref_id="ELSA-2014-1885"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3660" ref_id="CVE-2014-3660"/>
+    <description>[2.6.26-2.1.25.0.1.el5_11]
+- Add libxml2-enterprise.patch
+- Replaced doc/redhat.gif in tarball with updated image
+
+[2.6.26-2.1.25.el5]
+- CVE-2014-3660 denial of service via recursive entity expansion (rhbz#1161841)
+
+[2.6.26-2.1.24.el5]
+- fixed one regexp bug and added a (rhbz#922450)
+- Another small change on the algorithm for the elimination of epsilon (rhbz#922450)
+
+[2.6.26-2.1.23.el5]
+- detect and stop excessive entities expansion upon replacement (rhbz#912573)
+
+[2.6.26-2.1.22.el5]
+- fix validation issues with some XSD (rhbz#877348)
+- xmlDOMWrapCloneNode discards namespace of the node parameter (rhbz#884707)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T11:06:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:34:27.631-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:20.947-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:23.661-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libxml2 is earlier than 0:2.6.26-2.1.25.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:135349"/>
+      <criterion comment="libxml2-devel is earlier than 0:2.6.26-2.1.25.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:135973"/>
+      <criterion comment="libxml2-python is earlier than 0:2.6.26-2.1.25.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:135997"/>
+    </criteria>
+  </criteria>
+</definition>

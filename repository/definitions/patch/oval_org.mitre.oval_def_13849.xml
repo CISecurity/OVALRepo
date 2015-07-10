@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13849" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-820-1 -- pidgin vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>pidgin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-August/000955.html" ref_id="USN-820-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2694" ref_id="CVE-2009-2694"/>
+    <description>Federico Muttis discovered that Pidgin did not properly handle certain malformed messages in the MSN protocol handler. A remote attacker could send a specially crafted message and possibly execute arbitrary code with user privileges.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:55:57.571-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:08.625-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:17.517-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13849 - added CVE references; also made minor updates" date="2014-06-13T17:40:00.258-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:41:45.951-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:10.968-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpurple-dev DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:68989"/>
+            <criterion comment="finch-dev DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:68593"/>
+            <criterion comment="pidgin-dev DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:69304"/>
+            <criterion comment="libpurple-bin DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:68866"/>
+            <criterion comment="pidgin-data DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:69231"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpurple0 DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:69028"/>
+            <criterion comment="pidgin-dbg DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:69180"/>
+            <criterion comment="pidgin DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:68914"/>
+            <criterion comment="finch DPKG is earlier than 1:2.5.2-0ubuntu1.4" test_ref="oval:org.mitre.oval:tst:68887"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="finch-dev DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:68737"/>
+            <criterion comment="pidgin-dev DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69211"/>
+            <criterion comment="gaim DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69306"/>
+            <criterion comment="libpurple-bin DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69106"/>
+            <criterion comment="libpurple-dev DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69229"/>
+            <criterion comment="pidgin-data DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:68639"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpurple0 DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:68369"/>
+            <criterion comment="pidgin-dbg DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69312"/>
+            <criterion comment="pidgin DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69363"/>
+            <criterion comment="finch DPKG is earlier than 1:2.4.1-1ubuntu2.6" test_ref="oval:org.mitre.oval:tst:69178"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpurple-dev DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:68888"/>
+            <criterion comment="finch-dev DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69301"/>
+            <criterion comment="pidgin-dev DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69172"/>
+            <criterion comment="libpurple-bin DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69142"/>
+            <criterion comment="pidgin-data DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69164"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="finch DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69322"/>
+            <criterion comment="pidgin-dbg DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:68844"/>
+            <criterion comment="pidgin DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69077"/>
+            <criterion comment="libpurple0 DPKG is earlier than 1:2.5.5-1ubuntu8.4" test_ref="oval:org.mitre.oval:tst:69259"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

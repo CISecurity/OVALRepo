@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5938" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cisco IOS HTTP Configuration Interface Denial of Service Vulnerability</title>
+    <affected family="ios">
+      <platform>Cisco IOS</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2000-0380" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-0380"/>
+    <description>The IOS HTTP service in Cisco routers and switches running IOS 11.1 through 12.1 allows remote attackers to cause a denial of service by requesting a URL that contains a %% string.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-05-02T11:06:36.000-04:00">
+          <contributor organization="Hewlett-Packard">Yuzheng Zhou</contributor>
+        </submitted>
+        <status_change date="2008-07-30T16:33:13.003-04:00">DRAFT</status_change>
+        <status_change date="2008-08-18T04:01:06.657-04:00">INTERIM</status_change>
+        <status_change date="2008-09-08T04:00:58.241-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Cisco ISO meets CVE-2000-0380">
+    <criterion comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:8807"/>
+    <criterion negate="true" comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:8890"/>
+    <criterion comment="config contains: ^\s*ip http server" test_ref="oval:org.mitre.oval:tst:8123"/>
+    <criterion negate="true" comment="config contains: ^\s*no ip http server" test_ref="oval:org.mitre.oval:tst:8920"/>
+  </criteria>
+</definition>

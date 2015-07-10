@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11181" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cross-site scripting (XSS) vulnerability in Apache Tomcat 4.1.0 through 4.1.37, 5.5.0 through 5.5.26, and 6.0.0 through 6.0.16 allows remote attackers to inject arbitrary web script or HTML via a crafted string that is used in the message argument to the HttpServletResponse.sendError method.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1232" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1232"/>
+    <description>Cross-site scripting (XSS) vulnerability in Apache Tomcat 4.1.0 through 4.1.37, 5.5.0 through 5.5.26, and 6.0.0 through 6.0.16 allows remote attackers to inject arbitrary web script or HTML via a crafted string that is used in the message argument to the HttpServletResponse.sendError method.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:32:58.655-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:07:57.712-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:08:37.481-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11181 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:36:00.135-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:39:51.199-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:12:06.924-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="tomcat5-servlet-2.4-api-javadoc is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37489"/>
+      <criterion comment="tomcat5-jsp-2.0-api-javadoc is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:36583"/>
+      <criterion comment="tomcat5-jasper-javadoc is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37182"/>
+      <criterion comment="tomcat5-servlet-2.4-api is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37266"/>
+      <criterion comment="tomcat5-webapps is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37452"/>
+      <criterion comment="tomcat5 is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37501"/>
+      <criterion comment="tomcat5-jasper is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37524"/>
+      <criterion comment="tomcat5-jsp-2.0-api is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37275"/>
+      <criterion comment="tomcat5-server-lib is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37396"/>
+      <criterion comment="tomcat5-common-lib is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37498"/>
+      <criterion comment="tomcat5-admin-webapps is earlier than 0:5.5.23-0jpp.7.el5_2.1" test_ref="oval:org.mitre.oval:tst:37415"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:120" version="2" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 7 KCMS Arbitrary File Access Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>kcms_server</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0027" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0027"/>
+    <description>Directory traversal vulnerability in Sun Kodak Color Management System (KCMS) library service daemon (kcms_server) allows remote attackers to read arbitrary files via the KCS_OPEN_PROFILE procedure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-01-30T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+        <modified comment="fixed the service_name entity used in the inetd_object" date="2007-04-10T15:15:00.237-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:15:57.513-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:14.919-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecated. Superseded by def:2592 (same CVE-2003-0027)." date="2008-12-19T11:22:00.311-05:00">
+          <contributor organization="Secure Elements, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2008-12-19T11:23:14.326-05:00">DEPRECATED</status_change>
+        <modified comment="Fixed incorrect user_id element value in process_state.  Incorrect value was 'root', updated to value of '0'." date="2010-09-02T15:11:00.501-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="Solaris 7 Installed" test_ref="oval:org.mitre.oval:tst:3045"/>
+      <criterion comment="File kcms_server exists" test_ref="oval:org.mitre.oval:tst:2931"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="inetd.conf contains kcms_server" test_ref="oval:org.mitre.oval:tst:2930"/>
+      <criterion comment="inetd running" test_ref="oval:org.mitre.oval:tst:3135"/>
+      <criteria operator="OR" comment="File kcms_server executable and SUID or SGID">
+        <criterion comment="File kcms_server executable and SUID or SGID" test_ref="oval:org.mitre.oval:tst:2929"/>
+        <criterion comment="File kcms_server executable and SUID or SGID" test_ref="oval:org.mitre.oval:tst:2928"/>
+        <criterion comment="File kcms_server executable and SUID or SGID" test_ref="oval:org.mitre.oval:tst:2927"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

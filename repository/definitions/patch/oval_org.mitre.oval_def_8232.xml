@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8232" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1515 libnet-dns-perl -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 3.1</platform>
+      <product>libnet-dns-perl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1515" ref_id="DSA-1515"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3377" ref_id="CVE-2007-3377"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3409" ref_id="CVE-2007-3409"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6341" ref_id="CVE-2007-6341"/>
+    <description>Several remote vulnerabilities have been discovered in libnet-dns-perl. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered that libnet-dns-perl generates very weak transaction IDs when sending queries (CVE-2007-3377). This update switches transaction ID generation to the Perl random generator, making prediction attacks more difficult. Compression loops in domain names resulted in an infinite loop in the domain name expander written in Perl (CVE-2007-3409). The Debian package uses an expander written in C by default, but this vulnerability has been addressed nevertheless. Decoding malformed A records could lead to a crash (via an uncaught Perl exception) of certain applications using libnet-dns-perl (CVE-2007-6341).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:57:23.621-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:09.725-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:52.874-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8232 - Debian Patch Update" date="2014-06-06T17:31:00.789-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:32:58.621-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:25.007-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="libnet-dns-perl is earlier than 0.59-1etch1" test_ref="oval:org.mitre.oval:tst:18130"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692"/>
+      <criterion comment="libnet-dns-perl is earlier than 0.48-1sarge1" test_ref="oval:org.mitre.oval:tst:18389"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12235" version="13" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Windows Media Encoder 9</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3965" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3965"/>
+    <description>Untrusted search path vulnerability in Windows Media Encoder 9 on Microsoft Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista SP1 and SP2, and Windows Server 2008 Gold and SP2 allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a Windows Media Profile (PRX) file, aka "Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-06-08T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-12-17T20:54:18.274-05:00">DRAFT</status_change>
+        <status_change date="2011-01-03T04:00:20.179-05:00">INTERIM</status_change>
+        <status_change date="2011-01-24T04:00:18.411-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12235 - Made updates to the criteria, as there were references to a few tests that are unnecessary." date="2011-03-03T21:00:00.949-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-03-03T21:03:16.787-05:00">INTERIM</status_change>
+        <status_change date="2011-03-21T04:00:06.159-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:49:02.630-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:00:26.078-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:27.372-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:00:18.770-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12235 - extended definitions of OS are without SP checks" date="2014-07-28T17:44:00.322-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:46:31.233-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:00:22.339-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows Media Encoder 9, 32-bit version">
+      <criteria operator="OR" comment="Microsoft Windows XP x86, Server 2003 x86/x64, Vista 32-bit/x64, Server 2008 x86/x64">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <criterion comment="the version of Wmenceng.dll is greater than or equal to 9.0.0.0" test_ref="oval:org.mitre.oval:tst:27572"/>
+      <criterion comment="the version of Wmenceng.dll is less than 9.0.0.3374" test_ref="oval:org.mitre.oval:tst:41440"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Media Encoder 9, 64-bit version">
+      <criteria operator="OR" comment="Microsoft Windows XP x64, Server 2003 x64, Vista x64, Server 2008 x64">
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <criterion comment="the version of Wmenceng.dll is greater than or equal to 10.0.0.0" test_ref="oval:org.mitre.oval:tst:27289"/>
+      <criterion comment="the version of Wmenceng.dll is less than 10.0.0.3822" test_ref="oval:org.mitre.oval:tst:40923"/>
+    </criteria>
+  </criteria>
+</definition>

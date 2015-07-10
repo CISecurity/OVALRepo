@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23059" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:0414: policycoreutils security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>policycoreutils</product>
+      <product>selinux-policy</product>
+    </affected>
+    <reference ref_id="ELSA-2011:0414-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-0414.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-1011" ref_url="http://linux.oracle.com/cve/CVE-2011-1011.html" source="CVE"/>
+    <description>The seunshare_mount function in sandbox/seunshare.c in seunshare in certain Red Hat packages of policycoreutils 2.0.83 and earlier in Red Hat Enterprise Linux (RHEL) 6 and earlier, and Fedora 14 and earlier, mounts a new directory on top of /tmp without assigning root ownership and the sticky bit to this new directory, which allows local users to replace or delete arbitrary /tmp files, and consequently cause a denial of service or possibly gain privileges, by running a setuid application that relies on /tmp, as demonstrated by the ksu application.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:25:27.176-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:12.646-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:17.200-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23059 - optimisation of Oracle Linux content" date="2014-05-05T17:53:00.685-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:55:00.774-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:17.454-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="selinux-policy-doc is earlier than 0:3.7.19-54.el6_0.5" test_ref="oval:org.mitre.oval:tst:108395"/>
+      <criterion comment="selinux-policy-mls is earlier than 0:3.7.19-54.el6_0.5" test_ref="oval:org.mitre.oval:tst:108146"/>
+      <criterion comment="selinux-policy-minimum is earlier than 0:3.7.19-54.el6_0.5" test_ref="oval:org.mitre.oval:tst:108443"/>
+      <criterion comment="selinux-policy is earlier than 0:3.7.19-54.el6_0.5" test_ref="oval:org.mitre.oval:tst:108187"/>
+      <criterion comment="selinux-policy-targeted is earlier than 0:3.7.19-54.el6_0.5" test_ref="oval:org.mitre.oval:tst:108708"/>
+      <criterion comment="policycoreutils is earlier than 0:2.0.83-19.8.el6_0" test_ref="oval:org.mitre.oval:tst:108364"/>
+      <criterion comment="policycoreutils-gui is earlier than 0:2.0.83-19.8.el6_0" test_ref="oval:org.mitre.oval:tst:108403"/>
+      <criterion comment="policycoreutils-python is earlier than 0:2.0.83-19.8.el6_0" test_ref="oval:org.mitre.oval:tst:108189"/>
+      <criterion comment="policycoreutils-sandbox is earlier than 0:2.0.83-19.8.el6_0" test_ref="oval:org.mitre.oval:tst:108832"/>
+      <criterion comment="policycoreutils-newrole is earlier than 0:2.0.83-19.8.el6_0" test_ref="oval:org.mitre.oval:tst:108802"/>
+    </criteria>
+  </criteria>
+</definition>

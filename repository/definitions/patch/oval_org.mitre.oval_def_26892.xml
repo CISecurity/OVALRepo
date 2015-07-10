@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26892" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1148 -- squid security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 5</platform>
+      <product>squid</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1148.html" ref_id="ELSA-2014-1148"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4115" ref_id="CVE-2013-4115"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3609" ref_id="CVE-2014-3609"/>
+    <description>Squid is a high-performance proxy caching server for web clients,
+supporting FTP, Gopher, and HTTP data objects.
+
+A flaw was found in the way Squid handled malformed HTTP Range headers.
+A remote attacker able to send HTTP requests to the Squid proxy could use
+this flaw to crash Squid. (CVE-2014-3609)
+
+A buffer overflow flaw was found in Squid&amp;#39;s DNS lookup module. A remote
+attacker able to send HTTP requests to the Squid proxy could use this flaw
+to crash Squid. (CVE-2013-4115)
+
+Red Hat would like to thank the Squid project for reporting the
+CVE-2014-3609 issue. Upstream acknowledges Matthew Daley as the original
+reporter.
+
+All Squid users are advised to upgrade to this updated package, which
+contains backported patches to correct these issues. After installing this
+update, the squid service will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-01T10:20:26">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-10T18:35:27.830-04:00">DRAFT</status_change>
+        <status_change date="2014-10-27T04:01:45.654-04:00">INTERIM</status_change>
+        <status_change date="2014-11-17T04:01:04.981-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criterion comment="squid RPM is earlier than 0:3.1.10-22.el6_5" test_ref="oval:org.mitre.oval:tst:124639"/>
+    </criteria>
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criterion comment="squid RPM is earlier than 0:2.6.STABLE21-7.el5_10" test_ref="oval:org.mitre.oval:tst:124741"/>
+    </criteria>
+  </criteria>
+</definition>

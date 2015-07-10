@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29071" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-810-3 -- NSS regression</title>
+    <affected family="unix">
+      <platform>Ubuntu 9.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <product>nss</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-810-3/" ref_id="USN-810-3"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2404" ref_id="CVE-2009-2404"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2408" ref_id="CVE-2009-2408"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2409" ref_id="CVE-2009-2409"/>
+    <description>USN-810-1 fixed vulnerabilities in NSS.  Jozsef Kadlecsik noticed that
+the new libraries on amd64 did not correctly set stack memory flags,
+and caused applications using NSS (e.g. Firefox) to have an executable
+stack. This reduced the effectiveness of some defensive security
+protections.  This update fixes the problem.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:55:28">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:34:28.932-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 9.04 release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criterion comment="libnss3-1d is earlier than 0:3.12.3.1-0ubuntu0.9.04.2" test_ref="oval:org.mitre.oval:tst:139351"/>
+    </criteria>
+    <criteria comment="Ubuntu 8.10 release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criterion comment="libnss3-1d is earlier than 0:3.12.3.1-0ubuntu0.8.10.2" test_ref="oval:org.mitre.oval:tst:139767"/>
+    </criteria>
+    <criteria comment="Ubuntu 8.04 release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criterion comment="libnss3-1d is earlier than 0:3.12.3.1-0ubuntu0.8.04.2" test_ref="oval:org.mitre.oval:tst:139504"/>
+    </criteria>
+  </criteria>
+</definition>

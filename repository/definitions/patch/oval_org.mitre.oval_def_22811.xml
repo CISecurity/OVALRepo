@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22811" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:0411: device-mapper-multipath security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>device-mapper-multipath</product>
+    </affected>
+    <reference ref_id="ELSA-2009:0411-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-0411.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-0115" ref_url="http://linux.oracle.com/cve/CVE-2009-0115.html" source="CVE"/>
+    <description>The Device Mapper multipathing driver (aka multipath-tools or device-mapper-multipath) 0.4.8, as used in SUSE openSUSE, SUSE Linux Enterprise Server (SLES), Fedora, and possibly other operating systems, uses world-writable permissions for the socket file (aka /var/run/multipathd.sock), which allows local users to send arbitrary commands to the multipath daemon.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:55:37.791-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:33.202-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:12.865-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22811 - optimisation of Oracle Linux content" date="2014-05-05T18:03:00.641-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:05:21.266-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:19.599-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kpartx is earlier than 0:0.4.7-23.el5_3.2" test_ref="oval:org.mitre.oval:tst:102923"/>
+      <criterion comment="device-mapper-multipath is earlier than 0:0.4.7-23.el5_3.2" test_ref="oval:org.mitre.oval:tst:102908"/>
+    </criteria>
+  </criteria>
+</definition>

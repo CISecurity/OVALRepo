@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13088" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-897-1 -- mysql-dfsg-5.0, mysql-dfsg-5.1 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>mysql-dfsg-5.0</product>
+      <product>mysql-dfsg-5.1</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-February/001042.html" ref_id="USN-897-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4098" ref_id="CVE-2008-4098"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4456" ref_id="CVE-2008-4456"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-7247" ref_id="CVE-2008-7247"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2446" ref_id="CVE-2009-2446"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4019" ref_id="CVE-2009-4019"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4030" ref_id="CVE-2009-4030"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4484" ref_id="CVE-2009-4484"/>
+    <description>It was discovered that MySQL could be made to overwrite existing table files in the data directory. An authenticated user could use the DATA DIRECTORY and INDEX DIRECTORY options to possibly bypass privilege checks. This update alters table creation behaviour by disallowing the use of the MySQL data directory in DATA DIRECTORY and INDEX DIRECTORY options. This issue only affected Ubuntu 8.10. It was discovered that MySQL contained a cross-site scripting vulnerability in the command-line client when the --html option is enabled. An attacker could place arbitrary web script or html in a database cell, which would then get placed in the html document output by the command-line tool. This issue only affected Ubuntu 6.06 LTS, 8.04 LTS, 8.10 and 9.04. It was discovered that MySQL could be made to overwrite existing table files in the data directory. An authenticated user could use symlinks combined with the DATA DIRECTORY and INDEX DIRECTORY options to possibly bypass privilege checks. This issue only affected Ubuntu 9.10. It was discovered that MySQL contained multiple format string flaws when logging database creation and deletion. An authenticated user could use specially crafted database names to make MySQL crash, causing a denial of service. This issue only affected Ubuntu 6.06 LTS, 8.04 LTS, 8.10 and 9.04. It was discovered that MySQL incorrectly handled errors when performing certain SELECT statements, and did not preserve correct flags when performing statements that use the GeomFromWKB function. An authenticated user could exploit this to make MySQL crash, causing a denial of service. It was discovered that MySQL incorrectly checked symlinks when using the DATA DIRECTORY and INDEX DIRECTORY options. A local user could use symlinks to create tables that pointed to tables known to be created at a later time, bypassing access restrictions. It was discovered that MySQL contained a buffer overflow when parsing ssl certificates. A remote attacker could send crafted requests and cause a denial of service or possibly execute arbitrary code. This issue did not affect Ubuntu 6.06 LTS and the default compiler options for affected releases should reduce the vulnerability to a denial of service. In the default installation, attackers would also be isolated by the AppArmor MySQL profile</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:10:07.319-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:02:53.666-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:02:08.411-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13088 - added CVE references; also made minor updates" date="2014-06-13T16:18:00.749-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:19:41.833-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:33.377-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53443"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53324"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53495"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53538"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53505"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53590"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.51a-3ubuntu5.5" test_ref="oval:org.mitre.oval:tst:53518"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53313"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53291"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53587"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53484"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53464"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53371"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.67-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:53565"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53542"/>
+            <criterion comment="libmysqlclient16-dev DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53450"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53526"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53314"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient-dev DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53355"/>
+            <criterion comment="libmysqld-pic DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53579"/>
+            <criterion comment="mysql-client-5.1 DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53449"/>
+            <criterion comment="libmysqlclient16 DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53523"/>
+            <criterion comment="mysql-server-5.1 DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53151"/>
+            <criterion comment="libmysqld-dev DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53335"/>
+            <criterion comment="mysql-server-core-5.1 DPKG is earlier than 5.1.37-1ubuntu5.1" test_ref="oval:org.mitre.oval:tst:53138"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:53529"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:53434"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:52772"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:52888"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:53154"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:53498"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.22-0ubuntu6.06.12" test_ref="oval:org.mitre.oval:tst:53520"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="mysql-client DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53545"/>
+            <criterion comment="mysql-common DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53027"/>
+            <criterion comment="mysql-server DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53573"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53566"/>
+            <criterion comment="mysql-client-5.0 DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53117"/>
+            <criterion comment="mysql-server-5.0 DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:52868"/>
+            <criterion comment="libmysqlclient15off DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:53194"/>
+            <criterion comment="mysql-server-core-5.0 DPKG is earlier than 5.1.30really5.0.75-0ubuntu10.3" test_ref="oval:org.mitre.oval:tst:52603"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

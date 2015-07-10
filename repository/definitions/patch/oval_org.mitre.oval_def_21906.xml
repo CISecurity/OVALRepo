@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21906" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0376: dbus security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>dbus</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0376-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0376.html"/>
+    <reference source="CESA" ref_id="CESA-2011:0376"/>
+    <reference source="CVE" ref_id="CVE-2010-4352" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-4352.html"/>
+    <description>Stack consumption vulnerability in D-Bus (aka DBus) before 1.4.1 allows local users to cause a denial of service (daemon crash) via a message containing many nested variants.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:38:57.289-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:00.531-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:18.499-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="dbus-devel is earlier than 0:1.1.2-15.el5_6" test_ref="oval:org.mitre.oval:tst:97463"/>
+        <criterion comment="dbus is earlier than 0:1.1.2-15.el5_6" test_ref="oval:org.mitre.oval:tst:97598"/>
+        <criterion comment="dbus-x11 is earlier than 0:1.1.2-15.el5_6" test_ref="oval:org.mitre.oval:tst:97339"/>
+        <criterion comment="dbus-libs is earlier than 0:1.1.2-15.el5_6" test_ref="oval:org.mitre.oval:tst:97633"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="dbus-devel is earlier than 1:1.2.24-4.el6_0" test_ref="oval:org.mitre.oval:tst:97597"/>
+        <criterion comment="dbus is earlier than 1:1.2.24-4.el6_0" test_ref="oval:org.mitre.oval:tst:97533"/>
+        <criterion comment="dbus-x11 is earlier than 1:1.2.24-4.el6_0" test_ref="oval:org.mitre.oval:tst:97572"/>
+        <criterion comment="dbus-libs is earlier than 1:1.2.24-4.el6_0" test_ref="oval:org.mitre.oval:tst:97366"/>
+        <criterion comment="dbus-doc is earlier than 1:1.2.24-4.el6_0" test_ref="oval:org.mitre.oval:tst:96980"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

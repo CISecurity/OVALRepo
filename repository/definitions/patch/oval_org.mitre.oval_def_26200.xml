@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26200" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-3014-1 squid3 - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>squid3</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3014-1" ref_id="DSA-3014-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3609" ref_id="CVE-2014-3609"/>
+    <description>Matthew Daley discovered that Squid3, a fully featured web proxy cache, did not properly perform input validation in request parsing. A remote attacker could use this flaw to mount a denial of service by sending crafted Range requests.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-08T15:35:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-09-17T10:42:11.666-04:00">DRAFT</status_change>
+        <status_change date="2014-10-06T04:03:28.904-04:00">INTERIM</status_change>
+        <status_change date="2014-10-27T04:00:35.603-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="squid3 DPKG is earlier than 0:3.1.20-2.2+deb7u2" test_ref="oval:org.mitre.oval:tst:123053"/>
+  </criteria>
+</definition>

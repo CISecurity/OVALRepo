@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26999" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-1194 -- conga security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>conga</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1194.html" ref_id="ELSA-2014-1194"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5485" ref_id="CVE-2012-5485"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5486" ref_id="CVE-2012-5486"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5488" ref_id="CVE-2012-5488"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5497" ref_id="CVE-2012-5497"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5498" ref_id="CVE-2012-5498"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5499" ref_id="CVE-2012-5499"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5500" ref_id="CVE-2012-5500"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6496" ref_id="CVE-2013-6496"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3521" ref_id="CVE-2014-3521"/>
+    <description>The Conga project is a management system for remote workstations.
+It consists of luci, which is a secure web-based front end, and ricci,
+which is a secure daemon that dispatches incoming messages to underlying
+management modules.
+
+It was discovered that Plone, included as a part of luci, did not properly
+protect the administrator interface (control panel). A remote attacker
+could use this flaw to inject a specially crafted Python statement or
+script into Plone&amp;#39;s restricted Python sandbox that, when the administrator
+interface was accessed, would be executed with the privileges of that
+administrator user. (CVE-2012-5485)
+
+It was discovered that Plone, included as a part of luci, did not properly
+sanitize HTTP headers provided within certain URL requests. A remote
+attacker could use a specially crafted URL that, when processed, would
+cause the injected HTTP headers to be returned as a part of the Plone HTTP
+response, potentially allowing the attacker to perform other more advanced
+attacks. (CVE-2012-5486)
+
+Multiple information leak flaws were found in the way conga processed luci
+site extension-related URL requests. A remote, unauthenticated attacker
+could issue a specially crafted HTTP request that, when processed, would
+result in unauthorized information disclosure. (CVE-2013-6496)
+
+It was discovered that various components in the luci site
+extension-related URLs were not properly restricted to administrative
+users. A remote, authenticated attacker could escalate their privileges to
+perform certain actions that should be restricted to administrative users,
+such as adding users and systems, and viewing log data. (CVE-2014-3521)
+
+It was discovered that Plone, included as a part of luci, did not properly
+protect the privilege of running RestrictedPython scripts. A remote
+attacker could use a specially crafted URL that, when processed, would
+allow the attacker to submit and perform expensive computations or, in
+conjunction with other attacks, be able to access or alter privileged
+information. (CVE-2012-5488)
+
+It was discovered that Plone, included as a part of luci, did not properly
+enforce permissions checks on the membership database. A remote attacker
+could use a specially crafted URL that, when processed, could allow the
+attacker to enumerate user account names. (CVE-2012-5497)
+
+It was discovered that Plone, included as a part of luci, did not properly
+handle the processing of requests for certain collections. A remote
+attacker could use a specially crafted URL that, when processed, would lead
+to excessive I/O and/or cache resource consumption. (CVE-2012-5498)
+
+It was discovered that Plone, included as a part of luci, did not properly
+handle the processing of very large values passed to an internal utility
+function. A remote attacker could use a specially crafted URL that, when
+processed, would lead to excessive memory consumption. (CVE-2012-5499)
+
+It was discovered that Plone, included as a part of luci, allowed a remote
+anonymous user to change titles of content items due to improper
+permissions checks. (CVE-2012-5500)
+
+The CVE-2014-3521 issue was discovered by Radek Steiger of Red Hat, and the
+CVE-2013-6496 issue was discovered by Jan Pokorny of Red Hat.
+
+In addition, these updated conga packages include several bug fixes.
+Space precludes documenting all of these changes in this advisory.
+Users are directed to the Red Hat Enterprise Linux 5.11 Technical Notes,
+linked to in the References section, for information on the most
+significant of these changes
+
+All conga users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing this
+update, the luci and ricci services will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-01T10:21:16">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-10T18:35:31.133-04:00">DRAFT</status_change>
+        <status_change date="2014-10-27T04:01:50.546-04:00">INTERIM</status_change>
+        <status_change date="2014-11-17T04:01:26.461-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="luci RPM is earlier than 0:0.12.2-81.0.2.el5" test_ref="oval:org.mitre.oval:tst:124551"/>
+      <criterion comment="ricci RPM is earlier than 0:0.12.2-81.0.2.el5" test_ref="oval:org.mitre.oval:tst:124215"/>
+    </criteria>
+  </criteria>
+</definition>

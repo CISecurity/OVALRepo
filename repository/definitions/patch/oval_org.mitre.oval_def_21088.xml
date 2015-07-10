@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21088" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0427: libtasn1 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>libtasn1</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0427-02" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0427.html"/>
+    <reference source="CESA" ref_id="CESA-2012:0427"/>
+    <reference source="CVE" ref_id="CVE-2012-1569" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-1569.html"/>
+    <description>The asn1_get_length_der function in decoding.c in GNU Libtasn1 before 2.12, as used in GnuTLS before 3.0.16 and other products, does not properly handle certain large length values, which allows remote attackers to cause a denial of service (heap memory corruption and application crash) or possibly have unspecified other impact via a crafted ASN.1 structure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:29.047-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:29.945-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:47.460-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libtasn1-tools is earlier than 0:2.3-3.el6_2.1" test_ref="oval:org.mitre.oval:tst:93143"/>
+      <criterion comment="libtasn1 is earlier than 0:2.3-3.el6_2.1" test_ref="oval:org.mitre.oval:tst:93332"/>
+      <criterion comment="libtasn1-devel is earlier than 0:2.3-3.el6_2.1" test_ref="oval:org.mitre.oval:tst:92919"/>
+    </criteria>
+  </criteria>
+</definition>

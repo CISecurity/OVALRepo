@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27784" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1410-1 -- Security update for krb5 (low)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141410-1.html" ref_id="SUSE-SU-2014:1410-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5351" ref_id="CVE-2014-5351"/>
+    <description>This update for krb5 fixes the following issues:
+
+    * When randomizing the keys for a service principal, current keys
+      could be returned. (CVE-2014-5351)
+    * klist -s crashes when handling multiple referral entries.
+      (bnc#890623)
+
+Security Issues:
+
+    * CVE-2014-5351
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5351></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T11:15:41">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:38:20.530-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:15.076-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:15.829-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="krb5 is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136628"/>
+        <criterion comment="krb5-client is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136516"/>
+        <criterion comment="krb5-32bit is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136656"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="krb5-apps-clients is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136161"/>
+        <criterion comment="krb5-apps-servers is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136279"/>
+        <criterion comment="krb5-plugin-kdb-ldap is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136460"/>
+        <criterion comment="krb5-plugin-preauth-pkinit is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136356"/>
+        <criterion comment="krb5-server is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136626"/>
+        <criterion comment="krb5-doc is earlier than 0:1.6.3-133.49.64.1" test_ref="oval:org.mitre.oval:tst:136593"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

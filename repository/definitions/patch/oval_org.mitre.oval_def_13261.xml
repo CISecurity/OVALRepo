@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13261" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1039-1 -- apparmor update</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>apparmor</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-January/001222.html" ref_id="USN-1039-1"/>
+    <description>It was discovered that if AppArmor was misconfigured, under certain circumstances the parser could generate policy using an unconfined fallback execute transition when one was not specified.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:32:59.511-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:04:45.732-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:03:53.203-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apparmor-docs DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61443"/>
+            <criterion comment="apparmor-notify DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61454"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libapparmor-dev DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61493"/>
+            <criterion comment="libapparmor-perl DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:60707"/>
+            <criterion comment="libapparmor1 DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61563"/>
+            <criterion comment="libpam-apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61488"/>
+            <criterion comment="apparmor-profiles DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61565"/>
+            <criterion comment="apparmor-utils DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:60746"/>
+            <criterion comment="apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61542"/>
+            <criterion comment="libapache2-mod-apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.10.3" test_ref="oval:org.mitre.oval:tst:61207"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="apparmor-docs DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:60625"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libapparmor-dev DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61538"/>
+            <criterion comment="libapparmor-perl DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:60642"/>
+            <criterion comment="libapparmor1 DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61242"/>
+            <criterion comment="libpam-apparmor DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61642"/>
+            <criterion comment="apparmor-profiles DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61489"/>
+            <criterion comment="apparmor-utils DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61189"/>
+            <criterion comment="apparmor DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:60684"/>
+            <criterion comment="libapache2-mod-apparmor DPKG is earlier than 2.3.1+1403-0ubuntu27.4" test_ref="oval:org.mitre.oval:tst:61367"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="apparmor-docs DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:60841"/>
+            <criterion comment="apparmor-notify DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61363"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libapparmor-dev DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61494"/>
+            <criterion comment="libpam-apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61483"/>
+            <criterion comment="libapparmor1 DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61143"/>
+            <criterion comment="libapparmor-perl DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61435"/>
+            <criterion comment="apparmor-profiles DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61567"/>
+            <criterion comment="apparmor-utils DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61589"/>
+            <criterion comment="apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61585"/>
+            <criterion comment="libapache2-mod-apparmor DPKG is earlier than 2.5.1-0ubuntu0.10.04.2" test_ref="oval:org.mitre.oval:tst:61077"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

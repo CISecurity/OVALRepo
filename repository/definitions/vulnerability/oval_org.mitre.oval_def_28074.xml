@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28074" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Office remote code execution vulnerability - CVE-2015-0064 (MS15-012)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft Office Web Apps 2010</product>
+      <product>Microsoft SharePoint Server 2010</product>
+      <product>Microsoft Word 2007</product>
+      <product>Microsoft Word 2010</product>
+      <product>Microsoft Word Viewer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2015-0064" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0064"/>
+    <description>Microsoft Word 2007 SP3, Office 2010 SP2, Word 2010 SP2, Word Automation Services in SharePoint Server 2010, Web Applications 2010 SP2, Word Viewer, and Office Compatibility Pack SP3 allow remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted Office document, aka "Office Remote Code Execution Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-02-13T17:58:42">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-02-16T13:17:03.002-05:00">DRAFT</status_change>
+        <status_change date="2015-03-09T04:01:29.042-04:00">INTERIM</status_change>
+        <status_change date="2015-03-30T04:00:11.771-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Word 2007 and vulnerable file version">
+      <extend_definition comment="Microsoft Word 2007 is installed" definition_ref="oval:org.mitre.oval:def:2074"/>
+      <criterion comment="Check if the version of winword.exe is less than 12.0.6715.5000" test_ref="oval:org.mitre.oval:tst:137972"/>
+    </criteria>
+    <criteria operator="AND" comment="Word 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Word 2010 is installed" definition_ref="oval:org.mitre.oval:def:7631"/>
+      <criterion comment="Check if the version of winword.exe is less than 14.0.7143.5000" test_ref="oval:org.mitre.oval:tst:137993"/>
+    </criteria>
+    <criteria operator="AND" comment="Sharepoint 2010 and vulnerable file version">
+      <extend_definition comment="Microsoft Office SharePoint Server 2010 is installed." definition_ref="oval:org.mitre.oval:def:12880"/>
+      <criterion comment="Check if the version of msoserver.dll is less than 14.0.7143.5000" test_ref="oval:org.mitre.oval:tst:137828"/>
+    </criteria>
+    <criteria operator="AND" comment="Office Web Apps 2010 and vulnerable version">
+      <extend_definition comment="Microsoft Office Web Apps 2010 is installed" definition_ref="oval:org.mitre.oval:def:15787"/>
+      <criterion comment="Check if the version of msoserver.dll is less than 14.0.7143.5000" test_ref="oval:org.mitre.oval:tst:137137"/>
+    </criteria>
+    <criteria operator="AND" comment="Word viewer and vulnerable version of file">
+      <extend_definition comment="Microsoft Word Viewer is installed" definition_ref="oval:org.mitre.oval:def:737"/>
+      <criterion comment="Check if the version of wordview.exe is less than 11.0.8415" test_ref="oval:org.mitre.oval:tst:138071"/>
+    </criteria>
+    <criteria operator="AND" comment="Office Compatibility Pack and vulnerable file version">
+      <extend_definition comment="Microsoft Office Compatibility Pack is installed" definition_ref="oval:org.mitre.oval:def:1853"/>
+      <criterion comment="Check if the version of wordcnv.dll is less than 12.0.6715.5000" test_ref="oval:org.mitre.oval:tst:137965"/>
+    </criteria>
+  </criteria>
+</definition>

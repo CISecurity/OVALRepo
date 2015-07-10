@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25314" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0758-1 -- Security update for gnutls</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>gnutls</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140758-1.html" ref_id="SUSE-SU-2014:0758-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3466" ref_id="CVE-2014-3466"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3467" ref_id="CVE-2014-3467"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3468" ref_id="CVE-2014-3468"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3469" ref_id="CVE-2014-3469"/>
+    <description>GnuTLS has been patched to ensure proper parsing of session ids during the
+TLS/SSL handshake. Additionally, three issues inherited from libtasn1 have
+been fixed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:09:07">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:31.907-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:52.723-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:49.285-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="gnutls RPM is earlier than 0:2.4.1-24.39.51.1" test_ref="oval:org.mitre.oval:tst:115994"/>
+        <criterion comment="libgnutls26 RPM is earlier than 0:2.4.1-24.39.51.1" test_ref="oval:org.mitre.oval:tst:116318"/>
+        <criterion comment="libgnutls26-32bit RPM is earlier than 0:2.4.1-24.39.51.1" test_ref="oval:org.mitre.oval:tst:116459"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="libgnutls-extra26 RPM is earlier than 0:2.4.1-24.39.51.1" test_ref="oval:org.mitre.oval:tst:116453"/>
+    </criteria>
+  </criteria>
+</definition>

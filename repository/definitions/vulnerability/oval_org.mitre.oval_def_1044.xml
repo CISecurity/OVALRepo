@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1044" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris Xsun Privilege Escalation via Pixmaps Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <platform>Sun Solaris 10</platform>
+      <product>X</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-2495" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2495"/>
+    <description>Multiple integer overflows in XFree86 before 4.3.0 allow user-assisted attackers to execute arbitrary code via a crafted pixmap image.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-02-12T01:16:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-09T12:19:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="OR">
+      <criteria operator="AND" comment="Solaris 8 (SPARC,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Patch 108652-94 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1254"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (SPARC,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+        <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Patch 112785-52 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1253"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (SPARC,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:2459"/>
+        <criterion comment="sparc architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Patch 119059-08 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1252"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 8 (x86,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2463"/>
+        <criterion comment="Patch 108653-83 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1251"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+        <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2463"/>
+        <criterion comment="Patch 112786-41 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1250"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86,Xsun) meets Sun Alert ID 101926 criteria.">
+        <criterion comment="Solaris 10 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:2459"/>
+        <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:2463"/>
+        <criterion comment="Patch 119060-08 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1249"/>
+        <criterion comment="File Xorg exists" negate="true" test_ref="oval:org.mitre.oval:tst:1336"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="The Xsun X server is running" negate="false" test_ref="oval:org.mitre.oval:tst:1248"/>
+    </criteria>
+  </criteria>
+</definition>

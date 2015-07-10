@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5578" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Jet Engine MDB File Parsing Stack Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Jet 4.0 Database Engine</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-6026" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6026"/>
+    <description>Stack-based buffer overflow in Microsoft msjet40.dll 4.0.8618.0 (aka Microsoft Jet Engine), as used by Access 2003 in Microsoft Office 2003 SP3, allows user-assisted attackers to execute arbitrary code via a crafted MDB file database file containing a column structure with a modified column count.  NOTE: this might be the same issue as CVE-2005-0944.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-05-13T13:39:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-05-15T14:47:41.181-04:00">DRAFT</status_change>
+        <status_change date="2008-06-02T04:00:17.211-04:00">INTERIM</status_change>
+        <status_change date="2008-06-23T04:00:14.485-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Windows 2000">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of Msjet40.dll is less than 4.0.9511.0" test_ref="oval:org.mitre.oval:tst:7888"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows XP">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="the version of Msjet40.dll is less than 4.0.9511.0" test_ref="oval:org.mitre.oval:tst:7888"/>
+    </criteria>
+    <criteria operator="AND" comment="Windows Server 2003">
+      <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+      <criterion comment="the version of Msjet40.dll is less than 4.0.9511.0" test_ref="oval:org.mitre.oval:tst:7888"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22240" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2008:0893: bzip2 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>bzip2</product>
+    </affected>
+    <reference ref_id="ELSA-2008:0893-01" ref_url="http://linux.oracle.com/errata/ELSA-2008-0893.html" source="VENDOR"/>
+    <reference ref_id="CVE-2008-1372" ref_url="http://linux.oracle.com/cve/CVE-2008-1372.html" source="CVE"/>
+    <description>bzlib.c in bzip2 before 1.0.5 allows user-assisted remote attackers to cause a denial of service (crash) via a crafted file that triggers a buffer over-read, as demonstrated by the PROTOS GENOME test suite for Archive Formats.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:53:33.489-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:37.617-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:54.759-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22240 - optimisation of Oracle Linux content" date="2014-05-05T18:14:00.984-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:15:39.028-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:00.227-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="bzip2-devel is earlier than 0:1.0.3-4.el5_2" test_ref="oval:org.mitre.oval:tst:102668"/>
+      <criterion comment="bzip2-libs is earlier than 0:1.0.3-4.el5_2" test_ref="oval:org.mitre.oval:tst:102180"/>
+      <criterion comment="bzip2 is earlier than 0:1.0.3-4.el5_2" test_ref="oval:org.mitre.oval:tst:102545"/>
+    </criteria>
+  </criteria>
+</definition>

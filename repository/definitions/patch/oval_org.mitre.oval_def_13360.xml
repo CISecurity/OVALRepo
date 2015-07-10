@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13360" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1926-1 typo3-src -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>typo3-src</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00249.html" ref_id="DSA-1926-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3628" ref_id="CVE-2009-3628"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3629" ref_id="CVE-2009-3629"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3630" ref_id="CVE-2009-3630"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3631" ref_id="CVE-2009-3631"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3632" ref_id="CVE-2009-3632"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3633" ref_id="CVE-2009-3633"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3634" ref_id="CVE-2009-3634"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3635" ref_id="CVE-2009-3635"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3636" ref_id="CVE-2009-3636"/>
+    <description>Several remote vulnerabilities have been discovered in the TYPO3 web content management framework. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-3628 The Backend subcomponent allows remote authenticated users to determine an encryption key via crafted input to a form field. CVE-2009-3629 Multiple cross-site scripting vulnerabilities in the Backend subcomponent allow remote authenticated users to inject arbitrary web script or HTML. CVE-2009-3630 The Backend subcomponent allows remote authenticated users to place arbitrary web sites in TYPO3 backend framesets via crafted parameters. CVE-2009-3631 The Backend subcomponent, when the DAM extension or ftp upload is enabled, allows remote authenticated users to execute arbitrary commands via shell metacharacters in a filename. CVE-2009-3632 SQL injection vulnerability in the traditional frontend editing feature in the Frontend Editing subcomponent allows remote authenticated users to execute arbitrary SQL commands. CVE-2009-3633 Cross-site scripting vulnerability in allows remote attackers to inject arbitrary web script. CVE-2009-3634 Cross-site scripting vulnerability in the Frontend Login Box subcomponent allows remote attackers to inject arbitrary web script or HTML. CVE-2009-3635 The Install Tool subcomponent allows remote attackers to gain access by using only the password’s md5 hash as a credential. CVE-2009-3636 Cross-site scripting vulnerability in the Install Tool subcomponen allows remote attackers to inject arbitrary web script or HTML. For the old stable distribution, these problems have been fixed in version 4.0.2+debian-9. For the stable distribution, these problems have been fixed in version 4.2.5-1+lenny2. For the unstable distribution, these problems have been fixed in version 4.2.10-1. We recommend that you upgrade your typo3-src package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:29:30.182-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:15.271-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:06:04.152-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13360 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:29.872-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:04.361-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="typo3 DPKG is earlier than 4.2.5-1+lenny2" test_ref="oval:org.mitre.oval:tst:49371"/>
+        <criterion comment="typo3-src-4.2 DPKG is earlier than 4.2.5-1+lenny2" test_ref="oval:org.mitre.oval:tst:49263"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="typo3 DPKG is earlier than 4.0.2+debian-9" test_ref="oval:org.mitre.oval:tst:49058"/>
+        <criterion comment="typo3-src-4.0 DPKG is earlier than 4.0.2+debian-9" test_ref="oval:org.mitre.oval:tst:49056"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

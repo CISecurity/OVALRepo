@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29196" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0333 -- libpng security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 2</platform>
+      <product>libpng</product>
+      <product>libpng10</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0333.html" ref_id="RHSA-2009:0333"/>
+    <reference source="CESA-2009:0333" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-March/015674.html" ref_id="CESA-2009:0333-CentOS 2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1382" ref_id="CVE-2008-1382"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0040" ref_id="CVE-2009-0040"/>
+    <description>Updated libpng and libpng10 packages that fix a couple of security issues
+are now available for Red Hat Enterprise Linux 2.1, 4, and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The libpng packages contain a library of functions for creating and
+manipulating PNG (Portable Network Graphics) image format files.
+A flaw was discovered in libpng that could result in libpng trying to
+freerandom memory if certain, unlikely error conditions occurred. If a
+carefully-crafted PNG file was loaded by an application linked against
+libpng, it could cause the application to crash or, potentially, execute
+arbitrary code with the privileges of the user running the application.
+(CVE-2009-0040)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:28.556-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpng-devel is earlier than 2:1.2.10-7.1.el5_3.2" test_ref="oval:org.mitre.oval:tst:140055"/>
+        <criterion comment="libpng is earlier than 2:1.2.10-7.1.el5_3.2" test_ref="oval:org.mitre.oval:tst:140045"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libpng is earlier than 2:1.2.7-3.el4_7.2" test_ref="oval:org.mitre.oval:tst:140228"/>
+        <criterion comment="libpng-devel is earlier than 2:1.2.7-3.el4_7.2" test_ref="oval:org.mitre.oval:tst:140264"/>
+        <criterion comment="libpng10 is earlier than 2:1.0.16-3.el4_7.3" test_ref="oval:org.mitre.oval:tst:140306"/>
+        <criterion comment="libpng10-devel is earlier than 2:1.0.16-3.el4_7.3" test_ref="oval:org.mitre.oval:tst:140434"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

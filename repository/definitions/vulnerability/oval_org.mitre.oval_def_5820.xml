@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5820" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HTML Object Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2254" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2254"/>
+    <description>Microsoft Internet Explorer 6 and 7 accesses uninitialized memory, which allows remote attackers to cause a denial of service (crash) and execute arbitrary code via unknown vectors, aka "HTML Object Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-08-13T09:28:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-08-14T15:02:52.988-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:09.720-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:32.748-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:9018 - Included LDR support &amp; added new state to match correct version." date="2011-10-25T14:07:00.717-04:00">
+          <contributor organization="SecPod Technologies">Pooja Shetty</contributor>
+        </modified>
+        <status_change date="2011-10-25T14:12:05.827-04:00">INTERIM</status_change>
+        <status_change date="2011-11-14T04:00:46.553-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5820 - extended definitions of OS are without SP checks" date="2014-07-28T17:39:00.892-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:41:15.441-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:02.860-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Win 2K + IE6 vulnerable version">
+      <extend_definition comment="Microsoft Windows 2000 is installed" definition_ref="oval:org.mitre.oval:def:85"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2800.1613" test_ref="oval:org.mitre.oval:tst:8781"/>
+    </criteria>
+    <criteria operator="AND" comment="Win XP + IE 6">
+      <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.3395" test_ref="oval:org.mitre.oval:tst:8921"/>
+    </criteria>
+    <criteria operator="AND" comment="Win XP + IE 6">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.5626" test_ref="oval:org.mitre.oval:tst:9128"/>
+    </criteria>
+    <criteria operator="AND" comment="Win XP /  Win 2K3 + IE 7">
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criteria operator="OR" comment="Win XP / Win 2K3">
+        <extend_definition comment="Microsoft Windows XP is installed" definition_ref="oval:org.mitre.oval:def:105"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR / GDR">
+        <criterion comment="Mshtml.dll version is less than 7.0.6000.16705" test_ref="oval:org.mitre.oval:tst:9018"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Mshtml.dll version is greater than 7.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9441"/>
+          <criterion comment="Check if the version mshtml.dll is less than 7.0.6000.20861" test_ref="oval:org.mitre.oval:tst:44137"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win 2K3 / Win XP X64 and IE 6">
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.3790.3167" test_ref="oval:org.mitre.oval:tst:8958"/>
+      <criteria operator="OR" comment="Win 2K3 / Win XP X64">
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win XP X64 / Win 2K3">
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.3790.4324" test_ref="oval:org.mitre.oval:tst:8988"/>
+      <criteria operator="OR" comment="Win 2K3 / Win XP X64">
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win Vista and IE7">
+      <extend_definition comment="Microsoft Windows Vista is installed" definition_ref="oval:org.mitre.oval:def:228"/>
+      <criteria operator="OR" comment="Check for LDR and GDR">
+        <criterion comment="Mshtml.dll version is less than 7.0.6000.16711" test_ref="oval:org.mitre.oval:tst:8163"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Mshtml.dll version is greater than 7.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9441"/>
+          <criterion comment="Check if the version of mshtml.dll is less than 7.0.6000.20868" test_ref="oval:org.mitre.oval:tst:44258"/>
+        </criteria>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+    </criteria>
+    <criteria operator="AND" comment="Win Vista / Win 2K8 and IE7">
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criteria operator="OR" comment="Win Vista/ Win 2K8">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR /GDR">
+        <criterion comment="Mshtml.dll version is less than 7.0.6001.18099" test_ref="oval:org.mitre.oval:tst:9108"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Mshtml.dll version is greater than or equal to 7.0.6001.22000" test_ref="oval:org.mitre.oval:tst:42152"/>
+          <criterion comment="Check if the version of mshtml.dll is less than 7.0.6001.22212" test_ref="oval:org.mitre.oval:tst:44416"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

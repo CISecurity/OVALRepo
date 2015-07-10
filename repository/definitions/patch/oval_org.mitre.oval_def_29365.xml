@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29365" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1601 -- kdelibs security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>kdelibs</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1601.html" ref_id="RHSA-2009:1601"/>
+    <reference source="CESA-2009:1601" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-November/016337.html" ref_id="CESA-2009:1601-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0689" ref_id="CVE-2009-0689"/>
+    <description>Updated kdelibs packages that fix one security issue are now available for
+Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having critical security impact by the Red
+Hat Security Response Team.
+The kdelibs packages provide libraries for the K Desktop Environment (KDE).
+A buffer overflow flaw was found in the kdelibs string to floating point
+conversion routines. A web page containing malicious JavaScript could crash
+Konqueror or, potentially, execute arbitrary code with the privileges of the
+user running Konqueror. (CVE-2009-0689)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:52:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:33.366-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kdelibs-devel is earlier than 6:3.5.4-25.el5_4.1" test_ref="oval:org.mitre.oval:tst:140061"/>
+        <criterion comment="kdelibs is earlier than 6:3.5.4-25.el5_4.1" test_ref="oval:org.mitre.oval:tst:140121"/>
+        <criterion comment="kdelibs-apidocs is earlier than 6:3.5.4-25.el5_4.1" test_ref="oval:org.mitre.oval:tst:140212"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kdelibs is earlier than 6:3.3.1-17.el4_8.1" test_ref="oval:org.mitre.oval:tst:139744"/>
+        <criterion comment="kdelibs-devel is earlier than 6:3.3.1-17.el4_8.1" test_ref="oval:org.mitre.oval:tst:140188"/>
+      </criteria>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kdelibs is earlier than 6:3.5.4-25.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140215"/>
+        <criterion comment="kdelibs-apidocs is earlier than 6:3.5.4-25.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140119"/>
+        <criterion comment="kdelibs-devel is earlier than 6:3.5.4-25.el5.centos.1" test_ref="oval:org.mitre.oval:tst:139912"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

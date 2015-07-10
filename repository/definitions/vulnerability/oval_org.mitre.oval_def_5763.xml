@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5763" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>An rlpdaemon logic flaw vulnerability has been reported to us that may allow a remote or local attacker to execute arbitrary code with superuser privilege.</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2001-1198" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-1198"/>
+    <description>RLPDaemon in HP-UX 10.20 and 11.0 allows local users to overwrite arbitrary files and gain privileges by specifying the target file in the -L option.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-10T16:22:36.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-14T10:51:39.112-04:00">DRAFT</status_change>
+        <status_change date="2008-08-04T04:00:39.285-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:33.762-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:32:54.604-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:46.713-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX0111-176">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criterion negate="true" comment="Patch PHCO_25110 is installed" test_ref="oval:org.mitre.oval:tst:8611"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX0111-176">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion negate="true" comment="Patch PHCO_25111 is installed" test_ref="oval:org.mitre.oval:tst:8629"/>
+    </criteria>
+  </criteria>
+</definition>

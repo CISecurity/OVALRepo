@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28273" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1524-1 -- Security update for openssl (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141524-1.html" ref_id="SUSE-SU-2014:1524-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3513" ref_id="CVE-2014-3513"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3567" ref_id="CVE-2014-3567"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3568" ref_id="CVE-2014-3568"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566" ref_id="CVE-2014-3566"/>
+    <description>openssl was updated to fix four security issues.
+
+These security issues were fixed:
+- SRTP Memory Leak (CVE-2014-3513).
+- Session Ticket Memory Leak (CVE-2014-3567).
+- Fixed incomplete no-ssl3 build option (CVE-2014-3568).
+- Add support for TLS_FALLBACK_SCSV (CVE-2014-3566).
+
+NOTE: This update alone DOESN'T FIX the POODLE SSL protocol vulnerability.
+OpenSSL only adds downgrade detection support for client applications. See
+https://www.suse.com/support/kb/doc.php?id=7015773 for mitigations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T11:14:18">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:38:02.224-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:27.531-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:31.423-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 12 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <criterion comment="openssl-doc is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:136448"/>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 12 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libopenssl1_0_0 is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:136317"/>
+        <criterion comment="libopenssl1_0_0-debuginfo is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:135992"/>
+        <criterion comment="openssl is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:136261"/>
+        <criterion comment="openssl-debuginfo is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:135476"/>
+        <criterion comment="openssl-debugsource is earlier than 0:1.0.1i-5.1" test_ref="oval:org.mitre.oval:tst:136104"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

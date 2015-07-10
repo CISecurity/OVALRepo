@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29264" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1529 -- samba security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>samba</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1529.html" ref_id="RHSA-2009:1529"/>
+    <reference source="CESA-2009:1529" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-October/016276.html" ref_id="CESA-2009:1529-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1888" ref_id="CVE-2009-1888"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2813" ref_id="CVE-2009-2813"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2906" ref_id="CVE-2009-2906"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2948" ref_id="CVE-2009-2948"/>
+    <description>Updated samba packages that fix multiple security issues are now available
+for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Samba is a suite of programs used by machines to share files, printers, and
+other information.
+A denial of service flaw was found in the Samba smbd daemon. An
+authenticated, remote user could send a specially-crafted response that
+would cause an smbd child process to enter an infinite loop. An
+authenticated, remote user could use this flaw to exhaust system resources
+by opening multiple CIFS sessions. (CVE-2009-2906)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:52:36">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:13.616-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="samba is earlier than 0:3.0.33-0.18.el4_8" test_ref="oval:org.mitre.oval:tst:140058"/>
+        <criterion comment="samba-client is earlier than 0:3.0.33-0.18.el4_8" test_ref="oval:org.mitre.oval:tst:140629"/>
+        <criterion comment="samba-common is earlier than 0:3.0.33-0.18.el4_8" test_ref="oval:org.mitre.oval:tst:139800"/>
+        <criterion comment="samba-swat is earlier than 0:3.0.33-0.18.el4_8" test_ref="oval:org.mitre.oval:tst:140319"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="samba is earlier than 0:3.0.33-3.15.el5_4" test_ref="oval:org.mitre.oval:tst:139908"/>
+        <criterion comment="samba-client is earlier than 0:3.0.33-3.15.el5_4" test_ref="oval:org.mitre.oval:tst:140064"/>
+        <criterion comment="samba-common is earlier than 0:3.0.33-3.15.el5_4" test_ref="oval:org.mitre.oval:tst:140460"/>
+        <criterion comment="samba-swat is earlier than 0:3.0.33-3.15.el5_4" test_ref="oval:org.mitre.oval:tst:140564"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

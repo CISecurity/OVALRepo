@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24353" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2889-1 postfixadmin - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>postfixadmin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2889-1" ref_id="DSA-2889-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2655" ref_id="CVE-2014-2655"/>
+    <description>An SQL injection vulnerability was discovered in postfixadmin, a webadministration interface for the Postfix Mail Transport Agent, whichallowed authenticated users to make arbitrary manipulations to thedatabase.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-02T10:37:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-04-03T10:30:02.411-04:00">DRAFT</status_change>
+        <status_change date="2014-04-21T04:00:46.763-04:00">INTERIM</status_change>
+        <status_change date="2014-05-12T04:00:48.579-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24353 - Debian Patch Update" date="2014-06-06T17:29:00.238-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:31:22.521-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:43.441-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="postfixadmin DPKG is earlier than 0:2.3.5-2+deb7u1" test_ref="oval:org.mitre.oval:tst:113047"/>
+  </criteria>
+</definition>

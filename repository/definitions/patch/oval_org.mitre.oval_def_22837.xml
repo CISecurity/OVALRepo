@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22837" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:1465: kvm security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference ref_id="ELSA-2009:1465-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-1465.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-3290" ref_url="http://linux.oracle.com/cve/CVE-2009-3290.html" source="CVE"/>
+    <description>The kvm_emulate_hypercall function in arch/x86/kvm/x86.c in KVM in the Linux kernel 2.6.25-rc1, and other versions before 2.6.31, when running on x86 systems, does not prevent access to MMU hypercalls from ring 0, which allows local guest OS users to cause a denial of service (guest kernel crash) and read or write guest kernel memory via unspecified "random addresses."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:00:21.680-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:36.245-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:02:17.939-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22837 - optimisation of Oracle Linux content" date="2014-05-05T18:01:00.702-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:03:02.403-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:02:25.233-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kvm-qemu-img is earlier than 0:83-105.el5_4.7" test_ref="oval:org.mitre.oval:tst:103339"/>
+      <criterion comment="kvm is earlier than 0:83-105.el5_4.7" test_ref="oval:org.mitre.oval:tst:103456"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-105.el5_4.7" test_ref="oval:org.mitre.oval:tst:103434"/>
+      <criterion comment="kvm-tools is earlier than 0:83-105.el5_4.7" test_ref="oval:org.mitre.oval:tst:103424"/>
+    </criteria>
+  </criteria>
+</definition>

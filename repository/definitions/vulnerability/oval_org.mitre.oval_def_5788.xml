@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5788" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running shar(1), Local Execution of Arbitrary Code</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-1099" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1099"/>
+    <description>shar on HP-UX B.11.00, B.11.04, and B.11.11 creates temporary files with predictable names in /tmp, which allows local users to cause a denial of service and possibly execute arbitrary code via a symlink attack.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-08T17:01:38.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-14T10:51:35.478-04:00">DRAFT</status_change>
+        <status_change date="2008-08-04T04:00:40.872-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:35.134-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:32:58.398-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:47.375-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX00304">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="OS-Core.CMDS-AUX is installed" test_ref="oval:org.mitre.oval:tst:8504"/>
+      <criterion negate="true" comment="Patch PHCO_2901 is installed" test_ref="oval:org.mitre.oval:tst:8574"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX00304">
+      <criterion comment="HP Release B.11.04" test_ref="oval:org.mitre.oval:tst:3294"/>
+      <criterion comment="OS-Core.CMDS-AUX is installed" test_ref="oval:org.mitre.oval:tst:8504"/>
+      <criterion negate="true" comment="Patch PHCO_29697 is installed" test_ref="oval:org.mitre.oval:tst:8309"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX00304">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criterion comment="OS-Core.CMDS-AUX is installed" test_ref="oval:org.mitre.oval:tst:8504"/>
+      <criterion negate="true" comment="Patch PHCO_28954 is installed" test_ref="oval:org.mitre.oval:tst:8532"/>
+    </criteria>
+  </criteria>
+</definition>

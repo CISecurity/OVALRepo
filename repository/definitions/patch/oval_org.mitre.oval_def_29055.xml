@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29055" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:0953-2 -- Security update for perl-YAML-LibYAML (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>perl-YAML-LibYAML</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20150953-2.html" ref_id="SUSE-SU-2015:0953-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6393" ref_id="CVE-2013-6393"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9130" ref_id="CVE-2014-9130"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2525" ref_id="CVE-2014-2525"/>
+    <description>erl-YAML-LibYAML was updated to fix three security issues.
+These security issues were fixed:
+- CVE-2013-6393: The yaml_parser_scan_tag_uri function in scanner.c in
+  LibYAML before 0.1.5 performed an incorrect cast, which allowed remote
+  attackers to cause a denial of service (application crash) and possibly
+  execute arbitrary code via crafted tags in a YAML document, which
+  triggered a heap-based buffer overflow (bnc#860617, bnc#911782).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:36:15">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:25.258-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="perl-YAML-LibYAML is earlier than 0:0.38-10.1" test_ref="oval:org.mitre.oval:tst:140031"/>
+      <criterion comment="perl-YAML-LibYAML-debuginfo is earlier than 0:0.38-10.1" test_ref="oval:org.mitre.oval:tst:139121"/>
+      <criterion comment="perl-YAML-LibYAML-debugsource is earlier than 0:0.38-10.1" test_ref="oval:org.mitre.oval:tst:140013"/>
+    </criteria>
+  </criteria>
+</definition>

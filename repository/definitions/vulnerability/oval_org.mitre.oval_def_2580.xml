@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2580" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Animated Cursor Denial of Service (Server 2003)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Windows Animated Cursor</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1305" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1305"/>
+    <description>The Windows Animated Cursor (ANI) capability in Windows NT, Windows 2000 through SP4, Windows XP through SP1, and Windows 2003 allow remote attackers to cause a denial of service via (1) the frame number set to zero, which causes an invalid memory address to be used and leads to a kernel crash, or (2) the rate number set to zero, which leads to resource exhaustion and hang.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-14T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2005-01-20T02:31:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.059-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+        <status_change date="2007-10-25T16:50:28.870-04:00">INTERIM</status_change>
+        <status_change date="2007-11-13T12:01:09.407-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criteria operator="OR" comment="Windows Server 2003 or Windows Server 2003 64-bit Edition is installed">
+      <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+      <criteria operator="AND" comment="Microsoft Windows Server 2003 64-Bit Edition">
+        <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+        <criterion comment="64-Bit version of Windows is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2747"/>
+      </criteria>
+    </criteria>
+    <criterion comment="the version of user32.dll is less than 5.2.3790.245" negate="false" test_ref="oval:org.mitre.oval:tst:512"/>
+    <criterion comment="the patch kb891711 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:2807"/>
+  </criteria>
+</definition>

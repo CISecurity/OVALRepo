@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2621" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OpenSSL Denial of Service Vulnerabilities</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <product>Sun Crypto Accelerator 4000</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0079" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0079"/>
+    <description>The do_change_cipher_spec function in OpenSSL 0.9.6c to 0.9.6k, and 0.9.7a to 0.9.7c, allows remote attackers to cause a denial of service (crash) via a crafted SSL/TLS handshake that triggers a null dereference.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-12T09:44:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2004-10-13T01:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-10-27T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-11-17T10:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criteria operator="OR" comment="Solaris 8 or 9 installed">
+        <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="Solaris 9 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3051"/>
+      </criteria>
+      <criterion comment="Patch 114796-04 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:501"/>
+      <criterion comment="Sun Crypto Accelerator 4000 software installed" negate="false" test_ref="oval:org.mitre.oval:tst:500"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="Apache running (httpd)" negate="false" test_ref="oval:org.mitre.oval:tst:654"/>
+    </criteria>
+  </criteria>
+</definition>

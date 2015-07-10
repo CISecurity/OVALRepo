@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23486" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0123: OpenIPMI security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>OpenIPMI</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0123-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-0123.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-4339" ref_url="http://linux.oracle.com/cve/CVE-2011-4339.html" source="CVE"/>
+    <description>ipmievd (aka the IPMI event daemon) in OpenIPMI, as used in the ipmitool package 1.8.11 in Red Hat Enterprise Linux (RHEL) 6, Debian GNU/Linux, Fedora 16, and other products uses 0666 permissions for its ipmievd.pid PID file, which allows local users to kill arbitrary processes by writing to this file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:27:05.413-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:14.173-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:56.768-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23486 - optimisation of Oracle Linux content" date="2014-05-05T17:35:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:37:46.685-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:31.979-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="OpenIPMI-libs is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:106821"/>
+      <criterion comment="OpenIPMI-python is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:106833"/>
+      <criterion comment="OpenIPMI-tools is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:106839"/>
+      <criterion comment="OpenIPMI-gui is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:107034"/>
+      <criterion comment="OpenIPMI-perl is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:106765"/>
+      <criterion comment="OpenIPMI is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:107073"/>
+      <criterion comment="OpenIPMI-devel is earlier than 0:2.0.16-16.el5" test_ref="oval:org.mitre.oval:tst:107097"/>
+    </criteria>
+  </criteria>
+</definition>

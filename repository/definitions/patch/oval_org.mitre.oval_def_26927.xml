@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26927" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1507: trousers security, bug fix, and enhancement update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>trousers</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1507-01" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1507.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0698" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0698.html"/>
+    <reference source="CESA-2014:1507" ref_id="CESA-2014:1507" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2014-October/001389.html"/>
+    <description>TrouSerS is an implementation of the Trusted Computing Group's Software
+Stack (TSS) specification. You can use TrouSerS to write applications that
+make use of your TPM hardware. TPM hardware can create, store and use RSA
+keys securely (without ever being exposed in memory), verify a platform's
+software state using cryptographic hashes and more.
+
+A flaw was found in the way tcsd, the daemon that manages Trusted Computing
+resources, processed incoming TCP packets. A remote attacker could send a
+specially crafted TCP packet that, when processed by tcsd, could cause the
+daemon to crash. Note that by default tcsd accepts requests on localhost
+only. (CVE-2012-0698)
+
+Red Hat would like to thank Andrew Lutomirski for reporting this issue.
+
+The trousers package has been upgraded to upstream version 0.3.13, which
+provides a number of bug fixes and enhancements over the previous version,
+including corrected internal symbol names to avoid collisions with other
+applications, fixed memory leaks, added IPv6 support, fixed buffer handling
+in tcsd, as well as changed the license to BSD. (BZ#633584, BZ#1074634)
+
+All trousers users are advised to upgrade to these updated packages, which
+correct these issues and add these enhancements.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-17T11:36:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-17T23:29:20.864-04:00">DRAFT</status_change>
+        <status_change date="2014-11-03T04:00:26.218-05:00">INTERIM</status_change>
+        <status_change date="2014-11-24T04:01:20.262-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26927 - CentOS criteria were added where necessary, descriptions were shortened." date="2015-03-23T14:40:00.799-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-03-23T14:45:52.271-04:00">INTERIM</status_change>
+        <status_change date="2015-04-13T04:00:13.360-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="trousers is earlier than 0:0.3.13-2.el6" test_ref="oval:org.mitre.oval:tst:124549"/>
+        <criterion comment="trousers-devel is earlier than 0:0.3.13-2.el6" test_ref="oval:org.mitre.oval:tst:125305"/>
+        <criterion comment="trousers-static is earlier than 0:0.3.13-2.el6" test_ref="oval:org.mitre.oval:tst:125151"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criterion comment="trousers-debuginfo is earlier than 0:0.3.13-2.el6" test_ref="oval:org.mitre.oval:tst:138217"/>
+    </criteria>
+  </criteria>
+</definition>

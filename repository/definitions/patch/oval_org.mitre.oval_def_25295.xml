@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25295" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0622-2 -- Recommended update for suse-build-key</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <product>suse-build-key</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140622-2.html" ref_id="SUSE-RU-2014:0622-2"/>
+    <description>The SUSE GPG signing keys that are used for repository
+integrity checking  have been extended to March 17th, 2018.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:13:10">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:33.215-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:47.357-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:40.465-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="suse-build-key RPM is earlier than 0:1.0-907.39.3.1" test_ref="oval:org.mitre.oval:tst:116395"/>
+        <criterion comment="suse-build-key RPM is earlier than 0:1.0-907.36.36.1" test_ref="oval:org.mitre.oval:tst:116489"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 10 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+      <criterion comment="suse-build-key RPM is earlier than 0:1.0-685.20.1" test_ref="oval:org.mitre.oval:tst:116311"/>
+    </criteria>
+  </criteria>
+</definition>

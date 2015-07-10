@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24118" version="37" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:1476: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1476-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-1476.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-5590" ref_url="http://linux.oracle.com/cve/CVE-2013-5590.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5595" ref_url="http://linux.oracle.com/cve/CVE-2013-5595.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5597" ref_url="http://linux.oracle.com/cve/CVE-2013-5597.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5599" ref_url="http://linux.oracle.com/cve/CVE-2013-5599.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5600" ref_url="http://linux.oracle.com/cve/CVE-2013-5600.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5601" ref_url="http://linux.oracle.com/cve/CVE-2013-5601.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5602" ref_url="http://linux.oracle.com/cve/CVE-2013-5602.html" source="CVE"/>
+    <reference ref_id="CVE-2013-5604" ref_url="http://linux.oracle.com/cve/CVE-2013-5604.html" source="CVE"/>
+    <description>The txXPathNodeUtils::getBaseURI function in the XSLT processor in Mozilla Firefox before 25.0, Firefox ESR 17.x before 17.0.10 and 24.x before 24.1, Thunderbird before 24.1, Thunderbird ESR 17.x before 17.0.10, and SeaMonkey before 2.22 does not properly initialize data, which allows remote attackers to execute arbitrary code or cause a denial of service (stack-based buffer overflow and application crash) via crafted documents.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:50:59.155-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:46.496-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:21.213-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24118 - optimisation of Oracle Linux content" date="2014-05-05T17:17:00.672-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:19:50.785-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:14.885-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner is earlier than 0:17.0.10-1.el6_4" test_ref="oval:org.mitre.oval:tst:112207"/>
+        <criterion comment="xulrunner-devel is earlier than 0:17.0.10-1.el6_4" test_ref="oval:org.mitre.oval:tst:112455"/>
+        <criterion comment="firefox is earlier than 0:17.0.10-1.el6_4" test_ref="oval:org.mitre.oval:tst:112499"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner is earlier than 0:17.0.10-1.el5_10" test_ref="oval:org.mitre.oval:tst:112508"/>
+        <criterion comment="xulrunner-devel is earlier than 0:17.0.10-1.el5_10" test_ref="oval:org.mitre.oval:tst:112465"/>
+        <criterion comment="firefox is earlier than 0:17.0.10-1.el5_10" test_ref="oval:org.mitre.oval:tst:112144"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

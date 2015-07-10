@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13393" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1762-1 icu -- insufficient input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>icu</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00071.html" ref_id="DSA-1762-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1036" ref_id="CVE-2008-1036"/>
+    <description>It was discovered that icu, the internal components for Unicode, did not properly sanitise invalid encoded data, which could lead to cross- site scripting attacks. For the stable distribution, this problem has been fixed in version 3.8.1-3+lenny1. For the oldstable distribution, this problem has been fixed in version 3.6-2etch2. For the testing distribution and the unstable distribution, this problem has been fixed in version 4.0.1-1. We recommend that you upgrade your icu packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:31:18.937-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:25.444-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:06:24.575-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13393 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:36.477-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:09.768-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="icu-doc DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:50210"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libicu38 DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:50991"/>
+            <criterion comment="libicu38-dbg DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:51154"/>
+            <criterion comment="libicu-dev DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:51082"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="lib32icu38 DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:50403"/>
+            <criterion comment="lib32icu-dev DPKG is earlier than 3.8.1-3+lenny1" test_ref="oval:org.mitre.oval:tst:50927"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="icu-doc DPKG is earlier than 3.6-2etch2" test_ref="oval:org.mitre.oval:tst:50477"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libicu36-dev DPKG is earlier than 3.6-2etch2" test_ref="oval:org.mitre.oval:tst:50945"/>
+            <criterion comment="libicu36 DPKG is earlier than 3.6-2etch2" test_ref="oval:org.mitre.oval:tst:51175"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

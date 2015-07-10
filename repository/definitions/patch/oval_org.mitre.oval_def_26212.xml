@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26212" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0471-1 -- Security update for Mozilla Firefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <platform>SUSE Linux Enterprise Desktop 10</platform>
+      <product>Mozilla Firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130471-1.html" ref_id="SUSE-SU-2013:0471-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0787" ref_id="CVE-2013-0787"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0780" ref_id="CVE-2013-0780"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0782" ref_id="CVE-2013-0782"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0776" ref_id="CVE-2013-0776"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0775" ref_id="CVE-2013-0775"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0774" ref_id="CVE-2013-0774"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0773" ref_id="CVE-2013-0773"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0765" ref_id="CVE-2013-0765"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0772" ref_id="CVE-2013-0772"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0783" ref_id="CVE-2013-0783"/>
+    <description>MozillaFirefox has been updated to the 17.0.4ESR release.
+Besides the major  version update from the 10ESR stable
+release line to the 17ESR stable  release line, this update
+brings critical security and bugfixes.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:39:53">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:36:29.500-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:51.869-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:55.100-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26212 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2015-02-26T19:18:42.356-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:00:51.321-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 10 and SUSE Linux Enterprise Desktop 10 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 10 is installed" definition_ref="oval:org.mitre.oval:def:2106"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="mozilla-nspr RPM is earlier than 0:4.9.4-0.6.3" test_ref="oval:org.mitre.oval:tst:120327"/>
+        <criterion comment="mozilla-nspr-devel RPM is earlier than 0:4.9.4-0.6.3" test_ref="oval:org.mitre.oval:tst:120480"/>
+        <criterion comment="mozilla-nss RPM is earlier than 0:3.14.1-0.6.3" test_ref="oval:org.mitre.oval:tst:120739"/>
+        <criterion comment="mozilla-nss-devel RPM is earlier than 0:3.14.1-0.6.3" test_ref="oval:org.mitre.oval:tst:120606"/>
+        <criterion comment="mozilla-nss-tools RPM is earlier than 0:3.14.1-0.6.3" test_ref="oval:org.mitre.oval:tst:120743"/>
+        <criterion comment="MozillaFirefox RPM is earlier than 0:17.0.4esr-0.7.1" test_ref="oval:org.mitre.oval:tst:120745"/>
+        <criterion comment="MozillaFirefox-branding-SLED RPM is earlier than 0:7-0.10.4" test_ref="oval:org.mitre.oval:tst:120362"/>
+        <criterion comment="MozillaFirefox-translations RPM is earlier than 0:17.0.4esr-0.7.1" test_ref="oval:org.mitre.oval:tst:120496"/>
+        <criterion comment="mozilla-nspr-32bit RPM is earlier than 0:4.9.4-0.6.3" test_ref="oval:org.mitre.oval:tst:120456"/>
+        <criterion comment="mozilla-nss-32bit RPM is earlier than 0:3.14.1-0.6.3" test_ref="oval:org.mitre.oval:tst:120294"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 10 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 10 is installed" definition_ref="oval:org.mitre.oval:def:2106"/>
+      <criterion comment="mhtml-firefox RPM is earlier than 0:0.5-1.13.4" test_ref="oval:org.mitre.oval:tst:120514"/>
+    </criteria>
+  </criteria>
+</definition>

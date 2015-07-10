@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21323" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1898-1 -- openssl vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 13.04</platform>
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1898-1/" ref_id="USN-1898-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4929" ref_id="CVE-2012-4929"/>
+    <description>Applications could be made to expose sensitive information over the network.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T13:17:05">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-14T17:05:13.671-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:54.157-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:10.794-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21323 - added CVE references; also made minor updates" date="2014-06-13T15:28:00.340-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:30:53.751-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:37.001-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 13.04 release section">
+      <extend_definition comment="Ubuntu 13.04 is installed" definition_ref="oval:org.mitre.oval:def:16014"/>
+      <criterion comment="libssl1.0.0 DPKG is earlier than 0:1.0.1c-4ubuntu8.1" test_ref="oval:org.mitre.oval:tst:92397"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.10 release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criterion comment="libssl1.0.0 DPKG is earlier than 0:1.0.1c-3ubuntu2.5" test_ref="oval:org.mitre.oval:tst:91797"/>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="libssl1.0.0 DPKG is earlier than 0:1.0.1-4ubuntu5.10" test_ref="oval:org.mitre.oval:tst:92539"/>
+    </criteria>
+    <criteria comment="Ubuntu 10.04 release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="libssl0.9.8 DPKG is earlier than 0:0.9.8k-7ubuntu8.15" test_ref="oval:org.mitre.oval:tst:92345"/>
+    </criteria>
+  </criteria>
+</definition>

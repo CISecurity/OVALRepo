@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:402" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SNMP Request Handling Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Simple Network Management Protocol (SNMP)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0053" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0053"/>
+    <description>Buffer overflow in SNMP agent service in Windows 95/98/98SE, Windows NT 4.0, Windows 2000, and Windows XP allows remote attackers to cause a denial of service or execute arbitrary code via a malformed management request.  NOTE: this candidate may be split or merged with other candidates.  This and other PROTOS-related candidates, especially CVE-2002-0012 and CVE-2002-0013, will be updated when more accurate information is available.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-09-15T12:43:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Matt Busby</contributor>
+        </submitted>
+        <modified date="2004-09-15T03:43:00.000-04:00" comment="Filled out initial submission.  Now a complete definition.">
+          <contributor organization="The MITRE Corporation">Matthew Burton</contributor>
+        </modified>
+        <status_change date="2004-09-22T02:10:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-10-06T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-10-20T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:48.508-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:32.822-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <criterion comment="the version of snmp.exe is less than 5.0.2195.4919" test_ref="oval:org.mitre.oval:tst:2883"/>
+      <criterion negate="true" comment="Patch Q314147 Installed" test_ref="oval:org.mitre.oval:tst:2959"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="the SNMP service is enabled" test_ref="oval:org.mitre.oval:tst:2958"/>
+    </criteria>
+  </criteria>
+</definition>

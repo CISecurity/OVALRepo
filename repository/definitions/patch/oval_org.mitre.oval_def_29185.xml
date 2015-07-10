@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29185" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0937 -- cups security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>cups</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0937.html" ref_id="RHSA-2008:0937"/>
+    <reference source="CESA-2008:0937" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-October/015312.html" ref_id="CESA-2008:0937-CentOS 3"/>
+    <reference source="CESA-2008:0937" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-October/015324.html" ref_id="CESA-2008:0937-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3639" ref_id="CVE-2008-3639"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3640" ref_id="CVE-2008-3640"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3641" ref_id="CVE-2008-3641"/>
+    <description>Updated cups packages that fix multiple security issues are now available
+for Red Hat Enterprise Linux 3, 4, and 5.
+This update has been rated as having important security impact by the Red
+Hat Security Response Team.
+The Common UNIX Printing System (CUPS) provides a portable printing layer
+for UNIX(R) operating systems.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:18">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:41.679-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cups-devel is earlier than 1:1.2.4-11.18.el5_2.2" test_ref="oval:org.mitre.oval:tst:139113"/>
+        <criterion comment="cups is earlier than 1:1.2.4-11.18.el5_2.2" test_ref="oval:org.mitre.oval:tst:138134"/>
+        <criterion comment="cups-libs is earlier than 1:1.2.4-11.18.el5_2.2" test_ref="oval:org.mitre.oval:tst:138560"/>
+        <criterion comment="cups-lpd is earlier than 1:1.2.4-11.18.el5_2.2" test_ref="oval:org.mitre.oval:tst:139114"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 3 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cups is earlier than 1:1.1.17-13.3.54" test_ref="oval:org.mitre.oval:tst:138755"/>
+        <criterion comment="cups-devel is earlier than 1:1.1.17-13.3.54" test_ref="oval:org.mitre.oval:tst:139023"/>
+        <criterion comment="cups-libs is earlier than 1:1.1.17-13.3.54" test_ref="oval:org.mitre.oval:tst:138986"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="cups is earlier than 1:1.1.22-0.rc1.9.27.el4_7.1" test_ref="oval:org.mitre.oval:tst:139059"/>
+        <criterion comment="cups-devel is earlier than 1:1.1.22-0.rc1.9.27.el4_7.1" test_ref="oval:org.mitre.oval:tst:138971"/>
+        <criterion comment="cups-libs is earlier than 1:1.1.22-0.rc1.9.27.el4_7.1" test_ref="oval:org.mitre.oval:tst:138730"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

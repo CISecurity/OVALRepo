@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:4897" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX LP subsystem, Local Denial of Service (DoS)</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-1461" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1461"/>
+    <description>Buffer overflow in rwrite for HP-UX 11.0 could allow local users to execute arbitrary code via a long argument.  NOTE: the vendor was unable to reproduce the problem on a system that had been patched for an lp vulnerability (CVE-2002-1473).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-08T17:01:37.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-14T10:52:30.293-04:00">DRAFT</status_change>
+        <status_change date="2008-08-04T04:00:11.587-04:00">INTERIM</status_change>
+        <status_change date="2008-08-25T04:00:05.975-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-05T13:33:02.702-05:00">INTERIM</status_change>
+        <status_change date="2014-03-24T04:01:39.317-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX00213">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criterion comment="PrinterMgmt.LP-SPOOL is installed" test_ref="oval:org.mitre.oval:tst:8549"/>
+      <criterion negate="true" comment="Patch PHCO_27020 is installed" test_ref="oval:org.mitre.oval:tst:8217"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX00213">
+      <criterion comment="HP Release B.11.00" test_ref="oval:org.mitre.oval:tst:3571"/>
+      <criterion comment="PrinterMgmt.LP-SPOOL is installed" test_ref="oval:org.mitre.oval:tst:8549"/>
+      <criterion negate="true" comment="Patch PHCO_27132 is installed" test_ref="oval:org.mitre.oval:tst:8439"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7074" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VBE6.DLL Stack Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Office 2000</product>
+      <product>Microsoft Office XP</product>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Visual Basic for Applications</product>
+    </affected>
+    <reference ref_id="CVE-2010-0815" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0815" source="CVE"/>
+    <description>VBE6.DLL in Microsoft Office XP SP3, Office 2003 SP3, 2007 Microsoft Office System SP1 and SP2, Visual Basic for Applications (VBA), and VBA SDK 6.3 through 6.5 does not properly search for ActiveX controls that are embedded in documents, which allows remote attackers to execute arbitrary code via a crafted document, aka "VBE6.DLL Stack Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-11T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-05-12T12:23:28.732-04:00">DRAFT</status_change>
+        <status_change date="2010-05-31T04:00:32.140-04:00">INTERIM</status_change>
+        <status_change date="2010-06-21T04:00:13.110-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7074 - New inventory added Microsoft Office 2007 SP1 is installed and test  tst:79757 was changed" date="2014-05-08T11:08:00.572-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-08T11:09:44.034-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:29.841-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Office XP/2003 SP3/2007 SP2/2007 SP1/Visual Basic 6.0">
+      <extend_definition comment="Microsoft Office XP is installed" definition_ref="oval:org.mitre.oval:def:663"/>
+      <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+      <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+      <extend_definition comment="Microsoft Office 2007 SP1 is installed" definition_ref="oval:org.mitre.oval:def:23724"/>
+      <extend_definition comment="Microsoft Visual Basic for Applications is installed" definition_ref="oval:org.mitre.oval:def:1746"/>
+    </criteria>
+    <criterion comment="the version of Vbe6.dll is less than 6.5.10.53" test_ref="oval:org.mitre.oval:tst:11504"/>
+  </criteria>
+</definition>

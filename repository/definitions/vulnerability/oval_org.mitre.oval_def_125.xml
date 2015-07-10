@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:125" class="vulnerability" version="1" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HTML Help ActiveX Control Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-0214" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0214"/>
+    <description>The HTML Help ActiveX control (Hhctrl.ocx) in Microsoft Windows 2000 SP3, XP SP2 and Professional, 2003 SP1 allows remote attackers to execute arbitrary code via unspecified functions, related to uninitialized parameters.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-02-14T09:49:32">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2007-02-16T21:55:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-03-21T16:16:46.946-04:00">INTERIM</status_change>
+        <status_change date="2007-04-10T13:44:19.992-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Win2K,SP4" operator="AND">
+      <extend_definition comment="Windows 2000 SP4 is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of Hhctrl.ocx is less than 5.2.3790.620" test_ref="oval:org.mitre.oval:tst:196"/>
+    </criteria>
+    <criteria comment="WinXP,SP2" operator="AND">
+      <extend_definition comment="Windows XP, SP2 is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <criterion comment="the version of Hhctrl.ocx is less than 5.2.3790.2847" test_ref="oval:org.mitre.oval:tst:3154"/>
+    </criteria>
+    <criteria comment="WinXP,SP1 (64-bit)" operator="AND">
+      <extend_definition comment="Windows XP, SP1 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:480"/>
+      <criterion comment="the version of Hhctrl.ocx is less than 5.2.3790.2847" test_ref="oval:org.mitre.oval:tst:3154"/>
+    </criteria>
+    <criteria comment="S03-Gold" operator="AND">
+      <extend_definition comment="Windows Server 2003 (Gold) is installed" definition_ref="oval:org.mitre.oval:def:165"/>
+      <criterion comment="the version of Hhctrl.ocx is less than 5.2.3790.620" test_ref="oval:org.mitre.oval:tst:196"/>
+    </criteria>
+    <criteria comment="S03,SP1" operator="AND">
+      <extend_definition comment="Windows Server 2003, SP1 is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+      <criterion comment="the version of Hhctrl.ocx is less than 5.2.3790.2847" test_ref="oval:org.mitre.oval:tst:3154"/>
+    </criteria>
+  </criteria>
+</definition>

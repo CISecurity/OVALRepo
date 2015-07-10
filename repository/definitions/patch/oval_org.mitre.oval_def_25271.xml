@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25271" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0866: samba and samba3x security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>samba3x</product>
+      <product>samba</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0866-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0866.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0866"/>
+    <reference source="CVE" ref_id="CVE-2014-0244" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0244.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3493" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3493.html"/>
+    <description>Samba is an open-source implementation of the Server Message Block (SMB) or
+Common Internet File System (CIFS) protocol, which allows PC-compatible
+machines to share files, printers, and other information.
+
+A denial of service flaw was found in the way the sys_recvfile() function
+of nmbd, the NetBIOS message block daemon, processed non-blocking sockets.
+An attacker could send a specially crafted packet that, when processed,
+would cause nmbd to enter an infinite loop and consume an excessive amount
+of CPU time. (CVE-2014-0244)
+
+It was discovered that smbd, the Samba file server daemon, did not properly
+handle certain files that were stored on the disk and used a valid Unicode
+character in the file name. An attacker able to send an authenticated
+non-Unicode request that attempted to read such a file could cause smbd to
+crash. (CVE-2014-3493)
+
+Red Hat would like to thank Daniel Berteaud of FIREWALL-SERVICES SARL for
+reporting CVE-2014-0244, and the Samba project for reporting CVE-2014-3493.
+The Samba project acknowledges Simon Arlott as the original reporter of
+CVE-2014-3493.
+
+All Samba users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. After installing this
+update, the smb service will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-21T11:31:59">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-25T11:59:58.068-04:00">DRAFT</status_change>
+        <status_change date="2014-08-11T04:01:03.078-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:03:07.457-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="samba3x-client is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115866"/>
+        <criterion comment="samba3x-common is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115752"/>
+        <criterion comment="samba3x-winbind is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115828"/>
+        <criterion comment="samba3x-doc is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115827"/>
+        <criterion comment="samba3x-swat is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115213"/>
+        <criterion comment="samba3x-winbind-devel is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115671"/>
+        <criterion comment="samba3x-domainjoin-gui is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115545"/>
+        <criterion comment="samba3x is earlier than 0:3.6.6-0.140.el5_10" test_ref="oval:org.mitre.oval:tst:115293"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="samba-winbind-clients is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115904"/>
+        <criterion comment="samba is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115588"/>
+        <criterion comment="samba-client is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115108"/>
+        <criterion comment="samba-swat is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115089"/>
+        <criterion comment="samba-winbind-devel is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115719"/>
+        <criterion comment="samba-doc is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115699"/>
+        <criterion comment="libsmbclient is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115908"/>
+        <criterion comment="samba-common is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115002"/>
+        <criterion comment="samba-winbind-krb5-locator is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115794"/>
+        <criterion comment="samba-winbind is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115854"/>
+        <criterion comment="libsmbclient-devel is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115998"/>
+        <criterion comment="samba-domainjoin-gui is earlier than 0:3.6.9-169.el6_5" test_ref="oval:org.mitre.oval:tst:115415"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

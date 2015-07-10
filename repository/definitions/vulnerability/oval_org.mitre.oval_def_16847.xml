@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16847" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Kernel Information Disclosure Vulnerability - MS13-048</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3136" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3136"/>
+    <description>The kernel in Microsoft Windows XP SP3, Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2, Windows 7 SP1, and Windows 8 on 32-bit platforms does not properly handle unspecified page-fault system calls, which allows local users to obtain sensitive information from kernel memory via a crafted application, aka "Kernel Information Disclosure Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-06-13T17:15:43">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-06-13T14:08:49.371-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:16847 - Corrected platform MS Win Server 8 -> MS Win 8" date="2013-06-24T14:05:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-07-15T04:00:25.269-04:00">INTERIM</status_change>
+        <status_change date="2013-08-05T04:00:20.046-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="XP x86 and vulnerable file version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="Check if the version of Ntoskrnl.exe is less than 5.1.2600.6387" test_ref="oval:org.mitre.oval:tst:81177"/>
+    </criteria>
+    <criteria operator="AND" comment="Server 2003 x86 and vulnerable file version">
+      <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+      <criterion comment="Check if the version of Ntoskrnl.exe is less than 5.2.3790.5157" test_ref="oval:org.mitre.oval:tst:80294"/>
+    </criteria>
+    <criteria operator="AND" comment="Vista / 2K8 x86 and vulnerable file version">
+      <criteria operator="OR" comment="Vista / 2K8">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.0.6002.18832" test_ref="oval:org.mitre.oval:tst:80871"/>
+        <criteria operator="AND" comment="Check for LDR range">
+          <criterion comment="Check if the version of Ntoskrnl.exe is greater than or equal to 6.0.6002.23000" test_ref="oval:org.mitre.oval:tst:80719"/>
+          <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.0.6002.23103" test_ref="oval:org.mitre.oval:tst:81140"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win 7 x86 vulnerable file version">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.1.7601.18147" test_ref="oval:org.mitre.oval:tst:80675"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Ntoskrnl.exe is greater than or equal to 6.1.7601.22000" test_ref="oval:org.mitre.oval:tst:81000"/>
+          <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.1.7601.22318" test_ref="oval:org.mitre.oval:tst:80863"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Win 8 x86 and vulnerable file version">
+      <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+      <criteria operator="OR" comment="Check for vulnerable version">
+        <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.2.9200.16604" test_ref="oval:org.mitre.oval:tst:80789"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="Check if the version of Ntoskrnl.exe is greater than or equal to 6.2.9200.20000" test_ref="oval:org.mitre.oval:tst:80722"/>
+          <criterion comment="Check if the version of Ntoskrnl.exe is less than 6.2.9200.20708" test_ref="oval:org.mitre.oval:tst:81243"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

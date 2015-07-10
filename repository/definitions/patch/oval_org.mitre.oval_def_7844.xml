@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7844" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1460 postgresql-8.1 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>postgresql-8.1</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1460" ref_id="DSA-1460"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3278" ref_id="CVE-2007-3278"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4769" ref_id="CVE-2007-4769"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4772" ref_id="CVE-2007-4772"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6067" ref_id="CVE-2007-6067"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6600" ref_id="CVE-2007-6600"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6601" ref_id="CVE-2007-6601"/>
+    <description>Several local vulnerabilities have been discovered in PostgreSQL, an object-relational SQL database. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered that the DBLink module performed insufficient credential validation. This issue is also tracked as CVE-2007-6601, since the initial upstream fix was incomplete. Tavis Ormandy and Will Drewry discovered that a bug in the handling of back-references inside the regular expressions engine could lead to an out of bounds read, resulting in a crash. This constitutes only a security problem if an application using PostgreSQL processes regular expressions from untrusted sources. Tavis Ormandy and Will Drewry discovered that the optimizer for regular expression could be tricked into an infinite loop, resulting in denial of service. This constitutes only a security problem if an application using PostgreSQL processes regular expressions from untrusted sources. Tavis Ormandy and Will Drewry discovered that the optimizer for regular expression could be tricked massive resource consumption. This constitutes only a security problem if an application using PostgreSQL processes regular expressions from untrusted sources. Functions in index expressions could lead to privilege escalation. For a more in depth explanation please see the upstream announce available at http://www.postgresql.org/about/news.905. The old stable distribution (sarge), doesn't contain postgresql-8.1. For the stable distribution (etch), these problems have been fixed in version postgresql-8.1 8.1.11-0etch1. For the unstable distribution (sid), these problems have been fixed in version 8.2.6-1 of postgresql-8.2. We recommend that you upgrade your postgresql-8.1 (8.1.11-0etch1) package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:08-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:55:49.166-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:02:01.479-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:29.695-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7844 - Debian Patch Update" date="2014-06-06T16:41:00.361-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:42:52.959-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:02.112-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="postgresql-doc-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17208"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="postgresql-client-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16516"/>
+          <criterion comment="postgresql-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17181"/>
+          <criterion comment="postgresql-pltcl-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16927"/>
+          <criterion comment="libecpg5 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16269"/>
+          <criterion comment="postgresql-contrib-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17232"/>
+          <criterion comment="postgresql-server-dev-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17169"/>
+          <criterion comment="postgresql-plpython-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17047"/>
+          <criterion comment="libecpg-dev is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17068"/>
+          <criterion comment="libpgtypes2 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16722"/>
+          <criterion comment="libpq4 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17198"/>
+          <criterion comment="libpq-dev is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16997"/>
+          <criterion comment="postgresql-plperl-8.1 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:16816"/>
+          <criterion comment="libecpg-compat2 is earlier than 8.1.11-0etch1" test_ref="oval:org.mitre.oval:tst:17018"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24029" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cross-site scripting (XSS) vulnerability in Adobe Flash Player before 13.0.0.223 and 14.x before 14.0.0.125 on Windows (CVE-2014-0533)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Adobe Flash Player</product>
+      <product>Adobe AIR</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-0533" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0533"/>
+    <description>Cross-site scripting (XSS) vulnerability in Adobe Flash Player before 13.0.0.223 and 14.x before 14.0.0.125 on Windows and OS X and before 11.2.202.378 on Linux, Adobe AIR before 14.0.0.110, Adobe AIR SDK before 14.0.0.110, and Adobe AIR SDK &amp; Compiler before 14.0.0.110 allows remote attackers to inject arbitrary web script or HTML via unspecified vectors, a different vulnerability than CVE-2014-0531 and CVE-2014-0532.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-11T08:31:03">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-06-20T11:37:51.045-04:00">DRAFT</status_change>
+        <status_change date="2014-07-07T04:01:01.363-04:00">INTERIM</status_change>
+        <status_change date="2014-07-28T04:00:12.318-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:31365 - test that checks the version of Flash.*.ocx file has been added" date="2014-07-31T12:21:00.664-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-31T12:23:12.874-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:02:26.935-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:31365 - checks the version of Flash .ocx" date="2014-09-17T10:26:00.393-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-09-17T10:29:24.073-04:00">INTERIM</status_change>
+        <status_change date="2014-10-06T04:03:00.173-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check the version of Adobe Flash Player 13">
+      <extend_definition comment="Adobe Flash Player 13 is installed" definition_ref="oval:org.mitre.oval:def:24631"/>
+      <criteria operator="AND" comment="Determine if the version of Adobe Flash Player is less than or equal 13.0.0.214">
+        <criterion comment="Determine if the version of Adobe Flash Player is less than or equal 13.0.0.214" test_ref="oval:org.mitre.oval:tst:115079"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Adobe Air is less than or equal 13.0.0.111">
+      <extend_definition comment="Adobe AIR is installed" definition_ref="oval:org.mitre.oval:def:7479"/>
+      <criterion comment="Determine if the version of Adobe Air is less 13.0.0.111" test_ref="oval:org.mitre.oval:tst:114917"/>
+    </criteria>
+    <criterion comment="Determine if the version of Flash.ocx is less than or equal 13.0.0.214" test_ref="oval:org.mitre.oval:tst:123037"/>
+  </criteria>
+</definition>

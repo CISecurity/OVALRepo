@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29148" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:1020-1 -- Security update for autofs (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>autofs</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20151020-1.html" ref_id="SUSE-SU-2015:1020-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8169" ref_id="CVE-2014-8169"/>
+    <description>autofs was updated to fix one security issue.
+This security issue was fixed:
+- CVE-2014-8169: Prevent potential privilege escalation via interpreter
+  load path for program-based automount maps (bnc#917977).
+These non-security issues were fixed:
+- Dont pass sloppy option for other than nfs mounts (bnc#901448,
+  bnc#916203)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:36:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:35.193-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="autofs is earlier than 0:5.0.9-8.1" test_ref="oval:org.mitre.oval:tst:139789"/>
+      <criterion comment="autofs-debuginfo is earlier than 0:5.0.9-8.1" test_ref="oval:org.mitre.oval:tst:140082"/>
+      <criterion comment="autofs-debugsource is earlier than 0:5.0.9-8.1" test_ref="oval:org.mitre.oval:tst:139746"/>
+    </criteria>
+  </criteria>
+</definition>

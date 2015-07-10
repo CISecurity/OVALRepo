@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12939" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-920-1 -- firefox-3.0, xulrunner-1.9 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>firefox-3.0</product>
+      <product>xulrunner-1.9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-April/001077.html" ref_id="USN-920-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0174" ref_id="CVE-2010-0174"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0175" ref_id="CVE-2010-0175"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0176" ref_id="CVE-2010-0176"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0177" ref_id="CVE-2010-0177"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0178" ref_id="CVE-2010-0178"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0179" ref_id="CVE-2010-0179"/>
+    <description>Martijn Wargers, Josh Soref, Jesse Ruderman, and Ehsan Akhgari discovered flaws in the browser engine of Firefox. If a user were tricked into viewing a malicious website, a remote attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program. It was discovered that Firefox could be made to access previously freed memory. If a user were tricked into viewing a malicious website, a remote attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program. Paul Stone discovered that Firefox could be made to change a mouse click into a drag and drop event. If the user could be tricked into performing this action twice on a crafted website, an attacker could execute arbitrary JavaScript with chrome privileges. It was discovered that the XMLHttpRequestSpy module as used by the Firebug add-on could be used to escalate privileges within the browser. If the user had the Firebug add-on installed and were tricked into viewing a malicious website, an attacker could potentially run arbitrary JavaScript</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:07:44.351-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:37.538-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:12.425-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12939 - added CVE references; also made minor updates" date="2014-06-13T16:26:00.686-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:28:05.324-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:03.794-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="abrowser DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52178"/>
+            <criterion comment="firefox DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52418"/>
+            <criterion comment="firefox-granparadiso-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52438"/>
+            <criterion comment="firefox-granparadiso-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52729"/>
+            <criterion comment="firefox-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52399"/>
+            <criterion comment="firefox-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52756"/>
+            <criterion comment="firefox-granparadiso DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52589"/>
+            <criterion comment="firefox-trunk-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52681"/>
+            <criterion comment="firefox-trunk-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52248"/>
+            <criterion comment="xulrunner-1.9-venkman DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52528"/>
+            <criterion comment="firefox-granparadiso-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52754"/>
+            <criterion comment="firefox-trunk-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52215"/>
+            <criterion comment="firefox-3.0-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52577"/>
+            <criterion comment="xulrunner-1.9-dom-inspector DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52602"/>
+            <criterion comment="firefox-trunk DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52551"/>
+            <criterion comment="firefox-3.0-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52755"/>
+            <criterion comment="firefox-libthai DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52704"/>
+            <criterion comment="firefox-trunk-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52578"/>
+            <criterion comment="firefox-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52563"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="firefox-3.0 DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52051"/>
+            <criterion comment="xulrunner-1.9-dev DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:51798"/>
+            <criterion comment="firefox-3.0-branding DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52594"/>
+            <criterion comment="xulrunner-1.9-gnome-support DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52453"/>
+            <criterion comment="xulrunner-1.9 DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52727"/>
+            <criterion comment="firefox-3.0-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52767"/>
+            <criterion comment="abrowser-3.0-branding DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52700"/>
+            <criterion comment="firefox-3.0-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52405"/>
+            <criterion comment="xulrunner-dev DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.10.1" test_ref="oval:org.mitre.oval:tst:52126"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="firefox-trunk DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52784"/>
+            <criterion comment="firefox DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52511"/>
+            <criterion comment="firefox-granparadiso-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:51850"/>
+            <criterion comment="firefox-granparadiso-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52760"/>
+            <criterion comment="firefox-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:51826"/>
+            <criterion comment="firefox-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52810"/>
+            <criterion comment="firefox-granparadiso DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52016"/>
+            <criterion comment="firefox-trunk-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52712"/>
+            <criterion comment="firefox-trunk-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52499"/>
+            <criterion comment="xulrunner-1.9-venkman DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52535"/>
+            <criterion comment="firefox-granparadiso-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52764"/>
+            <criterion comment="firefox-trunk-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52469"/>
+            <criterion comment="firefox-3.0-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52607"/>
+            <criterion comment="xulrunner-1.9-dom-inspector DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52497"/>
+            <criterion comment="firefox-3.0-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52671"/>
+            <criterion comment="firefox-libthai DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52669"/>
+            <criterion comment="firefox-trunk-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52615"/>
+            <criterion comment="firefox-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52632"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="firefox-3.0 DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52774"/>
+            <criterion comment="xulrunner-1.9-dev DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52251"/>
+            <criterion comment="xulrunner-1.9-gnome-support DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52384"/>
+            <criterion comment="xulrunner-1.9 DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52747"/>
+            <criterion comment="firefox-3.0-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52706"/>
+            <criterion comment="firefox-3.0-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:52642"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="abrowser DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52789"/>
+            <criterion comment="firefox DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52656"/>
+            <criterion comment="firefox-granparadiso-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52736"/>
+            <criterion comment="firefox-granparadiso-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52530"/>
+            <criterion comment="firefox-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52400"/>
+            <criterion comment="firefox-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52574"/>
+            <criterion comment="firefox-granparadiso DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52815"/>
+            <criterion comment="firefox-trunk-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52457"/>
+            <criterion comment="firefox-trunk-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52785"/>
+            <criterion comment="xulrunner-1.9-venkman DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52721"/>
+            <criterion comment="firefox-granparadiso-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52434"/>
+            <criterion comment="firefox-trunk-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52732"/>
+            <criterion comment="firefox-3.0-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52664"/>
+            <criterion comment="xulrunner-1.9-dom-inspector DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52819"/>
+            <criterion comment="firefox-trunk DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52592"/>
+            <criterion comment="firefox-3.0-venkman DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52380"/>
+            <criterion comment="firefox-libthai DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52787"/>
+            <criterion comment="firefox-trunk-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52763"/>
+            <criterion comment="firefox-dom-inspector DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52477"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="firefox-3.0 DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52625"/>
+            <criterion comment="xulrunner-1.9-dev DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52776"/>
+            <criterion comment="firefox-3.0-branding DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52741"/>
+            <criterion comment="xulrunner-1.9-gnome-support DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52510"/>
+            <criterion comment="xulrunner-1.9 DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52394"/>
+            <criterion comment="firefox-3.0-gnome-support DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52396"/>
+            <criterion comment="abrowser-3.0-branding DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52827"/>
+            <criterion comment="firefox-3.0-dev DPKG is earlier than 3.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52618"/>
+            <criterion comment="xulrunner-dev DPKG is earlier than 1.9.0.19+nobinonly-0ubuntu0.9.04.1" test_ref="oval:org.mitre.oval:tst:52523"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

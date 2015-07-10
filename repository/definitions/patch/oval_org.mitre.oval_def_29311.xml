@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29311" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1123 -- gstreamer-plugins-good security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>gstreamer-plugins-good</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1123.html" ref_id="RHSA-2009:1123"/>
+    <reference source="CESA-2009:1123" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-June/016005.html" ref_id="CESA-2009:1123-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1932" ref_id="CVE-2009-1932"/>
+    <description>Updated gstreamer-plugins-good packages that fix multiple security issues
+are now available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+GStreamer is a streaming media framework, based on graphs of filters which
+operate on media data. GStreamer Good Plug-ins is a collection of
+well-supported, good quality GStreamer plug-ins.
+Multiple integer overflow flaws, that could lead to a buffer overflow, were
+found in the GStreamer Good Plug-ins PNG decoding handler. An attacker
+could create a specially-crafted PNG file that would cause an application
+using the GStreamer Good Plug-ins library to crash or, potentially, execute
+arbitrary code as the user running the application when parsed.
+(CVE-2009-1932)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:19">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:27.732-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="gstreamer-plugins-good-devel is earlier than 0:0.10.9-1.el5_3.2" test_ref="oval:org.mitre.oval:tst:141073"/>
+      <criterion comment="gstreamer-plugins-good is earlier than 0:0.10.9-1.el5_3.2" test_ref="oval:org.mitre.oval:tst:140782"/>
+    </criteria>
+  </criteria>
+</definition>

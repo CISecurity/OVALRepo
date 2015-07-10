@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26921" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1359: polkit-qt security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>polkit-qt</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1359-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1359.html"/>
+    <reference source="CESA" ref_id="CESA-2014:1359"/>
+    <reference source="CVE" ref_id="CVE-2014-5033" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-5033.html"/>
+    <description>Polkit-qt is a library that lets developers use the PolicyKit API through a
+Qt-styled API. The polkit-qt library is used by the KDE Authentication
+Agent (KAuth), which is a part of kdelibs.
+
+It was found that polkit-qt handled authorization requests with PolicyKit
+via a D-Bus API that is vulnerable to a race condition. A local user could
+use this flaw to bypass intended PolicyKit authorizations. This update
+modifies polkit-qt to communicate with PolicyKit via a different API that
+is not vulnerable to the race condition. (CVE-2014-5033)
+
+All polkit-qt users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-13T11:47:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-24T13:13:15.451-04:00">DRAFT</status_change>
+        <status_change date="2014-11-10T04:02:14.668-05:00">INTERIM</status_change>
+        <status_change date="2014-12-01T04:00:44.736-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 7 or Centos 7 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="polkit-qt is earlier than 0:0.103.0-10.el7_0" test_ref="oval:org.mitre.oval:tst:125718"/>
+      <criterion comment="polkit-qt-devel is earlier than 0:0.103.0-10.el7_0" test_ref="oval:org.mitre.oval:tst:125831"/>
+      <criterion comment="polkit-qt-doc is earlier than 0:0.103.0-10.el7_0" test_ref="oval:org.mitre.oval:tst:125512"/>
+    </criteria>
+  </criteria>
+</definition>

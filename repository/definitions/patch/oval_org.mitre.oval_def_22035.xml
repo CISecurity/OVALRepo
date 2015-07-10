@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22035" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0271: kvm security, bug fix and enhancement update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0271-05" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0271.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0430" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0430.html"/>
+    <reference source="CVE" ref_id="CVE-2010-0741" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0741.html"/>
+    <description>The virtio_net_bad_features function in hw/virtio-net.c in the virtio-net driver in the Linux kernel before 2.6.26, when used on a guest OS in conjunction with qemu-kvm 0.11.0 or KVM 83, allows remote attackers to cause a denial of service (guest OS crash, and an associated qemu-kvm process exit) by sending a large amount of network traffic to a TCP port on the guest OS, related to a virtio-net whitelist that includes an improper implementation of TCP Segment Offloading (TSO).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:46:23.110-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:13.045-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:34.546-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="kvm-qemu-img is earlier than 0:83-164.el5" test_ref="oval:org.mitre.oval:tst:99086"/>
+      <criterion comment="kvm is earlier than 0:83-164.el5" test_ref="oval:org.mitre.oval:tst:99187"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-164.el5" test_ref="oval:org.mitre.oval:tst:99238"/>
+      <criterion comment="kvm-tools is earlier than 0:83-164.el5" test_ref="oval:org.mitre.oval:tst:99258"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22353" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2010:0556: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2010:0556-01" ref_url="https://rhn.redhat.com/errata/RHSA-2010-0556.html"/>
+    <reference source="CESA" ref_id="CESA-2010:0556"/>
+    <reference source="CVE" ref_id="CVE-2010-2755" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-2755.html"/>
+    <description>layout/generic/nsObjectFrame.cpp in Mozilla Firefox 3.6.7 does not properly free memory in the parameter array of a plugin instance, which allows remote attackers to cause a denial of service (memory corruption) or possibly execute arbitrary code via a crafted HTML document, related to the DATA and SRC attributes of an OBJECT element. NOTE: this vulnerability exists because of an incorrect fix for CVE-2010-1214.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:48:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:45:45.350-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:41.034-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:08.412-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="xulrunner is earlier than 0:1.9.2.7-3.el5" test_ref="oval:org.mitre.oval:tst:99667"/>
+      <criterion comment="xulrunner-devel is earlier than 0:1.9.2.7-3.el5" test_ref="oval:org.mitre.oval:tst:99443"/>
+      <criterion comment="firefox is earlier than 0:3.6.7-3.el5" test_ref="oval:org.mitre.oval:tst:99558"/>
+    </criteria>
+  </criteria>
+</definition>

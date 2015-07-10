@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8066" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1937 gforge -- insufficient input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>gforge</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1937" ref_id="DSA-1937"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3303" ref_id="CVE-2009-3303"/>
+    <description>It was discovered that gforge, collaborative development tool, is prone to a cross-site scripting attack via the helpname parameter. Beside fixing this issue, the update also introduces some additional input sanitising. However, there are no known attack vectors. The oldstable distribution (etch), these problems have been fixed in version 4.5.14-22etch12.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:11.572-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:55.992-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:54.995-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8066 - Debian Patch Update" date="2014-06-06T16:34:00.948-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:35:53.910-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:56.762-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="gforge-mta-courier is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19076"/>
+        <criterion comment="gforge is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19145"/>
+        <criterion comment="gforge-plugin-scmcvs is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19134"/>
+        <criterion comment="gforge-common is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:18912"/>
+        <criterion comment="gforge-shell-postgresql is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19462"/>
+        <criterion comment="gforge-plugin-scmsvn is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19351"/>
+        <criterion comment="gforge-web-apache2 is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19124"/>
+        <criterion comment="gforge-mta-postfix is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19305"/>
+        <criterion comment="gforge-mta-exim4 is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:18870"/>
+        <criterion comment="gforge-lists-mailman is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19368"/>
+        <criterion comment="gforge-web-apache is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:18818"/>
+        <criterion comment="gforge-db-postgresql is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19233"/>
+        <criterion comment="gforge-ftp-proftpd is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19284"/>
+        <criterion comment="gforge-plugin-mediawiki is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19154"/>
+        <criterion comment="gforge-dns-bind9 is earlier than 4.7~rc2-7lenny2" test_ref="oval:org.mitre.oval:tst:19086"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="gforge-ldap-openldap is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19362"/>
+        <criterion comment="gforge-mta-exim4 is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19208"/>
+        <criterion comment="gforge-mta-courier is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19228"/>
+        <criterion comment="gforge-db-postgresql is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19238"/>
+        <criterion comment="gforge is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19279"/>
+        <criterion comment="gforge-common is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19376"/>
+        <criterion comment="gforge-mta-postfix is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19006"/>
+        <criterion comment="gforge-shell-postgresql is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19337"/>
+        <criterion comment="gforge-shell-ldap is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19269"/>
+        <criterion comment="gforge-lists-mailman is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19435"/>
+        <criterion comment="gforge-web-apache is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19017"/>
+        <criterion comment="gforge-mta-exim is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:18543"/>
+        <criterion comment="gforge-ftp-proftpd is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:18899"/>
+        <criterion comment="gforge-dns-bind9 is earlier than 4.5.14-22etch12" test_ref="oval:org.mitre.oval:tst:19121"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

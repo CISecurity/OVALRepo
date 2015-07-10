@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24897" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OpenSSL vulnerability in before 0.9.8x, 1.0.0 before 1.0.0j, and 1.0.1 before 1.0.1c, allows remote attackers to cause a denial of service (buffer over-read) or possibly have unspecified other impact</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-2333" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2333"/>
+    <description>Integer underflow in OpenSSL before 0.9.8x, 1.0.0 before 1.0.0j, and 1.0.1 before 1.0.1c, when TLS 1.1, TLS 1.2, or DTLS is used with CBC encryption, allows remote attackers to cause a denial of service (buffer over-read) or possibly have unspecified other impact via a crafted TLS packet that is not properly handled during a certain explicit IV calculation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-18T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-06-25T16:20:59.471-04:00">DRAFT</status_change>
+        <status_change date="2014-07-14T04:01:23.822-04:00">INTERIM</status_change>
+        <status_change date="2014-08-04T04:00:11.961-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check vulnerable OpenSSL">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL">
+        <criterion comment="Check if the version of OpenSSL 1.0.0 before 1.0.0j" test_ref="oval:org.mitre.oval:tst:115135"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.1 before 1.0.1c" test_ref="oval:org.mitre.oval:tst:115058"/>
+        <criterion comment="Check if the version of OpenSSL before 0.9.8x" test_ref="oval:org.mitre.oval:tst:114864"/>
+      </criteria>
+      <criterion comment="OpenSSL is installed" test_ref="oval:org.mitre.oval:tst:113869"/>
+    </criteria>
+    <criteria operator="AND" comment="Check vulnerable OpenSSL (32_bit)">
+      <criteria operator="OR" comment="Check vulnerable versions of OpenSSL (32_bit)">
+        <criterion comment="Check if the version of OpenSSL 1.0.0 before 1.0.0j (32_bit)" test_ref="oval:org.mitre.oval:tst:114989"/>
+        <criterion comment="Check if the version of OpenSSL 1.0.1 before 1.0.1c (32_bit)" test_ref="oval:org.mitre.oval:tst:115086"/>
+        <criterion comment="Check if the version of OpenSSL before 0.9.8x (32_bit)" test_ref="oval:org.mitre.oval:tst:115030"/>
+      </criteria>
+      <criterion comment="OpenSSL (32_bit) is installed" test_ref="oval:org.mitre.oval:tst:113875"/>
+    </criteria>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0j ProgramFilesDir" test_ref="oval:org.mitre.oval:tst:114594"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0j ProgramFilesDir x86" test_ref="oval:org.mitre.oval:tst:115121"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.0 before 1.0.0j under Sytem32 and SysWOW64" test_ref="oval:org.mitre.oval:tst:114955"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1c ProgramFilesDir" test_ref="oval:org.mitre.oval:tst:115174"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1c ProgramFilesDir x86" test_ref="oval:org.mitre.oval:tst:114987"/>
+    <criterion comment="Check if the version of ssleay32.dll 1.0.1 before 1.0.1c under Sytem32 and SysWOW64" test_ref="oval:org.mitre.oval:tst:115027"/>
+    <criterion comment="Check if the version of ssleay32.dll before 0.9.8x" test_ref="oval:org.mitre.oval:tst:115228"/>
+    <criterion comment="Check if the version of ssleay32.dll before 0.9.8x (32_bit)" test_ref="oval:org.mitre.oval:tst:115158"/>
+    <criterion comment="Check if the version of ssleay32.dll before 0.9.8x under System Root" test_ref="oval:org.mitre.oval:tst:115101"/>
+  </criteria>
+</definition>

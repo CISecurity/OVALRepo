@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12054" version="8" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>User-assisted remote web servers to cause a denial of service in Opera version less than 10.63.3516.0</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Opera Browser</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-4048" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4048"/>
+    <description>Opera before 10.63 allows user-assisted remote web servers to cause a denial of service (application crash) by sending a redirect during the saving of a file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-26T06:17:08">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-10-29T13:18:00.409-04:00">DRAFT</status_change>
+        <status_change date="2010-11-15T04:00:15.001-05:00">INTERIM</status_change>
+        <status_change date="2010-12-06T04:00:23.821-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:48:34.701-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:00:21.125-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:28339 - Now path to opera.exe is searched in registry" date="2013-12-04T13:48:00.075-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-04T13:53:16.745-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:11.105-05:00">ACCEPTED</status_change>
+        <status_change date="2013-12-23T04:00:07.831-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Opera Browser is installed" definition_ref="oval:org.mitre.oval:def:6482"/>
+    <criterion comment="Check if HKLM\SOFTWARE\Classes\Applications\Opera.exe\shell\open\command exists" test_ref="oval:org.mitre.oval:tst:89007"/>
+    <criterion comment="Check if Opera version is less than 10.63.3516.0" test_ref="oval:org.mitre.oval:tst:41854"/>
+  </criteria>
+</definition>

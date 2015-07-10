@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:4943" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AIX bellmail buffer overflow vulnerability</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.2</platform>
+      <platform>IBM AIX 5.3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-4623" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4623"/>
+    <description>Stack-based buffer overflow in the sendrmt function in bellmail in IBM AIX 5.2 and 5.3 allows local users to execute arbitrary code via a long parameter to the m command.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-11T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Yuzheng Zhou</contributor>
+        </submitted>
+        <status_change date="2008-04-11T14:12:20.234-04:00">DRAFT</status_change>
+        <status_change date="2008-04-28T04:00:06.799-04:00">INTERIM</status_change>
+        <status_change date="2008-05-19T04:00:08.528-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="IBM AIX 5.2 meets CVE-2007-4623">
+      <criterion comment="The level of fileset bos.net.tcp.client is greater than or equal 5.2.0.0" test_ref="oval:org.mitre.oval:tst:7050"/>
+      <criterion comment="The level of fileset bos.net.tcp.client is less than or equal 5.2.0.108" test_ref="oval:org.mitre.oval:tst:7261"/>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5.3 meets CVE-2007-4623">
+      <criterion comment="The level of fileset bos.net.tcp.client is greater than or equal 5.3.0.0" test_ref="oval:org.mitre.oval:tst:7735"/>
+      <criterion comment="The level of fileset bos.net.tcp.client is less than or equal 5.3.0.64" test_ref="oval:org.mitre.oval:tst:7429"/>
+    </criteria>
+  </criteria>
+</definition>

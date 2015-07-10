@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28696" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:0974-1 -- Security update for apache2 (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <product>apache2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20150974-1.html" ref_id="SUSE-SU-2015:0974-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5704" ref_id="CVE-2013-5704"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3581" ref_id="CVE-2014-3581"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8109" ref_id="CVE-2014-8109"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0228" ref_id="CVE-2015-0228"/>
+    <description>Apache2 updated to fix four security issues and one non-security bug.
+The following vulnerabilities have been fixed:
+- mod_headers rules could be bypassed via chunked requests. Adds
+  "MergeTrailers" directive to restore legacy behavior. (bsc#871310,
+  CVE-2013-5704)
+- An empty value in Content-Type could lead to a crash through a null
+  pointer dereference and a denial of service. (bsc#899836, CVE-2014-3581)
+- Remote attackers could bypass intended access restrictions in mod_lua
+  LuaAuthzProvider when multiple Require directives with different
+  arguments are used. (bsc#909715, CVE-2014-8109)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:34:26">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:13.485-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="apache2 is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139298"/>
+      <criterion comment="apache2-debuginfo is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:140081"/>
+      <criterion comment="apache2-debugsource is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139639"/>
+      <criterion comment="apache2-example-pages is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139256"/>
+      <criterion comment="apache2-prefork is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139602"/>
+      <criterion comment="apache2-prefork-debuginfo is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139960"/>
+      <criterion comment="apache2-utils is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:140099"/>
+      <criterion comment="apache2-utils-debuginfo is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139505"/>
+      <criterion comment="apache2-worker is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139810"/>
+      <criterion comment="apache2-worker-debuginfo is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:140078"/>
+      <criterion comment="apache2-doc is earlier than 0:2.4.10-12.1" test_ref="oval:org.mitre.oval:tst:139954"/>
+    </criteria>
+  </criteria>
+</definition>

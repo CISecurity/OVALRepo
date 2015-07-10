@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13286" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2057-1 mysql-dfsg-5.0 -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>mysql-dfsg-5.0</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00100.html" ref_id="DSA-2057-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1626" ref_id="CVE-2010-1626"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1848" ref_id="CVE-2010-1848"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1849" ref_id="CVE-2010-1849"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1850" ref_id="CVE-2010-1850"/>
+    <description>Several vulnerabilities have been discovered in the MySQL database server. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2010-1626 MySQL allows local users to delete the data and index files of another user's MyISAM table via a symlink attack in conjunction with the DROP TABLE command. CVE-2010-1848 MySQL failed to check the table name argument of a COM_FIELD_LIST command packet for validity and compliance to acceptable table name standards. This allows an authenticated user with SELECT privileges on one table to obtain the field definitions of any table in all other databases and potentially of other MySQL instances accessible from the server's file system. CVE-2010-1849 MySQL could be tricked to read packets indefinitely if it received a packet larger than the maximum size of one packet. This results in high CPU usage and thus denial of service conditions. CVE-2010-1850 MySQL was susceptible to a buffer-overflow attack due to a failure to perform bounds checking on the table name argument of a COM_FIELD_LIST command packet. By sending long data for the table name, a buffer is overflown, which could be exploited by an authenticated user to inject malicious code. For the stable distribution, these problems have been fixed in version 5.0.51a-24+lenny4 The testing and unstable distribution do not contain mysql-dfsg-5.0 anymore. We recommend that you upgrade your mysql-dfsg-5.0 package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:26:23.596-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:01:58.098-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:05:00.500-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13286 - Debian Patch Update" date="2014-06-06T17:01:00.787-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:03:31.660-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:53.510-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="mysql-client DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:45212"/>
+          <criterion comment="mysql-common DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:46078"/>
+          <criterion comment="mysql-server DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:45934"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libmysqlclient15-dev DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:46110"/>
+          <criterion comment="mysql-client-5.0 DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:46059"/>
+          <criterion comment="mysql-server-5.0 DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:46142"/>
+          <criterion comment="libmysqlclient15off DPKG is earlier than 5.0.51a-24+lenny4" test_ref="oval:org.mitre.oval:tst:45986"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

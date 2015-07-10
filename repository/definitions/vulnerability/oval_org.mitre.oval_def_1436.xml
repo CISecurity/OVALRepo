@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1436" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris CDE DTLogin XDMCP Parser Remote Double Free Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>Common Desktop Environment</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0368" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0368"/>
+    <description>Double free vulnerability in dtlogin in CDE on Solaris, HP-UX, and other operating systems allows remote attackers to execute arbitrary code via a crafted XDMCP packet.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-12T12:37:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <modified date="2004-10-12T12:47:00.000-04:00" comment="Added patch 107180-31 test for Solaris 7.  Changed vulnerable software test logic a little">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </modified>
+        <status_change date="2004-10-13T01:15:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-10-27T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-11-17T10:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected datatype on base element. Datatype must be int." date="2007-01-04T08:54:00.038-05:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2007-01-04T08:56:47.173-05:00">INTERIM</status_change>
+        <modified comment="Corrected datatype on version element in ste:841. Datatype must be int." date="2007-01-04T09:48:00.458-05:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2007-02-20T13:39:43.377-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="File /usr/dt/bin/dtlogin exists" test_ref="oval:org.mitre.oval:tst:939"/>
+      <criteria operator="OR" comment="Solaris 7,8,or 9 installed">
+        <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="Solaris 7 Installed" test_ref="oval:org.mitre.oval:tst:3045"/>
+        <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      </criteria>
+      <criterion comment="Patch 108919-21 or later installed" test_ref="oval:org.mitre.oval:tst:937"/>
+      <criterion comment="Patch 112807-09 or later installed" test_ref="oval:org.mitre.oval:tst:936"/>
+      <criterion comment="Patch 107180-31 or later installed" test_ref="oval:org.mitre.oval:tst:935"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="dtlogin running" test_ref="oval:org.mitre.oval:tst:938"/>
+    </criteria>
+  </criteria>
+</definition>

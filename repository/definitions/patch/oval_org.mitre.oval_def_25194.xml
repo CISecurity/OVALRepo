@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25194" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2014:0330-1 -- Recommended update for libopenssl</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>libopenssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140330-1.html" ref_id="SUSE-RU-2014:0330-1"/>
+    <description>This update brings various enhancements for OpenSSL:
+
+    * 
+
+      IPv6 support was added to the openssl s_client and
+s_server command line tool. (bnc#859228)
+
+    * 
+
+      The openssl command line tool now checks certificates
+by default against /etc/ssl/certs (this can be changed via
+the -CApath option). (bnc#860332)
+
+    * 
+
+      The Elliptic Curve Diffie-Hellman key exchange
+selector was enabled and can be selected by kECDHE, kECDH,
+ECDH tags in the SSL cipher string. (bnc#859924)
+
+    * 
+
+      If an optional "openssl1" command line tool is
+installed in parallel, c_rehash uses it to generate
+certificate hashes in both OpenSSL 0 and OpenSSL 1 style.
+This allows parallel usage of OpenSSL 0.9.8j and OpenSSL
+1.x client libraries with a shared certificate store.
+(bnc#862181)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:17:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:13:21.290-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:27.739-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:12.480-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libopenssl0_9_8 RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117579"/>
+        <criterion comment="openssl RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117182"/>
+        <criterion comment="libopenssl0_9_8-32bit RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117328"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libopenssl0_9_8-hmac RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117512"/>
+        <criterion comment="openssl-doc RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117532"/>
+        <criterion comment="libopenssl0_9_8-hmac-32bit RPM is earlier than 0:0.9.8j-0.52.1" test_ref="oval:org.mitre.oval:tst:117577"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

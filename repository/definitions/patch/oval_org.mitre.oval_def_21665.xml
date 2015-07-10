@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21665" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:1512: libxml2 security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:1512-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-1512.html"/>
+    <reference source="CESA" ref_id="CESA-2012:1512"/>
+    <reference source="CVE" ref_id="CVE-2012-5134" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-5134.html"/>
+    <description>Heap-based buffer underflow in the xmlParseAttValueComplex function in parser.c in libxml2 2.9.0 and earlier, as used in Google Chrome before 23.0.1271.91 and other products, allows remote attackers to cause a denial of service or possibly execute arbitrary code via crafted entities in an XML document.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:39.254-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:35.934-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:53.594-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libxml2-devel is earlier than 0:2.6.26-2.1.15.el5_8.6" test_ref="oval:org.mitre.oval:tst:94612"/>
+        <criterion comment="libxml2-python is earlier than 0:2.6.26-2.1.15.el5_8.6" test_ref="oval:org.mitre.oval:tst:94428"/>
+        <criterion comment="libxml2 is earlier than 0:2.6.26-2.1.15.el5_8.6" test_ref="oval:org.mitre.oval:tst:94892"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libxml2-devel is earlier than 0:2.7.6-8.el6_3.4" test_ref="oval:org.mitre.oval:tst:94867"/>
+        <criterion comment="libxml2-python is earlier than 0:2.7.6-8.el6_3.4" test_ref="oval:org.mitre.oval:tst:94379"/>
+        <criterion comment="libxml2 is earlier than 0:2.7.6-8.el6_3.4" test_ref="oval:org.mitre.oval:tst:94940"/>
+        <criterion comment="libxml2-static is earlier than 0:2.7.6-8.el6_3.4" test_ref="oval:org.mitre.oval:tst:94495"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

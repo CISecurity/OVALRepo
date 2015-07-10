@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12722" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2130-1 bind9 -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00182.html" ref_id="DSA-2130-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3762" ref_id="CVE-2010-3762"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3614" ref_id="CVE-2010-3614"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3613" ref_id="CVE-2010-3613"/>
+    <description>Several remote vulnerabilities have been discovered in BIND, an implementation of the DNS protocol suite. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2010-3762 When DNSSEC validation is enabled, BIND does not properly handle certain bad signatures if multiple trust anchors exist for a single zone, which allows remote attackers to cause a denial of service via a DNS query. CVE-2010-3614 BIND does not properly determine the security status of an NS RRset during a DNSKEY algorithm rollover, which may lead to zone unavailability during rollovers. CVE-2010-3613 BIND does not properly handle the combination of signed negative responses and corresponding RRSIG records in the cache, which allows remote attackers to cause a denial of service via a query for cached data. In addition, this security update improves compatibility with previously installed versions of the bind9 package. As a result, it is necessary to initiate the update with &amp;quot;apt-get dist-upgrade&amp;quot; instead of &amp;quot;apt-get update&amp;quot;. For the stable distribution, these problems have been fixed in version 1:9.6.ESV.R3+dfsg-0+lenny1. For the upcoming stable distribution and the unstable distribution, these problems have been fixed in version 1:9.7.2.dfsg.P3-1. We recommend that you upgrade your bind9 packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:25:20">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:09.326-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:26.070-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:32.843-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12722 - Debian Patch Update" date="2014-06-06T17:09:00.468-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:11:11.049-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:39.693-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:12121 - Modified Debian patches to correct Epochs." date="2015-02-04T10:32:00.631-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-04T10:36:20.771-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:00:12.870-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="ind9-doc DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42785"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libbind-dev DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42753"/>
+          <criterion comment="libisccc50 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42171"/>
+          <criterion comment="libbind9-50 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43159"/>
+          <criterion comment="libisc50 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43001"/>
+          <criterion comment="ind9 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42590"/>
+          <criterion comment="ind9utils DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43134"/>
+          <criterion comment="liblwres50 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42875"/>
+          <criterion comment="libisccfg50 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43028"/>
+          <criterion comment="nsutils DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42801"/>
+          <criterion comment="libdns58 DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43131"/>
+          <criterion comment="ind9-host DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:42976"/>
+          <criterion comment="lwresd DPKG is earlier than 1:9.6.ESV.R3+dfsg-0+lenny1" test_ref="oval:org.mitre.oval:tst:43148"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

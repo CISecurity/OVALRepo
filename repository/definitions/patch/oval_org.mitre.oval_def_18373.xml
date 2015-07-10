@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18373" version="8" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2707-1 dbus - denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>dbus</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2707-1" ref_id="DSA-2707-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2168" ref_id="CVE-2013-2168"/>
+    <description>Alexandru Cornea discovered a vulnerability in libdbus caused by an implementation bug in _dbus_printf_string_upper_bound(). This vulnerability can be exploited by a local user to crash system services that use libdbus, causing denial of service. Depending on the dbus services running, it could lead to complete system crash.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:12:03">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:10:20.709-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:01:05.548-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:09:57.128-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18373 - Replaced Debian 7.0 inventory with Debian 7.x &amp; Debian 6.0 with Debian GNU/Linux 6.0" date="2013-11-26T14:53:00.367-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-11-26T15:02:38.744-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23277 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-23T04:00:33.830-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18373 - Debian Patch Update" date="2014-06-06T17:36:00.316-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:38:33.888-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:04:19.529-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="dbus DPKG is earlier than 1.6.8-1+deb7u1" test_ref="oval:org.mitre.oval:tst:85892"/>
+  </criteria>
+</definition>

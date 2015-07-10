@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13772" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1109-1 -- gimp vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>gimp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-April/001303.html" ref_id="USN-1109-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4540" ref_id="CVE-2010-4540"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4541" ref_id="CVE-2010-4541"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4542" ref_id="CVE-2010-4542"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4543" ref_id="CVE-2010-4543"/>
+    <description>It was discovered that GIMP incorrectly handled malformed data in certain plugin configuration files. If a user were tricked into opening a specially crafted plugin configuration file, an attacker could cause GIMP to crash, or possibly execute arbitrary code with the user�s privileges. The default compiler options for affected releases should reduce the vulnerability to a denial of service. It was discovered that GIMP incorrectly handled malformed PSP image files. If a user were tricked into opening a specially crafted PSP image file, an attacker could cause GIMP to crash, or possibly execute arbitrary code with the user�s privileges</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:45:52.810-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:10:53.825-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:08:04.726-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13772 - added CVE references; also made minor updates" date="2014-06-13T15:07:00.368-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:09:49.680-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:53.758-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgimp2.0-doc DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65830"/>
+            <criterion comment="gimp-data DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65754"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgimp2.0 DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65901"/>
+            <criterion comment="gimp-libcurl DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65762"/>
+            <criterion comment="gimp-python DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65965"/>
+            <criterion comment="gimp-dbg DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65246"/>
+            <criterion comment="libgimp2.0-dev DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65940"/>
+            <criterion comment="gimp-gnomevfs DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:66009"/>
+            <criterion comment="gimp DPKG is earlier than 2.4.5-1ubuntu2.3" test_ref="oval:org.mitre.oval:tst:65715"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgimp2.0-doc DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65958"/>
+            <criterion comment="gimp-data DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65602"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gimp-dbg DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65147"/>
+            <criterion comment="libgimp2.0-dev DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65727"/>
+            <criterion comment="libgimp2.0 DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65930"/>
+            <criterion comment="gimp DPKG is earlier than 2.6.10-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:65518"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgimp2.0-doc DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65869"/>
+            <criterion comment="gimp-data DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65985"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gimp-dbg DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65891"/>
+            <criterion comment="libgimp2.0-dev DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65809"/>
+            <criterion comment="libgimp2.0 DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65852"/>
+            <criterion comment="gimp DPKG is earlier than 2.6.7-1ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65673"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgimp2.0-doc DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65689"/>
+            <criterion comment="gimp-data DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65040"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gimp-dbg DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65375"/>
+            <criterion comment="libgimp2.0-dev DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65653"/>
+            <criterion comment="libgimp2.0 DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65772"/>
+            <criterion comment="gimp DPKG is earlier than 2.6.8-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:65759"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

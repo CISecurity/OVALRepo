@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28673" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2765-2 -- davfs2 -- privilege escalation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>davfs2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2765" ref_id="DSA-2765-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4362" ref_id="CVE-2013-4362"/>
+    <description>Davfs2, a filesystem client for WebDAV, calls the function systeminsecurely while is setuid root. This might allow a privilege escalation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:39:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:42.664-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Debian 6">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="davfs2 is earlier than 0:1.4.6-1.1+squeeze1" test_ref="oval:org.mitre.oval:tst:140151"/>
+    </criteria>
+    <criteria operator="AND" comment="Debian 7">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="davfs2 is earlier than 0:1.4.6-1.1+deb7u1" test_ref="oval:org.mitre.oval:tst:139732"/>
+    </criteria>
+  </criteria>
+</definition>

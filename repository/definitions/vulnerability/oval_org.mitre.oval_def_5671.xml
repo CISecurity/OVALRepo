@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5671" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Linux Kernel SBNI WAN Driver Privilege Check Bugs May Let Local Users Gain Elevated Privileges</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3525" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3525"/>
+    <description>The sbni_ioctl function in drivers/net/wan/sbni.c in the wan subsystem in the Linux kernel 2.6.26.3 does not check for the CAP_NET_ADMIN capability before processing a (1) SIOCDEVRESINSTATS, (2) SIOCDEVSHWSTATE, (3) SIOCDEVENSLAVE, or (4) SIOCDEVEMANSIPATE ioctl request, which allows local users to bypass intended capability restrictions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-11-30T14:34:18.347-05:00">DRAFT</status_change>
+        <status_change date="2009-12-21T04:00:35.926-05:00">INTERIM</status_change>
+        <status_change date="2010-01-11T04:01:25.853-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criterion comment="Patch ESX350-200910401-SG is not installed" test_ref="oval:org.mitre.oval:tst:10930"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27517" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013-2503 -- Unbreakable Enterprise kernel security update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-2503.html" ref_id="ELSA-2013-2503"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4398" ref_id="CVE-2012-4398"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4461" ref_id="CVE-2012-4461"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4530" ref_id="CVE-2012-4530"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0190" ref_id="CVE-2013-0190"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0231" ref_id="CVE-2013-0231"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0216" ref_id="CVE-2013-0216"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0217" ref_id="CVE-2013-0217"/>
+    <description>[2.6.39-300.28.1]
+
+- kmod: make __request_module() killable (Oleg Nesterov) [Orabug: 16286305]
+
+  {CVE-2012-4398}
+
+- kmod: introduce call_modprobe() helper (Oleg Nesterov) [Orabug: 16286305]
+
+  {CVE-2012-4398}
+
+- usermodehelper: implement UMH_KILLABLE (Oleg Nesterov) [Orabug: 16286305]
+
+  {CVE-2012-4398}
+
+- usermodehelper: introduce umh_complete(sub_info) (Oleg Nesterov) [Orabug:
+
+  16286305] {CVE-2012-4398}
+
+- KVM: x86: invalid opcode oops on SET_SREGS with OSXSAVE bit set
+
+  (CVE-2012-4461) (Jerry Snitselaar) [Orabug: 16286290] {CVE-2012-4461}
+
+- exec: do not leave bprm->interp on stack (Kees Cook) [Orabug: 16286267]
+
+  {CVE-2012-4530}
+
+- exec: use -ELOOP for max recursion depth (Kees Cook) [Orabug: 16286267]
+
+  {CVE-2012-4530}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:24:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:14:55.820-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:04:54.252-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:08.590-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 5 release section">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:129523"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:130274"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:130338"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:130392"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:129940"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-300.28.1.el5uek" test_ref="oval:org.mitre.oval:tst:129839"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:130506"/>
+        <criterion comment="kernel-uek-debug is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:130306"/>
+        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:130325"/>
+        <criterion comment="kernel-uek-devel is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:130042"/>
+        <criterion comment="kernel-uek-doc is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:129926"/>
+        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.39-300.28.1.el6uek" test_ref="oval:org.mitre.oval:tst:130449"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

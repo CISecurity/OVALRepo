@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22679" version="17" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:0347: openldap security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>openldap</product>
+    </affected>
+    <reference ref_id="ELSA-2011:0347-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-0347.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-1024" ref_url="http://linux.oracle.com/cve/CVE-2011-1024.html" source="CVE"/>
+    <reference ref_id="CVE-2011-1025" ref_url="http://linux.oracle.com/cve/CVE-2011-1025.html" source="CVE"/>
+    <reference ref_id="CVE-2011-1081" ref_url="http://linux.oracle.com/cve/CVE-2011-1081.html" source="CVE"/>
+    <description>modrdn.c in slapd in OpenLDAP 2.4.x before 2.4.24 allows remote attackers to cause a denial of service (daemon crash) via a relative Distinguished Name (DN) modification request (aka MODRDN operation) that contains an empty value for the OldDN field.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:23:27.437-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:03:15.698-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:01:42.986-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22679 - optimisation of Oracle Linux content" date="2014-05-05T18:07:00.862-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:09:15.434-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:01:48.973-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="openldap-servers is earlier than 0:2.4.19-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108340"/>
+      <criterion comment="compat-openldap is earlier than 0:2.4.19_2.3.43-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108412"/>
+      <criterion comment="openldap is earlier than 0:2.4.19-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108671"/>
+      <criterion comment="openldap-clients is earlier than 0:2.4.19-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108378"/>
+      <criterion comment="openldap-devel is earlier than 0:2.4.19-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108712"/>
+      <criterion comment="openldap-servers-sql is earlier than 0:2.4.19-15.el6_0.2" test_ref="oval:org.mitre.oval:tst:108317"/>
+    </criteria>
+  </criteria>
+</definition>

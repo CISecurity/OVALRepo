@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6043" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <product>Microsoft Excel 2000</product>
+      <product>Microsoft Excel 2002</product>
+      <product>Microsoft Excel 2003</product>
+      <product>Microsoft Excel 2007</product>
+      <product>Microsoft Office Excel Viewer 2003</product>
+      <product>Microsoft Office Excel Viewer</product>
+      <product>Microsoft Office Compatibility Pack</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0100" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0100"/>
+    <description>Microsoft Office Excel 2000 SP3, 2002 SP3, 2003 SP3, and 2007 SP1; Excel in Microsoft Office 2004 and 2008 for Mac; Microsoft Office Excel Viewer and Excel Viewer 2003 SP3; and Microsoft Office Compatibility Pack for Word, Excel, and PowerPoint 2007 File Formats SP1 do not properly parse the Excel spreadsheet file format, which allows remote attackers to execute arbitrary code via a crafted spreadsheet that contains a malformed object with "an offset and a two-byte value" that trigger a memory calculation error, aka "Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-04-14T16:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Kyle Key</contributor>
+        </submitted>
+        <status_change date="2009-04-17T16:45:13.152-04:00">DRAFT</status_change>
+        <status_change date="2009-05-04T04:00:27.363-04:00">INTERIM</status_change>
+        <status_change date="2009-05-25T04:01:54.666-04:00">ACCEPTED</status_change>
+        <modified comment="Removed CVE from title. Added Microsoft Windows Vista, Server 2003, XP, 2000 to the list of affected platforms. Removed Microsoft reference" date="2009-06-01T16:05:28.035-04:00">
+          <contributor organization="The MITRE Corporation">Brendan Miles</contributor>
+        </modified>
+        <status_change date="2009-06-08T04:00:55.112-04:00">INTERIM</status_change>
+        <status_change date="2009-06-29T04:00:50.421-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6362 - Updating Microsoft Excel content to utilize the windows_view behavior." date="2012-05-10T14:07:00.113-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-05-10T14:23:57.875-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-06-04T04:01:59.767-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:6918 - check the version of the file Xlview.exe when Excel Viewer 2007 is installed." date="2013-09-11T10:00:00.318-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-11T10:13:42.604-04:00">INTERIM</status_change>
+        <status_change date="2013-09-30T04:01:27.591-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:02.062-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:11:13.562-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel 2000 is installed" definition_ref="oval:org.mitre.oval:def:758"/>
+      <criterion comment="Excel.exe version is less than 9.0.0.8977" test_ref="oval:org.mitre.oval:tst:9986"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel 2002 is installed" definition_ref="oval:org.mitre.oval:def:473"/>
+      <criterion comment="Excel.exe version is less than 10.0.6852.0" test_ref="oval:org.mitre.oval:tst:9874"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel 2003 is installed" definition_ref="oval:org.mitre.oval:def:764"/>
+      <criterion comment="Excel.exe version is less than 11.0.8302.0" test_ref="oval:org.mitre.oval:tst:9937"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel 2007 is installed" definition_ref="oval:org.mitre.oval:def:1745"/>
+      <criterion comment="Excel.exe version is less than 12.0.6341.5001" test_ref="oval:org.mitre.oval:tst:9740"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel Viewer 2003 is installed" definition_ref="oval:org.mitre.oval:def:439"/>
+      <criterion comment="Xlview.exe version is less than 11.0.8302.0" test_ref="oval:org.mitre.oval:tst:9960"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Excel Viewer 2007 is installed" definition_ref="oval:org.mitre.oval:def:6006"/>
+      <criterion comment="XLView.exe version is less than 12.0.6341.5001" test_ref="oval:org.mitre.oval:tst:9715"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Office Compatibility Pack is installed" definition_ref="oval:org.mitre.oval:def:1853"/>
+      <criterion comment="Excelcnv.exe version is less than 12.0.6341.5001" test_ref="oval:org.mitre.oval:tst:9892"/>
+    </criteria>
+  </criteria>
+</definition>

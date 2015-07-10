@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25868" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1251-1 -- Security update for glibc</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131251-1.html" ref_id="SUSE-SU-2013:1251-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1914" ref_id="CVE-2013-1914"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3480" ref_id="CVE-2012-3480"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3405" ref_id="CVE-2012-3405"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3406" ref_id="CVE-2012-3406"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4756" ref_id="CVE-2010-4756"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1089" ref_id="CVE-2011-1089"/>
+    <description>This collective update for the GNU C library (glibc)
+provides the following  fixes and enhancements:
+
+Security issues fixed:
+
+    * Fix stack overflow in getaddrinfo with many results.
+(bnc#813121, CVE-2013-1914)
+    * Fix a different stack overflow in getaddrinfo with
+many results. (bnc#828637)
+    * Fix array overflow in floating point parser
+[bnc#775690] (CVE-2012-3480)
+    * Fix strtod integer/buffer overflows [bnc#775690]
+(CVE-2012-3480)
+    * Add patches for fix overflows in vfprintf. [bnc
+#770891, CVE-2012-3405, CVE-2012-3406]
+    * Fix buffer overflow in glob. (bnc#691365)
+(CVE-2010-4756)
+    * Flush stream in addmntent, to catch errors like
+reached file size limits. [bnc #676178, CVE-2011-1089]
+
+Bugs fixed:
+
+    * Fix locking in _IO_cleanup. (bnc#796982)
+    * Fix resolver when first query fails, but seconds
+succeeds. [bnc #767266]</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:30:15">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:28:17.479-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:25.604-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:30.404-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="glibc RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119444"/>
+      <criterion comment="glibc-devel RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119042"/>
+      <criterion comment="glibc-html RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119440"/>
+      <criterion comment="glibc-i18ndata RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119082"/>
+      <criterion comment="glibc-info RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119361"/>
+      <criterion comment="glibc-locale RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119165"/>
+      <criterion comment="glibc-profile RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119392"/>
+      <criterion comment="nscd RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119323"/>
+      <criterion comment="glibc-32bit RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119413"/>
+      <criterion comment="glibc-devel-32bit RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119420"/>
+      <criterion comment="glibc-locale-32bit RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119359"/>
+      <criterion comment="glibc-profile-32bit RPM is earlier than 0:2.11.1-0.50.1" test_ref="oval:org.mitre.oval:tst:119177"/>
+    </criteria>
+  </criteria>
+</definition>

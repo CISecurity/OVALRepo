@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13712" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1861-1 libxml -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>libxml</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00178.html" ref_id="DSA-1861-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2416" ref_id="CVE-2009-2416"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2414" ref_id="CVE-2009-2414"/>
+    <description>Rauli Kaksonen, Tero Rontti and Jukka Taimisto discovered several vulnerabilities in libxml, a library for parsing and handling XML data files, which can lead to denial of service conditions or possibly arbitrary code execution in the application using the library. The Common Vulnerabilities and Exposures project identifies the following problems: An XML document with specially-crafted Notation or Enumeration attribute types in a DTD definition leads to the use of a pointers to memory areas which have already been freed. Missing checks for the depth of ELEMENT DTD definitions when parsing child content can lead to extensive stack-growth due to a function recursion which can be triggered via a crafted XML document. For the oldstable distribution, this problem has been fixed in version 1.8.17-14+etch1. The stable, testing and unstable distribution do not contain libxml anymore but libxml2 for which DSA-1859-1 has been released. We recommend that you upgrade your libxml packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:30:26.857-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:03:50.449-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:10:17.217-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13712 - Debian Patch Update" date="2014-06-06T16:53:00.834-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:54:34.786-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:57.023-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Supported architectures section">
+      <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+      <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+      <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+      <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+      <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+      <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+      <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+      <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+      <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libxml1 DPKG is earlier than 1.8.17-14+etch1" test_ref="oval:org.mitre.oval:tst:50288"/>
+      <criterion comment="libxml-dev DPKG is earlier than 1.8.17-14+etch1" test_ref="oval:org.mitre.oval:tst:50289"/>
+    </criteria>
+  </criteria>
+</definition>

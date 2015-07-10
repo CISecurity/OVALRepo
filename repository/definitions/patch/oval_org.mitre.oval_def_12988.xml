@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12988" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1002-2 -- postgresql-8.4 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <product>postgresql-8.4</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-October/001177.html" ref_id="USN-1002-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3433" ref_id="CVE-2010-3433"/>
+    <description>USN-1002-1 fixed vulnerabilities in PostgreSQL. This update provides the corresponding update for Ubuntu 10.10. Original advisory details: It was discovered that PostgreSQL did not properly enforce permissions within sessions when PL/Perl and PL/Tcl functions or operators were redefined. A remote authenticated attacker could exploit this to execute arbitrary code with permissions of a different user, possibly leading to privilege escalation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:09:52.330-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:47.876-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:22.257-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12988 - added CVE references; also made minor updates" date="2014-06-13T16:23:00.498-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:24:48.977-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:09.952-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="postgresql-doc-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:52998"/>
+          <criterion comment="postgresql-client DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53200"/>
+          <criterion comment="postgresql-contrib DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53430"/>
+          <criterion comment="postgresql DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53422"/>
+          <criterion comment="postgresql-doc DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53217"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="postgresql-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53334"/>
+          <criterion comment="postgresql-contrib-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53468"/>
+          <criterion comment="postgresql-client-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53031"/>
+          <criterion comment="libecpg6 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53147"/>
+          <criterion comment="postgresql-pltcl-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53414"/>
+          <criterion comment="postgresql-plpython-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53440"/>
+          <criterion comment="libpq-dev DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:52795"/>
+          <criterion comment="postgresql-server-dev-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53367"/>
+          <criterion comment="libecpg-dev DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53137"/>
+          <criterion comment="libpq5 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53398"/>
+          <criterion comment="libpgtypes3 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53386"/>
+          <criterion comment="postgresql-plperl-8.4 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53363"/>
+          <criterion comment="libecpg-compat3 DPKG is earlier than 8.4.5-0ubuntu10.10" test_ref="oval:org.mitre.oval:tst:53362"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

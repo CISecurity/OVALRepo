@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25148" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0024-1 -- Security update for Samba</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Samba</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140024-1.html" ref_id="SUSE-SU-2014:0024-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4408" ref_id="CVE-2013-4408"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6150" ref_id="CVE-2012-6150"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4475" ref_id="CVE-2013-4475"/>
+    <description>This update fixes the following security issues with Samba:
+
+    * bnc#844720: DCERPC frag_len not checked
+(CVE-2013-4408)
+    * bnc#853347: winbind pam security problem
+(CVE-2012-6150)
+    * bnc#848101: No access check verification on stream
+files (CVE-2013-4475)
+
+And fixes the following non-security issues:
+
+    * bnc#853021: libsmbclient0 package description
+contains comments
+    * bnc#817880: rpcclient adddriver and setdrive do not
+set all needed registry entries
+    * bnc#838472: Client trying to delete print job fails:
+Samba returns: WERR_INVALID_PRINTER_NAME
+    * bnc#854520 and bnc#849226: various upstream fixes</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:21:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:21:21.675-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:21.439-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:04.750-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="ldapsmb RPM is earlier than 0:1.34b-12.46.1" test_ref="oval:org.mitre.oval:tst:118031"/>
+        <criterion comment="ldapsmb RPM is earlier than 0:1.34b-12.33.39.1" test_ref="oval:org.mitre.oval:tst:118013"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libldb1 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118052"/>
+        <criterion comment="libsmbclient0 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117739"/>
+        <criterion comment="libtalloc2 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118059"/>
+        <criterion comment="libtdb1 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118097"/>
+        <criterion comment="libtevent0 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117698"/>
+        <criterion comment="libwbclient0 RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118103"/>
+        <criterion comment="samba RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117940"/>
+        <criterion comment="samba-client RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117788"/>
+        <criterion comment="samba-krb-printing RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118111"/>
+        <criterion comment="samba-winbind RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117841"/>
+        <criterion comment="libsmbclient0-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118068"/>
+        <criterion comment="libtalloc2-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117420"/>
+        <criterion comment="libtdb1-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117994"/>
+        <criterion comment="libtevent0-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117971"/>
+        <criterion comment="libwbclient0-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117640"/>
+        <criterion comment="samba-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118065"/>
+        <criterion comment="samba-client-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117138"/>
+        <criterion comment="samba-winbind-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:118045"/>
+        <criterion comment="samba-doc RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117950"/>
+        <criterion comment="libldb1 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117825"/>
+        <criterion comment="libsmbclient0 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117280"/>
+        <criterion comment="libtalloc1 RPM is earlier than 0:3.4.3-1.50.1" test_ref="oval:org.mitre.oval:tst:117988"/>
+        <criterion comment="libtalloc2 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117865"/>
+        <criterion comment="libtdb1 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118095"/>
+        <criterion comment="libtevent0 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117920"/>
+        <criterion comment="libwbclient0 RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117676"/>
+        <criterion comment="samba RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118098"/>
+        <criterion comment="samba-client RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118015"/>
+        <criterion comment="samba-krb-printing RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118120"/>
+        <criterion comment="samba-winbind RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118025"/>
+        <criterion comment="libsmbclient0-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117894"/>
+        <criterion comment="libtalloc1-32bit RPM is earlier than 0:3.4.3-1.50.1" test_ref="oval:org.mitre.oval:tst:118080"/>
+        <criterion comment="libtalloc2-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117892"/>
+        <criterion comment="libtdb1-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117207"/>
+        <criterion comment="libtevent0-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118076"/>
+        <criterion comment="libwbclient0-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118084"/>
+        <criterion comment="samba-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:118107"/>
+        <criterion comment="samba-client-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117936"/>
+        <criterion comment="samba-winbind-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117821"/>
+        <criterion comment="samba-doc RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117849"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libldb1-32bit RPM is earlier than 0:3.6.3-0.46.1" test_ref="oval:org.mitre.oval:tst:117837"/>
+        <criterion comment="libldb1-32bit RPM is earlier than 0:3.6.3-0.33.39.1" test_ref="oval:org.mitre.oval:tst:117648"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

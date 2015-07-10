@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24501" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in WPAR ftp for AIX</title>
+    <affected family="unix">
+      <platform>IBM AIX 6.1</platform>
+      <platform>IBM AIX 7.1</platform>
+    </affected>
+    <reference ref_id="CVE-2014-0899" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0899" source="CVE"/>
+    <description>ftpd in IBM AIX 7.1.1 before SP10 and 7.1.2 before SP5, when a Workload Partition (aka WPAR) for AIX 5.2 or 5.3 is used, allows remote authenticated users to bypass intended permission settings and modify arbitrary files via FTP commands.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-04-01T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </submitted>
+        <status_change date="2014-04-04T10:23:07.266-04:00">DRAFT</status_change>
+        <status_change date="2014-04-21T04:00:55.818-04:00">INTERIM</status_change>
+        <status_change date="2014-05-12T04:00:56.420-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="platforms">
+      <extend_definition comment="IBM AIX 6.1 is installed" definition_ref="oval:org.mitre.oval:def:5267"/>
+      <extend_definition comment="IBM AIX 7.1 is installed" definition_ref="oval:org.mitre.oval:def:18828"/>
+    </criteria>
+    <criteria operator="OR" comment="filesets">
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="vwpar.52.rte greater than or equal 1.1.0.0" test_ref="oval:org.mitre.oval:tst:113146"/>
+        <criterion comment="vwpar.52.rte less than or equal 1.1.1.19" test_ref="oval:org.mitre.oval:tst:113288"/>
+      </criteria>
+      <criteria operator="AND" comment="File Version Exists">
+        <criterion comment="vwpar.52.rte greater than or equal 1.1.2.0" test_ref="oval:org.mitre.oval:tst:113357"/>
+        <criterion comment="vwpar.52.rte less than or equal 1.1.2.17" test_ref="oval:org.mitre.oval:tst:113415"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

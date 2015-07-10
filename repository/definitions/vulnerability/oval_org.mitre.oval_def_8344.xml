@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8344" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Kernel Exception Handler Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0232" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0232"/>
+    <description>The kernel in Microsoft Windows NT 3.1 through Windows 7, including Windows 2000 SP4, Windows XP SP2 and SP3, Windows Server 2003 SP2, Windows Vista Gold, SP1, and SP2, and Windows Server 2008 Gold and SP2, when access to 16-bit applications is enabled on a 32-bit x86 platform, does not properly validate certain BIOS calls, which allows local users to gain privileges by crafting a VDM_TIB data structure in the Thread Environment Block (TEB), and then calling the NtVdmControl function to start the Windows Virtual DOS Machine (aka NTVDM) subsystem, leading to improperly handled exceptions involving the #GP trap handler (nt!KiTrap0D), aka "Windows Kernel Exception Handler Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-02-08T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-02-10T13:40:37.616-05:00">DRAFT</status_change>
+        <status_change date="2010-03-01T04:00:19.970-05:00">INTERIM</status_change>
+        <status_change date="2010-03-22T04:00:10.417-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 2000 SP4 or later">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 5.0.2195.7364" test_ref="oval:org.mitre.oval:tst:20965"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP2">
+      <extend_definition comment="Microsoft Windows XP (x86) SP2 is installed" definition_ref="oval:org.mitre.oval:def:754"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 5.1.2600.3654" test_ref="oval:org.mitre.oval:tst:20861"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86) SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 5.1.2600.5913" test_ref="oval:org.mitre.oval:tst:20875"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2003 x86 SP2">
+      <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 5.2.3790.4637" test_ref="oval:org.mitre.oval:tst:21038"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86 - GDR">
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6000.16000" test_ref="oval:org.mitre.oval:tst:10882"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6000.16973" test_ref="oval:org.mitre.oval:tst:21001"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86 - LDR">
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:10762"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6000.21175" test_ref="oval:org.mitre.oval:tst:21086"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP1 x86, Server 2008 32bit - GDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+      </criteria>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6001.18000" test_ref="oval:org.mitre.oval:tst:10821"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6001.18377" test_ref="oval:org.mitre.oval:tst:21094"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP1 x86, Server 2008 32bit - LDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:4873"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+      </criteria>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:10407"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6001.22577" test_ref="oval:org.mitre.oval:tst:20290"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP2 x86, Server 2008 SP2 32bit - GDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+      </criteria>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6002.18000" test_ref="oval:org.mitre.oval:tst:10870"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6002.18160" test_ref="oval:org.mitre.oval:tst:20720"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista SP2 x86, Server 2008 SP2 32bit - LDR">
+      <criteria operator="OR">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6124"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+      </criteria>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:10581"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.0.6002.22283" test_ref="oval:org.mitre.oval:tst:20937"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86 - GDR">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.1.7600.16000" test_ref="oval:org.mitre.oval:tst:21030"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.1.7600.16481" test_ref="oval:org.mitre.oval:tst:20790"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86 - LDR">
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <criterion comment="the version of Ntoskrnl.exe is greater than or equal 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:20969"/>
+      <criterion comment="the version of Ntoskrnl.exe is less than 6.1.7600.20591" test_ref="oval:org.mitre.oval:tst:20976"/>
+    </criteria>
+  </criteria>
+</definition>

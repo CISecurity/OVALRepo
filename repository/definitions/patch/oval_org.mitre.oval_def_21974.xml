@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21974" version="42" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1811: netpbm security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>netpbm</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1811-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1811.html"/>
+    <reference source="CESA" ref_id="CESA-2011:1811"/>
+    <reference source="CVE" ref_id="CVE-2009-4274" ref_url="https://www.redhat.com/security/data/cve/CVE-2009-4274.html"/>
+    <reference source="CVE" ref_id="CVE-2011-4516" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-4516.html"/>
+    <reference source="CVE" ref_id="CVE-2011-4517" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-4517.html"/>
+    <description>The jpc_crg_getparms function in libjasper/jpc/jpc_cs.c in JasPer 1.900.1 uses an incorrect data type during a certain size calculation, which allows remote attackers to trigger a heap-based buffer overflow and execute arbitrary code, or cause a denial of service (heap memory corruption), via a crafted component registration (CRG) marker segment in a JPEG2000 file.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:05.403-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:08.568-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:28.236-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="netpbm-progs is earlier than 0:10.35.58-8.el5_7.3" test_ref="oval:org.mitre.oval:tst:98726"/>
+      <criterion comment="netpbm-devel is earlier than 0:10.35.58-8.el5_7.3" test_ref="oval:org.mitre.oval:tst:98780"/>
+      <criterion comment="netpbm is earlier than 0:10.35.58-8.el5_7.3" test_ref="oval:org.mitre.oval:tst:98605"/>
+    </criteria>
+  </criteria>
+</definition>

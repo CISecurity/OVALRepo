@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15328" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1263-2 -- OpenJDK 6 regression</title>
+    <affected family="unix">
+      <platform>Ubuntu 11.04</platform>
+      <platform>Ubuntu 11.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <product>OpenJDK</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2012-January/001567.html" ref_id="USN-1263-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3389" ref_id="CVE-2011-3389"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3377" ref_id="CVE-2011-3377"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3521" ref_id="CVE-2011-3521"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3544" ref_id="CVE-2011-3544"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3547" ref_id="CVE-2011-3547"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3548" ref_id="CVE-2011-3548"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3551" ref_id="CVE-2011-3551"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3552" ref_id="CVE-2011-3552"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3553" ref_id="CVE-2011-3553"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3554" ref_id="CVE-2011-3554"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3556" ref_id="CVE-2011-3556"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3557" ref_id="CVE-2011-3557"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3558" ref_id="CVE-2011-3558"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3560" ref_id="CVE-2011-3560"/>
+    <description>openjdk-6: Open Source Java implementation - openjdk-6b18: Open Source Java implementation Details: USN-1263-1 fixed vulnerabilities in OpenJDK 6. The upstream patch for the chosen plaintext attack on the block-wise AES encryption algorithm introduced a regression that caused TLS/SSL connections to fail when using certain algorithms. This update fixes the problem. We apologize for the inconvenience. Original advisory USN-1263-1 caused a regression when using OpenJDK 6�s SSL/TLS implementation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-31T03:11:26-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-31T09:16:02.166-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:30.143-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:57.471-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15328 - added CVE references; also made minor updates" date="2014-06-13T16:29:00.177-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:31:54.089-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:05:40.524-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 11.04 is installed" definition_ref="oval:org.mitre.oval:def:14150"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:78932"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:79095"/>
+        <criterion comment="icedtea-6-jre-jamvm DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:78903"/>
+        <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:78938"/>
+        <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:78949"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b22-1.10.4-0ubuntu1~11.04.2" test_ref="oval:org.mitre.oval:tst:79107"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 11.10 is installed" definition_ref="oval:org.mitre.oval:def:14657"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:79040"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:78475"/>
+        <criterion comment="icedtea-6-jre-jamvm DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:79085"/>
+        <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:79067"/>
+        <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:79006"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b23~pre11-0ubuntu1.11.10.1" test_ref="oval:org.mitre.oval:tst:78769"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.04.3" test_ref="oval:org.mitre.oval:tst:78656"/>
+        <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.04.3" test_ref="oval:org.mitre.oval:tst:79020"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.04.3" test_ref="oval:org.mitre.oval:tst:78112"/>
+        <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.04.3" test_ref="oval:org.mitre.oval:tst:78352"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.04.3" test_ref="oval:org.mitre.oval:tst:78947"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.10.3" test_ref="oval:org.mitre.oval:tst:79032"/>
+        <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.10.3" test_ref="oval:org.mitre.oval:tst:78907"/>
+        <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.10.3" test_ref="oval:org.mitre.oval:tst:78784"/>
+        <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.10.3" test_ref="oval:org.mitre.oval:tst:79106"/>
+        <criterion comment="openjdk-6-jre DPKG is earlier than 6b20-1.9.10-0ubuntu1~10.10.3" test_ref="oval:org.mitre.oval:tst:78826"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5388" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OLE Heap Overrun Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Visual Basic 6.0</product>
+    </affected>
+    <reference ref_id="CVE-2007-0065" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0065" source="CVE"/>
+    <description>Heap-based buffer overflow in Object Linking and Embedding (OLE) Automation in Microsoft Windows 2000 SP4, XP SP2, Server 2003 SP1 and SP2, Vista, Office 2004 for Mac, and Visual basic 6.0 SP6 allows remote attackers to execute arbitrary code via a crafted script request.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-02-12T17:17:09">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-02-13T16:35:10.605-05:00">DRAFT</status_change>
+        <status_change date="2008-03-03T04:00:14.870-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:45.023-04:00">ACCEPTED</status_change>
+        <modified comment="Removed redundant tests" date="2008-04-11T13:56:00.473-04:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </modified>
+        <status_change date="2008-04-11T13:58:31.499-04:00">INTERIM</status_change>
+        <status_change date="2008-04-28T04:00:16.278-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5388 - def:5388, Inclusion of Win2003 IA-64 SP1, SP2 &amp; LDR support" date="2011-11-15T14:44:00.580-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2011-11-15T14:46:15.869-05:00">INTERIM</status_change>
+        <status_change date="2011-12-05T04:00:25.751-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5388 - New inventory definition for VB6, and updates to definitions incorrectly checking VBA inventory instead of VB6." date="2012-10-25T16:38:00.742-04:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2012-10-25T16:58:35.584-04:00">INTERIM</status_change>
+        <status_change date="2012-11-12T04:00:31.279-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows 2000 SP4">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of oleaut32.dll is less than 2.40.4532.0" test_ref="oval:org.mitre.oval:tst:7519"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP SP2">
+      <extend_definition comment="Microsoft Windows XP SP2 or later is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <criterion comment="the version of oleaut32.dll is less than 5.1.2600.3266" test_ref="oval:org.mitre.oval:tst:7828"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP x64 SP1/Server 2003 (x86)/(x64)/(ia-64) SP1">
+      <criteria operator="OR" comment="Windows XP x64 SP1/Server 2003 (x86)/(x64)/(ia-64) SP1">
+        <extend_definition comment="Microsoft Windows XP Professional x64 Edition SP1 is installed" definition_ref="oval:org.mitre.oval:def:720"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:4386"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="the version of oleaut32.dll is less than 5.2.3790.3057" test_ref="oval:org.mitre.oval:tst:7666"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP x64 SP2/Server 2003 (x86)/(x64)/(ia-64) SP2">
+      <criteria operator="OR" comment="Windows XP x64 SP2/Server 2003 (x86)/(x64)/(ia-64) SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of oleaut32.dll is less than 5.2.3790.4202" test_ref="oval:org.mitre.oval:tst:7548"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows Vista (32-bit)/(x64)">
+      <criteria operator="OR" comment="Windows Vista (32-bit)/(x64)">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criteria operator="OR" comment="Check for LDR/GDR">
+        <criterion comment="the version of oleaut32.dll is less than 6.0.6000.16607" test_ref="oval:org.mitre.oval:tst:7832"/>
+        <criteria operator="AND" comment="Check for LDR">
+          <criterion comment="the version of oleaut32.dll is less than 6.0.6000.20732" test_ref="oval:org.mitre.oval:tst:7768"/>
+          <criterion comment="Check if version of oleaut32.dll is greater than or equal to 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:77478"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Visual Basic 6.0">
+      <criteria operator="OR" comment="Vulnerable file version">
+        <criterion comment="the version of oleaut32.dll is less than 2.40.4532.0" test_ref="oval:org.mitre.oval:tst:7519"/>
+        <criterion comment="the version of oleaut32.dll is less than 5.2.3790.3057" test_ref="oval:org.mitre.oval:tst:7666"/>
+        <criterion comment="the version of oleaut32.dll is less than 5.2.3790.4202" test_ref="oval:org.mitre.oval:tst:7548"/>
+        <criterion comment="the version of oleaut32.dll is less than 6.0.6000.20732" test_ref="oval:org.mitre.oval:tst:7768"/>
+        <criterion comment="the version of oleaut32.dll is less than 5.1.2600.3266" test_ref="oval:org.mitre.oval:tst:7828"/>
+        <criterion comment="Check if version of oleaut32.dll is less than 2.40.4520.0" test_ref="oval:org.mitre.oval:tst:77578"/>
+        <criterion comment="Check if version of oleaut32.dll is less than 5.2.3790.727" test_ref="oval:org.mitre.oval:tst:77486"/>
+        <criterion comment="Check if version of oleaut32.dll is less than 3.50.5022.0" test_ref="oval:org.mitre.oval:tst:77199"/>
+      </criteria>
+      <extend_definition comment="Microsoft Visual Basic 6.0 is installed" definition_ref="oval:org.mitre.oval:def:15369"/>
+    </criteria>
+  </criteria>
+</definition>

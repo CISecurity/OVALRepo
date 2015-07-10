@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27707" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1885 -- libxml2 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1885.html" ref_id="RHSA-2014:1885"/>
+    <reference source="CESA-2014:1885" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020775.html" ref_id="CESA-2014:1885"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3660" ref_id="CVE-2014-3660"/>
+    <description>The libxml2 library is a development toolbox providing the implementation
+of various XML standards.
+
+A denial of service flaw was found in libxml2, a library providing support
+to read, modify and write XML and HTML files. A remote attacker could
+provide a specially crafted XML file that, when processed by an application
+using libxml2, would lead to excessive CPU consumption (denial of service)
+based on excessive entity substitutions, even if entity substitution was
+disabled, which is the parser default behavior. (CVE-2014-3660)
+
+All libxml2 users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue. The desktop must be
+restarted (log out, then log back in) for this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T15:37:44">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:36:06.680-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:12.981-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:13.780-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="libxml2-debuginfo is earlier than 0:2.6.26-2.1.25.el5_11" test_ref="oval:org.mitre.oval:tst:136070"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libxml2-devel is earlier than 0:2.6.26-2.1.25.el5_11" test_ref="oval:org.mitre.oval:tst:136057"/>
+        <criterion comment="libxml2 is earlier than 0:2.6.26-2.1.25.el5_11" test_ref="oval:org.mitre.oval:tst:135895"/>
+        <criterion comment="libxml2-python is earlier than 0:2.6.26-2.1.25.el5_11" test_ref="oval:org.mitre.oval:tst:136030"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

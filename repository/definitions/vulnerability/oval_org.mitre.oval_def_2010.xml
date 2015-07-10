@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2010" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>pkgadd(1M) May Set Incorrect Permissions if The pkgmap(4) File Contains a "?" in The "Mode" Field</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-4439" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-4439"/>
+    <description>pkgadd in Sun Solaris 10 before 20060825 installs files with insecure file and directory permissions (755 or 777) if the pkgmap file contains a "?" (question mark) in the mode field, which allows local users to modify arbitrary files or directories, a different vulnerability than CVE-2002-1871.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:25.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:13.656-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:29.485-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:42.976-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102513" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 119254-26 or later installed" test_ref="oval:org.mitre.oval:tst:3525" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102513" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 119255-26 or later installed" test_ref="oval:org.mitre.oval:tst:3358" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

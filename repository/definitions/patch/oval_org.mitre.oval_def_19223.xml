@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19223" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1963-1 -- usb-creator vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 13.04</platform>
+      <platform>Ubuntu 12.10</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>usb-creator</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1963-1/" ref_id="USN-1963-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1063" ref_id="CVE-2013-1063"/>
+    <description>usb-creator could be tricked into bypassing polkit authorizations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-11-18T13:11:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-11-21T13:29:53.235-05:00">DRAFT</status_change>
+        <status_change date="2013-12-09T04:00:15.123-05:00">INTERIM</status_change>
+        <status_change date="2013-12-30T04:00:22.978-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:24450 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-03-21T13:27:44.609-04:00">INTERIM</status_change>
+        <status_change date="2014-04-07T04:02:07.300-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19223 - added CVE references; also made minor updates" date="2014-06-13T15:26:00.141-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:28:27.978-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:08:53.520-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 13.04 is installed" definition_ref="oval:org.mitre.oval:def:16014"/>
+      <criterion comment="usb-creator-common DPKG is earlier than 0:0.2.47.1" test_ref="oval:org.mitre.oval:tst:87047"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418"/>
+      <criterion comment="usb-creator-common DPKG is earlier than 0:0.2.40ubuntu2" test_ref="oval:org.mitre.oval:tst:87057"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="usb-creator-common DPKG is earlier than 0:0.2.38.2" test_ref="oval:org.mitre.oval:tst:86680"/>
+    </criteria>
+  </criteria>
+</definition>

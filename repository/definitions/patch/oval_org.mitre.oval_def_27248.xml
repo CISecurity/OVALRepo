@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27248" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013-1449 -- kernel security and bug fix update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-1449.html" ref_id="ELSA-2013-1449"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4299" ref_id="CVE-2013-4299"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0343" ref_id="CVE-2013-0343"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4345" ref_id="CVE-2013-4345"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4368" ref_id="CVE-2013-4368"/>
+    <description>kernel
+[2.6.18-371.1.2]
+- [xen] x86: check segment descriptor read result in 64-bit OUTS emulation (Radim Krcmar) [1012958 1012959] {CVE-2013-4368}
+- [md] dm snapshot: fix data corruption (Mikulas Patocka) [1004734 975353] {CVE-2013-4299}
+
+[2.6.18-371.1.1]
+- [crypto] ansi_cprng fix off by one err in non-block size request (Neil Horman) [1007692 1007693] {CVE-2013-4345}
+- [fs] gfs2: yield() in shrinker to allow glock_workqueues to run (Abhijith Das) [1014714 928518]
+- [net] ipv6: ipv6_create_tempaddr cleanup (Petr Holasek) [999361 999362] {CVE-2013-0343}
+- [net] ipv6: remove max_addresses check from ipv6_create_tempaddr (Petr Holasek) [999361 999362] {CVE-2013-0343}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:09">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:58:57.608-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:03:01.142-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:10.388-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T19:49:37.484-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T19:49:37.484-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128524"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-371.1.2.el5-1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:128518"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-371.1.2.el5-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:128808"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128415"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128756"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128387"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128807"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128080"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128751"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128517"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:129066"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-371.1.2.el5" test_ref="oval:org.mitre.oval:tst:128659"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-371.1.2.el5PAE-1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:128663"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-371.1.2.el5debug-1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:128965"/>
+      <criterion comment="ocfs2 is earlier than 0:2.6.18-371.1.2.el5xen-1.4.10-1.el5" test_ref="oval:org.mitre.oval:tst:128371"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-371.1.2.el5PAE-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:129016"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-371.1.2.el5debug-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:128978"/>
+      <criterion comment="oracleasm is earlier than 0:2.6.18-371.1.2.el5xen-2.0.5-1.el5" test_ref="oval:org.mitre.oval:tst:128917"/>
+    </criteria>
+  </criteria>
+</definition>

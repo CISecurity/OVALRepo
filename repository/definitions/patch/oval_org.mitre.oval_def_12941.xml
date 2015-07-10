@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12941" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-944-1 -- glibc, eglibc vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>glibc</product>
+      <product>eglibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-May/001096.html" ref_id="USN-944-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1391" ref_id="CVE-2008-1391"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0296" ref_id="CVE-2010-0296"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0830" ref_id="CVE-2010-0830"/>
+    <description>Maksymilian Arciemowicz discovered that the GNU C library did not correctly handle integer overflows in the strfmon function. If a user or automated system were tricked into processing a specially crafted format string, a remote attacker could crash applications, leading to a denial of service. Jeff Layton and Dan Rosenberg discovered that the GNU C library did not correctly handle newlines in the mntent family of functions. If a local attacker were able to inject newlines into a mount entry through other vulnerable mount helpers, they could disrupt the system or possibly gain root privileges. Dan Rosenberg discovered that the GNU C library did not correctly validate certain ELF program headers. If a user or automated system were tricked into verifying a specially crafted ELF program, a remote attacker could execute arbitrary code with user privileges</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:09:11.494-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:39.092-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:13.924-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12941 - added CVE references; also made minor updates" date="2014-06-13T16:24:00.565-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:26:29.846-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:04.791-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="glibc-doc DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52730"/>
+            <criterion comment="glibc-source DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53156"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53123"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53213"/>
+            <criterion comment="libc6 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53150"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52667"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53187"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53249"/>
+            <criterion comment="nscd DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52601"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53170"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52742"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-amd64 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52813"/>
+            <criterion comment="libc6-dev-amd64 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53232"/>
+            <criterion comment="libc6-i686 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53253"/>
+            <criterion comment="libc6-xen DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:52963"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-ppc64 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53135"/>
+            <criterion comment="libc6-ppc64 DPKG is earlier than 2.7-10ubuntu6" test_ref="oval:org.mitre.oval:tst:53223"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="glibc-doc DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53172"/>
+            <criterion comment="eglibc-source DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53091"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53066"/>
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53113"/>
+            <criterion comment="libc6-dev-sparc64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52918"/>
+            <criterion comment="libc6-sparc64v DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53074"/>
+            <criterion comment="libc6-sparcv9b DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53161"/>
+            <criterion comment="nscd DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52863"/>
+            <criterion comment="libc6-sparcv9v2 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53155"/>
+            <criterion comment="libc6 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53152"/>
+            <criterion comment="libc6-sparc64b DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53202"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52905"/>
+            <criterion comment="libc6-sparc64v2 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52958"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53134"/>
+            <criterion comment="libc-dev-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53201"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53130"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52974"/>
+            <criterion comment="libc6-sparc64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52265"/>
+            <criterion comment="libc6-sparcv9v DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52723"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53238"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52273"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53066"/>
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53113"/>
+            <criterion comment="nscd DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52863"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53238"/>
+            <criterion comment="libc6 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53152"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52905"/>
+            <criterion comment="libc6-amd64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53168"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53134"/>
+            <criterion comment="libc-dev-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53201"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53130"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52974"/>
+            <criterion comment="libc6-dev-amd64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53163"/>
+            <criterion comment="libc6-i686 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52708"/>
+            <criterion comment="libc6-xen DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53109"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52273"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53066"/>
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53113"/>
+            <criterion comment="libc6 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53152"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53238"/>
+            <criterion comment="nscd DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52863"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52905"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53134"/>
+            <criterion comment="libc6-dev-ppc64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52948"/>
+            <criterion comment="libc-dev-bin DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53201"/>
+            <criterion comment="libc6-ppc64 DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53095"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52974"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:53130"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.11.1-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:52273"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="glibc-doc DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52932"/>
+            <criterion comment="eglibc-source DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53198"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc-bin DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52309"/>
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52906"/>
+            <criterion comment="nscd DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53032"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53089"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53277"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53299"/>
+            <criterion comment="libc-dev-bin DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53282"/>
+            <criterion comment="libc6 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53153"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52914"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53132"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53060"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-sparc64 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53304"/>
+            <criterion comment="libc6-sparc64v DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53052"/>
+            <criterion comment="libc6-sparcv9b DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52487"/>
+            <criterion comment="libc6-sparcv9v2 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53140"/>
+            <criterion comment="libc6-sparc64b DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53287"/>
+            <criterion comment="libc6-sparc64v2 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52565"/>
+            <criterion comment="libc6-sparc64 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53188"/>
+            <criterion comment="libc6-sparcv9v DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53000"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-ppc64 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:53215"/>
+            <criterion comment="libc6-ppc64 DPKG is earlier than 2.10.1-0ubuntu17" test_ref="oval:org.mitre.oval:tst:52985"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="zoneinfo-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53167"/>
+            <criterion comment="glibc-doc DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53146"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:52312"/>
+            <criterion comment="libc6-dev-sparc64 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53171"/>
+            <criterion comment="libc6-sparc64v DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53260"/>
+            <criterion comment="libc6-sparcv9b DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:52750"/>
+            <criterion comment="nscd DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53003"/>
+            <criterion comment="libc6 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53294"/>
+            <criterion comment="libc6-sparc64b DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:52485"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53255"/>
+            <criterion comment="libc6-sparcv9v DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53243"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53176"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53297"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53228"/>
+            <criterion comment="libc6-sparc64 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:52500"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53212"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53015"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:52312"/>
+            <criterion comment="nscd DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53003"/>
+            <criterion comment="libc6 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53294"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53255"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53176"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53212"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53228"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53297"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53015"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-ppc64 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53195"/>
+            <criterion comment="libc6-ppc64 DPKG is earlier than 2.3.6-0ubuntu20.6" test_ref="oval:org.mitre.oval:tst:53062"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="glibc-doc DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53279"/>
+            <criterion comment="glibc-source DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53125"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libnss-files-udeb DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53035"/>
+            <criterion comment="nscd DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53197"/>
+            <criterion comment="libc6 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53288"/>
+            <criterion comment="libc6-dev DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53199"/>
+            <criterion comment="libc6-pic DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53206"/>
+            <criterion comment="libnss-dns-udeb DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52977"/>
+            <criterion comment="libc6-prof DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53169"/>
+            <criterion comment="libc6-dbg DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53296"/>
+            <criterion comment="libc6-udeb DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53258"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-sparc64 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52658"/>
+            <criterion comment="libc6-sparc64v DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52947"/>
+            <criterion comment="libc6-sparcv9b DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53061"/>
+            <criterion comment="libc6-sparcv9v2 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52318"/>
+            <criterion comment="libc6-sparc64b DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52588"/>
+            <criterion comment="libc6-sparc64v2 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53165"/>
+            <criterion comment="libc6-sparc64 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52476"/>
+            <criterion comment="libc6-sparcv9v DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:52806"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libc6-dev-ppc64 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53283"/>
+            <criterion comment="libc6-ppc64 DPKG is earlier than 2.9-4ubuntu6.2" test_ref="oval:org.mitre.oval:tst:53218"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

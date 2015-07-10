@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18199" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in Windows NAT Driver Could Allow Denial of Service - MS13-064</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2012</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-3182" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3182"/>
+    <description>The Windows NAT Driver (aka winnat) service in Microsoft Windows Server 2012 does not properly validate memory addresses during the processing of ICMP packets, which allows remote attackers to cause a denial of service (memory corruption and system hang) via crafted packets, aka "Windows NAT Denial of Service Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-19T15:41:45">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-08-19T14:46:13.232-04:00">DRAFT</status_change>
+        <status_change date="2013-09-09T04:03:16.262-04:00">INTERIM</status_change>
+        <status_change date="2013-09-30T04:00:53.762-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+    <criteria operator="OR" comment="For GDR/LDR">
+      <criterion comment="Check if the version of Winnat.sys is less than 6.2.9200.16654" test_ref="oval:org.mitre.oval:tst:85873"/>
+      <criteria operator="AND" comment="For LDR">
+        <criterion comment="Check if the version of Winnat.sys is greater than or equals to 6.2.9200.20000" test_ref="oval:org.mitre.oval:tst:85872"/>
+        <criterion comment="Check if the version of Winnat.sys is less than 6.2.9200.20762" test_ref="oval:org.mitre.oval:tst:86054"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

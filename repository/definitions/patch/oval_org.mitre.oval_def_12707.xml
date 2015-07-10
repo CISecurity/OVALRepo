@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12707" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2141-1 openssl -- SSL/TLS insecure renegotiation protocol design flaw</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>openssl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00001.html" ref_id="DSA-2141-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" ref_id="CVE-2009-3555"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4180" ref_id="CVE-2010-4180"/>
+    <description>CVE-2009-3555: Marsh Ray, Steve Dispensa, and Martin Rex discovered a flaw in the TLS and SSLv3 protocols. If an attacker could perform a man in the middle attack at the start of a TLS connection, the attacker could inject arbitrary content at the beginning of the user's session. This update adds backported support for the new RFC5746 renegotiation extension which fixes this issue. If openssl is used in a server application, it will by default no longer accept renegotiation from clients that do not support the RFC5746 secure renegotiation extension. A separate advisory will add RFC5746 support for nss, the security library used by the iceweasel web browser. For apache2, there will be an update which allows to re-enable insecure renegotiation. This version of openssl is not compatible with older versions of tor. You have to use at least tor version 0.2.1.26-1~lenny+1, which has been included in the point release 5.0.7 of Debian stable. Currently we are not aware of other software with similar compatibility problems. CVE-2010-4180: In addition, this update fixes a flaw that allowed a client to bypass restrictions configured in the server for the used cipher suite.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T19:47:58-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:10.913-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:21.314-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:00:39.884-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12707 - Debian Patch Update" date="2014-06-06T17:09:00.468-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:11:05.807-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:00:34.761-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="openssl DPKG is earlier than 0.9.8g-15+lenny11" test_ref="oval:org.mitre.oval:tst:43733"/>
+  </criteria>
+</definition>

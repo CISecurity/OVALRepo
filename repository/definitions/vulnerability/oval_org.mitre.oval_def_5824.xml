@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5824" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Cisco IOS User Enumeration via Error Messages</title>
+    <affected family="ios">
+      <platform>Cisco IOS</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0512" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0512"/>
+    <description>Cisco IOS 12.2 and earlier generates a "% Login invalid" message instead of prompting for a password when an invalid username is provided, which allows remote attackers to identify valid usernames on the system and conduct brute force password guessing, as reported for the Aironet Bridge.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-05-02T11:06:36.000-04:00">
+          <contributor organization="Hewlett-Packard">Yuzheng Zhou</contributor>
+        </submitted>
+        <status_change date="2008-07-30T16:33:24.639-04:00">DRAFT</status_change>
+        <status_change date="2008-08-18T04:01:00.385-04:00">INTERIM</status_change>
+        <status_change date="2008-09-08T04:00:48.595-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Cisco ISO meets CVE-2003-0512">
+    <criterion comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:8849"/>
+    <criterion negate="true" comment="IOS vulnerable versions" test_ref="oval:org.mitre.oval:tst:8699"/>
+    <criterion negate="true" comment="config contains: aaa new-model" test_ref="oval:org.mitre.oval:tst:9089"/>
+  </criteria>
+</definition>

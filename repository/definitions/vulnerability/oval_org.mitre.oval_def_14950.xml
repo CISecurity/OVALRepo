@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14950" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Visual Basic for Applications Insecure Library Loading Vulnerability - MS12-046</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office 2010</product>
+      <product>Microsoft Visual Basic for Applications</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-1854" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1854"/>
+    <description>Untrusted search path vulnerability in VBE6.dll in Microsoft Office 2003 SP3, 2007 SP2 and SP3, and 2010 Gold and SP1; Microsoft Visual Basic for Applications (VBA); and Summit Microsoft Visual Basic for Applications SDK allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains a .docx file, aka "Visual Basic for Applications Insecure Library Loading Vulnerability," as exploited in the wild in July 2012.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-07-16T12:35:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-07-19T12:32:11.978-04:00">DRAFT</status_change>
+        <status_change date="2012-08-06T04:00:04.191-04:00">INTERIM</status_change>
+        <status_change date="2012-08-27T04:00:11.671-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Office 2k3 / Office 2k7 and VBA vulnerable version">
+      <criteria operator="OR" comment="Office 2k7 / Office 2K3 / VBA">
+        <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+        <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+        <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+        <extend_definition comment="Microsoft Visual Basic 6.0 is installed" definition_ref="oval:org.mitre.oval:def:1746"/>
+      </criteria>
+      <criterion comment="Check if the version of vbe6.dll is less than 6.5.10.54" test_ref="oval:org.mitre.oval:tst:79260"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2k10 and vulnerable VBA version">
+      <extend_definition comment="Microsoft Office 2010 is installed" definition_ref="oval:org.mitre.oval:def:12061"/>
+      <criteria operator="OR" comment="Check if both patches are applied">
+        <criterion comment="Check if the version of vbe7.dll is less than 7.00.16.27" test_ref="oval:org.mitre.oval:tst:79513"/>
+        <criterion comment="Check if the version of Acees.dll is less than 14.0.6015.1000" test_ref="oval:org.mitre.oval:tst:79658"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

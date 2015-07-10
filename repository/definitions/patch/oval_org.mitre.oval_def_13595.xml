@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13595" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-706-1 -- bind9 vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-January/000824.html" ref_id="USN-706-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0025" ref_id="CVE-2009-0025"/>
+    <description>It was discovered that Bind did not properly perform certificate verification. When DNSSEC with DSA certificates are in use, a remote attacker could exploit this to bypass certificate validation to spoof DNS entries and poison DNS caches. Among other things, this could lead to misdirected email and web traffic.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:09:21.956-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:09:12.800-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:09.185-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13595 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:31.793-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:27.956-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73676"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73625"/>
+            <criterion comment="libbind-dev DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73759"/>
+            <criterion comment="libisc32 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73916"/>
+            <criterion comment="liblwres30 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73232"/>
+            <criterion comment="libbind9-30 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73806"/>
+            <criterion comment="lwresd DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73662"/>
+            <criterion comment="libdns32 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73851"/>
+            <criterion comment="bind9 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73914"/>
+            <criterion comment="libisccfg30 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73505"/>
+            <criterion comment="libisccc30 DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73911"/>
+            <criterion comment="bind9-host DPKG is earlier than 1:9.4.1-P1-3ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73912"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73751"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73034"/>
+            <criterion comment="libbind-dev DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73822"/>
+            <criterion comment="libisc35 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73809"/>
+            <criterion comment="libdns35 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73479"/>
+            <criterion comment="liblwres30 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73201"/>
+            <criterion comment="libbind9-30 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73727"/>
+            <criterion comment="lwresd DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73868"/>
+            <criterion comment="bind9 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73787"/>
+            <criterion comment="libisccfg30 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73681"/>
+            <criterion comment="libisccc30 DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73899"/>
+            <criterion comment="bind9-host DPKG is earlier than 1:9.4.2.dfsg.P2-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:73861"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73704"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73927"/>
+            <criterion comment="libbind-dev DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73051"/>
+            <criterion comment="libisccfg1 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73783"/>
+            <criterion comment="libdns21 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73740"/>
+            <criterion comment="libisc11 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73301"/>
+            <criterion comment="libisccc0 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73642"/>
+            <criterion comment="libbind9-0 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73283"/>
+            <criterion comment="bind9-host DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73780"/>
+            <criterion comment="bind9 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73878"/>
+            <criterion comment="liblwres9 DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73803"/>
+            <criterion comment="lwresd DPKG is earlier than 1:9.3.2-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:73777"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73768"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73887"/>
+            <criterion comment="libbind-dev DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73563"/>
+            <criterion comment="libisccc40 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73929"/>
+            <criterion comment="libisccfg40 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73765"/>
+            <criterion comment="bind9utils DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73853"/>
+            <criterion comment="libdns43 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73924"/>
+            <criterion comment="liblwres40 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73843"/>
+            <criterion comment="lwresd DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73695"/>
+            <criterion comment="libbind9-40 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73773"/>
+            <criterion comment="libisc44 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73895"/>
+            <criterion comment="bind9 DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73520"/>
+            <criterion comment="bind9-host DPKG is earlier than 1:9.5.0.dfsg.P2-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:73718"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

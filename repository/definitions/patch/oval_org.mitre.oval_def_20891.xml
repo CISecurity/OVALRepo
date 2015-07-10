@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20891" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1230-1 -- quassel vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 11.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>quassel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1230-1/" ref_id="USN-1230-1"/>
+    <description>An unprivileged user could read files in the data and logging directories, including an automatically generated SSL certificate, used by the quasselcore daemon.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T13:16:55">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-14T17:05:09.728-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:21.305-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:36.882-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 11.04 release section">
+      <extend_definition comment="Ubuntu 11.04 is installed" definition_ref="oval:org.mitre.oval:def:14150"/>
+      <criterion comment="quassel-core DPKG is earlier than 0:0.7.2-0ubuntu2.3" test_ref="oval:org.mitre.oval:tst:91776"/>
+    </criteria>
+    <criteria comment="Ubuntu 10.10 release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="quassel-core DPKG is earlier than 0:0.7.1-0ubuntu1.2" test_ref="oval:org.mitre.oval:tst:92488"/>
+    </criteria>
+    <criteria comment="Ubuntu 10.04 release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="quassel-core DPKG is earlier than 0:0.6.1-0ubuntu1.3" test_ref="oval:org.mitre.oval:tst:92454"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28823" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2015-1189 -- kvm security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+      <product>kmod-kvm</product>
+      <product>kmod-kvm-debug</product>
+      <product>kvm-qemu-img</product>
+      <product>kvm-tools</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2015-1189.html" ref_id="ELSA-2015-1189"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3209" ref_id="CVE-2015-3209"/>
+    <description>[kvm-83-273.0.1.el5]
+- Added kvm-add-oracle-workaround-for-libvirt-bug.patch
+- Added kvm-Introduce-oel-machine-type.patch
+[kvm-83.273.el5]
+- kvm-pcnet-Properly-handle-TX-requests-during-Link-Fail.patch [bz#1225896]
+- kvm-pcnet-fix-Negative-array-index-read.patch [bz#1225896]
+- kvm-pcnet-force-the-buffer-access-to-be-in-bounds-during.patch [bz#1225896]
+- Resolves: bz#1225896
+  (EMBARGOED CVE-2015-3209 kvm: qemu: pcnet: multi-tmd buffer overflow in the tx path [rhel-5.11.z)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:38:53">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:21.765-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kvm is earlier than 0:83-273.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:139819"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-273.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:139853"/>
+      <criterion comment="kmod-kvm-debug is earlier than 0:83-273.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:139205"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-273.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:139918"/>
+      <criterion comment="kvm-tools is earlier than 0:83-273.0.1.el5_11" test_ref="oval:org.mitre.oval:tst:140090"/>
+    </criteria>
+  </criteria>
+</definition>

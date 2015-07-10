@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29150" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0544 -- php security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>php</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0544.html" ref_id="RHSA-2008:0544"/>
+    <reference source="CESA-2008:0544" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015126.html" ref_id="CESA-2008:0544-CentOS 3"/>
+    <reference source="CESA-2008:0544" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015142.html" ref_id="CESA-2008:0544-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4782" ref_id="CVE-2007-4782"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5898" ref_id="CVE-2007-5898"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5899" ref_id="CVE-2007-5899"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2051" ref_id="CVE-2008-2051"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2107" ref_id="CVE-2008-2107"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2108" ref_id="CVE-2008-2108"/>
+    <description>Updated PHP packages that fix several security issues are now available for
+Red Hat Enterprise Linux 3 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+PHP is an HTML-embedded scripting language commonly used with the Apache
+HTTP Web server.
+It was discovered that the PHP escapeshellcmdfunction did not properly
+escape multi-byte characters which are not valid in the locale used by the
+script. This could allow an attacker to bypass quoting restrictions imposed
+by escapeshellcmdand execute arbitrary commands if the PHP script was
+using certain locales. Scripts using the default UTF-8 locale are not
+affected by this issue. (CVE-2008-2051)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:29">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:47.883-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139056"/>
+        <criterion comment="php-bcmath is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139044"/>
+        <criterion comment="php-cli is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:138671"/>
+        <criterion comment="php-common is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139149"/>
+        <criterion comment="php-dba is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139124"/>
+        <criterion comment="php-devel is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139329"/>
+        <criterion comment="php-gd is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139276"/>
+        <criterion comment="php-imap is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:138598"/>
+        <criterion comment="php-ldap is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139194"/>
+        <criterion comment="php-mbstring is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139139"/>
+        <criterion comment="php-mysql is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139266"/>
+        <criterion comment="php-ncurses is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139275"/>
+        <criterion comment="php-odbc is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139128"/>
+        <criterion comment="php-pdo is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139024"/>
+        <criterion comment="php-pgsql is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139019"/>
+        <criterion comment="php-snmp is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:138416"/>
+        <criterion comment="php-soap is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:139231"/>
+        <criterion comment="php-xml is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:138915"/>
+        <criterion comment="php-xmlrpc is earlier than 0:5.1.6-20.el5_2.1" test_ref="oval:org.mitre.oval:tst:138786"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 3 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:138818"/>
+        <criterion comment="php-devel is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:139193"/>
+        <criterion comment="php-imap is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:139184"/>
+        <criterion comment="php-ldap is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:139257"/>
+        <criterion comment="php-mysql is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:138603"/>
+        <criterion comment="php-odbc is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:139159"/>
+        <criterion comment="php-pgsql is earlier than 0:4.3.2-48.ent" test_ref="oval:org.mitre.oval:tst:139179"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

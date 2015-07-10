@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8106" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1466 xfree86 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 3.1</platform>
+      <product>xfree86</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1466" ref_id="DSA-1466"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5760" ref_id="CVE-2007-5760"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5958" ref_id="CVE-2007-5958"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6427" ref_id="CVE-2007-6427"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6428" ref_id="CVE-2007-6428"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6429" ref_id="CVE-2007-6429"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0006" ref_id="CVE-2008-0006"/>
+    <description>The X.org fix for CVE-2007-6429 introduced a regression in the MIT-SHM extension, which prevented the start of a few applications. This update provides updated packages for the xfree86 version included in Debian old stable (sarge) in addition to the fixed packages for Debian stable (etch), which were provided in DSA 1466-2. For reference the original advisory text below: Several local vulnerabilities have been discovered in the X.Org X server. The Common Vulnerabilities and Exposures project identifies the following problems: regenrecht discovered that missing input sanitising within the XFree86-Misc extension may lead to local privilege escalation. It was discovered that error messages of security policy file handling may lead to a minor information leak disclosing the existence of files otherwise inaccessible to the user. regenrecht discovered that missing input sanitising within the XInput-Misc extension may lead to local privilege escalation. regenrecht discovered that missing input sanitising within the TOG-CUP extension may lead to disclosure of memory contents. regenrecht discovered that integer overflows in the EVI and MIT-SHM extensions may lead to local privilege escalation. It was discovered that insufficient validation of PCF fonts could lead to local privilege escalation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:07-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:55:44.427-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:04:13.715-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:09.376-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:10963 - new patches for Ubuntu" date="2013-07-03T15:24:00.849-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-07-03T17:53:18.579-04:00">INTERIM</status_change>
+        <status_change date="2013-07-22T04:03:15.738-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8106 - Debian Patch Update" date="2014-06-06T17:15:00.740-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:17:30.530-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:03.961-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xserver-xorg-core is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:16201"/>
+        <criterion comment="libxfont1-dbg is earlier than 1.2.2-2.etch1" test_ref="oval:org.mitre.oval:tst:16937"/>
+        <criterion comment="xdmx is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:16560"/>
+        <criterion comment="xserver-xorg-dev is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:17094"/>
+        <criterion comment="xvfb is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:17154"/>
+        <criterion comment="xnest is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:16890"/>
+        <criterion comment="libxfont1 is earlier than 1.2.2-2.etch1" test_ref="oval:org.mitre.oval:tst:16886"/>
+        <criterion comment="xserver-xephyr is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:17116"/>
+        <criterion comment="libxfont-dev is earlier than 1.2.2-2.etch1" test_ref="oval:org.mitre.oval:tst:16931"/>
+        <criterion comment="xdmx-tools is earlier than 1.1.1-21etch2" test_ref="oval:org.mitre.oval:tst:17101"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="xfree86-common is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17124"/>
+            <criterion comment="pm-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17037"/>
+            <criterion comment="x-window-system is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16982"/>
+            <criterion comment="xlibs-data is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17197"/>
+            <criterion comment="xfonts-100dpi is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17111"/>
+            <criterion comment="xfonts-base is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16939"/>
+            <criterion comment="xspecs is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16824"/>
+            <criterion comment="xfonts-scalable is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17133"/>
+            <criterion comment="xfonts-75dpi is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17048"/>
+            <criterion comment="xlibs-pic is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16796"/>
+            <criterion comment="xfonts-cyrillic is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17130"/>
+            <criterion comment="xlibs is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16759"/>
+            <criterion comment="xlibmesa3-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16553"/>
+            <criterion comment="xlibs-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16910"/>
+            <criterion comment="xfonts-100dpi-transcoded is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16828"/>
+            <criterion comment="xlibmesa-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17148"/>
+            <criterion comment="xfonts-base-transcoded is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17008"/>
+            <criterion comment="xlibs-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17099"/>
+            <criterion comment="xfonts-75dpi-transcoded is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17153"/>
+            <criterion comment="x-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17109"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libxtrap-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16399"/>
+            <criterion comment="libxtst6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17070"/>
+            <criterion comment="libdps1-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16676"/>
+            <criterion comment="lbxproxy is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16442"/>
+            <criterion comment="libxext6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16704"/>
+            <criterion comment="libxi-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17062"/>
+            <criterion comment="libxt-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17092"/>
+            <criterion comment="xlibmesa3 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16975"/>
+            <criterion comment="libxv-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16858"/>
+            <criterion comment="libxmuu-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16952"/>
+            <criterion comment="xlibmesa-gl-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17125"/>
+            <criterion comment="libxv1 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16699"/>
+            <criterion comment="xfs is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17030"/>
+            <criterion comment="libice6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16514"/>
+            <criterion comment="libsm6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17166"/>
+            <criterion comment="libxtrap6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17000"/>
+            <criterion comment="libxaw6-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17134"/>
+            <criterion comment="libxtrap6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16731"/>
+            <criterion comment="libxaw6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16857"/>
+            <criterion comment="xbase-clients is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16698"/>
+            <criterion comment="xfwp is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16994"/>
+            <criterion comment="xmh is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17143"/>
+            <criterion comment="libxpm4 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17202"/>
+            <criterion comment="libxmu6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17041"/>
+            <criterion comment="xlibmesa-gl is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17186"/>
+            <criterion comment="libice6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16564"/>
+            <criterion comment="twm is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17105"/>
+            <criterion comment="xutils is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17009"/>
+            <criterion comment="libxpm-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16848"/>
+            <criterion comment="libxi6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16762"/>
+            <criterion comment="libxaw7-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17082"/>
+            <criterion comment="libxrandr2-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16350"/>
+            <criterion comment="libxmuu1-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17063"/>
+            <criterion comment="proxymngr is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17095"/>
+            <criterion comment="xlibmesa-glu-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16966"/>
+            <criterion comment="libx11-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17173"/>
+            <criterion comment="xserver-common is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17194"/>
+            <criterion comment="libx11-6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17142"/>
+            <criterion comment="libxrandr2 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16744"/>
+            <criterion comment="xlibs-static-pic is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16996"/>
+            <criterion comment="libxext-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16652"/>
+            <criterion comment="libice-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16230"/>
+            <criterion comment="libxaw7 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17060"/>
+            <criterion comment="libxft1 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17102"/>
+            <criterion comment="xdm is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17188"/>
+            <criterion comment="xterm is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16753"/>
+            <criterion comment="libxext6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16998"/>
+            <criterion comment="libx11-6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17026"/>
+            <criterion comment="libxmu6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17211"/>
+            <criterion comment="libxaw7-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16990"/>
+            <criterion comment="libdps-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16945"/>
+            <criterion comment="libsm6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16785"/>
+            <criterion comment="xlibmesa-glu is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17083"/>
+            <criterion comment="libxmuu1 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16679"/>
+            <criterion comment="libxmu-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16987"/>
+            <criterion comment="libxaw6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17038"/>
+            <criterion comment="libxt6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16993"/>
+            <criterion comment="libxt6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17005"/>
+            <criterion comment="x-window-system-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17204"/>
+            <criterion comment="libxp6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17053"/>
+            <criterion comment="libxp-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17033"/>
+            <criterion comment="xlibs-static-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17161"/>
+            <criterion comment="libxpm4-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17110"/>
+            <criterion comment="xvfb is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16967"/>
+            <criterion comment="libxtst-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16788"/>
+            <criterion comment="libxp6 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16978"/>
+            <criterion comment="xlibmesa-gl-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17128"/>
+            <criterion comment="xnest is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17137"/>
+            <criterion comment="libxv1-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17097"/>
+            <criterion comment="libdps1 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17025"/>
+            <criterion comment="libxft1-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16989"/>
+            <criterion comment="libxtst6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17139"/>
+            <criterion comment="libxi6-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17059"/>
+            <criterion comment="libxrandr-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16599"/>
+            <criterion comment="xlibmesa-glu-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16527"/>
+            <criterion comment="libsm-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17118"/>
+            <criterion comment="x-window-system-core is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17187"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="xlibosmesa-dev is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16647"/>
+            <criterion comment="xlibmesa-dri is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17031"/>
+            <criterion comment="xlibosmesa4 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17174"/>
+            <criterion comment="xserver-xfree86 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16875"/>
+            <criterion comment="xlibmesa-dri-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16772"/>
+            <criterion comment="xserver-xfree86-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16251"/>
+            <criterion comment="xlibosmesa4-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:17160"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Supported platform section">
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="xserver-xfree86-dbg is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16645"/>
+            <criterion comment="xserver-xfree86 is earlier than 4.3.0.dfsg.1-14sarge7" test_ref="oval:org.mitre.oval:tst:16751"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

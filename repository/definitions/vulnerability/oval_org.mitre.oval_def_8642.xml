@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8642" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware kernel fs/ext2/dir.c fs/ext3/dir.c and possibly fs/ext4/dir.c vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3528" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3528"/>
+    <description>The error-reporting functionality in (1) fs/ext2/dir.c, (2) fs/ext3/dir.c, and possibly (3) fs/ext4/dir.c in the Linux kernel 2.6.26.5 does not limit the number of printk console messages that report directory corruption, which allows physically proximate attackers to cause a denial of service (temporary system hang) by mounting a filesystem that has corrupted dir->i_size and dir->i_blocks values and performing (a) read or (b) write operations.  NOTE: there are limited scenarios in which this crosses privilege boundaries.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-19T16:57:59.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2010-03-22T11:00:29.751-04:00">DRAFT</status_change>
+        <status_change date="2010-05-17T04:01:48.723-04:00">INTERIM</status_change>
+        <status_change date="2010-06-07T04:01:32.134-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8642 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:31.680-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:41.318-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criterion comment="Patch ESX400-200911201-UG is not installed" test_ref="oval:org.mitre.oval:tst:20677"/>
+  </criteria>
+</definition>

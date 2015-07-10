@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6065" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware Multiple Hosted Products Display Function Code Execution Vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-1244" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1244"/>
+    <description>Unspecified vulnerability in the virtual machine display function in VMware Workstation 6.5.1 and earlier; VMware Player 2.5.1 and earlier; VMware ACE 2.5.1 and earlier; VMware Server 1.x before 1.0.9 build 156507 and 2.x before 2.0.1 build 156745; VMware Fusion before 2.0.4 build 159196; VMware ESXi 3.5; and VMware ESX 3.0.2, 3.0.3, and 3.5 allows guest OS users to execute arbitrary code on the host OS via unknown vectors, a different vulnerability than CVE-2008-4916.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-09-28T06:56:37.015-04:00">DRAFT</status_change>
+        <status_change date="2009-10-19T04:00:08.745-04:00">INTERIM</status_change>
+        <status_change date="2009-11-09T04:00:34.291-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.3 is installed" definition_ref="oval:org.mitre.oval:def:6026"/>
+      <criterion comment="Patch ESX303-200904403-SG is not installed" test_ref="oval:org.mitre.oval:tst:10327"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.2 is installed" definition_ref="oval:org.mitre.oval:def:5613"/>
+      <criterion comment="Patch ESX-1008421 is not installed" test_ref="oval:org.mitre.oval:tst:9972"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criterion comment="Patch ESX350-200904201-SG is not installed" test_ref="oval:org.mitre.oval:tst:10724"/>
+    </criteria>
+  </criteria>
+</definition>

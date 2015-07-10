@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6920" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1797 xulrunner -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1797" ref_id="DSA-1797"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0652" ref_id="CVE-2009-0652"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1302" ref_id="CVE-2009-1302"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1303" ref_id="CVE-2009-1303"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1304" ref_id="CVE-2009-1304"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1305" ref_id="CVE-2009-1305"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1306" ref_id="CVE-2009-1306"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1307" ref_id="CVE-2009-1307"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1308" ref_id="CVE-2009-1308"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1309" ref_id="CVE-2009-1309"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1311" ref_id="CVE-2009-1311"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1312" ref_id="CVE-2009-1312"/>
+    <description>Several remote vulnerabilities have been discovered in Xulrunner, a runtime environment for XUL applications, such as the Iceweasel web browser. The Common Vulnerabilities and Exposures project identifies the following problems: Moxie Marlinspike discovered that Unicode box drawing characters inside of internationalised domain names could be used for phishing attacks. Olli Pettay, Martijn Wargers, Mats Palmgren, Oleg Romashin, Jesse Ruderman and Gary Kwong reported crashes in the layout engine, which might allow the execution of arbitrary code. Olli Pettay, Martijn Wargers, Mats Palmgren, Oleg Romashin, Jesse Ruderman and Gary Kwong reported crashes in the layout engine, which might allow the execution of arbitrary code. Igor Bukanov and Bob Clary discovered crashes in the Javascript engine, which might allow the execution of arbitrary code. Igor Bukanov and Bob Clary discovered crashes in the Javascript engine, which might allow the execution of arbitrary code. Daniel Veditz discovered that the Content-Disposition: header is ignored within the jar: URI scheme. Gregory Fleischer discovered that the same-origin policy for Flash files is inproperly enforced for files loaded through the view-source scheme, which may result in bypass of cross-domain policy restrictions. Cefn Hoile discovered that sites, which allow the embedding of third-party stylesheets are vulnerable to cross-site scripting attacks through XBL bindings. "moz_bug_r_a4" discovered bypasses of the same-origin policy in the XMLHttpRequest Javascript API and the XPCNativeWrapper. Paolo Amadini discovered that incorrect handling of POST data when saving a web site with an embedded frame may lead to information disclosure. It was discovered that Iceweasel allows Refresh: headers to redirect to Javascript URIs, resulting in cross-site scripting.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:49:05.605-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:00:21.304-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:11.289-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6920 - Debian Patch Update" date="2014-06-06T16:49:00.366-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:51:20.933-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:57.761-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libmozillainterfaces-java is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:11771"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libmozjs-dev is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:12013"/>
+          <criterion comment="spidermonkey-bin is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:11817"/>
+          <criterion comment="xulrunner-1.9-gnome-support is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:40979"/>
+          <criterion comment="xulrunner-1.9 is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:12047"/>
+          <criterion comment="libmozjs1d-dbg is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:11136"/>
+          <criterion comment="libmozjs1d is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:11828"/>
+          <criterion comment="python-xpcom is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:11845"/>
+          <criterion comment="xulrunner-1.9-dbg is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:12064"/>
+          <criterion comment="xulrunner-dev is earlier than 1.9.0.9-0lenny2" test_ref="oval:org.mitre.oval:tst:12083"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23170" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2010:0704: kernel security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="ELSA-2010:0704-01" ref_url="http://linux.oracle.com/errata/ELSA-2010-0704.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-3081" ref_url="http://linux.oracle.com/cve/CVE-2010-3081.html" source="CVE"/>
+    <description>The compat_alloc_user_space functions in include/asm/compat.h files in the Linux kernel before 2.6.36-rc4-git2 on 64-bit platforms do not properly allocate the userspace memory required for the 32-bit compatibility layer, which allows local users to gain privileges by leveraging the ability of the compat_mc_getsockopt function (aka the MCAST_MSFILTER getsockopt support) to control a certain length value, related to a "stack pointer underflow" issue, as exploited in the wild in September 2010.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:08:23.947-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:28.636-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:41.587-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23170 - optimisation of Oracle Linux content" date="2014-05-05T17:48:00.231-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:49:29.375-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:35.388-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kernel-headers is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:103729"/>
+      <criterion comment="kernel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104292"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104367"/>
+      <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104325"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104110"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:103818"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:103825"/>
+      <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104154"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104269"/>
+      <criterion comment="kernel-PAE is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104270"/>
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104201"/>
+      <criterion comment="kernel-xen is earlier than 0:2.6.18-194.11.4.el5" test_ref="oval:org.mitre.oval:tst:104323"/>
+    </criteria>
+  </criteria>
+</definition>

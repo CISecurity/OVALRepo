@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1697" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>X.Org Privilege Escalation Vulnerability in X11R6.9, X11R7.0</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-0745" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0745"/>
+    <description>X.Org server (xorg-server) 1.0.0 and later, X11R6.9.0, and X11R7.0 inadvertently treats the address of the geteuid function as if it is the return value of a call to geteuid, which allows local users to bypass intended restrictions and (1) execute arbitrary code via the -modulepath command line option or (2) overwrite arbitrary files via -logfile.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2006-03-21T04:03:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2006-03-22T11:10:00.000-04:00">DRAFT</status_change>
+        <status_change date="2006-04-06T06:31:00.000-04:00">INTERIM</status_change>
+        <status_change date="2006-05-03T10:06:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:1697 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:05:02.748-04:00">INTERIM</status_change>
+        <status_change date="2011-05-09T04:01:19.512-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Solaris 10 Installed" test_ref="oval:org.mitre.oval:tst:2459"/>
+    <criterion comment="ix86 architecture" test_ref="oval:org.mitre.oval:tst:2463"/>
+    <criteria operator="AND" comment="Patch 118966-14 through 118966-16 is installed.">
+      <criterion comment="Patch 118966-14 or later installed" test_ref="oval:org.mitre.oval:tst:765"/>
+      <criterion negate="true" comment="Patch 118966-17 or later installed" test_ref="oval:org.mitre.oval:tst:764"/>
+    </criteria>
+  </criteria>
+</definition>

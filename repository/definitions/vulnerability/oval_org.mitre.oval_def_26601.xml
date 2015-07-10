@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26601" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>.NET framework denial of service vulnerability - CVE-2014-4072 (MS14-053)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft .NET Framework 1.1</product>
+      <product>Microsoft .NET Framework 2.0</product>
+      <product>Microsoft .NET Framework 3.0</product>
+      <product>Microsoft .NET Framework 3.5.1</product>
+      <product>Microsoft .NET Framework 4.0</product>
+      <product>Microsoft .NET Framework 4.5</product>
+      <product>Microsoft .NET Framework 4.5.1</product>
+      <product>Microsoft .NET Framework 4.5.2</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-4072" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4072"/>
+    <description>Microsoft .NET Framework 1.1 SP1, 2.0 SP2, 3.0 SP2, 3.5, 3.5.1, 4, 4.5, 4.5.1, and 4.5.2 does not properly use a hash table for request data, which allows remote attackers to cause a denial of service (resource consumption and ASP.NET performance degradation) via crafted requests, aka ".NET Framework Denial of Service Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-12T10:59:59">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-10-15T15:56:34.779-04:00">DRAFT</status_change>
+        <status_change date="2014-11-03T04:00:13.105-05:00">INTERIM</status_change>
+        <status_change date="2014-11-24T04:00:35.446-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment=".net 1.1 sp1/versions">
+      <criterion comment="Check if the version of mscorlib.dll is less than 1.1.4322.2510" test_ref="oval:org.mitre.oval:tst:124781"/>
+      <extend_definition comment="Microsoft .NET Framework 1.1 Service Pack 1 is Installed" definition_ref="oval:org.mitre.oval:def:1834"/>
+      <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+    </criteria>
+    <criteria operator="AND" comment=".net 2.0 sp2/server 2003/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Server 2003 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1867"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 2.0 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6158"/>
+      <criteria operator="OR" comment="either file versions GDR/LDR">
+        <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.3662" test_ref="oval:org.mitre.oval:tst:125038"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.8637" test_ref="oval:org.mitre.oval:tst:124978"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 2.0.50727.8600" test_ref="oval:org.mitre.oval:tst:121706"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vista / 2k8 + vulnerable file version">
+      <criteria operator="OR" comment="Vista / 2K8">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.4253" test_ref="oval:org.mitre.oval:tst:124901"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.7071" test_ref="oval:org.mitre.oval:tst:124564"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 2.0.50727.7000" test_ref="oval:org.mitre.oval:tst:80994"/>
+        </criteria>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 2.0 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6158"/>
+    </criteria>
+    <criteria operator="AND" comment=".net 3.0 sp2/server 2003/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.0 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15312"/>
+      <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.4068" test_ref="oval:org.mitre.oval:tst:125058"/>
+    </criteria>
+    <criteria operator="AND" comment="Vista / 2k8 + vulnerable file version">
+      <criteria operator="OR" comment="Vista / 2K8">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR/LDR">
+        <criterion comment="Check if the version of system.identitymodel.dll is less than 3.0.4506.4222" test_ref="oval:org.mitre.oval:tst:124817"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.8635" test_ref="oval:org.mitre.oval:tst:125075"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 3.0.4506.8600" test_ref="oval:org.mitre.oval:tst:121980"/>
+        </criteria>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.0 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15312"/>
+    </criteria>
+    <criteria operator="AND" comment="Win 7 / R2 + vulnerable file version">
+      <criteria operator="OR" comment="Win 7 / R2">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.5485" test_ref="oval:org.mitre.oval:tst:125118"/>
+        <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.5463" test_ref="oval:org.mitre.oval:tst:125060"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.8635" test_ref="oval:org.mitre.oval:tst:125075"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 3.0.4506.8600" test_ref="oval:org.mitre.oval:tst:121980"/>
+        </criteria>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.7071" test_ref="oval:org.mitre.oval:tst:124564"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 2.0.50727.7000" test_ref="oval:org.mitre.oval:tst:80994"/>
+        </criteria>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+    </criteria>
+    <criteria operator="AND" comment="Win 8/2k12 and vulnerable file version">
+      <criteria operator="OR" comment="Win 8 / 2k12">
+        <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+        <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+        <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.6421" test_ref="oval:org.mitre.oval:tst:125017"/>
+        <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.6415" test_ref="oval:org.mitre.oval:tst:124404"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.7071" test_ref="oval:org.mitre.oval:tst:124564"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 2.0.50727.7000" test_ref="oval:org.mitre.oval:tst:80994"/>
+        </criteria>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.8635" test_ref="oval:org.mitre.oval:tst:125075"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 3.0.4506.8600" test_ref="oval:org.mitre.oval:tst:121980"/>
+        </criteria>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+    </criteria>
+    <criteria operator="AND" comment=".net 4.0/win server 2003/vista/server 2008/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Server 2003 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1867"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6749"/>
+      <criteria operator="OR" comment="GDR/LDR">
+        <criterion comment="Check if the version of mscorlib.dll is less than 4.0.30319.1026" test_ref="oval:org.mitre.oval:tst:125136"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of mscorlib.dll is less than 4.0.30319.2045" test_ref="oval:org.mitre.oval:tst:124886"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 4.0.30319.2000" test_ref="oval:org.mitre.oval:tst:81701"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 4.5/4.5.1/4.5.2/vista/server 2008/win 7/server 2008 R2/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      </criteria>
+      <criteria operator="OR" comment="4.5/4.5.1/4.5.2">
+        <extend_definition comment="Microsoft .NET Framework 4.5 is installed" definition_ref="oval:org.mitre.oval:def:15925"/>
+        <extend_definition comment="Microsoft .NET Framework 4.5.1 is installed" definition_ref="oval:org.mitre.oval:def:22275"/>
+        <extend_definition comment="Microsoft .NET Framework 4.5 SP2 is installed" definition_ref="oval:org.mitre.oval:def:26546"/>
+      </criteria>
+      <criterion comment="Check if the version of system.identitymodel.dll is less than 4.0.30319.34234" test_ref="oval:org.mitre.oval:tst:125089"/>
+    </criteria>
+    <criteria operator="AND" comment="Win 8.1/2k12 R2 and vulnerable file version">
+      <criteria operator="OR" comment="Win 8.1 / 2k12 R2">
+        <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924"/>
+        <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956"/>
+        <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+      </criteria>
+      <criteria operator="OR" comment="4.5.1/4.5.2">
+        <extend_definition comment="Microsoft .NET Framework 4.5.1 is installed" definition_ref="oval:org.mitre.oval:def:22275"/>
+        <extend_definition comment="Microsoft .NET Framework 4.5 SP2 is installed" definition_ref="oval:org.mitre.oval:def:26546"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of system.identitymodel.dll is less than 4.0.30319.34230" test_ref="oval:org.mitre.oval:tst:125134"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of system.identitymodel.dll is less than 4.0.30319.36241" test_ref="oval:org.mitre.oval:tst:124665"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 4.0.30319.36000" test_ref="oval:org.mitre.oval:tst:124668"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 4.5/4.5.1/4.5.2/win 8/server 2012/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914"/>
+        <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571"/>
+        <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+      </criteria>
+      <criteria operator="OR" comment="4.5/4.5.1/4.5.2">
+        <extend_definition comment="Microsoft .NET Framework 4.5 is installed" definition_ref="oval:org.mitre.oval:def:15925"/>
+        <extend_definition comment="Microsoft .NET Framework 4.5.1 is installed" definition_ref="oval:org.mitre.oval:def:22275"/>
+        <extend_definition comment="Microsoft .NET Framework 4.5 SP2 is installed" definition_ref="oval:org.mitre.oval:def:26546"/>
+      </criteria>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of system.identitymodel.dll is less than 4.0.30319.34230" test_ref="oval:org.mitre.oval:tst:125134"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of system.identitymodel.dll is less than 4.0.30319.36241" test_ref="oval:org.mitre.oval:tst:124665"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 4.0.30319.36000" test_ref="oval:org.mitre.oval:tst:124668"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment=".net 3.5.1/win 8.1/server 2012 r2/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924"/>
+        <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956"/>
+        <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+      </criteria>
+      <extend_definition comment="Microsoft .NET Framework 3.5 SP1 is installed" definition_ref="oval:org.mitre.oval:def:12542"/>
+      <criteria operator="OR" comment="either file versions">
+        <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.8002" test_ref="oval:org.mitre.oval:tst:124659"/>
+        <criteria operator="AND" comment="ldr range">
+          <criterion comment="Check if the version of System.IdentityModel.dll is less than 3.0.4506.8635" test_ref="oval:org.mitre.oval:tst:125075"/>
+          <criterion comment="Check if the version of System.IdentityModel.dll is greater than or equal to 3.0.4506.8600" test_ref="oval:org.mitre.oval:tst:121980"/>
+        </criteria>
+        <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.8009" test_ref="oval:org.mitre.oval:tst:124916"/>
+        <criteria operator="AND" comment="ldr">
+          <criterion comment="Check if the version of mscorlib.dll is less than 2.0.50727.8615" test_ref="oval:org.mitre.oval:tst:124861"/>
+          <criterion comment="Check if the version of mscorlib.dll is greater than or equal to 2.0.50727.8600" test_ref="oval:org.mitre.oval:tst:121706"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

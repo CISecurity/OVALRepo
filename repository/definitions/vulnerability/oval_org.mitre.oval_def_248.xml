@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:248" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Kerberos krb4 Plaintext Attack Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0138" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0138"/>
+    <description>Version 4 of the Kerberos protocol (krb4), as used in Heimdal and other packages, allows an attacker to impersonate any principal in a realm via a chosen-plaintext attack.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-08-14T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2004-03-25T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:23.753-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:23.652-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat 9 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3153"/>
+    <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+    <criterion comment="krb5-libs version is less than 1.2.7-14" negate="false" test_ref="oval:org.mitre.oval:tst:2756"/>
+    <criteria operator="OR" comment="krb5-server or krb5-workstation installed">
+      <criterion comment="krb5-server version is less than 1.2.7-14" negate="false" test_ref="oval:org.mitre.oval:tst:2785"/>
+      <criterion comment="krb5-workstation version is less than 1.2.7-14" negate="false" test_ref="oval:org.mitre.oval:tst:2755"/>
+    </criteria>
+  </criteria>
+</definition>

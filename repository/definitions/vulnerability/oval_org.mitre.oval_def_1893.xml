@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1893" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in Solaris 10 Link Aggregation may Allow Local Users Total Access to Network Packets</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-5013" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-5013"/>
+    <description>Sun Solaris 10 before patch 118855-16 (20060925), when run on x64 systems using IPv6, allows remote attackers to cause a denial of service (kernel panic) via crafted IPv6 packets.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:23.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:13.177-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:28.723-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:42.219-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102606" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 118833-23 or later installed" test_ref="oval:org.mitre.oval:tst:3263" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102606" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 118855-19 or later installed" test_ref="oval:org.mitre.oval:tst:3362" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

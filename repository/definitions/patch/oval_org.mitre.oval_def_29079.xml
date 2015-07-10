@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29079" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0479 -- perl-DBD-Pg security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>perl-DBD-Pg</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0479.html" ref_id="RHSA-2009:0479"/>
+    <reference source="CESA-2009:0479" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-May/015877.html" ref_id="CESA-2009:0479-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0663" ref_id="CVE-2009-0663"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1341" ref_id="CVE-2009-1341"/>
+    <description>An updated perl-DBD-Pg package that fixes two security issues is now
+available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Perl DBI is a database access Application Programming Interface (API) for
+the Perl language. perl-DBD-Pg allows Perl applications to access
+PostgreSQL database servers.
+A heap-based buffer overflow flaw was discovered in the pg_getline function
+implementation. If the pg_getline or getline functions read large,
+untrusted records from a database, it could cause an application using
+these functions to crash or, possibly, execute arbitrary code.
+(CVE-2009-0663)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:38.194-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criterion comment="perl-DBD-Pg is earlier than 0:1.49-2.el5_3.1" test_ref="oval:org.mitre.oval:tst:141018"/>
+  </criteria>
+</definition>

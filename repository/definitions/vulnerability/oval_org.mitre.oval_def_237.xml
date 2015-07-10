@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:237" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Troubleshooter ActiveX Control Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0662" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0662"/>
+    <description>Buffer overflow in Troubleshooter ActiveX Control (Tshoot.ocx) in Microsoft Windows 2000 SP4 and earlier allows remote attackers to execute arbitrary code via an HTML document with a long argument to the RunQuery2 method.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-10-17T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <modified date="2004-03-04T12:00:00.000-04:00" comment="Added the configuration check to see if ActiveX controls are enabled by the current user when local machine settings are not in use.">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </modified>
+        <status_change date="2004-03-25T12:00:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+      <criterion comment="the version of tshoot.ocx is less than 1.0.1.2125" negate="false" test_ref="oval:org.mitre.oval:tst:2764"/>
+      <criterion comment="the patch kb826232 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:2763"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="ActiveX controls are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2917"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2916"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

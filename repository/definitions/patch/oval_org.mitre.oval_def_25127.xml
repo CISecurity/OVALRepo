@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25127" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0790: dovecot security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 6</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>dovecot</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0790-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0790.html"/>
+    <reference source="CESA" ref_id="CESA-2014:0790"/>
+    <reference source="CVE" ref_id="CVE-2014-3430" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3430.html"/>
+    <description>Dovecot is an IMAP server, written with security primarily in mind, for
+Linux and other UNIX-like systems. It also contains a small POP3 server.
+It supports mail in both the maildir or mbox format. The SQL drivers and
+authentication plug-ins are provided as subpackages.
+
+It was discovered that Dovecot did not properly discard connections trapped
+in the SSL/TLS handshake phase. A remote attacker could use this flaw to
+cause a denial of service on an IMAP/POP3 server by exhausting the pool of
+available connections and preventing further, legitimate connections to the
+IMAP/POP3 server to be made. (CVE-2014-3430)
+
+All dovecot users are advised to upgrade to these updated packages, which
+contain a backported patch to correct this issue. After installing the
+updated packages, the dovecot service will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-02T17:22:28">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-07T16:13:33.028-04:00">DRAFT</status_change>
+        <status_change date="2014-07-28T04:00:50.527-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:25127 - 3 patches on RHEL where CentOS checks were added" date="2014-07-28T18:10:00.421-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-18T04:03:19.698-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="dovecot-pigeonhole is earlier than 1:2.0.9-7.el6_5.1" test_ref="oval:org.mitre.oval:tst:115565"/>
+        <criterion comment="dovecot-mysql is earlier than 1:2.0.9-7.el6_5.1" test_ref="oval:org.mitre.oval:tst:114827"/>
+        <criterion comment="dovecot is earlier than 1:2.0.9-7.el6_5.1" test_ref="oval:org.mitre.oval:tst:115465"/>
+        <criterion comment="dovecot-devel is earlier than 1:2.0.9-7.el6_5.1" test_ref="oval:org.mitre.oval:tst:115468"/>
+        <criterion comment="dovecot-pgsql is earlier than 1:2.0.9-7.el6_5.1" test_ref="oval:org.mitre.oval:tst:115126"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 7 or Centos 7 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="dovecot-pigeonhole is earlier than 1:2.2.10-4.el7_0.1" test_ref="oval:org.mitre.oval:tst:115404"/>
+        <criterion comment="dovecot-mysql is earlier than 1:2.2.10-4.el7_0.1" test_ref="oval:org.mitre.oval:tst:115453"/>
+        <criterion comment="dovecot is earlier than 1:2.2.10-4.el7_0.1" test_ref="oval:org.mitre.oval:tst:115504"/>
+        <criterion comment="dovecot-pgsql is earlier than 1:2.2.10-4.el7_0.1" test_ref="oval:org.mitre.oval:tst:115161"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

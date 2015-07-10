@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25357" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0549-3 -- Security update for OpenSSL</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>OpenSSL</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130549-3.html" ref_id="SUSE-SU-2013:0549-3"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4929" ref_id="CVE-2012-4929"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0169" ref_id="CVE-2013-0169"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0166" ref_id="CVE-2013-0166"/>
+    <description>OpenSSL has been updated to fix several security issues:
+
+    * CVE-2012-4929: Avoid the openssl CRIME attack by
+disabling SSL compression by default. Setting the
+environment variable "OPENSSL_NO_DEFAULT_ZLIB" to "no"
+enables compression again.
+    * CVE-2013-0169: Timing attacks against TLS could be
+used by physically local attackers to gain access to
+transmitted plain text or private keymaterial. This issue
+is also known as the "Lucky-13" issue.
+    * CVE-2013-0166: A OCSP invalid key denial of service
+issue was fixed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:38:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:36:21.670-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:02.626-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:02.855-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libopenssl0_9_8 RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120387"/>
+      <criterion comment="libopenssl0_9_8-hmac RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120379"/>
+      <criterion comment="openssl RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120532"/>
+      <criterion comment="openssl-doc RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120047"/>
+      <criterion comment="libopenssl0_9_8-32bit RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120235"/>
+      <criterion comment="libopenssl0_9_8-hmac-32bit RPM is earlier than 0:0.9.8j-0.50.1" test_ref="oval:org.mitre.oval:tst:120433"/>
+    </criteria>
+  </criteria>
+</definition>

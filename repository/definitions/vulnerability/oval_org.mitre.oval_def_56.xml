@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:56" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Solaris 8 rpc.yppasswdd Buffer Overrun Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <product>rpc.yppasswdd</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2001-0779" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2001-0779"/>
+    <description>Buffer overflow in rpc.yppasswdd (yppasswd server) in Solaris 2.6, 7 and 8 allows remote attackers to gain root access via a long username.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2002-08-30T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">David Proulx</contributor>
+        </submitted>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+      <criterion comment="File rpc.yppasswdd exists" negate="false" test_ref="oval:org.mitre.oval:tst:3006"/>
+      <criterion comment="Patch 111596-02 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:3005"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="rpc.yppasswdd running" negate="false" test_ref="oval:org.mitre.oval:tst:3004"/>
+    </criteria>
+  </criteria>
+</definition>

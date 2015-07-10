@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28687" version="2" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2608-1 -- qemu vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 15.04</platform>
+      <platform>Ubuntu 14.10</platform>
+      <product>qemu-kvm</product>
+      <product>qemu-system</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2015-May/002951.html" ref_id="USN-2608-1"/>
+    <reference source="CVE" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3456" ref_id="CVE-2015-3456"/>
+    <reference source="CVE" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1779" ref_id="CVE-2015-1779"/>
+    <reference source="CVE" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2756" ref_id="CVE-2015-2756"/>
+    <description>qemu: Machine emulator and virtualizer - qemu-kvm: Machine emulator and virtualizer Several security issues were fixed in QEMU.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-02T16:15:26">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-06-03T12:28:41.921-04:00">DRAFT</status_change>
+        <status_change date="2015-06-22T04:00:43.833-04:00">INTERIM</status_change>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="qemu-system DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138833"/>
+        <criterion comment="qemu-system-aarch64 DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138760"/>
+        <criterion comment="qemu-system-misc DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138745"/>
+        <criterion comment="qemu-system-x86 DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138358"/>
+        <criterion comment="qemu-system-sparc DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138867"/>
+        <criterion comment="qemu-system-arm DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138851"/>
+        <criterion comment="qemu-system-ppc DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:138527"/>
+        <criterion comment="qemu-system-mips DPKG is earlier than 0:2.0.0+dfsg-2ubuntu1.11" test_ref="oval:org.mitre.oval:tst:137984"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="qemu-kvm DPKG is earlier than 0:1.0+noroms-0ubuntu14.22" test_ref="oval:org.mitre.oval:tst:138187"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 15.04 is installed" definition_ref="oval:org.mitre.oval:def:28620"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="qemu-system DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138626"/>
+        <criterion comment="qemu-system-aarch64 DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138770"/>
+        <criterion comment="qemu-system-misc DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138232"/>
+        <criterion comment="qemu-system-x86 DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138930"/>
+        <criterion comment="qemu-system-sparc DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138680"/>
+        <criterion comment="qemu-system-arm DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138772"/>
+        <criterion comment="qemu-system-ppc DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138879"/>
+        <criterion comment="qemu-system-mips DPKG is earlier than 1:2.2+dfsg-5expubuntu9.1" test_ref="oval:org.mitre.oval:tst:138829"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="qemu-system DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138749"/>
+        <criterion comment="qemu-system-aarch64 DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138059"/>
+        <criterion comment="qemu-system-misc DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138977"/>
+        <criterion comment="qemu-system-x86 DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138983"/>
+        <criterion comment="qemu-system-sparc DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138769"/>
+        <criterion comment="qemu-system-arm DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138929"/>
+        <criterion comment="qemu-system-ppc DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138866"/>
+        <criterion comment="qemu-system-mips DPKG is earlier than 0:2.1+dfsg-4ubuntu6.6" test_ref="oval:org.mitre.oval:tst:138012"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

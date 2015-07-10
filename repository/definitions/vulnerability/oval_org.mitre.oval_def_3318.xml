@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3318" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE6,SP1 Channel Definition Format Cross Domain Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-0056" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0056"/>
+    <description>Internet Explorer 5.01, 5.5, and 6 does not properly validate certain URLs in Channel Definition Format (CDF) files, which allows remote attackers to obtain sensitive information or execute arbitrary code, aka the "Channel Definition Format (CDF) Cross Domain Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-03-17T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2005-03-23T08:09:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-04-13T12:15:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-05-04T12:33:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-12-26T09:40:00.000-04:00" comment="Removed test to check kb867282.">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2006-01-12T08:59:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected ste:2735. Set version element datatype to version. Implemented by Jon Baker of The MITRE Corporation." date="2007-01-13T19:44:00.916-05:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-01-13T19:45:59.798-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:40:18.542-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:56.020-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:14.995-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Internet Explorer 6 Service Pack 1 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2919"/>
+      <criteria operator="OR" comment="a vulnerable version of mshtml.dll exisits GDR/QFE">
+        <criterion comment="machine has followed the GDR update path and mshtml.dll is less than 6.0.2800.1491" negate="false" test_ref="oval:org.mitre.oval:tst:1329"/>
+        <criterion comment="machine has followed the QFE update path and mshtml.dll is less than 6.0.2800.1492" negate="false" test_ref="oval:org.mitre.oval:tst:1328"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

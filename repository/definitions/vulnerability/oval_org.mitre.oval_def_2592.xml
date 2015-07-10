@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2592" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>KCMS KCS_OPEN_PROFILE File Disclosure Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+      <product>kcms_server</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0027" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0027"/>
+    <description>Directory traversal vulnerability in Sun Kodak Color Management System (KCMS) library service daemon (kcms_server) allows remote attackers to read arbitrary files via the KCS_OPEN_PROFILE procedure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-19T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-01-24T03:40:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="fixed the service_name entity used in the inetd_object" date="2007-04-10T15:15:00.237-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:15:57.329-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:52:24.241-04:00">ACCEPTED</status_change>
+        <modified comment="Added platforms for Solaris 8 and 9" date="2008-12-08T13:59:00.558-05:00">
+          <contributor organization="Secure Elements, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2008-12-08T14:09:27.638-05:00">INTERIM</status_change>
+        <status_change date="2008-12-29T04:00:13.900-05:00">ACCEPTED</status_change>
+        <modified comment="Fixed incorrect user_id element value in process_state.  Incorrect value was 'root', updated to value of '0'." date="2010-09-02T15:11:00.501-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2010-09-02T15:13:53.870-04:00">INTERIM</status_change>
+        <status_change date="2010-09-20T04:00:20.237-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criteria operator="OR" comment="Solaris 7,8,or 9 installed">
+        <criterion comment="Solaris 8 Installed" test_ref="oval:org.mitre.oval:tst:3145"/>
+        <criterion comment="Solaris 7 Installed" test_ref="oval:org.mitre.oval:tst:3045"/>
+        <criterion comment="Solaris 9 Installed" test_ref="oval:org.mitre.oval:tst:3051"/>
+      </criteria>
+      <criterion comment="Kodak Color Managment Server (KCMS) Runtime Environment (SUNWkcsrt/SUNWkcsrx) installed" test_ref="oval:org.mitre.oval:tst:505"/>
+      <criterion negate="true" comment="Patch 114636-01 or later installed" test_ref="oval:org.mitre.oval:tst:504"/>
+      <criterion negate="true" comment="Patch 107337-03 or later installed" test_ref="oval:org.mitre.oval:tst:503"/>
+      <criterion negate="true" comment="Patch 111400-02 or later installed" test_ref="oval:org.mitre.oval:tst:502"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="inetd.conf contains kcms_server" test_ref="oval:org.mitre.oval:tst:2930"/>
+      <criterion comment="inetd running" test_ref="oval:org.mitre.oval:tst:3135"/>
+    </criteria>
+  </criteria>
+</definition>

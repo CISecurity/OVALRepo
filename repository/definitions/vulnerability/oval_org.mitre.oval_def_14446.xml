@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:14446" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Color Control Panel Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-5082" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-5082"/>
+    <description>Untrusted search path vulnerability in colorcpl.exe 6.0.6000.16386 in the Color Control Panel in Microsoft Windows Server 2008 SP2, R2, and R2 SP1 allows local users to gain privileges via a Trojan horse sti.dll file in the current working directory, as demonstrated by a directory that contains a .camp, .cdmp, .gmmp, .icc, or .icm file, aka "Color Control Panel Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-02-14T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2012-02-21T12:29:19.983-05:00">DRAFT</status_change>
+        <status_change date="2012-03-12T04:00:17.556-04:00">INTERIM</status_change>
+        <status_change date="2012-04-02T04:00:10.497-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Windows Server 2008 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+        <extend_definition comment="Microsoft Windows Server 2008 Itanium-Based Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6150"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Colorui.dll is less than 6.0.6002.18552" test_ref="oval:org.mitre.oval:tst:78304"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Colorui.dll is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:78331"/>
+          <criterion comment="The version of Colorui.dll is less than 6.0.6002.22757" test_ref="oval:org.mitre.oval:tst:78128"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64/ia64">
+      <criteria operator="OR" comment="Windows Server 2008 R2 x64/ia64">
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Colorui.dll is less than 6.1.7600.16931" test_ref="oval:org.mitre.oval:tst:78294"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Colorui.dll is greater than or equal to 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:78303"/>
+          <criterion comment="The version of Colorui.dll is less than 6.1.7600.21109" test_ref="oval:org.mitre.oval:tst:78225"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64/ia64 SP1">
+      <criteria operator="OR" comment="Windows Server 2008 R2 x64/ia64 SP1">
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Colorui.dll is less than 6.1.7601.17745" test_ref="oval:org.mitre.oval:tst:78115"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Colorui.dll is greater than or equal to 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:77917"/>
+          <criterion comment="The version of Colorui.dll is less than 6.1.7601.21879" test_ref="oval:org.mitre.oval:tst:78341"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

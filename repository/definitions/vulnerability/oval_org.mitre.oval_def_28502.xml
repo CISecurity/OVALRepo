@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28502" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Critical Patch Update January 2015</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference ref_id="CVE-2014-6509" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6509" source="CVE"/>
+    <description>Unspecified vulnerability in Oracle Solaris 10 allows local users to affect availability via unknown vectors related to Kernel.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-01-29T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Puneeth</contributor>
+        </submitted>
+        <status_change date="2015-02-03T13:38:43.811-05:00">DRAFT</status_change>
+        <status_change date="2015-02-23T04:01:25.284-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:53.765-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch 148403-01 or later installed">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 148403-01 or later installed" test_ref="oval:org.mitre.oval:tst:137119"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch 148404-01 or later installed">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 148404-01 or later installed" test_ref="oval:org.mitre.oval:tst:137600"/>
+    </criteria>
+  </criteria>
+</definition>

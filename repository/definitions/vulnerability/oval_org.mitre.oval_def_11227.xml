@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11227" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Use-after-free vulnerability in the HTML parser in Mozilla Firefox 3.0.x before 3.0.18 and 3.5.x before 3.5.8, Thunderbird before 3.0.2, and SeaMonkey before 2.0.3 allows remote attackers to execute arbitrary code via unspecified method calls that attempt to access freed objects in low-memory situations.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-1571" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1571"/>
+    <description>Use-after-free vulnerability in the HTML parser in Mozilla Firefox 3.0.x before 3.0.18 and 3.5.x before 3.5.8, Thunderbird before 3.0.2, and SeaMonkey before 2.0.3 allows remote attackers to execute arbitrary code via unspecified method calls that attempt to access freed objects in low-memory situations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:34:30.801-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:08:14.864-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:08:56.143-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11227 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T14:46:00.236-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T15:19:54.103-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:12:30.487-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="seamonkey-nspr is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:39910"/>
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:40282"/>
+        <criterion comment="seamonkey-nss-devel is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:40001"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:40160"/>
+        <criterion comment="seamonkey-nspr-devel is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:39327"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:39963"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:39749"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:40277"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:39865"/>
+        <criterion comment="seamonkey-nss is earlier than 0:1.0.9-0.50.el3" test_ref="oval:org.mitre.oval:tst:40145"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="seamonkey-js-debugger is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40087"/>
+        <criterion comment="thunderbird is earlier than 0:1.5.0.12-25.el4" test_ref="oval:org.mitre.oval:tst:40299"/>
+        <criterion comment="seamonkey is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40185"/>
+        <criterion comment="firefox is earlier than 0:3.0.18-1.el4" test_ref="oval:org.mitre.oval:tst:39897"/>
+        <criterion comment="seamonkey-mail is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40258"/>
+        <criterion comment="seamonkey-chat is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40130"/>
+        <criterion comment="seamonkey-devel is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40147"/>
+        <criterion comment="seamonkey-dom-inspector is earlier than 0:1.0.9-52.el4_8" test_ref="oval:org.mitre.oval:tst:40264"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="xulrunner-devel-unstable is earlier than 0:1.9.0.18-1.el5_4" test_ref="oval:org.mitre.oval:tst:39323"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.0.18-1.el5_4" test_ref="oval:org.mitre.oval:tst:40174"/>
+        <criterion comment="firefox is earlier than 0:3.0.18-1.el5_4" test_ref="oval:org.mitre.oval:tst:40301"/>
+        <criterion comment="thunderbird is earlier than 0:2.0.0.24-2.el5_4" test_ref="oval:org.mitre.oval:tst:40249"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.0.18-1.el5_4" test_ref="oval:org.mitre.oval:tst:39533"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

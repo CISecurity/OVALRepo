@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1048" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SNMP Trap Handling Vulnerability</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <platform>Sun Solaris 8</platform>
+      <product>snmpdx</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0012" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0012"/>
+    <description>Vulnerabilities in a large number of SNMP implementations allow remote attackers to cause a denial of service or gain privileges via SNMPv1 trap handling, as demonstrated by the PROTOS c06-SNMPv1 test suite.  NOTE: It is highly likely that this candidate will be SPLIT into multiple candidates, one or more for each vendor.  This and other SNMP-related candidates will be updated when more accurate information is available.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-02-01T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-02-01T08:41:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-09T07:56:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criteria operator="OR" comment="Solaris 7 or 8 installed">
+        <criterion comment="Solaris 7 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3045"/>
+        <criterion comment="Solaris 8 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3145"/>
+      </criteria>
+      <criterion comment="Solstice Enterprise Agents SNMP (SUNWsasnm) installed" negate="false" test_ref="oval:org.mitre.oval:tst:1243"/>
+      <criterion comment="Patch 107709-18 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1242"/>
+      <criterion comment="Patch 108869-15 or later installed" negate="true" test_ref="oval:org.mitre.oval:tst:1241"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="snmpdx running" negate="false" test_ref="oval:org.mitre.oval:tst:3124"/>
+    </criteria>
+  </criteria>
+</definition>

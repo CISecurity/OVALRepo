@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23402" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:1019: libvirt security, bug fix, and enhancement update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>libvirt</product>
+    </affected>
+    <reference ref_id="ELSA-2011:1019-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-1019.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-2511" ref_url="http://linux.oracle.com/cve/CVE-2011-2511.html" source="CVE"/>
+    <description>Integer overflow in libvirt before 0.9.3 allows remote authenticated users to cause a denial of service (libvirtd crash) and possibly execute arbitrary code via a crafted VirDomainGetVcpus RPC call that triggers memory corruption.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:13:27.918-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:03.921-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:40.584-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23402 - optimisation of Oracle Linux content" date="2014-05-05T17:41:00.232-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:43:12.132-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:18.665-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="libvirt-devel is earlier than 0:0.8.2-22.el5" test_ref="oval:org.mitre.oval:tst:105064"/>
+      <criterion comment="libvirt is earlier than 0:0.8.2-22.el5" test_ref="oval:org.mitre.oval:tst:104629"/>
+      <criterion comment="libvirt-python is earlier than 0:0.8.2-22.el5" test_ref="oval:org.mitre.oval:tst:104834"/>
+    </criteria>
+  </criteria>
+</definition>

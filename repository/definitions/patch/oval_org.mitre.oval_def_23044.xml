@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23044" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:1036: postgresql security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>postgresql</product>
+    </affected>
+    <reference ref_id="ELSA-2012:1036-00" ref_url="http://linux.oracle.com/errata/ELSA-2012-1036.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-2143" ref_url="http://linux.oracle.com/cve/CVE-2012-2143.html" source="CVE"/>
+    <description>The crypt_des (aka DES-based crypt) function in FreeBSD before 9.0-RELEASE-p2, as used in PHP, PostgreSQL, and other products, does not process the complete cleartext password if this password contains a 0x80 character, which makes it easier for context-dependent attackers to obtain access via an authentication attempt with an initial substring of the intended password, as demonstrated by a Unicode password.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:22:10.496-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:11.212-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:14.609-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23044 - optimisation of Oracle Linux content" date="2014-05-05T17:53:00.685-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:55:03.152-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:15.379-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="postgresql-test is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106589"/>
+      <criterion comment="postgresql-pl is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106355"/>
+      <criterion comment="postgresql is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106575"/>
+      <criterion comment="postgresql-libs is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106068"/>
+      <criterion comment="postgresql-contrib is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106469"/>
+      <criterion comment="postgresql-tcl is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106122"/>
+      <criterion comment="postgresql-python is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106592"/>
+      <criterion comment="postgresql-devel is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:105634"/>
+      <criterion comment="postgresql-server is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106183"/>
+      <criterion comment="postgresql-docs is earlier than 0:8.1.23-5.el5_8" test_ref="oval:org.mitre.oval:tst:106634"/>
+    </criteria>
+  </criteria>
+</definition>

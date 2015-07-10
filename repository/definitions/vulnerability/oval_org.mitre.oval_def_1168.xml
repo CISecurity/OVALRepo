@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1168" version="2" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Suppressed: Duplicate of OVAL3743</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Word for Windows 6.0 Converter</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0571" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0571"/>
+    <description>Microsoft Word for Windows 6.0 Converter does not properly validate certain data lengths, which allows remote attackers to execute arbitrary code via a .wri, .rtf, and .doc file sent by email or malicious web site, aka "Table Conversion Vulnerability," a different vulnerability than CVE-2004-0901.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-05T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2005-01-12T12:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-02T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-02-23T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-04-08T12:00:00.000-04:00" comment="modified wrt-35 - wrt-35 corrected literal string">
+          <contributor organization="The MITRE Corporation">Ingrid Skoog</contributor>
+        </modified>
+        <status_change date="2005-04-11T08:48:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-04-27T12:07:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2007-03-01T12:01:01" comment="Deprecated in favor of oval:org.mitre.oval:def:3743.">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-03-01T12:01:01">DEPRECATED</status_change>
+        <modified comment="References registry value for Common Files directory due to multilingual support" date="2008-04-14T11:07:00.928-04:00">
+          <contributor organization="GFI Software">Clifford Farrugia</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="the patch kb885836 is installed (Hotfix key)" negate="true" test_ref="oval:org.mitre.oval:tst:1104"/>
+      <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+      <criterion comment="the version of mswrd632.wpc is less than 2004.10.25.0" negate="false" test_ref="oval:org.mitre.oval:tst:1103"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="Word for Windows 6.0 Converter is enabled" negate="false" test_ref="oval:org.mitre.oval:tst:2421"/>
+    </criteria>
+  </criteria>
+</definition>

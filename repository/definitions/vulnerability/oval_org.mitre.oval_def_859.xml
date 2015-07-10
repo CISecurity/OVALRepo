@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:859" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Red Hat Kernel Real Time Clock Data Leakage</title>
+    <affected family="unix">
+      <platform>Red Hat Linux 9</platform>
+      <product>Linux kernel</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0984" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0984"/>
+    <description>Real time clock (RTC) routines in Linux kernel 2.4.23 and earlier do not properly initialize their structures, which could leak kernel data to user space.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-03-20T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="The MITRE Corporation">Matt Busby</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:42:04.989-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:53:02.615-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat 9 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3153"/>
+    <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+    <criteria operator="OR" comment="Vulnerable Configuration">
+      <criterion comment="kernel version is less than 2.4.20-28.9" negate="false" test_ref="oval:org.mitre.oval:tst:1560"/>
+      <criterion comment="kernel-smp version is less than 2.4.20-28.9" negate="false" test_ref="oval:org.mitre.oval:tst:1559"/>
+      <criterion comment="kernel-bigmem version is less than 2.4.20-28.9" negate="false" test_ref="oval:org.mitre.oval:tst:1558"/>
+    </criteria>
+  </criteria>
+</definition>

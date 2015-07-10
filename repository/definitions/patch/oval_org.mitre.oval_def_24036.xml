@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24036" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:1803: libjpeg-turbo security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>libjpeg-turbo</product>
+    </affected>
+    <reference ref_id="ELSA-2013:1803-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-1803.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-6629" ref_url="http://linux.oracle.com/cve/CVE-2013-6629.html" source="CVE"/>
+    <reference ref_id="CVE-2013-6630" ref_url="http://linux.oracle.com/cve/CVE-2013-6630.html" source="CVE"/>
+    <description>The get_dht function in jdmarker.c in libjpeg-turbo through 1.3.0, as used in Google Chrome before 31.0.1650.48 and other products, does not set all elements of a certain Huffman value array during the reading of segments that follow Define Huffman Table (DHT) JPEG markers, which allows remote attackers to obtain sensitive information from uninitialized memory locations via a crafted JPEG image.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:51:07.208-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:39.652-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:08.329-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24036 - optimisation of Oracle Linux content" date="2014-05-05T17:19:00.903-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:22:08.060-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:07.332-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="libjpeg-turbo is earlier than 0:1.2.1-3.el6_5" test_ref="oval:org.mitre.oval:tst:112387"/>
+      <criterion comment="libjpeg-turbo-static is earlier than 0:1.2.1-3.el6_5" test_ref="oval:org.mitre.oval:tst:112645"/>
+      <criterion comment="libjpeg-turbo-devel is earlier than 0:1.2.1-3.el6_5" test_ref="oval:org.mitre.oval:tst:112323"/>
+    </criteria>
+  </criteria>
+</definition>

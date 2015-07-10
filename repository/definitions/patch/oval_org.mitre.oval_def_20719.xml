@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20719" version="68" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0079: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0079-01" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0079.html"/>
+    <reference source="CESA" ref_id="CESA-2012:0079"/>
+    <reference source="CVE" ref_id="CVE-2011-3659" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-3659.html"/>
+    <reference source="CVE" ref_id="CVE-2011-3670" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-3670.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0442" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0442.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0444" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0444.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0449" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0449.html"/>
+    <description>Mozilla Firefox before 3.6.26 and 4.x through 9.0, Thunderbird before 3.1.18 and 5.0 through 9.0, and SeaMonkey before 2.7 allow remote attackers to cause a denial of service (memory corruption and application crash) or possibly execute arbitrary code via a malformed XSLT stylesheet that is embedded in a document.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:19:16.263-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:17.857-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:32.218-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Redhat 6 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.26-1.el6_2" test_ref="oval:org.mitre.oval:tst:92809"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.26-1.el6_2" test_ref="oval:org.mitre.oval:tst:92255"/>
+        <criterion comment="firefox is earlier than 0:3.6.26-1.el6_2" test_ref="oval:org.mitre.oval:tst:92852"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 6 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.26-1.el6.centos" test_ref="oval:org.mitre.oval:tst:94231"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.26-1.el6.centos" test_ref="oval:org.mitre.oval:tst:94932"/>
+        <criterion comment="firefox is earlier than 0:3.6.26-1.el6.centos" test_ref="oval:org.mitre.oval:tst:94032"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Redhat 5 and Centos 5 section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.26-1.el5_7" test_ref="oval:org.mitre.oval:tst:92621"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.26-1.el5_7" test_ref="oval:org.mitre.oval:tst:92651"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Centos 5 section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criterion comment="firefox is earlier than 0:3.6.26-1.el5.centos" test_ref="oval:org.mitre.oval:tst:94504"/>
+    </criteria>
+    <criteria operator="AND" comment="Redhat 5 section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="firefox is earlier than 0:3.6.26-1.el5_7" test_ref="oval:org.mitre.oval:tst:92761"/>
+    </criteria>
+  </criteria>
+</definition>

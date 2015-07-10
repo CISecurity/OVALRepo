@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26668" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Adobe Flash Player before 13.0.0.244 and 14.x and 15.x before 15.0.0.152 on Windows, Adobe AIR before 15.0.0.249 on Windows allows allow attackers to bypass intended access restrictions</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Adobe AIR</product>
+      <product>Adobe Flash Player</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-0554" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0554"/>
+    <description>Adobe Flash Player before 13.0.0.244 and 14.x and 15.x before 15.0.0.152 on Windows and OS X and before 11.2.202.406 on Linux, Adobe AIR before 15.0.0.249 on Windows and OS X and before 15.0.0.252 on Android, Adobe AIR SDK before 15.0.0.249, and Adobe AIR SDK &amp; Compiler before 15.0.0.249 allow attackers to bypass intended access restrictions via unspecified vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-09-17T08:31:03">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+        <status_change date="2014-09-19T15:13:20.896-04:00">DRAFT</status_change>
+        <status_change date="2014-10-06T04:03:55.925-04:00">INTERIM</status_change>
+        <status_change date="2014-10-27T04:01:19.985-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check the version of Adobe Flash Player 13">
+      <extend_definition comment="Adobe Flash Player 13 is installed" definition_ref="oval:org.mitre.oval:def:24631"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is less than or equal to 13.0.0.241" test_ref="oval:org.mitre.oval:tst:123136"/>
+    </criteria>
+    <criteria operator="AND" comment="Check the version of Adobe Flash Player 14">
+      <extend_definition comment="Adobe Flash Player 14 is installed" definition_ref="oval:org.mitre.oval:def:25040"/>
+      <criterion comment="Determine if the version of Adobe Flash Player is less than or equal to 14.0.0.179" test_ref="oval:org.mitre.oval:tst:123363"/>
+    </criteria>
+    <criteria operator="AND" comment="Determine if the version of Adobe Air is less than or equal to 14.0.0.178">
+      <extend_definition comment="Adobe AIR is installed" definition_ref="oval:org.mitre.oval:def:7479"/>
+      <criterion comment="Determine if the version of Adobe Air is less than or equal to 14.0.0.178" test_ref="oval:org.mitre.oval:tst:123416"/>
+    </criteria>
+  </criteria>
+</definition>

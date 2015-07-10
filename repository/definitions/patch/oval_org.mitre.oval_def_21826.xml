@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21826" version="17" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:0354: evolution-data-server security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>evolution28-evolution-data-server</product>
+      <product>evolution-data-server</product>
+    </affected>
+    <reference ref_id="ELSA-2009:0354-01" ref_url="http://linux.oracle.com/errata/ELSA-2009-0354.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-0547" ref_url="http://linux.oracle.com/cve/CVE-2009-0547.html" source="CVE"/>
+    <reference ref_id="CVE-2009-0582" ref_url="http://linux.oracle.com/cve/CVE-2009-0582.html" source="CVE"/>
+    <reference ref_id="CVE-2009-0587" ref_url="http://linux.oracle.com/cve/CVE-2009-0587.html" source="CVE"/>
+    <description>Multiple integer overflows in Evolution Data Server (aka evolution-data-server) before 2.24.5 allow context-dependent attackers to execute arbitrary code via a long string that is converted to a base64 representation in (1) addressbook/libebook/e-vcard.c in evc or (2) camel/camel-mime-utils.c in libcamel.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T08:55:32.888-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:02:20.524-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:00:30.836-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:21826 - optimisation of Oracle Linux content" date="2014-05-05T18:23:00.086-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T18:24:26.878-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:00:33.425-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="evolution-data-server-doc is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:102893"/>
+      <criterion comment="evolution-data-server is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:102762"/>
+      <criterion comment="evolution-data-server-devel is earlier than 0:1.12.3-10.el5_3.3" test_ref="oval:org.mitre.oval:tst:102824"/>
+    </criteria>
+  </criteria>
+</definition>

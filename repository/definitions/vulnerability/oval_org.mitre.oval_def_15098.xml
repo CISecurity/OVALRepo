@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15098" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DNS Denial of Service Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-0006" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0006"/>
+    <description>The DNS server in Microsoft Windows Server 2003 SP2 and Server 2008 SP2, R2, and R2 SP1 does not properly handle objects in memory during record lookup, which allows remote attackers to cause a denial of service (daemon restart) via a crafted query, aka "DNS Denial of Service Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-13T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2012-03-16T16:28:16.199-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15098 - updated three OVAL definitions (oval:org.mitre.oval:def:15098, oval:org.mitre.oval:def:12764 and oval:org.mitre.oval:def:12870) to use the wmi57 test instead the deprecated wmi test." date="2012-03-27T14:20:00.842-04:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2012-04-16T04:06:51.034-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:11.315-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2003 x86/x64/ia64 SP2">
+      <criterion comment="DNS role is enabled (Server 2003)" test_ref="oval:org.mitre.oval:tst:43899"/>
+      <criteria operator="OR" comment="Windows Server 2003 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="The version of Dns.exe is less than 5.2.3790.4957" test_ref="oval:org.mitre.oval:tst:78000"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 x86/x64 SP2">
+      <criterion comment="DNS role is enabled (Server 2008 or later)" test_ref="oval:org.mitre.oval:tst:78135"/>
+      <criteria operator="OR" comment="Windows Server 2008 x86/x64 SP2">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:5653"/>
+        <extend_definition comment="Microsoft Windows Server 2008 x64 Edition Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:6216"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Dns.exe is less than 6.0.6002.18557" test_ref="oval:org.mitre.oval:tst:78114"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Dns.exe is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:43701"/>
+          <criterion comment="The version of Dns.exe is less than 6.0.6002.22763" test_ref="oval:org.mitre.oval:tst:78110"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64">
+      <criterion comment="DNS role is enabled (Server 2008 or later)" test_ref="oval:org.mitre.oval:tst:78135"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Dns.exe is less than 6.1.7600.16936" test_ref="oval:org.mitre.oval:tst:78409"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Dns.exe is greater than or equal to 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:43876"/>
+          <criterion comment="The version of Dns.exe is less than 6.1.7600.21114" test_ref="oval:org.mitre.oval:tst:78378"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Server 2008 R2 x64 SP1">
+      <criterion comment="DNS role is enabled (Server 2008 or later)" test_ref="oval:org.mitre.oval:tst:78135"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="The version of Dns.exe is less than 6.1.7601.17750" test_ref="oval:org.mitre.oval:tst:78388"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="The version of Dns.exe is greater than or equal to 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:43730"/>
+          <criterion comment="The version of Dns.exe is less than 6.1.7601.21885" test_ref="oval:org.mitre.oval:tst:78429"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

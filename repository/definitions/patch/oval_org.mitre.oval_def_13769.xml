@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13769" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1834-2 apache2 -- denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>apache2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00163.html" ref_id="DSA-1834-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1890" ref_id="CVE-2009-1890"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1891" ref_id="CVE-2009-1891"/>
+    <description>The previous update caused a regression for apache2 in Debian 4.0 &amp;quot;etch&amp;quot;. Using mod_deflate together with mod_php could cause segfaults when a client aborts a connection. This update corrects this flaw. For reference the original advisory text is below. A denial of service flaw was found in the Apache mod_proxy module when it was used as a reverse proxy. A remote attacker could use this flaw to force a proxy process to consume large amounts of CPU time. This issue did not affect Debian 4.0 &amp;quot;etch&amp;quot;. A denial of service flaw was found in the Apache mod_deflate module. This module continued to compress large files until compression was complete, even if the network connection that requested the content was closed before compression completed. This would cause mod_deflate to consume large amounts of CPU if mod_deflate was enabled for a large file. A similar flaw related to HEAD requests for compressed content was also fixed. The oldstable distribution, this problem has been fixed in version 2.2.3-4+etch10. The other distributions stable, testing and unstable were not affected by the regression. This advisory also provides updated apache2-mpm-itk packages which have been recompiled against the new apache2 packages. Updated packages for apache2-mpm-itk for the s390 architecture are not included yet. They will be released as soon as they become available. We recommend that you upgrade your apache2, apache2-mpm-itk package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:33:08.155-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:04:03.091-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:10:52.828-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13769 - Debian Patch Update" date="2014-06-06T16:51:00.206-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:52:56.537-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:04.186-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="apache2-mpm-perchild DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52084"/>
+          <criterion comment="apache2-src DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52024"/>
+          <criterion comment="apache2-doc DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:51904"/>
+          <criterion comment="apache2 DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:51776"/>
+        </criteria>
+      </criteria>
+      <criterion comment="apache2-utils DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52155"/>
+      <criterion comment="apache2-mpm-worker DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52040"/>
+      <criterion comment="apache2.2-common DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52133"/>
+      <criterion comment="apache2-threaded-dev DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52132"/>
+      <criterion comment="apache2-mpm-event DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52078"/>
+      <criterion comment="apache2-mpm-prefork DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:52141"/>
+      <criterion comment="apache2-prefork-dev DPKG is earlier than 2.2.3-4+etch10" test_ref="oval:org.mitre.oval:tst:51686"/>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+        </criteria>
+        <criterion comment="apache2-mpm-itk DPKG is earlier than 2.2.3-01-2+etch4" test_ref="oval:org.mitre.oval:tst:52061"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

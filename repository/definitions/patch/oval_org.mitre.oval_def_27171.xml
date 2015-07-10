@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27171" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:1326: php53 and php security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>php53</product>
+      <product>php</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:1326-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1326.html"/>
+    <reference source="CESA" ref_id="CESA-2014:1326"/>
+    <reference source="CVE" ref_id="CVE-2014-2497" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2497.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3587" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3587.html"/>
+    <reference source="CVE" ref_id="CVE-2014-3597" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-3597.html"/>
+    <reference source="CVE" ref_id="CVE-2014-4670" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-4670.html"/>
+    <reference source="CVE" ref_id="CVE-2014-4698" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-4698.html"/>
+    <description>PHP is an HTML-embedded scripting language commonly used with the Apache
+HTTP Server. PHP's fileinfo module provides functions used to identify a
+particular file according to the type of data contained by the file.
+
+It was found that the fix for CVE-2012-1571 was incomplete; the File
+Information (fileinfo) extension did not correctly parse certain Composite
+Document Format (CDF) files. A remote attacker could use this flaw to crash
+a PHP application using fileinfo via a specially crafted CDF file.
+(CVE-2014-3587)
+
+A NULL pointer dereference flaw was found in the gdImageCreateFromXpm()
+function of PHP's gd extension. A remote attacker could use this flaw to
+crash a PHP application using gd via a specially crafted X PixMap (XPM)
+file. (CVE-2014-2497)
+
+Multiple buffer over-read flaws were found in the php_parserr() function of
+PHP. A malicious DNS server or a man-in-the-middle attacker could possibly
+use this flaw to execute arbitrary code as the PHP interpreter if a PHP
+application used the dns_get_record() function to perform a DNS query.
+(CVE-2014-3597)
+
+Two use-after-free flaws were found in the way PHP handled certain Standard
+PHP Library (SPL) Iterators and ArrayIterators. A malicious script author
+could possibly use either of these flaws to disclose certain portions of
+server memory. (CVE-2014-4670, CVE-2014-4698)
+
+The CVE-2014-3597 issue was discovered by David KutГЎlek of the Red Hat
+BaseOS QE.
+
+All php53 and php users are advised to upgrade to these updated packages,
+which contain backported patches to correct these issues. After installing
+the updated packages, the httpd daemon must be restarted for the update to
+take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-13T11:47:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-24T13:13:12.836-04:00">DRAFT</status_change>
+        <status_change date="2014-11-10T04:02:26.696-05:00">INTERIM</status_change>
+        <status_change date="2014-12-01T04:01:00.632-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="php is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125409"/>
+        <criterion comment="php-bcmath is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125920"/>
+        <criterion comment="php-cli is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125414"/>
+        <criterion comment="php-common is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125361"/>
+        <criterion comment="php-dba is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125832"/>
+        <criterion comment="php-devel is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125124"/>
+        <criterion comment="php-embedded is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:124972"/>
+        <criterion comment="php-enchant is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125778"/>
+        <criterion comment="php-fpm is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125644"/>
+        <criterion comment="php-gd is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125033"/>
+        <criterion comment="php-imap is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125888"/>
+        <criterion comment="php-intl is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125654"/>
+        <criterion comment="php-ldap is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125683"/>
+        <criterion comment="php-mbstring is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125177"/>
+        <criterion comment="php-mysql is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125738"/>
+        <criterion comment="php-odbc is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125620"/>
+        <criterion comment="php-pdo is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125814"/>
+        <criterion comment="php-pgsql is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125886"/>
+        <criterion comment="php-process is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125813"/>
+        <criterion comment="php-pspell is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125507"/>
+        <criterion comment="php-recode is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125661"/>
+        <criterion comment="php-snmp is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125746"/>
+        <criterion comment="php-soap is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125406"/>
+        <criterion comment="php-tidy is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125614"/>
+        <criterion comment="php-xml is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125697"/>
+        <criterion comment="php-xmlrpc is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125873"/>
+        <criterion comment="php-zts is earlier than 0:5.3.3-27.el6_5.2" test_ref="oval:org.mitre.oval:tst:125900"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="php53 is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125496"/>
+        <criterion comment="php53-bcmath is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:124943"/>
+        <criterion comment="php53-cli is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125461"/>
+        <criterion comment="php53-common is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125724"/>
+        <criterion comment="php53-dba is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125739"/>
+        <criterion comment="php53-devel is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125711"/>
+        <criterion comment="php53-gd is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125184"/>
+        <criterion comment="php53-imap is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125520"/>
+        <criterion comment="php53-intl is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125784"/>
+        <criterion comment="php53-ldap is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125741"/>
+        <criterion comment="php53-mbstring is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125173"/>
+        <criterion comment="php53-mysql is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125519"/>
+        <criterion comment="php53-odbc is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125455"/>
+        <criterion comment="php53-pdo is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125877"/>
+        <criterion comment="php53-pgsql is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125516"/>
+        <criterion comment="php53-process is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125911"/>
+        <criterion comment="php53-pspell is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125902"/>
+        <criterion comment="php53-snmp is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125011"/>
+        <criterion comment="php53-soap is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125705"/>
+        <criterion comment="php53-xml is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125105"/>
+        <criterion comment="php53-xmlrpc is earlier than 0:5.3.3-24.el5" test_ref="oval:org.mitre.oval:tst:125640"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

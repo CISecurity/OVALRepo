@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11541" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>sshd.c in OpenSSH 3.6.1p2 and 3.7.1p2 and possibly other versions, when using privilege separation, does not properly signal the non-privileged process when a session has been terminated after exceeding the LoginGraceTime setting, which leaves the connection open and allows remote attackers to cause a denial of service (connection consumption).</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-2069" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2069"/>
+    <description>sshd.c in OpenSSH 3.6.1p2 and 3.7.1p2 and possibly other versions, when using privilege separation, does not properly signal the non-privileged process when a session has been terminated after exceeding the LoginGraceTime setting, which leaves the connection open and allows remote attackers to cause a denial of service (connection consumption).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:33:18.224-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:09:49.824-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:10:36.378-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11541 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:19:00.859-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:23:28.390-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:14:38.280-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="openssh is earlier than 0:3.6.1p2-33.30.6" test_ref="oval:org.mitre.oval:tst:31887"/>
+      <criterion comment="openssh-askpass is earlier than 0:3.6.1p2-33.30.6" test_ref="oval:org.mitre.oval:tst:31483"/>
+      <criterion comment="openssh-server is earlier than 0:3.6.1p2-33.30.6" test_ref="oval:org.mitre.oval:tst:31809"/>
+      <criterion comment="openssh-clients is earlier than 0:3.6.1p2-33.30.6" test_ref="oval:org.mitre.oval:tst:31979"/>
+      <criterion comment="openssh-askpass-gnome is earlier than 0:3.6.1p2-33.30.6" test_ref="oval:org.mitre.oval:tst:31909"/>
+    </criteria>
+  </criteria>
+</definition>

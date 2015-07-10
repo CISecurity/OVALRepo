@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6092" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Integer Overflow Vulnerability in the Solaris 8 and 9 sadmind(1M) Daemon May Lead to Arbitrary Code Execution</title>
+    <affected family="unix">
+      <platform>Sun Solaris 8</platform>
+      <platform>Sun Solaris 9</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3870" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3870"/>
+    <description>Integer overflow in sadmind in Sun Solaris 8 and 9 allows remote attackers to execute arbitrary code via a crafted RPC request that triggers a heap-based buffer overflow, related to improper memory allocation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-05-28T13:34:47.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-06-05T14:12:44.849-04:00">DRAFT</status_change>
+        <status_change date="2009-06-22T04:00:27.049-04:00">INTERIM</status_change>
+        <status_change date="2009-07-13T04:00:47.597-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed incorrect user_id element value in process_state.  Incorrect value was 'root', updated to value of '0'." date="2010-09-02T15:11:00.501-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2010-09-02T15:13:53.660-04:00">INTERIM</status_change>
+        <status_change date="2010-09-20T04:00:32.984-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 8 (SPARC) meets Sun Alert 259468">
+        <extend_definition comment="Solaris 8 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1539"/>
+        <criterion negate="true" comment="Patch 116455-02 or later installed" test_ref="oval:org.mitre.oval:tst:9833"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (SPARC) meets Sun Alert 259468">
+        <extend_definition comment="Solaris 9 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1457"/>
+        <criterion negate="true" comment="Patch 116453-03 or later installed" test_ref="oval:org.mitre.oval:tst:9695"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 8 (x86) meets Sun Alert 259468">
+        <extend_definition comment="Solaris 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:2059"/>
+        <criterion negate="true" comment="Patch 116442-02 or later installed" test_ref="oval:org.mitre.oval:tst:10038"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 9 (x86) meets Sun Alert 259468">
+        <extend_definition comment="Solaris 9 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1683"/>
+        <criterion negate="true" comment="Patch 116454-03 or later installed" test_ref="oval:org.mitre.oval:tst:10171"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Configuration Section">
+      <criterion comment="inetd running" test_ref="oval:org.mitre.oval:tst:3135"/>
+      <criterion comment="inetd.conf contains sadmind" test_ref="oval:org.mitre.oval:tst:1023"/>
+    </criteria>
+  </criteria>
+</definition>

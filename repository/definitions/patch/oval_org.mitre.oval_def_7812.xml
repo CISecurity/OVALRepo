@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7812" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1491 tk8.4 -- buffer overflow</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 3.1</platform>
+      <product>tk8.4</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1491" ref_id="DSA-1491"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0553" ref_id="CVE-2008-0553"/>
+    <description>It was discovered that a buffer overflow in the GIF image parsing code of Tk, a cross-platform graphical toolkit, could lead to a denial of service and potentially the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:49:15.479-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:49.624-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:20.263-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7812 - Debian Patch Update" date="2014-06-06T16:43:00.922-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:44:37.188-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:57.677-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="tk8.4-doc is earlier than 8.4.12-1etch2" test_ref="oval:org.mitre.oval:tst:12314"/>
+        </criteria>
+        <criterion comment="tk8.4 is earlier than 8.4.12-1etch2" test_ref="oval:org.mitre.oval:tst:12155"/>
+        <criterion comment="tk8.4-dev is earlier than 8.4.12-1etch2" test_ref="oval:org.mitre.oval:tst:12095"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="tk8.4-doc is earlier than 8.4.9-1sarge2" test_ref="oval:org.mitre.oval:tst:12091"/>
+        </criteria>
+        <criterion comment="tk8.4 is earlier than 8.4.9-1sarge2" test_ref="oval:org.mitre.oval:tst:11927"/>
+        <criterion comment="tk8.4-dev is earlier than 8.4.9-1sarge2" test_ref="oval:org.mitre.oval:tst:12086"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

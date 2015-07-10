@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:340" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows 2000 ComboBox/ListBox GUI Widget User32.dll Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0659" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0659"/>
+    <description>Buffer overflow in a function in User32.dll on Windows NT through Server 2003 allows local users to execute arbitrary code via long (1) LB_DIR messages to ListBox or (2) CB_DIR messages to ComboBox controls in a privileged application.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-10-16T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <status_change date="2004-03-09T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-01-27T12:00:00.000-04:00" comment="Added the patch KB891711 (from MS05-002) which supercedes the previous patch">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-01-28T09:27:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-02-16T07:32:00.000-04:00">ACCEPTED</status_change>
+        <status_change date="2005-02-16T12:00:00.000-04:00">INTERIM</status_change>
+        <modified date="2005-09-26T12:22:00.000-04:00" comment="modified wft-285 - Changed comment to match test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-09-28T01:04:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-19T05:47:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="set datatype to int" date="2007-10-25T16:45:00.059-04:00">
+          <contributor organization="Opsware, Inc.">Jeff Cheng</contributor>
+        </modified>
+        <status_change date="2007-10-25T16:50:29.242-04:00">INTERIM</status_change>
+        <status_change date="2007-11-13T12:01:13.002-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+      <criterion comment="File %windir%\system32\user32.dll version is less than 5.0.2195.6799" negate="false" test_ref="oval:org.mitre.oval:tst:2691"/>
+      <criterion comment="the patch kb824141 is installed (Hotfix key)" negate="true" test_ref="oval:org.mitre.oval:tst:2808"/>
+      <criterion comment="the patch kb891711 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:2807"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="the utility manager Service is enabled" negate="false" test_ref="oval:org.mitre.oval:tst:2806"/>
+    </criteria>
+  </criteria>
+</definition>

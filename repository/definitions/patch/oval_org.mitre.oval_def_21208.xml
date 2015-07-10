@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21208" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1091-1 -- firefox, firefox-{3.0,3.5}, xulrunner-1.9.2 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 10.10</platform>
+      <product>firefox</product>
+      <product>firefox-3.0</product>
+      <product>firefox-3.5</product>
+      <product>xulrunner-1.9.2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-1091-1/" ref_id="USN-1091-1"/>
+    <description>It was discovered that several invalid HTTPS certificates were issued and revoked.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T13:16:32">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-14T17:04:56.616-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:38.087-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:57.647-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 8.04 release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criterion comment="firefox DPKG is earlier than 0:3.6.16+build1+nobinonly-0ubuntu0.8.04.1" test_ref="oval:org.mitre.oval:tst:92327"/>
+    </criteria>
+    <criteria comment="Ubuntu 9.10 release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criterion comment="firefox DPKG is earlier than 0:3.6.16+build1+nobinonly-0ubuntu0.9.10.1" test_ref="oval:org.mitre.oval:tst:92125"/>
+    </criteria>
+    <criteria comment="Ubuntu 10.04 release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="firefox DPKG is earlier than 0:3.6.16+build1+nobinonly-0ubuntu0.10.04.1" test_ref="oval:org.mitre.oval:tst:92306"/>
+        <criterion comment="xulrunner-1.9.2 DPKG is earlier than 0:1.9.2.16+build1+nobinonly-0ubuntu0.10.04.1" test_ref="oval:org.mitre.oval:tst:92309"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 10.10 release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="firefox DPKG is earlier than 0:3.6.16+build1+nobinonly-0ubuntu0.10.10.1" test_ref="oval:org.mitre.oval:tst:92058"/>
+        <criterion comment="xulrunner-1.9.2 DPKG is earlier than 0:1.9.2.16+build1+nobinonly-0ubuntu0.10.10.1" test_ref="oval:org.mitre.oval:tst:92375"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

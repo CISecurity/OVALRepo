@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition version="1" id="oval:org.mitre.oval:def:7510" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1888 openssl, openssl097 -- cryptographic weakness</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>openssl</product>
+      <product>openssl097</product>
+    </affected>
+    <reference source="DSA" ref_url="http://www.debian.org/security/2009/dsa-1888" ref_id="DSA-1888"/>
+    <description>Certificates with MD2 hash signatures are no longer accepted by OpenSSL, since they're no longer considered cryptographically secure.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:04-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:51:21.690-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:00:57.817-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:38.577-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Platform section" operator="OR">
+    <criteria comment="Release section" operator="AND">
+      <extend_definition comment="Debian 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria comment="Architecture section" operator="OR">
+        <criteria comment="Architecture dependent section" operator="AND">
+          <criteria comment="Supported architectures section" operator="OR">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria comment="Packages section" operator="OR">
+            <criterion comment="libssl-dev DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:13263"/>
+            <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:13565"/>
+            <criterion comment="openssl DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:13092"/>
+            <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:13045"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section" operator="AND">
+      <extend_definition comment="Debian 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria comment="Architecture section" operator="OR">
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="libssl0.9.7-dbg DPKG is earlier than 0.9.7k-3.1etch5" test_ref="oval:org.mitre.oval:tst:13329"/>
+          <criterion comment="libssl-dev DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:13395"/>
+          <criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:13330"/>
+          <criterion comment="openssl DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:13448"/>
+          <criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:13558"/>
+          <criterion comment="libssl0.9.7 DPKG is earlier than 0.9.7k-3.1etch5" test_ref="oval:org.mitre.oval:tst:13402"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

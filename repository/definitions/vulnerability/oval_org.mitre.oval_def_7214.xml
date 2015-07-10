@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7214" version="11" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Uniscribe Font Parsing Engine Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <product>Microsoft Office XP</product>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2007</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-2738" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2738"/>
+    <description>The Uniscribe (aka new Unicode Script Processor) implementation in USP10.DLL in Microsoft Windows XP SP2 and SP3, Server 2003 SP2, Vista SP1 and SP2, and Server 2008 Gold and SP2, and Microsoft Office XP SP3, 2003 SP3, and 2007 SP2, does not properly validate tables associated with malformed OpenType fonts, which allows remote attackers to execute arbitrary code via a crafted (1) web site or (2) Office document, aka "Uniscribe Font Parsing Engine Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-13T13:00:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2010-09-16T11:39:16.299-04:00">DRAFT</status_change>
+        <status_change date="2010-10-04T04:00:41.098-04:00">INTERIM</status_change>
+        <status_change date="2010-10-25T04:00:25.306-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:48:39.698-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:02:36.852-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7214 - Modified in accordance with MS bulletin" date="2014-05-20T12:41:00.778-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-20T12:43:56.083-04:00">INTERIM</status_change>
+        <status_change date="2014-06-09T04:01:48.213-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:21.821-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:11:24.029-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7214 - extended definitions of OS are without SP checks" date="2014-07-28T17:37:00.435-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:39:29.309-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:25.545-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows XP (x86)">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criterion comment="the version of Usp10.dll is less than 1.420.2600.5969" test_ref="oval:org.mitre.oval:tst:11440"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP (x64), Windows Server 2003 x64/x86/ia64">
+      <criteria operator="OR" comment="XP x64, Server 2003 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+      </criteria>
+      <criterion comment="the version of Usp10.dll is less than 1.422.3790.4695" test_ref="oval:org.mitre.oval:tst:11454"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86/x64, Server 2008 x86/x64/ia64">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Usp10.dll is less than 1.626.6001.18461" test_ref="oval:org.mitre.oval:tst:11764"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Usp10.dll is greater than or equal to 1.626.6001.22000" test_ref="oval:org.mitre.oval:tst:11596"/>
+          <criterion comment="the version of Usp10.dll is less than 1.626.6001.22672" test_ref="oval:org.mitre.oval:tst:10975"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows Vista x86/x64, Server 2008 x86/x64/ia64">
+      <criteria operator="OR" comment="Vista x86/x64, Server 2008 x86/x64/ia64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="the version of Usp10.dll is less than 1.626.6002.18244" test_ref="oval:org.mitre.oval:tst:11374"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="the version of Usp10.dll is greater than or equal to 1.626.6002.22000" test_ref="oval:org.mitre.oval:tst:11247"/>
+          <criterion comment="the version of Usp10.dll is less than 1.626.6002.22384" test_ref="oval:org.mitre.oval:tst:11723"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Office XP">
+      <extend_definition comment="Microsoft Office XP is installed" definition_ref="oval:org.mitre.oval:def:663"/>
+      <criterion comment="the version of Usp10.dll is less than 1.420.2600.5969" test_ref="oval:org.mitre.oval:tst:11495"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Office 2003">
+      <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+      <criterion comment="the version of Usp10.dll is less than 1.626.6000.21258" test_ref="oval:org.mitre.oval:tst:11005"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Office 2007">
+      <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+      <criterion comment="the version of Usp10.dll is less than 1.626.6002.22402" test_ref="oval:org.mitre.oval:tst:11352"/>
+    </criteria>
+  </criteria>
+</definition>

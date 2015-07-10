@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:17673" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1948-1 ntp - denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>ntp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1948-1" ref_id="DSA-1948-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3563" ref_id="CVE-2009-3563"/>
+    <description>Robin Park and Dmitri Vinokurov discovered that the daemon component of the ntp package, a reference implementation of the NTP protocol, is not properly reacting to certain incoming packets.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:12:51">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:13:23.004-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:00:23.494-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:09:28.551-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:17673 - Debian Patch Update" date="2014-06-06T17:22:00.920-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:24:25.897-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:49.709-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="ntp DPKG is earlier than 1:4.2.2.p4+dfsg-2etch4" test_ref="oval:org.mitre.oval:tst:86411"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="ntp DPKG is earlier than 1:4.2.4p4+dfsg-8lenny3" test_ref="oval:org.mitre.oval:tst:86522"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25256" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0760-1 -- Security update for glibc</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140760-1.html" ref_id="SUSE-SU-2014:0760-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4357" ref_id="CVE-2013-4357"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4458" ref_id="CVE-2013-4458"/>
+    <description>This update for the GNU Lib C fixes security issues, some bugs and
+introduces one new feature.
+
+The following security issues have been fixed:
+
+    * CVE-2013-4357: Various potential stack overflows in getaddrinfo() and
+      others were fixed. (bnc#844309)
+    * CVE-2013-4458: A stack (frame) overflow in getaddrinfo() when called
+      with AF_INET6.
+
+The following new feature has been implemented:
+
+    * On PowerLinux, a vDSO entry for getcpu() was added for possible
+      performance enhancements. (FATE#316816, bnc#854445)
+
+The following issues have been fixed:
+
+    * Performance problems with threads in __lll_lock_wait_private and
+      __lll_unlock_wake_private. (bnc#836746)
+    * IPv6: Memory leak in getaddrinfo() when many RRs are returned.
+      (bnc#863499)
+    * Using profiling C library (-lc_p) can trigger a segmentation fault.
+      (bnc#872832)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:08:56">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:50.171-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:38.089-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:27.454-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="glibc RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:115852"/>
+        <criterion comment="glibc-devel RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116218"/>
+        <criterion comment="glibc-i18ndata RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116410"/>
+        <criterion comment="glibc-locale RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116006"/>
+        <criterion comment="nscd RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116428"/>
+        <criterion comment="glibc-32bit RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116403"/>
+        <criterion comment="glibc-devel-32bit RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116381"/>
+        <criterion comment="glibc-locale-32bit RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116398"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="glibc-html RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:115844"/>
+        <criterion comment="glibc-info RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:115988"/>
+        <criterion comment="glibc-profile RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:116404"/>
+        <criterion comment="glibc-profile-32bit RPM is earlier than 0:2.11.3-17.62.1" test_ref="oval:org.mitre.oval:tst:115820"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

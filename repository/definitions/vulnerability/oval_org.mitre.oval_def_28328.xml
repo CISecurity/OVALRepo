@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28328" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>OWA XSS vulnerability (CVE-2014-6326) - MS14-075</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft Exchange Server 2013</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-6326" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6326"/>
+    <description>Cross-site scripting (XSS) vulnerability in Microsoft Exchange Server 2013 SP1 and Cumulative Update 6 allows remote attackers to inject arbitrary web script or HTML via a crafted URL, aka "OWA XSS Vulnerability," a different vulnerability than CVE-2014-6325.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-12T15:06:06">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-12-15T23:58:18.138-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:32.118-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:35.683-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Exchange Server 2013 and vulnerable file version">
+      <extend_definition comment="Microsoft Exchange Server 2013 is installed" definition_ref="oval:org.mitre.oval:def:18626"/>
+      <criterion comment="Check if the version of ExSetup.exe is less than 15.00.0847.035" test_ref="oval:org.mitre.oval:tst:135793"/>
+    </criteria>
+    <criteria operator="AND" comment="Exchange 2013 CU 6 and vulnerable file version">
+      <criterion comment="Check if the version of ExSetup.exe is less than 15.00.0995.034" test_ref="oval:org.mitre.oval:tst:135701"/>
+      <extend_definition comment="Microsoft Exchange Server 2013 CU 6 is installed" definition_ref="oval:org.mitre.oval:def:28213"/>
+    </criteria>
+  </criteria>
+</definition>

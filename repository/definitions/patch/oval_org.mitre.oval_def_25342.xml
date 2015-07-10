@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25342" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-RU-2013:1829-1 -- Recommended update for nfs-client</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>nfs-client</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131829-1.html" ref_id="SUSE-RU-2013:1829-1"/>
+    <description>This update for nfs-utils provides the following fixes:
+
+    * Fix decoding of octal encoded fields in idmapd.
+(bnc#802823)
+    * Improve support for GSS security negotiation with old
+servers. (bnc#844015)
+    * Correctly handle sub-directory exports from file
+systems with 64-bit inode numbers. (bnc#841971)
+    * Ensure ldconfig cache is updated when libraries exist
+on NFS mounted file system. (bnc#834164)
+    * Make it easy to enable NFSv4.1 support on server.
+(bnc#832264)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:23:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:20:57.095-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:00.531-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:01:59.975-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="nfs-client RPM is earlier than 0:1.2.3-18.33.1" test_ref="oval:org.mitre.oval:tst:117774"/>
+        <criterion comment="nfs-kernel-server RPM is earlier than 0:1.2.3-18.33.1" test_ref="oval:org.mitre.oval:tst:117809"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="nfs-doc RPM is earlier than 0:1.2.3-18.33.1" test_ref="oval:org.mitre.oval:tst:118118"/>
+    </criteria>
+  </criteria>
+</definition>

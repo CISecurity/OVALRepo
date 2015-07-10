@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13856" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-743-1 -- ghostscript, gs-gpl vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>ghostscript</product>
+      <product>gs-gpl</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-March/000870.html" ref_id="USN-743-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0583" ref_id="CVE-2009-0583"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0584" ref_id="CVE-2009-0584"/>
+    <description>It was discovered that Ghostscript contained multiple integer overflows in its ICC color management library. If a user or automated system were tricked into opening a crafted Postscript file, an attacker could cause a denial of service or execute arbitrary code with privileges of the user invoking the program. It was discovered that Ghostscript did not properly perform bounds checking in its ICC color management library. If a user or automated system were tricked into opening a crafted Postscript file, an attacker could cause a denial of service or execute arbitrary code with privileges of the user invoking the program</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:54:16.688-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:12:11.159-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:09:20.158-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13856 - added CVE references; also made minor updates" date="2014-06-13T17:32:00.342-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:34:01.281-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:04:12.963-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gs-gpl DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68543"/>
+            <criterion comment="gs-aladdin DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68744"/>
+            <criterion comment="gs DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68692"/>
+            <criterion comment="ghostscript-doc DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68712"/>
+            <criterion comment="gs-esp DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68417"/>
+            <criterion comment="gs-esp-x DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68499"/>
+            <criterion comment="gs-common DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68168"/>
+            <criterion comment="libgs-esp-dev DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68673"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgs-dev DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68631"/>
+            <criterion comment="ghostscript-x DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68275"/>
+            <criterion comment="ghostscript DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68760"/>
+            <criterion comment="libgs8 DPKG is earlier than 8.61.dfsg.1~svn8187-0ubuntu3.5" test_ref="oval:org.mitre.oval:tst:68408"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gs-gpl DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68577"/>
+            <criterion comment="gs-aladdin DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68215"/>
+            <criterion comment="gs DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68736"/>
+            <criterion comment="ghostscript-doc DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68532"/>
+            <criterion comment="gs-esp DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:67828"/>
+            <criterion comment="gs-esp-x DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68647"/>
+            <criterion comment="gs-common DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68687"/>
+            <criterion comment="libgs-esp-dev DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68629"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgs-dev DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68633"/>
+            <criterion comment="ghostscript-x DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68421"/>
+            <criterion comment="ghostscript DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68743"/>
+            <criterion comment="libgs8 DPKG is earlier than 8.61.dfsg.1-1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68502"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="gs DPKG is earlier than 8.15-4ubuntu3.2" test_ref="oval:org.mitre.oval:tst:68645"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criterion comment="gs-gpl DPKG is earlier than 8.15-4ubuntu3.2" test_ref="oval:org.mitre.oval:tst:68007"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="gs-gpl DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68018"/>
+            <criterion comment="gs-aladdin DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68680"/>
+            <criterion comment="gs DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68281"/>
+            <criterion comment="ghostscript-doc DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68352"/>
+            <criterion comment="gs-esp DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68314"/>
+            <criterion comment="gs-esp-x DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68503"/>
+            <criterion comment="gs-common DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68816"/>
+            <criterion comment="libgs-esp-dev DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68268"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libgs-dev DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68020"/>
+            <criterion comment="ghostscript-x DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68559"/>
+            <criterion comment="ghostscript DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68808"/>
+            <criterion comment="libgs8 DPKG is earlier than 8.63.dfsg.1-0ubuntu6.3" test_ref="oval:org.mitre.oval:tst:68591"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

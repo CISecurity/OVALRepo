@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12936" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Data Access Components Insecure Library Loading Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1975" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1975"/>
+    <description>Untrusted search path vulnerability in the Data Access Tracing component in Windows Data Access Components (Windows DAC) 6.0 in Microsoft Windows 7 Gold and SP1 and Windows Server 2008 R2 and R2 SP1 allows local users to gain privileges via a Trojan horse DLL in the current working directory, as demonstrated by a directory that contains an Excel .xlsx file, aka "Data Access Components Insecure Library Loading Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-08-09T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-08-15T08:28:56.935-04:00">DRAFT</status_change>
+        <status_change date="2011-09-05T04:00:18.113-04:00">INTERIM</status_change>
+        <status_change date="2011-09-26T04:00:18.564-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64, Windows Server 2008 R2 x64/Itanium">
+      <criteria operator="OR" comment="Windows 7 x86/x64, Windows Server 2008 R2 x64/Itanium">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Odbccp32.dll version is less than 6.1.7600.16833" test_ref="oval:org.mitre.oval:tst:43501"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Odbccp32.dll version is greater than or equal 6.1.7600.20000" test_ref="oval:org.mitre.oval:tst:43890"/>
+          <criterion comment="Odbccp32.dll version is less than 6.1.7600.20987" test_ref="oval:org.mitre.oval:tst:43553"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Microsoft Windows 7 x86/x64 sp1/sp1, Windows Server 2008 R2 x64/Itanium SP1/SP1">
+      <criteria operator="OR" comment="Windows 7 x86/x64 sp1/sp1, Windows Server 2008 R2 x64/Itanium SP1/SP1">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12583"/>
+      </criteria>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Odbccp32.dll version is less than 6.1.7601.17632" test_ref="oval:org.mitre.oval:tst:43866"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Odbccp32.dll version is greater than or equal 6.1.7601.21000" test_ref="oval:org.mitre.oval:tst:43739"/>
+          <criterion comment="Odbccp32.dll version is less than 6.1.7601.21747" test_ref="oval:org.mitre.oval:tst:43736"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

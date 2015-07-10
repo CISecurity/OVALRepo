@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23997" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0525: pcsc-lite security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>pcsc-lite</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0525-02" ref_url="http://linux.oracle.com/errata/ELSA-2013-0525.html" source="VENDOR"/>
+    <reference ref_id="CVE-2010-4531" ref_url="http://linux.oracle.com/cve/CVE-2010-4531.html" source="CVE"/>
+    <description>Stack-based buffer overflow in the ATRDecodeAtr function in the Answer-to-Reset (ATR) Handler (atrhandler.c) for pcscd in PCSC-Lite 1.5.3, and possibly other 1.5.x and 1.6.x versions, allows physically proximate attackers to cause a denial of service (crash) and possibly execute arbitrary code via a smart card with an ATR message containing a long attribute value.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:44:37.771-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:36.228-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:07:02.292-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23997 - optimisation of Oracle Linux content" date="2014-05-05T17:19:00.903-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:22:04.313-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:06:02.494-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="pcsc-lite-libs is earlier than 0:1.5.2-11.el6" test_ref="oval:org.mitre.oval:tst:111652"/>
+      <criterion comment="pcsc-lite-devel is earlier than 0:1.5.2-11.el6" test_ref="oval:org.mitre.oval:tst:110989"/>
+      <criterion comment="pcsc-lite is earlier than 0:1.5.2-11.el6" test_ref="oval:org.mitre.oval:tst:111595"/>
+      <criterion comment="pcsc-lite-doc is earlier than 0:1.5.2-11.el6" test_ref="oval:org.mitre.oval:tst:111578"/>
+    </criteria>
+  </criteria>
+</definition>

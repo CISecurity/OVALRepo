@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24089" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2014:0431: virt-viewer bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>virt-viewer</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2014:0431-02" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0431.html"/>
+    <reference source="CEBA" ref_id="CEBA-2014:0431"/>
+    <description>The virt-viewer packages provide Virtual Machine Viewer, which is a lightweight interface for interacting with the graphical display of a virtualized guest. Virtual Machine Viewer uses libvirt and is intended as a replacement for traditional VNC or SPICE clients.
+
+This update fixes the following bug: 
+
+* Prior to this update, Spice determined the scaling of windows incorrectly by using the original desktop size instead of the host screen size. As a consequence, when a guest window was open in Spice, the screen could under some circumstances become blurry. With this update, the guest window scaling has been fixed and this problem no longer occurs. (BZ#1081376)
+
+Users of virt-viewer are advised to upgrade to these updated packages, which fix this bug.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-09T15:16:45">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-06-10T14:50:17.771-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24089 - Products and Centos critera added" date="2014-06-13T17:47:00.365-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-30T04:10:02.353-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:08.293-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criterion comment="virt-viewer is earlier than 0:0.5.6-8.el6_5.1" test_ref="oval:org.mitre.oval:tst:114253"/>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+  </criteria>
+</definition>

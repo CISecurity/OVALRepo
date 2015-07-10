@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13169" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-733-1 -- evolution-data-server vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <product>evolution-data-server</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-March/000861.html" ref_id="USN-733-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0587" ref_id="CVE-2009-0587"/>
+    <description>It was discovered that the Base64 encoding functions in evolution-data-server did not properly handle large strings. If a user were tricked into opening a specially crafted image file, or tricked into connecting to a malicious server, an attacker could possibly execute arbitrary code with user privileges.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:09:44.640-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:03:36.112-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:02:50.462-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13169 - added CVE references; also made minor updates" date="2014-06-13T16:14:00.881-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:16:15.454-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:53.993-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="evolution-data-server-common DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73487"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libedataserverui1.2-8 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73966"/>
+            <criterion comment="libedata-book1.2-2 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73852"/>
+            <criterion comment="libecal1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73848"/>
+            <criterion comment="evolution-data-server-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73600"/>
+            <criterion comment="evolution-data-server DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73615"/>
+            <criterion comment="libegroupwise1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74007"/>
+            <criterion comment="libedata-book1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73211"/>
+            <criterion comment="libedataserverui1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73963"/>
+            <criterion comment="libebook1.2-9 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73967"/>
+            <criterion comment="libedata-cal1.2-6 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73646"/>
+            <criterion comment="evolution-data-server-dbg DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73805"/>
+            <criterion comment="libebook1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73955"/>
+            <criterion comment="libcamel1.2-10 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73478"/>
+            <criterion comment="libedata-cal1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73635"/>
+            <criterion comment="libecal1.2-7 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73041"/>
+            <criterion comment="libexchange-storage1.2-3 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74008"/>
+            <criterion comment="libexchange-storage1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73782"/>
+            <criterion comment="libcamel1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73668"/>
+            <criterion comment="libegroupwise1.2-13 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73808"/>
+            <criterion comment="libedataserver1.2-9 DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:73800"/>
+            <criterion comment="libedataserver1.2-dev DPKG is earlier than 1.12.1-0ubuntu2.1" test_ref="oval:org.mitre.oval:tst:74027"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libcamel1.2-8 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73693"/>
+        <criterion comment="libebook1.2-5 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73900"/>
+        <criterion comment="libedata-book1.2-2 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73678"/>
+        <criterion comment="libecal1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73723"/>
+        <criterion comment="evolution-data-server-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73455"/>
+        <criterion comment="evolution-data-server DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73940"/>
+        <criterion comment="libegroupwise1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73989"/>
+        <criterion comment="libedata-book1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73166"/>
+        <criterion comment="libedata-cal1.2-1 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73088"/>
+        <criterion comment="libedataserverui1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73923"/>
+        <criterion comment="libegroupwise1.2-9 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73428"/>
+        <criterion comment="evolution-data-server-dbg DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73691"/>
+        <criterion comment="libcamel1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73227"/>
+        <criterion comment="libedata-cal1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:74064"/>
+        <criterion comment="libedataserverui1.2-6 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73789"/>
+        <criterion comment="libexchange-storage1.2-1 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73837"/>
+        <criterion comment="libedataserver1.2-7 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:74004"/>
+        <criterion comment="libebook1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:74014"/>
+        <criterion comment="libexchange-storage1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73752"/>
+        <criterion comment="libedataserver1.2-dev DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:73840"/>
+        <criterion comment="libecal1.2-3 DPKG is earlier than 1.6.1-0ubuntu7.2" test_ref="oval:org.mitre.oval:tst:74048"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

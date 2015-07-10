@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1268" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHE3 Firefox and Mozilla Javascript Dialog Box Spoofing</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>mozilla</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-2268" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2268"/>
+    <description>Firefox before 1.0.5 and Mozilla before 1.7.9 does not clearly associate a Javascript dialog box with the web page that generated it, which allows remote attackers to spoof a dialog box from a trusted site and facilitates phishing attacks, aka the "Dialog Origin Spoofing Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-08-15T04:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2005-08-19T10:05:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-09-21T01:33:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-10-12T05:49:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2483"/>
+      <criterion comment="mozilla RPM is earlier than 37:1.7.10-1.1.3.1" negate="false" test_ref="oval:org.mitre.oval:tst:2482"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="/usr/bin/mozilla is executable" negate="false" test_ref="oval:org.mitre.oval:tst:2650"/>
+    </criteria>
+  </criteria>
+</definition>

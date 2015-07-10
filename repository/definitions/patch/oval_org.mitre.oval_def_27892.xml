@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27892" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2012-0306 -- krb5 security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>krb5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0306.html" ref_id="ELSA-2012-0306"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1526" ref_id="CVE-2011-1526"/>
+    <description>[1.6.1-70.el5]
+- add upstream patch for telnetd buffer overflow (CVE-2011-4862, #770351)
+
+[1.6.1-69.el5]
+- ftp: fix a static analysis should-never-happen NULL dereference (#750823)
+
+[1.6.1-68.el5]
+- backport fixes to teach libkrb5 to use descriptors higher than FD_SETSIZE
+  to talk to a KDC by using poll() if it's detected at compile-time, revised
+  (#701444, RT#6905)
+
+[1.6.1-67.el5]
+- add backported patch by way of jbarbuc to free subkeys created by the
+  KDC while processing TGS requests (#708516)
+
+[1.6.1-66.el5]
+- add backported patch by way of several people to better avoid false
+  detection of replay attacks when talking to systems with coarse time
+  resolution (#713500)
+
+[1.6.1-65.el5]
+- ftpd: add backported patch to check for errors when calling setegid
+  (MITKRB5-SA-2011-005, CVE-2011-1526, #719098)
+
+[1.6.1-64.el5]
+- klist: don't trip over referral entries when invoked with -s (#729067,
+  RT#6915)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:17">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:45:02.188-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:06:44.916-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:10.999-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T17:15:45.857-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T17:15:45.857-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="krb5 is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132673"/>
+      <criterion comment="krb5-devel is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132081"/>
+      <criterion comment="krb5-libs is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132318"/>
+      <criterion comment="krb5-server is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132469"/>
+      <criterion comment="krb5-server-ldap is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132694"/>
+      <criterion comment="krb5-workstation is earlier than 0:1.6.1-70.el5" test_ref="oval:org.mitre.oval:tst:132154"/>
+    </criteria>
+  </criteria>
+</definition>

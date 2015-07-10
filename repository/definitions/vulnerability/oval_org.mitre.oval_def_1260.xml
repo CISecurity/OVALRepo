@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1260" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Integer Overflow in libgd2</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>libgd</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0990" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0990"/>
+    <description>Integer overflow in GD Graphics Library libgd 2.0.28 (libgd2), and possibly other versions, allows remote attackers to cause a denial of service and possibly execute arbitrary code via PNG image files with large image rows values that lead to a heap-based buffer overflow in the gdImageCreateFromPngCtx function, a different set of vulnerabilities than CVE-2004-0941.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-06-27T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <status_change date="2005-06-29T06:49:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-07-27T10:37:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-08-18T07:37:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+    <criteria operator="AND" comment="libgd or libgd-devel RPM is earlier than 0:1.8.4-12.3.1">
+      <criterion comment="libgd RPM is earlier than 0:1.8.4-12.3.1" negate="false" test_ref="oval:org.mitre.oval:tst:1085"/>
+      <criterion comment="libgd-devel RPM is earlier than 0:1.8.4-12.3.1" negate="false" test_ref="oval:org.mitre.oval:tst:1084"/>
+    </criteria>
+  </criteria>
+</definition>

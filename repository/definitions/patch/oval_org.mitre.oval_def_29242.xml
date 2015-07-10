@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29242" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2015:0979-1 -- Security update for dnsmasq (moderate)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 12</platform>
+      <platform>SUSE Linux Enterprise Desktop 12</platform>
+      <product>dnsmasq</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2015/suse-su-20150979-1.html" ref_id="SUSE-SU-2015:0979-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3294" ref_id="CVE-2015-3294"/>
+    <description>The DNS server dnsmasq was updated to fix one security issue and one
+non-security bug.
+The following vulnerability was fixed:
+* CVE-2015-3294: A remote unauthenticated attacker could have caused a
+  denial of service (DoS) or read heap memory, potentially disclosing
+  information such as performed DNS queries or encryption keys.
+  (bsc#928867)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:33:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:12.853-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 12 is installed" definition_ref="oval:org.mitre.oval:def:28211"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="dnsmasq is earlier than 0:2.71-4.1" test_ref="oval:org.mitre.oval:tst:140021"/>
+      <criterion comment="dnsmasq-debuginfo is earlier than 0:2.71-4.1" test_ref="oval:org.mitre.oval:tst:139911"/>
+      <criterion comment="dnsmasq-debugsource is earlier than 0:2.71-4.1" test_ref="oval:org.mitre.oval:tst:139784"/>
+    </criteria>
+  </criteria>
+</definition>

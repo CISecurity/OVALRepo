@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19778" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Avoid unsigned integer wrapping in PL_ArenaAllocate</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Mozilla Firefox</product>
+      <product>Mozilla Seamonkey</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-5607" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5607"/>
+    <description>Integer overflow in the PL_ArenaAllocate function in Mozilla Netscape Portable Runtime (NSPR) before 4.10.2, as used in Firefox before 25.0.1, Firefox ESR 17.x before 17.0.11 and 24.x before 24.1.1, and SeaMonkey before 2.22.1, allows remote attackers to cause a denial of service (application crash) or possibly have unspecified other impact via a crafted X.509 certificate, a related issue to CVE-2013-1741.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-02T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-12-02T15:28:00.382-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:18.905-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:00:40.769-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:27586 - Corrected objects comments to match files referenced by the objects" date="2014-01-30T14:43:00.361-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2014-01-30T14:45:32.566-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:00:12.459-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for vulnerable Firefox">
+      <extend_definition comment="Mozilla Firefox is installed" definition_ref="oval:org.mitre.oval:def:6562"/>
+      <criterion comment="Mozilla Netscape Portable Runtime before 4.10.2 in Mozilla Firefox" test_ref="oval:org.mitre.oval:tst:88105"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Seamonkey">
+      <extend_definition comment="Mozilla Seamonkey is installed" definition_ref="oval:org.mitre.oval:def:6372"/>
+      <criterion comment="Mozilla Netscape Portable Runtime before 4.10.2 in Mozilla Seamonkey" test_ref="oval:org.mitre.oval:tst:87544"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:961" version="2" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Data Access Components SQL-DMO Buffer Overflow (Test 1)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 95</platform>
+      <platform>Microsoft Windows 98</platform>
+      <platform>Microsoft Windows ME</platform>
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <product>Microsoft Data Access Components 2.5</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0353" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0353"/>
+    <description>Buffer overflow in a component of SQL-DMO for Microsoft Data Access Components (MDAC) 2.5 through 2.7 allows remote attackers to execute arbitrary code via a long response to a broadcast request to UDP port 1434.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-05-04T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-05-25T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-06-16T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-02-28T12:00:00.000-04:00" comment="split out the MDAC and file version tests from the compound test">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-03-02T08:52:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-03-23T08:09:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Deprecating duplicate definition for CVE-2003-0353" date="2010-05-05T12:00:00.000-05:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2010-05-05T12:00:00.000-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Microsoft Data Access Components 2.5 is installed" test_ref="oval:org.mitre.oval:tst:2576"/>
+    <criterion comment="File %windir%\System32\odbcbcp.dll is less than 3.70.11.40" test_ref="oval:org.mitre.oval:tst:1396"/>
+    <criterion comment="Patch Q823718 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:1395"/>
+  </criteria>
+</definition>

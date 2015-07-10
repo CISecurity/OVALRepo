@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29276" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0421 -- ghostscript security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>ghostscript</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0421.html" ref_id="RHSA-2009:0421"/>
+    <reference source="CESA-2009:0421" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-April/015790.html" ref_id="CESA-2009:0421-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6725" ref_id="CVE-2007-6725"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-6679" ref_id="CVE-2008-6679"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0196" ref_id="CVE-2009-0196"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0792" ref_id="CVE-2009-0792"/>
+    <description>Updated ghostscript packages that fix multiple security issues are now
+available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Ghostscript is a set of software that provides a PostScript interpreter, a
+set of C procedures (the Ghostscript library, which implements the graphics
+capabilities in the PostScript language) and an interpreter for Portable
+Document Format (PDF) files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:33">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:10.301-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="ghostscript-devel is earlier than 0:8.15.2-9.4.el5_3.7" test_ref="oval:org.mitre.oval:tst:140267"/>
+      <criterion comment="ghostscript is earlier than 0:8.15.2-9.4.el5_3.7" test_ref="oval:org.mitre.oval:tst:140299"/>
+      <criterion comment="ghostscript-gtk is earlier than 0:8.15.2-9.4.el5_3.7" test_ref="oval:org.mitre.oval:tst:139829"/>
+    </criteria>
+  </criteria>
+</definition>

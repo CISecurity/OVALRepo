@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25932" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:0341-1 -- Security update for Linux kernel</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Linux kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20130341-1.html" ref_id="SUSE-SU-2013:0341-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0871" ref_id="CVE-2013-0871"/>
+    <description>The SUSE Linux Enterprise 11 SP2 kernel has been updated to
+fix two issues:
+
+One severe security issue:
+
+    * CVE-2013-0871: A race condition in ptrace(2) could be
+used by local attackers to crash the kernel and/or execute
+code in kernel context.
+
+One severe regression issue:
+
+    * A regression in UNIX domain socket credential
+passing. The default disabling of passing credentials
+caused regression in some software packages that did not
+expect this. One major software package affected by this
+was the Open Enterprise Server stack.
+
+Security Issue reference:
+
+    * CVE-2013-0871
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0871
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:41:36">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:38:18.093-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:05:36.325-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:03:40.541-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-default RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120622"/>
+        <criterion comment="kernel-default-base RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121126"/>
+        <criterion comment="kernel-default-devel RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120501"/>
+        <criterion comment="kernel-source RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120690"/>
+        <criterion comment="kernel-syms RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121082"/>
+        <criterion comment="kernel-trace RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120684"/>
+        <criterion comment="kernel-trace-base RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120806"/>
+        <criterion comment="kernel-trace-devel RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121064"/>
+        <criterion comment="kernel-xen RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121128"/>
+        <criterion comment="kernel-xen-base RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120789"/>
+        <criterion comment="kernel-xen-devel RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121078"/>
+        <criterion comment="xen-kmp-default RPM is earlier than 0:4.1.3_06_3.0.58_0.6.6-0.7.22" test_ref="oval:org.mitre.oval:tst:120313"/>
+        <criterion comment="xen-kmp-trace RPM is earlier than 0:4.1.3_06_3.0.58_0.6.6-0.7.22" test_ref="oval:org.mitre.oval:tst:120783"/>
+        <criterion comment="kernel-pae RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120259"/>
+        <criterion comment="kernel-pae-base RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120334"/>
+        <criterion comment="kernel-pae-devel RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120888"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-ec2 RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121103"/>
+        <criterion comment="kernel-ec2-base RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120884"/>
+        <criterion comment="kernel-ec2-devel RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121084"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Desktop 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-default-extra RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120737"/>
+        <criterion comment="kernel-trace-extra RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121154"/>
+        <criterion comment="kernel-xen-extra RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:121028"/>
+        <criterion comment="kernel-pae-extra RPM is earlier than 0:3.0.58-0.6.6.1" test_ref="oval:org.mitre.oval:tst:120887"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

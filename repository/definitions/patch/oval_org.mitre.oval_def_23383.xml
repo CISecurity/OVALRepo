@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23383" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2011:1160: dhcp security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 5</platform>
+      <product>dhcp</product>
+    </affected>
+    <reference ref_id="ELSA-2011:1160-01" ref_url="http://linux.oracle.com/errata/ELSA-2011-1160.html" source="VENDOR"/>
+    <reference ref_id="CVE-2011-2748" ref_url="http://linux.oracle.com/cve/CVE-2011-2748.html" source="CVE"/>
+    <reference ref_id="CVE-2011-2749" ref_url="http://linux.oracle.com/cve/CVE-2011-2749.html" source="CVE"/>
+    <description>The server in ISC DHCP 3.x and 4.x before 4.2.2, 3.1-ESV before 3.1-ESV-R3, and 4.1-ESV before 4.1-ESV-R3 allows remote attackers to cause a denial of service (daemon exit) via a crafted BOOTP packet.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:13:15.410-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:00.869-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:04:35.466-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23383 - optimisation of Oracle Linux content" date="2014-05-05T17:41:00.232-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:43:11.777-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:04:14.659-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="libdhcp4client is earlier than 12:3.0.5-29.el5_7.1" test_ref="oval:org.mitre.oval:tst:105185"/>
+        <criterion comment="dhclient is earlier than 12:3.0.5-29.el5_7.1" test_ref="oval:org.mitre.oval:tst:105088"/>
+        <criterion comment="dhcp-devel is earlier than 12:3.0.5-29.el5_7.1" test_ref="oval:org.mitre.oval:tst:104771"/>
+        <criterion comment="dhcp is earlier than 12:3.0.5-29.el5_7.1" test_ref="oval:org.mitre.oval:tst:104322"/>
+        <criterion comment="libdhcp4client-devel is earlier than 12:3.0.5-29.el5_7.1" test_ref="oval:org.mitre.oval:tst:105315"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="dhclient is earlier than 12:4.1.1-19.P1.el6_1.1" test_ref="oval:org.mitre.oval:tst:105282"/>
+        <criterion comment="dhcp-devel is earlier than 12:4.1.1-19.P1.el6_1.1" test_ref="oval:org.mitre.oval:tst:105103"/>
+        <criterion comment="dhcp is earlier than 12:4.1.1-19.P1.el6_1.1" test_ref="oval:org.mitre.oval:tst:104731"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

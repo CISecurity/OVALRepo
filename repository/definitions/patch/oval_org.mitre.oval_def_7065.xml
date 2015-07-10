@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7065" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1905 python-django -- insufficient input validation</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>python-django</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1905" ref_id="DSA-1905"/>
+    <description>The forms library of python-django, a high-level Python web development framework, is using a badly chosen regular expression when validating email addresses and URLs. An attacker can use this to perform denial of service attacks (100% CPU consumption) due to bad backtracking via a specially crafted email address or URL which is validated by the django forms library. python-django in the oldstable distribution (etch), is not affected by this problem.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:04-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:50:42.300-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:00:25.756-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:00:15.356-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7065 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:34:43.024-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:04.572-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criterion comment="python-django is earlier than 1.0.2-1+lenny2" test_ref="oval:org.mitre.oval:tst:12934"/>
+  </criteria>
+</definition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23822" version="45" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2013:0981: firefox security update (Critical)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>firefox</product>
+      <product>xulrunner</product>
+    </affected>
+    <reference ref_id="ELSA-2013:0981-00" ref_url="http://linux.oracle.com/errata/ELSA-2013-0981.html" source="VENDOR"/>
+    <reference ref_id="CVE-2013-1682" ref_url="http://linux.oracle.com/cve/CVE-2013-1682.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1684" ref_url="http://linux.oracle.com/cve/CVE-2013-1684.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1685" ref_url="http://linux.oracle.com/cve/CVE-2013-1685.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1686" ref_url="http://linux.oracle.com/cve/CVE-2013-1686.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1687" ref_url="http://linux.oracle.com/cve/CVE-2013-1687.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1690" ref_url="http://linux.oracle.com/cve/CVE-2013-1690.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1692" ref_url="http://linux.oracle.com/cve/CVE-2013-1692.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1693" ref_url="http://linux.oracle.com/cve/CVE-2013-1693.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1694" ref_url="http://linux.oracle.com/cve/CVE-2013-1694.html" source="CVE"/>
+    <reference ref_id="CVE-2013-1697" ref_url="http://linux.oracle.com/cve/CVE-2013-1697.html" source="CVE"/>
+    <description>The XrayWrapper implementation in Mozilla Firefox before 22.0, Firefox ESR 17.x before 17.0.7, Thunderbird before 17.0.7, and Thunderbird ESR 17.x before 17.0.7 does not properly restrict use of DefaultValue for method calls, which allows remote attackers to execute arbitrary JavaScript code with chrome privileges via a crafted web site that triggers use of a user-defined (1) toString or (2) valueOf method.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:49:09.982-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:11.680-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:23.916-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23822 - optimisation of Oracle Linux content" date="2014-05-05T17:26:00.915-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:27:47.988-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:33.886-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner-devel is earlier than 0:17.0.7-1.el6_4" test_ref="oval:org.mitre.oval:tst:112067"/>
+        <criterion comment="xulrunner is earlier than 0:17.0.7-1.el6_4" test_ref="oval:org.mitre.oval:tst:111978"/>
+        <criterion comment="firefox is earlier than 0:17.0.7-1.el6_4" test_ref="oval:org.mitre.oval:tst:111703"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="rpm test">
+      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      <criteria operator="OR" comment="rpm test">
+        <criterion comment="xulrunner-devel is earlier than 0:17.0.7-1.el5_9" test_ref="oval:org.mitre.oval:tst:112213"/>
+        <criterion comment="xulrunner is earlier than 0:17.0.7-1.el5_9" test_ref="oval:org.mitre.oval:tst:112107"/>
+        <criterion comment="firefox is earlier than 0:17.0.7-1.el5_9" test_ref="oval:org.mitre.oval:tst:111905"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

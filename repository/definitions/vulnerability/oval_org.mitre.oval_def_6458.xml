@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6458" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Libpng Library Uninitialized Pointer Arrays Memory Corruption Vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0040" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0040"/>
+    <description>The PNG reference library (aka libpng) before 1.0.43, and 1.2.x before 1.2.35, as used in pngcrush and other applications, allows context-dependent attackers to cause a denial of service (application crash) or possibly execute arbitrary code via a crafted PNG file that triggers a free of an uninitialized pointer in (1) the png_read_png function, (2) pCAL chunk handling, or (3) setup of 16-bit gamma tables.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-09-28T06:56:27.753-04:00">DRAFT</status_change>
+        <status_change date="2009-10-19T04:00:20.944-04:00">INTERIM</status_change>
+        <status_change date="2009-11-09T04:01:02.634-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.3 is installed" definition_ref="oval:org.mitre.oval:def:6026"/>
+      <criterion comment="Patch ESX303-200905401-SG is not installed" test_ref="oval:org.mitre.oval:tst:9878"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.2 is installed" definition_ref="oval:org.mitre.oval:def:5613"/>
+      <criterion comment="Patch ESX-1008420 is not installed" test_ref="oval:org.mitre.oval:tst:10635"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criterion comment="Patch ESX350-200904401-BG is not installed" test_ref="oval:org.mitre.oval:tst:10863"/>
+    </criteria>
+  </criteria>
+</definition>

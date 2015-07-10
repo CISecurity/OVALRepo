@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5277" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RPC Runtime Library Denial of Service and Information Disclosure Vulnerability (NT 4.0 Terminal Server Edition)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Remote Procedure Call (RPC)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0569" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0569"/>
+    <description>The RPC Runtime Library for Microsoft Windows NT 4.0 allows remote attackers to read active memory or cause a denial of service (system crash) via a malicious message, possibly related to improper length values.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-10-18T11:46:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Matthew Burton</contributor>
+        </submitted>
+        <status_change date="2004-10-20T02:41:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-11-03T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-12-09T08:46:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-02-22T09:29:00.000-04:00" comment="Changed CVE entry from 2003-0569 to 2004-0569">
+          <contributor organization="The MITRE Corporation">Matthew Burton</contributor>
+        </modified>
+        <status_change date="2005-12-12T09:59:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-12-28T04:28:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Standardized title, and fixed criteria: added check for NT 4.0; removed (non-negated!) specific patch test." date="2007-03-02T19:43:00.374-05:00">
+          <contributor organization="The MITRE Corporation">Matthew Wojcik</contributor>
+        </modified>
+        <status_change date="2007-03-02T19:44:12.396-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:17:20.137-04:00">ACCEPTED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2008-03-03T04:00:54.220-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:41.688-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software section">
+    <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+    <criterion comment="this is an NT Terminal Server" test_ref="oval:org.mitre.oval:tst:3097"/>
+    <criterion comment="the version of rpcrt4.dll is less than 4.0.1381.33578" test_ref="oval:org.mitre.oval:tst:276"/>
+  </criteria>
+</definition>

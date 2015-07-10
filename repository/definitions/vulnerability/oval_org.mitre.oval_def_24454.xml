@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24454" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MSCOMCTL ASLR Vulnerability (CVE-2014-1809) - MS14-024</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office 2010</product>
+      <product>Microsoft Office 2013</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2014-1809" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1809"/>
+    <description>The MSCOMCTL library in Microsoft Office 2007 SP3, 2010 SP1 and SP2, and 2013 Gold, SP1, RT, and RT SP1 makes it easier for remote attackers to bypass the ASLR protection mechanism via a crafted web site, as exploited in the wild in May 2014, aka "MSCOMCTL ASLR Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-05-16T09:39:29">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2014-05-20T12:49:58.409-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:113940 - fixes false negative Office 32bit is installed on a 64bit OS" date="2014-05-23T10:37:00.086-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2014-06-09T04:00:43.444-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-30T04:10:19.772-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Office 2007">
+      <criteria operator="OR" comment="Any file version">
+        <criterion comment="Check if the version of mscomctl.ocx is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:114143"/>
+        <criterion comment="Check if the version of msaddndr.dll is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:113895"/>
+        <criterion comment="Check if the version of msstdfmt.dll is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:113940"/>
+      </criteria>
+      <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+    </criteria>
+    <criteria operator="AND" comment="Office 2010">
+      <criteria operator="OR" comment="Any Microsoft Office 2010">
+        <extend_definition comment="Microsoft Office 2010 SP1 x86 is installed" definition_ref="oval:org.mitre.oval:def:20819"/>
+        <extend_definition comment="Microsoft Office 2010 SP2 x86 is installed" definition_ref="oval:org.mitre.oval:def:20860"/>
+        <extend_definition comment="Microsoft Office 2010 SP1 x64 is installed" definition_ref="oval:org.mitre.oval:def:20897"/>
+        <extend_definition comment="Microsoft Office 2010 SP2 x64 is installed" definition_ref="oval:org.mitre.oval:def:20917"/>
+      </criteria>
+      <criteria operator="OR" comment="Any File Version">
+        <criterion comment="Check if the version of msaddndr.dll is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:113895"/>
+        <criterion comment="Check if the version of mscomctl.ocx is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:114143"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Office 2013">
+      <criteria operator="OR" comment="Any Office 2013">
+        <extend_definition comment="Microsoft Office 2013 is installed" definition_ref="oval:org.mitre.oval:def:15381"/>
+        <extend_definition comment="Microsoft Office 2013 SP1 x64 is installed" definition_ref="oval:org.mitre.oval:def:21966"/>
+        <extend_definition comment="Microsoft Office 2013 SP1 x86 is installed" definition_ref="oval:org.mitre.oval:def:22392"/>
+      </criteria>
+      <criterion comment="Check if the version of mscomctl.ocx is less than 6.01.98.39" test_ref="oval:org.mitre.oval:tst:114143"/>
+    </criteria>
+  </criteria>
+</definition>

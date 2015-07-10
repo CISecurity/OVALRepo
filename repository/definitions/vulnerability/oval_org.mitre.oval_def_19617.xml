@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19617" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability which allows remote attackers to bypass a CSRF protection in Opera before 12.13</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Opera Browser</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-1639" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1639"/>
+    <description>Opera before 12.13 does not send CORS preflight requests in all required cases, which allows remote attackers to bypass a CSRF protection mechanism via a crafted web site that triggers a CORS request.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-11-27T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-12-02T15:44:28.785-05:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:28060 - Now path to opera.exe is searched in registry" date="2013-12-04T13:48:00.075-05:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-12-23T04:01:12.475-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:00:29.797-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Opera Browser is installed" definition_ref="oval:org.mitre.oval:def:6482"/>
+    <criterion comment="Check if Opera version is greater than or equals to 12.0 (for versions greater then 11.0)" test_ref="oval:org.mitre.oval:tst:88985"/>
+    <criterion comment="Check if Opera version is less than 12.13 (for versions greater then 11.0)" test_ref="oval:org.mitre.oval:tst:88906"/>
+  </criteria>
+</definition>

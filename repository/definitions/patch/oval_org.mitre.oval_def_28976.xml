@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28976" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:1016 -- enscript security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>enscript</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-1016.html" ref_id="RHSA-2008:1016"/>
+    <reference source="CESA-2008:1016" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-December/015491.html" ref_id="CESA-2008:1016-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3863" ref_id="CVE-2008-3863"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4306" ref_id="CVE-2008-4306"/>
+    <description>An updated enscript packages that fixes several security issues is now
+available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+GNU enscript converts ASCII files to PostScript(R) language files and
+spools the generated output to a specified printer or saves it to a file.
+Enscript can be extended to handle different output media and includes
+options for customizing printouts.
+Two buffer overflow flaws were found in GNU enscript. An attacker could
+craft an ASCII file in such a way that it could execute arbitrary commands
+if the file was opened with enscript with the special escapes option (-e
+or --escapes) enabled. (CVE-2008-3863, CVE-2008-4306)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:10">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:28.161-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criterion comment="enscript is earlier than 0:1.6.4-4.1.1.el5_2" test_ref="oval:org.mitre.oval:tst:140625"/>
+  </criteria>
+</definition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12537" version="6" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>LSASS Length Validation Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference ref_id="CVE-2011-0039" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0039" source="CVE"/>
+    <description>The Local Security Authority Subsystem Service (LSASS) in Microsoft Windows XP SP2 and SP3 and Server 2003 SP2 does not properly process authentication requests, which allows local users to gain privileges via a request with a crafted length, aka "LSASS Length Validation Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-02-09T14:23:12">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </submitted>
+        <status_change date="2011-02-10T13:48:28.762-05:00">DRAFT</status_change>
+        <status_change date="2011-02-28T04:00:16.393-05:00">INTERIM</status_change>
+        <status_change date="2011-03-21T04:00:12.429-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12537 - Corrected title and added comments" date="2011-07-28T12:56:00.052-04:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2011-07-28T13:05:52.226-04:00">INTERIM</status_change>
+        <status_change date="2011-08-15T04:00:07.968-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Windows XP x86 SP3">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="the version of lsasrv.dll is less than 5.1.2600.6058" test_ref="oval:org.mitre.oval:tst:42318"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+      <criteria operator="OR" comment="Affected operating systems: Windows XP x64 SP2, Server 2003 x86/x64/ia64 SP2">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of lsasrv.dll is less than 5.2.3790.4806" test_ref="oval:org.mitre.oval:tst:42363"/>
+    </criteria>
+  </criteria>
+</definition>

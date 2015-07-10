@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12441" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Windows Remote Desktop Protocol Server Private Key Disclosure Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-1794" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1794"/>
+    <description>Microsoft Terminal Server using Remote Desktop Protocol (RDP) 5.2 stores an RSA private key in mstlsapi.dll and uses it to sign a certificate, which allows remote attackers to spoof public keys of legitimate servers and conduct man-in-the-middle attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-28T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-07-05T22:14:54.705-04:00">DRAFT</status_change>
+        <status_change date="2011-07-25T04:00:09.337-04:00">INTERIM</status_change>
+        <status_change date="2011-08-15T04:00:07.640-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Terminal Services is enabled" test_ref="oval:org.mitre.oval:tst:43448"/>
+    <criterion comment="the version of termdd.sys is less than 5.3.0.0" test_ref="oval:org.mitre.oval:tst:43493"/>
+  </criteria>
+</definition>

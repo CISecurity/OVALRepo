@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5814" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>HP-UX Running System Administration Manager (SAM), Unintended Remote Access</title>
+    <affected family="unix">
+      <platform>HP-UX 11</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1662" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1662"/>
+    <description>Unspecified vulnerability in the HP System Administration Manager (SAM) on HP-UX B.11.11 and B.11.23, when used to configure NFS, might allow remote attackers to read or modify arbitrary files, related to an "empty systems list."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-07-31T12:40:22.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-08-11T11:11:31.251-04:00">DRAFT</status_change>
+        <status_change date="2008-09-01T04:01:09.394-04:00">INTERIM</status_change>
+        <status_change date="2008-09-22T04:00:32.273-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3901 - HP-UX Security Advisory - HPSBUX02944_101" date="2014-02-19T09:09:00.021-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-02-19T09:13:21.558-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3704 - HP-UX Security Advisories published in February 2014" date="2014-03-05T13:28:00.446-05:00">
+          <contributor organization="Hewlett-Packard">Sushant Kumar Singh</contributor>
+        </modified>
+        <status_change date="2014-03-24T04:01:47.941-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02286">
+      <criterion comment="HP Release B.11.11" test_ref="oval:org.mitre.oval:tst:3704"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="InternetSrvcs.INETSVCS-BOOT is installed" test_ref="oval:org.mitre.oval:tst:8337"/>
+        <criterion comment="OS-Core.UX-CORE is installed" test_ref="oval:org.mitre.oval:tst:8776"/>
+        <criterion comment="SystemAdmin.SAM is installed" test_ref="oval:org.mitre.oval:tst:8945"/>
+      </criteria>
+      <criterion negate="true" comment="Patch PHCO_36562 is installed" test_ref="oval:org.mitre.oval:tst:8901"/>
+    </criteria>
+    <criteria operator="AND" comment="Criteria meets HP Security Bulletin HPSBUX02286">
+      <criterion comment="HP Release B.11.23" test_ref="oval:org.mitre.oval:tst:3901"/>
+      <criteria operator="OR" comment="filesets tests">
+        <criterion comment="InternetSrvcs.INETSVCS-BOOT is installed" test_ref="oval:org.mitre.oval:tst:8337"/>
+        <criterion comment="OS-Core.UX-CORE is installed" test_ref="oval:org.mitre.oval:tst:8776"/>
+        <criterion comment="SystemAdmin.SAM is installed" test_ref="oval:org.mitre.oval:tst:8945"/>
+      </criteria>
+      <criterion negate="true" comment="Patch PHCO_36563 is installed" test_ref="oval:org.mitre.oval:tst:8924"/>
+    </criteria>
+  </criteria>
+</definition>

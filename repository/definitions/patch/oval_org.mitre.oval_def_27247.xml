@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27247" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-0704 -- qemu-kvm security and bug fix update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <product>qemu-kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-0704.html" ref_id="ELSA-2014-0704"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2894" ref_id="CVE-2014-2894"/>
+    <description>[1.5.3-60.el7_0.2]
+- kvm-pc-add-hot_add_cpu-callback-to-all-machine-types.patch [bz#1094820]
+- Resolves: bz#1094820
+  (Hot plug CPU not working with RHEL6  machine types running on RHEL7 host.)
+
+[1.5.3-60.el7_0.1]
+- kvm-iscsi-fix-indentation.patch [bz#1090978]
+- kvm-iscsi-correctly-propagate-errors-in-iscsi_open.patch [bz#1090978]
+- kvm-block-iscsi-query-for-supported-VPD-pages.patch [bz#1090978]
+- kvm-block-iscsi-fix-segfault-if-writesame-fails.patch [bz#1090978]
+- kvm-iscsi-recognize-invalid-field-ASCQ-from-WRITE-SAME-c.patch [bz#1090978]
+- kvm-iscsi-ignore-flushes-on-scsi-generic-devices.patch [bz#1090978]
+- kvm-iscsi-always-query-max-WRITE-SAME-length.patch [bz#1090978]
+- kvm-iscsi-Don-t-set-error-if-already-set-in-iscsi_do_inq.patch [bz#1090978]
+- kvm-iscsi-Remember-to-set-ret-for-iscsi_open-in-error-ca.patch [bz#1090978]
+- kvm-qemu_loadvm_state-shadow-SeaBIOS-for-VM-incoming-fro.patch [1091322]
+- kvm-uhci-UNfix-irq-routing-for-RHEL-6-machtypes-RHEL-onl.patch [bz#1090981]
+- kvm-ide-Correct-improper-smart-self-test-counter-reset-i.patch [bz#1093612]
+- Resolves: bz#1091322
+  (fail to reboot guest after migration from RHEL6.5 host to RHEL7.0 host)
+- Resolves: bz#1090981
+  (Guest hits call trace migrate from RHEL6.5 to RHEL7.0 host with -M 6.1 &amp; balloon &amp; uhci device)
+- Resolves: bz#1090978
+  (qemu-kvm: iSCSI: Failure. SENSE KEY:ILLEGAL_REQUEST(5) ASCQ:INVALID_FIELD_IN_CDB(0x2400))
+- Resolves: bz#1093612
+  (CVE-2014-2894 qemu-kvm: QEMU: out of bounds buffer accesses, guest triggerable via IDE SMART [rhel-7.0.z])</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:36">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:29:16.811-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:03:00.870-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:10.205-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:127306 - Modified Linux Oracle patches to correct Epochs." date="2015-02-04T10:36:00.433-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-04T10:38:21.569-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:00:58.226-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="qemu-kvm is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127306"/>
+      <criterion comment="libcacard is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127187"/>
+      <criterion comment="libcacard-devel is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127116"/>
+      <criterion comment="libcacard-tools is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:126339"/>
+      <criterion comment="qemu-guest-agent is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127159"/>
+      <criterion comment="qemu-img is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127274"/>
+      <criterion comment="qemu-kvm-common is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:126401"/>
+      <criterion comment="qemu-kvm-tools is earlier than 10:1.5.3-60.el7_0.2" test_ref="oval:org.mitre.oval:tst:127183"/>
+    </criteria>
+  </criteria>
+</definition>

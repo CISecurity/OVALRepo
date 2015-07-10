@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24550" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2917-1 super - security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>super</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2917-1" ref_id="DSA-2917-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0470" ref_id="CVE-2014-0470"/>
+    <description>John Lightsey of the Debian Security Audit project discovered that the super package did not check for setuid failures, allowing local users to increase the privileges on kernel versions which do not guard against RLIMIT_NPROC attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-05-21T14:54:18">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-05-23T10:33:20.211-04:00">DRAFT</status_change>
+        <status_change date="2014-06-09T04:00:49.858-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:10:23.002-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24550 - Debian Patch Update" date="2014-07-01T12:12:00.082-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-07-01T12:16:57.413-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:01:23.051-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 6.0 release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="super DPKG is earlier than 0:3.30.0-3+squeeze2" test_ref="oval:org.mitre.oval:tst:114507"/>
+    </criteria>
+    <criteria comment="Debian 7.x release section">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="super DPKG is earlier than 0:3.30.0-6+deb7u1" test_ref="oval:org.mitre.oval:tst:114250"/>
+    </criteria>
+  </criteria>
+</definition>

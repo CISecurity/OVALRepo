@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28752" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft office component use after free vulnerability - CVE-2015-1651 (MS15-033)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <product>Microsoft Word 2007</product>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft Word Viewer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2015-1651" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1651"/>
+    <description>Use-after-free vulnerability in Microsoft Word 2007 SP3, Word Viewer, and Office Compatibility Pack SP3 allows remote attackers to execute arbitrary code via a crafted Office document, aka "Microsoft Office Component Use After Free Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-04-17T13:58:26">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-04-23T10:09:46.336-04:00">DRAFT</status_change>
+        <status_change date="2015-05-11T04:00:19.936-04:00">INTERIM</status_change>
+        <status_change date="2015-06-01T04:00:20.130-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Word 2007 and vulnerable file version">
+      <extend_definition comment="Microsoft Word 2007 is installed" definition_ref="oval:org.mitre.oval:def:2074"/>
+      <criterion comment="Check if the version of winword.exe is less than 12.0.6720.5000" test_ref="oval:org.mitre.oval:tst:138470"/>
+    </criteria>
+    <criteria operator="AND" comment="Office Compatibility Pack and vuln file version">
+      <extend_definition comment="Microsoft Office Compatibility Pack is installed" definition_ref="oval:org.mitre.oval:def:1853"/>
+      <criterion comment="Check if the version of wordcnv.dll is less than 12.0.6720.5000" test_ref="oval:org.mitre.oval:tst:138309"/>
+    </criteria>
+    <criteria operator="AND" comment="Word viewer and vulnerable version of file">
+      <extend_definition comment="Microsoft Word Viewer is installed" definition_ref="oval:org.mitre.oval:def:737"/>
+      <criterion comment="Check if the version of wordview.exe is less than 11.0.8417" test_ref="oval:org.mitre.oval:tst:138052"/>
+    </criteria>
+  </criteria>
+</definition>

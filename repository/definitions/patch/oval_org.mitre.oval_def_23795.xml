@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23795" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:0052: kernel security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="ELSA-2012:0052-01" ref_url="http://linux.oracle.com/errata/ELSA-2012-0052.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-0056" ref_url="http://linux.oracle.com/cve/CVE-2012-0056.html" source="CVE"/>
+    <description>The mem_write function in Linux kernel 2.6.39 and other versions, when ASLR is disabled, does not properly check permissions when writing to /proc/&lt;pid>/mem, which allows local users to gain privileges by modifying process memory, as demonstrated by Mempodipper.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:33:07.136-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:06:06.220-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:16.573-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23795 - optimisation of Oracle Linux content" date="2014-05-05T17:26:00.915-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:27:54.964-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:28.778-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="kernel-kdump-devel is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109769"/>
+      <criterion comment="kernel-devel is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109863"/>
+      <criterion comment="kernel-headers is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109691"/>
+      <criterion comment="python-perf is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109797"/>
+      <criterion comment="perf is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109816"/>
+      <criterion comment="kernel-kdump is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109702"/>
+      <criterion comment="kernel-firmware is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109920"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109637"/>
+      <criterion comment="kernel-doc is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109845"/>
+      <criterion comment="kernel-debug is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109572"/>
+      <criterion comment="kernel-bootwrapper is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109735"/>
+      <criterion comment="kernel is earlier than 0:2.6.32-220.4.1.el6" test_ref="oval:org.mitre.oval:tst:109651"/>
+    </criteria>
+  </criteria>
+</definition>

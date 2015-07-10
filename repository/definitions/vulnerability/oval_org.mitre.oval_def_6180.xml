@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6180" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Active Directory Invalid Free Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-1138" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1138"/>
+    <description>The LDAP service in Active Directory on Microsoft Windows 2000 SP4 does not properly free memory for LDAP and LDAPS requests, which allows remote attackers to execute arbitrary code via a request that uses hexadecimal encoding, whose associated memory is not released, related to a "DN AttributeValue," aka "Active Directory Invalid Free Vulnerability."  NOTE: this issue is probably a memory leak.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-06-09T14:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-06-15T17:06:17.581-04:00">DRAFT</status_change>
+        <status_change date="2009-07-06T04:00:42.120-04:00">INTERIM</status_change>
+        <status_change date="2009-07-21T07:46:01.806-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+    <criterion comment="Ntdsa.dll version is less than 5.0.2195.7292" test_ref="oval:org.mitre.oval:tst:10236"/>
+    <criteria operator="OR">
+      <criterion comment="the system is being used as AD" test_ref="oval:org.mitre.oval:tst:9160"/>
+      <criterion comment="the system is being used as AD" test_ref="oval:org.mitre.oval:tst:9106"/>
+    </criteria>
+  </criteria>
+</definition>

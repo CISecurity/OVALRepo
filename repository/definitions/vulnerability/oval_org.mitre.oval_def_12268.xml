@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12268" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AIX security vulnerabilities in sa_snap</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3406" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3406"/>
+    <description>Unspecified vulnerability in sa_snap in the bos.esagent fileset in IBM AIX 5.3 allows local users to leverage system group membership and delete files via unknown vectors.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-11-25T15:43:39.000-05:00">
+          <contributor organization="Hewlett-Packard">Yamini Mohan R</contributor>
+        </submitted>
+        <status_change date="2010-12-02T13:04:11.863-05:00">DRAFT</status_change>
+        <status_change date="2010-12-20T04:00:29.819-05:00">INTERIM</status_change>
+        <status_change date="2011-01-10T04:00:15.287-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="5.3.10 check">
+      <criterion comment="IBM AIX 5300-10 installed" test_ref="oval:org.mitre.oval:tst:41608"/>
+      <criterion negate="true" comment="APAR IZ82630 is installed" test_ref="oval:org.mitre.oval:tst:41863"/>
+      <criterion comment="bos.esagent version greater than equal to 06.05.0010.0000" test_ref="oval:org.mitre.oval:tst:41001"/>
+      <criterion comment="bos.esagent version less than or equal to 06.05.0010.0003" test_ref="oval:org.mitre.oval:tst:41325"/>
+    </criteria>
+    <criteria operator="AND" comment="OS check">
+      <criterion comment="IBM AIX 5300-11 installed" test_ref="oval:org.mitre.oval:tst:40889"/>
+      <criterion negate="true" comment="APAR IZ82245 is installed" test_ref="oval:org.mitre.oval:tst:41460"/>
+      <criterion comment="bos.esagent version is greater than or equal to 06.05.0011.0000" test_ref="oval:org.mitre.oval:tst:41505"/>
+      <criterion comment="bos.esagent is less than or equal to 06.05.0011.0004" test_ref="oval:org.mitre.oval:tst:41254"/>
+    </criteria>
+    <criteria operator="AND" comment="OS check">
+      <criterion comment="IBM AIX 5300-12 installed" test_ref="oval:org.mitre.oval:tst:40894"/>
+      <criterion negate="true" comment="APAR IZ81819 is installed" test_ref="oval:org.mitre.oval:tst:41726"/>
+      <criterion comment="bos.esagent version is greater than or equal to 06.05.0012.0000" test_ref="oval:org.mitre.oval:tst:41687"/>
+      <criterion comment="bos.esagent is less than or equal to 06.05.0012.0001" test_ref="oval:org.mitre.oval:tst:41679"/>
+    </criteria>
+  </criteria>
+</definition>

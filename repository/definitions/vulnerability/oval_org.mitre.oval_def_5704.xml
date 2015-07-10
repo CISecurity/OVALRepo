@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5704" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>AIX Logical Volume Manager buffer overflow</title>
+    <affected family="unix">
+      <platform>IBM AIX 5.2</platform>
+      <platform>IBM AIX 5.3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-0586" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0586"/>
+    <description>Multiple buffer overflows in IBM AIX 5.2 and 5.3 allow local users to gain privileges via unspecified vectors related to the (1) lchangevg, (2) ldeletepv, (3) putlvodm, (4) lvaryoffvg, and (5) lvgenminor programs in bos.rte.lvm; and the (6) tellclvmd program in bos.clvm.enh.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-04-18T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2008-07-08T13:06:05.115-04:00">DRAFT</status_change>
+        <status_change date="2008-07-28T04:00:22.930-04:00">INTERIM</status_change>
+        <status_change date="2008-08-18T04:00:50.597-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="IBM AIX 5.2 meets CVE-2008-0586">
+      <extend_definition comment="IBM AIX 5.2 is installed" definition_ref="oval:org.mitre.oval:def:5189"/>
+      <criteria operator="OR">
+        <criterion negate="true" comment="All filesets for APAR IZ10828 are installed" test_ref="oval:org.mitre.oval:tst:7860"/>
+        <criterion negate="true" comment="All filesets for APAR IZ00559 are installed" test_ref="oval:org.mitre.oval:tst:8285"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-06 meets CVE-2008-0586">
+      <extend_definition comment="IBM AIX 5300-06 is installed" definition_ref="oval:org.mitre.oval:def:4813"/>
+      <criteria operator="OR">
+        <criterion negate="true" comment="All filesets for APAR IY99537 are installed" test_ref="oval:org.mitre.oval:tst:8308"/>
+        <criterion negate="true" comment="All filesets for APAR IY98340 are installed" test_ref="oval:org.mitre.oval:tst:8431"/>
+        <criterion negate="true" comment="All filesets for APAR IY98331 are installed" test_ref="oval:org.mitre.oval:tst:8070"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="IBM AIX 5300-07 meets CVE-2008-0586">
+      <extend_definition comment="IBM AIX 5300-07 is installed" definition_ref="oval:org.mitre.oval:def:5707"/>
+      <criteria operator="OR">
+        <criterion negate="true" comment="All filesets for APAR IY99517 are installed" test_ref="oval:org.mitre.oval:tst:8420"/>
+        <criterion negate="true" comment="All filesets for APAR IY98450 are installed" test_ref="oval:org.mitre.oval:tst:8268"/>
+        <criterion negate="true" comment="All filesets for APAR IY98448 are installed" test_ref="oval:org.mitre.oval:tst:8412"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

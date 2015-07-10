@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7820" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1847 bind9 -- improper assert</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>bind9</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1847" ref_id="DSA-1847"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0696" ref_id="CVE-2009-0696"/>
+    <description>It was discovered that the BIND DNS server terminates when processing a specially crafted dynamic DNS update. This vulnerability affects all BIND servers which serve at least one DNS zone authoritatively, as a master, even if dynamic updates are not enabled. The default Debian configuration for resolvers includes several authoritative zones, too, so resolvers are also affected by this issue unless these zones have been removed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:03-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:50:14.569-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:01:54.319-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:01:23.295-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7820 - Debian Patch Update" date="2014-06-06T17:31:00.789-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:33:05.804-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:58.660-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12669"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:11956"/>
+            <criterion comment="libbind-dev is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12772"/>
+            <criterion comment="libisccc40 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12622"/>
+            <criterion comment="libisccfg40 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12753"/>
+            <criterion comment="bind9utils is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12728"/>
+            <criterion comment="libisc45 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12516"/>
+            <criterion comment="liblwres40 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12764"/>
+            <criterion comment="libbind9-40 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12605"/>
+            <criterion comment="libdns45 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12730"/>
+            <criterion comment="bind9-host is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12219"/>
+            <criterion comment="bind9 is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:11801"/>
+            <criterion comment="lwresd is earlier than 9.5.1.dfsg.P3-1" test_ref="oval:org.mitre.oval:tst:12191"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="bind9-doc is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12529"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="dnsutils is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12395"/>
+            <criterion comment="libbind-dev is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:11811"/>
+            <criterion comment="libdns22 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12478"/>
+            <criterion comment="libisccfg1 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12710"/>
+            <criterion comment="libisccc0 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12808"/>
+            <criterion comment="libisc11 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12691"/>
+            <criterion comment="libbind9-0 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12046"/>
+            <criterion comment="bind9-host is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12679"/>
+            <criterion comment="bind9 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12778"/>
+            <criterion comment="liblwres9 is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12765"/>
+            <criterion comment="lwresd is earlier than 9.3.4-2etch5" test_ref="oval:org.mitre.oval:tst:12600"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

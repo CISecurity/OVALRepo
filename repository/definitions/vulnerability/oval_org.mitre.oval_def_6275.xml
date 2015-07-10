@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6275" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>mimeTeX and mathTeX Buffer Overflow and Command Injection Issues</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3</platform>
+      <platform>VMWare ESX Server 3.5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-1382" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1382"/>
+    <description>libpng 1.0.6 through 1.0.32, 1.2.0 through 1.2.26, and 1.4.0beta01 through 1.4.0beta19 allows context-dependent attackers to cause a denial of service (crash) and possibly execute arbitrary code via a PNG file with zero length "unknown" chunks, which trigger an access of uninitialized memory.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-23T15:39:02.000-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-09-28T06:56:27.954-04:00">DRAFT</status_change>
+        <status_change date="2009-10-19T04:00:13.612-04:00">INTERIM</status_change>
+        <status_change date="2009-11-09T04:00:44.197-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.3 is installed" definition_ref="oval:org.mitre.oval:def:6026"/>
+      <criterion comment="Patch ESX303-200905401-SG is not installed" test_ref="oval:org.mitre.oval:tst:9878"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMWare ESX Server 3.0.2 is installed" definition_ref="oval:org.mitre.oval:def:5613"/>
+      <criterion comment="Patch ESX-1008420 is not installed" test_ref="oval:org.mitre.oval:tst:10635"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criterion comment="Patch ESX350-200904401-BG is not installed" test_ref="oval:org.mitre.oval:tst:10863"/>
+    </criteria>
+  </criteria>
+</definition>

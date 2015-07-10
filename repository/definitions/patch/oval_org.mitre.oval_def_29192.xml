@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29192" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0855 -- openssh security update (Critical)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>openssh</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0855.html" ref_id="RHSA-2008:0855"/>
+    <reference source="CESA-2008:0855" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-August/015194.html" ref_id="CESA-2008:0855-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4752" ref_id="CVE-2007-4752"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3844" ref_id="CVE-2008-3844"/>
+    <description>Updated openssh packages are now available for Red Hat Enterprise Linux 4,
+Red Hat Enterprise Linux 5, and Red Hat Enterprise Linux 4.5 Extended
+Update Support.
+This update has been rated as having critical security impact by the Red
+Hat Security Response Team.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:13.970-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="openssh is earlier than 0:3.9p1-11.el4_7" test_ref="oval:org.mitre.oval:tst:139057"/>
+        <criterion comment="openssh-askpass is earlier than 0:3.9p1-11.el4_7" test_ref="oval:org.mitre.oval:tst:138943"/>
+        <criterion comment="openssh-askpass-gnome is earlier than 0:3.9p1-11.el4_7" test_ref="oval:org.mitre.oval:tst:139241"/>
+        <criterion comment="openssh-clients is earlier than 0:3.9p1-11.el4_7" test_ref="oval:org.mitre.oval:tst:138914"/>
+        <criterion comment="openssh-server is earlier than 0:3.9p1-11.el4_7" test_ref="oval:org.mitre.oval:tst:139218"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="openssh is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:139199"/>
+        <criterion comment="openssh-askpass is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:139215"/>
+        <criterion comment="openssh-clients is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:139246"/>
+        <criterion comment="openssh-server is earlier than 0:4.3p2-26.el5_2.1" test_ref="oval:org.mitre.oval:tst:138970"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

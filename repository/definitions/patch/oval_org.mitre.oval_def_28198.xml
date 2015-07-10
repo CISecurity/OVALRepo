@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28198" version="2" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>CESA-2015:1003 -- centos 5  kvm</title>
+    <affected family="unix">
+      <platform>CentOS Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.centos.org/pipermail/centos-announce/2015-May/021139.html" ref_id="CESA-2015:1003"/>
+    <reference source="CVE" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3456" ref_id="CVE-2015-3456"/>
+    <description>KVM  is a full virtualization solution for Linux on AMD64 and Intel 64 systems. An out-of-bounds memory access flaw was found in the way QEMU"s virtual Floppy Disk Controller  handled FIFO buffer access while processing certain FDC commands. A privileged guest user could use this flaw to crash the guest or, potentially, execute arbitrary code on the host with the privileges of the host"s QEMU process corresponding to the guest.  Red Hat would like to thank Jason Geffner of CrowdStrike for reporting this issue. All kvm users are advised to upgrade to these updated packages, which contain a backported patch to correct this issue. Note: The procedure in the Solution section must be performed before this update will take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-02T09:09:24-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-06-03T12:26:56.899-04:00">DRAFT</status_change>
+        <status_change date="2015-06-22T04:00:43.100-04:00">INTERIM</status_change>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    <criteria operator="OR" comment="All dependent packages of kvm">
+      <criterion comment="kmod-kvm is earlier than 0:83-272.el5.centos for x86_64" test_ref="oval:org.mitre.oval:tst:138868"/>
+      <criterion comment="kmod-kvm-debug is earlier than 0:83-272.el5.centos for x86_64" test_ref="oval:org.mitre.oval:tst:138923"/>
+      <criterion comment="kvm is earlier than 0:83-272.el5.centos for x86_64" test_ref="oval:org.mitre.oval:tst:138731"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-272.el5.centos for x86_64" test_ref="oval:org.mitre.oval:tst:138850"/>
+      <criterion comment="kvm-tools is earlier than 0:83-272.el5.centos for x86_64" test_ref="oval:org.mitre.oval:tst:138795"/>
+    </criteria>
+  </criteria>
+</definition>

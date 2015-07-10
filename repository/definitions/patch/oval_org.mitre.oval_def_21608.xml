@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21608" version="29" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1088: systemtap security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>systemtap</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1088-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1088.html"/>
+    <reference source="CVE" ref_id="CVE-2011-2502" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-2502.html"/>
+    <reference source="CVE" ref_id="CVE-2011-2503" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-2503.html"/>
+    <description>The insert_module function in runtime/staprun/staprun_funcs.c in the systemtap runtime tool (staprun) in SystemTap before 1.6 does not properly validate a module when loading it, which allows local users to gain privileges via a race condition between the signature validation and the module initialization.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:39:13.258-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:22.342-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:01:47.424-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="systemtap-runtime is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:97360"/>
+      <criterion comment="systemtap-client is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98233"/>
+      <criterion comment="systemtap-testsuite is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98072"/>
+      <criterion comment="systemtap-sdt-devel is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:97679"/>
+      <criterion comment="systemtap is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98192"/>
+      <criterion comment="systemtap-initscript is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98131"/>
+      <criterion comment="systemtap-grapher is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98294"/>
+      <criterion comment="systemtap-server is earlier than 0:1.4-6.el6_1.2" test_ref="oval:org.mitre.oval:tst:98346"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29206" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1082 -- cups security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>cups</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1082.html" ref_id="RHSA-2009:1082"/>
+    <reference source="CESA-2009:1082" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-June/015963.html" ref_id="CESA-2009:1082-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0949" ref_id="CVE-2009-0949"/>
+    <description>Updated cups packages that fix one security issue are now available for Red
+Hat Enterprise Linux 5.
+This update has been rated as having important security impact by the Red
+Hat Security Response Team.
+The Common UNIX reg; Printing System (CUPS) provides a portable printing layer
+for UNIX operating systems. The Internet Printing Protocol (IPP) allows
+users to print and manage printing-related tasks over a network. 
+A NULL pointer dereference flaw was found in the CUPS IPP routine, used for
+processing incoming IPP requests for the CUPS scheduler. An attacker could
+use this flaw to send specially-crafted IPP requests that would crash the
+cupsd daemon. (CVE-2009-0949)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:18.606-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="cups-devel is earlier than 1:1.3.7-8.el5_3.6" test_ref="oval:org.mitre.oval:tst:140422"/>
+      <criterion comment="cups is earlier than 1:1.3.7-8.el5_3.6" test_ref="oval:org.mitre.oval:tst:140915"/>
+      <criterion comment="cups-libs is earlier than 1:1.3.7-8.el5_3.6" test_ref="oval:org.mitre.oval:tst:140962"/>
+      <criterion comment="cups-lpd is earlier than 1:1.3.7-8.el5_3.6" test_ref="oval:org.mitre.oval:tst:141005"/>
+    </criteria>
+  </criteria>
+</definition>

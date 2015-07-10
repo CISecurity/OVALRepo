@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:875" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>XMLSoft Libxml2 Code Execution Vulnerability</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0110" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0110"/>
+    <description>Buffer overflow in the (1) nanohttp or (2) nanoftp modules in XMLSoft Libxml 2 (Libxml2) 2.6.0 through 2.6.5 allow remote attackers to execute arbitrary code via a long URL.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-02-22T12:00:00.000-04:00">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </submitted>
+        <modified date="2004-05-05T12:00:00.000-04:00" comment="Corrected syntax errors in sql verion of the definition.">
+          <contributor organization="Bastille Linux">Jay Beale</contributor>
+        </modified>
+        <status_change date="2004-05-25T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-06-16T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected regex to match only reasonable values for machine class. Implemented by Jon Baker of the MITRE Corporation." date="2007-04-10T15:39:00.888-04:00">
+          <contributor organization="Maitreya Security">Thomas R. Jones</contributor>
+        </modified>
+        <status_change date="2007-04-10T15:41:33.480-04:00">INTERIM</status_change>
+        <status_change date="2007-04-25T19:53:05.843-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Software section" operator="AND">
+    <criterion comment="Red Hat Enterprise 3 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2861"/>
+    <criterion comment="ix86 architecture" negate="false" test_ref="oval:org.mitre.oval:tst:3152"/>
+    <criteria operator="OR" comment="Vulnerable Config">
+      <criterion comment="libxml2 version is less than 2.5.10-6" negate="false" test_ref="oval:org.mitre.oval:tst:1609"/>
+      <criterion comment="libxml2-devel version is less than 2.5.10-6" negate="false" test_ref="oval:org.mitre.oval:tst:1608"/>
+      <criterion comment="libxml2-python version is less than 2.5.10-6" negate="false" test_ref="oval:org.mitre.oval:tst:1607"/>
+    </criteria>
+  </criteria>
+</definition>

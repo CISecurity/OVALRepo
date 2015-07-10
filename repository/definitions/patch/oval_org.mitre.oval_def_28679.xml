@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28679" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:1574-1 -- Security update for clamav (important)</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Server 10</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>clamav</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141574-1.html" ref_id="SUSE-SU-2014:1574-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6497" ref_id="CVE-2013-6497"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9050" ref_id="CVE-2014-9050"/>
+    <description>clamav was updated to version 0.98.5 to fix three security issues and
+several non-security issues.
+
+These security issues have been fixed:
+
+    * Crash when scanning maliciously crafted yoda's crypter files
+      (CVE-2013-6497).
+    * Heap-based buffer overflow when scanning crypted PE files
+      (CVE-2014-9050).
+    * Crash when using 'clamscan -a'.
+
+These non-security issues have been fixed:
+
+    * Support for the XDP file format and extracting, decoding, and
+      scanning PDF files within XDP files.
+    * Addition of shared library support for LLVM versions 3.1 - 3.5 for
+      the purpose of just-in-time(JIT) compilation of ClamAV bytecode
+      signatures.
+    * Enhancements to the clambc command line utility to assist ClamAV
+      bytecode signature authors by providing introspection into compiled
+      bytecode programs.
+    * Resolution of many of the warning messages from ClamAV compilation.
+    * Improved detection of malicious PE files.
+    * ClamAV 0.98.5 now works with OpenSSL in FIPS compliant mode
+      (bnc#904207).
+    * Fix server socket setup code in clamd (bnc#903489).
+    * Change updateclamconf to prefer the state of the old config file
+      even for commented-out options (bnc#903719).
+    * Fix infinite loop in clamdscan when clamd is not running.
+    * Fix buffer underruns when handling multi-part MIME email attachments.
+    * Fix configuration of OpenSSL on various platforms.
+    * Fix linking issues with libclamunrar.
+
+Security Issues:
+
+    * CVE-2013-6497
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6497>
+    * CVE-2014-9050
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9050></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-30T11:43:40">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:20:56.091-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:37.188-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:33.181-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criterion comment="clamav is earlier than 0:0.98.5-0.5.1" test_ref="oval:org.mitre.oval:tst:137317"/>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 10 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
+      <criterion comment="clamav is earlier than 0:0.98.5-0.7.1" test_ref="oval:org.mitre.oval:tst:136884"/>
+    </criteria>
+  </criteria>
+</definition>

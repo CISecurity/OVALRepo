@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27200" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-3046 -- unbreakable enterprise kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>dtrace-modules</product>
+      <product>kernel-uek</product>
+      <product>kernel-uek-debug</product>
+      <product>kernel-uek-debug-devel</product>
+      <product>kernel-uek-devel</product>
+      <product>kernel-uek-doc</product>
+      <product>kernel-uek-firmware</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-3046.html" ref_id="ELSA-2014-3046"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4943" ref_id="CVE-2014-4943"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4699" ref_id="CVE-2014-4699"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4348" ref_id="CVE-2013-4348"/>
+    <description>kernel-uek
+[3.8.13-35.1.3.el6uek]
+- l2tp: fix an unprivileged user to kernel privilege escalation (Sasha Levin)  [Orabug: 19229497]  {CVE-2014-4943} {CVE-2014-4943}
+- ptrace,x86: force IRET path after a ptrace_stop() (Tejun Heo)  [Orabug: 19230689]  {CVE-2014-4699}
+- net: flow_dissector: fail on evil iph->ihl (Jason Wang)  [Orabug: 19231234]  {CVE-2013-4348}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:41">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:29:30.006-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:02:45.336-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:01.969-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:27200 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T18:48:25.691-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:08.280-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="dtrace-modules-3.8.13-35.1.3.el6uek is earlier than 0:0.4.3-4.el6" test_ref="oval:org.mitre.oval:tst:127291"/>
+      <criterion comment="kernel-uek is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:127111"/>
+      <criterion comment="kernel-uek-debug is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:127342"/>
+      <criterion comment="kernel-uek-debug-devel is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:127324"/>
+      <criterion comment="kernel-uek-devel is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:126846"/>
+      <criterion comment="kernel-uek-doc is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:127348"/>
+      <criterion comment="kernel-uek-firmware is earlier than 0:3.8.13-35.1.3.el6uek" test_ref="oval:org.mitre.oval:tst:127259"/>
+    </criteria>
+  </criteria>
+</definition>

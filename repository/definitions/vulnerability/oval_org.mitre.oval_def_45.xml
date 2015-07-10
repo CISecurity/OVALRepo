@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:45" version="3" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: Windows NT HTR ISAPI Buffer Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Microsoft Internet Information Server (IIS)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0071" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0071"/>
+    <description>Buffer overflow in the ism.dll ISAPI extension that implements HTR scripting in Internet Information Server (IIS) 4.0 and 5.0 allows attackers to cause a denial of service or execute arbitrary code via HTR requests with long variable names.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-01-14T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Tiffany Bergeron</contributor>
+        </submitted>
+        <status_change date="2004-03-09T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected to use a forward slash as the separator in the key." date="2007-05-07T15:59:00.150-04:00">
+          <contributor organization="Secure Elements, Inc.">Glenn Strickland</contributor>
+        </modified>
+        <status_change date="2007-05-07T16:04:55.096-04:00">INTERIM</status_change>
+        <status_change date="2007-05-23T15:05:46.010-04:00">ACCEPTED</status_change>
+        <modified comment="Use def:12413 instead" date="2011-01-20T10:13:42.818-05:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2011-01-20T10:13:42.818-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="IIS 4.0 Major Version" negate="false" test_ref="oval:org.mitre.oval:tst:3099"/>
+      <criterion comment="IIS minor version equals 0" negate="false" test_ref="oval:org.mitre.oval:tst:3098"/>
+      <criterion comment="this is an NT Terminal Server" negate="true" test_ref="oval:org.mitre.oval:tst:3097"/>
+      <criterion comment="the version of w3svc.dll is less than 4.2.775.1" negate="false" test_ref="oval:org.mitre.oval:tst:3096"/>
+      <criterion comment="Patch Q319733 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:3095"/>
+      <criterion comment="Patch Q327696 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:3094"/>
+      <criterion comment="Patch Q811114 Installed" negate="true" test_ref="oval:org.mitre.oval:tst:3093"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="ism.dll mapping exists" negate="false" test_ref="oval:org.mitre.oval:tst:3057"/>
+    </criteria>
+  </criteria>
+</definition>

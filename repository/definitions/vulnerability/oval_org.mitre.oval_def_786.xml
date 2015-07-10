@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:786" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Network Connection Manager Interruption of Service (Server 2003,SP1)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-2307" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2307"/>
+    <description>netman.dll in Microsoft Windows Connections Manager Library allows local users to cause a denial of service (Network Connections Service crash) via a large integer argument to a particular function, aka "Network Connection Manager Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-10-12T12:00:00.000-04:00">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </submitted>
+        <status_change date="2005-10-19T05:46:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-11-16T08:02:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-12-01T06:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:786 - Various corrections to comments and products to align with Authoring Style Guide" date="2011-04-22T23:54:00.899-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-04-23T00:04:43.344-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Added an additional test for Windows Server 2003 platforms to test for the existence of the NT Directory Services" date="2011-04-25T14:34:00.432-04:00">
+          <contributor organization="Telos">Sudhir Gandhe</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:obj:717 - Reverted mistaken switch of obj:717 (Service Pack) and obj:15869 (NT Directory Services)" date="2011-04-26T11:53:00.464-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-05-16T04:03:29.430-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criterion comment="Windows Server 2003 is installed" test_ref="oval:org.mitre.oval:tst:2761"/>
+    <criterion comment="Win2K/XP/2003/Vista service pack 1 is installed" test_ref="oval:org.mitre.oval:tst:2843"/>
+    <criterion comment="netman.dll is less than 5.2.3790.2516" test_ref="oval:org.mitre.oval:tst:2340"/>
+  </criteria>
+</definition>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12893" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2247-1 rails -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>rails</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00117.html" ref_id="DSA-2247-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0446" ref_id="CVE-2011-0446"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0447" ref_id="CVE-2011-0447"/>
+    <description>Several vulnerabilities have been discovered in Rails, the Ruby web application framework. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2011-0446 Multiple cross-site scripting vulnerabilities when JavaScript encoding is used, allow remote attackers to inject arbitrary web script or HTML. CVE-2011-0447 Rails does not properly validate HTTP requests that contain an X-Requested-With header, which makes it easier for remote attackers to conduct cross-site request forgery attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-09-22T21:51:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-09-22T12:03:36.226-04:00">DRAFT</status_change>
+        <status_change date="2011-10-10T04:00:37.264-04:00">INTERIM</status_change>
+        <status_change date="2011-10-31T04:01:03.502-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12893 - Debian Patch Update" date="2014-06-06T17:07:00.556-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:09:36.762-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:01:04.155-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="rails DPKG is earlier than 2.1.0-7+lenny0.1" test_ref="oval:org.mitre.oval:tst:43384"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="rails DPKG is earlier than 2.3.5-1.2+squeeze0.1" test_ref="oval:org.mitre.oval:tst:43242"/>
+    </criteria>
+  </criteria>
+</definition>

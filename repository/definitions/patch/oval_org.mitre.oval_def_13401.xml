@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13401" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-725-1 -- kdepim vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>kdepim</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-February/000845.html" ref_id="USN-725-1"/>
+    <description>It was discovered that Kmail did not adequately prevent execution of arbitrary code when a user clicked on a URL to an executable within an HTML mail. If a user clicked on a malicious URL and chose to execute the file, a remote attacker could execute arbitrary code with user privileges. This update changes KMail�s behavior to instead launch a helper program to view the file if the user chooses to execute such a link.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:55:20.019-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:06:28.628-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:05:09.043-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13401 - added CVE references; also made minor updates" date="2014-06-13T15:51:00.199-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:53:35.713-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:02:52.262-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="kdepim DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68731"/>
+            <criterion comment="kdepim-doc-html DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68766"/>
+            <criterion comment="kdepim-doc DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68897"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libkleopatra1 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68932"/>
+            <criterion comment="ktnef DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68784"/>
+            <criterion comment="kdepim-dbg DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68379"/>
+            <criterion comment="kpilot DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67972"/>
+            <criterion comment="kmailcvt DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68930"/>
+            <criterion comment="knotes DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68521"/>
+            <criterion comment="korn DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:67999"/>
+            <criterion comment="libkmime2 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68978"/>
+            <criterion comment="kdepim-kio-plugins DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68886"/>
+            <criterion comment="kdepim-wizards DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68968"/>
+            <criterion comment="libksieve0 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68394"/>
+            <criterion comment="networkstatus-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68838"/>
+            <criterion comment="kalarm DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68851"/>
+            <criterion comment="karm DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68915"/>
+            <criterion comment="knode DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68518"/>
+            <criterion comment="libkdepim1-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68982"/>
+            <criterion comment="libindex0-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68864"/>
+            <criterion comment="libmimelib1c2a DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68711"/>
+            <criterion comment="libksieve0-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68620"/>
+            <criterion comment="kmail DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68628"/>
+            <criterion comment="libkpimexchange1 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68332"/>
+            <criterion comment="kleopatra DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68472"/>
+            <criterion comment="networkstatus DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68983"/>
+            <criterion comment="libkleopatra1-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68873"/>
+            <criterion comment="kdepim-kfile-plugins DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68746"/>
+            <criterion comment="kitchensync DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68904"/>
+            <criterion comment="libkpimidentities1 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68973"/>
+            <criterion comment="libkcal2-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68954"/>
+            <criterion comment="korganizer DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68555"/>
+            <criterion comment="kaddressbook DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68468"/>
+            <criterion comment="kandy DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68209"/>
+            <criterion comment="libktnef1-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68764"/>
+            <criterion comment="libkgantt0-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68415"/>
+            <criterion comment="libkpimexchange1-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68588"/>
+            <criterion comment="libkdepim1a DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68638"/>
+            <criterion comment="libmimelib1-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68663"/>
+            <criterion comment="kode DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68828"/>
+            <criterion comment="kdepim-dev DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68556"/>
+            <criterion comment="libindex0 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68917"/>
+            <criterion comment="kdepim-kresources DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68869"/>
+            <criterion comment="libkgantt0 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68918"/>
+            <criterion comment="libktnef1 DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68957"/>
+            <criterion comment="akregator DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68714"/>
+            <criterion comment="libkcal2b DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68523"/>
+            <criterion comment="kontact DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68698"/>
+            <criterion comment="konsolekalendar DPKG is earlier than 4:3.5.7enterprise20070926-0ubuntu2.2" test_ref="oval:org.mitre.oval:tst:68030"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="kdepim DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68923"/>
+            <criterion comment="kdepim-doc-html DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68803"/>
+            <criterion comment="kdepim-doc DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68903"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libkleopatra1 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68795"/>
+            <criterion comment="ktnef DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68830"/>
+            <criterion comment="kdepim-dbg DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:69010"/>
+            <criterion comment="kpilot DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68926"/>
+            <criterion comment="kmailcvt DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68773"/>
+            <criterion comment="knotes DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68636"/>
+            <criterion comment="korn DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68959"/>
+            <criterion comment="libkmime2 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68865"/>
+            <criterion comment="kdepim-kio-plugins DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68652"/>
+            <criterion comment="kdepim-wizards DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68934"/>
+            <criterion comment="libksieve0 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68409"/>
+            <criterion comment="networkstatus-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68831"/>
+            <criterion comment="kalarm DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:69012"/>
+            <criterion comment="karm DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68991"/>
+            <criterion comment="knode DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68793"/>
+            <criterion comment="libkdepim1-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68911"/>
+            <criterion comment="libindex0-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68563"/>
+            <criterion comment="libmimelib1c2a DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68709"/>
+            <criterion comment="libksieve0-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68723"/>
+            <criterion comment="kmail DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68839"/>
+            <criterion comment="libkpimexchange1 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68459"/>
+            <criterion comment="kleopatra DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68484"/>
+            <criterion comment="networkstatus DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:69002"/>
+            <criterion comment="libkleopatra1-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68776"/>
+            <criterion comment="kdepim-kfile-plugins DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68781"/>
+            <criterion comment="kitchensync DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68734"/>
+            <criterion comment="libkpimidentities1 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68436"/>
+            <criterion comment="libkcal2-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68859"/>
+            <criterion comment="korganizer DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68875"/>
+            <criterion comment="kaddressbook DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:69030"/>
+            <criterion comment="kandy DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68977"/>
+            <criterion comment="libktnef1-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68972"/>
+            <criterion comment="libkgantt0-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68693"/>
+            <criterion comment="libkpimexchange1-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68790"/>
+            <criterion comment="libkdepim1a DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68877"/>
+            <criterion comment="libmimelib1-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68460"/>
+            <criterion comment="kode DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68894"/>
+            <criterion comment="kdepim-dev DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68964"/>
+            <criterion comment="libindex0 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68406"/>
+            <criterion comment="kdepim-kresources DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68217"/>
+            <criterion comment="libkgantt0 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:69022"/>
+            <criterion comment="libktnef1 DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68801"/>
+            <criterion comment="akregator DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68623"/>
+            <criterion comment="libkcal2b DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68039"/>
+            <criterion comment="kontact DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68745"/>
+            <criterion comment="konsolekalendar DPKG is earlier than 4:3.5.10-0ubuntu1~hardy3.1" test_ref="oval:org.mitre.oval:tst:68234"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="kdepim DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69029"/>
+            <criterion comment="kdepim-doc-html DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68999"/>
+            <criterion comment="kdepim-doc DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68211"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libkleopatra1 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68393"/>
+            <criterion comment="ktnef DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68535"/>
+            <criterion comment="kpilot DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68824"/>
+            <criterion comment="kmailcvt DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68650"/>
+            <criterion comment="knotes DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68329"/>
+            <criterion comment="kleopatra DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68219"/>
+            <criterion comment="libkmime2 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68353"/>
+            <criterion comment="kdepim-kio-plugins DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68391"/>
+            <criterion comment="kdepim-wizards DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68963"/>
+            <criterion comment="kalarm DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68939"/>
+            <criterion comment="karm DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68778"/>
+            <criterion comment="knode DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68967"/>
+            <criterion comment="libindex0-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68247"/>
+            <criterion comment="libmimelib1c2a DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68952"/>
+            <criterion comment="libksieve0-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68088"/>
+            <criterion comment="kdepim-kfile-plugins DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68854"/>
+            <criterion comment="kmail DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68172"/>
+            <criterion comment="libkpimexchange1 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68592"/>
+            <criterion comment="libkcal2b DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69079"/>
+            <criterion comment="korn DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69015"/>
+            <criterion comment="networkstatus DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69061"/>
+            <criterion comment="libkleopatra1-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68454"/>
+            <criterion comment="libksieve0 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68825"/>
+            <criterion comment="kitchensync DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69011"/>
+            <criterion comment="libkpimidentities1 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68998"/>
+            <criterion comment="libkcal2-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68777"/>
+            <criterion comment="ksync DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68660"/>
+            <criterion comment="korganizer DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68970"/>
+            <criterion comment="kaddressbook DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68594"/>
+            <criterion comment="kandy DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68720"/>
+            <criterion comment="libktnef1-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69065"/>
+            <criterion comment="libkgantt0-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69043"/>
+            <criterion comment="libkpimexchange1-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68872"/>
+            <criterion comment="libkdepim1a DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68907"/>
+            <criterion comment="libmimelib1-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68944"/>
+            <criterion comment="kode DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68995"/>
+            <criterion comment="kdepim-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68878"/>
+            <criterion comment="libindex0 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68884"/>
+            <criterion comment="kdepim-kresources DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:69057"/>
+            <criterion comment="libkgantt0 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68895"/>
+            <criterion comment="libktnef1 DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68993"/>
+            <criterion comment="akregator DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68713"/>
+            <criterion comment="libkdepim1-dev DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68976"/>
+            <criterion comment="kontact DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68986"/>
+            <criterion comment="konsolekalendar DPKG is earlier than 4:3.5.2-0ubuntu6.1" test_ref="oval:org.mitre.oval:tst:68557"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="kdepim DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69059"/>
+            <criterion comment="kdepim-doc DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68661"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libmaildir4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68985"/>
+            <criterion comment="ktnef DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68347"/>
+            <criterion comment="kdepim-dbg DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68806"/>
+            <criterion comment="knotes DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68807"/>
+            <criterion comment="libkholidays4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68981"/>
+            <criterion comment="kdepim-wizards DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69034"/>
+            <criterion comment="kdepim-strigi-plugins DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68962"/>
+            <criterion comment="kalarm DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68821"/>
+            <criterion comment="knode DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69024"/>
+            <criterion comment="libkpgp4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68988"/>
+            <criterion comment="libksieve4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69040"/>
+            <criterion comment="kmail DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68761"/>
+            <criterion comment="kleopatra DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69089"/>
+            <criterion comment="kjots DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69018"/>
+            <criterion comment="korganizer DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68961"/>
+            <criterion comment="kaddressbook DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68935"/>
+            <criterion comment="libkdepim4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68820"/>
+            <criterion comment="libmimelib4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68802"/>
+            <criterion comment="libkleo4 DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68383"/>
+            <criterion comment="akonadi-kde DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68550"/>
+            <criterion comment="kode DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68771"/>
+            <criterion comment="kdepim-dev DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68882"/>
+            <criterion comment="kdepim-kresources DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:68840"/>
+            <criterion comment="ktimetracker DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69019"/>
+            <criterion comment="akregator DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69000"/>
+            <criterion comment="kontact DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69086"/>
+            <criterion comment="konsolekalendar DPKG is earlier than 4:4.1.4-0ubuntu1~intrepid2.1" test_ref="oval:org.mitre.oval:tst:69008"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

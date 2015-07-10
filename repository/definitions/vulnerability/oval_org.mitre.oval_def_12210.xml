@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12210" version="12" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Vulnerability in smtpd module in Python 2.6, 2.7, 3.1 and 3.2 alpha</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Python</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-3493" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3493"/>
+    <description>Multiple race conditions in smtpd.py in the smtpd module in Python 2.6, 2.7, 3.1, and 3.2 alpha allow remote attackers to cause a denial of service (daemon outage) by establishing and then immediately closing a TCP connection, leading to the accept function having an unexpected return value of None, an unexpected value of None for the address, or an ECONNABORTED, EAGAIN, or EWOULDBLOCK error, or the getpeername function having an ENOTCONN error, a related issue to CVE-2010-3492.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-11-18T10:50:19">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-11-19T14:44:55.923-05:00">DRAFT</status_change>
+        <status_change date="2010-12-06T04:00:37.707-05:00">INTERIM</status_change>
+        <status_change date="2010-12-27T04:00:22.488-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:11779 - Updated series of States to escape .(period) character." date="2012-01-13T17:30:00.463-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-01-13T17:34:50.069-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:14722 - Updated series of Objects to escape .(period) character." date="2012-01-13T17:35:00.266-05:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-01-30T04:00:07.860-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:14722 - the symbol \ is not needed before the symbol _" date="2013-09-19T17:49:00.856-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-09-19T17:50:34.588-04:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15525 - the symbol \ is not needed before the symbol _" date="2013-09-19T17:51:00.583-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <modified comment="EDITED oval:org.mitre.oval:ste:11779 - the symbol \ is not needed before the symbol _" date="2013-09-19T17:53:00.287-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-10-07T04:00:42.480-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:15525 - var_check=&quot;all&quot; was replaced with var_check=&quot;at least one&quot;" date="2013-10-29T16:13:00.745-04:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </modified>
+        <status_change date="2013-10-29T16:15:29.864-04:00">INTERIM</status_change>
+        <status_change date="2013-11-14T10:21:28.623-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Version of Python in the two installation modes">
+      <criterion comment="Check if the version of Python (Single User) is equal to 2.6.150.1013" test_ref="oval:org.mitre.oval:tst:41541"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 2.7.150.1013" test_ref="oval:org.mitre.oval:tst:41027"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 3.1.150.1013" test_ref="oval:org.mitre.oval:tst:41517"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 3.2.103.1013" test_ref="oval:org.mitre.oval:tst:41511"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 3.2.101.1013" test_ref="oval:org.mitre.oval:tst:40901"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 3.2.102.1013" test_ref="oval:org.mitre.oval:tst:41640"/>
+      <criterion comment="Check if the version of Python (Single User) is equal to 3.2.104.1013" test_ref="oval:org.mitre.oval:tst:41690"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 2.6.150.1013" test_ref="oval:org.mitre.oval:tst:41749"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to  2.7.150.1013" test_ref="oval:org.mitre.oval:tst:41004"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 3.1.150.1013" test_ref="oval:org.mitre.oval:tst:41087"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 3.2.103.1013" test_ref="oval:org.mitre.oval:tst:41046"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 3.2.101.1013" test_ref="oval:org.mitre.oval:tst:41142"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 3.2.102.1013" test_ref="oval:org.mitre.oval:tst:41309"/>
+      <criterion comment="Check if the version of Python (All Users) is equal to 3.2.104.1013" test_ref="oval:org.mitre.oval:tst:41825"/>
+    </criteria>
+    <criteria operator="OR" comment="File version of smtpd.py in the two installation modes">
+      <criterion comment="Check for the file smtpd.py (Single User)" test_ref="oval:org.mitre.oval:tst:41051"/>
+      <criterion comment="Check for the file smtpd.py (All User)" test_ref="oval:org.mitre.oval:tst:41834"/>
+    </criteria>
+    <extend_definition comment="Python is installed" definition_ref="oval:org.mitre.oval:def:11791"/>
+  </criteria>
+</definition>

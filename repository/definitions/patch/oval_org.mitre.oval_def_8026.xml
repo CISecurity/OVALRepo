@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8026" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1616 clamav -- denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>clamav</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1616" ref_id="DSA-1616"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2713" ref_id="CVE-2008-2713"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3215" ref_id="CVE-2008-3215"/>
+    <description>Damian Put discovered a vulnerability in the ClamAV anti-virus toolkit's parsing of Petite-packed Win32 executables. The weakness leads to an invalid memory access, and could enable an attacker to crash clamav by supplying a maliciously crafted Petite-compressed binary for scanning. In some configurations, such as when clamav is used in combination with mail servers, this could cause a system to fail open, facilitating a follow-on viral attack. A previous version of this advisory referenced packages that were built incorrectly and omitted the intended correction. This issue was fixed in packages referenced by the -2 revision of the advisory. The Common Vulnerabilities and Exposures project identifies this weakness as CVE-2008-2713 and CVE-2008-3215.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:07-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:54:26.137-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:37.360-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:40.877-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8026 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:37:40.215-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:48.782-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="clamav-docs is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:15704"/>
+          <criterion comment="clamav-testfiles is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16095"/>
+          <criterion comment="clamav-base is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16314"/>
+        </criteria>
+      </criteria>
+      <criterion comment="libclamav-dev is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16408"/>
+      <criterion comment="clamav is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16358"/>
+      <criterion comment="clamav-dbg is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16167"/>
+      <criterion comment="libclamav2 is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:15730"/>
+      <criterion comment="clamav-daemon is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16349"/>
+      <criterion comment="clamav-milter is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16467"/>
+      <criterion comment="clamav-freshclam is earlier than 0.90.1dfsg-3.1+etch14" test_ref="oval:org.mitre.oval:tst:16492"/>
+    </criteria>
+  </criteria>
+</definition>

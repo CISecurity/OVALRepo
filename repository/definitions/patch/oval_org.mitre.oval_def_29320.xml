@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29320" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1428 -- xmlsec1 security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>xmlsec1</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1428.html" ref_id="RHSA-2009:1428"/>
+    <reference source="CESA-2009:1428" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-September/016161.html" ref_id="CESA-2009:1428-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0217" ref_id="CVE-2009-0217"/>
+    <description>Updated xmlsec1 packages that fix one security issue are now available for
+Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The XML Security Library is a C library based on libxml2 and OpenSSL. It
+implements the XML Signature Syntax and Processing and XML Encryption
+Syntax and Processing standards. HMAC is used for message authentication
+using cryptographic hash functions. The HMAC algorithm allows the hash
+output to be truncated (as documented in RFC 2104).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:52:49">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:14.283-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xmlsec1-devel is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140664"/>
+        <criterion comment="xmlsec1-gnutls-devel is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140781"/>
+        <criterion comment="xmlsec1-nss-devel is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140757"/>
+        <criterion comment="xmlsec1-openssl-devel is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140571"/>
+        <criterion comment="xmlsec1 is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140817"/>
+        <criterion comment="xmlsec1-gnutls is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:139883"/>
+        <criterion comment="xmlsec1-nss is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140592"/>
+        <criterion comment="xmlsec1-openssl is earlier than 0:1.2.9-8.1.1" test_ref="oval:org.mitre.oval:tst:140808"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xmlsec1 is earlier than 0:1.2.6-3.1" test_ref="oval:org.mitre.oval:tst:140194"/>
+        <criterion comment="xmlsec1-devel is earlier than 0:1.2.6-3.1" test_ref="oval:org.mitre.oval:tst:140647"/>
+        <criterion comment="xmlsec1-openssl is earlier than 0:1.2.6-3.1" test_ref="oval:org.mitre.oval:tst:140559"/>
+        <criterion comment="xmlsec1-openssl-devel is earlier than 0:1.2.6-3.1" test_ref="oval:org.mitre.oval:tst:140725"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5975" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>udev Netlink Message Validation Local Privilege Escalation Vulnerability</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-1185" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1185"/>
+    <description>udev before 1.4.1 does not verify whether a NETLINK message originates from kernel space, which allows local users to gain privileges by sending a NETLINK message from user space.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-09-22T15:10:44.000-05:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </submitted>
+        <status_change date="2009-09-28T06:57:08.426-04:00">DRAFT</status_change>
+        <modified comment="Extra criteria blocks added to handle multiple patch logic in def:5975" date="2009-10-20T14:03:00.817-04:00">
+          <contributor organization="Hewlett-Packard">Michael Wood</contributor>
+        </modified>
+        <status_change date="2009-11-09T04:00:31.582-05:00">INTERIM</status_change>
+        <status_change date="2009-11-30T04:00:17.343-05:00">ACCEPTED</status_change>
+        <modified comment="Changed referenced definition from deprecated def:5895 to def:5506" date="2010-04-16T17:57:00.714-04:00">
+          <contributor organization="DTCC">J. Daniel Brown</contributor>
+        </modified>
+        <status_change date="2010-04-16T18:24:08.819-04:00">INTERIM</status_change>
+        <status_change date="2010-05-17T04:00:10.240-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5975 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:28.607-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:22.370-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:5506"/>
+    <criteria operator="OR" comment="All patches must be installed to not be vulnerable">
+      <criterion comment="Patch ESX400-200906411-SG is not installed" test_ref="oval:org.mitre.oval:tst:10791"/>
+      <criterion comment="Patch ESX400-200906407-SG is not installed" test_ref="oval:org.mitre.oval:tst:9883"/>
+    </criteria>
+  </criteria>
+</definition>

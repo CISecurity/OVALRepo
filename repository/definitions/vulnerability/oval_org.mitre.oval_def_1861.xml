@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition class="vulnerability" id="oval:org.mitre.oval:def:1861" version="3" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Mail UNC Navigation Request Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Vista</platform>
+      <product>Windows Mail</product>
+    </affected>
+    <reference ref_id="CVE-2007-1658" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1658" source="CVE"/>
+    <description>Windows Mail in Microsoft Windows Vista might allow user-assisted remote attackers to execute certain programs via a link to a (1) local file or (2) UNC share pathname in which there is a directory with the same base name as an executable program at the same level, as demonstrated using C:/windows/system32/winrm (winrm.cmd) and migwiz (migwiz.exe).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-06-13T08:22:59.000-04:00">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2007-06-13T15:20:00.000-04:00">DRAFT</status_change>
+        <status_change date="2007-06-29T09:41:59.536-04:00">INTERIM</status_change>
+        <status_change date="2007-07-16T09:55:10.745-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:3636 - modified comments" date="2014-02-28T15:13:00.247-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-28T15:16:14.840-05:00">INTERIM</status_change>
+        <status_change date="2014-03-17T04:00:14.554-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Windows Mail on Win Vista" operator="AND">
+    <extend_definition comment="Microsoft Windows Vista is installed" definition_ref="oval:org.mitre.oval:def:228"/>
+    <extend_definition comment="Windows Mail is installed" definition_ref="oval:org.mitre.oval:def:2058"/>
+    <criterion comment="the version of inetcomm.dll is less than 6.0.6000.16480" test_ref="oval:org.mitre.oval:tst:3636"/>
+  </criteria>
+</definition>

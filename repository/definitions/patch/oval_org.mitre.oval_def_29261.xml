@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29261" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:0013 -- avahi security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>avahi</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-0013.html" ref_id="RHSA-2009:0013"/>
+    <reference source="CESA-2009:0013" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-January/015543.html" ref_id="CESA-2009:0013-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5081" ref_id="CVE-2008-5081"/>
+    <description>Updated avahi packages that fix a security issue are now available for Red
+Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Avahi is an implementation of the DNS Service Discovery and Multicast DNS
+specifications for Zeroconf Networking. It facilitates service discovery on
+a local network. Avahi and Avahi-aware applications allow you to plug your
+computer into a network and, with no configuration, view other people to
+chat with, see printers to print to, and find shared files on other computers.
+Hugo Dias discovered a denial of service flaw in avahi-daemon. A remote
+attacker on the same local area network (LAN) could send a
+specially-crafted mDNS (Multicast DNS) packet that would cause avahi-daemon
+to exit unexpectedly due to a failed assertion check. (CVE-2008-5081)
+All users are advised to upgrade to these updated packages, which contain a
+backported patch which resolves this issue. After installing the update,
+avahi-daemon will be restarted automatically.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:40:04.645-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="avahi-compat-howl-devel is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140407"/>
+      <criterion comment="avahi-compat-libdns_sd-devel is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140416"/>
+      <criterion comment="avahi-devel is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140515"/>
+      <criterion comment="avahi-glib-devel is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140409"/>
+      <criterion comment="avahi-qt3-devel is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140297"/>
+      <criterion comment="avahi is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140073"/>
+      <criterion comment="avahi-compat-howl is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140334"/>
+      <criterion comment="avahi-compat-libdns_sd is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140321"/>
+      <criterion comment="avahi-glib is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140247"/>
+      <criterion comment="avahi-qt3 is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140389"/>
+      <criterion comment="avahi-tools is earlier than 0:0.6.16-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:140423"/>
+    </criteria>
+  </criteria>
+</definition>

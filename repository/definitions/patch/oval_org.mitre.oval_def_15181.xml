@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15181" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2323-1 radvd -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>radvd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2011/msg00207.html" ref_id="DSA-2323-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3602" ref_id="CVE-2011-3602"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3604" ref_id="CVE-2011-3604"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3605" ref_id="CVE-2011-3605"/>
+    <description>Multiple security issues were discovered by Vasiliy Kulikov in radvd, an IPv6 Router Advertisement daemon: CVE-2011-3602 set_interface_var function doesnt check the interface name, which is chosen by an unprivileged user. This could lead to an arbitrary file overwrite if the attacker has local access, or specific files overwrites otherwise. CVE-2011-3604 process_ra function lacks multiple buffer length checks which could lead to memory reads outside the stack, causing a crash of the daemon. CVE-2011-3605 process_rs function calls mdelay unconditionnally when running in unicast-only mode. As this call is in the main thread, that means all request processing is delayed. An attacked could flood the daemon with router solicitations in order to fill the input queue, causing a temporary denial of service. Note: upstream and Debian default is to use anycast mode.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-03-29T02:10:09-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2012-03-29T10:56:58.857-04:00">DRAFT</status_change>
+        <status_change date="2012-04-16T04:07:07.337-04:00">INTERIM</status_change>
+        <status_change date="2012-05-07T04:01:29.478-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:18901 - Debian patch definition fixes to epoch value in states." date="2012-08-23T17:05:00.375-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2012-08-23T17:08:05.485-04:00">INTERIM</status_change>
+        <status_change date="2012-09-10T04:00:14.560-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15181 - Debian Patch Update" date="2014-06-06T17:36:00.316-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:38:20.451-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:03:33.931-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="radvd DPKG is earlier than 1.1-3.1" test_ref="oval:org.mitre.oval:tst:78606"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+      </criteria>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criterion comment="radvd DPKG is earlier than 1.6-1.1" test_ref="oval:org.mitre.oval:tst:78545"/>
+    </criteria>
+  </criteria>
+</definition>

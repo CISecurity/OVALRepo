@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13510" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2032-1 libpng -- several</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>libpng</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00072.html" ref_id="DSA-2032-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2042" ref_id="CVE-2009-2042"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0205" ref_id="CVE-2010-0205"/>
+    <description>Several vulnerabilities have been discovered in libpng, a library for reading and writing PNG files. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-2042 libpng does not properly parse 1-bit interlaced images with width values that are not divisible by 8, which causes libpng to include uninitialised bits in certain rows of a PNG file and might allow remote attackers to read portions of sensitive memory via &amp;quot;out-of-bounds pixels&amp;quot; in the file. CVE-2010-0205 libpng does not properly handle compressed ancillary-chunk data that has a disproportionately large uncompressed representation, which allows remote attackers to cause a denial of service via a crafted PNG file For the stable distribution, these problems have been fixed in version 1.2.27-2+lenny3. For the testing and unstable distribution, these problems have been fixed in version 1.2.43-1 We recommend that you upgrade your libpng package.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:27:13.151-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:55.836-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:08:13.085-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13510 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:34:42.209-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:23.981-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="libpng3 DPKG is earlier than 1.2.27-2+lenny3" test_ref="oval:org.mitre.oval:tst:46437"/>
+      </criteria>
+      <criterion comment="libpng12-dev DPKG is earlier than 1.2.27-2+lenny3" test_ref="oval:org.mitre.oval:tst:47140"/>
+      <criterion comment="libpng12-0 DPKG is earlier than 1.2.27-2+lenny3" test_ref="oval:org.mitre.oval:tst:47110"/>
+    </criteria>
+  </criteria>
+</definition>

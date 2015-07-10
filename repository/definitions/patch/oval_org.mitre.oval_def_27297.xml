@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27297" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-0923 -- kernel security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <product>kernel</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-0923.html" ref_id="ELSA-2014-0923"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4943" ref_id="CVE-2014-4943"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4699" ref_id="CVE-2014-4699"/>
+    <description>[3.10.0-123.4.4]
+- Oracle Linux certificates (Alexey Petrenko)
+
+[3.10.0-123.4.4]
+- [net] l2tp_ppp: fail when socket option level is not SOL_PPPOL2TP (Petr  Matousek) [1119465 1119466] {CVE-2014-4943}
+
+[3.10.0-123.4.3]
+- [x86] ptrace: force IRET path after a ptrace_stop() (Oleg Nesterov) [1115934 1115935] {CVE-2014-4699}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:21:38">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T17:29:08.379-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:03:31.193-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:01:23.122-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kernel is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127197"/>
+      <criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127318"/>
+      <criterion comment="kernel-debug is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127009"/>
+      <criterion comment="kernel-debug-devel is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127144"/>
+      <criterion comment="kernel-devel is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127363"/>
+      <criterion comment="kernel-doc is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127308"/>
+      <criterion comment="kernel-headers is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127201"/>
+      <criterion comment="kernel-tools is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127204"/>
+      <criterion comment="kernel-tools-libs is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:126867"/>
+      <criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127330"/>
+      <criterion comment="perf is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127278"/>
+      <criterion comment="python-perf is earlier than 0:3.10.0-123.4.4.el7" test_ref="oval:org.mitre.oval:tst:127073"/>
+    </criteria>
+  </criteria>
+</definition>

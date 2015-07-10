@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9787" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Integer overflow in the rtl_allocateMemory function in sal/rtl/source/alloc_global.c in OpenOffice.org (OOo) 2.0 through 2.4 allows remote attackers to execute arbitrary code via a crafted file that triggers a heap-based buffer overflow.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2152" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2152"/>
+    <description>Integer overflow in the rtl_allocateMemory function in sal/rtl/source/alloc_global.c in OpenOffice.org (OOo) 2.0 through 2.4 allows remote attackers to execute arbitrary code via a crafted file that triggers a heap-based buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:19:00.696-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:14:06.466-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:15:13.342-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9787 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:24:00.823-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:31:21.546-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:22:11.956-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="openoffice.org-libs is earlier than 0:1.1.2-42.2.0.EL3" test_ref="oval:org.mitre.oval:tst:37041"/>
+        <criterion comment="openoffice.org is earlier than 0:1.1.2-42.2.0.EL3" test_ref="oval:org.mitre.oval:tst:37101"/>
+        <criterion comment="openoffice.org-i18n is earlier than 0:1.1.2-42.2.0.EL3" test_ref="oval:org.mitre.oval:tst:37231"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="openoffice.org2-langpack-lt_LT is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37131"/>
+        <criterion comment="openoffice.org2-langpack-nn_NO is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36855"/>
+        <criterion comment="openoffice.org2-langpack-ga_IE is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37023"/>
+        <criterion comment="openoffice.org2-langpack-zh_CN is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37014"/>
+        <criterion comment="openoffice.org2-javafilter is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36137"/>
+        <criterion comment="openoffice.org2-langpack-he_IL is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36217"/>
+        <criterion comment="openoffice.org2-draw is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37001"/>
+        <criterion comment="openoffice.org2-langpack-ko_KR is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36763"/>
+        <criterion comment="openoffice.org2-langpack-ca_ES is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36900"/>
+        <criterion comment="openoffice.org2-base is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36904"/>
+        <criterion comment="openoffice.org2-langpack-fr is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37102"/>
+        <criterion comment="openoffice.org is earlier than 0:1.1.5-10.6.0.5.EL4" test_ref="oval:org.mitre.oval:tst:37327"/>
+        <criterion comment="openoffice.org-libs is earlier than 0:1.1.5-10.6.0.5.EL4" test_ref="oval:org.mitre.oval:tst:37258"/>
+        <criterion comment="openoffice.org2-langpack-pa_IN is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36971"/>
+        <criterion comment="openoffice.org2-langpack-da_DK is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36698"/>
+        <criterion comment="openoffice.org2-emailmerge is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37065"/>
+        <criterion comment="openoffice.org2-langpack-pt_PT is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36143"/>
+        <criterion comment="openoffice.org2-langpack-es is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37128"/>
+        <criterion comment="openoffice.org2-langpack-sv is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37134"/>
+        <criterion comment="openoffice.org2-langpack-ms_MY is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37093"/>
+        <criterion comment="openoffice.org2-langpack-cs_CZ is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36815"/>
+        <criterion comment="openoffice.org2-xsltfilter is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36342"/>
+        <criterion comment="openoffice.org2-langpack-ja_JP is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37034"/>
+        <criterion comment="openoffice.org2-langpack-hu_HU is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36655"/>
+        <criterion comment="openoffice.org2-langpack-zh_TW is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36942"/>
+        <criterion comment="openoffice.org2-langpack-sl_SI is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36897"/>
+        <criterion comment="openoffice.org2-langpack-de is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37055"/>
+        <criterion comment="openoffice.org2-pyuno is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37040"/>
+        <criterion comment="openoffice.org2 is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37021"/>
+        <criterion comment="openoffice.org2-langpack-tr_TR is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37103"/>
+        <criterion comment="openoffice.org2-impress is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36121"/>
+        <criterion comment="openoffice.org2-langpack-bn is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36947"/>
+        <criterion comment="openoffice.org2-langpack-ar is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37015"/>
+        <criterion comment="openoffice.org2-langpack-pt_BR is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37052"/>
+        <criterion comment="openoffice.org2-langpack-af_ZA is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37077"/>
+        <criterion comment="openoffice.org2-langpack-pl_PL is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36551"/>
+        <criterion comment="openoffice.org2-calc is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37078"/>
+        <criterion comment="openoffice.org2-langpack-zu_ZA is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36165"/>
+        <criterion comment="openoffice.org2-langpack-fi_FI is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36997"/>
+        <criterion comment="openoffice.org2-langpack-sk_SK is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37121"/>
+        <criterion comment="openoffice.org2-langpack-hi_IN is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36911"/>
+        <criterion comment="openoffice.org2-langpack-nb_NO is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36682"/>
+        <criterion comment="openoffice.org2-langpack-th_TH is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36825"/>
+        <criterion comment="openoffice.org2-langpack-et_EE is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36739"/>
+        <criterion comment="openoffice.org2-langpack-gl_ES is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37097"/>
+        <criterion comment="openoffice.org2-langpack-it is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36848"/>
+        <criterion comment="openoffice.org2-langpack-hr_HR is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36841"/>
+        <criterion comment="openoffice.org-i18n is earlier than 0:1.1.5-10.6.0.5.EL4" test_ref="oval:org.mitre.oval:tst:37002"/>
+        <criterion comment="openoffice.org2-langpack-ta_IN is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37142"/>
+        <criterion comment="openoffice.org2-langpack-gu_IN is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36872"/>
+        <criterion comment="openoffice.org2-testtools is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37122"/>
+        <criterion comment="openoffice.org-kde is earlier than 0:1.1.5-10.6.0.5.EL4" test_ref="oval:org.mitre.oval:tst:36748"/>
+        <criterion comment="openoffice.org2-langpack-eu_ES is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37004"/>
+        <criterion comment="openoffice.org2-langpack-el_GR is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36830"/>
+        <criterion comment="openoffice.org2-core is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36693"/>
+        <criterion comment="openoffice.org2-langpack-ru is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36923"/>
+        <criterion comment="openoffice.org2-langpack-bg_BG is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36982"/>
+        <criterion comment="openoffice.org2-langpack-nl is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37080"/>
+        <criterion comment="openoffice.org2-langpack-sr_CS is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:36346"/>
+        <criterion comment="openoffice.org2-langpack-cy_GB is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37019"/>
+        <criterion comment="openoffice.org2-math is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37076"/>
+        <criterion comment="openoffice.org2-graphicfilter is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37072"/>
+        <criterion comment="openoffice.org2-writer is earlier than 0:2.0.4-5.7.0.5.0" test_ref="oval:org.mitre.oval:tst:37088"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="openoffice.org-langpack-sk_SK is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37166"/>
+        <criterion comment="openoffice.org-langpack-zu_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37187"/>
+        <criterion comment="openoffice.org-langpack-pa_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37170"/>
+        <criterion comment="openoffice.org-langpack-hi_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37123"/>
+        <criterion comment="openoffice.org-langpack-et_EE is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37214"/>
+        <criterion comment="openoffice.org-langpack-kn_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37151"/>
+        <criterion comment="openoffice.org is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37303"/>
+        <criterion comment="openoffice.org-langpack-zh_TW is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37161"/>
+        <criterion comment="openoffice.org-writer is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37011"/>
+        <criterion comment="openoffice.org-langpack-ve_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36920"/>
+        <criterion comment="openoffice.org-langpack-ga_IE is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37334"/>
+        <criterion comment="openoffice.org-langpack-ta_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37136"/>
+        <criterion comment="openoffice.org-langpack-ko_KR is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37183"/>
+        <criterion comment="openoffice.org-langpack-or_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36862"/>
+        <criterion comment="openoffice.org-langpack-da_DK is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36809"/>
+        <criterion comment="openoffice.org-langpack-sr_CS is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37264"/>
+        <criterion comment="openoffice.org-langpack-pl_PL is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37095"/>
+        <criterion comment="openoffice.org-langpack-fr is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37090"/>
+        <criterion comment="openoffice.org-langpack-ts_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37053"/>
+        <criterion comment="openoffice.org-javafilter is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37308"/>
+        <criterion comment="openoffice.org-langpack-as_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37009"/>
+        <criterion comment="openoffice.org-testtools is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36832"/>
+        <criterion comment="openoffice.org-langpack-hr_HR is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36882"/>
+        <criterion comment="openoffice.org-langpack-de is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36676"/>
+        <criterion comment="openoffice.org-emailmerge is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37216"/>
+        <criterion comment="openoffice.org-xsltfilter is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37256"/>
+        <criterion comment="openoffice.org-langpack-tn_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37150"/>
+        <criterion comment="openoffice.org-langpack-te_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37062"/>
+        <criterion comment="openoffice.org-langpack-sv is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37025"/>
+        <criterion comment="openoffice.org-base is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37325"/>
+        <criterion comment="openoffice.org-langpack-ca_ES is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36746"/>
+        <criterion comment="openoffice.org-langpack-nr_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36993"/>
+        <criterion comment="openoffice.org-core is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36901"/>
+        <criterion comment="openoffice.org-langpack-nl is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37311"/>
+        <criterion comment="openoffice.org-langpack-ur is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36621"/>
+        <criterion comment="openoffice.org-langpack-nn_NO is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37298"/>
+        <criterion comment="openoffice.org-langpack-ar is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37339"/>
+        <criterion comment="openoffice.org-langpack-ja_JP is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37184"/>
+        <criterion comment="openoffice.org-langpack-gu_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37220"/>
+        <criterion comment="openoffice.org-langpack-tr_TR is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36497"/>
+        <criterion comment="openoffice.org-langpack-eu_ES is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37147"/>
+        <criterion comment="openoffice.org-langpack-fi_FI is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37270"/>
+        <criterion comment="openoffice.org-graphicfilter is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37099"/>
+        <criterion comment="openoffice.org-pyuno is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37278"/>
+        <criterion comment="openoffice.org-langpack-ml_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37241"/>
+        <criterion comment="openoffice.org-langpack-gl_ES is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37169"/>
+        <criterion comment="openoffice.org-sdk-doc is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37338"/>
+        <criterion comment="openoffice.org-langpack-zh_CN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36994"/>
+        <criterion comment="openoffice.org-langpack-xh_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37310"/>
+        <criterion comment="openoffice.org-langpack-it is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37137"/>
+        <criterion comment="openoffice.org-sdk is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37110"/>
+        <criterion comment="openoffice.org-langpack-es is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37194"/>
+        <criterion comment="openoffice.org-langpack-nb_NO is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37221"/>
+        <criterion comment="openoffice.org-langpack-sl_SI is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37030"/>
+        <criterion comment="openoffice.org-draw is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37210"/>
+        <criterion comment="openoffice.org-langpack-nso_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37130"/>
+        <criterion comment="openoffice.org-langpack-ms_MY is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37324"/>
+        <criterion comment="openoffice.org-langpack-el_GR is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37244"/>
+        <criterion comment="openoffice.org-langpack-hu_HU is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37277"/>
+        <criterion comment="openoffice.org-langpack-ss_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37175"/>
+        <criterion comment="openoffice.org-langpack-bn is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36987"/>
+        <criterion comment="openoffice.org-langpack-he_IL is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36625"/>
+        <criterion comment="openoffice.org-langpack-pt_PT is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36795"/>
+        <criterion comment="openoffice.org-langpack-lt_LT is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37168"/>
+        <criterion comment="openoffice.org-langpack-af_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37329"/>
+        <criterion comment="openoffice.org-langpack-bg_BG is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37177"/>
+        <criterion comment="openoffice.org-calc is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37006"/>
+        <criterion comment="openoffice.org-langpack-cs_CZ is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37132"/>
+        <criterion comment="openoffice.org-langpack-cy_GB is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37116"/>
+        <criterion comment="openoffice.org-langpack-mr_IN is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36675"/>
+        <criterion comment="openoffice.org-headless is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37212"/>
+        <criterion comment="openoffice.org-langpack-th_TH is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37235"/>
+        <criterion comment="openoffice.org-langpack-pt_BR is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37042"/>
+        <criterion comment="openoffice.org-langpack-ru is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37211"/>
+        <criterion comment="openoffice.org-math is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37290"/>
+        <criterion comment="openoffice.org-impress is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:36953"/>
+        <criterion comment="openoffice.org-langpack-st_ZA is earlier than 0:2.3.0-6.5.1.el5_2" test_ref="oval:org.mitre.oval:tst:37186"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

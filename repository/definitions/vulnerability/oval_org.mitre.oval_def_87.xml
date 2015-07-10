@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:87" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SNMPv1 Request Handling DoS and Privilege Escalation</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Simple Network Management Protocol (SNMP)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-0013" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0013"/>
+    <description>Vulnerabilities in the SNMPv1 request handling of a large number of SNMP implementations allow remote attackers to cause a denial of service or gain privileges via (1) GetRequest, (2) GetNextRequest, and (3) SetRequest messages, as demonstrated by the PROTOS c06-SNMPv1 test suite.  NOTE: It is highly likely that this candidate will be SPLIT into multiple candidates, one or more for each vendor.  This and other SNMP-related candidates will be updated when more accurate information is available.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2003-10-10T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+      <criterion negate="true" comment="this is an NT Terminal Server" test_ref="oval:org.mitre.oval:tst:3097"/>
+      <criterion comment="the version of snmp.exe is less than 4.0.1381.7134" test_ref="oval:org.mitre.oval:tst:2960"/>
+      <criterion negate="true" comment="Patch Q314147 Installed" test_ref="oval:org.mitre.oval:tst:2959"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="the SNMP service is enabled" test_ref="oval:org.mitre.oval:tst:2958"/>
+    </criteria>
+  </criteria>
+</definition>

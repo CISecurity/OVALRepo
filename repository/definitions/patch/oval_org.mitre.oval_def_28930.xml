@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28930" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0892 -- xen security and bug fix update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>xen</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0892.html" ref_id="RHSA-2008:0892"/>
+    <reference source="CESA-2008:0892" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-October/015299.html" ref_id="CESA-2008:0892-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1945" ref_id="CVE-2008-1945"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1952" ref_id="CVE-2008-1952"/>
+    <description>Updated xen packages that resolve a couple of security issues and fix a bug
+are now available for Red Hat Enterprise Linux 5.
+This update has been rated as having important security impact by the Red
+Hat Security Response Team.
+The xen packages contain tools for managing the virtual machine monitor in
+Red Hat Virtualization.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:20">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:46.778-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criterion comment="xen-libs is earlier than 0:3.0.3-64.el5_2.3" test_ref="oval:org.mitre.oval:tst:138274"/>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="xen is earlier than 0:3.0.3-64.el5_2.3" test_ref="oval:org.mitre.oval:tst:138896"/>
+        <criterion comment="xen-devel is earlier than 0:3.0.3-64.el5_2.3" test_ref="oval:org.mitre.oval:tst:139095"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

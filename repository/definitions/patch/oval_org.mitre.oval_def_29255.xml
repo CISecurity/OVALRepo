@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29255" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0581 -- bluez-libs and bluez-utils security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>bluez-libs</product>
+      <product>bluez-utils</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0581.html" ref_id="RHSA-2008:0581"/>
+    <reference source="CESA-2008:0581" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015116.html" ref_id="CESA-2008:0581-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2374" ref_id="CVE-2008-2374"/>
+    <description>Updated bluez-libs and bluez-utils packages that fix a security flaw are
+now available for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The bluez-libs package contains libraries for use in Bluetooth
+applications. The bluez-utils package contains Bluetooth daemons and utilities.
+An input validation flaw was found in the Bluetooth Session Description
+Protocol (SDP) packet parser used by the Bluez Bluetooth utilities. A
+Bluetooth device with an already-established trust relationship, or a local
+user registering a service record via a UNIX reg; socket or D-Bus interface,
+could cause a crash, or possibly execute arbitrary code with privileges of
+the hcid daemon. (CVE-2008-2374)
+Users of bluez-libs and bluez-utils are advised to upgrade to these updated
+packages, which contains a backported patch to correct this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:29">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:19.056-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bluez-libs-devel is earlier than 0:3.7-1.1" test_ref="oval:org.mitre.oval:tst:139117"/>
+        <criterion comment="bluez-libs is earlier than 0:3.7-1.1" test_ref="oval:org.mitre.oval:tst:138482"/>
+        <criterion comment="bluez-utils is earlier than 0:3.7-2.2" test_ref="oval:org.mitre.oval:tst:138707"/>
+        <criterion comment="bluez-utils-cups is earlier than 0:3.7-2.2" test_ref="oval:org.mitre.oval:tst:139181"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="bluez-libs is earlier than 0:2.10-3" test_ref="oval:org.mitre.oval:tst:139259"/>
+        <criterion comment="bluez-libs-devel is earlier than 0:2.10-3" test_ref="oval:org.mitre.oval:tst:139237"/>
+        <criterion comment="bluez-utils is earlier than 0:2.10-2.4" test_ref="oval:org.mitre.oval:tst:139067"/>
+        <criterion comment="bluez-utils-cups is earlier than 0:2.10-2.4" test_ref="oval:org.mitre.oval:tst:139020"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

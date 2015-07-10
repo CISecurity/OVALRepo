@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28980" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0561 -- ruby security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>ruby</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0561.html" ref_id="RHSA-2008:0561"/>
+    <reference source="CESA-2008:0561" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015115.html" ref_id="CESA-2008:0561-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2376" ref_id="CVE-2008-2376"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2662" ref_id="CVE-2008-2662"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2663" ref_id="CVE-2008-2663"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2664" ref_id="CVE-2008-2664"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2725" ref_id="CVE-2008-2725"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2726" ref_id="CVE-2008-2726"/>
+    <description>Updated ruby packages that fix several security issues are now available
+for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Ruby is an interpreted scripting language for quick and easy
+object-oriented programming.
+Multiple integer overflows leading to a heap overflow were discovered in
+the array- and string-handling code used by Ruby. An attacker could use
+these flaws to crash a Ruby application or, possibly, execute arbitrary
+code with the privileges of the Ruby application using untrusted inputs in
+array or string operations. (CVE-2008-2376, CVE-2008-2662, CVE-2008-2663,
+CVE-2008-2725, CVE-2008-2726)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:30">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:09.550-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="ruby-devel is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:138737"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139026"/>
+        <criterion comment="ruby is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:138834"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139292"/>
+        <criterion comment="ruby-irb is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139055"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139140"/>
+        <criterion comment="ruby-rdoc is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139214"/>
+        <criterion comment="ruby-ri is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139261"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.5-5.el5_2.3" test_ref="oval:org.mitre.oval:tst:139269"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="irb is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:138487"/>
+        <criterion comment="ruby is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:139447"/>
+        <criterion comment="ruby-devel is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:138908"/>
+        <criterion comment="ruby-docs is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:138893"/>
+        <criterion comment="ruby-libs is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:139374"/>
+        <criterion comment="ruby-mode is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:138779"/>
+        <criterion comment="ruby-tcltk is earlier than 0:1.8.1-7.el4_6.1" test_ref="oval:org.mitre.oval:tst:139228"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

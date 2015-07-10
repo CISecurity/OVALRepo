@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5641" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>A Security Vulnerability With the Solaris Crypto Driver May Cause a System Panic</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0838" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0838"/>
+    <description>The crypto pseudo device driver in Sun Solaris 10, and OpenSolaris snv_88 through snv_102, does not properly free memory, which allows local users to cause a denial of service (panic) via unspecified vectors, related to the vmem_hash_delete function.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-03-10T13:09:16.000-04:00">
+          <contributor organization="Hewlett-Packard">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2009-03-13T20:24:03.298-04:00">DRAFT</status_change>
+        <status_change date="2009-03-30T04:00:18.937-04:00">INTERIM</status_change>
+        <status_change date="2009-04-20T04:00:16.154-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 254088">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion negate="true" comment="Patch 139498-04 or later installed" test_ref="oval:org.mitre.oval:tst:9626"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 254088">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion negate="true" comment="Patch 139499-04 or later installed" test_ref="oval:org.mitre.oval:tst:9460"/>
+    </criteria>
+  </criteria>
+</definition>

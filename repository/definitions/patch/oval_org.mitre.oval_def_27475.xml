@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27475" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2012-0676 -- kvm security and bug fix update (moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0676.html" ref_id="ELSA-2012-0676"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1601" ref_id="CVE-2012-1601"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2121" ref_id="CVE-2012-2121"/>
+    <description>[kvm-83-249.0.1.el5_8.4]
+- Added kvm-add-oracle-workaround-for-libvirt-bug.patch
+- Added kvm-Introduce-oel-machine-type.patch
+
+[kvm-83-249.el5_8.4]
+- kvm-kernel-KVM-unmap-pages-from-the-iommu-when-slots-are-remove.patch [bz#814151]
+- CVE: CVE-2012-2121
+- Resolves: bz#814151
+  (CVE-2012-2121 kvm: device assignment page leak [rhel-5.8])
+
+[kvm-83-249.el5_8.3]
+- kvm-fix-l1_map-buffer-overflow.patch [bz#816207]
+- Resolves: bz#816207
+  (qemu-kvm segfault in tb_invalidate_phys_page_range())
+
+[kvm-83-249.el5_8.2]
+- kvm-kernel-KVM-Ensure-all-vcpus-are-consistent-with-in-kernel-i.patch [bz#808205]
+- Resolves: bz#808205
+  (CVE-2012-1601 kernel: kvm: irqchip_in_kernel() and vcpu->arch.apic inconsistency [rhel-5.8.z])
+
+[kvm-83-249.el5_8.1]
+- kvm-posix-aio-compat-fix-thread-accounting-leak.patch [bz#802429]
+- Resolves: bz#802429
+  ([RHEL5.8 Snapshot2]RHEL5.8 KVMGuest hung during Guest OS booting up)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:25:11">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:27:03.008-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:04:40.273-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:01.331-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T18:55:28.519-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T18:55:28.519-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="kvm is earlier than 0:83-249.0.1.el5_8.4" test_ref="oval:org.mitre.oval:tst:132088"/>
+      <criterion comment="kmod-kvm is earlier than 0:83-249.0.1.el5_8.4" test_ref="oval:org.mitre.oval:tst:132225"/>
+      <criterion comment="kmod-kvm-debug is earlier than 0:83-249.0.1.el5_8.4" test_ref="oval:org.mitre.oval:tst:132172"/>
+      <criterion comment="kvm-qemu-img is earlier than 0:83-249.0.1.el5_8.4" test_ref="oval:org.mitre.oval:tst:132042"/>
+      <criterion comment="kvm-tools is earlier than 0:83-249.0.1.el5_8.4" test_ref="oval:org.mitre.oval:tst:132030"/>
+    </criteria>
+  </criteria>
+</definition>

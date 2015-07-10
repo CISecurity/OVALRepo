@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28262" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2390-1 -- Pidgin vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.10</platform>
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <product>pidgin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2390-1/" ref_id="USN-2390-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3694" ref_id="CVE-2014-3694"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3695" ref_id="CVE-2014-3695"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3696" ref_id="CVE-2014-3696"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3698" ref_id="CVE-2014-3698"/>
+    <description><![CDATA[Jacob Appelbaum and an anonymous person discovered that Pidgin incorrectly
+handled certificate validation. A remote attacker could exploit this to
+perform a man in the middle attack to view sensitive information or alter
+encrypted communications. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3694">CVE-2014-3694</a>)
+
+Yves Younan and Richard Johnson discovered that Pidgin incorrectly handled
+certain malformed MXit emoticons. A malicious remote server or a man in the
+middle could use this issue to cause Pidgin to crash, resulting in a denial
+of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3695">CVE-2014-3695</a>)
+
+Yves Younan and Richard Johnson discovered that Pidgin incorrectly handled
+certain malformed Groupwise messages. A malicious remote server or a man in
+the middle could use this issue to cause Pidgin to crash, resulting in a
+denial of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3696">CVE-2014-3696</a>)
+
+Thijs Alkemade and Paul Aurich discovered that Pidgin incorrectly handled
+memory when processing XMPP messages. A malicious remote server or user
+could use this issue to cause Pidgin to disclosure arbitrary memory,
+resulting in an information leak. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3698">CVE-2014-3698</a>)]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-14T09:52:24">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-17T18:43:58.070-05:00">DRAFT</status_change>
+        <status_change date="2014-12-08T04:01:01.041-05:00">INTERIM</status_change>
+        <status_change date="2014-12-29T04:00:40.449-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:28262 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-20T10:53:17.478-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:32.370-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 14.10 release section">
+      <extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="pidgin is earlier than 1:2.10.9-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:135572"/>
+        <criterion comment="libpurple0 is earlier than 1:2.10.9-0ubuntu7.1" test_ref="oval:org.mitre.oval:tst:135289"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 14.04 release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="pidgin is earlier than 1:2.10.9-0ubuntu3.2" test_ref="oval:org.mitre.oval:tst:135390"/>
+        <criterion comment="libpurple0 is earlier than 1:2.10.9-0ubuntu3.2" test_ref="oval:org.mitre.oval:tst:135252"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="pidgin is earlier than 1:2.10.3-0ubuntu1.6" test_ref="oval:org.mitre.oval:tst:135412"/>
+        <criterion comment="libpurple0 is earlier than 1:2.10.3-0ubuntu1.6" test_ref="oval:org.mitre.oval:tst:135440"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

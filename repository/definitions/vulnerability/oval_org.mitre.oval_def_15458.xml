@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15458" version="9" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>MSXML XSLT Vulnerability - MS13-002</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Expression Web</product>
+      <product>Microsoft Office 2003</product>
+      <product>Microsoft Office 2007</product>
+      <product>Microsoft Office Compatibility Pack</product>
+      <product>Microsoft Groove Server 2007</product>
+      <product>Microsoft SharePoint Server 2007</product>
+      <product>Microsoft Word Viewer</product>
+      <product>Microsoft XML Core Services 4.0</product>
+      <product>Microsoft XML Core Services 5.0</product>
+      <product>Microsoft XML Core Services 6.0</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-0007" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0007"/>
+    <description>Microsoft XML Core Services (aka MSXML) 4.0, 5.0, and 6.0 does not properly parse XML content, which allows remote attackers to execute arbitrary code via a crafted web page, aka "MSXML XSLT Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-01-09T15:58:28">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-01-15T13:52:57.591-05:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:19819 - MS Bulletin updates to add support for Windows 8 and Windows Server 2012." date="2013-01-25T15:26:00.759-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2013-02-11T04:01:20.510-05:00">INTERIM</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15458 - Corrected platform 'Microsoft Windows Server Vista' to 'Microsoft Windows Vista'" date="2013-02-25T14:59:00.526-05:00">
+          <contributor organization="SecPod Technologies">Pradeep R B</contributor>
+        </modified>
+        <status_change date="2013-03-18T04:00:04.848-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15458 - MS13-002 Update" date="2013-05-21T12:28:00.438-04:00">
+          <contributor organization="SecPod Technologies">Bhavya K</contributor>
+        </modified>
+        <status_change date="2013-05-21T12:29:18.951-04:00">INTERIM</status_change>
+        <status_change date="2013-06-10T04:00:29.721-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15458 - extended definitions of OS are without SP checks" date="2014-07-28T17:52:00.359-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:54:20.451-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:14.746-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for XML 5.0 fix">
+      <criteria operator="OR" comment="Check for vulnerable application">
+        <extend_definition comment="Microsoft Office 2003 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15626"/>
+        <extend_definition comment="Microsoft Office 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15607"/>
+        <extend_definition comment="Microsoft Office 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15704"/>
+        <extend_definition comment="Microsoft Office SharePoint Server 2007 SP2 is installed" definition_ref="oval:org.mitre.oval:def:15502"/>
+        <extend_definition comment="Microsoft Office SharePoint Server 2007 SP3 is installed" definition_ref="oval:org.mitre.oval:def:15537"/>
+        <extend_definition comment="Microsoft Expression Web SP1 is installed" definition_ref="oval:org.mitre.oval:def:15420"/>
+        <extend_definition comment="Microsoft Expression Web 2 is installed" definition_ref="oval:org.mitre.oval:def:15694"/>
+        <extend_definition comment="Microsoft Office Compatibility Pack SP2 is installed" definition_ref="oval:org.mitre.oval:def:15640"/>
+        <extend_definition comment="Microsoft Office Compatibility Pack SP3 is installed" definition_ref="oval:org.mitre.oval:def:15035"/>
+        <extend_definition comment="Microsoft Word Viewer is installed" definition_ref="oval:org.mitre.oval:def:737"/>
+        <extend_definition comment="Microsoft Groove Server 2007 Service Pack 2 is installed" definition_ref="oval:org.mitre.oval:def:16135"/>
+        <extend_definition comment="Microsoft Groove Server 2007 Service Pack 3 is installed" definition_ref="oval:org.mitre.oval:def:16203"/>
+      </criteria>
+      <extend_definition comment="Microsoft XML Core Services 5 is installed" definition_ref="oval:org.mitre.oval:def:493"/>
+      <criterion comment="Check if the version of msxml5.dll is less than 5.20.1099.0" test_ref="oval:org.mitre.oval:tst:79809"/>
+    </criteria>
+    <criteria operator="AND" comment="win 8/server 2012/version">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows 8 is installed" definition_ref="oval:org.mitre.oval:def:15732"/>
+        <extend_definition comment="Microsoft Windows Server 2012 is installed" definition_ref="oval:org.mitre.oval:def:16359"/>
+      </criteria>
+      <criteria operator="OR" comment="msxml 4.0/6.0">
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criteria operator="OR" comment="GDR.LDR">
+            <criterion comment="Check if the version of msxml6.dll is less than 6.30.9200.16447" test_ref="oval:org.mitre.oval:tst:80589"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if the version of msxml6.dll is less than 6.30.9200.20551" test_ref="oval:org.mitre.oval:tst:80765"/>
+              <criterion comment="Check if the version of msxml6.dll is greater than or equal to 6.30.9200.20000" test_ref="oval:org.mitre.oval:tst:80441"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win 7/server 2008 R2/version">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows 7 is installed" definition_ref="oval:org.mitre.oval:def:12541"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+      </criteria>
+      <criteria operator="OR" comment="msxml 4.0/6.0">
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criteria operator="OR" comment="GDR/LDR">
+            <criterion comment="Check if the version of msxml6.dll is less than 6.30.7600.17157" test_ref="oval:org.mitre.oval:tst:80630"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if the version of msxml6.dll is less than 6.30.7600.21360" test_ref="oval:org.mitre.oval:tst:80343"/>
+              <criterion comment="Check if version of Msxml6.dll is greater than or equal to 6.30.7600.20000" test_ref="oval:org.mitre.oval:tst:79062"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win 7/server 2008 R2/version">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        <extend_definition comment="Microsoft Windows Server 2008 R2 Itanium-Based Edition is installed" definition_ref="oval:org.mitre.oval:def:5954"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      </criteria>
+      <criteria operator="OR" comment="msxml 4.0/6.0/version">
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criteria operator="OR" comment="GDR/LDR">
+            <criterion comment="Check if the version of msxml6.dll is less than 6.30.7601.17988" test_ref="oval:org.mitre.oval:tst:79807"/>
+            <criteria operator="AND" comment="LDR range">
+              <criterion comment="Check if the version of msxml6.dll is less than 6.30.7601.22149" test_ref="oval:org.mitre.oval:tst:80633"/>
+              <criterion comment="Check if version of Msxml6.dll is greater than or equal to 6.30.7601.22000" test_ref="oval:org.mitre.oval:tst:79900"/>
+            </criteria>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vista /Server 2008/versions">
+      <criteria operator="OR" comment="either os">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (ia-64) is installed" definition_ref="oval:org.mitre.oval:def:5667"/>
+      </criteria>
+      <criteria operator="OR" comment="msxml 6.0/4.0">
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criterion comment="Check if the version of msxml6.dll is less than 6.20.5006.0" test_ref="oval:org.mitre.oval:tst:80297"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win xp/server 2003/version">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criteria operator="OR" comment="msxml 4.0/6.0 version">
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criterion comment="Check if the version of msxml6.dll is less than 6.20.2502.0" test_ref="oval:org.mitre.oval:tst:80659"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="win xp 64 and vulnerable xml version">
+      <criteria operator="OR" comment="msxml 4.0/6.0/version">
+        <criteria operator="AND" comment="msxml 4.0/version">
+          <extend_definition comment="Microsoft XML Core Services 4 is installed" definition_ref="oval:org.mitre.oval:def:1002"/>
+          <criterion comment="Check if the version of msxml4.dll is less than 4.30.2117.0" test_ref="oval:org.mitre.oval:tst:80430"/>
+        </criteria>
+        <criteria operator="AND" comment="msxml 6.0/version">
+          <extend_definition comment="Microsoft XML Core Services 6 is installed" definition_ref="oval:org.mitre.oval:def:454"/>
+          <criterion comment="Check if the version of msxml6.dll is less than 6.20.2016.0" test_ref="oval:org.mitre.oval:tst:80207"/>
+        </criteria>
+      </criteria>
+      <criteria operator="OR" comment="Check for 2k3 and xp 64 bit vuln version">
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) Gold is installed" definition_ref="oval:org.mitre.oval:def:396"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

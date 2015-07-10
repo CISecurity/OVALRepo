@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25230" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014:0595: gnutls security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>gnutls</product>
+    </affected>
+    <reference ref_id="ELSA-2014:0595-00" ref_url="http://linux.oracle.com/errata/ELSA-2014-0595.html" source="VENDOR"/>
+    <reference ref_id="CVE-2014-3466" ref_url="http://linux.oracle.com/cve/CVE-2014-3466.html" source="CVE"/>
+    <description>The GnuTLS library provides support for cryptographic algorithms and for
+protocols such as Transport Layer Security (TLS).
+A flaw was found in the way GnuTLS parsed session IDs from ServerHello
+messages of the TLS/SSL handshake. A malicious server could use this flaw
+to send an excessively long session ID value, which would trigger a buffer
+overflow in a connecting TLS/SSL client application using GnuTLS, causing
+the client application to crash or, possibly, execute arbitrary code.
+(CVE-2014-3466)
+Red Hat would like to thank GnuTLS upstream for reporting this issue.
+Upstream acknowledges Joonas Kuorilehto of Codenomicon as the original
+reporter.
+Users of GnuTLS are advised to upgrade to these updated packages, which
+correct this issue. For the update to take effect, all applications linked
+to the GnuTLS library must be restarted.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-06-25T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Prashant Kumar</contributor>
+        </submitted>
+        <status_change date="2014-07-10T11:45:54.156-04:00">DRAFT</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:25230 - modified Oracle Linux content" date="2014-07-23T14:34:00.918-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-08-11T04:01:00.830-04:00">INTERIM</status_change>
+        <status_change date="2014-09-01T04:03:05.675-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="gnutls is earlier than 0:2.8.5-14.el6_5" test_ref="oval:org.mitre.oval:tst:115348"/>
+      <criterion comment="gnutls-guile is earlier than 0:2.8.5-14.el6_5" test_ref="oval:org.mitre.oval:tst:115200"/>
+      <criterion comment="gnutls-devel is earlier than 0:2.8.5-14.el6_5" test_ref="oval:org.mitre.oval:tst:115408"/>
+      <criterion comment="gnutls-utils is earlier than 0:2.8.5-14.el6_5" test_ref="oval:org.mitre.oval:tst:115489"/>
+    </criteria>
+  </criteria>
+</definition>

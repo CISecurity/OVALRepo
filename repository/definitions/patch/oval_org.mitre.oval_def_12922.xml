@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12922" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-712-1 -- vim vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 7.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 8.10</platform>
+      <product>vim</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-January/000831.html" ref_id="USN-712-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2712" ref_id="CVE-2008-2712"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4101" ref_id="CVE-2008-4101"/>
+    <description>Jan Minar discovered that Vim did not properly sanitize inputs before invoking the execute or system functions inside Vim scripts. If a user were tricked into running Vim scripts with a specially crafted input, an attacker could execute arbitrary code with the privileges of the user invoking the program. Ben Schmidt discovered that Vim did not properly escape characters when performing keyword or tag lookups. If a user were tricked into running specially crafted commands, an attacker could execute arbitrary code with the privileges of the user invoking the program</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:53:33.557-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:01:33.164-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:08.451-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12922 - added CVE references; also made minor updates" date="2014-06-13T16:18:00.749-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:19:39.998-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:01.222-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-doc DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68213"/>
+            <criterion comment="vim-runtime DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68355"/>
+            <criterion comment="vim-gui-common DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68006"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-tcl DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68296"/>
+            <criterion comment="vim-common DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67701"/>
+            <criterion comment="vim-gnome DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68481"/>
+            <criterion comment="vim-ruby DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68236"/>
+            <criterion comment="vim-gtk DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68315"/>
+            <criterion comment="vim DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68013"/>
+            <criterion comment="vim-python DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67533"/>
+            <criterion comment="vim-tiny DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68261"/>
+            <criterion comment="vim-full DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:68478"/>
+            <criterion comment="vim-perl DPKG is earlier than 1:7.1-056+2ubuntu2.1" test_ref="oval:org.mitre.oval:tst:67661"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-tcl DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68093"/>
+            <criterion comment="vim-doc DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68498"/>
+            <criterion comment="vim-runtime DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68259"/>
+            <criterion comment="vim-perl DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68464"/>
+            <criterion comment="vim-ruby DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68272"/>
+            <criterion comment="vim-full DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68488"/>
+            <criterion comment="vim-gui-common DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68313"/>
+            <criterion comment="vim-python DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68073"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-common DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68249"/>
+            <criterion comment="vim-gnome DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68170"/>
+            <criterion comment="vim-gtk DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68448"/>
+            <criterion comment="vim-nox DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:67969"/>
+            <criterion comment="vim-tiny DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68441"/>
+            <criterion comment="vim DPKG is earlier than 1:7.1-138+1ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68224"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-doc DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68291"/>
+            <criterion comment="vim-runtime DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68399"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-tcl DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68148"/>
+            <criterion comment="vim-common DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68192"/>
+            <criterion comment="vim-gnome DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68287"/>
+            <criterion comment="vim-ruby DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68363"/>
+            <criterion comment="vim-gtk DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68074"/>
+            <criterion comment="vim-gui-common DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68266"/>
+            <criterion comment="vim DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68433"/>
+            <criterion comment="vim-python DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68471"/>
+            <criterion comment="vim-tiny DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68463"/>
+            <criterion comment="vim-perl DPKG is earlier than 1:6.4-006+2ubuntu6.2" test_ref="oval:org.mitre.oval:tst:68303"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-tcl DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68334"/>
+            <criterion comment="vim-doc DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68419"/>
+            <criterion comment="vim-runtime DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:67543"/>
+            <criterion comment="vim-perl DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68350"/>
+            <criterion comment="vim-ruby DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68319"/>
+            <criterion comment="vim-full DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:67945"/>
+            <criterion comment="vim-gui-common DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:67861"/>
+            <criterion comment="vim-python DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68144"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="vim-common DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68199"/>
+            <criterion comment="vim-gnome DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68430"/>
+            <criterion comment="vim-gtk DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68245"/>
+            <criterion comment="vim DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68480"/>
+            <criterion comment="vim-tiny DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68024"/>
+            <criterion comment="vim-nox DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68357"/>
+            <criterion comment="vim-dbg DPKG is earlier than 1:7.1.314-3ubuntu3.1" test_ref="oval:org.mitre.oval:tst:68458"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

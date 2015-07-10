@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6923" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1988 qt4-x11 -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>qt4-x11</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-1988" ref_id="DSA-1988"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0945" ref_id="CVE-2009-0945"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1687" ref_id="CVE-2009-1687"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1690" ref_id="CVE-2009-1690"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1698" ref_id="CVE-2009-1698"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1699" ref_id="CVE-2009-1699"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1711" ref_id="CVE-2009-1711"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1712" ref_id="CVE-2009-1712"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1713" ref_id="CVE-2009-1713"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1725" ref_id="CVE-2009-1725"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2700" ref_id="CVE-2009-2700"/>
+    <description>Several vulnerabilities have been discovered in qt4-x11, a cross-platform C++ application framework. The Common Vulnerabilities and Exposures project identifies the following problems: Array index error in the insertItemBefore method in WebKit, as used in qt4-x11, allows remote attackers to execute arbitrary code. The JavaScript garbage collector in WebKit, as used in qt4-x11 does not properly handle allocation failures, which allows remote attackers to execute arbitrary code or cause a denial of service via a crafted HTML document that triggers write access to an "offset of a NULL pointer. Use-after-free vulnerability in WebKit, as used in qt4-x11, allows remote attackers to execute arbitrary code or cause a denial of service by setting an unspecified property of an HTML tag that causes child elements to be freed and later accessed when an HTML error occurs. WebKit in qt4-x11 does not initialise a pointer during handling of a Cascading Style Sheets attr function call with a large numerical argument, which allows remote attackers to execute arbitrary code or cause a denial of service via a crafted HTML document. The XSL stylesheet implementation in WebKit, as used in qt4-x11 does not properly handle XML external entities, which allows remote attackers to read arbitrary files via a crafted DTD. WebKit in qt4-x11 does not properly initialise memory for Attr DOM objects, which allows remote attackers to execute arbitrary code or cause a denial of service via a crafted HTML document. WebKit in qt4-x11 does not prevent remote loading of local Java applets, which allows remote attackers to execute arbitrary code, gain privileges, or obtain sensitive information via an APPLET or OBJECT element. The XSLT functionality in WebKit, as used in qt4-x11 does not properly implement the document function, which allows remote attackers to read arbitrary local files and files from different security zones. WebKit in qt4-x11 does not properly handle numeric character references, which allows remote attackers to execute arbitrary code or cause a denial of service via a crafted HTML document. qt4-x11 does not properly handle a "\0" character in a domain name in the Subject Alternative Name field of an X.509 certificate, which allows man-in-the-middle attackers to spoof arbitrary SSL servers via a crafted certificate issued by a legitimate Certification Authority. The oldstable distribution is not affected by these problems.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:05:28-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:28:09.478-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:26.134-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:10.173-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6923 - Debian Patch Update" date="2014-06-06T16:49:00.366-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:51:25.982-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:58.533-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="qt4-doc is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25809"/>
+          <criterion comment="qt4-doc-html is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25899"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="libqtgui4 is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25955"/>
+          <criterion comment="qt4-dev-tools is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25778"/>
+          <criterion comment="libqt4-designer is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25957"/>
+          <criterion comment="libqt4-core is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25875"/>
+          <criterion comment="libqt4-webkit is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25436"/>
+          <criterion comment="libqt4-sql-sqlite2 is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25883"/>
+          <criterion comment="libqt4-svg is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25864"/>
+          <criterion comment="libqtcore4 is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25930"/>
+          <criterion comment="qt4-designer is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25845"/>
+          <criterion comment="qt4-demos is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25895"/>
+          <criterion comment="libqt4-gui is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25680"/>
+          <criterion comment="libqt4-help is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25819"/>
+          <criterion comment="libqt4-dbus is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25683"/>
+          <criterion comment="libqt4-sql-odbc is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25954"/>
+          <criterion comment="libqt4-script is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25688"/>
+          <criterion comment="libqt4-xml is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25756"/>
+          <criterion comment="libqt4-network is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25672"/>
+          <criterion comment="libqt4-opengl is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25963"/>
+          <criterion comment="libqt4-assistant is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25682"/>
+          <criterion comment="libqt4-dev is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25671"/>
+          <criterion comment="qt4-qmake is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25652"/>
+          <criterion comment="libqt4-xmlpatterns-dbg is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:24995"/>
+          <criterion comment="libqt4-qt3support is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25852"/>
+          <criterion comment="libqt4-sql-mysql is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25848"/>
+          <criterion comment="libqt4-test is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25768"/>
+          <criterion comment="libqt4-opengl-dev is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25050"/>
+          <criterion comment="libqt4-webkit-dbg is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:26022"/>
+          <criterion comment="libqt4-sql-sqlite is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25822"/>
+          <criterion comment="libqt4-sql is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25927"/>
+          <criterion comment="libqt4-xmlpatterns is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25458"/>
+          <criterion comment="libqt4-dbg is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25995"/>
+          <criterion comment="qt4-qtconfig is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25528"/>
+          <criterion comment="libqt4-sql-psql is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:26036"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+        </criteria>
+        <criterion comment="libqt4-sql-ibase is earlier than 4.4.3-1+lenny1" test_ref="oval:org.mitre.oval:tst:25865"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

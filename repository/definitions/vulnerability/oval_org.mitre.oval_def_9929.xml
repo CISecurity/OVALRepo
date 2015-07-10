@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9929" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Buffer overflow in the X render (Xrender) extension in X.org X server 6.8.0 up to allows attackers to cause a denial of service (crash), as demonstrated by the (1) XRenderCompositeTriStrip and (2) XRenderCompositeTriFan requests in the rendertest from XCB xcb/xcb-demo, which leads to an incorrect memory allocation due to a typo in an expression that uses a "" instead of a "*" operator. NOTE: the subject line of the original announcement used an incorrect CVE number for this issue.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2006-1526" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1526"/>
+    <description>Buffer overflow in the X render (Xrender) extension in X.org X server 6.8.0 up to allows attackers to cause a denial of service (crash), as demonstrated by the (1) XRenderCompositeTriStrip and (2) XRenderCompositeTriFan requests in the rendertest from XCB xcb/xcb-demo, which leads to an incorrect memory allocation due to a typo in an expression that uses a "&amp;" instead of a "*" operator. NOTE: the subject line of the original announcement used an incorrect CVE number for this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:21:13.621-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:15:00.756-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:16:08.776-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9929 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:36:00.135-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:41:16.983-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:23:24.304-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+      <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="xorg-x11-doc is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:31792"/>
+      <criterion comment="xorg-x11-libs is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32571"/>
+      <criterion comment="xorg-x11-xauth is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32223"/>
+      <criterion comment="xorg-x11-Mesa-libGLU is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32554"/>
+      <criterion comment="xorg-x11-twm is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32521"/>
+      <criterion comment="xorg-x11-Mesa-libGL is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32568"/>
+      <criterion comment="xorg-x11-Xdmx is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32369"/>
+      <criterion comment="xorg-x11-xfs is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:31728"/>
+      <criterion comment="xorg-x11-deprecated-libs-devel is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32424"/>
+      <criterion comment="xorg-x11-devel is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32510"/>
+      <criterion comment="xorg-x11-Xvfb is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32532"/>
+      <criterion comment="xorg-x11-deprecated-libs is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32174"/>
+      <criterion comment="xorg-x11-sdk is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32670"/>
+      <criterion comment="xorg-x11-xdm is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32705"/>
+      <criterion comment="xorg-x11-Xnest is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32274"/>
+      <criterion comment="xorg-x11 is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32683"/>
+      <criterion comment="xorg-x11-font-utils is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32330"/>
+      <criterion comment="xorg-x11-tools is earlier than 0:6.8.2-1.EL.13.25.1" test_ref="oval:org.mitre.oval:tst:32692"/>
+    </criteria>
+  </criteria>
+</definition>

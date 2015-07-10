@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8252" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1559 phpgedview -- insufficient input sanitising</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>phpgedview</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2008/dsa-1559" ref_id="DSA-1559"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5051" ref_id="CVE-2007-5051"/>
+    <description>It was discovered that phpGedView, an application to provide online access to genealogical data, performed insufficient input sanitising on some parameters, making it vulnerable to cross site scripting.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:10-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:58:41.197-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:15.198-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:03:56.568-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8252 - Debian Patch Update" date="2014-06-06T16:28:00.025-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:30:30.420-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:27.190-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="phpgedview-places is earlier than 4.0.2.dfsg-3" test_ref="oval:org.mitre.oval:tst:19081"/>
+      <criterion comment="phpgedview-languages is earlier than 4.0.2.dfsg-3" test_ref="oval:org.mitre.oval:tst:19179"/>
+      <criterion comment="phpgedview is earlier than 4.0.2.dfsg-3" test_ref="oval:org.mitre.oval:tst:18960"/>
+      <criterion comment="phpgedview-themes is earlier than 4.0.2.dfsg-3" test_ref="oval:org.mitre.oval:tst:19195"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6907" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware ESX,Service Console update for cpio and tar.</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 3.5</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0624" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0624"/>
+    <description>Heap-based buffer overflow in the rmt_read__ function in lib/rtapelib.c in the rmt client functionality in GNU tar before 1.23 and GNU cpio before 2.11 allows remote rmt servers to cause a denial of service (memory corruption) or possibly execute arbitrary code by sending more data than was requested, related to archive filenames that contain a : (colon) character.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-10-01T16:37:39.000-05:00">
+          <contributor organization="Hewlett-Packard">Varun</contributor>
+        </submitted>
+        <status_change date="2010-10-05T14:11:07.519-04:00">DRAFT</status_change>
+        <status_change date="2010-10-25T04:00:21.397-04:00">INTERIM</status_change>
+        <status_change date="2010-11-15T04:00:35.808-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6907 - Replaced platform names &quot;VMWare ESX Server 4&quot; with &quot;VMWare ESX Server 4.0&quot; and 3.5.0 to 3.5" date="2014-01-03T16:41:00.136-05:00">
+          <contributor organization="The MITRE Corporation">Chris Coffin</contributor>
+        </modified>
+        <status_change date="2014-01-03T16:45:30.233-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:01:30.335-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 3.5.0 is installed" definition_ref="oval:org.mitre.oval:def:5887"/>
+      <criteria operator="OR" comment="Not to be vulnerable, all the patches should be installed.">
+        <criterion comment="Patch ESX350-201008405-SG is not installed." test_ref="oval:org.mitre.oval:tst:11681"/>
+        <criterion comment="Patch ESX350-201008407-SG is not installed." test_ref="oval:org.mitre.oval:tst:11182"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criteria operator="OR" comment="Not to be vulnerable, all the patches should be installed.">
+        <criterion comment="Patch ESX400-201009402-SG is not installed." test_ref="oval:org.mitre.oval:tst:11270"/>
+        <criterion comment="Patch ESX400-201009406-SG is not installed." test_ref="oval:org.mitre.oval:tst:11105"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

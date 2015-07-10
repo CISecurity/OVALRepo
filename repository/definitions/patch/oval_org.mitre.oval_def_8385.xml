@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8385" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1734 opensc -- programming error</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>opensc</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1734" ref_id="DSA-1734"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0368" ref_id="CVE-2009-0368"/>
+    <description>B.Badrignans discovered that OpenSC, a set of smart card utilities, could store private data on a smart card without proper access restrictions. Only blank cards initialised with OpenSC are affected by this problem. This update only improves creating new private data objects, but cards already initialised with such private data objects need to be modified to repair the access control conditions on such cards. Instructions for a variety of situations can be found at the OpenSC web site: http://www.opensc-project.org/security.html The old stable distribution (etch) is not affected by this problem.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:11-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:59:32.813-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:05:32.248-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:04:14.910-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8385 - Debian Patch Update" date="2014-06-06T16:28:00.025-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:30:39.150-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:10:37.212-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="libopensc2 is earlier than 0.11.4-5+lenny1" test_ref="oval:org.mitre.oval:tst:19122"/>
+      <criterion comment="libopensc2-dev is earlier than 0.11.4-5+lenny1" test_ref="oval:org.mitre.oval:tst:19505"/>
+      <criterion comment="opensc is earlier than 0.11.4-5+lenny1" test_ref="oval:org.mitre.oval:tst:19501"/>
+      <criterion comment="mozilla-opensc is earlier than 0.11.4-5+lenny1" test_ref="oval:org.mitre.oval:tst:18934"/>
+      <criterion comment="libopensc2-dbg is earlier than 0.11.4-5+lenny1" test_ref="oval:org.mitre.oval:tst:19635"/>
+    </criteria>
+  </criteria>
+</definition>

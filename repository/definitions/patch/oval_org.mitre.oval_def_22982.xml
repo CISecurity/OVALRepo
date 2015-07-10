@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22982" version="13" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2009:1459: cyrus-imapd security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>cyrus-imapd</product>
+    </affected>
+    <reference ref_id="ELSA-2009:1459-04" ref_url="http://linux.oracle.com/errata/ELSA-2009-1459.html" source="VENDOR"/>
+    <reference ref_id="CVE-2009-2632" ref_url="http://linux.oracle.com/cve/CVE-2009-2632.html" source="CVE"/>
+    <reference ref_id="CVE-2009-3235" ref_url="http://linux.oracle.com/cve/CVE-2009-3235.html" source="CVE"/>
+    <description>Multiple stack-based buffer overflows in the Sieve plugin in Dovecot 1.0 before 1.0.4 and 1.1 before 1.1.7, as derived from Cyrus libsieve, allow context-dependent attackers to cause a denial of service (crash) and possibly execute arbitrary code via a crafted SIEVE script, as demonstrated by forwarding an e-mail message to a large number of recipients, a different vulnerability than CVE-2009-2632.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T09:00:38.395-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:04:03.321-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:03:01.552-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22982 - optimisation of Oracle Linux content" date="2014-05-05T17:55:00.751-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:57:13.708-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:03:04.731-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="cyrus-imapd-perl is earlier than 0:2.3.7-7.el5_4.3" test_ref="oval:org.mitre.oval:tst:102470"/>
+      <criterion comment="cyrus-imapd is earlier than 0:2.3.7-7.el5_4.3" test_ref="oval:org.mitre.oval:tst:103384"/>
+      <criterion comment="cyrus-imapd-utils is earlier than 0:2.3.7-7.el5_4.3" test_ref="oval:org.mitre.oval:tst:103221"/>
+      <criterion comment="cyrus-imapd-devel is earlier than 0:2.3.7-7.el5_4.3" test_ref="oval:org.mitre.oval:tst:103267"/>
+    </criteria>
+  </criteria>
+</definition>

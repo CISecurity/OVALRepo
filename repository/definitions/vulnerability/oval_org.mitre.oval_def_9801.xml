@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9801" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Buffer overflow in the JBIG2Bitmap::JBIG2Bitmap function in JBIG2Stream.cc in Xpdf, as used in products such as gpdf, kpdf, pdftohtml, poppler, teTeX, CUPS, libextractor, and others, allows attackers to modify memory and possibly execute arbitrary code via unknown attack vectors.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0557" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0557"/>
+    <description>Multiple buffer overflows in the st_wavstartread function in wav.c for Sound eXchange (SoX) 12.17.2 through 12.17.4 allow remote attackers to execute arbitrary code via certain WAV file header fields.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:17:03.371-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:14:14.332-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:15:21.331-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:9801 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:04:00.787-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T16:10:11.571-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:22:22.072-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="RHEL3 or CentOS3">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+      <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+    </criteria>
+    <criteria operator="OR" comment="Configuration section">
+      <criterion comment="sox is earlier than 0:12.17.4-4.3" test_ref="oval:org.mitre.oval:tst:30502"/>
+      <criterion comment="sox-devel is earlier than 0:12.17.4-4.3" test_ref="oval:org.mitre.oval:tst:30810"/>
+    </criteria>
+  </criteria>
+</definition>

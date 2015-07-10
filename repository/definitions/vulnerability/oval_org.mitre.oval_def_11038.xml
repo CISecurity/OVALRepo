@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11038" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Memory leak in the ipip6_rcv function in net/ipv6/sit.c in the Linux kernel 2.4 before 2.4.36.5 and 2.6 before 2.6.25.3 allows remote attackers to cause a denial of service (memory consumption) via network traffic to a Simple Internet Transition (SIT) tunnel interface, related to the pskb_may_pull and kfree_skb functions, and management of an skb reference count.</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 3</platform>
+      <platform>CentOS Linux 3</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-2136" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2136"/>
+    <description>Memory leak in the ipip6_rcv function in net/ipv6/sit.c in the Linux kernel 2.4 before 2.4.36.5 and 2.6 before 2.6.25.3 allows remote attackers to cause a denial of service (memory consumption) via network traffic to a Simple Internet Transition (SIT) tunnel interface, related to the pskb_may_pull and kfree_skb functions, and management of an skb reference count.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:30:53.457-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:07:05.002-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:07:39.481-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11038 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T16:53:00.583-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:01:37.260-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:10:58.369-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL3, CentOS3">
+      <criteria operator="OR" comment="RHEL3 or CentOS3">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 3" definition_ref="oval:org.mitre.oval:def:11782"/>
+        <extend_definition comment="CentOS Linux 3.x" definition_ref="oval:org.mitre.oval:def:16651"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="kernel-BOOT is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37931"/>
+        <criterion comment="kernel-unsupported is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37846"/>
+        <criterion comment="kernel-smp-unsupported is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37817"/>
+        <criterion comment="kernel-hugemem-unsupported is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37663"/>
+        <criterion comment="kernel-hugemem is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37799"/>
+        <criterion comment="kernel is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37028"/>
+        <criterion comment="kernel-source is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37885"/>
+        <criterion comment="kernel-doc is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37981"/>
+        <criterion comment="kernel-smp is earlier than 0:2.4.21-58.EL" test_ref="oval:org.mitre.oval:tst:37117"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="kernel-xenU is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37193"/>
+        <criterion comment="kernel-hugemem is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37447"/>
+        <criterion comment="kernel-hugemem-devel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37178"/>
+        <criterion comment="kernel-xenU-devel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37392"/>
+        <criterion comment="kernel-smp-devel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37398"/>
+        <criterion comment="kernel-largesmp-devel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37465"/>
+        <criterion comment="kernel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37240"/>
+        <criterion comment="kernel-devel is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37091"/>
+        <criterion comment="kernel-doc is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37431"/>
+        <criterion comment="kernel-largesmp is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37233"/>
+        <criterion comment="kernel-smp is earlier than 0:2.6.9-67.0.22.EL" test_ref="oval:org.mitre.oval:tst:37493"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="kernel-kdump is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:36537"/>
+        <criterion comment="kernel-debug is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:36954"/>
+        <criterion comment="kernel-xen is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37079"/>
+        <criterion comment="kernel-headers is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:36957"/>
+        <criterion comment="kernel-kdump-devel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37527"/>
+        <criterion comment="kernel-xen-devel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37262"/>
+        <criterion comment="kernel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37410"/>
+        <criterion comment="kernel-PAE-devel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37323"/>
+        <criterion comment="kernel-devel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37508"/>
+        <criterion comment="kernel-PAE is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37153"/>
+        <criterion comment="kernel-debug-devel is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37180"/>
+        <criterion comment="kernel-doc is earlier than 0:2.6.18-92.1.10.el5" test_ref="oval:org.mitre.oval:tst:37188"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

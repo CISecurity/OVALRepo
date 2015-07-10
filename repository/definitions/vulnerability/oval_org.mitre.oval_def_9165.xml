@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:9165" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerabilities in the KSSL Kernel Module May Lead to a System Panic</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-3470" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3470"/>
+    <description>Multiple unspecified vulnerabilities in the KSSL kernel module in Sun Solaris 10, when configured with the KSSL proxy, allow remote attackers to cause a denial of service (kernel panic) via unspecified vectors related to "memory buffers" of Secure Socket Layer (SSL) records.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-03T10:36:57.000-04:00">
+          <contributor organization="Opsware, Inc.">Todd Dolinsky</contributor>
+        </submitted>
+        <status_change date="2007-08-03T16:51:06.630-04:00">DRAFT</status_change>
+        <status_change date="2007-08-20T08:04:46.053-04:00">INTERIM</status_change>
+        <status_change date="2007-09-06T09:13:39.334-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Software Section">
+      <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102918" negate="false">
+        <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+        <criterion comment="Patch 125100-10 or later installed" test_ref="oval:org.mitre.oval:tst:4665" negate="true"/>
+        <criterion comment="Patch 121474-01 or later installed" test_ref="oval:org.mitre.oval:tst:4207" negate="false"/>
+      </criteria>
+      <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102918" negate="false">
+        <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+        <criterion comment="Patch 125101-10 or later installed" test_ref="oval:org.mitre.oval:tst:4966" negate="true"/>
+        <criterion comment="Patch 121475-01 or later installed" test_ref="oval:org.mitre.oval:tst:4240" negate="false"/>
+      </criteria>
+    </criteria>
+    <criterion comment="kssl running" negate="false" test_ref="oval:org.mitre.oval:tst:4861"/>
+  </criteria>
+</definition>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13523" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-955-2 -- libpam-opie vulnerability</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <product>libpam-opie</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-June/001108.html" ref_id="USN-955-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1938" ref_id="CVE-2010-1938"/>
+    <description>USN-955-1 fixed vulnerabilities in OPIE. This update provides rebuilt libpam-opie packages against the updated libopie library. Original advisory details: Maksymilian Arciemowicz and Adam Zabrocki discovered that OPIE incorrectly handled long usernames. A remote attacker could exploit this with a crafted username and make applications linked against libopie crash, leading to a denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:20:10.120-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:08:20.309-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:06:35.301-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13523 - added CVE references; also made minor updates" date="2014-06-13T15:50:00.661-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:51:51.666-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:20.906-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criterion comment="libpam-opie DPKG is earlier than 0.21-8build3.1" test_ref="oval:org.mitre.oval:tst:57059"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criterion comment="libpam-opie DPKG is earlier than 0.21-8build1.9.04.1" test_ref="oval:org.mitre.oval:tst:56938"/>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+      </criteria>
+      <criterion comment="libpam-opie DPKG is earlier than 0.21-8build2.1" test_ref="oval:org.mitre.oval:tst:56762"/>
+    </criteria>
+  </criteria>
+</definition>

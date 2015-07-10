@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:18426" version="7" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1989-1 fuse - denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>fuse</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-1989-1" ref_id="DSA-1989-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3297" ref_id="CVE-2009-3297"/>
+    <description>Dan Rosenberg discovered a race condition in FUSE, a Filesystem in USErspace. A local attacker, with access to use FUSE, could unmount arbitrary locations, leading to a denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-08-01T17:12:49">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2013-08-27T11:12:33.981-04:00">DRAFT</status_change>
+        <status_change date="2013-09-16T04:01:15.372-04:00">INTERIM</status_change>
+        <status_change date="2013-10-07T04:10:03.980-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:23735 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2013-12-02T15:31:25.910-05:00">INTERIM</status_change>
+        <status_change date="2013-12-23T04:00:35.044-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:18426 - Debian Patch Update" date="2014-06-06T17:20:00.187-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:22:12.408-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:04:28.587-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criterion comment="fuse DPKG is earlier than 2.5.3-4.4+etch1" test_ref="oval:org.mitre.oval:tst:86536"/>
+    </criteria>
+    <criteria comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criterion comment="fuse DPKG is earlier than 2.7.4-1.1+lenny1" test_ref="oval:org.mitre.oval:tst:86085"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21873" version="81" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:0412: glibc security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>glibc</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:0412-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-0412.html"/>
+    <reference source="CESA" ref_id="CESA-2011:0412"/>
+    <reference source="CVE" ref_id="CVE-2010-0296" ref_url="https://www.redhat.com/security/data/cve/CVE-2010-0296.html"/>
+    <reference source="CVE" ref_id="CVE-2011-0536" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-0536.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1071" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1071.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1095" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1095.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1658" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1658.html"/>
+    <reference source="CVE" ref_id="CVE-2011-1659" ref_url="https://www.redhat.com/security/data/cve/CVE-2011-1659.html"/>
+    <description>Integer overflow in posix/fnmatch.c in the GNU C Library (aka glibc or libc6) 2.13 and earlier allows context-dependent attackers to cause a denial of service (application crash) via a long UTF8 string that is used in an fnmatch call with a crafted pattern argument, a different vulnerability than CVE-2011-1071.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:02.692-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:03:49.095-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:13.966-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="glibc-common is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:97278"/>
+      <criterion comment="glibc-headers is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:96986"/>
+      <criterion comment="glibc-devel is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:97665"/>
+      <criterion comment="glibc is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:97008"/>
+      <criterion comment="nscd is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:96920"/>
+      <criterion comment="glibc-utils is earlier than 0:2.5-58.el5_6.2" test_ref="oval:org.mitre.oval:tst:97720"/>
+    </criteria>
+  </criteria>
+</definition>

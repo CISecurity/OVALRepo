@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28420" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-2021 -- jasper security update (important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <platform>Oracle Linux 7</platform>
+      <product>jasper</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-2021.html" ref_id="ELSA-2014-2021"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8137" ref_id="CVE-2014-8137"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8138" ref_id="CVE-2014-8138"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9029" ref_id="CVE-2014-9029"/>
+    <description>[1.900.1-16.2]
+- CVE-2014-8137 - double-free in in jas_iccattrval_destroy (#1173566)
+- CVE-2014-8138 - heap overflow in jp2_decode (#1173566)
+
+[1.900.1-16.1]
+- CVE-2014-9029 - incorrect component number check in COC, RGN and QCC
+                  marker segment decoders (#1171208)
+
+[1.900.1-16]
+- CERT VU#887409: heap buffer overflow flaws lead to arbitrary code execution
+  (#749150)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-22T10:48:34">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-01-14T20:12:28.273-05:00">DRAFT</status_change>
+        <status_change date="2015-02-02T04:00:22.347-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:20.335-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="jasper is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:136509"/>
+        <criterion comment="jasper-devel is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:136818"/>
+        <criterion comment="jasper-libs is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:136936"/>
+        <criterion comment="jasper-utils is earlier than 0:1.900.1-16.el6_6.2" test_ref="oval:org.mitre.oval:tst:136894"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 7 release section">
+      <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="jasper is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:136403"/>
+        <criterion comment="jasper-devel is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:136843"/>
+        <criterion comment="jasper-libs is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:136691"/>
+        <criterion comment="jasper-utils is earlier than 0:1.900.1-26.el7_0.2" test_ref="oval:org.mitre.oval:tst:136769"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

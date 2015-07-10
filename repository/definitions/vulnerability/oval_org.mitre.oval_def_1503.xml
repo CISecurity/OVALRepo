@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1503" version="2" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows 2000 HtmlHelp Heap Overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>HTML Help Facility</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0201" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0201"/>
+    <description>Heap-based buffer overflow in the HtmlHelp program (hh.exe) in HTML Help for Microsoft Windows 98, Me, NT 4.0, 2000, XP, and Server 2003 allows remote attackers to execute arbitrary commands via a .CHM file with a large length field, a different vulnerability than CVE-2003-1041.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-07-14T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <status_change date="2004-08-04T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2004-08-25T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Corrected obj:964. Changed registry key name from a pattern match of .* to nil." date="2007-02-12T13:46:00.470-05:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+        <status_change date="2007-02-12T13:47:37.659-05:00">INTERIM</status_change>
+        <status_change date="2007-03-21T16:16:51.623-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Windows 2000 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:3085"/>
+      <criterion comment="the version of itss.dll is less than 5.2.3790.185" negate="false" test_ref="oval:org.mitre.oval:tst:1406"/>
+      <criterion comment="the patch kb840315 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:1405"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="HTML Help is registered" negate="true" test_ref="oval:org.mitre.oval:tst:1404"/>
+    </criteria>
+  </criteria>
+</definition>

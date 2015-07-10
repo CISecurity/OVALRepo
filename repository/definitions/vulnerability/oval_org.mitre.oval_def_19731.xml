@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:19731" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Null Cipher buffer overflow</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Mozilla Firefox</product>
+      <product>Mozilla Thunderbird</product>
+      <product>Mozilla Seamonkey</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-5605" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5605"/>
+    <description>Mozilla Network Security Services (NSS) 3.14 before 3.14.5 and 3.15 before 3.15.3 allows remote attackers to cause a denial of service or possibly have unspecified other impact via invalid handshake packets.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-02T13:00:00">
+          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+        </submitted>
+        <status_change date="2013-12-02T15:28:00.821-05:00">DRAFT</status_change>
+        <status_change date="2013-12-23T04:01:16.830-05:00">INTERIM</status_change>
+        <status_change date="2014-01-13T04:00:37.312-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:19731 - replaced all links to oval:org.mitre.oval:def:6504" date="2014-06-25T16:25:00.999-04:00">
+          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+        </modified>
+        <status_change date="2014-06-25T16:35:28.525-04:00">INTERIM</status_change>
+        <status_change date="2014-07-14T04:01:18.775-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for vulnerable Firefox">
+      <extend_definition comment="Mozilla Firefox is installed" definition_ref="oval:org.mitre.oval:def:6562"/>
+      <criteria operator="OR">
+        <criterion comment="Mozilla Network Security Services 3.14 before 3.14.5 in Mozilla Firefox" test_ref="oval:org.mitre.oval:tst:88119"/>
+        <criterion comment="Mozilla Network Security Services 3.15 before 3.15.3 in Mozilla Firefox" test_ref="oval:org.mitre.oval:tst:88203"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Seamonkey">
+      <extend_definition comment="Mozilla Seamonkey is installed" definition_ref="oval:org.mitre.oval:def:6372"/>
+      <criteria operator="OR">
+        <criterion comment="Mozilla Network Security Services 3.14 before 3.14.5 in Mozilla Seamonkey" test_ref="oval:org.mitre.oval:tst:88010"/>
+        <criterion comment="Mozilla Network Security Services 3.15 before 3.15.3 in Mozilla Seamonkey" test_ref="oval:org.mitre.oval:tst:87819"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Thunderbird">
+      <extend_definition comment="Mozilla Thunderbird Mainline release is installed" definition_ref="oval:org.mitre.oval:def:22093"/>
+      <criteria operator="OR">
+        <criterion comment="Mozilla Network Security Services 3.14 before 3.14.5 in Mozilla Thunderbird" test_ref="oval:org.mitre.oval:tst:87799"/>
+        <criterion comment="Mozilla Network Security Services 3.15 before 3.15.3 in Mozilla Thunderbird" test_ref="oval:org.mitre.oval:tst:88211"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

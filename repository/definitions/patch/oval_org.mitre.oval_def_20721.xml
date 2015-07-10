@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20721" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2013:0663: sssd security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>sssd</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2013:0663-01" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0663.html"/>
+    <reference source="CESA" ref_id="CESA-2013:0663"/>
+    <reference source="CVE" ref_id="CVE-2013-0287" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-0287.html"/>
+    <description>The Simple Access Provider in System Security Services Daemon (SSSD) 1.9.0 through 1.9.4, when the Active Directory provider is used, does not properly enforce the simple_deny_groups option, which allows remote authenticated users to bypass intended access restrictions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-09T13:03:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-10T12:56:35.486-05:00">DRAFT</status_change>
+        <status_change date="2014-01-27T04:00:22.120-05:00">INTERIM</status_change>
+        <status_change date="2014-02-17T04:00:28.967-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="sssd-client is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90088"/>
+      <criterion comment="libipa_hbac-python is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:91001"/>
+      <criterion comment="libsss_sudo is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90980"/>
+      <criterion comment="sssd is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90928"/>
+      <criterion comment="libipa_hbac is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90505"/>
+      <criterion comment="libsss_idmap is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90809"/>
+      <criterion comment="libsss_autofs is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90890"/>
+      <criterion comment="libipa_hbac-devel is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90966"/>
+      <criterion comment="sssd-tools is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90557"/>
+      <criterion comment="libsss_idmap-devel is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90864"/>
+      <criterion comment="libsss_sudo-devel is earlier than 0:1.9.2-82.4.el6_4" test_ref="oval:org.mitre.oval:tst:90637"/>
+    </criteria>
+  </criteria>
+</definition>

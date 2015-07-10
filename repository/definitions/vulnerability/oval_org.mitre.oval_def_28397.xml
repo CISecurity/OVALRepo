@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28397" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Windows Hyper-V DoS vulnerability - CVE-2015-1647 (MS15-042)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft Hyper-V Server</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2015-1647" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1647"/>
+    <description>Virtual Machine Manager (VMM) in Hyper-V in Microsoft Windows 8.1 and Windows Server 2012 R2 allows guest OS users to cause a denial of service (VMM functionality loss) via a crafted application, aka "Windows Hyper-V DoS Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-04-17T14:55:27">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2015-04-23T10:29:08.196-04:00">DRAFT</status_change>
+        <status_change date="2015-05-11T04:00:13.155-04:00">INTERIM</status_change>
+        <status_change date="2015-06-01T04:00:16.805-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="OR" comment="Either OS">
+      <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956"/>
+      <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858"/>
+    </criteria>
+    <extend_definition comment="Microsoft Windows Hyper-V is installed" definition_ref="oval:org.mitre.oval:def:19210"/>
+    <criterion comment="Check if the version of VMMS.exe is less than 6.3.9600.17729" test_ref="oval:org.mitre.oval:tst:138045"/>
+  </criteria>
+</definition>

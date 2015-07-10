@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27982" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2010-0181 -- brltty security and bug fix update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 5</platform>
+      <product>brltty</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2010-0181.html" ref_id="ELSA-2010-0181"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3279" ref_id="CVE-2008-3279"/>
+    <description>[3.7.2-4]
+- use rpm macros more consistently
+- add manual page for brltty.conf
+- add more documentation
+- install the default brltty-pm.conf to docdir only
+- Resolves: #530554
+- silence the postinstall scriptlet
+- Resolves: #529163
+
+[3.7.2-3]
+- escape rpm macros in the rpm change log
+- remove bogus rpath from libbrlttybba.so (CVE-2008-3279, #457942)
+- add dependencies to bind the subpackages from one build together
+
+[3.7.2-2]
+- fix building with newer kernel-headers (#456247)
+- do not strip debug info during install (#500545)
+- Resolves: rhbz #456247 #500545</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:26:12">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T19:05:52.834-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:07:02.492-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:03:20.407-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T20:47:53.808-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T20:47:53.808-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="brltty is earlier than 0:3.7.2-4.el5" test_ref="oval:org.mitre.oval:tst:135233"/>
+      <criterion comment="brlapi is earlier than 0:0.4.1-4.el5" test_ref="oval:org.mitre.oval:tst:134622"/>
+      <criterion comment="brlapi-devel is earlier than 0:0.4.1-4.el5" test_ref="oval:org.mitre.oval:tst:135013"/>
+    </criteria>
+  </criteria>
+</definition>

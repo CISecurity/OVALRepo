@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25088" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2013:1497-1 -- Security update for Mozilla Firefox</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>Mozilla Firefox</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131497-1.html" ref_id="SUSE-SU-2013:1497-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1737" ref_id="CVE-2013-1737"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1735" ref_id="CVE-2013-1735"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1736" ref_id="CVE-2013-1736"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1732" ref_id="CVE-2013-1732"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1730" ref_id="CVE-2013-1730"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1726" ref_id="CVE-2013-1726"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1725" ref_id="CVE-2013-1725"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1722" ref_id="CVE-2013-1722"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1718" ref_id="CVE-2013-1718"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1705" ref_id="CVE-2013-1705"/>
+    <description>This update to Firefox 17.0.9esr (bnc#840485) addresses:
+
+    * MFSA 2013-91 User-defined properties on DOM proxies
+get the wrong "this" object o (CVE-2013-1737)
+    * MFSA 2013-90 Memory corruption involving scrolling o
+use-after-free in mozilla::layout::ScrollbarActivity
+(CVE-2013-1735) o Memory corruption in
+nsGfxScrollFrameInner::IsLTR() (CVE-2013-1736)
+    * MFSA 2013-89 Buffer overflow with multi-column,
+lists, and floats o buffer overflow at
+nsFloatManager::GetFlowArea() with multicol, list, floats
+(CVE-2013-1732)
+    * MFSA 2013-88 compartment mismatch re-attaching
+XBL-backed nodes o compartment mismatch in
+nsXBLBinding::DoInitJSClass (CVE-2013-1730)
+    * MFSA 2013-83 Mozilla Updater does not lock MAR file
+after signature verification o MAR signature bypass in
+Updater could lead to downgrade (CVE-2013-1726)
+    * MFSA 2013-82 Calling scope for new Javascript objects
+can lead to memory corruption o ABORT: bad scope for new
+JSObjects: ReparentWrapper / document.open (CVE-2013-1725)
+    * MFSA 2013-79 Use-after-free in Animation Manager
+during stylesheet cloning o Heap-use-after-free in
+nsAnimationManager::BuildAnimations (CVE-2013-1722)
+    * MFSA 2013-76 Miscellaneous memory safety hazards
+(rv:24.0 / rv:17.0.9) o Memory safety bugs fixed in Firefox
+17.0.9 and Firefox 24.0 (CVE-2013-1718)
+    * MFSA 2013-65 Buffer underflow when generating CRMF
+requests o ASAN heap-buffer-overflow (read 1) in
+cryptojs_interpret_key_gen_type (CVE-2013-1705)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:26:05">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:23:10.432-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:03:11.313-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:00:54.443-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="MozillaFirefox RPM is earlier than 0:17.0.9esr-0.7.1" test_ref="oval:org.mitre.oval:tst:118318"/>
+      <criterion comment="MozillaFirefox-translations RPM is earlier than 0:17.0.9esr-0.7.1" test_ref="oval:org.mitre.oval:tst:118300"/>
+      <criterion comment="MozillaFirefox RPM is earlier than 0:17.0.9esr-0.3.1" test_ref="oval:org.mitre.oval:tst:117694"/>
+      <criterion comment="MozillaFirefox-translations RPM is earlier than 0:17.0.9esr-0.3.1" test_ref="oval:org.mitre.oval:tst:118522"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29133" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0818 -- hplip security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>hplip</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0818.html" ref_id="RHSA-2008:0818"/>
+    <reference source="CESA-2008:0818" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-August/015189.html" ref_id="CESA-2008:0818-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2940" ref_id="CVE-2008-2940"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2941" ref_id="CVE-2008-2941"/>
+    <description>Updated hplip packages that fix various security issues are now available
+for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The hplip (Hewlett-Packard Linux Imaging and Printing) packages provide
+drivers for Hewlett-Packard printers and multifunction peripherals.
+A flaw was discovered in the hplip alert-mailing functionality. A local
+attacker could elevate their privileges by using specially-crafted packets
+to trigger alert mails, which are sent by the root account. (CVE-2008-2940)
+A flaw was discovered in the hpssd message parser. By sending
+specially-crafted packets, a local attacker could cause a denial of
+service, stopping the hpssd process. (CVE-2008-2941)
+Users of hplip should upgrade to these updated packages, which contain
+backported patches to correct these issues.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:50.664-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="hpijs is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:139153"/>
+        <criterion comment="hplip is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:139170"/>
+        <criterion comment="libsane-hpaio is earlier than 0:1.6.7-4.1.el5_2.4" test_ref="oval:org.mitre.oval:tst:139324"/>
+      </criteria>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="postfix is earlier than 0:2.3.3-2.1.el5_2" test_ref="oval:org.mitre.oval:tst:139326"/>
+        <criterion comment="postfix-pflogsumm is earlier than 0:2.3.3-2.1.el5_2" test_ref="oval:org.mitre.oval:tst:138478"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

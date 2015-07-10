@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11139" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>The Math.random function in the JavaScript implementation in Mozilla Firefox 3.5.x before 3.5.10 and 3.6.x before 3.6.4, and SeaMonkey before 2.0.5, uses a random number generator that is seeded only once per browser session, which makes it easier for remote attackers to track a user, or trick a user into acting upon a spoofed pop-up message, by calculating the seed value, related to a "temporary footprint" and an "in-session phishing attack."</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 4</platform>
+      <platform>Oracle Linux 4</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>Oracle Linux 5</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-5913" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5913"/>
+    <description>The Math.random function in the JavaScript implementation in Mozilla Firefox 3.5.x before 3.5.10 and 3.6.x before 3.6.4, and SeaMonkey before 2.0.5, uses a random number generator that is seeded only once per browser session, which makes it easier for remote attackers to track a user, or trick a user into acting upon a spoofed pop-up message, by calculating the seed value, related to a "temporary footprint" and an "in-session phishing attack."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-07-09T03:56:16-04:00">
+          <contributor organization="SCAP.com, LLC">Aharon Chernin</contributor>
+        </submitted>
+        <status_change date="2010-07-28T14:32:05.090-04:00">DRAFT</status_change>
+        <status_change date="2010-08-16T04:07:43.663-04:00">INTERIM</status_change>
+        <status_change date="2010-09-06T04:08:22.119-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:11139 - Expanded the vulnerability checks for RHEL 3, 4, and 5 to cover  CentOS 3, 4, 5 and Oracle Linux 4 and 5" date="2013-04-10T17:25:00.657-04:00">
+          <contributor organization="G2, Inc.">Dragos Prisaca</contributor>
+        </modified>
+        <status_change date="2013-04-10T17:30:39.546-04:00">INTERIM</status_change>
+        <status_change date="2013-04-29T04:11:47.665-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="OS Section: RHEL4, CentOS4, Oracle Linux 4">
+      <criteria operator="OR" comment="RHEL4, CentOS4 or Oracle Linux 4">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+        <extend_definition comment="CentOS Linux 4.x" definition_ref="oval:org.mitre.oval:def:16636"/>
+        <extend_definition comment="Oracle Linux 4.x" definition_ref="oval:org.mitre.oval:def:15990"/>
+      </criteria>
+      <criterion comment="firefox is earlier than 0:3.6.4-8.el4" test_ref="oval:org.mitre.oval:tst:40755"/>
+    </criteria>
+    <criteria operator="AND" comment="OS Section: RHEL5, CentOS5, Oracle Linux 5">
+      <criteria operator="OR" comment="RHEL5, CentOS5 or Oracle Linux 5">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+        <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
+      </criteria>
+      <criteria operator="OR" comment="Configuration section">
+        <criterion comment="gnome-python2-extras is earlier than 0:2.14.2-7.el5" test_ref="oval:org.mitre.oval:tst:40435"/>
+        <criterion comment="devhelp-devel is earlier than 0:0.12-21.el5" test_ref="oval:org.mitre.oval:tst:40552"/>
+        <criterion comment="gnome-python2-libegg is earlier than 0:2.14.2-7.el5" test_ref="oval:org.mitre.oval:tst:40721"/>
+        <criterion comment="xulrunner-devel is earlier than 0:1.9.2.4-10.el5" test_ref="oval:org.mitre.oval:tst:40480"/>
+        <criterion comment="gnome-python2-gtkhtml2 is earlier than 0:2.14.2-7.el5" test_ref="oval:org.mitre.oval:tst:40813"/>
+        <criterion comment="totem is earlier than 0:2.16.7-7.el5" test_ref="oval:org.mitre.oval:tst:40749"/>
+        <criterion comment="xulrunner is earlier than 0:1.9.2.4-10.el5" test_ref="oval:org.mitre.oval:tst:40221"/>
+        <criterion comment="gnome-python2-gtkspell is earlier than 0:2.14.2-7.el5" test_ref="oval:org.mitre.oval:tst:40385"/>
+        <criterion comment="yelp is earlier than 0:2.16.0-26.el5" test_ref="oval:org.mitre.oval:tst:40828"/>
+        <criterion comment="devhelp is earlier than 0:0.12-21.el5" test_ref="oval:org.mitre.oval:tst:40814"/>
+        <criterion comment="firefox is earlier than 0:3.6.4-8.el5" test_ref="oval:org.mitre.oval:tst:40524"/>
+        <criterion comment="totem-mozplugin is earlier than 0:2.16.7-7.el5" test_ref="oval:org.mitre.oval:tst:40620"/>
+        <criterion comment="gnome-python2-gtkmozembed is earlier than 0:2.14.2-7.el5" test_ref="oval:org.mitre.oval:tst:40722"/>
+        <criterion comment="esc is earlier than 0:1.1.0-12.el5" test_ref="oval:org.mitre.oval:tst:40273"/>
+        <criterion comment="totem-devel is earlier than 0:2.16.7-7.el5" test_ref="oval:org.mitre.oval:tst:40637"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

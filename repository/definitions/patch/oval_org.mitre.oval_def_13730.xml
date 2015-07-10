@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13730" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-1140-2 -- pam regression</title>
+    <affected family="unix">
+      <platform>Ubuntu 10.10</platform>
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>pam</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-May/001341.html" ref_id="USN-1140-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0887" ref_id="CVE-2009-0887"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3316" ref_id="CVE-2010-3316"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3430" ref_id="CVE-2010-3430"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3431" ref_id="CVE-2010-3431"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3435" ref_id="CVE-2010-3435"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3853" ref_id="CVE-2010-3853"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4706" ref_id="CVE-2010-4706"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4707" ref_id="CVE-2010-4707"/>
+    <description>pam: Pluggable Authentication Modules Details: USN-1140-1 fixed vulnerabilities in PAM. A regression was found that caused cron to stop working with a &amp;quot;Module is unknown&amp;quot; error. As a result, systems configured with automatic updates will not receive updates until cron is restarted, these updates are installed or the system is rebooted. This update fixes the problem. We apologize for the inconvenience. Original advisory The USN-1140-1 PAM update caused cron to stop working.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T16:12:48.703-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:10:28.081-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:07:48.794-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13730 - added CVE references; also made minor updates" date="2014-06-13T15:21:00.742-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T15:22:58.215-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:03:46.908-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libpam-modules DPKG is earlier than 1.1.1-4ubuntu2.3" test_ref="oval:org.mitre.oval:tst:75036"/>
+        <criterion comment="libpam0g DPKG is earlier than 1.1.1-4ubuntu2.3" test_ref="oval:org.mitre.oval:tst:75111"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libpam-modules DPKG is earlier than 0.99.7.1-5ubuntu6.4" test_ref="oval:org.mitre.oval:tst:74588"/>
+        <criterion comment="libpam0g DPKG is earlier than 0.99.7.1-5ubuntu6.4" test_ref="oval:org.mitre.oval:tst:75045"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libpam-modules DPKG is earlier than 1.1.1-2ubuntu5.3" test_ref="oval:org.mitre.oval:tst:74991"/>
+        <criterion comment="libpam0g DPKG is earlier than 1.1.1-2ubuntu5.3" test_ref="oval:org.mitre.oval:tst:74557"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

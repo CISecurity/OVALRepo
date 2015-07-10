@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:21013" version="42" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2012:0545: ImageMagick security and bug fix update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>ImageMagick</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2012:0545-00" ref_url="https://rhn.redhat.com/errata/RHSA-2012-0545.html"/>
+    <reference source="CESA" ref_id="CESA-2012:0545"/>
+    <reference source="CVE" ref_id="CVE-2012-0247" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0247.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0248" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0248.html"/>
+    <reference source="CVE" ref_id="CVE-2012-0260" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-0260.html"/>
+    <description>The JPEGWarningHandler function in coders/jpeg.c in ImageMagick before 6.7.6-3 allows remote attackers to cause a denial of service (memory consumption) via a JPEG image with a crafted sequence of restart markers.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-14T18:40:22">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:20:12.408-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:01:26.858-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:00:43.952-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages section">
+      <criterion comment="ImageMagick-devel is earlier than 0:6.2.8.0-15.el5_8" test_ref="oval:org.mitre.oval:tst:93190"/>
+      <criterion comment="ImageMagick-c++ is earlier than 0:6.2.8.0-15.el5_8" test_ref="oval:org.mitre.oval:tst:93180"/>
+      <criterion comment="ImageMagick-c++-devel is earlier than 0:6.2.8.0-15.el5_8" test_ref="oval:org.mitre.oval:tst:93145"/>
+      <criterion comment="ImageMagick is earlier than 0:6.2.8.0-15.el5_8" test_ref="oval:org.mitre.oval:tst:93225"/>
+      <criterion comment="ImageMagick-perl is earlier than 0:6.2.8.0-15.el5_8" test_ref="oval:org.mitre.oval:tst:93236"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6228" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DNS Server Query Validation Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2009-0233" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0233"/>
+    <description>The DNS Resolver Cache Service (aka DNSCache) in Windows DNS Server in Microsoft Windows 2000 SP4, Server 2003 SP1 and SP2, and Server 2008, when dynamic updates are enabled, does not reuse cached DNS responses in all applicable situations, which makes it easier for remote attackers to predict transaction IDs and poison caches by simultaneously sending crafted DNS queries and responses, aka "DNS Server Query Validation Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-03-10T16:00:00">
+          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2009-03-13T20:23:52.929-04:00">DRAFT</status_change>
+        <status_change date="2009-03-30T04:00:24.626-04:00">INTERIM</status_change>
+        <status_change date="2009-04-20T04:00:24.299-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6228 - - &quot;def:5715 updated to included missing LDR support.&quot; - &quot;def:6138 updated by removing non-vuln Win2008 criteria.&quot; - &quot;def:6117 updated do merged all common criteria.&quot;. - &quot;def:6228 updated to included missing LDR support.&quot;" date="2011-10-27T09:52:00.232-04:00">
+          <contributor organization="SecPod Technologies">Chandan S</contributor>
+        </modified>
+        <status_change date="2011-10-27T10:01:17.802-04:00">INTERIM</status_change>
+        <status_change date="2011-11-14T04:00:59.175-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Microsoft Windows Server 2000 SP4 is installed and version of dns.exe">
+      <extend_definition comment="Microsoft Windows 2000 SP4 or later is installed" definition_ref="oval:org.mitre.oval:def:229"/>
+      <criterion comment="the version of dns.exe is less than 5.0.2195.7260" test_ref="oval:org.mitre.oval:tst:9653"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows Server 2003 SP1 (x86/x64/ia64) is installed and file version of dns.exe">
+      <criteria operator="OR" comment="Microsoft Windows Server 2003 SP1 (x86/x64/ia64) is installed">
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:4386"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="the version of dns.exe is less than 5.2.3790.3295" test_ref="oval:org.mitre.oval:tst:9777"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows Server 2003 SP2 (x86/x64/ia64) is installed and file versions of dns.exe">
+      <criteria operator="OR" comment="Microsoft Windows Server 2003 SP2 (x86/x64/ia64) is installed">
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="the version of dns.exe is less than 5.2.3790.4460" test_ref="oval:org.mitre.oval:tst:9346"/>
+    </criteria>
+    <criteria operator="AND" comment="Microsoft Windows Server 2008 (x86/x64) is installed and file version of dns.exe">
+      <criteria operator="OR" comment="Microsoft Windows Server 2008 (x86/x64) is installed">
+        <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+        <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      </criteria>
+      <criteria operator="OR" comment="version of dns.exe less than 6.0.6001.18214 or greater than or equal 6.0.6001.22000 and less than 6.0.6001.22375">
+        <criterion comment="the version of dns.exe is less than 6.0.6001.18214" test_ref="oval:org.mitre.oval:tst:9751"/>
+        <criteria operator="AND" comment="For LDR file version greater than or equal 6.0.6001.22000 and less than 6.0.6001.22375">
+          <criterion comment="the version of dns.exe is greater than or equal 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:44438"/>
+          <criterion comment="the version of dns.exe is less than 6.0.6001.22375" test_ref="oval:org.mitre.oval:tst:44142"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

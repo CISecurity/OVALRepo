@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2248" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Sun RPC No Timeout Denial of Service on TCP Ports</title>
+    <affected family="unix">
+      <platform>Sun Solaris 7</platform>
+      <product>libc</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2002-1265" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1265"/>
+    <description>The Sun RPC functionality in multiple libc implementations does not provide a time-out mechanism when reading data from TCP connections, which allows remote attackers to cause a denial of service (hang).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-04-13T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Brian Soby</contributor>
+        </submitted>
+        <status_change date="2005-04-20T12:13:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-05-11T05:41:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-01T03:30:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Solaris 7 Installed" negate="false" test_ref="oval:org.mitre.oval:tst:3045"/>
+      <criteria operator="AND" comment="All RPC w/TCP patches installed - CVE-2002-1265">
+        <criterion comment="Patch 108748-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:581"/>
+        <criterion comment="Patch 108750-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:580"/>
+        <criteria operator="OR" comment="Patches 108752-01 or 106541-14 installed">
+          <criterion comment="Patch 108752-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:579"/>
+          <criterion comment="Patch 106541-14 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:578"/>
+        </criteria>
+        <criterion comment="Patch 106942-09 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:577"/>
+        <criterion comment="Patch 107477-03 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:576"/>
+        <criterion comment="Patch 108551-03 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:575"/>
+        <criterion comment="Patch 108754-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:574"/>
+        <criterion comment="Patch 108756-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:573"/>
+        <criterion comment="Patch 108758-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:572"/>
+        <criterion comment="Patch 108760-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:571"/>
+        <criterion comment="Patch 108762-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:570"/>
+        <criterion comment="Patch 108764-01 or later installed" negate="false" test_ref="oval:org.mitre.oval:tst:569"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="rpcbind running" negate="false" test_ref="oval:org.mitre.oval:tst:568"/>
+    </criteria>
+  </criteria>
+</definition>

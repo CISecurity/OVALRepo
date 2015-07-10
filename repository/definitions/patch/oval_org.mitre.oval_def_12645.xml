@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12645" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2094-1 linux-2.6 -- privilege escalation/denial of service/information leak</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>linux-2.6</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00140.html" ref_id="DSA-2094-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4895" ref_id="CVE-2009-4895"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2226" ref_id="CVE-2010-2226"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2240" ref_id="CVE-2010-2240"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2248" ref_id="CVE-2010-2248"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2521" ref_id="CVE-2010-2521"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2798" ref_id="CVE-2010-2798"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2803" ref_id="CVE-2010-2803"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2959" ref_id="CVE-2010-2959"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3015" ref_id="CVE-2010-3015"/>
+    <description>CVE-2009-4895 Kyle Bader reported an issue in the tty subsystem that allows local users to create a denial of service. CVE-2010-2226 Dan Rosenberg reported an issue in the xfs filesystem that allows local users to copy and read a file owned by another user, for which they only have write permissions, due to a lack of permission checking in the XFS_SWAPEXT ioctl. CVE-2010-2240 Rafal Wojtczuk reported an issue that allows users to obtain escalated privileges. Users must already have sufficient privileges to execute or connect clients to an Xorg server. CVE-2010-2248 Suresh Jayaraman discovered an issue in the CIFS filesystem. A malicious file server can set an incorrect &amp;quot;CountHigh&amp;quot; value, resulting in a denial of service. CVE-2010-2521 Neil Brown reported an issue in the NFSv4 server code. A malicious client could trigger a denial of service on a server due to a bug in the read_buf routine. CVE-2010-2798 Bob Peterson reported an issue in the GFS2 file system. A file system user could cause a denial of service via certain rename operations. CVE-2010-2803 Kees Cook reported an issue in the DRM subsystem. Local users with sufficient privileges could acquire access to sensitive kernel memory. CVE-2010-2959 Ben Hawkes discovered an issue in the AF_CAN socket family. An integer overflow condition may allow local users to obtain elevated privileges. CVE-2010-3015 Toshiyuki Okajima reported an issue in the ext4 filesystem. Local users could trigger a denial of service by generating a specific set of filesystem operations. This update also includes fixes a regression introduced by a previous update. See the referenced Debian bug page for details. For the stable distribution, this problem has been fixed in version 2.6.26-24lenny1. We recommend that you upgrade your linux-2.6 and user-mode-linux packages. The following matrix lists additional source packages that were rebuilt for compatibility with or to take advantage of this update: Debian 5.0 user-mode-linux 2.6.26-1um-2+24lenny1</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-06-30T06:16:26">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-06-30T14:54:40.273-04:00">DRAFT</status_change>
+        <status_change date="2011-07-18T04:00:19.544-04:00">INTERIM</status_change>
+        <status_change date="2011-08-08T04:00:27.855-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12645 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-30T16:52:09.663-04:00">INTERIM</status_change>
+        <status_change date="2014-07-21T04:00:24.711-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independet section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-doc-2.6.26 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43404"/>
+          <criterion comment="linux-tree-2.6.26 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43301"/>
+          <criterion comment="linux-patch-debian-2.6.26 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43287"/>
+          <criterion comment="linux-source-2.6.26 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42826"/>
+          <criterion comment="linux-manual-2.6.26 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43373"/>
+          <criterion comment="linux-support-2.6.26-2 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43084"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.26-2-all DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43340"/>
+          <criterion comment="linux-image-2.6.26-2-vserver-s390x DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42704"/>
+          <criterion comment="linux-image-2.6.26-2-s390 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43186"/>
+          <criterion comment="linux-headers-2.6.26-2-s390 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42833"/>
+          <criterion comment="linux-image-2.6.26-2-s390-tape DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43417"/>
+          <criterion comment="linux-headers-2.6.26-2-all-s390 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43021"/>
+          <criterion comment="linux-headers-2.6.26-2-vserver-s390x DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43414"/>
+          <criterion comment="linux-headers-2.6.26-2-common-vserver DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43364"/>
+          <criterion comment="linux-libc-dev DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42452"/>
+          <criterion comment="linux-image-2.6.26-2-s390x DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43127"/>
+          <criterion comment="linux-headers-2.6.26-2-common DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43097"/>
+          <criterion comment="linux-headers-2.6.26-2-s390x DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43207"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="xen-linux-system-2.6.26-2-xen-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43360"/>
+          <criterion comment="linux-headers-2.6.26-2-all DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43340"/>
+          <criterion comment="linux-modules-2.6.26-2-xen-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43309"/>
+          <criterion comment="linux-headers-2.6.26-2-openvz-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43226"/>
+          <criterion comment="linux-headers-2.6.26-2-common-vserver DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43364"/>
+          <criterion comment="linux-image-2.6.26-2-openvz-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43331"/>
+          <criterion comment="linux-libc-dev DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42452"/>
+          <criterion comment="linux-headers-2.6.26-2-common-openvz DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43328"/>
+          <criterion comment="linux-image-2.6.26-2-vserver-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43305"/>
+          <criterion comment="linux-headers-2.6.26-2-all-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43356"/>
+          <criterion comment="linux-image-2.6.26-2-xen-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43374"/>
+          <criterion comment="linux-headers-2.6.26-2-common-xen DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43253"/>
+          <criterion comment="linux-image-2.6.26-2-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43102"/>
+          <criterion comment="linux-headers-2.6.26-2-xen-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43399"/>
+          <criterion comment="linux-headers-2.6.26-2-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43123"/>
+          <criterion comment="linux-headers-2.6.26-2-common DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43097"/>
+          <criterion comment="linux-headers-2.6.26-2-vserver-amd64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43368"/>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Supported platform section">
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        <criteria operator="OR" comment="Packages section">
+          <criterion comment="linux-headers-2.6.26-2-all DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43340"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43366"/>
+          <criterion comment="linux-image-2.6.26-2-parisc64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43141"/>
+          <criterion comment="linux-image-2.6.26-2-parisc DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43433"/>
+          <criterion comment="linux-headers-2.6.26-2-common DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43097"/>
+          <criterion comment="linux-headers-2.6.26-2-all-hppa DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42509"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc64 DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43071"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc64-smp DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43182"/>
+          <criterion comment="linux-libc-dev DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:42452"/>
+          <criterion comment="linux-image-2.6.26-2-parisc64-smp DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43294"/>
+          <criterion comment="linux-headers-2.6.26-2-parisc-smp DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43436"/>
+          <criterion comment="linux-image-2.6.26-2-parisc-smp DPKG is earlier than 2.6.26-24lenny1" test_ref="oval:org.mitre.oval:tst:43363"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

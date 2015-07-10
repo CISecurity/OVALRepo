@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:142" version="2" class="vulnerability" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Suppressed OVAL142, covered by OVAL2022</title>
+    <affected family="windows">
+      <platform>Microsoft Windows NT</platform>
+      <product>Windows kernel</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2003-0112" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0112"/>
+    <description>Buffer overflow in Windows Kernel allows local users to gain privileges by causing certain error messages to be passed to a debugger.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-11-02T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </submitted>
+        <status_change date="2004-11-03T12:00:00.000-04:00">DRAFT</status_change>
+        <status_change date="2004-12-09T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-01-06T12:00:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2005-06-02T12:00:00.000-04:00" comment="Added product">
+          <contributor organization="The MITRE Corporation">Christine Walzer</contributor>
+        </modified>
+        <status_change date="2005-06-08T03:17:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-29T06:49:00.000-04:00">ACCEPTED</status_change>
+        <modified date="2007-03-01T12:01:01" comment="Deprecated in favor of oval:org.mitre.oval:def:2022.">
+          <contributor organization="ThreatGuard, Inc.">Robert L. Hollis</contributor>
+        </modified>
+        <status_change date="2007-03-01T12:01:01">DEPRECATED</status_change>
+        <modified comment="Removed reference to test for nt 4.0 and add reference to nt 4.0 inventory definition." date="2008-02-28T12:48:00.621-04:00">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND" comment="Software section">
+    <extend_definition comment="Microsoft Windows NT is installed" definition_ref="oval:org.mitre.oval:def:36"/>
+    <criterion negate="true" comment="Windows NT Service Pack 6a is installed" test_ref="oval:org.mitre.oval:tst:2887"/>
+    <criterion comment="The version of Ntoskrnl.exe is less than 4.0.1381.7203" test_ref="oval:org.mitre.oval:tst:2886"/>
+    <criterion negate="true" comment="the patch Q811493 is installed" test_ref="oval:org.mitre.oval:tst:2885"/>
+  </criteria>
+</definition>

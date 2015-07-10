@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:15580" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>.NET Framework Index Comparison Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <product>Microsoft .NET Framework 4</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2012-0164" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0164"/>
+    <description>Microsoft .NET Framework 4 does not properly compare index values, which allows remote attackers to cause a denial of service (application hang) via crafted requests to a Windows Presentation Foundation (WPF) application, aka ".NET Framework Index Comparison Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2012-05-08T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2012-05-18T16:55:22.837-04:00">DRAFT</status_change>
+        <status_change date="2012-06-04T04:01:09.482-04:00">INTERIM</status_change>
+        <status_change date="2012-06-25T04:00:29.328-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:15580 - extended definitions of OS are without SP checks" date="2014-07-28T17:52:00.359-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:54:20.195-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:19.689-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Windows XP x86/x64, Windows Server 2003 x86/x64 , Vista x86/64, Server x86/x64, Windows 7 x86/x64, Server 2008 r2 x64">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      <extend_definition comment="Microsoft Windows Server 2003 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1870"/>
+      <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+      <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+      <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+      <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+      <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+      <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+    </criteria>
+    <extend_definition comment="Microsoft .NET Framework 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6749"/>
+    <criteria operator="OR" comment="GDR or LDR Service branch">
+      <criterion comment="the version of PresentationCore.dll is less than 4.0.30319.275" test_ref="oval:org.mitre.oval:tst:79708"/>
+      <criteria operator="AND" comment="LDR">
+        <criterion comment="the version of PresentationCore.dll is less than 4.0.30319.550" test_ref="oval:org.mitre.oval:tst:79110"/>
+        <criterion comment="the version of PresentationCore.dll is greater than or equal to 4.0.30319.400" test_ref="oval:org.mitre.oval:tst:79865"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

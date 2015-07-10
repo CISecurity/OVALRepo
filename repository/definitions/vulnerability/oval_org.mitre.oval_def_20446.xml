@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:20446" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>VMware ESX/ESXi SLPD denial of service vulnerability and ESX third party updates for Service Console packages bind, pam, and rpm.</title>
+    <affected family="unix">
+      <platform>VMWare ESX Server 4.1</platform>
+      <platform>VMWare ESX Server 4.0</platform>
+    </affected>
+    <reference ref_id="CVE-2010-3613" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3613" source="CVE"/>
+    <description>named in ISC BIND 9.6.2 before 9.6.2-P3, 9.6-ESV before 9.6-ESV-R3, and 9.7.x before 9.7.2-P3 does not properly handle the combination of signed negative responses and corresponding RRSIG records in the cache, which allows remote attackers to cause a denial of service (daemon crash) via a query for cached data.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-12-06T11:43:28.000-05:00">
+          <contributor organization="Hewlett-Packard">Merryl DMello</contributor>
+        </submitted>
+        <status_change date="2013-12-11T15:41:36.689-05:00">DRAFT</status_change>
+        <status_change date="2013-12-30T04:00:41.183-05:00">INTERIM</status_change>
+        <status_change date="2014-01-20T04:00:45.051-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Patch ESX410-201104407-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.1 is installed" definition_ref="oval:org.mitre.oval:def:13012"/>
+      <criterion comment="Patch ESX410-201104407-SG is not installed" test_ref="oval:org.mitre.oval:tst:89488"/>
+    </criteria>
+    <criteria operator="AND" comment="Patch ESX400-201103407-SG is not installed">
+      <extend_definition comment="VMware ESX Server 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6293"/>
+      <criterion comment="Patch ESX400-201103407-SG is not installed" test_ref="oval:org.mitre.oval:tst:89412"/>
+    </criteria>
+  </criteria>
+</definition>

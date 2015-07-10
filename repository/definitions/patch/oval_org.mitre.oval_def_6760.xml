@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:6760" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1953 expat -- denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>expat</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2009/dsa-1953" ref_id="DSA-1953"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3560" ref_id="CVE-2009-3560"/>
+    <description>Jan Lieskovsky discovered an error in expat, an XML parsing C library, when parsing certain UTF-8 sequences, which can be exploited to crash an application using the library.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:04:21-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:27:51.566-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:11.258-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:48:51.219-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:6760 - Debian Patch Update" date="2014-06-06T16:51:00.206-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:52:54.837-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:07:51.843-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="lib64expat1 is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25646"/>
+            <criterion comment="lib64expat1-dev is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25551"/>
+            <criterion comment="expat is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:24950"/>
+            <criterion comment="libexpat1-dev is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25270"/>
+            <criterion comment="libexpat1 is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25940"/>
+          </criteria>
+        </criteria>
+        <criteria operator="AND" comment="Architecture dependent section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="expat is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25698"/>
+            <criterion comment="libexpat1-dev is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25610"/>
+            <criterion comment="libexpat1 is earlier than 2.0.1-4+lenny2" test_ref="oval:org.mitre.oval:tst:25842"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Supported architectures section">
+        <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+        <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+        <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+        <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+        <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages section">
+        <criterion comment="libexpat1 is earlier than 1.95.8-3.4+etch2" test_ref="oval:org.mitre.oval:tst:25564"/>
+        <criterion comment="expat is earlier than 1.95.8-3.4+etch2" test_ref="oval:org.mitre.oval:tst:25617"/>
+        <criterion comment="libexpat1-dev is earlier than 1.95.8-3.4+etch2" test_ref="oval:org.mitre.oval:tst:25615"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

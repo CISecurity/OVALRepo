@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:27589" version="4" class="patch" deprecated="true" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DEPRECATED: ELSA-2013-0528 -- ipa security, bug fix and enhancement update (low)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>ipa</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2013-0528.html" ref_id="ELSA-2013-0528"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4546" ref_id="CVE-2012-4546"/>
+    <description>It was found that the current default configuration of IPA servers did not
+publish correct CRLs (Certificate Revocation Lists). The default
+configuration specifies that every replica is to generate its own CRL;
+however, this can result in inconsistencies in the CRL contents provided to
+clients from different Identity Management replicas. More specifically, if
+a certificate is revoked on one Identity Management replica, it will not
+show up on another Identity Management replica.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-05T10:23:49">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-05T18:14:43.502-05:00">DRAFT</status_change>
+        <status_change date="2014-11-24T04:05:12.271-05:00">INTERIM</status_change>
+        <status_change date="2014-12-15T04:02:20.382-05:00">ACCEPTED</status_change>
+        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T11:20:08.736-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-10T11:20:08.736-05:00">DEPRECATED</status_change>
+      </dates>
+      <status>DEPRECATED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="ipa is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:129698"/>
+      <criterion comment="ipa-admintools is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130200"/>
+      <criterion comment="ipa-client is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130173"/>
+      <criterion comment="ipa-python is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130257"/>
+      <criterion comment="ipa-server is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130295"/>
+      <criterion comment="ipa-server-selinux is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130207"/>
+      <criterion comment="ipa-server-trust-ad is earlier than 0:3.0.0-25.el6" test_ref="oval:org.mitre.oval:tst:130178"/>
+    </criteria>
+  </criteria>
+</definition>

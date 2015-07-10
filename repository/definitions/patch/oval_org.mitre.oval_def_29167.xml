@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29167" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2008:0789 -- dnsmasq security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <product>dnsmasq</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0789.html" ref_id="RHSA-2008:0789"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" ref_id="CVE-2008-1447"/>
+    <description>An updated dnsmasq package that implements UDP source-port randomization
+is now available for Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+Dnsmasq is lightweight DNS forwarder and DHCP server. It is designed to
+provide DNS and, optionally, DHCP, to a small network.
+The dnsmasq DNS resolver used a fixed source UDP port. This could have made
+DNS spoofing attacks easier. dnsmasq has been updated to use random UDP
+source ports, helping to make DNS spoofing attacks harder. (CVE-2008-1447)
+All dnsmasq users are advised to upgrade to this updated package, that
+upgrades dnsmasq to version 2.45, which resolves this issue.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:27">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:28.873-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+    <criterion comment="dnsmasq is earlier than 0:2.45-1.el5_2.1" test_ref="oval:org.mitre.oval:tst:139204"/>
+  </criteria>
+</definition>

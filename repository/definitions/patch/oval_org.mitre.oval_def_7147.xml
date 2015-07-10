@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:7147" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2010 kvm -- privilege escalation/denial of service</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/2010/dsa-2010" ref_id="DSA-2010"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0298" ref_id="CVE-2010-0298"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0306" ref_id="CVE-2010-0306"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0309" ref_id="CVE-2010-0309"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0419" ref_id="CVE-2010-0419"/>
+    <description>Several local vulnerabilities have been discovered in kvm, a full virtualization system. The Common Vulnerabilities and Exposures project identifies the following problems: Gleb Natapov discovered issues in the KVM subsystem where missing permission checks permit a user in a guest system to denial of service a guest or gain escalated privileges with the guest. Marcelo Tosatti fixed an issue in the PIT emulation code in the KVM subsystem that allows privileged users in a guest domain to cause a denial of service of the host system. Paolo Bonzini found a bug in KVM that can be used to bypass proper permission checking while loading segment selectors. This potentially allows privileged guest users to execute privileged instructions on the host system.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-05-24T19:02:14-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2010-05-26T13:27:39.535-04:00">DRAFT</status_change>
+        <status_change date="2010-06-14T04:00:36.506-04:00">INTERIM</status_change>
+        <status_change date="2010-06-29T11:49:25.985-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:7147 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:34:40.685-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:08:07.298-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="kvm-source is earlier than 72+dfsg-5~lenny5" test_ref="oval:org.mitre.oval:tst:24786"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture dependent section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criterion comment="kvm is earlier than 72+dfsg-5~lenny5" test_ref="oval:org.mitre.oval:tst:25412"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

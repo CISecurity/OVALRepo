@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26996" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1615 -- virt-v2v security and bug fix update (Low)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>virt-v2v</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1615.html" ref_id="RHSA-2011:1615"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1773" ref_id="CVE-2011-1773"/>
+    <description><![CDATA[virt-v2v is a tool for converting and importing virtual machines to
+libvirt-managed KVM (Kernel-based Virtual Machine), or Red Hat Enterprise
+Virtualization.
+
+Using virt-v2v to convert a guest that has a password-protected VNC console
+to a KVM guest removed that password protection from the converted guest:
+after conversion, a password was not required to access the converted
+guest&#39;s VNC console. Now, converted guests will require the same VNC
+console password as the original guest. Note that when converting a guest
+to run on Red Hat Enterprise Virtualization, virt-v2v will display a
+warning that VNC passwords are not supported. (CVE-2011-1773)
+
+Note: The Red Hat Enterprise Linux 6.2 perl-Sys-Virt update must also be
+installed to correct CVE-2011-1773.
+
+Bug fixes:
+
+* When converting a guest virtual machine (VM), whose name contained
+certain characters, virt-v2v would create a converted guest with a
+corrupted name. Now, virt-v2v will not corrupt guest names. (BZ#665883)
+
+* There were numerous usability issues when running virt-v2v as a non-root
+user. This update makes it simpler to run virt-v2v as a non-root user.
+(BZ#671094)
+
+* virt-v2v failed to convert a Microsoft Windows guest with Windows
+Recovery Console installed in a separate partition. Now, virt-v2v will
+successfully convert a guest with Windows Recovery Console installed in a
+separate partition by ignoring that partition. (BZ#673066)
+
+* virt-v2v failed to convert a Red Hat Enterprise Linux guest which did not
+have the symlink &quot;/boot/grub/menu.lst&quot;. With this update, virt-v2v can
+select a grub configuration file from several places. (BZ#694364)
+
+* This update removes information about the usage of deprecated command
+line options in the virt-v2v man page. (BZ#694370)
+
+* virt-v2v would fail to correctly change the allocation policy, (sparse or
+preallocated) when converting a guest with QCOW2 image format. The error
+message &quot;Cannot import VM, The selected disk configuration is not
+supported&quot; was displayed. With this update, allocation policy changes to a
+guest with QCOW2 storage will work correctly. (BZ#696089)
+
+* The options &quot;--network&quot; and &quot;--bridge&quot; can not be used in conjunction
+when converting a guest, but no error message was displayed. With this
+update, virt-v2v will now display an error message if the mutually
+exclusive &quot;--network&quot; and &quot;--bridge&quot; command line options are both
+specified. (BZ#700759)
+
+* virt-v2v failed to convert a multi-boot guest, and did not clean up
+temporary storage and mount points after failure. With this update,
+virt-v2v will prompt for which operating system to convert from a
+multi-boot guest, and will correctly clean up if the process fails.
+(BZ#702007)
+
+* virt-v2v failed to correctly configure modprobe aliases when converting a
+VMware ESX guest with VMware Tools installed. With this update, modprobe
+aliases will be correctly configured. (BZ#707261)
+
+* When converting a guest with preallocated raw storage using the
+libvirtxml input method, virt-v2v failed with the erroneous error message
+&quot;size(X) &lt; usage(Y)&quot;. This update removes this erroneous error. (BZ#727489)
+
+* When converting a Red Hat Enterprise Linux guest, virt-v2v did not check
+that the Cirrus X driver was available before configuring it. With this
+update, virt-v2v will attempt to install the Cirrus X driver if it is
+required. (BZ#708961)
+
+* VirtIO systems do not support the Windows Recovery Console on 32-bit
+Windows XP. The virt-v2v man page has been updated to note this. On Windows
+XP Professional x64 Edition, however, if Windows Recovery Console is
+re-installed after conversion, it will work as expected. (BZ#732421)
+
+* Placing comments in the guest fstab file by means of the leading &quot;#&quot;
+symbol caused an &quot;unknown filesystem&quot; error after conversion of a guest.
+With this update comments can now be used and error messages will not be
+displayed. (BZ#677870)
+
+Users of virt-v2v should upgrade to this updated package, which fixes these
+issues and upgrades virt-v2v to version 0.8.3.]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:16:10">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:47:48.127-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:26.222-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:30.564-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criterion comment="virt-v2v is earlier than 0:0.8.3-5.el6" test_ref="oval:org.mitre.oval:tst:125955"/>
+  </criteria>
+</definition>

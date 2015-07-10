@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:16741" version="5" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Mircosoft .NET Framework authentication bypass vulnerability - (CVE-2013-1337) MS13-040</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <product>Microsoft .NET Framework 4.5</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2013-1337" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1337"/>
+    <description>Microsoft .NET Framework 4.5 does not properly create policy requirements for custom Windows Communication Foundation (WCF) endpoint authentication in certain situations involving passwords over HTTPS, which allows remote attackers to bypass authentication by sending queries to an endpoint, aka "Authentication Bypass Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2013-05-17T11:39:12">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2013-05-21T11:58:18.223-04:00">DRAFT</status_change>
+        <status_change date="2013-06-10T04:01:32.680-04:00">INTERIM</status_change>
+        <status_change date="2013-07-01T04:01:10.654-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:16741 - extended definitions of OS are without SP checks" date="2014-07-28T17:29:00.723-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:34:31.398-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:01:46.864-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Microsoft .NET Framework 4.5 is installed" definition_ref="oval:org.mitre.oval:def:15925"/>
+    <criteria operator="OR" comment="Check for vulnerable file version">
+      <criteria operator="AND" comment="Check for vulnerable OS/file version">
+        <criteria operator="OR" comment="Check for vulnerable OS">
+          <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+          <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:4870"/>
+          <extend_definition comment="Microsoft Windows Server 2008 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:5356"/>
+          <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+          <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+          <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:6438"/>
+        </criteria>
+        <criteria operator="OR" comment="Check for LDR/GDR">
+          <criterion comment="Check if version of System.Security.dll is less than 4.0.30319.18038" test_ref="oval:org.mitre.oval:tst:81011"/>
+          <criteria operator="AND" comment="Check for LDR">
+            <criterion comment="Check if version of System.Security.dll is greater than or equal to 4.0.30319.19000" test_ref="oval:org.mitre.oval:tst:81085"/>
+            <criterion comment="Check if version of System.Security.dll is less than 4.0.30319.19057" test_ref="oval:org.mitre.oval:tst:81186"/>
+          </criteria>
+        </criteria>
+      </criteria>
+      <criteria operator="AND" comment="Check for vulnerable file version">
+        <criteria operator="OR" comment="Check for vulnerable OS">
+          <extend_definition comment="Microsoft Windows 8 is installed" definition_ref="oval:org.mitre.oval:def:15732"/>
+          <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585"/>
+        </criteria>
+        <criteria operator="OR" comment="Check for LDR/GDR">
+          <criterion comment="Check if version of System.Security.dll is less than 4.0.30319.18039" test_ref="oval:org.mitre.oval:tst:80937"/>
+          <criteria operator="AND" comment="Check for LDR">
+            <criterion comment="Check if version of System.Security.dll is greater than or equal to 4.0.30319.19000" test_ref="oval:org.mitre.oval:tst:81085"/>
+            <criterion comment="Check if version of System.Security.dll is less than 4.0.30319.19058" test_ref="oval:org.mitre.oval:tst:81172"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

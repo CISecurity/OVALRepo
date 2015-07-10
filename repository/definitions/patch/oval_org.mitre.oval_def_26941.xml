@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26941" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1531 -- qemu-kvm security, bug fix, and enhancement update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <product>qemu-kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1531.html" ref_id="RHSA-2011:1531"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2527" ref_id="CVE-2011-2527"/>
+    <description>KVM (Kernel-based Virtual Machine) is a full virtualization solution for
+Linux on AMD64 and Intel 64 systems. qemu-kvm is the user-space component
+for running virtual machines using KVM.
+
+It was found that qemu-kvm did not properly drop supplemental group
+privileges when the root user started guests from the command line
+(&amp;quot;/usr/libexec/qemu-kvm&amp;quot;) with the &amp;quot;-runas&amp;quot; option. A qemu-kvm process
+started this way could use this flaw to gain access to files on the host
+that are accessible to the supplementary groups and not accessible to the
+primary group. (CVE-2011-2527)
+
+Note: This issue only affected qemu-kvm when it was started directly from
+the command line. It did not affect the Red Hat Enterprise Virtualization
+platform or applications that start qemu-kvm via libvirt, such as the
+Virtual Machine Manager (virt-manager).
+
+This update also fixes several bugs and adds various enhancements.
+Documentation for these bug fixes and enhancements will be available
+shortly from the Technical Notes document, linked to in the References
+section.
+
+All users of qemu-kvm are advised to upgrade to these updated packages,
+which contain backported patches to correct these issues and add these
+enhancements. After installing this update, shut down all running virtual
+machines. Once all virtual machines have shut down, start them again for
+this update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-28T18:16:08">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-29T12:48:04.577-04:00">DRAFT</status_change>
+        <status_change date="2014-11-17T04:01:12.222-05:00">INTERIM</status_change>
+        <status_change date="2014-12-08T04:00:26.935-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="qemu-img is earlier than 0:0.12.1.2-2.209.el6" test_ref="oval:org.mitre.oval:tst:126276"/>
+      <criterion comment="qemu-kvm is earlier than 0:0.12.1.2-2.209.el6" test_ref="oval:org.mitre.oval:tst:126257"/>
+      <criterion comment="qemu-kvm-debuginfo is earlier than 0:0.12.1.2-2.209.el6" test_ref="oval:org.mitre.oval:tst:125938"/>
+      <criterion comment="qemu-kvm-tools is earlier than 0:0.12.1.2-2.209.el6" test_ref="oval:org.mitre.oval:tst:126320"/>
+    </criteria>
+  </criteria>
+</definition>

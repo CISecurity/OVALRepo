@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13413" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1907-1 kvm -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <product>kvm</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00229.html" ref_id="DSA-1907-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5714" ref_id="CVE-2008-5714"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3290" ref_id="CVE-2009-3290"/>
+    <description>Several vulnerabilities have been discovered in kvm, a full virtualization system. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2008-5714 Chris Webb discovered an off-by-one bug limiting KVM's VNC passwords to 7 characters. This flaw might make it easier for remote attackers to guess the VNC password, which is limited to seven characters where eight was intended. CVE-2009-3290 It was discovered that the kvm_emulate_hypercall function in KVM does not prevent access to MMU hypercalls from ring 0, which allows local guest OS users to cause a denial of service and read or write guest kernel memory. For the stable distribution, these problems have been fixed in version 72+dfsg-5~lenny3. The oldstable distribution does not contain kvm. For the testing distribution these problems will be fixed soon. For the unstable distribution these problems have been fixed in version 85+dfsg-4.1 We recommend that you upgrade your kvm packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:28:12.235-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:31.209-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:06:50.495-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13413 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:32.756-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:12.212-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+    <criteria operator="OR" comment="Architecture section">
+      <criteria operator="AND" comment="Architecture independent section">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="kvm-source DPKG is earlier than 72+dfsg-5~lenny3" test_ref="oval:org.mitre.oval:tst:47474"/>
+      </criteria>
+      <criteria operator="AND" comment="Architecture depended section">
+        <criteria operator="OR" comment="Supported architectures section">
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+        </criteria>
+        <criterion comment="kvm DPKG is earlier than 72+dfsg-5~lenny3" test_ref="oval:org.mitre.oval:tst:48012"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

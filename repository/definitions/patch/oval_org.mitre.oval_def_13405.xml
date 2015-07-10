@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13405" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-960-1 -- libpng vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 8.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <platform>Ubuntu 9.10</platform>
+      <platform>Ubuntu 6.06</platform>
+      <platform>Ubuntu 9.04</platform>
+      <product>libpng</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-July/001118.html" ref_id="USN-960-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1205" ref_id="CVE-2010-1205"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2249" ref_id="CVE-2010-2249"/>
+    <description>It was discovered that libpng did not properly handle certain malformed PNG images. If a user or automated system were tricked into opening a crafted PNG file, an attacker could cause a denial of service or possibly execute arbitrary code with the privileges of the user invoking the program. It was discovered that libpng did not properly handle certain malformed PNG images. If a user or automated system were tricked into processing a crafted PNG image, an attacker could possibly use this flaw to consume all available resources, resulting in a denial of service</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:06:53.431-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:06:33.941-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:05:12.880-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13405 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-20T11:46:30.869-04:00">INTERIM</status_change>
+        <status_change date="2014-07-07T04:00:22.428-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libpng3 DPKG is earlier than 1.2.15~beta5-3ubuntu0.3" test_ref="oval:org.mitre.oval:tst:51025"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpng12-0-udeb DPKG is earlier than 1.2.15~beta5-3ubuntu0.3" test_ref="oval:org.mitre.oval:tst:50779"/>
+            <criterion comment="libpng12-dev DPKG is earlier than 1.2.15~beta5-3ubuntu0.3" test_ref="oval:org.mitre.oval:tst:51246"/>
+            <criterion comment="libpng12-0 DPKG is earlier than 1.2.15~beta5-3ubuntu0.3" test_ref="oval:org.mitre.oval:tst:50901"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libpng3 DPKG is earlier than 1.2.42-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:50791"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpng12-0-udeb DPKG is earlier than 1.2.42-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:50903"/>
+            <criterion comment="libpng12-dev DPKG is earlier than 1.2.42-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:50792"/>
+            <criterion comment="libpng12-0 DPKG is earlier than 1.2.42-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:51287"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libpng3 DPKG is earlier than 1.2.37-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:51012"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpng12-0-udeb DPKG is earlier than 1.2.37-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:50797"/>
+            <criterion comment="libpng12-dev DPKG is earlier than 1.2.37-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:51046"/>
+            <criterion comment="libpng12-0 DPKG is earlier than 1.2.37-1ubuntu0.2" test_ref="oval:org.mitre.oval:tst:51144"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libpng3 DPKG is earlier than 1.2.8rel-5ubuntu0.6" test_ref="oval:org.mitre.oval:tst:50983"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpng12-0-udeb DPKG is earlier than 1.2.8rel-5ubuntu0.6" test_ref="oval:org.mitre.oval:tst:50829"/>
+            <criterion comment="libpng12-dev DPKG is earlier than 1.2.8rel-5ubuntu0.6" test_ref="oval:org.mitre.oval:tst:51604"/>
+            <criterion comment="libpng12-0 DPKG is earlier than 1.2.8rel-5ubuntu0.6" test_ref="oval:org.mitre.oval:tst:51146"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independet section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="libpng3 DPKG is earlier than 1.2.27-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:50836"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libpng12-0-udeb DPKG is earlier than 1.2.27-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:50851"/>
+            <criterion comment="libpng12-dev DPKG is earlier than 1.2.27-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:50880"/>
+            <criterion comment="libpng12-0 DPKG is earlier than 1.2.27-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:50885"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

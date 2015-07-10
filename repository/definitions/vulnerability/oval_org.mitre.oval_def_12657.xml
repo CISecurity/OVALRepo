@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:12657" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Shift JIS Character Encoding Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Microsoft Internet Explorer 6</product>
+      <product>Microsoft Internet Explorer 7</product>
+      <product>Microsoft Internet Explorer 8</product>
+      <product>Microsoft Internet Explorer 9</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2011-1962" ref_url="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1962"/>
+    <description>Microsoft Internet Explorer 6 through 9 does not properly handle unspecified character sequences, which allows remote attackers to read content from a different (1) domain or (2) zone via a crafted web site that triggers "inactive filtering," aka "Shift JIS Character Encoding Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-08-09T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2011-08-15T08:27:59.221-04:00">DRAFT</status_change>
+        <status_change date="2011-09-05T04:00:06.601-04:00">INTERIM</status_change>
+        <status_change date="2011-09-26T04:00:08.009-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:ste:12055 - modified states" date="2014-02-13T12:23:00.044-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-13T12:24:37.442-05:00">INTERIM</status_change>
+        <status_change date="2014-03-03T04:00:34.742-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:12657 - extended definitions of OS are without SP checks" date="2014-07-28T17:46:00.519-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:48:04.722-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:00:33.740-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Internet Explorer 6 on XP x86">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.2900.6129" test_ref="oval:org.mitre.oval:tst:43916"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 6 on XP x64">
+      <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      <extend_definition comment="Microsoft Internet Explorer 6 is installed" definition_ref="oval:org.mitre.oval:def:563"/>
+      <criterion comment="Mshtml.dll version is less than 6.0.3790.4882" test_ref="oval:org.mitre.oval:tst:43410"/>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 7 on XP x86/x64">
+      <criteria operator="OR" comment="XP x86/x64">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criteria operator="OR" comment="GDR or QFE Service branch">
+        <criterion comment="Mshtml.dll version is less than 7.0.6000.17102" test_ref="oval:org.mitre.oval:tst:43870"/>
+        <criteria operator="AND" comment="QFE">
+          <criterion comment="Mshtml.dll version is greater than 7.0.6000.20000" test_ref="oval:org.mitre.oval:tst:9441"/>
+          <criterion comment="Mshtml.dll version is less than 7.0.6000.21305" test_ref="oval:org.mitre.oval:tst:43713"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 7 on Vista x86/x64">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 7 is installed" definition_ref="oval:org.mitre.oval:def:627"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Mshtml.dll version is less than 7.0.6002.18494" test_ref="oval:org.mitre.oval:tst:43246"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Mshtml.dll version is greater than 7.0.6002.22000" test_ref="oval:org.mitre.oval:tst:10125"/>
+          <criterion comment="Mshtml.dll version is less than 7.0.6002.22683" test_ref="oval:org.mitre.oval:tst:43716"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 8 on XP x64/x86, Vista x86/x64">
+      <criteria operator="OR" comment="XP x64,XP x86, Vista x86/x64">
+        <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+        <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 8 is installed" definition_ref="oval:org.mitre.oval:def:6210"/>
+      <criteria operator="OR" comment="GDR or QFE Service branch">
+        <criterion comment="Mshtml.dll version is less than 8.0.6001.19120" test_ref="oval:org.mitre.oval:tst:43762"/>
+        <criteria operator="AND" comment="QFE">
+          <criterion comment="Mshtml.dll version is greater than 8.0.6001.22000" test_ref="oval:org.mitre.oval:tst:9913"/>
+          <criterion comment="Mshtml.dll version is less than 8.0.6001.23216" test_ref="oval:org.mitre.oval:tst:43726"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 8 on Windows 7 x86/x64">
+      <criteria operator="OR" comment="Windows 7 x86/x64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 8 is installed" definition_ref="oval:org.mitre.oval:def:6210"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Mshtml.dll version is less than 8.0.7600.16853" test_ref="oval:org.mitre.oval:tst:43676"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Mshtml.dll version is greater than or equal 8.0.7600.20000" test_ref="oval:org.mitre.oval:tst:20848"/>
+          <criterion comment="Mshtml.dll version is less than 8.0.7600.21013" test_ref="oval:org.mitre.oval:tst:43007"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 8 on Windows 7 x86/x64">
+      <criteria operator="OR" comment="Windows 7 x86/x64">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 8 is installed" definition_ref="oval:org.mitre.oval:def:6210"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Mshtml.dll version is less than 8.0.7601.17655" test_ref="oval:org.mitre.oval:tst:43535"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Mshtml.dll version is greater than or equal 8.0.7601.20000" test_ref="oval:org.mitre.oval:tst:41997"/>
+          <criterion comment="Mshtml.dll version is less than 8.0.7601.21776" test_ref="oval:org.mitre.oval:tst:43348"/>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Internet Explorer 9 on Vista x86/x64, Windows 7 x86/x64">
+      <criteria operator="OR" comment="Vista x86/x64, Windows 7 x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <extend_definition comment="Microsoft Internet Explorer 9 is installed" definition_ref="oval:org.mitre.oval:def:11985"/>
+      <criteria operator="OR" comment="GDR or LDR Service branch">
+        <criterion comment="Mshtml.dll version is less than 9.0.8112.16434" test_ref="oval:org.mitre.oval:tst:43849"/>
+        <criteria operator="AND" comment="LDR">
+          <criterion comment="Mshtml.dll version is greater than or equal to 9.0.8112.20000" test_ref="oval:org.mitre.oval:tst:42899"/>
+          <criterion comment="Mshtml.dll version is less than 9.0.8112.20534" test_ref="oval:org.mitre.oval:tst:43772"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

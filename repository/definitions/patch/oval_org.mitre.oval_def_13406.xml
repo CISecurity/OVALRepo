@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:13406" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1813-2 evolution-data-server -- Several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>evolution-data-server</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00154.html" ref_id="DSA-1813-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0587" ref_id="CVE-2009-0587"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0547" ref_id="CVE-2009-0547"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0582" ref_id="CVE-2009-0582"/>
+    <description>The previous update introduced a regression that stopped encrypted and signed S/MIME messages to work properly. Also, there have been other regressions caused by the introduction of an undefined symbol. This update corrects these flaws. For reference the original advisory text is below. Several vulnerabilities have been found in evolution-data-server, the database backend server for the evolution groupware suite. The Common Vulnerabilities and Exposures project identifies the following problems: CVE-2009-0587 It was discovered that evolution-data-server is prone to integer overflows triggered by large base64 strings. CVE-2009-0547 Joachim Breitner discovered that S/MIME signatures are not verified properly, which can lead to spoofing attacks. CVE-2009-0582 It was discovered that NTLM authentication challenge packets are not validated properly when using the NTLM authentication method, which could lead to an information disclosure or a denial of service. For the oldstable distribution, these problems have been fixed in version 1.6.3-5etch3. For the stable distribution, these problems have been fixed in version 2.22.3-1.1+lenny2. For the testing distribution and the unstable distribution , these problems have been fixed in version 2.26.1.1-1. We recommend that you upgrade your evolution-data-server packages.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-11T14:18:57-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-10-13T11:29:04.941-04:00">DRAFT</status_change>
+        <status_change date="2011-10-31T04:02:29.891-04:00">INTERIM</status_change>
+        <status_change date="2011-11-21T04:06:34.604-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13406 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T17:01:35.327-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:02:11.778-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="volution-data-server-common DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48938"/>
+        </criteria>
+        <criteria operator="AND" comment="Architecture depended section">
+          <criteria operator="OR" comment="Supported architectures section">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101"/>
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110"/>
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+          </criteria>
+          <criteria operator="OR" comment="Packages section">
+            <criterion comment="libecal1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48992"/>
+            <criterion comment="libegroupwise1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48978"/>
+            <criterion comment="libebook1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49032"/>
+            <criterion comment="libedataserverui1.2-8 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48610"/>
+            <criterion comment="volution-data-server DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48451"/>
+            <criterion comment="volution-data-server-dbg DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48948"/>
+            <criterion comment="libedata-cal1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48999"/>
+            <criterion comment="libexchange-storage1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48875"/>
+            <criterion comment="libedata-book1.2-2 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48574"/>
+            <criterion comment="libedata-book1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48266"/>
+            <criterion comment="libedataserver1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48764"/>
+            <criterion comment="libedataserver1.2-9 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49024"/>
+            <criterion comment="libebook1.2-9 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49017"/>
+            <criterion comment="libcamel1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48642"/>
+            <criterion comment="libgdata-google1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48968"/>
+            <criterion comment="libegroupwise1.2-13 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48944"/>
+            <criterion comment="volution-data-server-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48847"/>
+            <criterion comment="libexchange-storage1.2-3 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48905"/>
+            <criterion comment="libgdata1.2-1 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48869"/>
+            <criterion comment="libecal1.2-7 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49031"/>
+            <criterion comment="libgdata1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48896"/>
+            <criterion comment="libedataserverui1.2-dev DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49012"/>
+            <criterion comment="libedata-cal1.2-6 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:49001"/>
+            <criterion comment="libcamel1.2-11 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48865"/>
+            <criterion comment="libgdata-google1.2-1 DPKG is earlier than 2.22.3-1.1+lenny2" test_ref="oval:org.mitre.oval:tst:48837"/>
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Release section">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461"/>
+      <criteria operator="OR" comment="Architecture section">
+        <criteria operator="AND" comment="Architecture independent section">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881"/>
+          <criterion comment="volution-data-server-common DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48743"/>
+        </criteria>
+        <criterion comment="libcamel1.2-8 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48413"/>
+        <criterion comment="libegroupwise1.2-10 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:49010"/>
+        <criterion comment="libedata-book1.2-2 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48972"/>
+        <criterion comment="libedata-cal1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48924"/>
+        <criterion comment="libegroupwise1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48929"/>
+        <criterion comment="libebook1.2-5 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48961"/>
+        <criterion comment="libexchange-storage1.2-1 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48931"/>
+        <criterion comment="libedataserverui1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48799"/>
+        <criterion comment="libedata-cal1.2-5 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:49000"/>
+        <criterion comment="libebook1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48333"/>
+        <criterion comment="libedata-book1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48995"/>
+        <criterion comment="volution-data-server-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48786"/>
+        <criterion comment="volution-data-server-dbg DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48809"/>
+        <criterion comment="libedataserverui1.2-6 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48161"/>
+        <criterion comment="libexchange-storage1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48963"/>
+        <criterion comment="volution-data-server DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:49028"/>
+        <criterion comment="libedataserver1.2-7 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:49092"/>
+        <criterion comment="libecal1.2-6 DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48357"/>
+        <criterion comment="libcamel1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:49154"/>
+        <criterion comment="libecal1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48412"/>
+        <criterion comment="libedataserver1.2-dev DPKG is earlier than 1.6.3-5etch3" test_ref="oval:org.mitre.oval:tst:48952"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

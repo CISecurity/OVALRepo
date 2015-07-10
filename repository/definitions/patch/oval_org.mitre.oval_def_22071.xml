@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:22071" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2011:1243: thunderbird security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <platform>CentOS Linux 6</platform>
+      <product>thunderbird</product>
+    </affected>
+    <reference source="VENDOR" ref_id="RHSA-2011:1243-01" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1243.html"/>
+    <reference source="CESA" ref_id="CESA-2011:1243"/>
+    <description>Mozilla Thunderbird is a standalone mail and newsgroup client.
+
+It was found that a Certificate Authority (CA) issued a fraudulent HTTPS
+certificate. This update renders any HTTPS certificates signed by that
+CA as untrusted, except for a select few. The now untrusted certificates
+that were issued before July 1, 2011 can be manually re-enabled and used
+again at your own risk in Thunderbird; however, affected certificates
+issued after this date cannot be re-enabled or used. (BZ#734316)
+
+All Thunderbird users should upgrade to this updated package, which
+resolves this issue. All running instances of Thunderbird must be
+restarted for the update to take effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-15T12:06:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-01-15T12:37:17.510-05:00">DRAFT</status_change>
+        <status_change date="2014-02-03T04:04:16.987-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:02:39.160-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:22071 - Products and Centos critera added" date="2014-06-13T17:47:00.365-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T17:50:40.846-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:09:45.918-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Operation system section">
+      <criteria operator="OR" comment="Redhat 5 or Centos 5 release">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criterion comment="thunderbird is earlier than 0:2.0.0.24-24.el5" test_ref="oval:org.mitre.oval:tst:98185"/>
+    </criteria>
+    <criteria comment="Operation system section">
+      <criterion comment="thunderbird is earlier than 0:3.1.12-2.el6_1" test_ref="oval:org.mitre.oval:tst:98102"/>
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+    </criteria>
+  </criteria>
+</definition>

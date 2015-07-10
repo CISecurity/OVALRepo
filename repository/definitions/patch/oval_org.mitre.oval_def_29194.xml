@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29194" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-2628-2 -- nss-pam-ldapd -- buffer overflow</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 6.0</platform>
+      <platform>Debian GNU/kFreeBSD 6.0</platform>
+      <product>nss-pam-ldapd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2628" ref_id="DSA-2628-2"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0288" ref_id="CVE-2013-0288"/>
+    <description>Garth Mollett discovered that a file descriptor overflow issue in the use of FD_SETin nss-pam-ldapd, which provides NSS and PAM modules for using LDAP as a naming service, can lead to a stack-based buffer overflow. An attacker could, under some circumstances, use this flaw to cause a process that has the NSS or PAM module loaded to crash or potentially execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:39:17">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:37:26.987-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
+    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
+    </criteria>
+    <criterion comment="nss-pam-ldapd is earlier than 0:0.7.15+squeeze4" test_ref="oval:org.mitre.oval:tst:140177"/>
+  </criteria>
+</definition>

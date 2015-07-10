@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:3157" version="4" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>IE6 (for XP,SP2) Content Advisor Memory Corruption Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <product>Microsoft Internet Explorer</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2005-0555" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0555"/>
+    <description>Buffer overflow in the Content Advisor in Microsoft Internet Explorer 5.01, 5.5, and 6 allows remote attackers to execute arbitrary code via a crafted Content Advisor file, aka "Content Advisor Memory Corruption Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-05-10T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Harvey Rubinovitz</contributor>
+        </submitted>
+        <status_change date="2005-05-11T05:38:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-06-01T03:30:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-06-22T12:38:00.000-04:00">ACCEPTED</status_change>
+        <modified comment="Fixed obj:583: Removed blank after the word Filelist in the Key.  Modified by Harvey Rubinovitz." date="2007-01-22T00:06:00.366-05:00">
+          <contributor organization="Centennial Software">John Hoyland</contributor>
+        </modified>
+        <status_change date="2007-01-22T00:07:40.648-05:00">INTERIM</status_change>
+        <status_change date="2007-02-20T13:40:17.527-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:247 - cvename in reference was replaced with CVE-2013-1311 and description was modified" date="2014-02-04T12:25:00.319-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-02-04T12:28:34.906-05:00">INTERIM</status_change>
+        <status_change date="2014-02-24T04:03:14.607-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criterion comment="Internet Explorer 6.0 Installed XP SP2" negate="false" test_ref="oval:org.mitre.oval:tst:2403"/>
+      <criterion comment="the version of mshtml.dll is less than 6.0.2900.2627" negate="false" test_ref="oval:org.mitre.oval:tst:768"/>
+      <criterion comment="the patch kb890923  is installed (XP SP2 Hotfix key)" negate="true" test_ref="oval:org.mitre.oval:tst:767"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criteria operator="OR" comment="ActiveX controls and active scripting are enabled">
+        <criteria operator="AND" comment="current user settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="true" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2917"/>
+          <criterion comment="active scripting is enabled for the current user" negate="false" test_ref="oval:org.mitre.oval:tst:2812"/>
+        </criteria>
+        <criteria operator="AND" comment="local machine settings are being used and ActiveX controls and active scripting are enabled">
+          <criterion comment="use machine settings rather than individual user settings" negate="false" test_ref="oval:org.mitre.oval:tst:2951"/>
+          <criterion comment="ActiveX controls are enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2916"/>
+          <criterion comment="active scripting is enabled for the local machine" negate="false" test_ref="oval:org.mitre.oval:tst:2811"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

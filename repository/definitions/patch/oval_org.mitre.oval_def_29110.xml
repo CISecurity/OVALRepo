@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:29110" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1060 -- pidgin security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 4</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>pidgin</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1060.html" ref_id="RHSA-2009:1060"/>
+    <reference source="CESA-2009:1060" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-May/015891.html" ref_id="CESA-2009:1060-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1373" ref_id="CVE-2009-1373"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1374" ref_id="CVE-2009-1374"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1375" ref_id="CVE-2009-1375"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1376" ref_id="CVE-2009-1376"/>
+    <description>Updated pidgin packages that fix several security issues are now available
+for Red Hat Enterprise Linux 4 and 5.
+This update has been rated as having important security impact by the Red
+Hat Security Response Team.
+Pidgin is an instant messaging program which can log in to multiple
+accounts on multiple instant messaging networks simultaneously.
+A buffer overflow flaw was found in the way Pidgin initiates file transfers
+when using the Extensible Messaging and Presence Protocol (XMPP). If a
+Pidgin client initiates a file transfer, and the remote target sends a
+malformed response, it could cause Pidgin to crash or, potentially, execute
+arbitrary code with the permissions of the user running Pidgin. This flaw
+only affects accounts using XMPP, such as Jabber and Google Talk.
+(CVE-2009-1373)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:54:55">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T10:30:42.742-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="finch-devel is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139391"/>
+        <criterion comment="libpurple-devel is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139367"/>
+        <criterion comment="pidgin-devel is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139158"/>
+        <criterion comment="finch is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139335"/>
+        <criterion comment="libpurple is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139481"/>
+        <criterion comment="libpurple-perl is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139616"/>
+        <criterion comment="libpurple-tcl is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139476"/>
+        <criterion comment="pidgin is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139634"/>
+        <criterion comment="pidgin-perl is earlier than 0:2.5.5-3.el5" test_ref="oval:org.mitre.oval:tst:139681"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 4 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="finch is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139278"/>
+        <criterion comment="finch-devel is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139587"/>
+        <criterion comment="libpurple is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139489"/>
+        <criterion comment="libpurple-devel is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139196"/>
+        <criterion comment="libpurple-perl is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139628"/>
+        <criterion comment="libpurple-tcl is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139586"/>
+        <criterion comment="pidgin is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139605"/>
+        <criterion comment="pidgin-devel is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139538"/>
+        <criterion comment="pidgin-perl is earlier than 0:2.5.5-2.el4" test_ref="oval:org.mitre.oval:tst:139400"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1157" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Crystal Reports Business Objects Directory Traversal</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <product>Crystal Enterprise</product>
+      <product>Crystal Reports</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-0204" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0204"/>
+    <description>Directory traversal vulnerability in the web viewers for Business Objects Crystal Reports 9 and 10, and Crystal Enterprise 9 or 10, as used in Visual Studio .NET 2003 and Outlook 2003 with Business Contact Manager, Microsoft Business Solutions CRM 1.2, and other products, allows remote attackers to read and delete arbitrary files via ".." sequences in the dynamicimag argument to crystalimagehandler.aspx.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2004-06-09T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Andrew Buttner</contributor>
+        </submitted>
+        <modified date="2005-01-18T12:00:00.000-04:00" comment="modified wrt-400 - Changed datatype to int was incorrectly set to binary">
+          <contributor organization="The MITRE Corporation">Jonathan Baker</contributor>
+        </modified>
+      </dates>
+      <status>INTERIM</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria operator="AND" comment="Software section">
+      <criterion comment="the version of CrystalDecisions.Web.dll is less than 9.1.9800.9" test_ref="oval:org.mitre.oval:tst:1113"/>
+    </criteria>
+    <criteria operator="AND" comment="Configuration section">
+      <criterion comment="the w3svc service is enabled" test_ref="oval:org.mitre.oval:tst:1112"/>
+      <criterion comment="a website linked to the Crystal Reports Viewer is active" test_ref="oval:org.mitre.oval:tst:1111"/>
+    </criteria>
+  </criteria>
+</definition>

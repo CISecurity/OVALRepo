@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5825" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Messaging Queue Service Remote Code Execution Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2008-3464" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3464"/>
+    <description>afd.sys in the Ancillary Function Driver (AFD) component in Microsoft Windows XP SP2 and SP3 and Windows Server 2003 SP1 and SP2 does not properly validate input sent from user mode to the kernel, which allows local users to gain privileges via a crafted application, as demonstrated using crafted pointers and lengths that bypass intended ProbeForRead and ProbeForWrite restrictions, aka "AFD Kernel Overwrite Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-10-14T14:00:00">
+          <contributor organization="Secure Elements, Inc.">Jeff Ito</contributor>
+        </submitted>
+        <status_change date="2008-10-16T14:02:09.987-04:00">DRAFT</status_change>
+        <status_change date="2008-11-03T04:00:20.631-05:00">INTERIM</status_change>
+        <status_change date="2008-11-24T04:00:14.752-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:5825 - Added support for Windows Server 2003 SP1 &amp; SP2 for Itanium Edition" date="2011-10-17T14:43:00.381-04:00">
+          <contributor organization="SecPod Technologies">Prashanth A.</contributor>
+        </modified>
+        <status_change date="2011-10-17T14:44:17.357-04:00">INTERIM</status_change>
+        <status_change date="2011-11-07T04:01:02.959-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Check for vulnerable Windows XP SP2 and afd.sys version">
+      <extend_definition comment="Microsoft Windows XP SP2 or later is installed" definition_ref="oval:org.mitre.oval:def:521"/>
+      <criterion comment="The version of afd.sys is less than 5.1.2600.3427." test_ref="oval:org.mitre.oval:tst:9248"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Windows XP SP3 and afd.sys version">
+      <extend_definition comment="Microsoft Windows XP (x86) SP3 is installed" definition_ref="oval:org.mitre.oval:def:5631"/>
+      <criterion comment="The version of afd.sys is less than 5.1.2600.5657." test_ref="oval:org.mitre.oval:tst:9065"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Windows XP SP1(x64)/Windows Server 2003 SP1 (x86)/(x64)/(IA-64) and afd.sys version">
+      <criteria operator="OR" comment="Check for vulnerable Windows XP SP1(x64)/Windows Server 2003 SP1 (x86)/(x64)/(IA-64)">
+        <extend_definition comment="Microsoft Windows XP Professional x64 Edition SP1 is installed" definition_ref="oval:org.mitre.oval:def:720"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:565"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (x64) is installed" definition_ref="oval:org.mitre.oval:def:730"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP1 for Itanium is installed" definition_ref="oval:org.mitre.oval:def:1205"/>
+      </criteria>
+      <criterion comment="The version of afd.sys is less than 5.2.3790.3192." test_ref="oval:org.mitre.oval:tst:9122"/>
+    </criteria>
+    <criteria operator="AND" comment="Check for vulnerable Windows XP SP2(x64)/Windows Server 2003 SP2 (x86)/(x64)/(IA-64) and afd.sys version">
+      <criteria operator="OR" comment="Check for vulnerable Windows XP SP2(x64)/Windows Server 2003 SP2 (x86)/(x64)/(IA-64)">
+        <extend_definition comment="Microsoft Windows XP x64 Edition SP2 is installed" definition_ref="oval:org.mitre.oval:def:4193"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1935"/>
+        <extend_definition comment="Microsoft Windows Server 2003 SP2 (x64) is installed" definition_ref="oval:org.mitre.oval:def:2161"/>
+        <extend_definition comment="Microsoft Windows Server 2003 (ia64) SP2 is installed" definition_ref="oval:org.mitre.oval:def:1442"/>
+      </criteria>
+      <criterion comment="The version of afd.sys is less than 5.2.3790.4355." test_ref="oval:org.mitre.oval:tst:9331"/>
+    </criteria>
+  </criteria>
+</definition>

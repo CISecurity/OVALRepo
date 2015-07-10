@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:8595" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Movie Maker and Producer Buffer Overflow Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows 7</platform>
+      <product>Movie Maker 2.1</product>
+      <product>Movie Maker 2.6</product>
+      <product>Movie Maker 6.0</product>
+      <product>Microsoft Producer 2003</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-0265" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0265"/>
+    <description>Buffer overflow in Microsoft Windows Movie Maker 2.1, 2.6, and 6.0, and Microsoft Producer 2003, allows remote attackers to execute arbitrary code via a crafted project (.MSWMM) file, aka "Movie Maker and Producer Buffer Overflow Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2010-03-09T13:00:00">
+          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
+        </submitted>
+        <status_change date="2010-03-10T11:31:12.438-05:00">DRAFT</status_change>
+        <modified date="2010-05-05T12:00:00.000-05:00" comment="Added criteria for Microsoft Producer 2003">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2010-05-05T12:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2010-05-24T04:00:04.994-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - New Microsoft Patch Tuesday May 2012 definitions." date="2012-05-18T15:40:00.554-04:00">
+          <contributor organization="Symantec Corporation">Josh Turpin</contributor>
+        </modified>
+        <status_change date="2012-05-18T15:48:49.140-04:00">INTERIM</status_change>
+        <status_change date="2012-06-04T04:02:56.641-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:309 - Modified criteria to match MS bulletin" date="2014-06-13T14:52:00.642-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-06-13T14:56:24.051-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:11:29.788-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8595 - extended definitions of OS are without SP checks" date="2014-07-28T17:51:00.661-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-07-28T17:52:51.029-04:00">INTERIM</status_change>
+        <status_change date="2014-08-18T04:06:37.887-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND" comment="Vulnerable Movie Maker 2.1 on Microsoft Windows XP (x86)">
+      <extend_definition comment="Microsoft Windows XP (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1353"/>
+      <criterion comment="Moviemk.exe version is less than 2.1.4027.0" test_ref="oval:org.mitre.oval:tst:21003"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 2.1 on Microsoft Windows XP x64">
+      <extend_definition comment="Microsoft Windows XP x64 is installed" definition_ref="oval:org.mitre.oval:def:15247"/>
+      <criteria operator="OR" comment="file version">
+        <criterion comment="Wmoviemk.exe version is less than 2.1.4030.0" test_ref="oval:org.mitre.oval:tst:20887"/>
+        <criterion comment="Moviemk.exe version is less than 2.1.4030.0" test_ref="oval:org.mitre.oval:tst:21037"/>
+      </criteria>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64 - GDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6000.16000" test_ref="oval:org.mitre.oval:tst:21014"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6000.16937" test_ref="oval:org.mitre.oval:tst:20978"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64 - LDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6000.20000" test_ref="oval:org.mitre.oval:tst:21119"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6000.21139" test_ref="oval:org.mitre.oval:tst:20898"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64 - GDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6001.18000" test_ref="oval:org.mitre.oval:tst:20954"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6001.18341" test_ref="oval:org.mitre.oval:tst:20135"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64 - LDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6001.22000" test_ref="oval:org.mitre.oval:tst:20860"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6001.22541" test_ref="oval:org.mitre.oval:tst:21045"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64, Server 2008 32bit/x64/ia64 - GDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6002.18000" test_ref="oval:org.mitre.oval:tst:20315"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6002.18121" test_ref="oval:org.mitre.oval:tst:21118"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 6.0 on Microsoft Windows Vista x86/x64 - LDR">
+      <criteria operator="OR" comment="Vista x86/x64">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+      </criteria>
+      <criterion comment="Moviemk.dll version is greater than or equal to 6.0.6002.22000" test_ref="oval:org.mitre.oval:tst:21108"/>
+      <criterion comment="Moviemk.dll version is less than 6.0.6002.22245" test_ref="oval:org.mitre.oval:tst:20993"/>
+    </criteria>
+    <criteria operator="AND" comment="Vulnerable Movie Maker 2.6 on Microsoft Windows Vista, Windows 7">
+      <criteria operator="OR" comment="Windows Vista, Windows 7">
+        <extend_definition comment="Microsoft Windows Vista (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:1282"/>
+        <extend_definition comment="Microsoft Windows Vista x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:2041"/>
+        <extend_definition comment="Microsoft Windows 7 (32-bit) is installed" definition_ref="oval:org.mitre.oval:def:6165"/>
+        <extend_definition comment="Microsoft Windows 7 x64 Edition is installed" definition_ref="oval:org.mitre.oval:def:5950"/>
+      </criteria>
+      <extend_definition comment="Windows Movie Maker 2.6 is installed" definition_ref="oval:org.mitre.oval:def:8694"/>
+      <criterion comment="Moviemk.exe version is less than 2.6.4038.0" test_ref="oval:org.mitre.oval:tst:20750"/>
+    </criteria>
+    <extend_definition comment="Microsoft Producer 2003 is installed" definition_ref="oval:org.mitre.oval:def:7279"/>
+  </criteria>
+</definition>

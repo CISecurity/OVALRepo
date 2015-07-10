@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25431" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0150-1 -- Security update for libxml2</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140150-1.html" ref_id="SUSE-SU-2014:0150-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2877" ref_id="CVE-2013-2877"/>
+    <description>This update fixes a DoS vulnerability in libxml2.
+CVE-2013-2877 has been  assigned to this issue.
+
+Security Issue reference:
+
+    * CVE-2013-2877
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2877
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:20:03">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:19:00.913-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:18.726-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:20.252-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <criteria operator="OR" comment="Operation system section">
+        <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+        <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+      </criteria>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="libxml2 RPM is earlier than 0:2.7.6-0.25.1" test_ref="oval:org.mitre.oval:tst:116828"/>
+        <criterion comment="libxml2-python RPM is earlier than 0:2.7.6-0.25.1" test_ref="oval:org.mitre.oval:tst:117713"/>
+        <criterion comment="libxml2-32bit RPM is earlier than 0:2.7.6-0.25.1" test_ref="oval:org.mitre.oval:tst:117670"/>
+      </criteria>
+    </criteria>
+    <criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <criterion comment="libxml2-doc RPM is earlier than 0:2.7.6-0.25.1" test_ref="oval:org.mitre.oval:tst:117300"/>
+    </criteria>
+  </criteria>
+</definition>

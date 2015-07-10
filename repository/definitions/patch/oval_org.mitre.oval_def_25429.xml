@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:25429" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-YU-2013:1408-1 -- Security update for libzypp</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <platform>SUSE Linux Enterprise Desktop 11</platform>
+      <product>libzypp</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2013/suse-yu-20131408-1.html" ref_id="SUSE-YU-2013:1408-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3704" ref_id="CVE-2013-3704"/>
+    <description>libzypp did not handle multiple gpg pubkeys in the
+repomd.xml.key and  content.key consistently and secure.
+Attackers could have exploited this to  add their own keys
+and pretend it's from SUSE.
+
+Security Issue reference:
+
+    * CVE-2013-3704
+&lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-3704
+></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:27:06">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:22:58.628-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:04:18.568-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:02:20.116-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria operator="OR" comment="Operation system section">
+      <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+      <extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140"/>
+    </criteria>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="libzypp RPM is earlier than 0:9.37.1-0.7.1" test_ref="oval:org.mitre.oval:tst:118222"/>
+      <criterion comment="libzypp RPM is earlier than 0:9.16.1-0.5.1" test_ref="oval:org.mitre.oval:tst:117633"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28073" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>USN-2391-1 -- php5 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 14.10</platform>
+      <platform>Ubuntu 14.04</platform>
+      <platform>Ubuntu 12.04</platform>
+      <platform>Ubuntu 10.04</platform>
+      <product>php5</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://www.ubuntu.com/usn/usn-2391-1/" ref_id="USN-2391-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3668" ref_id="CVE-2014-3668"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3669" ref_id="CVE-2014-3669"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3670" ref_id="CVE-2014-3670"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3710" ref_id="CVE-2014-3710"/>
+    <description><![CDATA[Symeon Paraschoudis discovered that PHP incorrectly handled the mkgmtime
+function. A remote attacker could possibly use this issue to cause PHP to
+crash, resulting in a denial of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3668">CVE-2014-3668</a>)
+
+Symeon Paraschoudis discovered that PHP incorrectly handled unserializing
+objects. A remote attacker could possibly use this issue to cause PHP to
+crash, resulting in a denial of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3669">CVE-2014-3669</a>)
+
+Otto Ebeling discovered that PHP incorrectly handled the exif_thumbnail
+function. A remote attacker could use this issue to cause PHP to crash,
+resulting in a denial of service, or possibly execute arbitrary code.
+(<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3670">CVE-2014-3670</a>)
+
+Francisco Alonso that PHP incorrectly handled ELF files in the fileinfo
+extension. A remote attacker could possibly use this issue to cause PHP to
+crash, resulting in a denial of service. (<a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3710">CVE-2014-3710</a>)
+
+It was discovered that PHP incorrectly handled NULL bytes when processing
+certain URLs with the curl functions. A remote attacker could possibly use
+this issue to bypass filename restrictions and obtain access to sensitive
+files. (No CVE number)]]></description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-11-14T09:52:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-11-17T18:43:51.331-05:00">DRAFT</status_change>
+        <status_change date="2014-12-08T04:00:54.825-05:00">INTERIM</status_change>
+        <status_change date="2014-12-29T04:00:29.043-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:28073 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-20T10:53:13.068-05:00">INTERIM</status_change>
+        <status_change date="2015-03-09T04:01:28.382-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Ubuntu 14.10 release section">
+      <extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php5-cli is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:135081"/>
+        <criterion comment="php5-cgi is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:135270"/>
+        <criterion comment="php5-xmlrpc is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:135566"/>
+        <criterion comment="php5-curl is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:135508"/>
+        <criterion comment="libapache2-mod-php5 is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:134723"/>
+        <criterion comment="php5-fpm is earlier than 0:5.5.12+dfsg-2ubuntu4.1" test_ref="oval:org.mitre.oval:tst:135445"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 14.04 release section">
+      <extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php5-cli is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135166"/>
+        <criterion comment="php5-cgi is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135005"/>
+        <criterion comment="php5-xmlrpc is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135534"/>
+        <criterion comment="php5-curl is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135200"/>
+        <criterion comment="libapache2-mod-php5 is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135525"/>
+        <criterion comment="php5-fpm is earlier than 0:5.5.9+dfsg-1ubuntu4.5" test_ref="oval:org.mitre.oval:tst:135383"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 12.04 release section">
+      <extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php5-cli is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:134907"/>
+        <criterion comment="php5-cgi is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:135222"/>
+        <criterion comment="php5-xmlrpc is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:135519"/>
+        <criterion comment="php5-curl is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:135102"/>
+        <criterion comment="libapache2-mod-php5 is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:134988"/>
+        <criterion comment="php5-fpm is earlier than 0:5.3.10-1ubuntu3.15" test_ref="oval:org.mitre.oval:tst:135439"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Ubuntu 10.04 release section">
+      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="php5-cli is earlier than 0:5.3.2-1ubuntu4.28" test_ref="oval:org.mitre.oval:tst:135526"/>
+        <criterion comment="php5-cgi is earlier than 0:5.3.2-1ubuntu4.28" test_ref="oval:org.mitre.oval:tst:135402"/>
+        <criterion comment="libapache2-mod-php5 is earlier than 0:5.3.2-1ubuntu4.28" test_ref="oval:org.mitre.oval:tst:135511"/>
+        <criterion comment="php5-curl is earlier than 0:5.3.2-1ubuntu4.28" test_ref="oval:org.mitre.oval:tst:135436"/>
+        <criterion comment="php5-xmlrpc is earlier than 0:5.3.2-1ubuntu4.28" test_ref="oval:org.mitre.oval:tst:135521"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

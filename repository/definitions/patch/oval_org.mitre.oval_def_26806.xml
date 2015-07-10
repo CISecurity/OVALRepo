@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:26806" version="5" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2014-3072 -- Unbreakable Enterprise kernel security update (Important)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 7</platform>
+      <platform>Oracle Linux 6</platform>
+      <product>kernel-uek</product>
+    </affected>
+    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-3072.html" ref_id="ELSA-2014-3072"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3917" ref_id="CVE-2014-3917"/>
+    <description>kernel-uek
+[3.8.13-44.1.1.el7uek]
+- auditsc: audit_krule mask accesses need bounds checking (Andy 
+Lutomirski)  [Orabug: 19590596]  {CVE-2014-3917}</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-10-01T10:20:51">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-10-10T18:35:17.242-04:00">DRAFT</status_change>
+        <status_change date="2014-10-27T04:01:36.966-04:00">INTERIM</status_change>
+        <status_change date="2014-11-17T04:00:55.931-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:124649 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-26T18:48:25.499-05:00">INTERIM</status_change>
+        <status_change date="2015-03-16T04:01:01.309-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Oracle Linux 7 release section">
+      <extend_definition comment="Oracle Linux 7.x" definition_ref="oval:org.mitre.oval:def:25183"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek-firmware RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:124454"/>
+        <criterion comment="kernel-uek-doc RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:124637"/>
+        <criterion comment="kernel-uek RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:124189"/>
+        <criterion comment="kernel-uek-devel RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:124914"/>
+        <criterion comment="kernel-uek-debug-devel RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:123957"/>
+        <criterion comment="kernel-uek-debug RPM is earlier than 0:3.8.13-44.1.1.el7uek" test_ref="oval:org.mitre.oval:tst:124701"/>
+        <criterion comment="dtrace-modules-3.8.13-44.1.1.el7uek RPM is earlier than 0:0.4.3-4.el7" test_ref="oval:org.mitre.oval:tst:124649"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Oracle Linux 6 release section">
+      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="kernel-uek-firmware RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124798"/>
+        <criterion comment="kernel-uek-doc RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124882"/>
+        <criterion comment="kernel-uek RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124706"/>
+        <criterion comment="kernel-uek-devel RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124906"/>
+        <criterion comment="kernel-uek-debug-devel RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124318"/>
+        <criterion comment="kernel-uek-debug RPM is earlier than 0:3.8.13-44.1.1.el6uek" test_ref="oval:org.mitre.oval:tst:124810"/>
+        <criterion comment="dtrace-modules-3.8.13-44.1.1.el6uek RPM is earlier than 0:0.4.3-4.el6" test_ref="oval:org.mitre.oval:tst:124893"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition version="1" id="oval:org.mitre.oval:def:8060" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>DSA-1782 mplayer -- several vulnerabilities</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>mplayer</product>
+    </affected>
+    <reference source="DSA" ref_url="http://www.debian.org/security/2009/dsa-1782" ref_id="DSA-1782"/>
+    <description>Several vulnerabilities have been discovered in mplayer, a movie player for Unix-like systems. The Common Vulnerabilities and Exposures project identifies the following problems: It was discovered that watching a malformed 4X movie file could lead to the execution of arbitrary code. It was discovered that multiple buffer overflows could lead to the execution of arbitrary code. It was discovered that watching a malformed TwinVQ file could lead to the execution of arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:10-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T07:58:06.391-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:52.695-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:52.456-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Release section" operator="AND">
+    <extend_definition comment="Debian 4.0 is installed" definition_ref="oval:org.mitre.oval:def:6461"/>
+    <criteria comment="Architecture section" operator="OR">
+      <criteria comment="Architecture independent section" operator="AND">
+        <criterion comment="all architecture" test_ref="oval:org.mitre.oval:tst:10881"/>
+        <criterion comment="mplayer-doc is earlier than 1.0~rc1-12etch7" test_ref="oval:org.mitre.oval:tst:17868"/>
+      </criteria>
+      <criteria comment="Architecture dependent section" operator="AND">
+        <criteria comment="Supported architectures section" operator="OR">
+          <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024"/>
+          <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392"/>
+          <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465"/>
+          <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933"/>
+          <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864"/>
+          <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195"/>
+          <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830"/>
+          <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654"/>
+          <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168"/>
+          <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164"/>
+        </criteria>
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="mplayer DPKG is earlier than 1.0~rc1-12etch7" test_ref="oval:org.mitre.oval:tst:17888"/>
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

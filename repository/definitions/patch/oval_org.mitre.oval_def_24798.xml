@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:24798" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>SUSE-SU-2014:0723-1 -- Security update for Samba</title>
+    <affected family="unix">
+      <platform>SUSE Linux Enterprise Server 11</platform>
+      <product>Samba</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140723-1.html" ref_id="SUSE-SU-2014:0723-1"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4496" ref_id="CVE-2013-4496"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4408" ref_id="CVE-2013-4408"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4124" ref_id="CVE-2013-4124"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0214" ref_id="CVE-2013-0214"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0213" ref_id="CVE-2013-0213"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6150" ref_id="CVE-2012-6150"/>
+    <description>This is a LTSS roll-up update for the Samba Server suite fixing multiple
+security issues and bugs.
+
+Security issues fixed:
+
+    * CVE-2013-4496: Password lockout was not enforced for SAMR password
+      changes, leading to brute force possibility.
+    * CVE-2013-4408: DCE-RPC fragment length field is incorrectly checked.
+    * CVE-2013-4124: Samba was affected by a denial of service attack on
+      authenticated or guest connections.
+    * CVE-2013-0214: The SWAT webadministration was affected by a cross
+      site scripting attack (XSS).
+    * CVE-2013-0213: The SWAT webadministration could possibly be used in
+      clickjacking attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-07-15T17:10:57">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-07-29T19:03:44.440-04:00">DRAFT</status_change>
+        <status_change date="2014-08-18T04:02:48.523-04:00">INTERIM</status_change>
+        <status_change date="2014-09-08T04:00:27.506-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270"/>
+    <criteria operator="OR" comment="Packages match section">
+      <criterion comment="cifs-mount RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116222"/>
+      <criterion comment="ldapsmb RPM is earlier than 0:1.34b-11.28.52.3" test_ref="oval:org.mitre.oval:tst:116655"/>
+      <criterion comment="libsmbclient0 RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116369"/>
+      <criterion comment="libtalloc1 RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116290"/>
+      <criterion comment="libtdb1 RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116638"/>
+      <criterion comment="libwbclient0 RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116270"/>
+      <criterion comment="samba RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:115758"/>
+      <criterion comment="samba-client RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:115729"/>
+      <criterion comment="samba-krb-printing RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116322"/>
+      <criterion comment="samba-winbind RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116326"/>
+      <criterion comment="libsmbclient0-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116635"/>
+      <criterion comment="libtalloc1-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116629"/>
+      <criterion comment="libtdb1-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:115748"/>
+      <criterion comment="libwbclient0-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116349"/>
+      <criterion comment="samba-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116387"/>
+      <criterion comment="samba-client-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116634"/>
+      <criterion comment="samba-winbind-32bit RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116534"/>
+      <criterion comment="samba-doc RPM is earlier than 0:3.4.3-1.52.3" test_ref="oval:org.mitre.oval:tst:116523"/>
+    </criteria>
+  </criteria>
+</definition>

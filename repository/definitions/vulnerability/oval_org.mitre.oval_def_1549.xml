@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:1549" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>WINS Association Context Vulnerability (64-bit Server 2003, Test 1)</title>
+    <affected family="windows">
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Windows Internet Naming Service (WINS)</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2004-1080" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-1080"/>
+    <description>The WINS service (wins.exe) on Microsoft Windows NT Server 4.0, Windows 2000 Server, and Windows Server 2003 allows remote attackers to write to arbitrary memory locations and possibly execute arbitrary code via a modified memory pointer in a WINS replication packet to TCP port 42, aka the "Association Context Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2005-01-03T12:00:00.000-04:00">
+          <contributor organization="The MITRE Corporation">Matthew Burton</contributor>
+        </submitted>
+        <status_change date="2005-01-12T12:41:00.000-04:00">DRAFT</status_change>
+        <status_change date="2005-02-02T12:00:00.000-04:00">INTERIM</status_change>
+        <status_change date="2005-02-23T09:25:00.000-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <criteria comment="Software section" operator="AND">
+      <criteria operator="AND" comment="Microsoft Windows Server 2003 64-Bit Edition">
+        <criterion comment="Windows Server 2003 is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2761"/>
+        <criterion comment="64-Bit version of Windows is installed" negate="false" test_ref="oval:org.mitre.oval:tst:2747"/>
+      </criteria>
+      <criterion comment="the version of wins.exe is less than 5.2.3790.239" negate="false" test_ref="oval:org.mitre.oval:tst:866"/>
+      <criterion comment="the patch KB870763 is installed" negate="true" test_ref="oval:org.mitre.oval:tst:865"/>
+    </criteria>
+    <criteria comment="Configuration section" operator="AND">
+      <criterion comment="the wins service is enabled" negate="false" test_ref="oval:org.mitre.oval:tst:2405"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:5407" version="3" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Microsoft Office Execution Jump Vulnerability</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows XP</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <product>Microsoft Office 2000</product>
+      <product>Microsoft Office XP</product>
+    </affected>
+    <reference ref_id="CVE-2008-0103" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0103" source="CVE"/>
+    <description>Unspecified vulnerability in Microsoft Office 2000 SP3, Office XP SP3, Office 2003 SP2, and Office 2004 for Mac allows remote attackers to execute arbitrary code via an Office document that contains a malformed object, related to a "memory handling error," aka "Microsoft Office Execution Jump Vulnerability."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2008-02-12T18:19:01">
+          <contributor organization="Secure Elements, Inc.">Sudhir Gandhe</contributor>
+        </submitted>
+        <status_change date="2008-02-13T16:35:12.578-05:00">DRAFT</status_change>
+        <status_change date="2008-03-03T04:00:17.279-05:00">INTERIM</status_change>
+        <status_change date="2008-03-24T04:00:47.186-04:00">ACCEPTED</status_change>
+        <modified comment="References registry value for Common Files directory due to multilingual support" date="2008-04-14T11:07:00.744-04:00">
+          <contributor organization="GFI Software">Clifford Farrugia</contributor>
+        </modified>
+        <status_change date="2008-04-14T12:25:45.141-04:00">INTERIM</status_change>
+        <status_change date="2008-05-05T04:00:24.702-04:00">ACCEPTED</status_change>
+        <modified comment="Removed &quot;Office  2002&quot; from list of products, corrected extra space in product names" date="2010-01-14T16:01:00.140-05:00">
+          <contributor organization="The MITRE Corporation">Mike Lah</contributor>
+        </modified>
+        <status_change date="2010-01-14T16:02:21.146-05:00">INTERIM</status_change>
+        <status_change date="2010-02-01T04:00:10.976-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Office 2000 is installed" definition_ref="oval:org.mitre.oval:def:93"/>
+      <criterion comment="the version of Vbe6.dll is less than 6.5.10.24" test_ref="oval:org.mitre.oval:tst:7726"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Office XP is installed" definition_ref="oval:org.mitre.oval:def:663"/>
+      <criterion comment="the version of Vbe6.dll is less than 6.5.10.24" test_ref="oval:org.mitre.oval:tst:7726"/>
+    </criteria>
+    <criteria operator="AND">
+      <extend_definition comment="Microsoft Office 2003 is installed" definition_ref="oval:org.mitre.oval:def:233"/>
+      <criterion comment="the version of Vbe6.dll is less than 6.5.10.24" test_ref="oval:org.mitre.oval:tst:7726"/>
+    </criteria>
+  </criteria>
+</definition>

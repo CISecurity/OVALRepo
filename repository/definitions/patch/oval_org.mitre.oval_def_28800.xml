@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:28800" version="1" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>RHSA-2009:1075 -- httpd security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>CentOS Linux 5</platform>
+      <product>httpd</product>
+    </affected>
+    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2009-1075.html" ref_id="RHSA-2009:1075"/>
+    <reference source="CESA-2009:1075" ref_url="http://lists.centos.org/pipermail/centos-announce/2009-May/015953.html" ref_id="CESA-2009:1075-CentOS 5"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1678" ref_id="CVE-2008-1678"/>
+    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1195" ref_id="CVE-2009-1195"/>
+    <description>Updated httpd packages that fix two security issues are now available for
+Red Hat Enterprise Linux 5.
+This update has been rated as having moderate security impact by the Red
+Hat Security Response Team.
+The Apache HTTP Server is a popular and freely-available Web server.
+A flaw was found in the handling of compression structures between mod_ssl
+and OpenSSL. If too many connections were opened in a short period of time,
+all system memory and swap space would be consumed by httpd, negatively
+impacting other processes, or causing a system crash. (CVE-2008-1678)</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-06-29T10:53:23">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2015-07-06T11:17:33.240-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-22.el5_3.1" test_ref="oval:org.mitre.oval:tst:140704"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-22.el5_3.1" test_ref="oval:org.mitre.oval:tst:141096"/>
+        <criterion comment="httpd is earlier than 0:2.2.3-22.el5_3.1" test_ref="oval:org.mitre.oval:tst:140508"/>
+        <criterion comment="mod_ssl is earlier than 0:2.2.3-22.el5_3.1" test_ref="oval:org.mitre.oval:tst:140501"/>
+      </criteria>
+    </criteria>
+    <criteria comment="CentOS Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="httpd is earlier than 0:2.2.3-22.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140715"/>
+        <criterion comment="httpd-devel is earlier than 0:2.2.3-22.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140112"/>
+        <criterion comment="httpd-manual is earlier than 0:2.2.3-22.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140942"/>
+        <criterion comment="mod_ssl is earlier than 0:2.2.3-22.el5.centos.1" test_ref="oval:org.mitre.oval:tst:140150"/>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

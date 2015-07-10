@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:11841" version="7" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Multiple integer overflow vulnerabilities in the in_midi plugin in Winamp before 5.6</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 2000</platform>
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2003</platform>
+      <platform>Microsoft Windows Server 2008</platform>
+      <platform>Microsoft Windows Vista</platform>
+      <platform>Microsoft Windows XP</platform>
+      <product>Winamp</product>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2010-4370" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4370"/>
+    <description>Multiple integer overflows in the in_midi plugin in Winamp before 5.6 allow remote attackers to execute arbitrary code via a crafted MIDI file that triggers a buffer overflow.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-03-18T13:47:07">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-03-18T16:57:55.514-04:00">DRAFT</status_change>
+        <status_change date="2011-04-04T04:00:06.288-04:00">INTERIM</status_change>
+        <status_change date="2011-04-25T04:00:05.285-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:var:1907 - Removed the trailing \ from all local_variables that are used as paths in a file_object" date="2011-08-03T08:25:00.425-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2011-08-03T08:28:11.423-04:00">INTERIM</status_change>
+        <status_change date="2011-08-22T04:00:15.514-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:obj:7602 - New Winamp vulnerability definitions and updated objects with windows_view behavior." date="2012-07-24T13:29:00.094-04:00">
+          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
+        </modified>
+        <status_change date="2012-07-24T13:37:50.690-04:00">INTERIM</status_change>
+        <status_change date="2012-08-13T04:00:03.035-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="AND">
+    <extend_definition comment="Winamp is installed" definition_ref="oval:org.mitre.oval:def:6897"/>
+    <criteria operator="OR" comment="Check if winamp version is less than 5.6.0.3091">
+      <criterion comment="Check if Winamp lower version is less than 5.6.0.3091" test_ref="oval:org.mitre.oval:tst:41945"/>
+      <criterion comment="Check if Winamp version is less than 5.6.0.3091" test_ref="oval:org.mitre.oval:tst:42231"/>
+    </criteria>
+    <criterion comment="Check if library file in_midi.dll is present" test_ref="oval:org.mitre.oval:tst:41988"/>
+  </criteria>
+</definition>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:2202" version="1" class="vulnerability" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>Security Vulnerability in the in.telnetd(1M) Daemon May Allow Unauthorized Remote Users to Gain Access to a Solaris Host</title>
+    <affected family="unix">
+      <platform>Sun Solaris 10</platform>
+    </affected>
+    <reference source="CVE" ref_id="CVE-2007-0882" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0882"/>
+    <description>Argument injection vulnerability in the telnet daemon (in.telnetd) in Solaris 10 and 11 (SunOS 5.10 and 5.11) misinterprets certain client "-f" sequences as valid requests for the login program to skip authentication, which allows remote attackers to log into certain accounts, as demonstrated by the bin account.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2007-08-10T12:25:19.000-04:00">
+          <contributor organization="Opsware, Inc.">Pai Peng</contributor>
+        </submitted>
+        <status_change date="2007-08-13T13:57:11.422-04:00">DRAFT</status_change>
+        <status_change date="2007-09-06T09:13:32.140-04:00">INTERIM</status_change>
+        <status_change date="2007-09-27T08:57:46.156-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR" comment="Software Section">
+    <criteria operator="AND" comment="Solaris 10 (SPARC) meets Sun Alert 102802" negate="false">
+      <extend_definition comment="Solaris 10 (SPARC) is installed" definition_ref="oval:org.mitre.oval:def:1440"/>
+      <criterion comment="Patch 120068-02 or later installed" test_ref="oval:org.mitre.oval:tst:3727" negate="true"/>
+    </criteria>
+    <criteria operator="AND" comment="Solaris 10 (x86) meets Sun Alert 102802" negate="false">
+      <extend_definition comment="Solaris 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:1926"/>
+      <criterion comment="Patch 120069-02 or later installed" test_ref="oval:org.mitre.oval:tst:3199" negate="true"/>
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition id="oval:org.mitre.oval:def:23747" version="6" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <metadata>
+    <title>ELSA-2012:1261: dbus security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Oracle Linux 6</platform>
+      <product>dbus</product>
+    </affected>
+    <reference ref_id="ELSA-2012:1261-01" ref_url="http://linux.oracle.com/errata/ELSA-2012-1261.html" source="VENDOR"/>
+    <reference ref_id="CVE-2012-3524" ref_url="http://linux.oracle.com/cve/CVE-2012-3524.html" source="CVE"/>
+    <description>libdbus 1.5.x and earlier, when used in setuid or other privileged programs in X.org and possibly other products, allows local users to gain privileges and execute arbitrary code via the DBUS_SYSTEM_BUS_ADDRESS environment variable.  NOTE: libdbus maintainers state that this is a vulnerability in the applications that do not cleanse environment variables, not in libdbus itself: "we do not support use of libdbus in setuid binaries that do not sanitize their environment before their first call into libdbus."</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-01-13T12:30:04.000-05:00">
+          <contributor organization="Hewlett-Packard">Vinay Naikar</contributor>
+        </submitted>
+        <status_change date="2014-03-18T10:37:49.769-04:00">DRAFT</status_change>
+        <status_change date="2014-04-07T04:05:57.142-04:00">INTERIM</status_change>
+        <status_change date="2014-04-28T04:06:02.351-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:23747 - optimisation of Oracle Linux content" date="2014-05-05T17:27:00.179-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2014-05-05T17:30:00.875-04:00">INTERIM</status_change>
+        <status_change date="2014-05-26T04:05:19.776-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
+    <criteria operator="OR" comment="rpm test">
+      <criterion comment="dbus-devel is earlier than 1:1.2.24-7.el6_3" test_ref="oval:org.mitre.oval:tst:110214"/>
+      <criterion comment="dbus is earlier than 1:1.2.24-7.el6_3" test_ref="oval:org.mitre.oval:tst:110885"/>
+      <criterion comment="dbus-x11 is earlier than 1:1.2.24-7.el6_3" test_ref="oval:org.mitre.oval:tst:111146"/>
+      <criterion comment="dbus-libs is earlier than 1:1.2.24-7.el6_3" test_ref="oval:org.mitre.oval:tst:110590"/>
+      <criterion comment="dbus-doc is earlier than 1:1.2.24-7.el6_3" test_ref="oval:org.mitre.oval:tst:111049"/>
+    </criteria>
+  </criteria>
+</definition>
