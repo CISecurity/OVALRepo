@@ -20,6 +20,21 @@ $ brew install python3
 $ pip3 install lxml
 ```
 
+Prerequisites:
+ * Homebrew (http://brew.sh/) -- or install via command line:
+ 
+ ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
+ 
+ * Xcode
+ 
+The installation of lxml may fail with an error indicating that libxml/xmlversion.h cannot be found.  In that case, try the following:
+ 
+ ```
+ $ xcode-select --install
+ $ pip3 install lxml
+ ```
+ 
+
 ### Serialization Directory Structure
 * (file) full_repository.txt
 	This file contains the file name for every definition in the repository.  The relative file path to each definition's XML file is /oval_repository/repository/definitions.  This allows for the construction of the full OVAL repository bulk download, as per http://oval.mitre.org/rep-data/5.10/org.mitre.oval/oval.xml.
