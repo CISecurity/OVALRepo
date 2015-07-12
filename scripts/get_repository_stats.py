@@ -4,7 +4,7 @@
 Authors: David Ries <ries@jovalcm.com>
 
 For usage information, please see the command line help:
-    python3 get_repository_stats -h
+    python3 get_repository_stats.py -h
 
 TODO:
 - TBD
