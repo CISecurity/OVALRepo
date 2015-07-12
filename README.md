@@ -35,6 +35,16 @@ The installation of lxml may fail with an error indicating that libxml/xmlversio
  ```
  
 
+### Linux (Debian/Ubuntu)
+
+1. Install python3.  Most likely this is already installed on recent OS releases.  Otherwise
+``` sudo apt-get install python3```
+2. Install pip3:  ```sudo apt-get install python3-pip```
+3. Install lxml:  ```sudo apt-get install python3-lxml```
+4. Install git:  ```sudo apt-get install git-core```
+
+
+
 ### Serialization Directory Structure
 * (file) full_repository.txt
 	This file contains the file name for every definition in the repository.  The relative file path to each definition's XML file is /oval_repository/repository/definitions.  This allows for the construction of the full OVAL repository bulk download, as per http://oval.mitre.org/rep-data/5.10/org.mitre.oval/oval.xml.
