@@ -4,7 +4,7 @@
 Authors: David Ries <ries@jovalcm.com>
 
 For usage information, please see the command line help:
-    python3 build_oval_definitions_file -h
+    python3 build_oval_definitions_file.py -h
 
 TODO:
 - testing
@@ -42,6 +42,7 @@ def main():
     source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
     source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    output_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -53,8 +54,12 @@ def main():
         if field in args and args[field]:
             query[field] = args[field]
 
-    # at least one definition selection option must be specified
-    if not query:
+    # --all_definitions OR at least one definition selection option must be specified
+    if args['all_definitions'] and query:
+        message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
+        parser.print_help()
+        sys.exit(0)
+    elif not (args['all_definitions'] or query):
         message('error','At least one definitions filtering argument must be provided.')
         parser.print_help()
         sys.exit(0)
@@ -89,8 +94,8 @@ def main():
         OvalGenerator.queue_element_file(element_type, file_path)
 
     # write output file
-    message('info','writing OVAL definitions to {0}'.format(args['filename']))
-    OvalGenerator.write(args['filename'])
+    message('info','writing OVAL definitions to {0}'.format(args['outfile']))
+    OvalGenerator.write(args['outfile'])
 
     # validate
     if args['validate']:
@@ -98,7 +103,7 @@ def main():
         schema_path = lib_repo.get_oval_def_schema('5.11.1')
         message('info','performing schema validation')
         try:
-            lib_xml.schema_validate(args['filename'], schema_path)
+            lib_xml.schema_validate(args['outfile'], schema_path)
             message('info','schema validation successful')
         except lib_xml.SchemaValidationError as e:
             message('error','schema validation failed:\n\t{0}'.format(e.message))
@@ -108,7 +113,7 @@ def main():
         schema_path = lib_repo.get_oval_def_schema('5.11.1')
         message('info','performing schematron validation')
         try:
-            lib_xml.schematron_validate(args['filename'], schema_path)
+            lib_xml.schematron_validate(args['outfile'], schema_path)
             message('info','schematron validation successful')
         except lib_xml.SchematronValidationError as e:
             message('error','schematron validation failed:\n\t{0}'.format('\n\t'.join(e.messages)))
