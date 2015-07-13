@@ -42,6 +42,7 @@ def main():
     source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
     source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    output_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -53,8 +54,12 @@ def main():
         if field in args and args[field]:
             query[field] = args[field]
 
-    # at least one definition selection option must be specified
-    if not query:
+    # --all_definitions OR at least one definition selection option must be specified
+    if args['all_definitions'] and query:
+        message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
+        parser.print_help()
+        sys.exit(0)
+    elif not (args['all_definitions'] or query):
         message('error','At least one definitions filtering argument must be provided.')
         parser.print_help()
         sys.exit(0)
