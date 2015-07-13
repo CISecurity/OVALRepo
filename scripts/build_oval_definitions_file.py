@@ -23,7 +23,7 @@ def main():
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
     output_options = parser.add_argument_group('output options')
-    output_options.add_argument('-o', '--outfile', required=True, help='file name for output OVAL definitions file')
+    output_options.add_argument('-f', '--filename', required=True, help='file name for output OVAL definitions file')
     output_options.add_argument('-v', '--validate', default=False, action="store_true", help='schema validate the output file')
     output_options.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the output file')
     source_options = parser.add_argument_group('definitions filtering',
