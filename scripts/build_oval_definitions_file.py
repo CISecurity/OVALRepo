@@ -12,7 +12,7 @@ TODO:
 - add options to zip/tar the result file?
 """
 
-import argparse, pprint, os, os.path, datetime, sys, time
+import argparse, sys, time
 import lib_repo, lib_xml, lib_search
 
 
@@ -23,7 +23,7 @@ def main():
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds a schema-valid OVAL definitions file.')
     output_options = parser.add_argument_group('output options')
-    output_options.add_argument('-f', '--filename', required=True, help='file name for output OVAL definitions file')
+    output_options.add_argument('-o', '--outfile', required=True, help='file name for output OVAL definitions file')
     output_options.add_argument('-v', '--validate', default=False, action="store_true", help='schema validate the output file')
     output_options.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the output file')
     source_options = parser.add_argument_group('definitions filtering',
@@ -131,9 +131,9 @@ def format_duration(seconds):
     return '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)
 
 
-def message(type, message):
+def message(label, message):
     """ print a message """
-    sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
+    sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
     
 
 if __name__ == '__main__':
