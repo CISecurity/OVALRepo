@@ -66,8 +66,8 @@ For example:
 `repository/objects/linux/rpminfo_object/24000/oval_org.mitre.oval_obj_23691.xml`
 
 where:
-`[oval_type]` represents either `test`, `object`, `state`, or `variable`
-`[schema_short_name]` represents the family of the particular `[oval_type]`, such as `independent`, `unix`, or `ios`
-`[predicate]` represents the specific OVAL construct, such as `file_test`, `router_object`, `registry_state`, etc, and 
+`[oval_type]` represents either `test`, `object`, `state`, or `variable`  
+`[schema_short_name]` represents the family of the particular `[oval_type]`, such as `independent`, `unix`, or `ios`  
+`[predicate]` represents the specific OVAL construct, such as `file_test`, `router_object`, `registry_state`, etc, and  
 `[index_modulus]` represents a numeric multiple of 1000, in order to never have more than 1000 files per folder.
 
