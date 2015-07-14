@@ -84,6 +84,7 @@ class OvalDocument(object):
     For working with OVAL documents.  That interaction will entail the use of the other classes.
     Can be used to find certain elements within the document, update the document, and save the changes to a file
     """
+        
     
     # A time format to match what OVAL expects
     TIME_FORMAT = "%Y-%m-%dT%H:%M:%S%z"
@@ -101,6 +102,25 @@ class OvalDocument(object):
 #     http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd 
 #     http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd">^M
     
+    
+    @staticmethod            
+    def getOvalTimestamp(timestamp=None):
+        """Renders a datetime to a string formatted according to the OVAL specification.
+        if the timestamp argument is None (which it is by default) or is not of type datetime,
+        this function will return a string using the current datetime.
+        
+        @type timestamp: datetime
+        @param timestamp: A datetime to be formatted as an OVAL timestamp, or None to use the current time.
+        
+        @rtype: string
+        @return: a string formatted as per OVAL
+        """
+        if timestamp is None or not isinstance(timestamp, datetime):
+            now = datetime.date.today() 
+            return now.strftime(OvalDocument.TIME_FORMAT)
+        else:
+            return timestamp.strftime(OvalDocument.TIME_FORMAT)
+ 
     
     
     def __init__(self, tree):
@@ -662,9 +682,17 @@ class OvalElement(object):
     TODO:
     """
     
+    DEFINITION = "definition"
+    TEST = "test"
+    OBJECT = "object"
+    STATE = "state"
+    VARIABLE = "variable"
+
+
     def __init__(self, element):
         self.element = element
         
+                
         
     def getId(self):
         """
@@ -745,6 +773,10 @@ class OvalDefinition(OvalElement):
             self.element.set("version", "1")
             meta = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}metadata")
             self.element.append(meta)
+    
+    
+    def getType(self):
+        return OvalElement.DEFINITION
     
 
 
@@ -951,12 +983,19 @@ class OvalTest(OvalElement):
         self.element = element
         
         
+    def getType(self):
+        return OvalElement.TEST
         
+
+
 class OvalObject(OvalElement):
     
     def __init__(self, element):
         self.element = element
-        
+
+
+    def getType(self):
+        return OvalElement.OBJECT
         
         
 class OvalState(OvalElement):
@@ -965,8 +1004,15 @@ class OvalState(OvalElement):
         self.element = element
         
         
+    def getType(self):
+        return OvalElement.STATE
+        
         
 class OvalVariable(OvalElement):
     
     def __init__(self, element):
-        self.element = element                        
+        self.element = element
+        
+        
+    def getType(self):
+        return OvalElement.VARIABLE                        
