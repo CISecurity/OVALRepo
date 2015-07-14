@@ -12,7 +12,7 @@ TODO:
 - add options to zip/tar the result file?
 """
 
-import argparse, pprint, os, os.path, datetime, sys, time
+import argparse, sys, time
 import lib_repo, lib_xml, lib_search
 
 
@@ -56,12 +56,12 @@ def main():
 
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:
-        message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
         parser.print_help()
+        message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
         sys.exit(0)
     elif not (args['all_definitions'] or query):
-        message('error','At least one definitions filtering argument must be provided.')
         parser.print_help()
+        message('error','At least one definitions filtering argument must be provided.')
         sys.exit(0)
 
     # query index
@@ -77,7 +77,7 @@ def main():
     # add all downstream element ids
     message('info','Finding downstream OVAL ids for all definitions')
     elements_index = lib_search.ElementsIndex(message)
-    oval_ids = elements_index.find_downstream_ids(definition_ids)
+    oval_ids = elements_index.find_downstream_ids(definition_ids, definition_ids)
     message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
 
     # get paths for all elements
@@ -131,9 +131,9 @@ def format_duration(seconds):
     return '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)
 
 
-def message(type, message):
+def message(label, message):
     """ print a message """
-    sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
+    sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
     
 
 if __name__ == '__main__':
