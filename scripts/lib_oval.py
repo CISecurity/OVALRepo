@@ -1,39 +1,68 @@
 #!/usr/bin/env/ python3
-"""
-Library to simplify working with the OVAL XML structure
+"""Library to simplify working with the OVAL XML structure
 
 
 Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
 
 
-When working with this library, be sure to check the return values of any of
-the methods for a value of None.
-
 
 Available classes:
-- OvalDocument:  operations at the OVAL document level, such as reading in an existing OVAL document from
+    - OvalDocument:    operations at the OVAL document level, such as reading in an existing OVAL document from
 file, creating a new one, finding or adding OVAL elements
-- OvalElement:  the base class for OVAL elements.  Implements a few common methods inherited by the
+    - OvalElement:    the base class for OVAL elements.  Implements a few common methods inherited by the
 subclasses for definition, test, state, object, and variable
-- OvalDefinition: a type of OVAL element with certain attributes available.  Additional classes used by the OvalDefinition class:
-    - OvalMetadata:
-    - OvalAffected:
-    - OvalRepositoryInformation:
-- OvalTest:
-- OvalObject:
-- OvalState:
-- OvalVariable:
+    - OvalDefinition:    a type of OVAL element with certain attributes available.  Additional classes used by the OvalDefinition class:
+        - OvalMetadata:    the metadata associated with a definition, which includes the definition title and description.  Metadata also contains:
+            - OvalAffected:    The family and platforms affected by this definition
+            - OvalRepositoryInformation:    Additional information added by the OVAL repository
+    - OvalTest:    for working with OVAL test elements
+    - OvalObject:    for working with OVAL object elements
+    - OvalState:    for working with OVAL state elements
+    - OvalVariable:    for working with OVAL variable elements
 
 
 
 Available exceptions:
-  None at this time
+    - None at this time
+    
+    
+:Usage:
+
+1. Create an OvalDocument:
+
+    >>> tree = ElementTree()
+    >>> tree.parse("OvalTest.xml")
+    >>> document = OvalDocument(tree)
+
+2. Find an oval element within the loaded document:
+
+    >>> element = document.getElementByID("oval:org.mitre.oval:def:22382")
+    >>> if element is not None:
+    >>>    ....
+
+3. Read an XML file with a single OVAL Definition (error checking omitted for brevity):
+
+    >>> tree = ElementTree()    
+    >>> tree.parse('test-definition.xml')
+    >>> root = tree.getroot()    
+    >>> definition = lib_oval.OvalDefinition(root)
+    
+4. Change information in the definition from #3 and write the changes
+
+    >>> meta = definition.getMetadata()
+    >>> repo = meta.getOvalRepositoryInformation()
+    >>> repo.setMinimumSchemaVersion("5.9")
+    >>> tree.write("outfilename.xml", UTF-8", True)
+
+
+
+
   
 
 TODO:
- - Add exceptions that give more detail about why a value of None is sometimes returned
- - Expand use of find() to allow for the possibility that the XML document is not using namespaces
- - Lots of pydoc to be added
+    - Add exceptions that give more detail about why a value of None is sometimes returned
+    - Expand use of find() to allow for the possibility that the XML document is not using namespaces
+    - Lots of pydoc to be added
 
 """
 
@@ -45,6 +74,8 @@ import lib_repo
 import datetime
 
 
+
+# __docformat__ = "Epytext en"
 
 
 
@@ -85,6 +116,11 @@ class OvalDocument(object):
         """
         Load an OVAL document from a filename and parse that into an ElementTree
         Returns False if the filename is empty or there is an error parsing the XML document
+        @type filename: string
+        @param filename: The path to the OVAL XML document to parse
+        
+        @rtype:    boolean
+        @return:    True on success, otherwise False
         """
         try: 
             if not filename:
@@ -101,6 +137,9 @@ class OvalDocument(object):
         """
         Initializes the ElementTree by parsing the xmltext as XML
         Returns False if the string could not be parsed as XML
+        
+        @rtype:    boolean
+        @return:    True on success, otherwise False
         """
         try:
             if not xmltext:
@@ -117,6 +156,9 @@ class OvalDocument(object):
         """
         Writes the internal representation of the XmlTree to the given file name
         Returns False on error
+        
+        @rtype:    boolean
+        @return:    True on success, otherwise False
         """
         try:
             if not filename:
@@ -135,6 +177,9 @@ class OvalDocument(object):
         """
         Returns the root element of the XML tree if one has been loaded.
         Otherwise, returns None
+        
+        @rtype:    Element
+        @return:    The root Element of the OVAL document, or None
         """
         if not self.tree:
             return None
@@ -149,6 +194,9 @@ class OvalDocument(object):
         return none.  However, setting the optional parameter to True will cause
         a default generate element to be created, added to the document, and that will be returned.
         A value of None may also be returned if this OvalDocument is empty
+        
+        @rtype:    OvalGenerator
+        @return:    An OvalGenerator object, or None if it does not exist and create was not set to True
         """
         if not self.tree:
             return None
@@ -179,6 +227,9 @@ class OvalDocument(object):
         """
         Returns a list of all definitions found in this OvalDocment where each item in the list is of type OvalDefinition
         Returns None if no definitions could be found
+        
+        @rtype:    List
+        @return:    All definitions in the OVAL document or None if none were found
         """
         root = self.getDocumentRoot()
         if not root:
@@ -202,6 +253,9 @@ class OvalDocument(object):
         """
         Returns a list of all tests in this OvalDocument where each list item is of type OvalTest
         Returns None if no tests could be found
+        
+        @rtype:    List
+        @return:    All tests in the OVAL document or None if none were found
         """
         root = self.getDocumentRoot()
         if not root:
@@ -224,6 +278,9 @@ class OvalDocument(object):
         """
         Returns a list of all objects in this OvalDocument where each list item is of type OvalObject
         Returns None if no objects could be found
+        
+        @rtype:    List
+        @return:    All objects in the OVAL document or None if none were found
         """
         root = self.getDocumentRoot()
         if not root:
@@ -246,6 +303,9 @@ class OvalDocument(object):
         """
         Returns a list of all states in this OvalDocument where each list item is of type OvalState
         Returns None if no states could be found
+        
+        @rtype:    List
+        @return:    All states in the OVAL document or None if none were found
         """
         root = self.getDocumentRoot()
         if not root:
@@ -269,6 +329,9 @@ class OvalDocument(object):
         """
         Returns a list of all variables in this OvalDocument where each list item is of type OvalVariable
         Returns None if no variables could be found
+        
+        @rtype:    List
+        @return:    All variables in the OVAL document or None if none were found
         """
         root = self.getDocumentRoot()
         if not root:
@@ -293,7 +356,10 @@ class OvalDocument(object):
         Uses the ovalid argument to determine what type of element is being referenced and locate that element
         in the OVAL ElementTree.
         Returns an OvalElement of the appropriate class (OvalDefinition, OvalTest, ...) 
-            or None if there is no ElementTree or if a matching item could not be found
+        or None if there is no ElementTree or if a matching item could not be found
+        
+        @rtype:    OvalElement
+        @return:    The located element as the appropriate OvalElement subclass, or None if no matching element was found.
         """
         if not ovalid:
             return None
@@ -342,10 +408,13 @@ class OvalDocument(object):
         By default this method will replace an existing item with the same OVALID, but this behavior can
         be overridden by changing the option second argument to a value of "False"
         Returns True on success, otherwise False
+        
+        @rtype:    boolean
+        @return:    True if the element was added to the document, otherwise False
         """
-        if not element:
+        if not element or element is None:
             return False
-        if not self.tree:
+        if not self.tree or self.tree is None:
             return False
         
         ovalid = element.getId()
@@ -358,7 +427,7 @@ class OvalDocument(object):
             self.tree._setroot(root)
             
         # If replace has been set to False, then we want to exit with no changes
-        #  if an element with this OVALID already appears in the document            
+        #  when an element with this OVALID already appears in the document            
         if not replace:
             existing = self.getElementByID(ovalid)
             if existing:
