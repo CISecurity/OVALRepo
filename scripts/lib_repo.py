@@ -31,6 +31,7 @@ import lib_xml
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
 supported_definition_statuses = ('ACCEPTED', 'DEPRECATED', 'DRAFT', 'INTERIM')
+supported_element_types = ('definition', 'test', 'object', 'state', 'variable')
 
 
 def path_to_oval_id(path):
