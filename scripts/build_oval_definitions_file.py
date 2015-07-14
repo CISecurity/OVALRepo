@@ -12,7 +12,7 @@ TODO:
 - add options to zip/tar the result file?
 """
 
-import argparse, pprint, os, os.path, datetime, sys, time
+import argparse, sys, time
 import lib_repo, lib_xml, lib_search
 
 
@@ -131,9 +131,9 @@ def format_duration(seconds):
     return '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)
 
 
-def message(type, message):
+def message(label, message):
     """ print a message """
-    sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))
+    sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
     
 
 if __name__ == '__main__':
