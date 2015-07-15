@@ -21,13 +21,6 @@ description of your question or idea.*
 - [Repository Scripts](./scripts/README.md)
 - [Contributing Scripts](./scripts/README.contributing.scripts.md)
 
-## Prerequisites
-
-Before you can get started using these scripts, you will need to:
-
-- [Get a Local Copy of the Repository](../README.getting.repo.md)
-- [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
-
 ## Getting Help, Making Suggestions
 
 If you need help understanding and following this process, please post your
