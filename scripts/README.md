@@ -1,56 +1,129 @@
-# Scripts #
+# Scripts
 
-This folder will contain scripts that can be used to support the contribution, consumption and maintenance of the repository.
+This folder contains scripts that can be used:
 
-## Script Formats ##
+- [By Content Users](#scripts-for-content-use) to build custom packages of content.
+- [By Content Contributors](#scripts-for-content-contribution) to validate submissions, build packages for testing and more.
+- [By Repository Maintainers](#scripts-for-content-maintenance) to validate submissions, find related elements and more.
 
-TBD. We're currently considering python and/or shell scrips.
+## Status: Work in Progress
+*Please note: this documentation is a work in progress. If you have questions or suggestions, 
+please [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
+description of your question or idea.*
 
-## To Do List ##
+## Related Resources
 
-We should collaborate to complete and prioritize this list of tasks.
+- The OVAL Repository Website (coming soon)
+- [Repository Overview](../README.md)
+- [Repository Organization](../repository/README.md)
+- [Contributing OVAL](../README.contributing.oval.md)
+- Scripts for OVAL Contributors & Consumers (this document)
+ - [Getting a Local Copy of the Repository](../README.getting.repo.md)
+ - [Get Python 3.4 & Required Packages](../README.scripting.setup.md)
+ - [Contributing Scripts](./README.contributing.scripts.md))
 
-- **Validate Definitions**: validates one or more Definitions and creates a report
-  - Parameters: definition id(s) OR "all", report filepath
-  - Notes: schema validate, schematron validate, validate metadata, validate file format, validate file name, validate file location, create report
-  - Output: report including definitions list and success/failure for each task
-- **Determine Affected Definitions**: determines definitions affected by changes to one or more files in repo
-  - Parameters: ids or filepaths of changed files
-  - Notes: tbd
-  - Output: definition ids of affected definitions
-- **Increment Version of Affected Upstream Elements**: determines upstream elements affected by changes to one or more files in repo and increments their version
-  - Parameters: ids or filepaths of changed files
-  - Notes: "upstream" means elements that depend on the changed element (i.e. reference it directly or indirectly)
-  - Output: oval ids of affected elements
-- **Itemize Changed OVAL IDs**: determines OVAL ids of files added or changed in a pull request
-  - Parameters: tbd
-  - Notes: uses git command line to generate OVAL ids list in PR, this can then be used to Determine Affected Definition and that can be used to drive the Validate Definitions Script
-  - Output: tbd
-- **Generate OVAL Definition**
-  - Parameters: definition id
-  - Notes: tbd
-  - Output: valid OVAL file for 1 definition
-- **Generate OVAL Definitions by Schema** 
-  - Parameters: schema and version
-  - Notes:  tbd
-  - Output: valid OVAL file containing all definitions for specified schema/version
-- **Generate HTML for Contributor Stats** 
-  - Parameters: 
-  - Notes: 
-  - Output: generate html page for contributor statistics TBD
-- **Generate HTML for Repository Browsing**: 
-  - Parameters: 
-  - Notes: This could generate HTML files for each oval entity that displays metadata nicely, xml content nicely and links id’s to html pages for those id’s, etc. TBD
-  - Output: a directory of HTML files that allow site visitors to browse the repo content 
-- **Generate HTML by Reference Pages?**: 
-  - Parameters: 
-  - Notes: generate HTML pages listing definitions by CPE?, Class?, Status?, Reference?, Type?
-  - Output:
-- **Decompose Definition**: 
-  - Parameters: an oval definition file
-  - Notes: decomposes a definition file. The intent is to reduce effort for content submitters that currently submit entire definitons vice corrections to existing items. This script would need to look for collisions between items in the definition file and existing items in the repo. For examples, the input definition file may contain a modified test, an unmodified variable and state, but a new object. 
-  - Output: individual and properly placed files that correspond with the oval tst/obj/var/etc in the definition file.
-- **Related Tasks that aren't scripts**: 
-  - Add sections to this readme with step-by-step instructions for:
-    - Using scripts to build content
-    - Using scripts to prepare content for contribution
+## Prerequisites
+
+Before you can get started using these scripts, you will need to:
+
+- [Get a Local Copy of the Repository](../README.getting.repo.md)
+- [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
+
+## Getting Help, Making Suggestions
+
+If you need help using these scripts, please post your questions to the 
+OVAL Repository Mailing List (link TBD).
+
+If you encounter a bug or have ideas for improving these scripts, please 
+[create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
+description of your bug or idea.
+
+## Scripts for Content Use
+
+Once you have a [local copy of the repository](../README.getting.repo.md) and the 
+[scripting prerequisites](./README.scripting.setup.md)
+in place, you're ready to build your own content!
+
+### build\_oval\_definitions\_file.py
+
+Use this script to search the repository for the content you want and compile it
+into an OVAL definitions file you can run.
+
+```Shell
+# First, make sure you have the lastest content & scripts
+$ git pull origin master
+
+# Compile all Windows vulnerability definitions into all.windows.vulnerability.xml
+$ python3 build_oval_definitions_file.py -o all.windows.vulnerability.xml --family windows --class vulnerability
+
+# Compile all UNIX definitions related to CVE-2014-6509 into CVE.2014.6509.xml
+$ python3 build_oval_definitions_file.py -o CVE.2014.6509.xml --family unix --reference_id "CVE-2014-6509"
+
+# See script usage and options
+$ python3 build_oval_definitions_file.py -h
+```
+
+## Scripts for Content Contribution
+
+Before using these scripts to contribute content, you must have a [local copy of the repository](../README.getting.repo.md),  
+install the [scripting prerequisites](./README.scripting.setup.md) and 
+review the [content contribution process & guidelines](../README.contributing.oval.md).
+
+### oval\_decomposition.py
+
+If your submission is a complete OVAL definitions file, you should use this script to 
+extract its component elements and store those elements 
+in the appropriate places in the [repository file structure](../repository/README.md).
+
+```Shell
+# extract elements in my.oval.defintions.file.xml and insert them into the repository
+$ python3 oval_decomposition.py -f my.oval.defintions.file.xml
+
+# See script usage and options
+$ python3 oval_decomposition.py -h
+```
+
+### build\_oval\_definitions\_file.py
+
+If your submission includes updates to elements in the repository, you can use this 
+script to compile those elements into an OVAL definitions file that you can test and validate.
+
+```Shell
+# Compile oval:com.mysite.oval:def:1 into 1.xml and schema validate it
+$ python3 build_oval_definitions_file.py -o 1.xml --definition_id="oval:com.mysite.oval:def:1" -v
+
+# See script usage and options
+$ python3 build_oval_definitions_file.py -h
+```
+
+### validate\_oval\_definitions\_files.py
+
+Schema and schematron validate one or more OVAL definitions files.
+
+```Shell
+
+# See script usage and options
+$ python3 validatate_oval_definitions_files.py -h
+```
+
+### get\_related\_elements.py
+
+Get OVAL elements that are related to one or more elements.
+
+```Shell
+# See script usage and options
+$ python3 get_related_elements.py -h
+```
+
+## Scripts for Content Maintainance
+
+### get\_repository\_stats.py
+
+Get OVAL elements that are related to one or more elements.
+
+```Shell
+# See script usage and options
+$ python3 get_repository_stats.py -h
+```
+
+
