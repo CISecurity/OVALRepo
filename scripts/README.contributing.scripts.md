@@ -15,4 +15,4 @@ description of your question or idea.*
 1. [Create an issue](https://github.com/CISecurity/OVALRepo/issues/new) describing the change or
 addition you'd like to contribute. We will review it and provide feedback!
 
-2. Follow the [process for contributing OVAL content via Git](README.contributing.oval.md)
+2. Follow the [process for contributing OVAL content via Git](./../README.contributing.oval.md)
