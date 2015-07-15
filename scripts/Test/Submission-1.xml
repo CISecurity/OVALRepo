@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<oval_definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#windows windows-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <generator>
+    <oval:product_name>OVALdb generator</oval:product_name>
+    <oval:schema_version>5.10.1</oval:schema_version>
+    <oval:timestamp>2015-07-10T11:58:55</oval:timestamp>
+  </generator>
+  <definitions>
+    <definition id="oval:org.mitre.oval:def:6778" version="3" class="vulnerability">
+      <metadata>
+        <title>Untrusted search path vulnerability in Adobe PhotoShop CS2 through CS5</title>
+        <affected family="windows">
+          <platform>Microsoft Windows 2000</platform>
+          <platform>Microsoft Windows 7</platform>
+          <platform>Microsoft Windows Server 2003</platform>
+          <platform>Microsoft Windows Server 2008</platform>
+          <platform>Microsoft Windows Vista</platform>
+          <platform>Microsoft Windows XP</platform>
+          <product>Adobe Photoshop</product>
+        </affected>
+        <reference source="CVE" ref_id="CVE-2010-3127" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3127" />
+        <description>Untrusted search path vulnerability in Adobe PhotoShop CS2 through CS5 allows local users, and possibly remote attackers, to execute arbitrary code and conduct DLL hijacking attacks via a Trojan horse dwmapi.dll or Wintab32.dll that is located in the same folder as a PSD or other file that is processed by PhotoShop.  NOTE: some of these details are obtained from third party information.</description>
+        <oval_repository>
+          <dates>
+            <submitted date="2010-09-28T12:30:55">
+              <contributor organization="SecPod Technologies">SecPod Team</contributor>
+            </submitted>
+            <status_change date="2010-09-30T13:26:10.172-04:00">DRAFT</status_change>
+            <status_change date="2010-10-18T04:00:10.391-04:00">INTERIM</status_change>
+            <status_change date="2010-11-08T04:00:05.576-05:00">ACCEPTED</status_change>
+          </dates>
+          <status>ACCEPTED</status>
+        </oval_repository>
+      </metadata>
+      <criteria>
+        <extend_definition comment="Adobe Photoshop is installed" definition_ref="oval:org.mitre.oval:def:6647" />
+        <criteria operator="AND">
+          <criterion comment="Check if the version of Adobe Photoshop is greater than or equal to 9.0" test_ref="oval:org.mitre.oval:tst:11517" />
+          <criterion comment="Check if the version of Adobe Photoshop is less than or equal to 12.0" test_ref="oval:org.mitre.oval:tst:11351" />
+        </criteria>
+      </criteria>
+    </definition>
+    <definition id="oval:org.mitre.oval:def:6647" version="5" class="inventory">
+      <metadata>
+        <title>Adobe Photoshop is installed</title>
+        <affected family="windows">
+          <platform>Microsoft Windows 2000</platform>
+          <platform>Microsoft Windows 7</platform>
+          <platform>Microsoft Windows Server 2003</platform>
+          <platform>Microsoft Windows Server 2008</platform>
+          <platform>Microsoft Windows Vista</platform>
+          <platform>Microsoft Windows XP</platform>
+          <product>Adobe Photoshop</product>
+        </affected>
+        <reference source="CPE" ref_id="cpe:/a:adobe:photoshop" />
+        <description>Adobe Photoshop is installed</description>
+        <oval_repository>
+          <dates>
+            <submitted date="2010-09-28T12:30:55">
+              <contributor organization="SecPod Technologies">SecPod Team</contributor>
+            </submitted>
+            <status_change date="2010-09-30T13:26:09.613-04:00">DRAFT</status_change>
+            <status_change date="2010-10-18T04:00:09.443-04:00">INTERIM</status_change>
+            <status_change date="2010-11-08T04:00:03.081-05:00">ACCEPTED</status_change>
+            <modified comment="EDITED oval:org.mitre.oval:def:6647 - modified inventories for Microsoft Expression Design." date="2013-07-05T09:53:00.264-04:00">
+              <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
+            </modified>
+            <status_change date="2013-07-05T09:57:59.927-04:00">INTERIM</status_change>
+            <status_change date="2013-07-22T04:03:11.137-04:00">ACCEPTED</status_change>
+          </dates>
+          <status>ACCEPTED</status>
+        </oval_repository>
+      </metadata>
+      <criteria operator="AND">
+        <criterion comment="Check if Adobe Photoshop is installed" test_ref="oval:org.mitre.oval:tst:11643" />
+        <criterion comment="The registry key that holds the location of Adobe Photoshop exists" test_ref="oval:org.mitre.oval:tst:81489" />
+      </criteria>
+    </definition>
+  </definitions>
+  <tests>
+    <file_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:tst:11643" version="1" comment="Check if Adobe Photoshop is installed" check_existence="at_least_one_exists" check="all">
+      <object object_ref="oval:org.mitre.oval:obj:6885" />
+    </file_test>
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:tst:81489" version="1" comment="The registry key that holds the location of Adobe Photoshop exists" check_existence="at_least_one_exists" check="at least one">
+      <object object_ref="oval:org.mitre.oval:obj:7186" />
+    </registry_test>
+    <file_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:tst:11351" version="1" comment="Check if the version of Adobe Photoshop is less than or equal to 12.0" check_existence="at_least_one_exists" check="all">
+      <object object_ref="oval:org.mitre.oval:obj:6885" />
+      <state state_ref="oval:org.mitre.oval:ste:6758" />
+    </file_test>
+    <file_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:tst:11517" version="1" comment="Check if the version of Adobe Photoshop is greater than or equal to 9.0" check_existence="at_least_one_exists" check="all">
+      <object object_ref="oval:org.mitre.oval:obj:6885" />
+      <state state_ref="oval:org.mitre.oval:ste:7060" />
+    </file_test>
+  </tests>
+  <objects>
+    <file_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:obj:6885" version="1" comment="The object holds the full file path to Photoshop.exe">
+      <filepath var_ref="oval:org.mitre.oval:var:278" var_check="all" />
+    </file_object>
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:obj:7186" version="1" comment="The registry key that holds the location of Adobe Photoshop">
+      <hive>HKEY_LOCAL_MACHINE</hive>
+      <key>SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Photoshop.exe</key>
+      <name />
+    </registry_object>
+  </objects>
+  <states>
+    <file_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:ste:6758" version="1" comment="State matches with Adobe Photoshop version less than or equal to 12.0">
+      <version datatype="version" operation="less than or equal">12.0</version>
+    </file_state>
+    <file_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:ste:7060" version="1" comment="State matches with Adobe Photoshop version greater than or equal to 9.0">
+      <version datatype="version" operation="greater than or equal">9.0</version>
+    </file_state>
+  </states>
+  <variables>
+    <local_variable id="oval:org.mitre.oval:var:278" version="1" comment="Full file path to Photoshop.exe" datatype="string">
+      <object_component object_ref="oval:org.mitre.oval:obj:7186" item_field="value" />
+    </local_variable>
+  </variables>
+</oval_definitions>

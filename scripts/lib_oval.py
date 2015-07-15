@@ -63,6 +63,7 @@ TODO:
     - Add exceptions that give more detail about why a value of None is sometimes returned
     - Expand use of find() to allow for the possibility that the XML document is not using namespaces
     - Lots of pydoc to be added
+    - Redo getter/setter for OvalRepository status.
 
 """
 
@@ -101,6 +102,23 @@ class OvalDocument(object):
 #     http://oval.mitre.org/XMLSchema/oval-definitions-5#solaris solaris-definitions-schema.xsd 
 #     http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd 
 #     http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd">^M
+    
+    
+    @staticmethod
+    def indent(elem, level=0):
+        i = "\n" + level*"  "
+        if len(elem):
+            if not elem.text or not elem.text.strip():
+                elem.text = i + "  "
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = i
+            for elem in elem:
+                OvalDocument.indent(elem, level+1)
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = i
+        else:
+            if level and (not elem.tail or not elem.tail.strip()):
+                elem.tail = i    
     
     
     @staticmethod            
@@ -393,15 +411,15 @@ class OvalDocument(object):
         except Exception:
             return None
         
-        if oval_type == "definition":
+        if oval_type == OvalDefinition.DEFINITION:
             elist = self.getDefinitions()
-        elif oval_type == "test":
+        elif oval_type == OvalDefinition.TEST:
             elist = self.getTests()
-        elif oval_type == "object":
+        elif oval_type == OvalDefinition.OBJECT:
             elist = self.getObjects()
-        elif oval_type == "state":
+        elif oval_type == OvalDefinition.STATE:
             elist = self.getStates()
-        elif oval_type == "variable":
+        elif oval_type == OvalDefinition.VARIABLE:
             elist = self.getVariables()
         else:
             return None
@@ -461,7 +479,7 @@ class OvalDocument(object):
                 
         # Depending on the ID type, find the parent for it or create that parent if it doesn't exist
         # Then append the current element
-        if oval_type == "definition":
+        if oval_type == OvalDefinition.DEFINITION:
             parent = root.find("def:definitions", OvalDocument.NS_DEFAULT)
             if parent is None:
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}definitions")
@@ -470,7 +488,7 @@ class OvalDocument(object):
             parent.append(element)
             return True
         
-        elif oval_type == "test":
+        elif oval_type == OvalDefinition.TEST:
             parent = root.find("def:tests", OvalDocument.NS_DEFAULT)
             if parent is None:
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}tests")
@@ -479,7 +497,7 @@ class OvalDocument(object):
             parent.append(element)
             return True
         
-        elif oval_type == "object":
+        elif oval_type == OvalDefinition.OBJECT:
             parent = root.find("def:objects", OvalDocument.NS_DEFAULT)
             if parent is None:
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}objects")
@@ -488,7 +506,7 @@ class OvalDocument(object):
             parent.append(element)
             return True
         
-        elif oval_type == "state":
+        elif oval_type == OvalDefinition.STATE:
             parent = root.find("def:states", OvalDocument.NS_DEFAULT)
             if parent is None:
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}states")
@@ -497,7 +515,7 @@ class OvalDocument(object):
             parent.append(element)
             return True
         
-        elif oval_type == "variable":
+        elif oval_type == OvalDefinition.VARIABLE:
             parent = root.find("def:variables", OvalDocument.NS_DEFAULT)
             if parent is None:
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}variables")
@@ -717,7 +735,90 @@ class OvalElement(object):
         
         if ovalid is not None:
             self.element.set("id", ovalid)
-            
+
+
+    def getVersion(self):
+        if not self.element:
+            return None
+        
+        return self.element.get("version")
+    
+    
+    def setVersion(self, version):
+        if not self.element:
+            return False
+        if not version:
+            return False
+        if not isinstance(version, int):
+            return False
+        
+        self.element.set("version", version)
+        return True
+    
+    
+    def incrementVersion(self):
+        version = self.getVersion()
+        if not version:
+            version = 1
+        else:
+            if not isinstance(version, int):
+                version = 1
+            else:
+                version = version + 1
+        
+        self.setVersion(version)
+        
+        
+        
+    def getIndexSequence(self):
+        ovalid = self.getId()
+        if not ovalid or ovalid is None:
+            return 1000
+        
+        # Get the numeric index from the end of the OVAL ID
+        position = ovalid.rfind(':')
+        if position < 0:
+            return 1000
+        
+        try:
+            position = position + 1
+            index = ovalid[position:]
+        
+            # Apply the modulus function to determine which bucket it belongs to
+            return int(int(index)/1000 + 1) * 1000
+            # Or another way to do it:
+#             sequence = int(index)
+#             mod = sequence % 1000
+#             return sequence - mod + 1000
+        except Exception:
+            return 1000
+        
+        
+        
+    def getFileName(self):
+        """
+        Use my OVAL ID to create a base file name.  That really just means replacing ':' with '_'
+        *NOTE* This does not include the path to the file.
+        """
+        ovalid = self.getId()
+        if not ovalid or ovalid is None:
+            return None
+        
+        return ovalid.replace(':', '_') + ".xml"
+
+        
+        
+    def getPredicate(self):
+        """
+        The portion of the element name that precedes the "_"
+        So, for "password_test", the predicate would be "password"
+        """
+        localname = self.getLocalName()
+        if not localname or localname is None:
+            return None
+        
+        return localname.rsplit('_',1)[0]
+
             
     def getElement(self):
         """
@@ -726,17 +827,121 @@ class OvalElement(object):
         """
         return self.element
             
+    
             
     def getName(self):
         """
-        Get the tag name (XMl element name) of the underlying XML Element
+        Get the tag name (XMl element name) of the underlying XML Element, which includes the schema URI
         """
-        if not self.element:
+        if not self.element or self.element is None:
             return None
         
         return self.element.tag
     
     
+    def getLocalName(self):
+        """
+        Just the element name with the schema URI (if any) removed
+        """
+        
+        if not self.element or self.element is None:
+            return None
+
+        #Check if this node name is prefixed by a URI, in which case return every after the URI
+        if '}' in self.element.tag:
+            return str(self.element.tag).rsplit('}',1)[1]
+        
+        #If no namespace prefix, just return the node name
+        return self.element.tag
+    
+    
+    
+    def getNamespace(self):
+        """
+        Returns the URI of the namespace or None if this node does not have a namepsace
+        """
+        if not self.element or self.element is None:
+            return None
+
+        tag = self.element.tag
+        
+        if not tag or tag is None:
+            return None
+        
+        # If the oval ID does not contain a namespace, then we can't determine the schema shortname
+        if not '}' in tag:
+            return None
+        
+        try:
+            position = tag.find('}')
+            if position < 0:
+                return None
+            
+            namespace = tag[:position]
+            return namespace[1:]
+        except Exception:
+            return None
+
+    
+    def getSchemaShortName(self):
+        """
+        """
+        if not self.element or self.element is None:
+            return None
+
+        tag = self.element.tag
+        
+        if not tag or tag is None:
+            return None
+        
+        # If the oval ID does not contain a namespace, then we can't determine the schema shortname
+        if not '}' in tag:
+            return None
+        
+        try:
+            schema = tag.rsplit('}', 1)[0]
+            if not '#' in schema:
+                return None
+            return schema.rsplit('#', 1)[1].strip()
+        except Exception:
+            return None
+        
+    
+    def constructFilePath(self):
+        """
+        """
+        if not self.element or self.element is None:
+            return None
+        
+        # The path is:  repo_base / element type / schema short name / local node name / index bucket / converted file name
+        try:
+            return lib_repo.get_repository_root_path() + "/" + self.getType() + "s/" + self.getSchemaShortName() \
+                + "/" + self.getLocalName() + "/" + str(self.getIndexSequence()) + "/" + self.getFileName()
+        except Exception:
+            return None
+
+    
+    @staticmethod    
+    def asOvalElement(element):
+        """
+        For an XML Element, determines if it fits one of the implemented OvalElement subclasses and,
+        if so, returns an instantiation of that class
+        """        
+        
+        if not element or element is None:
+            return None
+        
+        try:        
+            ovalid = element.get("id")
+            if not ovalid or ovalid is None:
+                return None
+        
+            oval_type = lib_repo.get_element_type_from_oval_id(ovalid)
+            return OvalElement.create(oval_type, element)
+        except Exception:
+            return None
+        
+            
     @staticmethod            
     def create(oval_type, element):
         """
@@ -746,15 +951,15 @@ class OvalElement(object):
             return None
         
         
-        if oval_type == "definition":
+        if oval_type == OvalDefinition.DEFINITION:
             return OvalDefinition(element)
-        elif oval_type == "test":
+        elif oval_type == OvalDefinition.TEST:
             return OvalTest(element)
-        elif oval_type == "object":
+        elif oval_type == OvalDefinition.OBJECT:
             return OvalObject(element)
-        elif oval_type == "state":
+        elif oval_type == OvalDefinition.STATE:
             return OvalState(element)
-        elif oval_type == "variable":
+        elif oval_type == OvalDefinition.VARIABLE:
             return OvalVariable(element)
         else:
             return None
@@ -810,46 +1015,25 @@ class OvalDefinition(OvalElement):
         self.element.set("class", ovalclass)
         return True
     
-    
-    
-    def getVersion(self):
-        if not self.element:
-            return None
-        
-        return self.element.get("version")
-    
-    
-    def setVersion(self, version):
-        if not self.element:
-            return False
-        if not version:
-            return False
-        if not isinstance(version, int):
-            return False
-        
-        self.element.set("version", version)
-        return True
-    
-    
-    def incrementVersion(self):
-        version = self.getVersion()
-        if not version:
-            version = 1
-        else:
-            if not isinstance(version, int):
-                version = 1
-            else:
-                version = version + 1
-        
-        self.setVersion(version)
-        
-        
+            
         
     def getReferencingIDs(self):
         if not self.element:
             return None
         
         return self.xpath("//@*[name()='definition_ref' or name()='test_ref'")
+    
+    
+    def constructFilePath(self):
+        if not self.element or self.element is None:
+            return None
+        
+        # The path is:  repo_base / class / converted file name
+        try:
+            return lib_repo.get_repository_root_path() + "/definitions/" + self.getClass() + "/" + self.getFileName()
+        except Exception:
+            return None
+        
     
 
 
