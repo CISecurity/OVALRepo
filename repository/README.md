@@ -29,7 +29,7 @@ The "repository" folder is where you can find all of the XML files that can be b
 
 The `definitions` folder is further decomposed by class (i.e. `compliance`, `inventory` and so on).  
 
-The other OVAL types (`objects`, `states`, and so on; except for variables) are broken down a bit differently.  They are first categorized by "schema short name" (i.e. `independent`), and further categorized by predicate (i.e. `variable_test`, `rpminfo_test`, and the like).  Finally, specific entiteis may be furhter categorized by index modulus - essentially by ID.
+The other OVAL types (`objects`, `states`, and so on; except for variables) are broken down a bit differently.  They are first categorized by "schema short name" (i.e. `independent`), and further categorized by predicate (i.e. `variable_test`, `rpminfo_test`, and the like).  Finally, specific entities may be further categorized by index modulus - essentially by ID.
 
 Put into an abstract example: 
 `repository/[oval_type]s/[schema_short_name]/[predicate]/[index_modulus]`
