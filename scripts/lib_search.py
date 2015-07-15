@@ -13,6 +13,8 @@ Available classes:
 - ElementsIndex: methods to create, maintain and query an index of definitions metadata
     - query: search the index for definitions metadata
     - find_downstream_ids: get a list of all ids downstream from one or more elements
+    - find_upstream_ids: get a list of all ids downstream from one or more elements
+    - get_paths_from_ids: returns a list of paths for given list of OVAL ids
     - other methods are used internally to build, maintain and interact with the index
 
 Available exceptions:
@@ -296,30 +298,43 @@ class ElementsIndex(SearchIndex):
             document = self.whoosh_escape_document(document)
             yield document
 
-    def find_downstream_ids(self, parent_ids, all_ids=False):
+    def find_downstream_ids(self, parent_ids, all_ids=set(), depth_limit=0, depth=1):
         """ Recursively find a list of all OVAL ids downstream from the provided OVAL id(a). """
-        if isinstance(parent_ids, str):
-            parent_ids = set(parent_ids)
+        return self.find_related_element_ids('downstream', parent_ids, all_ids, depth_limit)
+
+    def find_upstream_ids(self, child_ids, all_ids=set(), depth_limit=0):
+        """ Recursively find a list of all OVAL ids upstream from the provided OVAL id(a). """
+        return self.find_related_element_ids('upstream', child_ids, all_ids, depth_limit)
+
+    def find_related_element_ids(self, direction, source_ids, all_ids=set(), depth_limit=0, depth=1):
+        """ Recursively find a list of all OVAL ids upstream or downstream from the source OVAL id(a). """
+        # optionally limit recursion depth
+        # self.message('debug','{0} depth, {1} depth limit'.format(depth, depth_limit))
+        if depth_limit > 0 and depth > depth_limit:
+            return all_ids
+
+        if isinstance(source_ids, str):
+            source_ids = set(source_ids)
 
         self.update()
-        #self.message('debug','checking for oval refs:\n\t{0}'.format('\n\t'.join(parent_ids)))
-
-        if not all_ids:
-            all_ids = parent_ids.copy()
+        # self.message('debug','checking for oval refs:\n\t{0}'.format('\n\t'.join(source_ids)))
 
         # get all parent elements from index and extract their oval_refs
-        documents = self.query({ 'oval_id': parent_ids})
-        found_ids = set()
-        found_ids = { oval_ref for document in documents for oval_ref in document['oval_refs'].split(',') if document['oval_refs'] }
+        if direction == 'upstream':
+            documents = self.query({ 'oval_refs': source_ids })
+            found_ids = { document['oval_id'] for document in documents }
+        else: 
+            documents = self.query({ 'oval_id': source_ids })
+            found_ids = { oval_ref for document in documents for oval_ref in document['oval_refs'].split(',') if document['oval_refs'] }
         
         # remove ids already in result set
         found_ids.difference_update(all_ids)
-        #self.message('debug','--unique found--\n{0}'.format(repr(found_ids)))
+        # self.message('debug','--unique found--\n{0}'.format(repr(found_ids)))
 
         # add found ids to results, add all ids downstream from found_ids
         if found_ids:
             all_ids.update(found_ids)
-            all_ids = self.find_downstream_ids(found_ids, all_ids)
+            all_ids = self.find_related_element_ids(direction, found_ids, all_ids, depth_limit, depth + 1)
 
         return all_ids
 
