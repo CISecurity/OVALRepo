@@ -11,6 +11,11 @@ to get the following pre-requisites installed and running on your machine:
   - smmap (version 0.9.0)
   - Whoosh (version 2.7.0)
 
+## Status: Work in Progress
+*Please note: this documentation is a work in progress. If you have questions or suggestions, 
+please [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
+description of your question or idea.*
+
 ## Windows Instructions
 
 1. **Install Python 3.4.3**
