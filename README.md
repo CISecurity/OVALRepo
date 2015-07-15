@@ -16,7 +16,7 @@ Consumers and contributors are invited to engage using this repository.
 - [Contributing OVAL](./README.contributing.oval.md)
 - [Scripts for OVAL Contributors & Consumers](./scripts/README.md)
  - [Getting a Local Copy of the Repository](./README.getting.repo.md)
- - [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
+ - [Get Python 3.4 & Required Packages](./scripts/README.scripting.setup.md)
  - [Contributing Scripts](./scripts/README.contributing.scripts.md)
 
 ## Status: Work in Progress
