@@ -4,7 +4,7 @@ In order to contribute content or build your own packages, you will need your ow
 repository. There are two ways to accomplish this:
 
 - [Clone for Read-only Access](#clone-for-read-only-access) if you just want to review and use the repository content.
-- [Fork for Read/Write Access](#fork-for-read-write-access) if you want to contribute content or scripts to the repository.
+- [Fork for Read/Write Access](#fork-for-readwrite-access) if you want to contribute content or scripts to the repository.
 
 ## Status: Work in Progress
 *Please note: this documentation is a work in progress. If you have questions or suggestions, 
