@@ -1,14 +1,15 @@
 # Scripts
 
-*Please note: this documentation is a work in progress. If you have questions or suggestions, 
-please [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
-description of your question or idea.*
-
 This folder contains scripts that can be used:
 
 - [By Content Users](#scripts-for-content-use) to build custom packages of content.
 - [By Content Contributors](#scripts-for-content-contribution) to validate submissions, build packages for testing and more.
 - [By Repository Maintainers](#scripts-for-content-maintenance) to validate submissions, find related elements and more.
+
+## Status: Work in Progress
+*Please note: this documentation is a work in progress. If you have questions or suggestions, 
+please [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
+description of your question or idea.*
 
 ## Related Resources
 
