@@ -17,7 +17,10 @@ description of your question or idea.*
 - [Repository Overview](./README.md)
 - [Repository Organization](./repository/README.md)
 - [Contributing OVAL](./README.contributing.oval.md)
-- [Contributing Scripts](./scripts/README.contributing.scripts.md)
+- [Scripts for OVAL Contributors & Consumers](./scripts/README.md)
+ - Getting a Local Copy of the Repository (this document)
+ - [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
+ - [Contributing Scripts](./scripts/README.contributing.scripts.md)
 
 ## Getting Help, Making Suggestions
 

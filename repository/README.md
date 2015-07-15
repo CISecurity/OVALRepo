@@ -8,7 +8,9 @@ description of your question or idea.*
 
 ## Related Resources
 
+- The OVAL Repository Website (coming soon)
 - [Repository Overview](../README.md)
+- Repository Organization (this document)
 - [Contributing OVAL](../README.contributing.oval.md)
 - [Scripts for OVAL Contributors & Consumers](../scripts/README.md)
  - [Getting a Local Copy of the Repository](../README.getting.repo.md)
