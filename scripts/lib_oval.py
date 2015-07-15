@@ -53,8 +53,7 @@ Available exceptions:
     >>> repo = meta.getOvalRepositoryInformation()
     >>> repo.setMinimumSchemaVersion("5.9")
     >>> tree.write("outfilename.xml", UTF-8", True)
-
-
+        
 
 
   
@@ -63,14 +62,12 @@ TODO:
     - Add exceptions that give more detail about why a value of None is sometimes returned
     - Expand use of find() to allow for the possibility that the XML document is not using namespaces
     - Lots of pydoc to be added
-    - Redo getter/setter for OvalRepository status.
-
+    - Redo getter/setter for OvalRepository status elements.
 """
 
+import os, xml.etree
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
-
-import lib_repo
 
 import datetime
 
@@ -407,7 +404,7 @@ class OvalDocument(object):
             return None
         
         try:
-            oval_type = lib_repo.get_element_type_from_oval_id(ovalid)
+            oval_type = OvalElement.getElementTypeFromOvalID(ovalid)
         except Exception:
             return None
         
@@ -473,7 +470,7 @@ class OvalDocument(object):
             
         
         try:
-            oval_type = lib_repo.get_element_type_from_oval_id(ovalid)
+            oval_type = OvalElement.getElementTypeFromOvalID(ovalid)
         except Exception:
             return False
                 
@@ -907,19 +904,113 @@ class OvalElement(object):
             return None
         
     
-    def constructFilePath(self):
-        """
+    def constructRelativeFilePath(self):
+        """Uses what is know about this element to construct the path, relative to the repository root, that
+        this element would be written to as a standalone file
         """
         if not self.element or self.element is None:
             return None
-        
+         
         # The path is:  repo_base / element type / schema short name / local node name / index bucket / converted file name
         try:
-            return lib_repo.get_repository_root_path() + "/" + self.getType() + "s/" + self.getSchemaShortName() \
+            return self.getType() + "s/" + self.getSchemaShortName() \
                 + "/" + self.getLocalName() + "/" + str(self.getIndexSequence()) + "/" + self.getFileName()
         except Exception:
             return None
+        
+        
+    def writeToFile(self, path, with_xml_declaration=True):
+        """Writes this element as a single standalone XML file
+        @type path: string
+        @param path: The path to the file to write
+        @type with_xml_declaration: boolean
+        @param with_xml_declaration: True to include the XML declaration at the top of the file (the default), or False to exclude it
+        
+        @rtype: boolean
+        @return: True on success, otherwise False 
+        """
+        if not self or self is None:
+            return False;
+        if not self.element or self.element is None:
+            return False
+        if not path or path is None:
+            return False;
+        
+        try:
+            namespace = self.getNamespace()
+            # Register this namespace with the parser as the default namespace
+            xml.etree.ElementTree.register_namespace('', namespace)
+            e = self.getElement()
+            # Fix up the element so it will print nicely
+            OvalDocument.indent(e)
+            # Create a new ElementTree with this element as the root
+            tree = ElementTree(e)
+            # And finally, write the full tree to a file
+            tree.write(path, "UTF-8", with_xml_declaration)
+            
+            return True
+        
+        except Exception:
+            return False;
 
+
+    @staticmethod
+    def fromStandaloneFile(path):
+        """For a file that contains a single OVAL XML element as the root element, instantiate the appropriate OvalElement sublcass for that element
+        @type path: string
+        @param path: the path to the file
+        
+        @rtype OvalElement
+        @return None on error, or an object of the appropriate OvalElement subclass
+        """
+        
+        if not path or path is None:
+            return None
+        
+        if not os.path.exists(path):
+            return None
+        
+        try:
+            tree = ElementTree()
+            tree.parse(path)
+            
+            root = tree.getroot()
+            return OvalElement.asOvalElement(root)
+        
+        except Exception:
+            return None
+        
+        
+        
+            
+    
+    @staticmethod
+    def getElementTypeFromOvalID(ovalid):
+        """ Gets element type from OVAL id. """
+        
+        if not ovalid or ovalid is None:
+            raise ValueError("No OVAL ID given")
+        
+        segments = ovalid.split(':')
+        if len(segments) != 4:
+            raise ValueError('Invalid OVAL ID: {0}.'.format(ovalid))
+    
+        code = segments[2]
+        if code == 'def':
+            return OvalElement.DEFINITION
+        elif code == 'tst':
+            return OvalElement.TEST
+        elif code == 'obj':
+            return OvalElement.OBJECT
+        elif code == 'ste':
+            return OvalElement.STATE
+        elif code == 'var':
+            return OvalElement.VARIABLE
+        else:
+            raise ValueError("Unknown OVAL object type '{0}' in {1}.".format(code, ovalid))
+    
+
+        
     
     @staticmethod    
     def asOvalElement(element):
@@ -936,7 +1027,7 @@ class OvalElement(object):
             if not ovalid or ovalid is None:
                 return None
         
-            oval_type = lib_repo.get_element_type_from_oval_id(ovalid)
+            oval_type = OvalElement.getElementTypeFromOvalID(ovalid)
             return OvalElement.create(oval_type, element)
         except Exception:
             return None
@@ -963,6 +1054,7 @@ class OvalElement(object):
             return OvalVariable(element)
         else:
             return None
+    
     
 
 
@@ -1020,17 +1112,17 @@ class OvalDefinition(OvalElement):
     def getReferencingIDs(self):
         if not self.element:
             return None
-        
+         
         return self.xpath("//@*[name()='definition_ref' or name()='test_ref'")
-    
-    
-    def constructFilePath(self):
+     
+     
+    def constructRelativeFilePath(self):
         if not self.element or self.element is None:
             return None
-        
+         
         # The path is:  repo_base / class / converted file name
         try:
-            return lib_repo.get_repository_root_path() + "/definitions/" + self.getClass() + "/" + self.getFileName()
+            return "definitions/" + self.getClass() + "/" + self.getFileName()
         except Exception:
             return None
         

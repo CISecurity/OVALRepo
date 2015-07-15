@@ -12,7 +12,8 @@ TODO:
  - Create missing directories for filepaths when writing them there files
  - Tools for resolving/accepting changes when the OVAL ID for a component refers to an existing item
  - Use the min schema method to determine the minimum schema needed for this definition and add that information to the definition metadata
- - Update the local copy of the whoosh database
+ - Update the local copy of the whoosh database index with metadata for all the new files
+ - Group display of new vice changed files rather than show each file status as it is processed
  - Other types of validation
      - Are all referenced items either in the document or does it already exist in the repository?
      - Is the definition/metadata/oval_repository/status set to the proper value?
@@ -24,11 +25,16 @@ import argparse, os, xml, xml.etree
 from lib_oval import OvalDocument
 from xml.etree.ElementTree import ElementTree
 
+import lib_repo
+
+
 
 def main():
     """
     Breaks the OVAL file into its constituent elements and writes each of those into the repository
     """
+    
+    
     
     parser = argparse.ArgumentParser(description='Separates an OVAL file into its component parts and saves them to the repository.')
     options = parser.add_argument_group('options')
@@ -40,6 +46,9 @@ def main():
     filename = args['file']
     if args['verbose']:
         verbose = True
+    else:
+        verbose = False
+        
     
     if not oval.parseFromFile(filename):
         print("Unable to parse source file '", filename, "':  no actions taken")
@@ -52,13 +61,15 @@ def main():
         
     if verbose:
         print(" Number of definitions to process: ", len(deflist))
+
+
+    repository_root = lib_repo.get_repository_root_path()
     
-    
-    writeFiles(deflist, verbose)
-    writeFiles(oval.getTests(), verbose)
-    writeFiles(oval.getObjects(), verbose)
-    writeFiles(oval.getStates(), verbose)
-    writeFiles(oval.getVariables(), verbose)
+    writeFiles(deflist, repository_root, verbose)
+    writeFiles(oval.getTests(), repository_root, verbose)
+    writeFiles(oval.getObjects(), repository_root, verbose)
+    writeFiles(oval.getStates(), repository_root, verbose)
+    writeFiles(oval.getVariables(), repository_root, verbose)
 
 
         
@@ -86,13 +97,15 @@ def main():
     #  If updating, make sure the version is set properly
 
 
-def writeFiles(element_list, verbose=False):
+
+def writeFiles(element_list, repo_root, verbose=False):
     if not element_list or element_list is None:
         return
     
     for element in element_list:
-        filepath = element.constructFilePath()
+        filepath = element.constructRelativeFilePath()
         if filepath and filepath is not None:
+            filepath = repo_root + "/" + filepath
             writeFile(filepath, element, verbose)
         
         
