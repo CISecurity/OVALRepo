@@ -12,7 +12,7 @@ Consumers and contributors are invited to engage using this repository.
 
 - The OVAL Repository Website (coming soon)
 - [Repository Organization](./repository/README.md)
-- [Contributing OVAL](../README.contributing.oval.md)
+- [Contributing OVAL](./README.contributing.oval.md)
 - [Scripts for OVAL Contributors & Consumers](./scripts/README.md)
  - [Getting a Local Copy of the Repository](./README.getting.repo.md)
  - [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
