@@ -23,7 +23,7 @@ Available exceptions:
 - SchematronValidationError: raised for schematron valdiation errors
 
 TODO:
-- TBD
+- Schematron validation (xsl transform) is extremely slow; improve or replace (?saxon?)
 """
 
 import sys, os, os.path, inspect, datetime, random, re
