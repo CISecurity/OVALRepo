@@ -137,7 +137,6 @@ def schematron_validate(filepath, schema_path):
 
 
 def get_schematron_xsl_from_schema(schema_path, force_generate=False):
-    """ NOTE: this does not work!! """
     """ Gets path to schematron from schema_path, creating if necessary """
     sch_path = schema_path.replace('.xsd','-schematron.sch')
     xsl_path = schema_path.replace('.xsd','-schematron.xslt')
