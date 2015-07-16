@@ -65,11 +65,9 @@ development using git called the "fork & pull" model [learn more](https://help.g
 #### Making a Contribution
 
 1. **Create a Topic Branch**: create a branch in which you will create your submission. You should create a topic branch for each set of changes that you think should be reviewed and accepted as unit.
-        
-        ```Shell
+
         # create a topic branch and switch to it
         $ git checkout -b [topic branch name]
-        ```
 
 2. **Make Updates**: add, update and delete elements in your topic branch.
 
