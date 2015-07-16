@@ -74,7 +74,8 @@ def get_definition_paths_iterator():
     definitions_root = os.path.join(get_repository_root_path(), 'definitions')
     for dirpath, dirnames, filenames in os.walk(definitions_root):
         for filename in filenames:
-            yield os.path.join(dirpath, filename)
+            if filename.endswith('.xml'):
+                yield os.path.join(dirpath, filename)
 
 
 def get_element_paths_iterator():
@@ -82,7 +83,8 @@ def get_element_paths_iterator():
     elements_root = os.path.join(get_repository_root_path())
     for dirpath, dirnames, filenames in os.walk(elements_root):
         for filename in filenames:
-            yield os.path.join(dirpath, filename)
+            if filename.endswith('.xml'):
+                yield os.path.join(dirpath, filename)
 
 
 def get_root_path():

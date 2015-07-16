@@ -1,6 +1,9 @@
 #!/usr/bin/env/ python3
 """Splits the OVAL document into its component parts and stores them in the appropriate places in the repository.
 
+Right now, only handles the very simple case of processing a valid oval_definitions file with at least one
+definition and puts all of the component pieces in the proper location in the repository
+
 
 Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
 

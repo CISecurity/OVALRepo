@@ -140,7 +140,7 @@ class SearchIndex:
 
         # check require that we're on master branch
         if not lib_git.on_master():
-            this.message('warning','The repository is not on the master branch.')
+            self.message('warning','The repository is not on the master branch.')
 
         # require all OVAL to be committed
         if lib_git.get_uncommitted_oval():
@@ -235,7 +235,7 @@ class SearchIndex:
 
         sys.stdout.flush()
 
-    def message(type, message):
+    def message(self, type, message):
         """ print a message """
         if not self.no_output:
             sys.stdout.write('\r{0}: {1}\n'.format(type.upper(), message))

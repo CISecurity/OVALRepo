@@ -18,15 +18,11 @@ description of your question or idea.*
 - The OVAL Repository Website (coming soon)
 - [Repository Overview](./README.md)
 - [Repository Organization](./repository/README.md)
-- [Repository Scripts](./scripts/README.md)
-- [Contributing Scripts](./scripts/README.contributing.scripts.md)
-
-## Prerequisites
-
-Before you can get started using these scripts, you will need to:
-
-- [Get a Local Copy of the Repository](../README.getting.repo.md)
-- [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
+- Contributing OVAL(this document)
+- [Scripts for OVAL Contributors & Consumers](./scripts/README.md)
+ - [Getting a Local Copy of the Repository](./README.getting.repo.md)
+ - [Get Python 3.4 & Required Packages](./scripts/README.scripting.setup.md)
+ - [Contributing Scripts](./scripts/README.contributing.scripts.md)
 
 ## Getting Help, Making Suggestions
 
@@ -54,8 +50,8 @@ This option will be available for a limited time and we recommend that you plan 
 
 ## Ongoing Contribution via Git
 
-The process for contributing via Git has been designed to follow a mature practices for collaborative 
-development using git called the "Fork & pull" model [learn more](https://help.github.com/articles/using-pull-requests/).
+The process for contributing via Git has been designed to follow a mature practice for collaborative 
+development using git called the "fork & pull" model [learn more](https://help.github.com/articles/using-pull-requests/).
 
 ### High-Level Overview
 
@@ -64,19 +60,18 @@ development using git called the "Fork & pull" model [learn more](https://help.g
 - You have a [GitHub account](https://github.com)
 - You have [set up git](https://help.github.com/articles/set-up-git/) on your machine
 - You have [created a fork](https://help.github.com/articles/fork-a-repo/) of this [OVAL repository](https://github.com/CISecurity/OVALRepo) 
-- You have [created a local clone](https://help.github.com/articles/fork-a-repo/) of your fork
+- You have [created a local clone](https://help.github.com/articles/fork-a-repo/#step-2-create-a-local-clone-of-your-fork) of your fork
 
 #### Making a Contribution
 
-1. **Create a Topic Branch**: create a branch to make your submission in. You should create a topic branch for each 
-set of changes that you think should be reviewed and accepted as unit.
+1. **Create a Topic Branch**: create a branch in which you will create your submission. You should create a topic branch for each set of changes that you think should be reviewed and accepted as unit.
 
 2. **Make Updates**: add, update and delete elements in your topic branch.
 
 3. **Commit Updates**: commit your updates.
 
-4. **QA**: make sure that definitions affected by your contribution schema and schematron validate
-using our provided scripts or your own validation scripts. (additional QA guidelines TBD). If you have validation
+4. **Quality Assurance**: make sure that definitions affected by your contribution schema and schematron validate
+using our provided scripts or your own validation scripts. (additional QA guidelines TBD). If you have any validation
 issues, resolve them before proceeding.
 
 5. **Push Commits to Your Fork**: publish you submission to your own fork.
@@ -85,18 +80,17 @@ issues, resolve them before proceeding.
   1. Go to your fork on GitHub.com
   2. Switch to your feature branch\
   3. Click the green "Compare and Review" button 
-  4. Review the chagnes to ensure they're correct and click "Create Pull Request"
+  4. Review the changes to insure they're correct and click "Create Pull Request"
   5. Add a descriptive title and a description of the submission and click "Create Pull Request"
 
 7. **Community Review**: GitHub will notify CIS and the community that you have made a PR.
-Community members may add questions and comments to the PR discussion page, which you are 
-encouraged to respond to. CIS will QA the PR and add any issues or concerns to the PR discussion
-page.
+Community members may add questions and comments to the PR discussion page, to which you are 
+encouraged to respond. CIS will perform QA on your PR, and will add any issues or concerns they've uncovered to the PR discussion page.
 
-8. **Issue Resolution**: If there are issues you wish to resolve, you may update update the PR by followings
+8. **Issue Resolution**: If there are issues you wish to resolve, you may update update your PR by following
 steps 2-5 above.
 
-9. **Submission Acceptable**: Once CIS has completed QA, CIS will accept the PR, merging your changes into 
+9. **Submission Acceptable**: Once CIS has completed QA, they will accept the PR, merging your changes into 
 the master branch of this repository.
 
 10. **Clean Up**: once your PR has been accepted, you should delete your topic branch and update your master
