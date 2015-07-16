@@ -64,6 +64,19 @@ development using git called the "fork & pull" model [learn more](https://help.g
 
 #### Making a Contribution
 
+0. **Switch to your local repository clone**: Open a git shell
+
+        # navigate to your local clone
+        cd [directory of local OVALRepo clone]
+        
+1. **Synchronize**: Ensure your local repository is synced with the remote master branch
+        # switch to your master branch, if you're not on it already
+        $ git checkout master
+        
+        # merge changes from upstream into your master
+        $ git fetch upstream
+        $ git merge upstream/master
+
 1. **Create a Topic Branch**: create a branch in which you will create your submission. You should create a topic branch for each set of changes that you think should be reviewed and accepted as unit.
 
         # create a topic branch and switch to it
@@ -75,11 +88,26 @@ development using git called the "fork & pull" model [learn more](https://help.g
 
 3. **Commit Updates**: commit your updates.
 
+        # check to see the changes you've made
+        $ git status
+        
+        # if you've created any new files, add them
+        $ git add [new files]
+        
+        # if you've deleted files, delete them in git
+        $ git add -u
+        
+        # commit updates
+        $ git commit -am '[a descriptive note about this commit]'
+
 4. **Quality Assurance**: make sure that definitions affected by your contribution schema and schematron validate
 using our provided scripts or your own validation scripts. (additional QA guidelines TBD). If you have any validation
 issues, resolve them before proceeding.
 
 5. **Push Commits to Your Fork**: publish you submission to your own fork.
+
+        # push branch and commits to your fork
+        $ git push origin [topic branch name]
 
 6. **Initiate a Pull Request ("PR")**: 
   1. Go to your fork on GitHub.com
@@ -100,6 +128,11 @@ the master branch of this repository.
 
 10. **Clean Up**: once your PR has been accepted, you should delete your topic branch and update your master
 branch from the upstream/master so you have all the latest content (including your submission)!
+
+        # after acceptance, delete topic branch
+        git checkout master
+        git branch -d [topic branch name]
+        git push origin :[topic branch name]
 
 ##### Sample Git Commands
 
