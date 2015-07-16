@@ -16,11 +16,11 @@ description of your question or idea.*
 - The OVAL Repository Website (coming soon)
 - [Repository Overview](../README.md)
 - [Repository Organization](../repository/README.md)
-- [Contributing OVAL](../README.contributing.oval.md)
+- [Contributing OVAL](../CONTRIBUTING.md)
 - Scripts for OVAL Contributors & Consumers (this document)
  - [Getting a Local Copy of the Repository](../README.getting.repo.md)
  - [Get Python 3.4 & Required Packages](../README.scripting.setup.md)
- - [Contributing Scripts](./README.contributing.scripts.md))
+ - [Contributing Scripts](./CONTRIBUTING.md))
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ $ python3 build_oval_definitions_file.py -h
 
 Before using these scripts to contribute content, you must have a [local copy of the repository](../README.getting.repo.md),  
 install the [scripting prerequisites](./README.scripting.setup.md) and 
-review the [content contribution process & guidelines](../README.contributing.oval.md).
+review the [content contribution process & guidelines](../CONTRIBUTING.md).
 
 ### oval\_decomposition.py
 
