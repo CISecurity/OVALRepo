@@ -33,7 +33,11 @@ from lxml import etree
 
 def get_definition_metadata(filepath):
     """ Takes a filepath for an OVAL definition file and returns dictionary of metadata. """
-    tree = etree.parse(filepath)
+    try:
+        tree = etree.parse(filepath)
+    except OSError as e:
+        raise InvalidPathError(filepath)
+    
     root = tree.getroot()
     ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
     
@@ -57,6 +61,11 @@ def get_definition_metadata(filepath):
 
 def get_element_metadata(filepath):
     """ Takes a filepath for an OVAL element file and returns dictionary of metadata. """
+    try:
+        tree = etree.parse(filepath)
+    except Exception:
+        raise InvalidPathError(filepath)
+
     tree = etree.parse(filepath)
     root = tree.getroot()
     ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
@@ -192,6 +201,12 @@ def apply_xslt(xml_tree, xslt_path):
 class Error(Exception):
     """Base class for exceptions in this module."""
     pass
+
+
+class InvalidPathError(Error):
+    """Exception raised for when a path does not exist. """
+    def __init__(self, path):
+        self.path = path
 
 
 class SchemaValidationError(Error):
