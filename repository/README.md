@@ -11,7 +11,7 @@ description of your question or idea.*
 - The OVAL Repository Website (coming soon)
 - [Repository Overview](../README.md)
 - Repository Organization (this document)
-- [Contributing OVAL](../README.contributing.oval.md)
+- [Contributing OVAL](../CONTRIBUTING.md)
 - [Scripts for OVAL Contributors & Consumers](../scripts/README.md)
  - [Getting a Local Copy of the Repository](../README.getting.repo.md)
  - [Get Python 3.4 & Required Packages](../scripts/README.scripting.setup.md)
