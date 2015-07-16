@@ -21,7 +21,9 @@ TODO:
 """
 
 
-import argparse, os, xml, xml.etree
+import argparse
+import os
+import xml.etree
 from lib_oval import OvalDocument
 from xml.etree.ElementTree import ElementTree
 
@@ -103,7 +105,8 @@ def writeFiles(element_list, repo_root, verbose=False):
         return
     
     for element in element_list:
-        filepath = element.constructRelativeFilePath()
+        e = element.getElement()
+        filepath = lib_repo.get_element_repository_path(e)
         if filepath and filepath is not None:
             filepath = repo_root + "/" + filepath
             writeFile(filepath, element, verbose)

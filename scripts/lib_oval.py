@@ -904,19 +904,6 @@ class OvalElement(object):
             return None
         
     
-    def constructRelativeFilePath(self):
-        """Uses what is know about this element to construct the path, relative to the repository root, that
-        this element would be written to as a standalone file
-        """
-        if not self.element or self.element is None:
-            return None
-         
-        # The path is:  repo_base / element type / schema short name / local node name / index bucket / converted file name
-        try:
-            return self.getType() + "s/" + self.getSchemaShortName() \
-                + "/" + self.getLocalName() + "/" + str(self.getIndexSequence()) + "/" + self.getFileName()
-        except Exception:
-            return None
         
         
     def writeToFile(self, path, with_xml_declaration=True):
@@ -1116,16 +1103,6 @@ class OvalDefinition(OvalElement):
         return self.xpath("//@*[name()='definition_ref' or name()='test_ref'")
      
      
-    def constructRelativeFilePath(self):
-        if not self.element or self.element is None:
-            return None
-         
-        # The path is:  repo_base / class / converted file name
-        try:
-            return "definitions/" + self.getClass() + "/" + self.getFileName()
-        except Exception:
-            return None
-        
     
 
 

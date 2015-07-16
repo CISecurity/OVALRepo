@@ -2,6 +2,7 @@
 """Library for accessing files in this repository.
 
 Authors: David Ries <ries@jovalcm.com>
+    Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
 
 This library should provide a stable interface to accessing OVAL objects
 and other files stored in this repository. Other code should use this library
@@ -25,8 +26,9 @@ TODO:
 """
 
 
-import pprint, inspect, os, os.path, sys, glob
-import lib_xml
+import inspect
+import os.path
+import sys
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
@@ -39,6 +41,12 @@ def path_to_oval_id(path):
     file_name = os.path.basename(path)
     oval_id = file_name.replace('_', ':')
     return oval_id
+
+
+def oval_id_to_path(ovalid):
+    if not ovalid or ovalid is None:
+        return None
+    return ovalid.replace(":", "_") + ".xml"
 
 
 def get_element_type_from_oval_id(oval_id):
@@ -59,9 +67,143 @@ def get_element_type_from_oval_id(oval_id):
     elif code == 'var':
         element_type = 'variable'
     else:
-        raise ValueError("Unknown OVAL object type '{0}' in {1}.".format(element_type, oval_id))
+        raise ValueError("Unknown OVAL object type '{0}' in {1}.".format(code, oval_id))
 
     return element_type
+
+
+def get_element_repository_path(element):
+    """Uses what is know about this element to construct the path that
+    this element would be written to as a standalone file in the repository
+    @type element: Element
+    @param element: The XML element to be written
+    
+    @rtype: string
+    @return: The full path to the repository file for this element or None if the path could not be created 
+    """
+    if not element or element is None:
+        return None
+         
+    # The path is:  repo_base / element type / schema short name / local node name / index bucket / converted file name
+    # For definitions:  repo_base / oval class /
+    try:
+        root_path = get_repository_root_path()
+        if not root_path or root_path is None:
+            return None
+            
+        oval_id = element.get("id")
+        if not oval_id or oval_id is None:
+            return None
+                
+        element_type = get_element_type_from_oval_id(oval_id)
+            
+        if element_type == 'definition':
+            defclass = element.get("class")
+            if not defclass or defclass is None:
+                return None
+            return root_path + "/definitions/" + defclass + "/" + oval_id_to_path(oval_id)
+        
+        else:
+            platform = get_schema_short_name(element)
+            if not platform or platform is None:
+                return None        
+                            
+            predicate = get_local_name(element)
+            if not predicate or predicate is None:
+                return None
+                    
+            bucket = get_index_bucket(oval_id)
+            if bucket < 1000:
+                return None
+            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + str(bucket) + "/" + oval_id_to_path(oval_id)
+        
+    except Exception:
+        return None
+        
+
+def get_schema_short_name(element):
+    """The schema short name reveals is a stand-in for the platform that this element is for and can be derived from the namespace URI
+    @type element: Element
+    @param element: the XML Element 
+    
+    @rtype: string
+    @return: the "short name" of the platform schema or None if it could not be determined
+    """
+    if not element or element is None:
+        return None
+
+    tag = element.tag
+        
+    if not tag or tag is None:
+        return None
+        
+    # If the oval ID does not contain a namespace, then we can't determine the schema shortname
+    if not '}' in tag:
+        return 'unknown'
+        
+    try:
+        schema = tag.rsplit('}', 1)[0]
+        if not '#' in schema:
+            return None
+        return schema.rsplit('#', 1)[1].strip()
+    except Exception:
+        return None
+        
+        
+def get_local_name(element):
+    """
+    Just the element name with the schema URI (if any) removed
+    @type element: Element
+    @param element:  The XML element
+    
+    @rtype: string
+    @return: the base name of the element or None if it could not be determined
+    """
+        
+    if not element or element is None:
+        return None
+
+    #Check if this node name is prefixed by a URI, in which case return every after the URI
+    if '}' in element.tag:
+        return str(element.tag).rsplit('}',1)[1]
+        
+    #If no namespace prefix, just return the node name
+    return element.tag
+        
+        
+        
+def get_index_bucket(oval_id):
+    """The current repository schema protects against having too many files in a single directory by
+    creating subdirectories based on the index portion of the OVALID that limits the number of
+    files to 1000.  This function determines the proper bucket based on the OVALID
+    @type oval_id: string
+    @param oval_id: The OVALID
+    
+    @rtype: int
+    @return: an integer representing the proper subdirectory for this OVALID, or 0 if it could not
+    be computed.  
+    """
+    if not oval_id or oval_id is None:
+        return 0
+        
+    # Get the numeric index from the end of the OVAL ID
+    position = oval_id.rfind(':')
+    if position < 0:
+        return 0
+        
+    try:
+        position = position + 1
+        index = oval_id[position:]
+        
+        # Apply the modulus function to determine which bucket it belongs to
+        return int(int(index)/1000 + 1) * 1000
+        # Or another way to do it:
+#             sequence = int(index)
+#             mod = sequence % 1000
+#             return sequence - mod + 1000
+    except Exception:
+        return 0
+
 
 
 def get_element_type_from_path(path):
