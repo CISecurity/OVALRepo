@@ -20,7 +20,7 @@ description of your question or idea.*
 - Scripts for OVAL Contributors & Consumers (this document)
  - [Getting a Local Copy of the Repository](../README.getting.repo.md)
  - [Get Python 3.4 & Required Packages](../README.scripting.setup.md)
- - [Contributing Scripts](./CONTRIBUTING.md))
+ - [Contributing Scripts](./CONTRIBUTING.md)
 
 ## Prerequisites
 
