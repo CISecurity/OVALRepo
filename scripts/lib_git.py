@@ -32,23 +32,27 @@ def get_uncommitted_oval():
     """ Returns list of OVAL files in the repository that are not committed. """
     repo = get_repo()
 
-    uncommitted_oval = []
+    uncommitted_oval = set()
     content_rel_path = lib_repo.get_repository_root_path().replace(lib_repo.get_root_path(),'')[1:]
 
     # check for changes in content staged for commit
     for diff in repo.index.diff(repo.head.commit, paths=content_rel_path):
-      uncommitted_oval.append(diff.a_path)
+      uncommitted_oval.add(diff.a_path)
       # print('staged: {0}'.format(diff.a_path))
 
     # check for changes in content not staged for commit
     for diff in repo.index.diff(None, paths=content_rel_path):
-      uncommitted_oval.append(diff.a_path)
+      uncommitted_oval.add(diff.a_path)
       # print('not staged: {0}'.format(diff.a_path))
 
     # check for untracked files 
     for path in repo.untracked_files:
       if path.startswith(content_rel_path):
-        uncommitted_oval.append(path)
+        uncommitted_oval.add(path)
+
+    # get full paths AND remove non-xml files, i.e. readme.md 
+    uncommitted_oval = { os.path.join(lib_repo.get_root_path(), path) for path in uncommitted_oval if path.endswith('.xml') }
+    #print('Uncommitted files list:\n\t{0}'.format('\n\t'.join(uncommitted_oval)))
       
     return uncommitted_oval
 

@@ -17,22 +17,23 @@ Available classes:
     - get_paths_from_ids: returns a list of paths for given list of OVAL ids
     - other methods are used internally to build, maintain and interact with the index
 
+Notes:
+- The index is designed to keep itself in sync with the current working directory. In
+    normal usage, there should be no reason to manually update it. Simply calling the query
+    method (or another method that calls query) will update the index, if necessary.
+
 Available exceptions:
 - Error: base class for exceptions in this module.
 - RepositoryStateError: raised for repository state errors that affect search.
 - IndexQueryError: raised for index query errors.
 
 TODO:
-- Improve process for determining when/how to rebuild/update index so it doesn't require
-  everything to be committed, for example:
-    - when commit changes, delete all and rebuild all
-    - if commit is same, just update/rebuild all uncommitted files
 - the escaping and _stored value approach is working, but lame
     - currently removing all special characters
     - stored values don't seem to work for multi-value fields (KEYWORDS)
 """
 
-import os, os.path, shutil, inspect, datetime, random, re, pprint, sys
+import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle
 import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query, whoosh.sorting
 import lib_repo, lib_xml, lib_git
 
@@ -114,45 +115,69 @@ class SearchIndex:
     def update(self, force_rebuild=False):
         """ Adds/updates all items in repo to index. Note: querying will call this automatically."""
 
-        # skip rebuild if unncecessary
-        if not force_rebuild and (self.index_updated or not self.in_sync()):
+        # if we've already updated the index during this script run, we're done!
+        if self.index_updated:
             return False
 
-        # get reference to the index and a writer
-        index = self.get_index(force_rebuild)
-        index_writer = index.writer()
+        # if the index is not based on the current commit, rebuild from scratch
+        if not self.index_based_on_current_commit():
+            force_rebuild = True
+
+        if force_rebuild:
+            # get a new clean/empty index
+            index = self.get_index(force_rebuild)
+            index_writer = index.writer()
+
+            # index all documents
+            documents = self.document_iterator()
+            activity_description = 'Rebuilding'
+        else:
+            # use the current index
+            index = self.get_index()
+            index_writer = index.writer()
+
+            # delete uncommitted files that are in index already
+            for filepath in self.get_indexed_uncommitted_files():
+                index_writer.delete_by_term('path', filepath)
+
+            # get list of uncommitted files and persist it
+            uncommitted_files = lib_git.get_uncommitted_oval()
+            self.set_indexed_uncommitted_files(uncommitted_files)
+
+            # if there are no uncommitted files to index, we're done
+            if not uncommitted_files:
+                return False
+
+            # index only uncommitted files
+            documents = self.document_iterator(uncommitted_files)
+            activity_description = 'Updating'
 
         # add all definition files to index
         counter = 0
-        for document in self.document_iterator():
+        for document in documents:
             counter = counter + 1
-            self.status_spinner(counter, 'Building {0} index'.format(self.index_name), self.item_label)
-            index_writer.add_document(**document)
+            self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
+            if 'deleted' in document and document['deleted']:
+                index_writer.delete_by_term('path', document['path'])
+                #self.message('debug', 'Deleting from index:\n\t{0} '.format(document['path']))
+            else:
+                index_writer.add_document(**document)
+                #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
         index_writer.commit()
-        self.status_spinner(counter, 'Building {0} index'.format(self.index_name), self.item_label, True)
+        self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
 
         # update indexed commit
         self.set_indexed_commit_hash()
         self.index_updated = True
 
-    def in_sync(self):
-        """  Determines whether or not index is in sync with working directory. """
-
-        # check require that we're on master branch
-        if not lib_git.on_master():
-            self.message('warning','The repository is not on the master branch.')
-
-        # require all OVAL to be committed
-        if lib_git.get_uncommitted_oval():
-            raise RepositoryStateError('Commit changes to OVAL before performing searchs:\n\t{0}.'.format('\n\t'.join(lib_git.get_uncommitted_oval())))
-
-        # if the index is already in sync with current commit, we're done
+    def index_based_on_current_commit(self):
+        """ Is the index based on the current commit? """
         current_commit = lib_git.get_current_commit_hash()
         indexed_commit = self.get_indexed_commit_hash()
         if indexed_commit == current_commit:
-            return False
-        else:
             return True
+        else:
+            return False
 
     def get_fieldnames(self):
         return self.schema_dictionary.keys()
@@ -174,6 +199,21 @@ class SearchIndex:
         filepath = os.path.join(lib_repo.get_scripts_path(), '__index__', self.index_name, 'git.commit.base.txt' )
         with open(filepath, 'wt') as f:
             f.write(current_commit_hash)
+
+    def get_indexed_uncommitted_files(self):
+        """ Returns a list of uncommitted files in the index. """
+        filepath = os.path.join(lib_repo.get_scripts_path(), '__index__', self.index_name, 'indexed.uncommitted.pickle' )
+        if not os.path.isfile(filepath):
+            return {}
+        else:
+            with open(filepath, 'rb') as f:
+                return pickle.load(f)
+
+    def set_indexed_uncommitted_files(self, files=[]):
+        """ Persist a list of uncommitted files in the index. """
+        filepath = os.path.join(lib_repo.get_scripts_path(), '__index__', self.index_name, 'indexed.uncommitted.pickle' )
+        with open(filepath, 'wb') as f:
+            pickle.dump(files, f)
 
     def get_index(self, force_rebuild=False):
         """ Returns a reference to the search index, creating if necessary. """
@@ -265,13 +305,21 @@ class DefinitionsIndex(SearchIndex):
             'path': whoosh.fields.ID(stored=True)
         }
 
-    def document_iterator(self):
-        """ Iterator yielding all definitions in repo as indexable documents. """
-        for path in lib_repo.get_definition_paths_iterator():
-            document = lib_xml.get_definition_metadata(path)
-            document = self.whoosh_escape_document(document)
-    
-            yield document
+    def document_iterator(self, paths=False):
+        """ Iterator yielding definition files in repo as indexable documents. """
+
+        if not paths:
+            # get all in repo
+            paths = lib_repo.get_definition_paths_iterator()
+
+        for path in paths:
+            try:
+                document = lib_xml.get_definition_metadata(path)
+            except lib_xml.InvalidPathError as e:
+                yield { 'path': e.path, 'deleted': True }
+            else:
+                document = self.whoosh_escape_document(document)
+                yield document
 
 
 class ElementsIndex(SearchIndex):
@@ -291,12 +339,21 @@ class ElementsIndex(SearchIndex):
             'path': whoosh.fields.ID(stored=True)
         }
 
-    def document_iterator(self):
-        """ Iterator yielding all definitions in repo as indexable documents. """
-        for path in lib_repo.get_element_paths_iterator():
-            document = lib_xml.get_element_metadata(path)
-            document = self.whoosh_escape_document(document)
-            yield document
+    def document_iterator(self, paths=False):
+        """ Iterator yielding elements files in repo as indexable documents. """
+
+        if not paths:
+            # get all in repo
+            paths = lib_repo.get_element_paths_iterator()
+
+        for path in paths:
+            try:
+                document = lib_xml.get_element_metadata(path)
+            except lib_xml.InvalidPathError as e:
+                yield { 'path': e.path, 'deleted': True }
+            else:
+                document = self.whoosh_escape_document(document)
+                yield document
 
     def find_downstream_ids(self, parent_ids, all_ids=set(), depth_limit=0, depth=1):
         """ Recursively find a list of all OVAL ids downstream from the provided OVAL id(a). """
