@@ -18,6 +18,7 @@ Available functions:
 - get_scripts_path: get full/real path for scripts folder
 - get_oval_def_schema: gets OVAL definitions schema file for specified schema version
 - get_oval_def_schematron: gets OVAL definitions schema file for specified schematron version
+- get_schema_versions: get sorted list of OVAL schema version contained in the repo.
 - message: outputs a message to the CLI
 
 TODO:
@@ -95,6 +96,9 @@ def get_root_path():
         root_path = os.path.realpath(scripts_path + '/../')
     return root_path
 
+def get_schema_versions():
+    """ Gets sorted OVAL schema versions contained in the repo. The order must be newest to oldest """
+    return ["5.11.1","5.11","5.10.1","5.10","5.9","5.8","5.7","5.6","5.5","5.4","5.3","5.2","5.1","5.0"]
 
 def get_repository_root_path():
     """ Gets repository root path. """
