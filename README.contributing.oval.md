@@ -70,6 +70,8 @@ development using git called the "fork & pull" model [learn more](https://help.g
         $ git checkout -b [topic branch name]
 
 2. **Make Updates**: add, update and delete elements in your topic branch.
+- Adding
+- Updating
 
 3. **Commit Updates**: commit your updates.
 
