@@ -102,6 +102,9 @@ branch from the upstream/master so you have all the latest content (including yo
 # switch to your master branch, if you're not on it already
 $ git checkout master
 
+# add the master repository as the upstream remote, if you haven't
+$ git remote add upstream https://github.com/CISecurity/OVALRepo.git
+
 # merge changes from upstream into your master
 $ git fetch upstream
 $ git merge upstream/master
