@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>lib_search</title>
+  <title>find_affected</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,7 +39,7 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        Module&nbsp;lib_search
+        Module&nbsp;find_affected
       </span>
     </td>
     <td>
@@ -49,61 +49,39 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="lib_search-module.html"
+            >]&nbsp;|&nbsp;<a href="find_affected-module.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== MODULE DESCRIPTION ==================== -->
-<h1 class="epydoc">Module lib_search</h1><p class="nomargin-top"><span class="codelink"><a href="lib_search-pysrc.html">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Module find_affected</h1><p class="nomargin-top"><span class="codelink"><a href="find_affected-pysrc.html">source&nbsp;code</a></span></p>
 <pre class="literalblock">
-Library for indexing and searching OVAL elements in the repository.
+Identify all the elements that will be affected by a submission, whether that submission
+is via a file or a pull request
 
-Authors: David Ries &lt;ries@jovalcm.com&gt;
+Authors: Gunnar Engelbach &lt;Gunnar.Engelbach@ThreatGuard.com&gt;
 
-This library provides methods to create, maintain and query an index of OVAL 
-elements in the repository using Whoosh, a pure Python lucene implementation.
-
-Available classes:
-- DefinitionsIndex: methods to create, maintain and query an index of definitions metadata
-    - query: search the index for definitions metadata 
-    - other methods are used internally to build, maintain and interact with the index
-- ElementsIndex: methods to create, maintain and query an index of definitions metadata
-    - query: search the index for definitions metadata
-    - find_downstream_ids: get a list of all ids downstream from one or more elements
-    - find_upstream_ids: get a list of all ids downstream from one or more elements
-    - get_paths_from_ids: returns a list of paths for given list of OVAL ids
-    - other methods are used internally to build, maintain and interact with the index
-
-Notes:
-- The index is designed to keep itself in sync with the current working directory. In
-    normal usage, there should be no reason to manually update it. Simply calling the query
-    method (or another method that calls query) will update the index, if necessary.
-
-Available exceptions:
-- Error: base class for exceptions in this module.
-- RepositoryStateError: raised for repository state errors that affect search.
-- IndexQueryError: raised for index query errors.
+For usage information, please see the command line help:
+    python3 find_affected.py -h
 
 TODO:
-- the escaping and _stored value approach is working, but lame
-    - currently removing all special characters
-    - stored values don't seem to work for multi-value fields (KEYWORDS)
+- TBD
 
 </pre>
 
-<!-- ==================== CLASSES ==================== -->
-<a name="section-Classes"></a>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="left"><span class="table-header">Functions</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-Classes"
+         ><span class="options">[<a href="#section-Functions"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -114,48 +92,48 @@ TODO:
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="lib_search.SearchIndex-class.html" class="summary-name">SearchIndex</a><br />
-      Abstract base class including generic methods to create, maintain and query an index.
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="main"></a><span class="summary-sig-name">main</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="find_affected-pysrc.html#main">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="lib_search.DefinitionsIndex-class.html" class="summary-name">DefinitionsIndex</a><br />
-      A SearchIndex for OVAL definitions.
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_changed_ids_from_git"></a><span class="summary-sig-name">get_changed_ids_from_git</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="find_affected-pysrc.html#get_changed_ids_from_git">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="lib_search.ElementsIndex-class.html" class="summary-name">ElementsIndex</a><br />
-      A SearchIndex for OVAL elements.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="lib_search.Error-class.html" class="summary-name">Error</a><br />
-      Base class for exceptions in this module.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="lib_search.RepositoryStateError-class.html" class="summary-name">RepositoryStateError</a><br />
-      Exception raised for repository state errors that affect search.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="lib_search.IndexQueryError-class.html" class="summary-name">IndexQueryError</a><br />
-      Exception raised for index query errors.
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_changed_ids_from_file"></a><span class="summary-sig-name">get_changed_ids_from_file</span>(<span class="summary-sig-arg">source</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="find_affected-pysrc.html#get_changed_ids_from_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 </table>
