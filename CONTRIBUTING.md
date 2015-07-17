@@ -133,8 +133,12 @@ $ git push origin [topic branch name]
 
 # initiate your PR
 
-# after acceptance, delete topic branch
+# after acceptance, delete topic branch (don't merge!)
 git checkout master
-git branch -d [topic branch name]
+git branch -D [topic branch name]
 git push origin :[topic branch name]
+
+# and finally, get updates from master
+$ git fetch upstream
+$ git merge upstream/master
 ```
