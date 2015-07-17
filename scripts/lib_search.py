@@ -54,7 +54,6 @@ class SearchIndex:
         self.message = message_method or self.message
         self.index_updated = False
         self.no_output = False
-        self.index_writer = False
 
     def query(self, query_dict={}, group_by=[]):
         """ Perform a query against an index. 
@@ -127,7 +126,9 @@ class SearchIndex:
         if force_rebuild:
             # get a new clean/empty index
             index = self.get_index(force_rebuild)
-            index_writer = index.writer()
+
+            # get a high-performance writer as per: https://pythonhosted.org/Whoosh/batch.html
+            index_writer = index.writer(procs=4, multisegment=True)
 
             # index all documents
             documents = self.document_iterator()
@@ -306,6 +307,7 @@ class DefinitionsIndex(SearchIndex):
             'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
+        self.fields_with_stemming = [ 'title', 'description' ]
 
     def document_iterator(self, paths=False):
         """ Iterator yielding definition files in repo as indexable documents. """
@@ -340,6 +342,7 @@ class ElementsIndex(SearchIndex):
             'oval_refs': whoosh.fields.KEYWORD(commas=True,scorable=True,stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
+        self.fields_with_stemming = [ ]
 
     def document_iterator(self, paths=False):
         """ Iterator yielding elements files in repo as indexable documents. """
