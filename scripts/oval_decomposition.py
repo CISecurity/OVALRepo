@@ -54,12 +54,12 @@ def main():
     
     if not oval.parseFromFile(filename):
         print("Unable to parse source file '", filename, "':  no actions taken")
-        exit
+        return
 
     deflist = oval.getDefinitions()
     if not deflist or deflist is None or len(deflist) < 1:
         print("Error:  this document does not contain any OVAL definitions.  No further action will be taken")
-        exit
+        return
         
     if verbose:
         print(" Number of definitions to process: ", len(deflist))
@@ -86,8 +86,6 @@ def main():
 #         else:
 #             print("  ## New file: ", filepath)
 #     
-    
-
         
     
     #For each file path, see if a file already exists in the repository
