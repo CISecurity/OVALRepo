@@ -376,6 +376,8 @@ class ElementsIndex(SearchIndex):
             return all_ids
 
         if isinstance(source_ids, str):
+            source_ids = set([source_ids])
+        elif isinstance(source_ids, list):
             source_ids = set(source_ids)
 
         self.update()
