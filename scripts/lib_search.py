@@ -54,6 +54,7 @@ class SearchIndex:
         self.message = message_method or self.message
         self.index_updated = False
         self.no_output = False
+        self.index_writer = False
 
     def query(self, query_dict={}, group_by=[]):
         """ Perform a query against an index. 
@@ -146,6 +147,7 @@ class SearchIndex:
 
             # if there are no uncommitted files to index, we're done
             if not uncommitted_files:
+                index_writer.commit()
                 return False
 
             # index only uncommitted files
