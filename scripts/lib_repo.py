@@ -52,6 +52,10 @@ def oval_id_to_path(ovalid):
 
 def get_element_type_from_oval_id(oval_id):
     """ Gets element type from OVAL id. """
+    
+    if not oval_id or oval_id is None:
+        raise ValueError("Empty OVAL ID")
+        
     segments = oval_id.split(':')
     if len(segments) != 4:
         raise ValueError('Invalid OVAL id: {0}.'.format(oval_id))
@@ -82,7 +86,7 @@ def get_element_repository_path(element):
     @rtype: string
     @return: The full path to the repository file for this element or None if the path could not be created 
     """
-    if not element or element is None:
+    if element is None:
         return None
          
     # The path is:  repo_base / element type / schema short name / local node name / index bucket / converted file name
@@ -120,7 +124,8 @@ def get_element_repository_path(element):
         
     except Exception:
         return None
-        
+    
+    
 
 def get_schema_short_name(element):
     """The schema short name reveals is a stand-in for the platform that this element is for and can be derived from the namespace URI
@@ -130,7 +135,7 @@ def get_schema_short_name(element):
     @rtype: string
     @return: the "short name" of the platform schema or None if it could not be determined
     """
-    if not element or element is None:
+    if element is None:
         return None
 
     tag = element.tag
@@ -161,7 +166,7 @@ def get_local_name(element):
     @return: the base name of the element or None if it could not be determined
     """
         
-    if not element or element is None:
+    if element is None:
         return None
 
     #Check if this node name is prefixed by a URI, in which case return every after the URI

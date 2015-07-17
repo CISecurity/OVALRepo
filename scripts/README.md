@@ -29,6 +29,13 @@ Before you can get started using these scripts, you will need to:
 - [Get a Local Copy of the Repository](../README.getting.repo.md)
 - [Get Python 3.4 & Required Packages](./README.scripting.setup.md)
 
+## Notes
+- *You must run these scripts from within a repo*: These scripts are intended to be run from within a copy of this repository
+that was retrieved using git (i.e. a git clone). If you've followed the instructions
+for [getting a local copy of the repository](../README.getting.repo.md), then you're all
+set. But, if you have downloaded a zip of the content or moved the scripts outside of 
+your local copy of the repo, these scripts will not work properly.
+
 ## Getting Help, Making Suggestions
 
 If you need help using these scripts, please post your questions to the 

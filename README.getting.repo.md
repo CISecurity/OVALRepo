@@ -67,4 +67,5 @@ and use the content, you might want to follow those instructions (above).
 1. **GitHub Account**: Create a [GitHub account](https://github.com) if you don't have one
 2. **Install Git**: If you don't have git on your machine, you will need to [install git](https://help.github.com/articles/set-up-git/)
 3. **Fork this Repo**: [Create a fork](https://help.github.com/articles/fork-a-repo/) of this [OVAL repository](https://github.com/CISecurity/OVALRepo) 
-4. **Clone Your Fork**: [Created a local clone](https://help.github.com/articles/fork-a-repo/) of your fork
+4. **Clone Your Fork**: [Create a local clone](https://help.github.com/articles/fork-a-repo/) of your fork
+5. **Add Upstream**: [Add this repository as the upstream remote](https://help.github.com/articles/configuring-a-remote-for-a-fork/)

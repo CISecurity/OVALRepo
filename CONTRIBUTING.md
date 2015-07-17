@@ -102,6 +102,9 @@ branch from the upstream/master so you have all the latest content (including yo
 # switch to your master branch, if you're not on it already
 $ git checkout master
 
+# add the master repository as the upstream remote, if you haven't
+$ git remote add upstream https://github.com/CISecurity/OVALRepo.git
+
 # merge changes from upstream into your master
 $ git fetch upstream
 $ git merge upstream/master
@@ -130,8 +133,12 @@ $ git push origin [topic branch name]
 
 # initiate your PR
 
-# after acceptance, delete topic branch
+# after acceptance, delete topic branch (don't merge!)
 git checkout master
-git branch -d [topic branch name]
+git branch -D [topic branch name]
 git push origin :[topic branch name]
+
+# and finally, get updates from master
+$ git fetch upstream
+$ git merge upstream/master
 ```
