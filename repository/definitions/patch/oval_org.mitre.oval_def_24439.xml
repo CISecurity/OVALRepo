@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition id="oval:org.mitre.oval:def:24439" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+<definition id="oval:org.mitre.oval:def:24439" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
   <metadata>
     <title>RHSA-2014:0380: flash-plugin security update (Critical)</title>
     <affected family="unix">
       <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
       <product>flash-plugin</product>
     </affected>
     <reference source="VENDOR" ref_id="RHSA-2014:0380-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0380.html"/>
@@ -42,12 +43,22 @@ upgrades Flash Player to version 11.2.202.350.</description>
         <status_change date="2014-04-23T10:26:45.530-04:00">DRAFT</status_change>
         <status_change date="2014-05-12T04:00:54.348-04:00">INTERIM</status_change>
         <status_change date="2014-06-02T04:00:13.168-04:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:24439 - Added criteria for RHEL 5 and 7" date="2015-07-13T20:25:00.758-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-07-13T20:27:41.405-04:00">INTERIM</status_change>
       </dates>
-      <status>ACCEPTED</status>
+      <status>INTERIM</status>
     </oval_repository>
   </metadata>
-  <criteria>
-    <criterion comment="flash-plugin is earlier than 0:11.2.202.350-1.el6" test_ref="oval:org.mitre.oval:tst:113518"/>
-    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criterion comment="flash-plugin is earlier than 0:11.2.202.350-1.el5" test_ref="oval:org.mitre.oval:tst:141011"/>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criterion comment="flash-plugin is earlier than 0:11.2.202.350-1.el6" test_ref="oval:org.mitre.oval:tst:113518"/>
+    </criteria>
   </criteria>
 </definition>

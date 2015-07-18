@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition id="oval:org.mitre.oval:def:26915" version="3" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+<definition id="oval:org.mitre.oval:def:26915" version="4" class="patch" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
   <metadata>
     <title>RHSA-2014:1657: java-1.7.0-oracle security update (Critical)</title>
     <affected family="unix">
       <platform>Red Hat Enterprise Linux 6</platform>
+      <platform>Red Hat Enterprise Linux 5</platform>
+      <platform>Red Hat Enterprise Linux 7</platform>
       <product>java-1.7.0-oracle</product>
     </affected>
     <reference source="VENDOR" ref_id="RHSA-2014:1657-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1657.html"/>
@@ -54,19 +56,47 @@ take effect.</description>
         <status_change date="2014-10-17T23:29:26.774-04:00">DRAFT</status_change>
         <status_change date="2014-11-03T04:00:23.645-05:00">INTERIM</status_change>
         <status_change date="2014-11-24T04:01:15.647-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:26915 - Added criteria for RHEL 5 and 7" date="2015-07-13T20:25:00.758-04:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-07-13T20:27:40.039-04:00">INTERIM</status_change>
       </dates>
-      <status>ACCEPTED</status>
+      <status>INTERIM</status>
     </oval_repository>
   </metadata>
-  <criteria>
-    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-    <criteria operator="OR" comment="Packages section">
-      <criterion comment="java-1.7.0-oracle is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:124966"/>
-      <criterion comment="java-1.7.0-oracle-devel is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125290"/>
-      <criterion comment="java-1.7.0-oracle-javafx is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125339"/>
-      <criterion comment="java-1.7.0-oracle-jdbc is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125348"/>
-      <criterion comment="java-1.7.0-oracle-plugin is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125233"/>
-      <criterion comment="java-1.7.0-oracle-src is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125274"/>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 5 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="java-1.7.0-oracle is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:140719"/>
+        <criterion comment="java-1.7.0-oracle-devel is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:140918"/>
+        <criterion comment="java-1.7.0-oracle-javafx is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:140948"/>
+        <criterion comment="java-1.7.0-oracle-jdbc is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:141211"/>
+        <criterion comment="java-1.7.0-oracle-plugin is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:141212"/>
+        <criterion comment="java-1.7.0-oracle-src is earlier than 1:1.7.0.72-1jpp.4.el5_11" test_ref="oval:org.mitre.oval:tst:141161"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 6 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="java-1.7.0-oracle is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:124966"/>
+        <criterion comment="java-1.7.0-oracle-devel is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125290"/>
+        <criterion comment="java-1.7.0-oracle-javafx is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125339"/>
+        <criterion comment="java-1.7.0-oracle-jdbc is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125348"/>
+        <criterion comment="java-1.7.0-oracle-plugin is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125233"/>
+        <criterion comment="java-1.7.0-oracle-src is earlier than 1:1.7.0.72-1jpp.2.el6" test_ref="oval:org.mitre.oval:tst:125274"/>
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
+      <criteria operator="OR" comment="Packages match section">
+        <criterion comment="java-1.7.0-oracle is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:141226"/>
+        <criterion comment="java-1.7.0-oracle-devel is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:141191"/>
+        <criterion comment="java-1.7.0-oracle-javafx is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:140729"/>
+        <criterion comment="java-1.7.0-oracle-jdbc is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:140953"/>
+        <criterion comment="java-1.7.0-oracle-plugin is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:141116"/>
+        <criterion comment="java-1.7.0-oracle-src is earlier than 1:1.7.0.72-1jpp.2.el7" test_ref="oval:org.mitre.oval:tst:141169"/>
+      </criteria>
     </criteria>
   </criteria>
 </definition>
