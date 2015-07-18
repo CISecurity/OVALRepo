@@ -1,8 +1,8 @@
 #!/usr/bin/env/ python3
-"""Identify all the elements that will be affected by a submission, whether that submission
-is via a file or a pull request
+"""Identify changes in current working directory as compared to a remote authoritative copy of the repo and
+identify all the elements affected by those changes.
 
-Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
+Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>, David Ries <ries@jovalcm.com>
 
 For usage information, please see the command line help:
     python3 find_affected.py -h
@@ -17,73 +17,108 @@ import lib_search
 import lib_git
 import lib_oval
 import lib_repo
-import os
+import lib_xml
+import os, time, sys
 
 
 def main():
-    verbose = False;
-    
-    parser = argparse.ArgumentParser(description='Uses a file or a diff of the local uncommitted changes to identify all items that could be affected.')
-    options = parser.add_argument_group('Options')
-    options.add_argument('-f', '--file', required=False, help='The name of the source file.  If not used the local git repository will be used as the source')
-    options.add_argument('-v', '--verbose', required=False, action="store_true", help='Enable verbose messages')
+    """ parse command line options and call lib functions """
+    start_time = time.time()
 
+    parser = argparse.ArgumentParser(description='Identify changes in current working directory as compared to a remote authoritative copy of the repo and identify all the elements affected by those changes.')
+    # Note: I don't think we need to support files. If a file is submitted, CIS/QA can decompose it and then run this. So this can always run against repo.
+    #parser.add_argument('-f', '--file', required=False, help='The name of the source file.  If not used the local git repository will be used as the source')
+    parser.add_argument('-v', '--verbose', required=False, action="store_true", help='Enable verbose messages')
+    parser.add_argument('--remote', required=False, default='upstream', help="name of authoritative remote (default: 'upstream')")
+    parser.add_argument('--branch', required=False, default='master', help="name of branch in authoritative remote (default: 'master')")
+    parser.add_argument('--outfile', required=False, default='all.affected.oval.xml', help="file name OVAL definitions file containing all affected definitions (default 'all.affected.oval.xml')")
+    parser.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the affected definitions')
     args = vars(parser.parse_args())
 
-    if args['verbose']:
-        verbose = True
-    
-    source = args['file']
-    if source:
-        if not os.path.isfile(source):
-            print("\n## Error:  source file '{0}' not found.  No actions taken.\n".format(source))
-            return
-        if verbose:
-            print("\n Looking for changed items in source file '{0}'".format(source))
-        idlist = get_changed_ids_from_file(source)
-    else:
-        if verbose:
-            print("\n Checking the local repository for uncommitted changes...")
-        idlist = get_changed_ids_from_git()
-        
-    if not idlist or idlist is None or len(idlist) < 1:
-        print("---  Action complete:  no changes found.\n")
-        return
-        
-        
+    verbose = args['verbose']
+
+    ## 1. Find Affected Elements
+
+    # get changes in working dir vs. remote/branch
+    message('info', 'Comparing working directory to {0}/{1}'.format(args['remote'], args['branch']), verbose)
+    paths_changed = lib_git.compare_current_oval_to_remote(args['remote'], args['branch'])
+    if not paths_changed:
+        message('info', 'No changes. Aborting.', verbose)
+        sys.exit(0)
+    message('info', 'Found {0} files changed in working directory:\n\t{1}'.format(len(paths_changed), '\n\t'.join(paths_changed)), verbose)
+
+    # convert paths to oval ids
+    oval_ids_changed = { lib_repo.path_to_oval_id(filepath) for filepath in paths_changed }
+    message('info', 'Found {0} OVAL elements changed in working directory:\n\t{1}'.format(len(oval_ids_changed), '\n\t'.join(oval_ids_changed)), verbose)
+
+    # find all upstream ids
+    message('info','Finding upstream OVAL ids for {0} element(s)'.format(len(oval_ids_changed)), verbose)
+    elements_index = lib_search.ElementsIndex(message)
+    upstream_ids = elements_index.find_upstream_ids(oval_ids_changed, set())
+    message('info','Found {0} upstream OVAL ids (all element types)'.format(len(upstream_ids)), verbose)
+
+    # filter affected to defintion ids
+    affected_def_ids = { oval_id for oval_id in upstream_ids if lib_repo.get_element_type_from_oval_id(oval_id) == 'definition' }
+    message('info','Found {0} upstream OVAL definitions:\n\t{1}'.format(len(affected_def_ids), '\n\t'.join(affected_def_ids)), verbose)
+
+    ## 2. Build an OVAL Definitions File and Validate It!
+    message('info','Building an OVAL definitions file for all affected definitions.', verbose)
+
+    # get all downstream elements
+    oval_ids = elements_index.find_downstream_ids(affected_def_ids, affected_def_ids)
+    file_paths = elements_index.get_paths_from_ids(oval_ids)
+
+    # add each OVAL definition to generator and write to file
+    message('info',"Generating OVAL definition file '{0}' with {1} elements".format(args['outfile'], len(oval_ids)), verbose)
+    OvalGenerator = lib_xml.OvalGenerator(message)
+    for file_path in file_paths:
+        element_type = lib_repo.get_element_type_from_path(file_path)
+        OvalGenerator.queue_element_file(element_type, file_path)
+    OvalGenerator.write(args['outfile'])
+
+    # validate
+    schema_path = lib_repo.get_oval_def_schema('5.11.1')
+    message('info','Performing schema validation', verbose)
+    try:
+        lib_xml.schema_validate(args['outfile'], schema_path)
+        message('info','Schema validation successful', verbose)
+    except lib_xml.SchemaValidationError as e:
+        message('error','Schema validation failed:\n\t{0}'.format(e.message), verbose)
+
+    if args['schematron']:
+        # schematron validate
+        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        message('info','Performing schematron validation', verbose)
+        try:
+            lib_xml.schematron_validate(args['outfile'], schema_path)
+            message('info','Schematron validation successful', verbose)
+        except lib_xml.SchematronValidationError as e:
+            message('error','Schematron validation failed:\n\t{0}'.format('\n\t'.join(e.messages)), verbose)
+
     #Find all downstream children -- that is, a search depth of one
     #Find all upstream users, all the way up to the definition
     
     #Sort the list:  definitions, then tests, objects, states, and variables
     #Show the list
     #Offer to build an OVAL file that contains all the changes
-        
-        
-      
-      
-      
-def get_changed_ids_from_git():
-    try:
-        changed_files = lib_git.get_uncommitted_oval()
-        if not changed_files or changed_files is None:
-            return None
-        
-        change_list = []
-        for file in changed_files:
-            change_list.add(lib_repo.path_to_oval_id(file))
-            
-        return change_list
-    
-    except Exception:
-        if main.verbose:
-            print("## Error while querying git for changes: ", format(Exception))
-        return None
-    
-    
-def get_changed_ids_from_file(source):
-    if not source or source is None:
-        return None
 
+    seconds_elapsed = time.time() - start_time
+    message('info','Completed in {0}!'.format(format_duration(seconds_elapsed)), verbose)
+    
+
+def format_duration(seconds):
+    """ format a duration in seconds """
+    hours = int(seconds // 3600)
+    seconds = seconds - (hours * 3600)
+    minutes = int(seconds // 60)
+    seconds = int(seconds - (minutes * 60))
+    return '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)
+
+
+def message(label, message, verbose=True):
+    """ print a message """
+    if verbose:
+        sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
 
 if __name__ == '__main__':
     main()

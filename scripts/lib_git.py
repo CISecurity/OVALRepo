@@ -90,7 +90,9 @@ def compare_current_oval_to_remote(remote='origin', branch='master'):
 
     # get full paths AND remove non-xml files, i.e. readme.md 
     files = { os.path.join(lib_repo.get_root_path(), path) for path in files if path.endswith('.xml') }
-    print('Files list:\n\t{0}'.format('\n\t'.join(files)))
+    # print('Files list:\n\t{0}'.format('\n\t'.join(files)))
+
+    return files
 
 
 def get_current_commit_hash():

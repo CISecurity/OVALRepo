@@ -40,7 +40,7 @@ supported_element_types = ('definition', 'test', 'object', 'state', 'variable')
 def path_to_oval_id(path):
     """ Transform a path to an oval_id. """
     file_name = os.path.basename(path)
-    oval_id = file_name.replace('_', ':')
+    oval_id = file_name.replace('_', ':')[:-4]
     return oval_id
 
 
