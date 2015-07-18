@@ -409,7 +409,7 @@ class OvalGenerator:
                     <oval:schema_version>{2}</oval:schema_version>
                     <oval:timestamp>{3}</oval:timestamp>
                 </generator>
-            """.format(OvalGenerator.product_name, OvalGenerator.generator_version, OvalGenerator.oval_schema_version, oval_timestamp).replace('                ','\t').replace('    ','\t'))
+            """.format(self.product_name, self.generator_version, self.oval_schema_version, oval_timestamp).replace('                ','\t').replace('    ','\t'))
 
             # add queued file content
             for element in OvalGenerator.supported_oval_elements:
