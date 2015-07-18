@@ -33,7 +33,7 @@ TODO:
     - stored values don't seem to work for multi-value fields (KEYWORDS)
 """
 
-import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle
+import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle, time
 import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query, whoosh.sorting
 import lib_repo, lib_xml, lib_git
 
@@ -118,7 +118,7 @@ class SearchIndex:
         # if we've already updated the index during this script run, we're done!
         if self.index_updated:
             return False
-
+        
         # if the index is not based on the current commit, rebuild from scratch
         if not self.index_based_on_current_commit():
             force_rebuild = True
@@ -149,6 +149,8 @@ class SearchIndex:
             # if there are no uncommitted files to index, we're done
             if not uncommitted_files:
                 index_writer.commit()
+                self.index_updated = True
+            
                 return False
 
             # index only uncommitted files

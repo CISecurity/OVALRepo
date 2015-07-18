@@ -12,7 +12,7 @@ TODO:
 - add options to zip/tar the result file?
 """
 
-import argparse, sys, time
+import argparse, sys, time, cProfile
 import lib_repo, lib_xml, lib_search
 
 
@@ -88,13 +88,13 @@ def main():
     OvalGenerator = lib_xml.OvalGenerator(message)
 
     # add each OVAL definition to generator
-    message('info','generating OVAL definition file with {0} elements'.format(len(oval_ids)))
+    message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
     for file_path in file_paths:
         element_type = lib_repo.get_element_type_from_path(file_path)
         OvalGenerator.queue_element_file(element_type, file_path)
 
     # write output file
-    message('info','writing OVAL definitions to {0}'.format(args['outfile']))
+    message('info','Writing OVAL definitions to {0}'.format(args['outfile']))
     OvalGenerator.write(args['outfile'])
 
     # validate
