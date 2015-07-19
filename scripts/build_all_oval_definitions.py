@@ -37,8 +37,9 @@ def main():
         message('info','Building file {0} for {1}.'.format(i_file, def_id))
 
         # add all downstream element ids
+        def_ids = set([def_id])
         elements_index = lib_search.ElementsIndex(message)
-        oval_ids = elements_index.find_downstream_ids(def_id)
+        oval_ids = elements_index.find_downstream_ids(def_ids, def_ids)
         file_paths = elements_index.get_paths_from_ids(oval_ids)
 
         # create generator
