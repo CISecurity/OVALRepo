@@ -390,9 +390,13 @@ class ElementsIndex(SearchIndex):
             documents = self.query({ 'oval_refs': source_ids })
             found_ids = { document['oval_id'] for document in documents }
         else: 
+            timer = time.time()
             documents = self.query({ 'oval_id': source_ids })
+            print('\t\t - query: {0}'.format(int((time.time() - timer) * 1000)))
+            timer = time.time()
             found_ids = { oval_ref for document in documents for oval_ref in document['oval_refs'].split(',') if document['oval_refs'] }
-        
+            print('\t\t - extract: {0}'.format(int((time.time() - timer) * 1000)))
+
         # remove ids already in result set
         found_ids.difference_update(all_ids)
         # self.message('debug','--unique found--\n{0}'.format(repr(found_ids)))

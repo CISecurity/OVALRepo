@@ -23,8 +23,9 @@ def main():
     parser.add_argument('-l', '--limit', nargs='?', default="0", type=int, help='limits number of defintions that will be built)')
     args = vars(parser.parse_args())
 
-    # get definitions index
+    # get indexes
     definitions_index = lib_search.DefinitionsIndex(message)
+    elements_index = lib_search.ElementsIndex(message)
 
     i_file = 0
     i_limit = args['limit']
@@ -38,7 +39,6 @@ def main():
 
         # add all downstream element ids
         def_ids = set([def_id])
-        elements_index = lib_search.ElementsIndex(message)
         oval_ids = elements_index.find_downstream_ids(def_ids, def_ids)
         file_paths = elements_index.get_paths_from_ids(oval_ids)
 
