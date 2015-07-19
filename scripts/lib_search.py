@@ -54,6 +54,7 @@ class SearchIndex:
         self.message = message_method or self.message
         self.index_updated = False
         self.no_output = False
+        self.index_searcher = False
 
     def query(self, query_dict={}, group_by=[]):
         """ Perform a query against an index. 
@@ -104,13 +105,15 @@ class SearchIndex:
             query_kwargs['maptype'] = whoosh.sorting.Count
 
         # run query against index
-        index = self.get_index()
-        with index.searcher() as index_searcher:
-            results = index_searcher.search(query, **query_kwargs)
-            if group_by:
-                return results.groups().copy()
-            else:
-                return [result.fields() for result in results]
+        index_searcher = self.get_searcher()
+        results = index_searcher.search(query, **query_kwargs)
+
+        if group_by:
+            results = results.groups().copy()
+        else:
+            results = [result.fields() for result in results]
+
+        return results
             
     def update(self, force_rebuild=False):
         """ Adds/updates all items in repo to index. Note: querying will call this automatically."""
@@ -118,6 +121,9 @@ class SearchIndex:
         # if we've already updated the index during this script run, we're done!
         if self.index_updated:
             return False
+
+        # we only need to do this once per script lifetime
+        self.index_updated = True
         
         # if the index is not based on the current commit, rebuild from scratch
         if not self.index_based_on_current_commit():
@@ -133,6 +139,9 @@ class SearchIndex:
             # index all documents
             documents = self.document_iterator()
             activity_description = 'Rebuilding'
+
+            # update indexed commit
+            self.set_indexed_commit_hash()
         else:
             # use the current index
             index = self.get_index()
@@ -141,22 +150,20 @@ class SearchIndex:
             # delete uncommitted files that are in index already
             for filepath in self.get_indexed_uncommitted_files():
                 index_writer.delete_by_term('path', filepath)
+            index_writer.commit()
 
             # get list of uncommitted files and persist it
             uncommitted_files = lib_git.get_uncommitted_oval()
             self.set_indexed_uncommitted_files(uncommitted_files)
 
-            # if there are no uncommitted files to index, we're done
+            # nothing to update? done!
             if not uncommitted_files:
-                index_writer.commit()
-                self.index_updated = True
-            
-                return False
+                return
 
             # index only uncommitted files
             documents = self.document_iterator(uncommitted_files)
             activity_description = 'Updating'
-
+        
         # add all definition files to index
         counter = 0
         for document in documents:
@@ -168,12 +175,9 @@ class SearchIndex:
             else:
                 index_writer.add_document(**document)
                 #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
-        index_writer.commit()
+        
         self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
-
-        # update indexed commit
-        self.set_indexed_commit_hash()
-        self.index_updated = True
+        index_writer.commit()
 
     def index_based_on_current_commit(self):
         """ Is the index based on the current commit? """
@@ -239,6 +243,22 @@ class SearchIndex:
             whoosh.index.create_in(index_path, whoosh.fields.Schema(**schema_dictionary), self.index_name)
 
         return whoosh.index.open_dir(index_path, self.index_name)
+
+    def get_searcher(self):
+        """ Returns a reference to the index searcher, creating if necssary. """
+        if self.index_searcher:
+            return self.index_searcher
+
+        index = self.get_index()
+        self.index_searcher = index.searcher()
+        return self.index_searcher
+
+    def close_searcher(self):
+        """ Closes the index searcher. """
+        if self.index_searcher:
+            self.index_searcher.close()
+
+        self.index_searcher = false
 
     def whoosh_escape(self, s):
         """ Escape a string for whoosh. """
@@ -382,7 +402,6 @@ class ElementsIndex(SearchIndex):
         elif isinstance(source_ids, list):
             source_ids = set(source_ids)
 
-        self.update()
         # self.message('debug','checking for oval refs:\n\t{0}'.format('\n\t'.join(source_ids)))
 
         # get all parent elements from index and extract their oval_refs
@@ -390,12 +409,8 @@ class ElementsIndex(SearchIndex):
             documents = self.query({ 'oval_refs': source_ids })
             found_ids = { document['oval_id'] for document in documents }
         else: 
-            timer = time.time()
             documents = self.query({ 'oval_id': source_ids })
-            print('\t\t - query: {0}'.format(int((time.time() - timer) * 1000)))
-            timer = time.time()
             found_ids = { oval_ref for document in documents for oval_ref in document['oval_refs'].split(',') if document['oval_refs'] }
-            print('\t\t - extract: {0}'.format(int((time.time() - timer) * 1000)))
 
         # remove ids already in result set
         found_ids.difference_update(all_ids)
