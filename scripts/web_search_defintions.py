@@ -8,8 +8,6 @@ For usage information, please see the command line help:
 
 TODO:
 - testing
-- improve performance of schematron validation (if possible)
-- add options to zip/tar the result file?
 """
 
 import argparse, sys, time, json
