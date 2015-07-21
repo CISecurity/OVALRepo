@@ -9,9 +9,13 @@ elements in the repository using Whoosh, a pure Python lucene implementation.
 Available classes:
 - DefinitionsIndex: methods to create, maintain and query an index of definitions metadata
     - query: search the index for definitions metadata 
+    - grouped_query: search the index for totals based on grouping
+    - paged_query: search and return a page of results
     - other methods are used internally to build, maintain and interact with the index
 - ElementsIndex: methods to create, maintain and query an index of definitions metadata
     - query: search the index for definitions metadata
+    - grouped_query: search the index for totals based on grouping
+    - paged_query: search and return a page of results
     - find_downstream_ids: get a list of all ids downstream from one or more elements
     - find_upstream_ids: get a list of all ids downstream from one or more elements
     - get_paths_from_ids: returns a list of paths for given list of OVAL ids
@@ -56,7 +60,7 @@ class SearchIndex:
         self.no_output = False
         self.index_searcher = False
 
-    def query(self, query_dict={}, group_by=[]):
+    def query(self, query_dict={}, query_options={}):
         """ Perform a query against an index. 
 
             query_dict: {
@@ -99,22 +103,44 @@ class SearchIndex:
             query = whoosh.query.Every()
 
         # assemble query args
-        query_kwargs = { 'scored': False, 'sortedby': False, 'terms': False }
-        if group_by:
-            query_kwargs['groupedby'] = group_by
+        if 'sorted' in query_options and query_options['sorted']:
+            query_kwargs = { 'terms': False }
+        else:
+            query_kwargs = { 'scored': False, 'sortedby': False, 'terms': False }
+
+        if 'group_by' in query_options:
+            query_kwargs['groupedby'] = query_options['group_by']
             query_kwargs['maptype'] = whoosh.sorting.Count
 
-        # run query against index
+        # get searcher (may already be open)
         index_searcher = self.get_searcher()
-        results = index_searcher.search(query, **query_kwargs)
 
-        if group_by:
-            results = results.groups().copy()
+        # run query
+        if 'page' in query_options and 'page_length' in query_options:
+            results = index_searcher.search_page(query, query_options['page'], query_options['page_length'], **query_kwargs)
         else:
-            results = [result.fields() for result in results]
+            results = index_searcher.search(query, **query_kwargs)
 
-        return results
-            
+        if 'group_by' in query_options:
+            return results.groups().copy()
+        elif hasattr(results, 'pagenum'):
+            return {
+                'documents': [result.fields() for result in results],
+                'page': results.pagenum,
+                'page_count': results.pagecount,
+                'page_length': results.pagelen
+            }
+        else:
+            return [result.fields() for result in results]
+
+    def grouped_query(self, query_dict={}, group_by=[]):
+        """ Perform a query and group results """
+        return self.query(query_dict, { 'group_by': group_by })
+
+    def paged_query(self, query_dict={}, page=1, page_length=50):
+        """ Perform a query and return a page of results """
+        return self.query(query_dict, { 'page': page, 'page_length': page_length, 'sorted': True })
+
     def update(self, force_rebuild=False):
         """ Adds/updates all items in repo to index. Note: querying will call this automatically."""
 

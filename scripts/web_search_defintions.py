@@ -20,23 +20,26 @@ def main():
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Powers website OVAL definitions search.')
-    source_options = parser.add_argument_group('Search Criteria',
+    output_options = parser.add_argument_group('output options')
+    output_options.add_argument('--page', nargs='?', default=1, type=int, help='page number to return (1 based, default: 1)')
+    output_options.add_argument('--page_length', nargs='?', default=50, type=int, help='number of items per page (default: 50)')
+    criteria_options = parser.add_argument_group('search criteria',
                                                'Provide at least one of the following criteria to determine which definition(s) ' +
                                                'will be included in the results set. Results will include the intersection of matches for each parameter ' +
                                                'supplied. When multiple values are supplied for one paramater, the parameter will ' +
                                                'match definitions that match any provided value.')
-    source_options.add_argument('--definition_id', nargs='*', dest='oval_id', help='match OVAL definition id(s)')
-    source_options.add_argument('--title', nargs='*', dest='title', metavar='PHRASE', help='match phrase(s) in definition titles')
-    source_options.add_argument('--description', nargs='*', dest='description', metavar='PHRASE', help='match phrase(s) in definition titles')
-    source_options.add_argument('--class', nargs='*', dest='class', help='filter by class(es): {0}'.format(', '.join(lib_repo.supported_definition_classes)))
-    source_options.add_argument('--status', nargs='*', dest='status', help='filter by status(es): {0}'.format(', '.join(lib_repo.supported_definition_statuses)))
-    source_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
-    source_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
-    source_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
-    source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
-    source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
-    source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
-    source_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
+    criteria_options.add_argument('--definition_id', nargs='*', dest='oval_id', help='match OVAL definition id(s)')
+    criteria_options.add_argument('--title', nargs='*', dest='title', metavar='PHRASE', help='match phrase(s) in definition titles')
+    criteria_options.add_argument('--description', nargs='*', dest='description', metavar='PHRASE', help='match phrase(s) in definition titles')
+    criteria_options.add_argument('--class', nargs='*', dest='class', help='filter by class(es): {0}'.format(', '.join(lib_repo.supported_definition_classes)))
+    criteria_options.add_argument('--status', nargs='*', dest='status', help='filter by status(es): {0}'.format(', '.join(lib_repo.supported_definition_statuses)))
+    criteria_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
+    criteria_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
+    criteria_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
+    criteria_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
+    criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
+    criteria_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    criteria_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     args = vars(parser.parse_args())
 
     # get output object
@@ -63,18 +66,23 @@ def main():
         sys.exit(0)
 
     # query index
-    query_results = definitions_index.query(query)
+    query_results = definitions_index.paged_query(query, args['page'], args['page_length'])
     if not query_results:
         output.message('info','No matching OVAL definitions found. Aborting.')
         output.write_json()
         sys.exit(0)
 
     # add results to output
-    for query_result in query_results:
+    for query_result in query_results['documents']:
         del query_result['path']
         for split_field in ['contributors', 'organizations', 'platforms', 'products', 'reference_ids']:
             query_result[split_field] = query_result[split_field].split(',') if query_result[split_field] else []
         output.add_result(query_result)
+
+    # add paging metadata
+    output.add_keyvalue('page', query_results['page'])
+    output.add_keyvalue('page_count', query_results['page_count'])
+    output.add_keyvalue('page_length', query_results['page_length'])
 
     # add timinig
     seconds_elapsed = time.time() - start_time
@@ -100,13 +108,17 @@ class WebOutput():
         """ constructor, set defaults for instances """
         self.output = {
             "RESULTS": [],
-            "RESULTS_COUNT": 0,
+            "RESULTS_COUNT": 0, 
             "MESSAGES": []
         }
 
     def add_result(self, result):
         """ add a message to output """
         self.output['RESULTS'].append(result)
+
+    def add_keyvalue(self, key, value):
+        """ add key/value pair to output """
+        self.output[key.upper()] = value
 
     def message(self, label, message):
         """ add a message to output """

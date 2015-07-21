@@ -76,7 +76,7 @@ def main():
 
 
 def output_grouped_totals(group_by, index, output_format, is_first, is_last):    
-    results = index.query({}, [group_by])
+    results = index.grouped_query({}, [group_by])
 
     if is_first and output_format == 'json':
         print("{")
