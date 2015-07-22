@@ -56,6 +56,8 @@ def determine_def_min_version(defpath, definitions_index, elements_index):
             exception = e.message
             break;
 
+    OvalGenerator.clear()
+
     return { 'oval_id': def_id, 'minimum_version': minimum_version, 'exception': exception }
 
 def main():
