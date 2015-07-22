@@ -38,7 +38,7 @@ def set_min_schema_version(defpath, schema_version):
     else:
         deftext = deftext.replace('</oval_repository>','  <min_schema_version>' + schema_version + '</min_schema_version>\n    </oval_repository>')
 
-    with open(defpath + ".new", mode='wt', encoding='utf-8') as f:
+    with open(defpath, mode='wt', encoding='utf-8') as f:
         f.write(deftext)
 
 def determine_def_min_version(defpath, definitions_index, elements_index, update):
