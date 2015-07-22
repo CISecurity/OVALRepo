@@ -2,14 +2,16 @@
 """ Determines the minimum OVAL schema version for a given definition fragment
 
 For usage information, please see the command line help:
-    python3 get_min_oval_version -h
+    python3 get_min_oval_version.py -h
 
 TODO:
+
+    - Once the xml c14n work is complete, port set_min_schema_version()
+
 """
 
-import argparse, sys, time, pprint
+import argparse, sys, time, pprint, re, os
 import lib_repo, lib_xml, lib_search
-import os, errno, tempfile
 from lxml import etree
  
 schema_path_cache = {}
@@ -18,7 +20,29 @@ def message(label, message):
     """ print a message """
     sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
 
-def determine_def_min_version(defpath, definitions_index, elements_index):
+def set_min_schema_version(defpath, schema_version):
+    """ updates or sets the min_schema_version attribute in the provided oval definition. """
+
+    current_version = None
+
+    with open(defpath, mode='rt', encoding='utf-8') as f:
+        deftext = f.read()
+
+    p = re.compile(r'<min_schema_version>(.*?)<\/min_schema_version>')
+
+    if p.match(deftext):
+        if current_version == p.group(1):
+            return
+        else:
+            deftext = deftext.replace(p.group(0),'<min_schema_version>' + schema_version + '</min_schema_version>')
+    else:
+        deftext = deftext.replace('</oval_repository>','  <min_schema_version>' + schema_version + '</min_schema_version>\n    </oval_repository>')
+
+    with open(defpath + ".new", mode='wt', encoding='utf-8') as f:
+        f.write(deftext)
+
+def determine_def_min_version(defpath, definitions_index, elements_index, update):
+    """ determines the minimum oval schema version the given definition can be expressed in. """
 
     global schema_path_cache
 
@@ -58,6 +82,9 @@ def determine_def_min_version(defpath, definitions_index, elements_index):
 
     OvalGenerator.clear()
 
+    if update:
+        set_min_schema_version(defpath, minimum_version)
+
     return { 'oval_id': def_id, 'minimum_version': minimum_version, 'exception': exception }
 
 def main():
@@ -68,6 +95,7 @@ def main():
     parser.add_argument('-p', '--path', help='path to definition fragment')
     parser.add_argument('-i', '--id',  help='id of definition fragment')
     parser.add_argument('-a', '--all', default=False, action="store_true", help='determine minimum supported OVAL schema for all indexed definitino fragments. cannot be combined with --id or --path')
+    parser.add_argument('-u', '--update', default=False, action="store_true", help='update the given definition to include the min_schema_version element')
 
     args = vars(parser.parse_args())
 
@@ -97,7 +125,7 @@ def main():
     if args['all']:
     
         for defpath in lib_repo.get_definition_paths_iterator():
-            result = determine_def_min_version(defpath, definitions_index, elements_index)
+            result = determine_def_min_version(defpath, definitions_index, elements_index, args['update'])
             report(defpath, result['minimum_version'])
 
     elif args['id']:
@@ -110,14 +138,14 @@ def main():
         paths = [ document['path'] for document in documents ]
 
         for path in paths:
-            result = determine_def_min_version(path, definitions_index, elements_index)
+            result = determine_def_min_version(path, definitions_index, elements_index, args['update'])
             report(result['oval_id'], result['minimum_version'])
 
     elif args['path'] and not os.path.isfile(args['path']):
         message('info',"Definition fragment path not found: " + args['path'])
         sys.exit(0)
     else:
-        result = determine_def_min_version(args['path'], definitions_index, elements_index)
+        result = determine_def_min_version(args['path'], definitions_index, elements_index, args['update'])
         report(args['path'], result['minimum_version'])
 
 def report(subject, version):
