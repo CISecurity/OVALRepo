@@ -362,6 +362,7 @@ class OvalGenerator:
     product_name = 'CIS OVAL Repository'
     generator_version = '0.1'
     oval_schema_version = '5.11.1'
+    queue_mode = None
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
@@ -386,45 +387,89 @@ class OvalGenerator:
             self.tmp[element].write(xml)
             self.tmp[element].write('\n')
 
-    def write(self, output_filepath):
-        """ dequeue all elements into one OVAL definitions file and clean up """
-        
-        # close queue files for writing and then open for reading
-        for key in self.tmp:
-            self.tmp[key].close();
-            self.tmp[key] = open(self.tmp[key].name, mode='rt', encoding='utf-8')
+    def clear(self):
+        """ clears all elements in the queue """
 
-        with open(output_filepath, mode='wt', encoding='utf-8') as f:
-            # add header
-            oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
-            f.write("""<oval_definitions 
-                xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" 
-                xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" 
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd">
+        if not hasattr(self, 'tmp'):
+            return
 
-                <generator>
-                    <oval:product_name>{0}</oval:product_name>
-                    <oval:product_version>{1}</oval:product_version>
-                    <oval:schema_version>{2}</oval:schema_version>
-                    <oval:timestamp>{3}</oval:timestamp>
-                </generator>
-            """.format(self.product_name, self.generator_version, self.oval_schema_version, oval_timestamp).replace('                ','\t').replace('    ','\t'))
-
-            # add queued file content
-            for element in OvalGenerator.supported_oval_elements:
-                if element in self.tmp:
-                    f.write("\n\t<{0}s>".format(element))
-                    f.write(self.tmp[element].read().rstrip())
-                    f.write("\n\t</{0}s>\n".format(element))
-
-            # add footer
-            f.write("\n</oval_definitions>")
-
-        # close and delete queue files 
         for key in self.tmp:
             self.tmp[key].close();
             os.remove(self.tmp[key].name)
+
+    def set_queue_mode(self, mode):
+        """ sets queue to read or write mod """
+
+        if self.queue_mode == mode:
+            return
+
+        if not hasattr(self, 'tmp'):
+            return
+
+        file_mode = None
+
+        if mode == 'read':
+            file_mode = 'rt'
+        elif mode == 'write':
+            file_mode = 'wt'
+        else:
+            message('error', "Invalid file mode {0} in set_queue_mode")
+            return
+
+        # close queue files and reopen in given mode
+        for key in self.tmp:
+            self.tmp[key].close();
+            self.tmp[key] = open(self.tmp[key].name, mode=file_mode, encoding='utf-8')
+
+        self.queue_mode = mode
+
+    def to_string(self):
+        """ serializes queued elements to a string """
+
+        self.set_queue_mode('read')
+
+        oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
+        string = """<oval_definitions
+            xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd">
+
+            <generator>
+                <oval:product_name>{0}</oval:product_name>
+                <oval:product_version>{1}</oval:product_version>
+                <oval:schema_version>{2}</oval:schema_version>
+                <oval:timestamp>{3}</oval:timestamp>
+            </generator>
+        """.format(self.product_name, self.generator_version, self.oval_schema_version, oval_timestamp).replace('                ','\t').replace('    ','\t')
+
+        # add queued file content
+        for element in OvalGenerator.supported_oval_elements:
+            if element in self.tmp:
+                string += "\n\t<{0}s>".format(element)
+                string += self.tmp[element].read().rstrip()
+                string += "\n\t</{0}s>\n".format(element)
+
+                # this is required to allow future to_string() or write() calls to work
+                self.tmp[element].seek(0)
+
+        # add footer
+        string += "\n</oval_definitions>"
+
+        # set queue back to writable state
+        self.set_queue_mode('write')
+
+        return string
+
+    def write(self, output_filepath):
+        """ dequeue all elements into one OVAL definitions file and clean up """
+
+        self.set_queue_mode('read')
+
+        with open(output_filepath, mode='wt', encoding='utf-8') as f:
+            f.write(self.to_string())
+
+        self.clear()
 
     def message(self, type, message):
         """ print a warning message """
