@@ -12,6 +12,7 @@ Available functions:
 - get_definition_metadata: takes a filepath for an OVAL definition file and returns dictionary of metadata
 - get_element_metadata: takes a filepath for an OVAL element file and returns dictionary of metadata
 - schema_validate: schema validate an XML file
+- schema_validate_tree: schema validate an XML tree
 - schematron_validate: schematron validate an XML file
 - get_schematron_xsl_from_schema: gets path to schematron from schema_path, creating if necessary 
 - apply_xslt: applies an xslt to an XML tree
@@ -37,7 +38,7 @@ import lib_repo
 #from xml.sax.saxutils import escape
 from lxml import etree
 
-
+schema_cache = {}
 
 def get_element_change_status(left, right):
     """Compare two OVAL elements recursively and determine if any substantive changes have been made.
@@ -163,9 +164,6 @@ def load_standalone_element(path):
         return tree.getroot()
     except Exception:
         return None
-        
-
-    
 
 def get_definition_metadata(filepath):
     """ Takes a filepath for an OVAL definition file and returns dictionary of metadata. """
@@ -234,6 +232,23 @@ def get_element_metadata(filepath):
         'path' : filepath
     }
 
+def schema_validate_tree(tree, schema_path, use_cache=0):
+
+    schema_validator = None
+
+    global schema_cache
+
+    if use_cache == 1:
+        if not schema_path in schema_cache:
+            schema_cache[schema_path] = etree.XMLSchema(etree.parse(schema_path))
+
+        schema_validator = schema_cache[schema_path]
+    else:
+        schema_validator = etree.XMLSchema(etree.parse(schema_path))
+
+    if not schema_validator.validate(tree):
+        error_msg = schema_validator.error_log.last_error.message
+        raise SchemaValidationError(error_msg)
 
 def schema_validate(filepath, schema_path):
     """ Schema validate an XML file. """
@@ -455,9 +470,6 @@ class OvalGenerator:
 
         # add footer
         string += "\n</oval_definitions>"
-
-        # set queue back to writable state
-        self.set_queue_mode('write')
 
         return string
 
