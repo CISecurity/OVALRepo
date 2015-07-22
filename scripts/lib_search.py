@@ -458,8 +458,6 @@ class ElementsIndex(SearchIndex):
         elif isinstance(ids, list):
             ids = set(ids)
 
-        self.update()
-
         # get all elements from index and extract their paths
         documents = self.query({ 'oval_id': ids})
         paths = [ document['path'] for document in documents ]
