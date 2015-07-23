@@ -343,7 +343,7 @@ class DefinitionsIndex(SearchIndex):
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
-        super().__init__(message_method)
+        super(DefinitionsIndex, self).__init__(message_method)
         self.index_name = 'oval_definitions'
         self.item_label = 'definition'
         self.schema_dictionary = { 
@@ -407,7 +407,7 @@ class ThreadSafeDefinitionsIndex(DefinitionsIndex):
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
-        super().__init__(message_method)
+        super(ThreadSafeDefinitionsIndex, self).__init__(message_method)
         self.thread_safe = True
 
 
@@ -416,7 +416,7 @@ class ElementsIndex(SearchIndex):
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
-        super().__init__(message_method)
+        super(ElementsIndex, self).__init__(message_method)
         self.index_name = 'oval_elements'
         self.item_label = 'element'
         self.schema_dictionary = { 
@@ -511,7 +511,7 @@ class ThreadSafeElementsIndex(ElementsIndex):
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
-        super().__init__(message_method)
+        super(ThreadSafeElementsIndex, self).__init__(message_method)
         self.thread_safe = True
 
 
