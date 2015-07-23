@@ -24,33 +24,45 @@ def main():
     SCHEMA_VERSION = '5.11.1'
     
     
-
-    # Issue warning (prompt to continue) if any of the changes are a deleted item
-    remove_list = lib_git.get_removed_files()
-
-    # Locate all uncommitted changes to the local repository
+    # 1. Locate all uncommitted changes to the local repository
     change_list = lib_git.get_uncommitted_oval()
+
+    # 1.1 Determine which of these changes are due to removed files    
+    remove_list = find_removed_items(change_list)
+
     
-    if change_list is not None and len(change_list) > 0:
+    # 1.2 Issue warning (prompt to continue) if any of the changes are a deleted item
+    if remove_list is not None and len(remove_list) > 0:
         print("---- The following files were removed as a part of this update:")
         show_files(change_list)
+        # TODO:  Offer the option to inspect the OVALIDs in the removed files and 
+        #    build a list of what items, if any, refer to them
         response = input("\n :: Accept these changes (y/N): ")
         if response != 'y' and response != 'Y':
             return
         
-    # Don't include removed files as part of the update
+    # 1.3 Don't include removed files as part of the update
     change_list = [file for file in change_list if file not in remove_list]
     
 
-    # Remove all changes that are semantically the same as existing elements (except for states)
+    # 2. Remove all changes that are semantically the same as existing elements (except for states)
     change_list = prune_unchanged_elements(change_list)
     
+    # 2.1 If that means we have no changes left, there is nothing else to do
     if len(change_list) < 1:
         print("\n----- This update does not include any changes of significance")
         return
     
     
-    # For each item that actually changed, validate it
+    # 3. For each element in the list that is a definition, check:
+    # 3.1 If this is an update, does it change any existing metadata?
+    # 3.2 Check existence and accuracy of definition metadata (<status> and date)
+    #  - DRAFT on new submission
+    #  - INTERIM if updating a previous definition
+    #  - ?
+    
+    
+    # 4. Schema validate the changes
     # First, generate an OVAL document
     oval_tree = build_comprehensive_oval_document(change_list)
     if oval_tree is None:
@@ -58,30 +70,29 @@ def main():
         return
 
     # Then do the validation    
-    #  - Schema
-    #  - Schematron
-    #  - Repository Schema
     if not schema_validate(oval_tree, SCHEMA_VERSION):
         print("### Error:  does not pass validation")
         return
+        
+    
+    # 5. On passing all of the above, make these changes:
+    #  5.1 Set/update version numbers as necessary
+    #  5.2 If it's a definition, determine and set the minimum schema version
+    #  5.3 For each element that is not using an OVALID in the CIS namespace:
+    #      5.3.1 Set to a unique OVALID in the CIS namespace
+    #      5.3.2 Update all references to the old OVALID
+    #  5.4 Canonicalize all altered elements (if possible)
+    #  5.5 Verify the file location in the repository and move if necessary
+    
+    # 6. Prompt for a message to use for the commit
+    # 6.1 Commit and push the changes
     
     
-    # Check existence and accuracy of definition metadata (<status> and date)
-    #  - DRAFT on new submission
-    #  - INTERIM if updating a previous definition
-    #  - ?
     
-    # If this is an update, does it change any existing metadata?
+def find_removed_items(changes):
     
-    # On passing all of the above, make these changes:
-    #  - Set/update version numbers as necessary
-    #  - If it's a definition, determine and set the minimum schema version
-    #  - For each element that is not using an OVALID in the CIS namespace:
-    #      - Set to a unique OVALID in the CIS namespace
-    #      - Update all references to the old OVALID
-    #  - Canonicalize all altered elements (if possible)
-    #  - Verify the file location in the repository and move if necessary
-    
+    return None
+
     
     
 def schema_validate(oval_tree, schema_version):
@@ -89,7 +100,7 @@ def schema_validate(oval_tree, schema_version):
     schema_path = lib_repo.get_oval_def_schema(schema_version)
     print('  Performing schema validation...')
     try:
-        lib_xml.schema_validate_tree(oval_tree, schema_path)
+        lib_xml.schema_validate(oval_tree, schema_path)
         print('Schema validation successful')
     except lib_xml.SchemaValidationError as e:
         print('error','Schema validation failed:\n\t{0}'.format(e.message))
