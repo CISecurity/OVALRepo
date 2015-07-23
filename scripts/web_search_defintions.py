@@ -46,7 +46,7 @@ def main():
     output = WebOutput()
 
     # get definitions index
-    definitions_index = lib_search.DefinitionsIndex(output.message)
+    definitions_index = lib_search.ThreadSafeDefinitionsIndex(output.message)
     definitions_index.no_output = True
 
     # contruct query from args

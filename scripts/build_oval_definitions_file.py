@@ -87,6 +87,10 @@ def main():
     # create generator
     OvalGenerator = lib_xml.OvalGenerator(message)
 
+    # build in memory if there aren't that many files
+    if len(file_paths) < 200:
+        OvalGenerator.use_file_queues = False
+
     # add each OVAL definition to generator
     message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
     for file_path in file_paths:
@@ -95,7 +99,7 @@ def main():
 
     # write output file
     message('info','Writing OVAL definitions to {0}'.format(args['outfile']))
-    OvalGenerator.write(args['outfile'])
+    OvalGenerator.to_file(args['outfile'])
 
     # validate
     if args['validate']:
