@@ -162,7 +162,6 @@ class SearchIndex:
             force_rebuild = True
 
         if force_rebuild:
-            print('rebuilding!')
             # get a new clean/empty index
             index = self.get_index(force_rebuild)
 
