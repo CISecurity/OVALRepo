@@ -27,6 +27,10 @@ def main():
     definitions_index = lib_search.DefinitionsIndex(message)
     elements_index = lib_search.ElementsIndex(message)
 
+    # create generator, build in memory b/c smallish files
+    OvalGenerator = lib_xml.OvalGenerator(message)
+    OvalGenerator.use_file_queues = False
+
     i_file = 0
     i_limit = args['limit']
     for defpath in lib_repo.get_definition_paths_iterator():
@@ -42,17 +46,14 @@ def main():
         oval_ids = elements_index.find_downstream_ids(def_ids, def_ids)
         file_paths = elements_index.get_paths_from_ids(oval_ids)
 
-        # create generator
-        OvalGenerator = lib_xml.OvalGenerator(message)
-
         # add each OVAL definition to generator
         for file_path in file_paths:
             element_type = lib_repo.get_element_type_from_path(file_path)
             OvalGenerator.queue_element_file(element_type, file_path)
 
         # write output file
-        outfile = './gen.{0}'.format(lib_repo.oval_id_to_path(def_id))
-        OvalGenerator.write(outfile)
+        outfile = './tmp/gen.{0}'.format(lib_repo.oval_id_to_path(def_id))
+        OvalGenerator.to_file(outfile)
 
     seconds_elapsed = time.time() - start_time
     message('info','Completed in {0}!'.format(format_duration(seconds_elapsed)))

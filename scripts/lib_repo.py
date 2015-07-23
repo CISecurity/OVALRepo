@@ -176,8 +176,7 @@ def get_local_name(element):
     #If no namespace prefix, just return the node name
     return element.tag
         
-        
-        
+          
 def get_index_bucket(oval_id):
     """The current repository schema protects against having too many files in a single directory by
     creating subdirectories based on the index portion of the OVALID that limits the number of
@@ -210,8 +209,6 @@ def get_index_bucket(oval_id):
     except Exception:
         return 0
 
-
-
 def get_element_type_from_path(path):
     """ Gets element type from path. """
     return get_element_type_from_oval_id(path_to_oval_id(path))
@@ -243,9 +240,11 @@ def get_root_path():
         root_path = os.path.realpath(scripts_path + '/../')
     return root_path
 
+
 def get_schema_versions():
     """ Gets sorted OVAL schema versions contained in the repo. The order must be newest to oldest """
     return ["5.11.1","5.11","5.10.1","5.10","5.9","5.8","5.7","5.6","5.5","5.4","5.3","5.2","5.1","5.0"]
+
 
 def get_repository_root_path():
     """ Gets repository root path. """

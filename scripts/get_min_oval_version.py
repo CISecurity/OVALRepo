@@ -5,8 +5,7 @@ For usage information, please see the command line help:
     python3 get_min_oval_version.py -h
 
 TODO:
-
-    - Once the xml c14n work is complete, port set_min_schema_version()
+- Once the xml c14n work is complete, port set_min_schema_version()
 
 """
 
@@ -57,30 +56,30 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
     oval_ids = elements_index.find_downstream_ids(def_ids, def_ids)
     file_paths = elements_index.get_paths_from_ids(oval_ids)
 
-    # create generator
+    # create generator that builds files in memory (these are small)
     OvalGenerator = lib_xml.OvalGenerator(message)
-    #OvalGenerator.oval_schema_version = schema_version
+    OvalGenerator.use_file_queues = False
 
     # add each OVAL definition to generator
     for file_path in file_paths:
         element_type = lib_repo.get_element_type_from_path(file_path)
         OvalGenerator.queue_element_file(element_type, file_path)
 
+    # parse defintion, get ref to schema_version element
+    tree = etree.fromstring(OvalGenerator.to_string())
+    schema_version_element = tree.find('.//oval:schema_version', { 'oval': 'http://oval.mitre.org/XMLSchema/oval-common-5' })
+
     for schema_version in lib_repo.get_schema_versions():
-
-        OvalGenerator.oval_schema_version = schema_version
-
-        tree = etree.fromstring(OvalGenerator.to_string())
+        # update schema version in tree
+        schema_version_element.text = schema_version
 
         # test of definitions file validates against current schema
         try:
-            lib_xml.schema_validate_tree(tree, schema_path_cache[schema_version], 1)
+            lib_xml.schema_validate(tree, schema_path_cache[schema_version])
             minimum_version = schema_version
         except lib_xml.SchemaValidationError as e:
             exception = e.message
             break;
-
-    OvalGenerator.clear()
 
     if update:
         set_min_schema_version(defpath, minimum_version)
@@ -89,6 +88,7 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
 
 def main():
     """ parse command line options and generate file """
+    start_time = time.time()
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Determine minimum supported OVAL schema for a given definition')
@@ -123,16 +123,15 @@ def main():
         schema_path_cache[schema_version] = lib_repo.get_oval_def_schema(schema_version)
 
     if args['all']:
-    
         for defpath in lib_repo.get_definition_paths_iterator():
             result = determine_def_min_version(defpath, definitions_index, elements_index, args['update'])
             report(defpath, result['minimum_version'])
 
     elif args['id']:
-        documents = elements_index.query({ 'oval_id': args['id'] })
+        documents = definitions_index.query({ 'oval_id': args['id'] })
 
         if len(documents) == 0:
-            message('info',"No object having id '{0}' found.".format(args['id']))
+            message('info',"No definitions having id '{0}' found.".format(args['id']))
             sys.exit(0)
 
         paths = [ document['path'] for document in documents ]
@@ -148,8 +147,21 @@ def main():
         result = determine_def_min_version(args['path'], definitions_index, elements_index, args['update'])
         report(args['path'], result['minimum_version'])
 
+    seconds_elapsed = time.time() - start_time
+    report('info','Completed in {0}!'.format(format_duration(seconds_elapsed)))
+
+
 def report(subject, version):
     print("The minimum OVAL version suported by '{0}' is {1}.".format(subject, version))
+
+
+def format_duration(seconds):
+    """ format a duration in seconds """
+    hours = int(seconds // 3600)
+    seconds = seconds - (hours * 3600)
+    minutes = int(seconds // 60)
+    seconds = int(seconds - (minutes * 60))
+    return '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)
 
 if __name__ == '__main__':
     main()
