@@ -38,130 +38,6 @@ import lib_repo
 #from xml.sax.saxutils import escape
 from lxml import etree
 
-def get_element_change_status(left, right):
-    """Compare two OVAL elements recursively and determine if any substantive changes have been made.
-    
-    @type left: Element
-    @param left: the new element
-    @type right: Element
-    @param right: the existing element in the repository
-    
-    @rtype: int
-    @return: And integer value indicating the level of change:
-      -2 = an error has occurred
-      -1 = these are not the same elements
-       0 = no changes or the elements are not the same item
-       1 = has changes, but they are inconsequential (have no affect on functionality)
-       2 = changes of consequence
-    """
-    
-    import traceback
-    
-    ignore_attributes = ['version']
-    unimportant_attributes = ['comment']
-    
-    
-    if left is None:
-        if right is None:
-            return -1
-        else:
-            return False
-    elif right is None:
-        return -1
-    
-    try:        
-        # Compare tags
-        if left.tag != right.tag:
-            return -1
-        
-        # If this is the top-level element, make certain we really are dealing with the same elements
-        left_id = left.get('id')
-        if left_id is not None:     # Only primary elements have OVAL IDs
-            left_type = lib_repo.get_element_type_from_oval_id(left_id)
-            if left_type is not None and left_type in lib_repo.supported_element_types:
-                right_id = right.get('id')
-                right_type = lib_repo.get_element_type_from_oval_id(right_id)
-                if not right_id or right_id is None:
-                    return -1
-                if left_type != right_type:
-                    return -1
-
-        # Compare text
-        if left.text is not None:
-            if right.text is not None:
-                if left.text.strip() != right.text.strip():
-                    return 2
-            else:
-                return 2
-        elif right.text is not None:
-            return 2
-                
-        
-        # Compare tails?  Do OVAL Elements even have tails?
-#         if left.tail != right.tail:
-#             return 2
-        
-        # Compare attributes
-        #   But don't compare the version attribute -- so we can't just use cmp()
-        try:
-            for key in left.keys():
-                if not key in ignore_attributes:
-                    lvalue = left.get(key)
-                    rvalue = right.get(key)
-                    if lvalue != rvalue:
-                        if key in unimportant_attributes:
-                            return 1
-                        else:
-                            return 2
-        except:
-            # An exception at this point probably indicates that the attributes don't match
-            return 2
-        
-        # Compare children (recurse on this method)
-        #   Be sure we are enumerating the same children in the same order
-        result = 0
-        
-        left_children = list(left)
-        right_children = list(right)
-        if len(left_children) != len(right_children):
-            return 2
-        
-        for index, lchild in enumerate(left_children):
-            # Get the matching right_child, if any
-            # and compare children
-            rchild = right_children[index]
-            sub_result = get_element_change_status(lchild, rchild)
-            if sub_result != 0 and sub_result != 1:  # Anything else is reason to stop processing
-                return sub_result
-            elif sub_result == 1:
-                result = 1
-                    
-        return result
-    
-    except:
-        print (traceback.format_exc())
-        return -2
-    
-    
-def load_standalone_element(path):
-    """Assuming that the path references a file that exists and the contents of that file is valid XXML
-    that contains a single OVAL Element, loads and returns that element or None if this could not be done.
-    
-    @type path: string
-    @param path: the path to the file
-    
-    @rtype: lxml.etree.element
-    @return: the XML element or None
-    """
-    
-    if not path or path is None:
-        return None
-    
-    try:
-        tree = etree.parse(path)
-        return tree.getroot()
-    except Exception:
-        return None
 
 def get_definition_metadata(filepath):
     """ Takes a filepath for an OVAL definition file and returns dictionary of metadata. """
@@ -177,6 +53,7 @@ def get_definition_metadata(filepath):
     return {
         'oval_id': root.get('id'),
         'oval_version' : root.get('version'),
+        'min_schema_version': root.findtext('./oval-def:metadata/oval-def:oval_repository/oval-def:min_schema_version', namespaces=ns_map),
         'title': root.findtext('./oval-def:metadata/oval-def:title', namespaces=ns_map),
         'description': root.findtext('./oval-def:metadata/oval-def:description', namespaces=ns_map),
         'class': root.get('class'),
@@ -490,5 +367,127 @@ class OvalGenerator:
         print('{0}: {1}'.format(type.upper(), message))
 
 
+def get_element_change_status(left, right):
+    """Compare two OVAL elements recursively and determine if any substantive changes have been made.
+    
+    @type left: Element
+    @param left: the new element
+    @type right: Element
+    @param right: the existing element in the repository
+    
+    @rtype: int
+    @return: And integer value indicating the level of change:
+      -2 = an error has occurred
+      -1 = these are not the same elements
+       0 = no changes or the elements are not the same item
+       1 = has changes, but they are inconsequential (have no affect on functionality)
+       2 = changes of consequence
+    """
+    
+    import traceback
+    
+    ignore_attributes = ['version']
+    unimportant_attributes = ['comment']
+    
+    
+    if left is None:
+        if right is None:
+            return -1
+        else:
+            return False
+    elif right is None:
+        return -1
+    
+    try:        
+        # Compare tags
+        if left.tag != right.tag:
+            return -1
+        
+        # If this is the top-level element, make certain we really are dealing with the same elements
+        left_id = left.get('id')
+        if left_id is not None:     # Only primary elements have OVAL IDs
+            left_type = lib_repo.get_element_type_from_oval_id(left_id)
+            if left_type is not None and left_type in lib_repo.supported_element_types:
+                right_id = right.get('id')
+                right_type = lib_repo.get_element_type_from_oval_id(right_id)
+                if not right_id or right_id is None:
+                    return -1
+                if left_type != right_type:
+                    return -1
 
-
+        # Compare text
+        if left.text is not None:
+            if right.text is not None:
+                if left.text.strip() != right.text.strip():
+                    return 2
+            else:
+                return 2
+        elif right.text is not None:
+            return 2
+                
+        
+        # Compare tails?  Do OVAL Elements even have tails?
+#         if left.tail != right.tail:
+#             return 2
+        
+        # Compare attributes
+        #   But don't compare the version attribute -- so we can't just use cmp()
+        try:
+            for key in left.keys():
+                if not key in ignore_attributes:
+                    lvalue = left.get(key)
+                    rvalue = right.get(key)
+                    if lvalue != rvalue:
+                        if key in unimportant_attributes:
+                            return 1
+                        else:
+                            return 2
+        except:
+            # An exception at this point probably indicates that the attributes don't match
+            return 2
+        
+        # Compare children (recurse on this method)
+        #   Be sure we are enumerating the same children in the same order
+        result = 0
+        
+        left_children = list(left)
+        right_children = list(right)
+        if len(left_children) != len(right_children):
+            return 2
+        
+        for index, lchild in enumerate(left_children):
+            # Get the matching right_child, if any
+            # and compare children
+            rchild = right_children[index]
+            sub_result = get_element_change_status(lchild, rchild)
+            if sub_result != 0 and sub_result != 1:  # Anything else is reason to stop processing
+                return sub_result
+            elif sub_result == 1:
+                result = 1
+                    
+        return result
+    
+    except:
+        print (traceback.format_exc())
+        return -2
+    
+    
+def load_standalone_element(path):
+    """Assuming that the path references a file that exists and the contents of that file is valid XXML
+    that contains a single OVAL Element, loads and returns that element or None if this could not be done.
+    
+    @type path: string
+    @param path: the path to the file
+    
+    @rtype: lxml.etree.element
+    @return: the XML element or None
+    """
+    
+    if not path or path is None:
+        return None
+    
+    try:
+        tree = etree.parse(path)
+        return tree.getroot()
+    except Exception:
+        return None

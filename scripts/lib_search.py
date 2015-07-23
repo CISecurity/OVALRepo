@@ -37,7 +37,7 @@ TODO:
     - stored values don't seem to work for multi-value fields (KEYWORDS)
 """
 
-import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle, time
+import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle, time, decimal
 import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query, whoosh.sorting
 import lib_repo, lib_xml, lib_git
 
@@ -59,6 +59,7 @@ class SearchIndex:
         self.index_updated = False
         self.no_output = False
         self.index_searcher = False
+        self.thread_safe = False
 
     def query(self, query_dict={}, query_options={}):
         """ Perform a query against an index. 
@@ -75,8 +76,13 @@ class SearchIndex:
                 'contributors': 'Jonathan Baker'
             }
         """
-        # update the index
-        self.update()
+        if self.thread_safe:
+            # require that index is on current commit and no uncommitted files
+            if not self.index_based_on_current_commit():
+                raise RepositoryStateError('The index is out of sync with current commit.')
+        else:
+            # auto update
+            self.update()
 
         # construct query by looping through schema fields and adding terms
         query_fields = []
@@ -156,6 +162,7 @@ class SearchIndex:
             force_rebuild = True
 
         if force_rebuild:
+            print('rebuilding!')
             # get a new clean/empty index
             index = self.get_index(force_rebuild)
 
@@ -176,7 +183,6 @@ class SearchIndex:
             # delete uncommitted files that are in index already
             for filepath in self.get_indexed_uncommitted_files():
                 index_writer.delete_by_term('path', filepath)
-            index_writer.commit()
 
             # get list of uncommitted files and persist it
             uncommitted_files = lib_git.get_uncommitted_oval()
@@ -184,6 +190,7 @@ class SearchIndex:
 
             # nothing to update? done!
             if not uncommitted_files:
+                index_writer.commit()
                 return
 
             # index only uncommitted files
@@ -343,6 +350,7 @@ class DefinitionsIndex(SearchIndex):
         self.schema_dictionary = { 
             'oval_id': whoosh.fields.ID(stored=True, unique=True),
             'oval_version': whoosh.fields.STORED(),
+            'min_schema_version': whoosh.fields.NUMERIC(numtype=decimal.Decimal, decimal_places=4, signed=False, stored=True),
             'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
             'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
             'class': whoosh.fields.ID(stored=True),
@@ -356,6 +364,22 @@ class DefinitionsIndex(SearchIndex):
             'path': whoosh.fields.ID(stored=True)
         }
         self.fields_with_stemming = [ 'title', 'description' ]
+
+    def version_to_decimal(self, version_number):
+        """ Converts a version number string to a decimal that can be sorted """
+        components = version_number.split('.')
+        
+        if len(components) > 3:
+            raise InvalidVersionNumberError('Invalid version number: {0}'.fomat(version_number))
+
+        while len(components) < 3:
+            components.append(0)
+
+        major = int(components[0]) * 1000 
+        minor = int(components[1]) 
+        build = int(components[2]) / 1000 
+
+        return decimal.Decimal(major + minor + build)
 
     def document_iterator(self, paths=False):
         """ Iterator yielding definition files in repo as indexable documents. """
@@ -371,11 +395,25 @@ class DefinitionsIndex(SearchIndex):
                 yield { 'path': e.path, 'deleted': True }
             else:
                 document = self.whoosh_escape_document(document)
+                document['min_schema_version'] = self.version_to_decimal(document['min_schema_version'])
                 yield document
 
 
+class ThreadSafeDefinitionsIndex(DefinitionsIndex):
+    """ A search index for OVAL definitions that's safe to use from multiple processes at once.
+
+        Note: this index will not auto-update because index updating cannot be done in concurrent processes.
+        So, you must call .update() method to update index when it is out of sync with working directory.
+    """
+
+    def __init__(self, message_method = False):
+        """ constructor, set defaults for instances """
+        super().__init__(message_method)
+        self.thread_safe = True
+
+
 class ElementsIndex(SearchIndex):
-    """ A SearchIndex for OVAL elements. """
+    """ A search index for OVAL elements. """
 
     def __init__(self, message_method = False):
         """ constructor, set defaults for instances """
@@ -465,16 +503,37 @@ class ElementsIndex(SearchIndex):
         return paths
 
 
+class ThreadSafeElementsIndex(ElementsIndex):
+    """ A SearchIndex for OVAL elements that's safe to use from multiple processes at once. 
+
+        Note: this index will not auto-update because index updating cannot be done in concurrent processes.
+        So, you must call .update() method to update index when it is out of sync with working directory.
+    """
+
+    def __init__(self, message_method = False):
+        """ constructor, set defaults for instances """
+        super().__init__(message_method)
+        self.thread_safe = True
+
+
 class Error(Exception):
     """Base class for exceptions in this module."""
     pass
+
 
 class RepositoryStateError(Error):
     """Exception raised for repository state errors that affect search. """
     def __init__(self, message):
         self.message = message
 
+
 class IndexQueryError(Error):
     """Exception raised for index query errors. """
+    def __init__(self, message):
+        self.message = message
+
+
+class InvalidVersionNumberError(Error):
+    """Exception raised for invalid schema version numbers. """
     def __init__(self, message):
         self.message = message
