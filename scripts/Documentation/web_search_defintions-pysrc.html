@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>web_search_defintions</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;web_search_defintions
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="web_search_defintions-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="web_search_defintions-module.html">Module web_search_defintions</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env/ python3</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">"""Powers website OVAL definitions search.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Authors: David Ries &lt;ries@jovalcm.com&gt;</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">For usage information, please see the command line help:</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">    python3 web_search_definitions.py -h</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">TODO:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">- testing</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">argparse</tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">,</tt> <tt class="py-name">json</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module lib_repo=lib_repo-module.html"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-0', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Module lib_xml=lib_xml-module.html"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-1', 'lib_xml', 'link-1');">lib_xml</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Module lib_search=lib_search-module.html"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-2', 'lib_search', 'link-2');">lib_search</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-docstring">""" parse command line options and generate file """</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">start_time</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-comment"># parse command line options</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">ArgumentParser</tt><tt class="py-op">(</tt><tt class="py-name">description</tt><tt class="py-op">=</tt><tt class="py-string">'Powers website OVAL definitions search.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">output_options</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument_group</tt><tt class="py-op">(</tt><tt class="py-string">'output options'</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">output_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--page'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'?'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">type</tt><tt class="py-op">=</tt><tt class="py-name">int</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'page number to return (1 based, default: 1)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">output_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--page_length'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'?'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">,</tt> <tt class="py-name">type</tt><tt class="py-op">=</tt><tt class="py-name">int</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'number of items per page (default: 50)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument_group</tt><tt class="py-op">(</tt><tt class="py-string">'search criteria'</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                                               <tt class="py-string">'Provide at least one of the following criteria to determine which definition(s) '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                                               <tt class="py-string">'will be included in the results set. Results will include the intersection of matches for each parameter '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                                               <tt class="py-string">'supplied. When multiple values are supplied for one paramater, the parameter will '</tt> <tt class="py-op">+</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">                                               <tt class="py-string">'match definitions that match any provided value.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--definition_id'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'oval_id'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'match OVAL definition id(s)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--title'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'title'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'PHRASE'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'match phrase(s) in definition titles'</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--description'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'description'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'PHRASE'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'match phrase(s) in definition titles'</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--class'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'class'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by class(es): {0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-string">', '</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-3', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable lib_repo.supported_definition_classes=lib_repo-module.html#supported_definition_classes"><a title="lib_repo.supported_definition_classes" class="py-name" href="#" onclick="return doclink('link-4', 'supported_definition_classes', 'link-4');">supported_definition_classes</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--status'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'status'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by status(es): {0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-string">', '</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-5', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable lib_repo.supported_definition_statuses=lib_repo-module.html#supported_definition_statuses"><a title="lib_repo.supported_definition_statuses" class="py-name" href="#" onclick="return doclink('link-6', 'supported_definition_statuses', 'link-6');">supported_definition_statuses</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--family'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'family'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by family(ies)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--platform'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'platforms'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'PLATFORM'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by platform(s)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--product'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'products'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'PRODUCT'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by product(s)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--contributor'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'contributors'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'NAME'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by contributor(s)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--organization'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'organizations'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'NAME'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by organization(s)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--reference_id'</tt><tt class="py-op">,</tt> <tt class="py-name">nargs</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'reference_ids'</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">'REFERENCE_ID'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'filter by reference ids, e.g. CVE-2015-3306'</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">criteria_options</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'--all_definitions'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">"store_true"</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'include all definitions in the repository (do not specify any other filters)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">vars</tt><tt class="py-op">(</tt><tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-comment"># get output object</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Class web_search_defintions.WebOutput=web_search_defintions.WebOutput-class.html"><a title="web_search_defintions.WebOutput" class="py-name" href="#" onclick="return doclink('link-7', 'WebOutput', 'link-7');">WebOutput</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-comment"># get definitions index</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">definitions_index</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-8', 'lib_search', 'link-2');">lib_search</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Class lib_search.DefinitionsIndex=lib_search.DefinitionsIndex-class.html"><a title="lib_search.DefinitionsIndex" class="py-name" href="#" onclick="return doclink('link-9', 'DefinitionsIndex', 'link-9');">DefinitionsIndex</a></tt><tt class="py-op">(</tt><tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Function build_all_oval_definitions.message()=build_all_oval_definitions-module.html#message,Function build_oval_definitions_file.message()=build_oval_definitions_file-module.html#message,Function find_affected.message()=find_affected-module.html#message,Function get_min_oval_version.message()=get_min_oval_version-module.html#message,Function get_related_elements.message()=get_related_elements-module.html#message,Function get_repository_stats.message()=get_repository_stats-module.html#message,Function lib_repo.message()=lib_repo-module.html#message,Method lib_search.SearchIndex.message()=lib_search.SearchIndex-class.html#message,Method lib_xml.OvalGenerator.message()=lib_xml.OvalGenerator-class.html#message,Function validate_oval_definitons_files.message()=validate_oval_definitons_files-module.html#message,Method web_search_defintions.WebOutput.message()=web_search_defintions.WebOutput-class.html#message"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-10', 'message', 'link-10');">message</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">definitions_index</tt><tt class="py-op">.</tt><tt class="py-name">no_output</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-comment"># contruct query from args</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Method lib_search.SearchIndex.query()=lib_search.SearchIndex-class.html#query"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-11', 'query', 'link-11');">query</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">field</tt> <tt class="py-keyword">in</tt> <tt class="py-name">definitions_index</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method lib_search.SearchIndex.get_fieldnames()=lib_search.SearchIndex-class.html#get_fieldnames"><a title="lib_search.SearchIndex.get_fieldnames" class="py-name" href="#" onclick="return doclink('link-12', 'get_fieldnames', 'link-12');">get_fieldnames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">field</tt> <tt class="py-keyword">in</tt> <tt class="py-name">args</tt> <tt class="py-keyword">and</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-name">field</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt id="link-13" class="py-name"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-13', 'query', 'link-11');">query</a></tt><tt class="py-op">[</tt><tt class="py-name">field</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-name">field</tt><tt class="py-op">]</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-comment"># --all_definitions OR at least one definition selection option must be specified</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'all_definitions'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt id="link-14" class="py-name"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-14', 'query', 'link-11');">query</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-15', 'message', 'link-10');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">"The '--all_definitions' filter cannot be combined with any other filters."</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method web_search_defintions.WebOutput.write_json()=web_search_defintions.WebOutput-class.html#write_json"><a title="web_search_defintions.WebOutput.write_json" class="py-name" href="#" onclick="return doclink('link-16', 'write_json', 'link-16');">write_json</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'all_definitions'</tt><tt class="py-op">]</tt> <tt class="py-keyword">or</tt> <tt id="link-17" class="py-name"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-17', 'query', 'link-11');">query</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-18', 'message', 'link-10');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">'At least one definitions filtering argument must be provided.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="web_search_defintions.WebOutput.write_json" class="py-name" href="#" onclick="return doclink('link-19', 'write_json', 'link-16');">write_json</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-comment"># query index</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">query_results</tt> <tt class="py-op">=</tt> <tt class="py-name">definitions_index</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method lib_search.SearchIndex.paged_query()=lib_search.SearchIndex-class.html#paged_query"><a title="lib_search.SearchIndex.paged_query" class="py-name" href="#" onclick="return doclink('link-20', 'paged_query', 'link-20');">paged_query</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-21', 'query', 'link-11');">query</a></tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'page'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'page_length'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">query_results</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-22', 'message', 'link-10');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'info'</tt><tt class="py-op">,</tt><tt class="py-string">'No matching OVAL definitions found. Aborting.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="web_search_defintions.WebOutput.write_json" class="py-name" href="#" onclick="return doclink('link-23', 'write_json', 'link-16');">write_json</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-comment"># add results to output</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">query_result</tt> <tt class="py-keyword">in</tt> <tt class="py-name">query_results</tt><tt class="py-op">[</tt><tt class="py-string">'documents'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">del</tt> <tt class="py-name">query_result</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">split_field</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'contributors'</tt><tt class="py-op">,</tt> <tt class="py-string">'organizations'</tt><tt class="py-op">,</tt> <tt class="py-string">'platforms'</tt><tt class="py-op">,</tt> <tt class="py-string">'products'</tt><tt class="py-op">,</tt> <tt class="py-string">'reference_ids'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">query_result</tt><tt class="py-op">[</tt><tt class="py-name">split_field</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">query_result</tt><tt class="py-op">[</tt><tt class="py-name">split_field</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">','</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">query_result</tt><tt class="py-op">[</tt><tt class="py-name">split_field</tt><tt class="py-op">]</tt> <tt class="py-keyword">else</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method web_search_defintions.WebOutput.add_result()=web_search_defintions.WebOutput-class.html#add_result"><a title="web_search_defintions.WebOutput.add_result" class="py-name" href="#" onclick="return doclink('link-24', 'add_result', 'link-24');">add_result</a></tt><tt class="py-op">(</tt><tt class="py-name">query_result</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-comment"># add paging metadata</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method web_search_defintions.WebOutput.add_keyvalue()=web_search_defintions.WebOutput-class.html#add_keyvalue"><a title="web_search_defintions.WebOutput.add_keyvalue" class="py-name" href="#" onclick="return doclink('link-25', 'add_keyvalue', 'link-25');">add_keyvalue</a></tt><tt class="py-op">(</tt><tt class="py-string">'page'</tt><tt class="py-op">,</tt> <tt class="py-name">query_results</tt><tt class="py-op">[</tt><tt class="py-string">'page'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="web_search_defintions.WebOutput.add_keyvalue" class="py-name" href="#" onclick="return doclink('link-26', 'add_keyvalue', 'link-25');">add_keyvalue</a></tt><tt class="py-op">(</tt><tt class="py-string">'page_count'</tt><tt class="py-op">,</tt> <tt class="py-name">query_results</tt><tt class="py-op">[</tt><tt class="py-string">'page_count'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="web_search_defintions.WebOutput.add_keyvalue" class="py-name" href="#" onclick="return doclink('link-27', 'add_keyvalue', 'link-25');">add_keyvalue</a></tt><tt class="py-op">(</tt><tt class="py-string">'page_length'</tt><tt class="py-op">,</tt> <tt class="py-name">query_results</tt><tt class="py-op">[</tt><tt class="py-string">'page_length'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-comment"># add timinig</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">seconds_elapsed</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">start_time</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-28', 'message', 'link-10');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'time'</tt><tt class="py-op">,</tt><tt class="py-string">'{0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt id="link-29" class="py-name" targets="Function build_all_oval_definitions.format_duration()=build_all_oval_definitions-module.html#format_duration,Function build_oval_definitions_file.format_duration()=build_oval_definitions_file-module.html#format_duration,Function find_affected.format_duration()=find_affected-module.html#format_duration,Function get_related_elements.format_duration()=get_related_elements-module.html#format_duration,Function get_repository_stats.format_duration()=get_repository_stats-module.html#format_duration,Function validate_oval_definitons_files.format_duration()=validate_oval_definitons_files-module.html#format_duration,Function web_search_defintions.format_duration()=web_search_defintions-module.html#format_duration"><a title="build_all_oval_definitions.format_duration
+build_oval_definitions_file.format_duration
+find_affected.format_duration
+get_related_elements.format_duration
+get_repository_stats.format_duration
+validate_oval_definitons_files.format_duration
+web_search_defintions.format_duration" class="py-name" href="#" onclick="return doclink('link-29', 'format_duration', 'link-29');">format_duration</a></tt><tt class="py-op">(</tt><tt class="py-name">seconds_elapsed</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-comment"># output results</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">output</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="web_search_defintions.WebOutput.write_json" class="py-name" href="#" onclick="return doclink('link-30', 'write_json', 'link-16');">write_json</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="format_duration"></a><div id="format_duration-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="format_duration-toggle" onclick="return toggle('format_duration');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions-module.html#format_duration">format_duration</a><tt class="py-op">(</tt><tt class="py-param">seconds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="format_duration-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="format_duration-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">""" format a duration in seconds """</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-name">hours</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">seconds</tt> <tt class="py-op">//</tt> <tt class="py-number">3600</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">seconds</tt> <tt class="py-op">=</tt> <tt class="py-name">seconds</tt> <tt class="py-op">-</tt> <tt class="py-op">(</tt><tt class="py-name">hours</tt> <tt class="py-op">*</tt> <tt class="py-number">3600</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">minutes</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">seconds</tt> <tt class="py-op">//</tt> <tt class="py-number">60</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">seconds</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">seconds</tt> <tt class="py-op">-</tt> <tt class="py-op">(</tt><tt class="py-name">minutes</tt> <tt class="py-op">*</tt> <tt class="py-number">60</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">'{0:02d}:{1:02d}:{2:02d}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">hours</tt><tt class="py-op">,</tt> <tt class="py-name">minutes</tt><tt class="py-op">,</tt> <tt class="py-name">seconds</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput"></a><div id="WebOutput-def"><a name="L104"></a><tt class="py-lineno">104</tt> <a class="py-toggle" href="#" id="WebOutput-toggle" onclick="return toggle('WebOutput');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html">WebOutput</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="WebOutput-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-docstring">""" A SearchIndex for OVAL definitions. """</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput.__init__"></a><div id="WebOutput.__init__-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="WebOutput.__init__-toggle" onclick="return toggle('WebOutput.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WebOutput.__init__-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-docstring">""" constructor, set defaults for instances """</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-string">"RESULTS"</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-string">"RESULTS_COUNT"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt>  </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-string">"MESSAGES"</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput.add_result"></a><div id="WebOutput.add_result-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="WebOutput.add_result-toggle" onclick="return toggle('WebOutput.add_result');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html#add_result">add_result</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">result</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput.add_result-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WebOutput.add_result-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-docstring">""" add a message to output """</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">[</tt><tt class="py-string">'RESULTS'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput.add_keyvalue"></a><div id="WebOutput.add_keyvalue-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="WebOutput.add_keyvalue-toggle" onclick="return toggle('WebOutput.add_keyvalue');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html#add_keyvalue">add_keyvalue</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput.add_keyvalue-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WebOutput.add_keyvalue-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-docstring">""" add key/value pair to output """</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+</div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput.message"></a><div id="WebOutput.message-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="WebOutput.message-toggle" onclick="return toggle('WebOutput.message');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html#message">message</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-param">message</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput.message-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WebOutput.message-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-docstring">""" add a message to output """</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">[</tt><tt class="py-string">'MESSAGES'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">{</tt> <tt class="py-name">label</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt id="link-31" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-31', 'message', 'link-10');">message</a></tt> <tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="WebOutput.write_json"></a><div id="WebOutput.write_json-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="WebOutput.write_json-toggle" onclick="return toggle('WebOutput.write_json');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="web_search_defintions.WebOutput-class.html#write_json">write_json</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebOutput.write_json-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WebOutput.write_json-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">[</tt><tt class="py-string">'RESULTS_COUNT'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">[</tt><tt class="py-string">'RESULTS'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">json</tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">output</tt><tt class="py-op">,</tt> <tt class="py-name">sort_keys</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name" targets="Static Method lib_oval.OvalDocument.indent()=lib_oval.OvalDocument-class.html#indent"><a title="lib_oval.OvalDocument.indent" class="py-name" href="#" onclick="return doclink('link-32', 'indent', 'link-32');">indent</a></tt><tt class="py-op">=</tt><tt class="py-number">4</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt id="link-33" class="py-name" targets="Function build_all_oval_definitions.main()=build_all_oval_definitions-module.html#main,Function build_oval_definitions_file.main()=build_oval_definitions_file-module.html#main,Function bulk_generate_schematron.main()=bulk_generate_schematron-module.html#main,Function find_affected.main()=find_affected-module.html#main,Function get_min_oval_version.main()=get_min_oval_version-module.html#main,Function get_related_elements.main()=get_related_elements-module.html#main,Function get_repository_stats.main()=get_repository_stats-module.html#main,Function oval_decomposition.main()=oval_decomposition-module.html#main,Function submission_qa.main()=submission_qa-module.html#main,Function validate_oval_definitons_files.main()=validate_oval_definitons_files-module.html#main,Function web_search_defintions.main()=web_search_defintions-module.html#main"><a title="build_all_oval_definitions.main
+build_oval_definitions_file.main
+bulk_generate_schematron.main
+find_affected.main
+get_min_oval_version.main
+get_related_elements.main
+get_repository_stats.main
+oval_decomposition.main
+submission_qa.main
+validate_oval_definitons_files.main
+web_search_defintions.main" class="py-name" href="#" onclick="return doclink('link-33', 'main', 'link-33');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul 23 15:39:33 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -57,7 +57,7 @@ def main():
     upstream_ids = elements_index.find_upstream_ids(oval_ids_changed, set())
     message('info','Found {0} upstream OVAL ids (all element types)'.format(len(upstream_ids)), verbose)
 
-    # filter affected to defintion ids
+    # filter affected to definition ids
     affected_def_ids = { oval_id for oval_id in upstream_ids if lib_repo.get_element_type_from_oval_id(oval_id) == 'definition' }
     message('info','Found {0} upstream OVAL definitions:\n\t{1}'.format(len(affected_def_ids), '\n\t'.join(affected_def_ids)), verbose)
 

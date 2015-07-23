@@ -20,7 +20,7 @@ def main():
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Builds all OVAL definitons in the repository.')
-    parser.add_argument('-l', '--limit', nargs='?', default="0", type=int, help='limits number of defintions that will be built)')
+    parser.add_argument('-l', '--limit', nargs='?', default="0", type=int, help='limits number of definitions that will be built)')
     args = vars(parser.parse_args())
 
     # get indexes
