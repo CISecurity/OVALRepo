@@ -37,7 +37,7 @@ TODO:
     - stored values don't seem to work for multi-value fields (KEYWORDS)
 """
 
-import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle, time, decimal
+import os, os.path, shutil, inspect, datetime, random, re, pprint, sys, pickle, time
 import whoosh.index, whoosh.fields, whoosh.analysis, whoosh.query, whoosh.sorting
 import lib_repo, lib_xml, lib_git
 
@@ -349,7 +349,7 @@ class DefinitionsIndex(SearchIndex):
         self.schema_dictionary = { 
             'oval_id': whoosh.fields.ID(stored=True, unique=True),
             'oval_version': whoosh.fields.STORED(),
-            'min_schema_version': whoosh.fields.NUMERIC(numtype=decimal.Decimal, decimal_places=4, signed=False, stored=True),
+            'min_schema_version': whoosh.fields.NUMERIC(numtype=int, bits=32, signed=False, stored=True),
             'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
             'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
             'class': whoosh.fields.ID(stored=True),
@@ -364,8 +364,8 @@ class DefinitionsIndex(SearchIndex):
         }
         self.fields_with_stemming = [ 'title', 'description' ]
 
-    def version_to_decimal(self, version_number):
-        """ Converts a version number string to a decimal that can be sorted """
+    def version_to_int(self, version_number):
+        """ Converts a version number string to a int that can be sorted """
         components = version_number.split('.')
         
         if len(components) > 3:
@@ -374,11 +374,12 @@ class DefinitionsIndex(SearchIndex):
         while len(components) < 3:
             components.append(0)
 
-        major = int(components[0]) * 1000 
-        minor = int(components[1]) 
-        build = int(components[2]) / 1000 
+        major = int(components[0]) * 1000000 
+        minor = int(components[1]) * 1000 
+        build = int(components[2])
 
-        return decimal.Decimal(major + minor + build)
+        version = major + minor + build
+        return version
 
     def document_iterator(self, paths=False):
         """ Iterator yielding definition files in repo as indexable documents. """
@@ -394,7 +395,7 @@ class DefinitionsIndex(SearchIndex):
                 yield { 'path': e.path, 'deleted': True }
             else:
                 document = self.whoosh_escape_document(document)
-                document['min_schema_version'] = self.version_to_decimal(document['min_schema_version'])
+                document['min_schema_version'] = self.version_to_int(document['min_schema_version'])
                 yield document
 
 
