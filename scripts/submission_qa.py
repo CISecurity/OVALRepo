@@ -15,7 +15,10 @@ import lib_search
 import lib_git
 import lib_repo
 import lib_xml
+import sys
+import os
 from lxml import etree
+import get_min_oval_version
 
 
 
@@ -55,6 +58,9 @@ def main():
     
     
     # 3. For each element in the list that is a definition, check:
+    def_list = [ path for path in change_list if lib_repo.get_element_type_from_path(path) == 'definition']
+    for def_path in def_list:
+        def_element = lib_xml.load_standalone_element(def_path)
     # 3.1 If this is an update, does it change any existing metadata?
     # 3.2 Check existence and accuracy of definition metadata (<status> and date)
     #  - DRAFT on new submission
@@ -75,24 +81,85 @@ def main():
         return
         
     
-    # 5. On passing all of the above, make these changes:
-    #  5.1 Set/update version numbers as necessary
-    #  5.2 If it's a definition, determine and set the minimum schema version
+    e_index = lib_search.ElementsIndex(message)
+    d_index = lib_search.DefinitionsIndex(message)
+
+    # 5. On passing all of the above, make these changes for all elements:
+    for path in change_list:
+        oval_element = lib_xml.load_standalone_element(path)
+    #  5.1 If it's a definition, determine and set the minimum schema version
+        if lib_repo.get_element_type_from_path(path) == 'definition':
+            mvt = get_min_oval_version.determine_def_min_version(path, d_index, e_index, False)
+            min_schema = mvt['minimum_version']
+            
+    #  5.2 Set/update version numbers as necessary
+    #    5.2.2 If this is an update, find the previous version and increment by one
+    #        Otherwise, set it to 1
     #  5.3 For each element that is not using an OVALID in the CIS namespace:
     #      5.3.1 Set to a unique OVALID in the CIS namespace
-    #      5.3.2 Update all references to the old OVALID
+    #      5.3.2 Update all references from the old OVALID
     #  5.4 Canonicalize all altered elements (if possible)
-    #  5.5 Verify the file location in the repository and move if necessary
+    #  5.5 Write the element, and remove the old if the path changed
+        new_path = lib_repo.get_element_repository_path(oval_element)
+        save_element(oval_element, new_path)
+        if new_path != path:
+            os.remove(path)
     
     # 6. Prompt for a message to use for the commit
     # 6.1 Commit and push the changes
+
+
     
+def message(label, message):
+    """ print a message """
+    sys.stdout.write('\r{0}: {1}\n'.format(label.upper(), message))
     
     
 def find_removed_items(changes):
-    
+    # TODO
     return None
 
+
+def save_element(element, path):
+    
+    if not element or element is None:
+        return
+    
+    if not path or path is None:
+        return
+    
+    dir = os.path.dirname(path)
+    if not os.path.isdir(dir):
+        os.makedirs(dir, 755, True)
+        
+        
+    try:
+        namespace = element.getNamespace()
+        indent(element)
+        # Create a new ElementTree with this element as the root
+        tree = etree.ElementTree(element)
+        # Write the full tree to a file
+        tree.write(file_or_filename = path, encoding="UTF-8", method="xml", default_namespace = namespace)
+        return True
+    except:
+        return False
+
+
+def indent(elem, level=0):
+    i = "\n" + level*"  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i    
+    
     
     
 def schema_validate(oval_tree, schema_version):
@@ -153,6 +220,7 @@ def prune_unchanged_elements(changes):
     <state> elements are always considered significant
     """
     
+    #TODO
     return changes
 
 #     change_list = []
