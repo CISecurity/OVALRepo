@@ -126,6 +126,7 @@ class WebOutput():
 
     def write_json(self):
         self.output['RESULTS_COUNT'] = len(self.output['RESULTS'])
+        print(repr(self.output))
         print(json.dumps(self.output, sort_keys=True, indent=4))
 
 
