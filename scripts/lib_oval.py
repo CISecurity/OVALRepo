@@ -141,7 +141,14 @@ class OvalDocument(object):
     def __init__(self, tree):
 #         if not tree or not isinstance(tree, ElementTree):
         if not tree:
-            self.tree = None
+            root = Element("oval_definitions")
+            self.tree = ElementTree.ElementTree(root)
+            element = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}generator")
+            gen = OvalGenerator(element)
+            gen.setProduct("The CIS OVAL Repository")
+            gen.setTimestamp(None)
+            gen.setSchemaVersion("5.10.1")
+            root.append(gen.get_element())
             return        
         
         self.tree = tree
@@ -206,6 +213,18 @@ class OvalDocument(object):
                 
         except Exception:
             return False
+        
+        
+    def to_string(self):
+        
+        if not self.tree:
+            return None
+        
+        root = self.tree.getroot()
+        if root is None:
+            return ""
+        OvalDocument.indent(root)
+        return ElementTree.tostring(root, "UTF-8", "xml").decode("utf-8")
     
         
     def getDocumentRoot(self):
@@ -252,7 +271,7 @@ class OvalDocument(object):
             gen = OvalGenerator(element)
             gen.setProduct("The CIS OVAL Repository")
             gen.setTimestamp(None)
-            gen.setVersion("5.10.1")
+            gen.setSchemaVersion("5.10.1")
             return gen
             
     
@@ -477,12 +496,14 @@ class OvalDocument(object):
         # Depending on the ID type, find the parent for it or create that parent if it doesn't exist
         # Then append the current element
         if oval_type == OvalDefinition.DEFINITION:
+            print (">>>> Add definition: ", ovalid)
             parent = root.find("def:definitions", OvalDocument.NS_DEFAULT)
             if parent is None:
+                print("   >>>> Adding definitions element")
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}definitions")
                 root.append(parent)
                 
-            parent.append(element)
+            parent.append(element.getElement())
             return True
         
         elif oval_type == OvalDefinition.TEST:
@@ -491,7 +512,7 @@ class OvalDocument(object):
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}tests")
                 root.append(parent)
                 
-            parent.append(element)
+            parent.append(element.getElement())
             return True
         
         elif oval_type == OvalDefinition.OBJECT:
@@ -500,7 +521,7 @@ class OvalDocument(object):
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}objects")
                 root.append(parent)
                 
-            parent.append(element)
+            parent.append(element.getElement())
             return True
         
         elif oval_type == OvalDefinition.STATE:
@@ -509,7 +530,7 @@ class OvalDocument(object):
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}states")
                 root.append(parent)
                 
-            parent.append(element)
+            parent.append(element.getElement())
             return True
         
         elif oval_type == OvalDefinition.VARIABLE:
@@ -518,7 +539,7 @@ class OvalDocument(object):
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}variables")
                 root.append(parent)
                 
-            parent.append(element)
+            parent.append(element.getElement())
             return True
         
         else:
@@ -541,7 +562,7 @@ class OvalGenerator(object):
         """
         Gets the value of the product element
         """
-        if not self.element:
+        if self.element is None:
             return None
         
                     
@@ -552,16 +573,19 @@ class OvalGenerator(object):
         else:            
             return child.text
             
+            
+    def get_element(self):
+        return self.element
         
         
     def setProduct(self, product):
         """
         Sets a value for the product element.  If a product element does not already exist, one will be created
         """
-        if not self.element:
+        if self.element is None:
             return False
         
-        if not product:
+        if product is None:
             return False
 
         child = self.element.find("oval:product_name", OvalDocument.NS_OVAL)
@@ -578,7 +602,7 @@ class OvalGenerator(object):
         """
         Gets the value of the schema_version element
         """
-        if not self.element:
+        if self.element is None:
             return None
         
         child = self.element.find("oval:schema_version", OvalDocument.NS_OVAL)
@@ -592,10 +616,10 @@ class OvalGenerator(object):
         """
         Sets a value for the schema_version element.  If that element does not exist, one will be created.
         """
-        if not self.element:
+        if self.element is None:
             return False
         
-        if not version:
+        if version is None:
             return False
         
         child = self.element.find("oval:schema_version", OvalDocument.NS_OVAL)
@@ -626,10 +650,10 @@ class OvalGenerator(object):
         Sets a value for the timestamp element.  If that elememtn does not exist, one will be created.
         If the timestamp argument is set to None, the timestamp will be set to the current time.
         """
-        if not self.element:
+        if self.element is None:
             return False
         
-        if not timestamp:
+        if not timestamp or timestamp is None:
             now = datetime.date.today()
             timestamp = now.strftime(OvalDocument.TIME_FORMAT)
                     
@@ -958,9 +982,8 @@ class OvalElement(object):
             return None
         
         try:
-            tree = ElementTree()
-            tree.parse(path)
-            
+            tree = ElementTree.ElementTree()
+            tree.parse(path)            
             root = tree.getroot()
             return OvalElement.asOvalElement(root)
         
