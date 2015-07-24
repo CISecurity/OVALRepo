@@ -79,7 +79,7 @@ def get_element_metadata(filepath):
     root = tree.getroot()
     ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
 
-    tag_name = str(root.tag).rsplit('}',1)[1]
+    tag_name = str(root.tag).rsplit('}',1)[-1]
     tag_components = tag_name.rsplit('_',1)
     element_type = tag_components[0]
     
