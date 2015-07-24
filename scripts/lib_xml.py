@@ -366,7 +366,7 @@ class OvalGenerator:
             self.clear_queues()
 
     def get_file_header(self):
-        oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
+        oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S%z')
         return """<oval_definitions
             xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
             xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
