@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>submission_qa</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;submission_qa
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="submission_qa-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="submission_qa-module.html">Module submission_qa</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env/ python3</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">"""Steps through all of the QA tasks needed for a submission and updates the local repository as necessary on success. </tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Authors: Gunnar Engelbach &lt;Gunnar.Engelbach@ThreatGuard.com&gt;</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">TODO:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">- Build each of the library calls necessary to complete all of the steps</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">- Use gitpython to do a commit and push if everything checks</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">- Prune out elements that don't represent a significant change</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module lib_search=lib_search-module.html"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-0', 'lib_search', 'link-0');">lib_search</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module lib_git=lib_git-module.html"><a title="lib_git" class="py-name" href="#" onclick="return doclink('link-1', 'lib_git', 'link-1');">lib_git</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module lib_repo=lib_repo-module.html"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-2', 'lib_repo', 'link-2');">lib_repo</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module lib_xml=lib_xml-module.html"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-3', 'lib_xml', 'link-3');">lib_xml</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">lxml</tt> <tt class="py-keyword">import</tt> <tt class="py-name">etree</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="submission_qa-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">     </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">SCHEMA_VERSION</tt> <tt class="py-op">=</tt> <tt class="py-string">'5.11.1'</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">     </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">     </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-comment"># Issue warning (prompt to continue) if any of the changes are a deleted item</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">remove_list</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="lib_git" class="py-name" href="#" onclick="return doclink('link-4', 'lib_git', 'link-1');">lib_git</a></tt><tt class="py-op">.</tt><tt class="py-name">get_removed_files</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-comment"># Locate all uncommitted changes to the local repository</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">change_list</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="lib_git" class="py-name" href="#" onclick="return doclink('link-5', 'lib_git', 'link-1');">lib_git</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Function lib_git.get_uncommitted_oval()=lib_git-module.html#get_uncommitted_oval"><a title="lib_git.get_uncommitted_oval" class="py-name" href="#" onclick="return doclink('link-6', 'get_uncommitted_oval', 'link-6');">get_uncommitted_oval</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">     </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">change_list</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">change_list</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"---- The following files were removed as a part of this update:"</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Function submission_qa.show_files()=submission_qa-module.html#show_files"><a title="submission_qa.show_files" class="py-name" href="#" onclick="return doclink('link-7', 'show_files', 'link-7');">show_files</a></tt><tt class="py-op">(</tt><tt class="py-name">change_list</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">response</tt> <tt class="py-op">=</tt> <tt class="py-name">input</tt><tt class="py-op">(</tt><tt class="py-string">"\n :: Accept these changes (y/N): "</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">response</tt> <tt class="py-op">!=</tt> <tt class="py-string">'y'</tt> <tt class="py-keyword">and</tt> <tt class="py-name">response</tt> <tt class="py-op">!=</tt> <tt class="py-string">'Y'</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">         </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-comment"># Don't include removed files as part of the update</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">change_list</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">file</tt> <tt class="py-keyword">for</tt> <tt class="py-name">file</tt> <tt class="py-keyword">in</tt> <tt class="py-name">change_list</tt> <tt class="py-keyword">if</tt> <tt class="py-name">file</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">remove_list</tt><tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">     </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-comment"># Remove all changes that are semantically the same as existing elements (except for states)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-name">change_list</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Function submission_qa.prune_unchanged_elements()=submission_qa-module.html#prune_unchanged_elements"><a title="submission_qa.prune_unchanged_elements" class="py-name" href="#" onclick="return doclink('link-8', 'prune_unchanged_elements', 'link-8');">prune_unchanged_elements</a></tt><tt class="py-op">(</tt><tt class="py-name">change_list</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">     </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">change_list</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"\n----- This update does not include any changes of significance"</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">     </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">     </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-comment"># For each item that actually changed, validate it</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-comment"># First, generate an OVAL document</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-name">oval_tree</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Function submission_qa.build_comprehensive_oval_document()=submission_qa-module.html#build_comprehensive_oval_document"><a title="submission_qa.build_comprehensive_oval_document" class="py-name" href="#" onclick="return doclink('link-9', 'build_comprehensive_oval_document', 'link-9');">build_comprehensive_oval_document</a></tt><tt class="py-op">(</tt><tt class="py-name">change_list</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">oval_tree</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"\n#### Error:  Unable to construct an OVAL document for this change set"</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-comment"># Then do the validation    </tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-comment">#  - Schema</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-comment">#  - Schematron</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-comment">#  - Repository Schema</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-10" class="py-name" targets="Function lib_xml.schema_validate()=lib_xml-module.html#schema_validate,Function submission_qa.schema_validate()=submission_qa-module.html#schema_validate"><a title="lib_xml.schema_validate
+submission_qa.schema_validate" class="py-name" href="#" onclick="return doclink('link-10', 'schema_validate', 'link-10');">schema_validate</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_tree</tt><tt class="py-op">,</tt> <tt class="py-name">SCHEMA_VERSION</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"### Error:  does not pass validation"</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">     </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">     </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-comment"># Check existence and accuracy of definition metadata (&lt;status&gt; and date)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-comment">#  - DRAFT on new submission</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-comment">#  - INTERIM if updating a previous definition</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-comment">#  - ?</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">     </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-comment"># If this is an update, does it change any existing metadata?</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">     </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-comment"># On passing all of the above, make these changes:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-comment">#  - Set/update version numbers as necessary</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-comment">#  - If it's a definition, determine and set the minimum schema version</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-comment">#  - For each element that is not using an OVALID in the CIS namespace:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-comment">#      - Set to a unique OVALID in the CIS namespace</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-comment">#      - Update all references to the old OVALID</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-comment">#  - Canonicalize all altered elements (if possible)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-comment">#  - Verify the file location in the repository and move if necessary</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">     </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">     </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">     </tt>
+<a name="schema_validate"></a><div id="schema_validate-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="schema_validate-toggle" onclick="return toggle('schema_validate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="submission_qa-module.html#schema_validate">schema_validate</a><tt class="py-op">(</tt><tt class="py-param">oval_tree</tt><tt class="py-op">,</tt> <tt class="py-param">schema_version</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="schema_validate-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="schema_validate-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">         </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-name">schema_path</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-11', 'lib_repo', 'link-2');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Function lib_repo.get_oval_def_schema()=lib_repo-module.html#get_oval_def_schema"><a title="lib_repo.get_oval_def_schema" class="py-name" href="#" onclick="return doclink('link-12', 'get_oval_def_schema', 'link-12');">get_oval_def_schema</a></tt><tt class="py-op">(</tt><tt class="py-name">schema_version</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'  Performing schema validation...'</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt id="link-13" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-13', 'lib_xml', 'link-3');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Function lib_xml.schema_validate_tree()=lib_xml-module.html#schema_validate_tree"><a title="lib_xml.schema_validate_tree" class="py-name" href="#" onclick="return doclink('link-14', 'schema_validate_tree', 'link-14');">schema_validate_tree</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_tree</tt><tt class="py-op">,</tt> <tt class="py-name">schema_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Schema validation successful'</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt id="link-15" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-15', 'lib_xml', 'link-3');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Class lib_xml.SchemaValidationError=lib_xml.SchemaValidationError-class.html"><a title="lib_xml.SchemaValidationError" class="py-name" href="#" onclick="return doclink('link-16', 'SchemaValidationError', 'link-16');">SchemaValidationError</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">'Schema validation failed:\n\t{0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Function build_all_oval_definitions.message()=build_all_oval_definitions-module.html#message,Function build_oval_definitions_file.message()=build_oval_definitions_file-module.html#message,Function find_affected.message()=find_affected-module.html#message,Function get_min_oval_version.message()=get_min_oval_version-module.html#message,Function get_related_elements.message()=get_related_elements-module.html#message,Function get_repository_stats.message()=get_repository_stats-module.html#message,Function lib_repo.message()=lib_repo-module.html#message,Method lib_search.SearchIndex.message()=lib_search.SearchIndex-class.html#message,Method lib_xml.OvalGenerator.message()=lib_xml.OvalGenerator-class.html#message,Function validate_oval_definitons_files.message()=validate_oval_definitons_files-module.html#message,Method web_search_defintions.WebOutput.message()=web_search_defintions.WebOutput-class.html#message"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-17', 'message', 'link-17');">message</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-comment"># schematron validate</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'info'</tt><tt class="py-op">,</tt><tt class="py-string">'Performing schematron validation'</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-18', 'lib_xml', 'link-3');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Function lib_xml.schematron_validate_tree()=lib_xml-module.html#schematron_validate_tree"><a title="lib_xml.schematron_validate_tree" class="py-name" href="#" onclick="return doclink('link-19', 'schematron_validate_tree', 'link-19');">schematron_validate_tree</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_tree</tt><tt class="py-op">,</tt> <tt class="py-name">schema_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'info'</tt><tt class="py-op">,</tt><tt class="py-string">'Schematron validation successful'</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt id="link-20" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-20', 'lib_xml', 'link-3');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Class lib_xml.SchematronValidationError=lib_xml.SchematronValidationError-class.html"><a title="lib_xml.SchematronValidationError" class="py-name" href="#" onclick="return doclink('link-21', 'SchematronValidationError', 'link-21');">SchematronValidationError</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">'Schematron validation failed:\n\t{0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-string">'\n\t'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">messages</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="build_comprehensive_oval_document"></a><div id="build_comprehensive_oval_document-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="build_comprehensive_oval_document-toggle" onclick="return toggle('build_comprehensive_oval_document');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="submission_qa-module.html#build_comprehensive_oval_document">build_comprehensive_oval_document</a><tt class="py-op">(</tt><tt class="py-param">changes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="build_comprehensive_oval_document-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="build_comprehensive_oval_document-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">    Builds an XML tree which contains all elements affected by the changes</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">     </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">changes</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">changes</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">     </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-name">oval_ids_changed</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt id="link-22" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-22', 'lib_repo', 'link-2');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Function lib_repo.path_to_oval_id()=lib_repo-module.html#path_to_oval_id"><a title="lib_repo.path_to_oval_id" class="py-name" href="#" onclick="return doclink('link-23', 'path_to_oval_id', 'link-23');">path_to_oval_id</a></tt><tt class="py-op">(</tt><tt class="py-name">filepath</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">filepath</tt> <tt class="py-keyword">in</tt> <tt class="py-name">changes</tt> <tt class="py-op">}</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-comment"># find all upstream ids</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">elements_index</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-24', 'lib_search', 'link-0');">lib_search</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Class lib_search.ElementsIndex=lib_search.ElementsIndex-class.html"><a title="lib_search.ElementsIndex" class="py-name" href="#" onclick="return doclink('link-25', 'ElementsIndex', 'link-25');">ElementsIndex</a></tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">upstream_ids</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method lib_search.ElementsIndex.find_upstream_ids()=lib_search.ElementsIndex-class.html#find_upstream_ids"><a title="lib_search.ElementsIndex.find_upstream_ids" class="py-name" href="#" onclick="return doclink('link-26', 'find_upstream_ids', 'link-26');">find_upstream_ids</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_ids_changed</tt><tt class="py-op">,</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-comment"># filter affected to definition ids</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-name">affected_def_ids</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-name">oval_id</tt> <tt class="py-keyword">for</tt> <tt class="py-name">oval_id</tt> <tt class="py-keyword">in</tt> <tt class="py-name">upstream_ids</tt> <tt class="py-keyword">if</tt> <tt id="link-27" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-27', 'lib_repo', 'link-2');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Function lib_repo.get_element_type_from_oval_id()=lib_repo-module.html#get_element_type_from_oval_id"><a title="lib_repo.get_element_type_from_oval_id" class="py-name" href="#" onclick="return doclink('link-28', 'get_element_type_from_oval_id', 'link-28');">get_element_type_from_oval_id</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_id</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'definition'</tt> <tt class="py-op">}</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-comment"># get all downstream elements</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-name">oval_ids</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method lib_search.ElementsIndex.find_downstream_ids()=lib_search.ElementsIndex-class.html#find_downstream_ids"><a title="lib_search.ElementsIndex.find_downstream_ids" class="py-name" href="#" onclick="return doclink('link-29', 'find_downstream_ids', 'link-29');">find_downstream_ids</a></tt><tt class="py-op">(</tt><tt class="py-name">affected_def_ids</tt><tt class="py-op">,</tt> <tt class="py-name">affected_def_ids</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-name">file_paths</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method lib_search.ElementsIndex.get_paths_from_ids()=lib_search.ElementsIndex-class.html#get_paths_from_ids"><a title="lib_search.ElementsIndex.get_paths_from_ids" class="py-name" href="#" onclick="return doclink('link-30', 'get_paths_from_ids', 'link-30');">get_paths_from_ids</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_ids</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-comment"># add each OVAL definition to generator</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt id="link-31" class="py-name" targets="Class lib_oval.OvalGenerator=lib_oval.OvalGenerator-class.html,Class lib_xml.OvalGenerator=lib_xml.OvalGenerator-class.html"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-31', 'OvalGenerator', 'link-31');">OvalGenerator</a></tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-32', 'lib_xml', 'link-3');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-33', 'OvalGenerator', 'link-31');">OvalGenerator</a></tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">file_path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file_paths</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">element_type</tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-34', 'lib_repo', 'link-2');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Function lib_repo.get_element_type_from_path()=lib_repo-module.html#get_element_type_from_path"><a title="lib_repo.get_element_type_from_path" class="py-name" href="#" onclick="return doclink('link-35', 'get_element_type_from_path', 'link-35');">get_element_type_from_path</a></tt><tt class="py-op">(</tt><tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-36', 'OvalGenerator', 'link-31');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method lib_xml.OvalGenerator.queue_element_file()=lib_xml.OvalGenerator-class.html#queue_element_file"><a title="lib_xml.OvalGenerator.queue_element_file" class="py-name" href="#" onclick="return doclink('link-37', 'queue_element_file', 'link-37');">queue_element_file</a></tt><tt class="py-op">(</tt><tt class="py-name">element_type</tt><tt class="py-op">,</tt> <tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">         </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">         </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">fromstring</tt><tt class="py-op">(</tt><tt id="link-38" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-38', 'OvalGenerator', 'link-31');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method lib_xml.OvalGenerator.to_string()=lib_xml.OvalGenerator-class.html#to_string"><a title="lib_xml.OvalGenerator.to_string" class="py-name" href="#" onclick="return doclink('link-39', 'to_string', 'link-39');">to_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">     </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">     </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">     </tt>
+<a name="prune_unchanged_elements"></a><div id="prune_unchanged_elements-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="prune_unchanged_elements-toggle" onclick="return toggle('prune_unchanged_elements');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="submission_qa-module.html#prune_unchanged_elements">prune_unchanged_elements</a><tt class="py-op">(</tt><tt class="py-param">changes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="prune_unchanged_elements-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="prune_unchanged_elements-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-docstring">"""Remove items from the list that do not contain any significant differences.</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;state&gt; elements are always considered significant</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">     </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">changes</tt> </tt>
+</div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-comment">#     change_list = []</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-comment">#     </tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-comment">#     if changes is None or len(changes) &lt; 1:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-comment">#         return change_list</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-comment">#     </tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-comment">#     for file in changes:</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-comment">#         # If this is a new element make sure nothing else in the repository does the same thing</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-comment">#         # Otherwise, compare it to the old version to see if there's any important changes</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-comment">#         # A new state is always considered to be significant.</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-comment">#         # Get the old version, if it exists</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-comment">#         </tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-comment">#         # If it doesn't exist then this is a significant change</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-comment">#         left = lib_xml.load_standalone_element(file)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-comment">#         # Compare the elements</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-comment">#         if lib_xml.get_element_change_status(left, right):</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-comment">#             change_list.add(file)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-comment">#             </tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-comment">#     return change_list</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="show_files"></a><div id="show_files-def"><a name="L168"></a><tt class="py-lineno">168</tt> <a class="py-toggle" href="#" id="show_files-toggle" onclick="return toggle('show_files');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="submission_qa-module.html#show_files">show_files</a><tt class="py-op">(</tt><tt class="py-param">file_list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="show_files-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="show_files-expanded"><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-docstring">"""Take a list of file paths and format them to the console"""</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">     </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">file_list</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">file_list</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"    No files"</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">     </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">file</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file_list</tt><tt class="py-op">:</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"    {0}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">         </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">         </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt id="link-40" class="py-name" targets="Function build_all_oval_definitions.main()=build_all_oval_definitions-module.html#main,Function build_oval_definitions_file.main()=build_oval_definitions_file-module.html#main,Function bulk_generate_schematron.main()=bulk_generate_schematron-module.html#main,Function find_affected.main()=find_affected-module.html#main,Function get_min_oval_version.main()=get_min_oval_version-module.html#main,Function get_related_elements.main()=get_related_elements-module.html#main,Function get_repository_stats.main()=get_repository_stats-module.html#main,Function oval_decomposition.main()=oval_decomposition-module.html#main,Function submission_qa.main()=submission_qa-module.html#main,Function validate_oval_definitons_files.main()=validate_oval_definitons_files-module.html#main,Function web_search_defintions.main()=web_search_defintions-module.html#main"><a title="build_all_oval_definitions.main
+build_oval_definitions_file.main
+bulk_generate_schematron.main
+find_affected.main
+get_min_oval_version.main
+get_related_elements.main
+get_repository_stats.main
+oval_decomposition.main
+submission_qa.main
+validate_oval_definitons_files.main
+web_search_defintions.main" class="py-name" href="#" onclick="return doclink('link-40', 'main', 'link-40');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul 23 15:39:33 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -150,6 +150,27 @@ def schematron_validate(filepath, schema_path):
             message = failure[0].text if len(failure) else 'no message output by schematron'
             messages.append(message)
         raise SchematronValidationError(messages)
+    
+    
+def schematron_validate_tree(xml_tree, schema_path):
+    """Schematron validate an XML tree
+    """
+    # get schematron path
+    schematron_path = get_schematron_xsl_from_schema(schema_path)
+
+    # apply schematron xsl to create svrl result
+    svrl = apply_xslt(xml_tree, schematron_path)
+    svrl_root = svrl.getroot()
+
+    # extract results from svrl
+    failures = svrl_root.xpath('//svrl:failed-assert', namespaces={'svrl': 'http://purl.oclc.org/dsdl/svrl'})
+    messages = []
+    if failures:
+        for failure in failures:
+            #test = failure.get('test')
+            message = failure[0].text if len(failure) else 'no message output by schematron'
+            messages.append(message)
+        raise SchematronValidationError(messages)
 
 
 def get_schematron_xsl_from_schema(schema_path, force_generate=False):
@@ -322,8 +343,9 @@ class OvalGenerator:
         if clear_queues:
             self.clear_queues()
 
-        return ''.join(chunks)
-
+        return ''.join(chunks)        
+        
+        
     def to_file(self, output_filepath, clear_queues=True):
         """ dequeue all elements into one OVAL definitions file """
 
@@ -344,7 +366,7 @@ class OvalGenerator:
             self.clear_queues()
 
     def get_file_header(self):
-        oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
+        oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S%z')
         return """<oval_definitions
             xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
             xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>get_min_oval_version</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;get_min_oval_version
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="get_min_oval_version-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="get_min_oval_version-module.html">Module get_min_oval_version</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env/ python3</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">""" Determines the minimum OVAL schema version for a given definition fragment</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">For usage information, please see the command line help:</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">    python3 get_min_oval_version.py -h</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">TODO:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">    - Once the xml c14n work is complete, port set_min_schema_version()</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">argparse</tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">,</tt> <tt class="py-name">pprint</tt><tt class="py-op">,</tt> <tt class="py-name">re</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module lib_repo=lib_repo-module.html"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-0', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Module lib_xml=lib_xml-module.html"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-1', 'lib_xml', 'link-1');">lib_xml</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Module lib_search=lib_search-module.html"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-2', 'lib_search', 'link-2');">lib_search</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">lxml</tt> <tt class="py-keyword">import</tt> <tt class="py-name">etree</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">  </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable get_min_oval_version.schema_path_cache=get_min_oval_version-module.html#schema_path_cache"><a title="get_min_oval_version.schema_path_cache" class="py-name" href="#" onclick="return doclink('link-3', 'schema_path_cache', 'link-3');">schema_path_cache</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="message"></a><div id="message-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="message-toggle" onclick="return toggle('message');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="get_min_oval_version-module.html#message">message</a><tt class="py-op">(</tt><tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-param">message</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="message-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="message-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-docstring">""" print a message """</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stdout</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method lib_xml.OvalGenerator.write()=lib_xml.OvalGenerator-class.html#write"><a title="lib_xml.OvalGenerator.write" class="py-name" href="#" onclick="return doclink('link-4', 'write', 'link-4');">write</a></tt><tt class="py-op">(</tt><tt class="py-string">'\r{0}: {1}\n'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">label</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Function build_all_oval_definitions.message()=build_all_oval_definitions-module.html#message,Function build_oval_definitions_file.message()=build_oval_definitions_file-module.html#message,Function find_affected.message()=find_affected-module.html#message,Function get_min_oval_version.message()=get_min_oval_version-module.html#message,Function get_related_elements.message()=get_related_elements-module.html#message,Function get_repository_stats.message()=get_repository_stats-module.html#message,Function lib_repo.message()=lib_repo-module.html#message,Method lib_search.SearchIndex.message()=lib_search.SearchIndex-class.html#message,Method lib_xml.OvalGenerator.message()=lib_xml.OvalGenerator-class.html#message,Function validate_oval_definitons_files.message()=validate_oval_definitons_files-module.html#message,Method web_search_defintions.WebOutput.message()=web_search_defintions.WebOutput-class.html#message"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-5', 'message', 'link-5');">message</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="set_min_schema_version"></a><div id="set_min_schema_version-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="set_min_schema_version-toggle" onclick="return toggle('set_min_schema_version');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="get_min_oval_version-module.html#set_min_schema_version">set_min_schema_version</a><tt class="py-op">(</tt><tt class="py-param">defpath</tt><tt class="py-op">,</tt> <tt class="py-param">schema_version</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="set_min_schema_version-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="set_min_schema_version-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-docstring">""" updates or sets the min_schema_version attribute in the provided oval definition. """</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">current_version</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-string">'rt'</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">deftext</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">r'&lt;min_schema_version&gt;(.*?)&lt;\/min_schema_version&gt;'</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">deftext</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">current_version</tt> <tt class="py-op">==</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-name">deftext</tt> <tt class="py-op">=</tt> <tt class="py-name">deftext</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-string">'&lt;min_schema_version&gt;'</tt> <tt class="py-op">+</tt> <tt class="py-name">schema_version</tt> <tt class="py-op">+</tt> <tt class="py-string">'&lt;/min_schema_version&gt;'</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">deftext</tt> <tt class="py-op">=</tt> <tt class="py-name">deftext</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'&lt;/oval_repository&gt;'</tt><tt class="py-op">,</tt><tt class="py-string">'  &lt;min_schema_version&gt;'</tt> <tt class="py-op">+</tt> <tt class="py-name">schema_version</tt> <tt class="py-op">+</tt> <tt class="py-string">'&lt;/min_schema_version&gt;\n    &lt;/oval_repository&gt;'</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-string">'wt'</tt><tt class="py-op">,</tt> <tt class="py-name">encoding</tt><tt class="py-op">=</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib_xml.OvalGenerator.write" class="py-name" href="#" onclick="return doclink('link-6', 'write', 'link-4');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">deftext</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="determine_def_min_version"></a><div id="determine_def_min_version-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="determine_def_min_version-toggle" onclick="return toggle('determine_def_min_version');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="get_min_oval_version-module.html#determine_def_min_version">determine_def_min_version</a><tt class="py-op">(</tt><tt class="py-param">defpath</tt><tt class="py-op">,</tt> <tt class="py-param">definitions_index</tt><tt class="py-op">,</tt> <tt class="py-param">elements_index</tt><tt class="py-op">,</tt> <tt class="py-param">update</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="determine_def_min_version-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="determine_def_min_version-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-docstring">""" determines the minimum oval schema version the given definition can be expressed in. """</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-7" class="py-name"><a title="get_min_oval_version.schema_path_cache" class="py-name" href="#" onclick="return doclink('link-7', 'schema_path_cache', 'link-3');">schema_path_cache</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">minimum_version</tt><tt class="py-op">=</tt><tt class="py-name">None</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">exception</tt><tt class="py-op">=</tt><tt class="py-name">None</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-comment"># get id of oval definition</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">def_id</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-8', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Function lib_repo.path_to_oval_id()=lib_repo-module.html#path_to_oval_id"><a title="lib_repo.path_to_oval_id" class="py-name" href="#" onclick="return doclink('link-9', 'path_to_oval_id', 'link-9');">path_to_oval_id</a></tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-comment"># add all downstream element ids</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-name">def_ids</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">def_id</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">oval_ids</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method lib_search.ElementsIndex.find_downstream_ids()=lib_search.ElementsIndex-class.html#find_downstream_ids"><a title="lib_search.ElementsIndex.find_downstream_ids" class="py-name" href="#" onclick="return doclink('link-10', 'find_downstream_ids', 'link-10');">find_downstream_ids</a></tt><tt class="py-op">(</tt><tt class="py-name">def_ids</tt><tt class="py-op">,</tt> <tt class="py-name">def_ids</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-name">file_paths</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lib_search.ElementsIndex.get_paths_from_ids()=lib_search.ElementsIndex-class.html#get_paths_from_ids"><a title="lib_search.ElementsIndex.get_paths_from_ids" class="py-name" href="#" onclick="return doclink('link-11', 'get_paths_from_ids', 'link-11');">get_paths_from_ids</a></tt><tt class="py-op">(</tt><tt class="py-name">oval_ids</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-comment"># create generator</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Class lib_oval.OvalGenerator=lib_oval.OvalGenerator-class.html,Class lib_xml.OvalGenerator=lib_xml.OvalGenerator-class.html"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-12', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-13', 'lib_xml', 'link-1');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-14', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-15', 'message', 'link-5');">message</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-comment">#OvalGenerator.oval_schema_version = schema_version</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-comment"># add each OVAL definition to generator</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">file_path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file_paths</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">element_type</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-16', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Function lib_repo.get_element_type_from_path()=lib_repo-module.html#get_element_type_from_path"><a title="lib_repo.get_element_type_from_path" class="py-name" href="#" onclick="return doclink('link-17', 'get_element_type_from_path', 'link-17');">get_element_type_from_path</a></tt><tt class="py-op">(</tt><tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-18', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method lib_xml.OvalGenerator.queue_element_file()=lib_xml.OvalGenerator-class.html#queue_element_file"><a title="lib_xml.OvalGenerator.queue_element_file" class="py-name" href="#" onclick="return doclink('link-19', 'queue_element_file', 'link-19');">queue_element_file</a></tt><tt class="py-op">(</tt><tt class="py-name">element_type</tt><tt class="py-op">,</tt> <tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">schema_version</tt> <tt class="py-keyword">in</tt> <tt id="link-20" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-20', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Function lib_repo.get_schema_versions()=lib_repo-module.html#get_schema_versions"><a title="lib_repo.get_schema_versions" class="py-name" href="#" onclick="return doclink('link-21', 'get_schema_versions', 'link-21');">get_schema_versions</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-22', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Variable lib_xml.OvalGenerator.oval_schema_version=lib_xml.OvalGenerator-class.html#oval_schema_version"><a title="lib_xml.OvalGenerator.oval_schema_version" class="py-name" href="#" onclick="return doclink('link-23', 'oval_schema_version', 'link-23');">oval_schema_version</a></tt> <tt class="py-op">=</tt> <tt class="py-name">schema_version</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">fromstring</tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-24', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method lib_xml.OvalGenerator.to_string()=lib_xml.OvalGenerator-class.html#to_string"><a title="lib_xml.OvalGenerator.to_string" class="py-name" href="#" onclick="return doclink('link-25', 'to_string', 'link-25');">to_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-comment"># test of definitions file validates against current schema</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt id="link-26" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-26', 'lib_xml', 'link-1');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Function lib_xml.schema_validate_tree()=lib_xml-module.html#schema_validate_tree"><a title="lib_xml.schema_validate_tree" class="py-name" href="#" onclick="return doclink('link-27', 'schema_validate_tree', 'link-27');">schema_validate_tree</a></tt><tt class="py-op">(</tt><tt class="py-name">tree</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name"><a title="get_min_oval_version.schema_path_cache" class="py-name" href="#" onclick="return doclink('link-28', 'schema_path_cache', 'link-3');">schema_path_cache</a></tt><tt class="py-op">[</tt><tt class="py-name">schema_version</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-name">minimum_version</tt> <tt class="py-op">=</tt> <tt class="py-name">schema_version</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-29" class="py-name"><a title="lib_xml" class="py-name" href="#" onclick="return doclink('link-29', 'lib_xml', 'link-1');">lib_xml</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Class lib_xml.SchemaValidationError=lib_xml.SchemaValidationError-class.html"><a title="lib_xml.SchemaValidationError" class="py-name" href="#" onclick="return doclink('link-30', 'SchemaValidationError', 'link-30');">SchemaValidationError</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">            <tt class="py-name">exception</tt> <tt class="py-op">=</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-31', 'message', 'link-5');">message</a></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">break</tt><tt class="py-op">;</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt id="link-32" class="py-name"><a title="lib_oval.OvalGenerator
+lib_xml.OvalGenerator" class="py-name" href="#" onclick="return doclink('link-32', 'OvalGenerator', 'link-12');">OvalGenerator</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method lib_xml.OvalGenerator.clear()=lib_xml.OvalGenerator-class.html#clear"><a title="lib_xml.OvalGenerator.clear" class="py-name" href="#" onclick="return doclink('link-33', 'clear', 'link-33');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-34" class="py-name" targets="Method lib_search.SearchIndex.update()=lib_search.SearchIndex-class.html#update"><a title="lib_search.SearchIndex.update" class="py-name" href="#" onclick="return doclink('link-34', 'update', 'link-34');">update</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt id="link-35" class="py-name" targets="Function get_min_oval_version.set_min_schema_version()=get_min_oval_version-module.html#set_min_schema_version"><a title="get_min_oval_version.set_min_schema_version" class="py-name" href="#" onclick="return doclink('link-35', 'set_min_schema_version', 'link-35');">set_min_schema_version</a></tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">,</tt> <tt class="py-name">minimum_version</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> <tt class="py-string">'oval_id'</tt><tt class="py-op">:</tt> <tt class="py-name">def_id</tt><tt class="py-op">,</tt> <tt class="py-string">'minimum_version'</tt><tt class="py-op">:</tt> <tt class="py-name">minimum_version</tt><tt class="py-op">,</tt> <tt class="py-string">'exception'</tt><tt class="py-op">:</tt> <tt class="py-name">exception</tt> <tt class="py-op">}</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="get_min_oval_version-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-docstring">""" parse command line options and generate file """</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-comment"># parse command line options</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">ArgumentParser</tt><tt class="py-op">(</tt><tt class="py-name">description</tt><tt class="py-op">=</tt><tt class="py-string">'Determine minimum supported OVAL schema for a given definition'</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-p'</tt><tt class="py-op">,</tt> <tt class="py-string">'--path'</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'path to definition fragment'</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-i'</tt><tt class="py-op">,</tt> <tt class="py-string">'--id'</tt><tt class="py-op">,</tt>  <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'id of definition fragment'</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-a'</tt><tt class="py-op">,</tt> <tt class="py-string">'--all'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">"store_true"</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'determine minimum supported OVAL schema for all indexed definitino fragments. cannot be combined with --id or --path'</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-u'</tt><tt class="py-op">,</tt> <tt class="py-string">'--update'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">"store_true"</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'update the given definition to include the min_schema_version element'</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">vars</tt><tt class="py-op">(</tt><tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'all'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt> <tt class="py-keyword">or</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">print_help</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-36', 'message', 'link-5');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt> <tt class="py-string">"--all cannot be combined with --id or --path."</tt><tt class="py-op">)</tt>     </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'all'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt> <tt class="py-keyword">or</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">print_help</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt id="link-37" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-37', 'message', 'link-5');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">"Please specify one of: --all, --path or --id."</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">print_help</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt id="link-38" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-38', 'message', 'link-5');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'error'</tt><tt class="py-op">,</tt><tt class="py-string">"Please specify one of: --all, --path, or --id."</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-comment"># get indexes</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">definitions_index</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-39', 'lib_search', 'link-2');">lib_search</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Class lib_search.DefinitionsIndex=lib_search.DefinitionsIndex-class.html"><a title="lib_search.DefinitionsIndex" class="py-name" href="#" onclick="return doclink('link-40', 'DefinitionsIndex', 'link-40');">DefinitionsIndex</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-41', 'message', 'link-5');">message</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">elements_index</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="lib_search" class="py-name" href="#" onclick="return doclink('link-42', 'lib_search', 'link-2');">lib_search</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Class lib_search.ElementsIndex=lib_search.ElementsIndex-class.html"><a title="lib_search.ElementsIndex" class="py-name" href="#" onclick="return doclink('link-43', 'ElementsIndex', 'link-43');">ElementsIndex</a></tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-44', 'message', 'link-5');">message</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-comment"># build schema path cache</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">schema_version</tt> <tt class="py-keyword">in</tt> <tt id="link-45" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-45', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="lib_repo.get_schema_versions" class="py-name" href="#" onclick="return doclink('link-46', 'get_schema_versions', 'link-21');">get_schema_versions</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt id="link-47" class="py-name"><a title="get_min_oval_version.schema_path_cache" class="py-name" href="#" onclick="return doclink('link-47', 'schema_path_cache', 'link-3');">schema_path_cache</a></tt><tt class="py-op">[</tt><tt class="py-name">schema_version</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-48', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Function lib_repo.get_oval_def_schema()=lib_repo-module.html#get_oval_def_schema"><a title="lib_repo.get_oval_def_schema" class="py-name" href="#" onclick="return doclink('link-49', 'get_oval_def_schema', 'link-49');">get_oval_def_schema</a></tt><tt class="py-op">(</tt><tt class="py-name">schema_version</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'all'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">     </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">defpath</tt> <tt class="py-keyword">in</tt> <tt id="link-50" class="py-name"><a title="lib_repo" class="py-name" href="#" onclick="return doclink('link-50', 'lib_repo', 'link-0');">lib_repo</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Function lib_repo.get_definition_paths_iterator()=lib_repo-module.html#get_definition_paths_iterator"><a title="lib_repo.get_definition_paths_iterator" class="py-name" href="#" onclick="return doclink('link-51', 'get_definition_paths_iterator', 'link-51');">get_definition_paths_iterator</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name" targets="Function get_min_oval_version.determine_def_min_version()=get_min_oval_version-module.html#determine_def_min_version"><a title="get_min_oval_version.determine_def_min_version" class="py-name" href="#" onclick="return doclink('link-52', 'determine_def_min_version', 'link-52');">determine_def_min_version</a></tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">,</tt> <tt class="py-name">definitions_index</tt><tt class="py-op">,</tt> <tt class="py-name">elements_index</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'update'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt id="link-53" class="py-name" targets="Function get_min_oval_version.report()=get_min_oval_version-module.html#report"><a title="get_min_oval_version.report" class="py-name" href="#" onclick="return doclink('link-53', 'report', 'link-53');">report</a></tt><tt class="py-op">(</tt><tt class="py-name">defpath</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-string">'minimum_version'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">documents</tt> <tt class="py-op">=</tt> <tt class="py-name">elements_index</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Method lib_search.SearchIndex.query()=lib_search.SearchIndex-class.html#query"><a title="lib_search.SearchIndex.query" class="py-name" href="#" onclick="return doclink('link-54', 'query', 'link-54');">query</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt> <tt class="py-string">'oval_id'</tt><tt class="py-op">:</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt> <tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">documents</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt id="link-55" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-55', 'message', 'link-5');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'info'</tt><tt class="py-op">,</tt><tt class="py-string">"No object having id '{0}' found."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">paths</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">document</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">document</tt> <tt class="py-keyword">in</tt> <tt class="py-name">documents</tt> <tt class="py-op">]</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">paths</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name"><a title="get_min_oval_version.determine_def_min_version" class="py-name" href="#" onclick="return doclink('link-56', 'determine_def_min_version', 'link-52');">determine_def_min_version</a></tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-name">definitions_index</tt><tt class="py-op">,</tt> <tt class="py-name">elements_index</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'update'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt id="link-57" class="py-name"><a title="get_min_oval_version.report" class="py-name" href="#" onclick="return doclink('link-57', 'report', 'link-53');">report</a></tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-string">'oval_id'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-string">'minimum_version'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt id="link-58" class="py-name"><a title="build_all_oval_definitions.message
+build_oval_definitions_file.message
+find_affected.message
+get_min_oval_version.message
+get_related_elements.message
+get_repository_stats.message
+lib_repo.message
+lib_search.SearchIndex.message
+lib_xml.OvalGenerator.message
+validate_oval_definitons_files.message
+web_search_defintions.WebOutput.message" class="py-name" href="#" onclick="return doclink('link-58', 'message', 'link-5');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'info'</tt><tt class="py-op">,</tt><tt class="py-string">"Definition fragment path not found: "</tt> <tt class="py-op">+</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="get_min_oval_version.determine_def_min_version" class="py-name" href="#" onclick="return doclink('link-59', 'determine_def_min_version', 'link-52');">determine_def_min_version</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">definitions_index</tt><tt class="py-op">,</tt> <tt class="py-name">elements_index</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'update'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt id="link-60" class="py-name"><a title="get_min_oval_version.report" class="py-name" href="#" onclick="return doclink('link-60', 'report', 'link-53');">report</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-string">'path'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-string">'minimum_version'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="report"></a><div id="report-def"><a name="L151"></a><tt class="py-lineno">151</tt> <a class="py-toggle" href="#" id="report-toggle" onclick="return toggle('report');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="get_min_oval_version-module.html#report">report</a><tt class="py-op">(</tt><tt class="py-param">subject</tt><tt class="py-op">,</tt> <tt class="py-param">version</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="report-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="report-expanded"><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"The minimum OVAL version suported by '{0}' is {1}."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">subject</tt><tt class="py-op">,</tt> <tt class="py-name">version</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt id="link-61" class="py-name" targets="Function build_all_oval_definitions.main()=build_all_oval_definitions-module.html#main,Function build_oval_definitions_file.main()=build_oval_definitions_file-module.html#main,Function bulk_generate_schematron.main()=bulk_generate_schematron-module.html#main,Function find_affected.main()=find_affected-module.html#main,Function get_min_oval_version.main()=get_min_oval_version-module.html#main,Function get_related_elements.main()=get_related_elements-module.html#main,Function get_repository_stats.main()=get_repository_stats-module.html#main,Function oval_decomposition.main()=oval_decomposition-module.html#main,Function submission_qa.main()=submission_qa-module.html#main,Function validate_oval_definitons_files.main()=validate_oval_definitons_files-module.html#main,Function web_search_defintions.main()=web_search_defintions-module.html#main"><a title="build_all_oval_definitions.main
+build_oval_definitions_file.main
+bulk_generate_schematron.main
+find_affected.main
+get_min_oval_version.main
+get_related_elements.main
+get_repository_stats.main
+oval_decomposition.main
+submission_qa.main
+validate_oval_definitons_files.main
+web_search_defintions.main" class="py-name" href="#" onclick="return doclink('link-61', 'main', 'link-61');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >OVALRepo APIs</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jul 23 15:39:33 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -106,7 +106,6 @@ def writeFiles(element_list, repo_root, verbose=False):
         e = element.getElement()
         filepath = lib_repo.get_element_repository_path(e)
         if filepath and filepath is not None:
-            filepath = repo_root + "/" + filepath
             writeFile(filepath, element, verbose)
         
         

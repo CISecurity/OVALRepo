@@ -290,7 +290,7 @@ class SearchIndex:
         if self.index_searcher:
             self.index_searcher.close()
 
-        self.index_searcher = false
+        self.index_searcher = False
 
     def whoosh_escape(self, s):
         """ Escape a string for whoosh. """
