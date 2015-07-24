@@ -366,7 +366,7 @@ class DefinitionsIndex(SearchIndex):
 
     def version_to_int(self, version_number):
         """ Converts a version number string to a int that can be sorted """
-        components = version_number.split('.')
+        components = version_number.split('.') if version_number else [0,0,0]
         
         if len(components) > 3:
             raise InvalidVersionNumberError('Invalid version number: {0}'.fomat(version_number))

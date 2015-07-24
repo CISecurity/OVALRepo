@@ -67,7 +67,7 @@ def main():
 
     # query index
     query_results = definitions_index.paged_query(query, args['page'], args['page_length'])
-    if not query_results:
+    if not query_results or not query_results['documents']:
         output.message('info','No matching OVAL definitions found. Aborting.')
         output.write_json()
         sys.exit(0)
@@ -126,7 +126,6 @@ class WebOutput():
 
     def write_json(self):
         self.output['RESULTS_COUNT'] = len(self.output['RESULTS'])
-        print(repr(self.output))
         print(json.dumps(self.output, sort_keys=True, indent=4))
 
 
