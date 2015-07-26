@@ -146,9 +146,6 @@ def main():
 
     if verbose:
         print(" ++++ Schema validations passed")
-        
-
-    if verbose:
         print("\n + 5: Updating elements...")    
 
     # 5. On passing all of the above, make these changes for all elements:
@@ -175,7 +172,7 @@ def main():
         #  5.2 For each element that is not using an OVALID in the CIS namespace:
         ovalid = oval_element.get("id")
         is_update = True
-        if not is_cis_id(ovalid):
+        if not is_repository_id(ovalid):
             is_update = False
             element_type = lib_repo.get_element_type_from_path(path)
             new_id = generate_next_ovalid(element_type, element_index)
@@ -325,13 +322,15 @@ def find_largest_index(oval_id_list):
     return max_index
     
     
-def is_cis_id(ovalid):
+def is_repository_id(ovalid):
     
     if not ovalid or ovalid is None:
         return False
     
     try:
-        if ovalid.index(":org.cisecurity") > 0:
+        if ovalid.index(":org.cisecurity:") > 0:
+            return True
+        if ovalid.index(":org.mitre.oval:") > 0:
             return True
     except:
         return False
