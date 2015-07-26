@@ -287,12 +287,11 @@ def generate_next_ovalid(element_type, element_index):
     elif element_type == "variable":
         type_key = "var"
 
-    search_term = "oval_*_" + type_key + "_*"        
+    search_term = "oval_*_{0}_*".format(type_key)        
     index_searcher = element_index.get_searcher();
     query = Wildcard("oval_id", search_term)
     matching = index_searcher.search(query, limit=None)
 
-    matching = element_index.query({'oval_id': search_term})
     index = find_largest_index(matching) + 1
     
     # Past the parts together to create the ID
