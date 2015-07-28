@@ -53,12 +53,12 @@ def main():
         
     
     if not oval.parseFromFile(filename):
-        print("Unable to parse source file '", filename, "':  no actions taken")
+        print("\n >> Unable to parse source file '{0}':  no actions taken".format(filename))
         return
 
     deflist = oval.getDefinitions()
     if not deflist or deflist is None or len(deflist) < 1:
-        print("Error:  this document does not contain any OVAL definitions.  No further action will be taken")
+        print("\n ## Error:  this document does not contain any OVAL definitions.  No further action will be taken")
         return
         
     if verbose:
@@ -106,7 +106,6 @@ def writeFiles(element_list, repo_root, verbose=False):
         e = element.getElement()
         filepath = lib_repo.get_element_repository_path(e)
         if filepath and filepath is not None:
-            filepath = repo_root + "/" + filepath
             writeFile(filepath, element, verbose)
         
         
@@ -114,6 +113,7 @@ def writeFile(path, element, verbose=False):
     
     if verbose:
         if os.path.exists(path):
+            # TODO  Determine if the element has not changed
             print("## Overwrite existing file: ", path)
         else:
             print("@@ Creating new file: ", path)
