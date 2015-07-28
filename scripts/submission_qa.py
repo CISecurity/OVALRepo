@@ -28,6 +28,7 @@ from lib_oval import OvalElement
 verbose = False
 debug = False
 autoaccept = False
+id_cache_list = {'def': None, 'tst': None, 'obj': None, 'ste': None, 'var': None}
 NS_DEFAULT  = {None: "http://oval.mitre.org/XMLSchema/oval-definitions-5"}
 NS_MAP = { None: "http://oval.mitre.org/XMLSchema/oval-definitions-5", "oval": "http://oval.mitre.org/XMLSchema/oval-common-5",
             "xsi": "http://www.w3.org/2001/XMLSchema-instance" }
@@ -176,6 +177,8 @@ def main():
             is_update = False
             element_type = lib_repo.get_element_type_from_path(path)
             new_id = generate_next_ovalid(element_type, element_index)
+            if verbose:
+                print("    ---- Change submission ID from '{0}' to '{1}'".format(ovalid, new_id))
             oval_element.set("id", new_id)
         #      5.2.1 Set to a unique OVALID in the CIS namespace
         #      5.2.2 Update all references from the old OVALID
@@ -277,6 +280,9 @@ def generate_next_ovalid(element_type, element_index):
     # Find the largest index for this element type
     # Increment it by one
     
+    global id_cache_list
+    global verbose
+    
     type_key = "def"
     if element_type == "state":
         type_key = "ste"
@@ -287,15 +293,27 @@ def generate_next_ovalid(element_type, element_index):
     elif element_type == "variable":
         type_key = "var"
 
-    search_term = "oval_*_{0}_*".format(type_key)        
-    index_searcher = element_index.get_searcher();
-    query = Wildcard("oval_id", search_term)
-    matching = index_searcher.search(query, limit=None)
 
-    index = find_largest_index(matching) + 1
-    
-    # Past the parts together to create the ID
-    return "oval:org.cisecurity:{0}:{1}".format(type_key, index)
+    cached_list = id_cache_list[type_key]
+    if not cached_list or len(cached_list) < 1:
+        search_term = "oval_*_{0}_*".format(type_key)        
+        index_searcher = element_index.get_searcher();
+        query = Wildcard("oval_id", search_term)
+        results = index_searcher.search(query, limit=None)
+        
+        matching = [hit['oval_id'] for hit in results]
+        index = find_largest_index(matching) + 1
+        new_id = "oval:org.cisecurity:{0}:{1}".format(type_key, index)
+        cached_list = [new_id]
+        id_cache_list[type_key] = cached_list
+    else:
+        index = find_largest_index(cached_list) + 1
+        new_id = "oval:org.cisecurity:{0}:{1}".format(type_key, index)
+        cached_list.append(new_id)
+        
+    return new_id
+
+
 
 
 def find_largest_index(oval_id_list):
@@ -321,15 +339,16 @@ def find_largest_index(oval_id_list):
     return max_index
     
     
+    
 def is_repository_id(ovalid):
     
     if not ovalid or ovalid is None:
         return False
     
     try:
-        if ovalid.index(":org.cisecurity:") > 0:
+        if ":org.cisecurity" in ovalid:
             return True
-        if ovalid.index(":org.mitre.oval:") > 0:
+        if ":org.mitre.oval:" in ovalid:
             return True
     except:
         return False
@@ -343,7 +362,7 @@ def set_minimum_schema_version(oval_element, min_schema):
     global NS_MAP
     global NS_DEFAULT
     
-    if not oval_element or oval_element is None:
+    if oval_element is None:
         return None
     
     if not min_schema or min_schema is None:
