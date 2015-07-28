@@ -58,6 +58,8 @@ def get_uncommitted_oval():
     return uncommitted_oval
 
 
+
+
 def compare_current_oval_to_remote(remote='origin', branch='master'):
     """ Returns a list of OVAL files in current working directory that differ from a remote/branch. """
     repo = get_repo()
