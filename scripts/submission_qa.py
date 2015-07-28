@@ -30,6 +30,7 @@ debug = False
 autoaccept = False
 id_cache_list = {'def': None, 'tst': None, 'obj': None, 'ste': None, 'var': None}
 NS_DEFAULT  = {None: "http://oval.mitre.org/XMLSchema/oval-definitions-5"}
+NS_DEFINITION  = {'def': "http://oval.mitre.org/XMLSchema/oval-definitions-5"}
 NS_MAP = { None: "http://oval.mitre.org/XMLSchema/oval-definitions-5", "oval": "http://oval.mitre.org/XMLSchema/oval-common-5",
             "xsi": "http://www.w3.org/2001/XMLSchema-instance" }
 
@@ -59,6 +60,13 @@ def main():
 #     if args['autoaccept']:
 #         autoaccept = True
     
+    # Grab some things we're going to need later
+    # First, build the schema path cache
+    element_index = lib_search.ElementsIndex(message)
+    schema_path_cache = {}
+    for schema_version in lib_repo.get_schema_versions():
+        schema_path_cache[schema_version] = lib_repo.get_oval_def_schema(schema_version)
+
     
     # 1. Locate all uncommitted changes to the local repository
     if verbose:
@@ -150,11 +158,6 @@ def main():
         print("\n + 5: Updating elements...")    
 
     # 5. On passing all of the above, make these changes for all elements:
-    # First, build the schema path cache
-    element_index = lib_search.ElementsIndex(message)
-    schema_path_cache = {}
-    for schema_version in lib_repo.get_schema_versions():
-        schema_path_cache[schema_version] = lib_repo.get_oval_def_schema(schema_version)
 
 
     affected_elements = set()
@@ -163,15 +166,21 @@ def main():
         oval_element = lib_xml.load_standalone_element(path)
         update_elements[path] = oval_element
         #  5.1 If it's a definition, determine and set the minimum schema version
+        ovalid = oval_element.get("id")
+        if verbose:
+            print("\n  ---- Processing submitted element {0}".format(ovalid))
+            
         if lib_repo.get_element_type_from_path(path) == 'definition':
-            min_schema = determine_definition_minimum_schema_version(path, element_index, schema_path_cache)
+            if verbose:
+                print("    --- Is a definition:  determining minimum schema version")
+#             min_schema = determine_definition_minimum_schema_version(path, element_index, schema_path_cache)
+            min_schema = determine_definition_minimum_schema_version(oval_element, element_index, schema_path_cache)
             if min_schema and min_schema is not None:
                 if verbose:
-                    print("  ---- Setting min schema version for '{0}' to '{1}'".format(os.path.basename(path), min_schema))
+                    print("    ---- Determined minimum schema version to be {0}".format(min_schema))
                 set_minimum_schema_version(oval_element, min_schema)
         
         #  5.2 For each element that is not using an OVALID in the CIS namespace:
-        ovalid = oval_element.get("id")
         is_update = True
         if not is_repository_id(ovalid):
             is_update = False
@@ -186,30 +195,45 @@ def main():
         #  5.3 Set/update version numbers as necessary.  The previous step can be used to determine new vice update
         if is_update:
         #    5.3.1 If this is an update, find the current version and increment by one
+            if verbose:
+                print("     ---- Is an update:  incrementing version")
             increment_version(oval_element)
             # Find all upstream elements and add them, as unique, to the list of items to change
-            affected_elements = set().union(affected_elements, find_affected(ovalid))
+            if lib_repo.get_element_type_from_path(path) != 'definition':
+                if verbose:
+                    print("     ---- Not a definition.  Finding affected upstream elements...")
+                affected = find_affected(ovalid, element_index)
+                if affected is not None and len(affected) > 0:
+                    if verbose:
+                        print("     ---- Number of elements affected: {0}".format(len(affected)))
+                    affected_elements = set().union(affected_elements, affected)
+                else:
+                    if verbose:
+                        print("     >>>>> Warning: found no affected elements for this update.  Possible orphan.")
         else:
         #        Otherwise, set it to 1
             oval_element.set("version", "1")
         #  5.4 Canonicalize all altered elements (if possible)
         
     # Now that we know all the elements affected by an update we can increment their IDs once
-    for file in affected_elements:
-        oval_element = lib_xml.load_standalone_element(file)
-        if oval_element and oval_element is not None:
-            increment_version(oval_element)
-            update_elements[file] = oval_element
+    if len(affected_elements) > 0:
+        if verbose:
+            print("\n ------- This update affects {0} upstream elements:  incrementing the version number for each...".format(len(affected_elements)))
+        for file in affected_elements:
+            oval_element = lib_xml.load_standalone_element(file)
+            if oval_element is not None:
+                increment_version(oval_element)
+                update_elements[file] = oval_element
     
     
     #  6 Write the element, and remove the old if the path changed
     print("\n=============== Complete ===================")
-    print("  All automated checks have completed successfully, but the following")
-    print("     manual checks need to be made prior to accepting this submission:")
-    print("  * Metadata for definitions is complete and accurate")
-    print("  * Existing metadata has not been changed")
-    print("  * Contains a meaningful change")
-    print("  * Does not contain any harmful actions or unacceptable language")
+    print("All automated checks have completed successfully, but the following")
+    print(" manual checks need to be made prior to accepting this submission:")
+    print("   * Metadata for definitions is complete and accurate")
+    print("   * Existing metadata has not been changed")
+    print("   * Contains a meaningful change")
+    print("   * Does not contain any harmful actions or unacceptable language")
     response = input("\n :::: Save all changes now? (N[o] / y[es]): ")
     if response != 'y' and response != 'Y':
         return
@@ -242,28 +266,31 @@ def main():
 def find_affected(ovalid, element_index):
 
     if not ovalid or ovalid is None:
-        return set()
+        return None
     
-    oval_id_list = element_index.find_upstream_ids(ovalid, ovalid)
+    oval_id_list = element_index.find_upstream_ids(ovalid)
     
     if oval_id_list is None or len(oval_id_list) < 1:
-        return set()
+        return None
     
-    affected_items = set()
-    for affected_id in oval_id_list:
-        path = lib_repo.oval_id_to_path(affected_id)
+    file_path_list = element_index.get_paths_from_ids(oval_id_list)
+    if file_path_list is None or len(file_path_list) < 1:
+        return None
+    
+    affected_items = {}
+    for path in file_path_list:
         oval_element = lib_xml.load_standalone_element(path)
-        if not oval_element or oval_element is None:
+        if oval_element is None:
             continue
         affected_items[path] = oval_element
         
-    return affected_items
+    return set(affected_items)
     
     
 
 def increment_version(oval_element):
     
-    if not oval_element or oval_element is None:
+    if oval_element is None:
         return
 
     version = oval_element.get("version")
@@ -361,6 +388,8 @@ def set_minimum_schema_version(oval_element, min_schema):
     
     global NS_MAP
     global NS_DEFAULT
+    global NS_DEFINITION
+    global debug
     
     if oval_element is None:
         return None
@@ -369,65 +398,41 @@ def set_minimum_schema_version(oval_element, min_schema):
         return None
     
     
-    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema_version", NS_MAP)
-    if not min_element or min_element is None:
+    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema_version", NS_DEFINITION)
+    if min_element is None:
         # Find/create oval_repository element
-        repo_element = oval_element.find("def:metadata/def:oval_repository")
-        if not repo_element or repo_element is None:
+        repo_element = oval_element.find("def:metadata/def:oval_repository", NS_DEFINITION)
+        if repo_element is None:
             # Find/create metadata element
-            meta_element = oval_element.find("def:metadata", NS_MAP)
-            if not meta_element or meta_element is None:
-                meta_element = etree.SubElement(oval_element, "metadata", NS_DEFAULT)
+            meta_element = oval_element.find("def:metadata", NS_DEFINITION)
+            if meta_element is None:
+                meta_element = etree.SubElement(oval_element, "metadata", NS_DEFINITION)
                 
-            repo_element = etree.SubElement(meta_element, "oval_repository", NS_DEFAULT)
+            repo_element = etree.SubElement(meta_element, "oval_repository", NS_DEFINITION)
             
-        min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFAULT)
+        min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFINITION)
         
     min_element.text = min_schema
-
-
-
-def determine_definition_minimum_schema_version(defpath, index, schema_path_cache):
-
-    if not defpath or defpath is None:
-        return None
     
-    if not os.path.isfile(defpath):
-        return None
-    
+#     if debug:
+#         print("------  updated definition -------")
+#         print(etree.tostring(oval_element))
+#         print("----------------------------------")
 
+
+def determine_definition_minimum_schema_version(element, index, schema_path_cache):
+
+    if element is None:
+        return None
+         
     minimum_version=None
 
-    # get id of oval definition
-    def_id = lib_repo.path_to_oval_id(defpath)
-
-    # add all downstream element ids
-    def_ids = set([def_id])
-    oval_ids = index.find_downstream_ids(def_ids, def_ids)
-    file_paths = index.get_paths_from_ids(oval_ids)
-
-    # create generator that builds files in memory (these are small)
-    OvalGenerator = lib_xml.OvalGenerator(message)
-    OvalGenerator.use_file_queues = False
-
-    # add each OVAL definition to generator
-    for file_path in file_paths:
-        element_type = lib_repo.get_element_type_from_path(file_path)
-        OvalGenerator.queue_element_file(element_type, file_path)
-
-    # parse defintion, get ref to schema_version element
-    tree = etree.fromstring(OvalGenerator.to_string())
-    schema_version_element = tree.find('.//oval:schema_version', { 'oval': 'http://oval.mitre.org/XMLSchema/oval-common-5' })
-
     for schema_version in lib_repo.get_schema_versions():
-        # update schema version in tree
-        schema_version_element.text = schema_version
-
         # test of definitions file validates against current schema
         try:
-            lib_xml.schema_validate(tree, schema_path_cache[schema_version])
+            lib_xml.schema_validate(element, schema_path_cache[schema_version])
             minimum_version = schema_version
-        except lib_xml.SchemaValidationError as e:
+        except lib_xml.SchemaValidationError:
             break;
 
     return minimum_version
@@ -534,6 +539,33 @@ def schema_validate(oval_tree, schema_version):
 
 
 
+def build_oval_document_for_definition(defid):
+    """For a definition, build a complete oval_definitions document for it"""
+
+    if defid is None:
+        return None
+    
+    elements_index = lib_search.ElementsIndex(False)
+    
+    if verbose:
+        print("    ---- Resolving all elements needed to build comprehensive document...")
+    oval_ids = elements_index.find_downstream_ids(defid)
+    file_paths = elements_index.get_paths_from_ids(oval_ids)
+    
+    if verbose:
+        print("    ---- Importing separate elements into comprehensive document....")
+    oval = OvalDocument(None)
+    for path in file_paths:
+        element = OvalElement.fromStandaloneFile(path)
+        if element is None:
+            print (":::: None from path: ", path)
+            return None
+        oval.addElement(element, True)
+                
+    return etree.fromstring(oval.to_string())
+
+
+
 def build_comprehensive_oval_document(changes):
     """
     Builds an XML tree which contains all elements affected by the changes
@@ -575,22 +607,7 @@ def build_comprehensive_oval_document(changes):
         oval.addElement(element, True)
                 
     return etree.fromstring(oval.to_string())
-
-    # add each OVAL definition to generator
-#     OvalGenerator = lib_xml.OvalGenerator(False)
-#     for file_path in file_paths:
-#         element_type = lib_repo.get_element_type_from_path(file_path)
-#         xml_text = get_element_text(file_path)
-#         if xml_text is not None:
-#             OvalGenerator.queue_element(element_type, xml_text)
-#         
-#     try:
-#         return etree.fromstring(OvalGenerator.to_string())
-#     except Exception:
-#         if debug:
-#             sys.stdout.write(OvalGenerator.to_string())
             
-    return None
     
 def get_element_text(path):
     
@@ -614,7 +631,7 @@ def prune_unchanged_elements(changes):
     """
     
     #TODO
-    print("\n####--- prune_unchanged_elements not currently doing anything")
+    print("\n#### Warning prune_unchanged_elements not currently doing anything.  This submission could update elements that didn't actually change.")
     return changes
 
 #     change_list = []
