@@ -131,7 +131,7 @@ def writeFile(path, element, verbose=False):
     parent = os.path.dirname(path)
     if not os.path.isdir(parent):
         try :
-            os.makedirs(parent, 755, True)
+            os.makedirs(parent, 0o755, True)
         except:
             return False
     
