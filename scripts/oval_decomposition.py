@@ -131,11 +131,13 @@ def writeFile(path, element, verbose=False):
     parent = os.path.dirname(path)
     if not os.path.isdir(parent):
         try :
-            os.makedirs(parent, 755, True)
+            os.makedirs(parent, 0o0755, True)
+            os.chmod(parent, 0o0755)
         except:
             return False
     
     tree.write(path, "UTF-8", True)
+    os.chmod(path, 0o0664)
 #     xml.etree.ElementTree.dump(tree)
     return True
     

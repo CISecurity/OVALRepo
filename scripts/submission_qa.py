@@ -484,8 +484,8 @@ def save_element(element, path):
     
     parent = os.path.dirname(path)
     if not os.path.isdir(parent):
-        os.makedirs(parent, 755, True)
-        
+        os.makedirs(parent, mode=0o755, True)
+        os.chmod(parent, 0o0755)
         
     try:
         namespace = element.getNamespace()
@@ -494,6 +494,7 @@ def save_element(element, path):
         tree = etree.ElementTree(element)
         # Write the full tree to a file
         tree.write(file_or_filename = path, encoding="UTF-8", method="xml", default_namespace = namespace)
+        os.chmod(path, 0o0664)
         return True
     except:
         return False
