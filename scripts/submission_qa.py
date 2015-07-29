@@ -482,9 +482,9 @@ def save_element(element, path):
     if not path or path is None:
         return
     
-    dir = os.path.dirname(path)
-    if not os.path.isdir(dir):
-        os.makedirs(dir, 755, True)
+    parent = os.path.dirname(path)
+    if not os.path.isdir(parent):
+        os.makedirs(parent, 755, True)
         
         
     try:
