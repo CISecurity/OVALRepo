@@ -126,6 +126,7 @@ def get_element_repository_path(element):
         return None
     
     
+    
 
 def get_schema_short_name(element):
     """The schema short name reveals is a stand-in for the platform that this element is for and can be derived from the namespace URI

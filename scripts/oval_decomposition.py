@@ -128,8 +128,16 @@ def writeFile(path, element, verbose=False):
     # Create a new ElementTree with this element as the root
     tree = ElementTree(e)
     # And finally, write the full tree to a file including the xml declaration
+    parent = os.path.dirname(path)
+    if not os.path.isdir(parent):
+        try :
+            os.makedirs(parent, 755, True)
+        except:
+            return False
+    
     tree.write(path, "UTF-8", True)
 #     xml.etree.ElementTree.dump(tree)
+    return True
     
         
 

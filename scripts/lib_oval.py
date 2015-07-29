@@ -496,10 +496,8 @@ class OvalDocument(object):
         # Depending on the ID type, find the parent for it or create that parent if it doesn't exist
         # Then append the current element
         if oval_type == OvalDefinition.DEFINITION:
-            print (">>>> Add definition: ", ovalid)
             parent = root.find("def:definitions", OvalDocument.NS_DEFAULT)
             if parent is None:
-                print("   >>>> Adding definitions element")
                 parent = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}definitions")
                 root.append(parent)
                 
