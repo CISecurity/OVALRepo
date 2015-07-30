@@ -488,12 +488,12 @@ def save_element(element, path):
         os.chmod(parent, 0o0755)
         
     try:
-        namespace = element.getNamespace()
+        # Pretty up the element
         indent(element)
         # Create a new ElementTree with this element as the root
         tree = etree.ElementTree(element)
         # Write the full tree to a file
-        tree.write(file_or_filename = path, encoding="UTF-8", method="xml", default_namespace = namespace)
+        tree.write(path, xml_declaration=True, encoding="UTF-8", method="xml")
         os.chmod(path, 0o0664)
         return True
     except:

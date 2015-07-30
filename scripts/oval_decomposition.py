@@ -9,7 +9,6 @@ Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
 
 
 TODO:
- - Create missing directories for filepaths when writing them there files
  - Tools for resolving/accepting changes when the OVAL ID for a component refers to an existing item
  - Use the min schema method to determine the minimum schema needed for this definition and add that information to the definition metadata
  - Update the local copy of the whoosh database index with metadata for all the new files
