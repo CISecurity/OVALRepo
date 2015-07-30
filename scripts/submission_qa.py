@@ -147,6 +147,7 @@ def main():
     schema_path = lib_repo.get_oval_def_schema(SCHEMA_VERSION)
     for element_file in change_list:
         try:
+            print(element_file)
             lib_xml.schema_validate(element_file, schema_path, True)
         except Exception as e:
             print('    Schema validation failed:\n\t{0}'.format(e.message))
