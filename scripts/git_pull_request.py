@@ -99,11 +99,6 @@ def main():
 
     sys.exit(ret)
 
-def test1(pr):
-    ret = os.system('git checkout -b pull-request-%s' % (pr))
-    ret = os.system('git fetch CISecurity pull/%s/head:pull-request-%s' % (pr, pr))
-    return ret
-
 """Nicely display info about a given pull request
 """
 def display(pr):
@@ -159,8 +154,7 @@ def fetch(repo, pullreq):
     data = json.loads(data)
     pr = data
     if pr['head']['repo'] == None:
-      print("remote repository for this pull request "
-            "does not exist anymore.")
+      print("remote repository for this pull request does not exist anymore.")
       return 6
     display(pr)
 
@@ -179,6 +173,8 @@ def fetch(repo, pullreq):
 
     print("pulling from %s (%s)" % (pr['head']['repo']['git_url'], pr['head']['ref']));
 
+    # WKM - Modification to this script was to change the git piece to https, otherwise
+    #       an error was thrown...
     git_url = shlex.quote(pr['head']['repo']['git_url']).replace("git://", "https://")
     ref = shlex.quote(pr['head']['ref'])
     ret = os.system('git pull %s %s' % (git_url, ref));
