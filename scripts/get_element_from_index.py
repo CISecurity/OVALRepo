@@ -18,7 +18,7 @@ def main():
     """ parse command line options and generate file """
 
     # parse command line options
-    parser = argparse.ArgumentParser(description='Determine minimum supported OVAL schema for a given definition')
+    parser = argparse.ArgumentParser(description='Searches the index for a given OVAL element and outputs relevant information')
     parser.add_argument('-i', '--id',  help='id of definition fragment')
 
     args = vars(parser.parse_args())
