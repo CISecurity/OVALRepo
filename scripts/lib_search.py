@@ -398,7 +398,7 @@ class DefinitionsIndex(SearchIndex):
         components = version_number.split('.') if version_number else [0,0,0]
         
         if len(components) > 3:
-            raise InvalidVersionNumberError('Invalid version number: {0}'.fomat(version_number))
+            raise InvalidVersionNumberError('Invalid version number: {0}'.format(version_number))
 
         while len(components) < 3:
             components.append(0)
