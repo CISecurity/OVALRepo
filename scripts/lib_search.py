@@ -60,6 +60,7 @@ class SearchIndex:
         self.no_output = False
         self.index_searcher = False
         self.thread_safe = False
+        self.index = False
 
     def query(self, query_dict={}, query_options={}):
         """ Perform a query against an index. 
@@ -198,16 +199,25 @@ class SearchIndex:
         
         # add all definition files to index
         counter = 0
-        for document in documents:
-            counter = counter + 1
-            self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
-            if 'deleted' in document and document['deleted']:
-                index_writer.delete_by_term('path', document['path'])
-                #self.message('debug', 'Deleting from index:\n\t{0} '.format(document['path']))
-            else:
-                index_writer.add_document(**document)
-                #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
-        
+        try:
+            for document in documents:
+                counter = counter + 1
+                self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
+                if 'deleted' in document and document['deleted']:
+                    index_writer.delete_by_term('path', document['path'])
+                    #self.message('debug', 'Deleting from index:\n\t{0} '.format(document['path']))
+                else:
+                    index_writer.add_document(**document)
+                    #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
+        except lib_xml.InvalidXmlError as e:
+            # abort: cannot build index
+            self.message('ERROR CANNOT BUILD INDEX', 'Invalid xml fragment\n\tFile: {0}\n\tMessage: {1}'.format(e.path, e.message))
+            self.message('ERROR', 'deleting index and aborting execution')
+            index_writer.commit()
+            self.index.close()
+            shutil.rmtree(self.get_index_path())
+            sys.exit(0)
+
         self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
         index_writer.commit()
 
@@ -256,10 +266,16 @@ class SearchIndex:
         with open(filepath, 'wb') as f:
             pickle.dump(files, f)
 
+    def get_indices_path(self):
+        return os.path.join(lib_repo.get_scripts_path(), '__index__')
+
+    def get_index_path(self):
+        return os.path.join(self.get_indices_path(), self.index_name)
+
     def get_index(self, force_rebuild=False):
         """ Returns a reference to the search index, creating if necessary. """
-        indices_path = os.path.join(lib_repo.get_scripts_path(), '__index__')
-        index_path = os.path.join(indices_path, self.index_name)
+        indices_path = self.get_indices_path()
+        index_path = self.get_index_path()
 
         if force_rebuild and os.path.exists(index_path):
             shutil.rmtree(index_path)
@@ -274,7 +290,8 @@ class SearchIndex:
             schema_dictionary = self.schema_dictionary
             whoosh.index.create_in(index_path, whoosh.fields.Schema(**schema_dictionary), self.index_name)
 
-        return whoosh.index.open_dir(index_path, self.index_name)
+        self.index = whoosh.index.open_dir(index_path, self.index_name)
+        return self.index
 
     def get_searcher(self):
         """ Returns a reference to the index searcher, creating if necssary. """
@@ -393,6 +410,8 @@ class DefinitionsIndex(SearchIndex):
                 document = lib_xml.get_definition_metadata(path)
             except lib_xml.InvalidPathError as e:
                 yield { 'path': e.path, 'deleted': True }
+            except lib_xml.InvalidXmlError as e:
+                raise
             else:
                 document = self.whoosh_escape_document(document)
                 document['min_schema_version'] = self.version_to_int(document['min_schema_version'])
@@ -442,6 +461,8 @@ class ElementsIndex(SearchIndex):
                 document = lib_xml.get_element_metadata(path)
             except lib_xml.InvalidPathError as e:
                 yield { 'path': e.path, 'deleted': True }
+            except lib_xml.InvalidXmlError as e:
+                raise
             else:
                 document = self.whoosh_escape_document(document)
                 yield document
