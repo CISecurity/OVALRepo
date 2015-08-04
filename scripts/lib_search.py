@@ -97,15 +97,19 @@ class SearchIndex:
                 # get a whoosh.query.Term for each value
                 field_values = []
                 for value in values:
-                    field_values.append(whoosh.query.Term(field, self.whoosh_escape(value)))
+                    escaped_value = self.whoosh_escape(value, field)
+                    field_values.append(whoosh.query.Term(field, escaped_value))
 
-                # OR field values together and add to query_fields list
-                query_fields.append(whoosh.query.Or(field_values))
+                if field_values and len(field_values) > 1:
+                    # OR field values together and add to query_fields list
+                    query_fields.append(whoosh.query.Or(field_values))
+                else:
+                    query_fields.append(field_values[0])
 
         if query_fields:
             # create query by ANDing query_fields together
             query = query_fields[0] if len(query_fields) == 1 else whoosh.query.And(query_fields)
-            #this.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
+            #self.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
         else:
             query = whoosh.query.Every()
 
@@ -309,10 +313,18 @@ class SearchIndex:
 
         self.index_searcher = False
 
-    def whoosh_escape(self, s):
+    def whoosh_escape(self, s, field=''):
         """ Escape a string for whoosh. """
         s = s.replace(',','').strip()
-        return re.sub('[\s:\[\]]+','_', s)
+
+        # if not a text field, escape spaces
+        if (field and field not in self.text_fields):
+            s = re.sub('\s+','_', s)
+
+        # escape _:[]
+        s = re.sub('[_:\[\]]+','_', s)
+
+        return s
 
     def whoosh_escape_document(self, document):
         """ Escape all document fields, adding _stored values where necessary. """
@@ -320,10 +332,10 @@ class SearchIndex:
         for field in document.keys():
             value = document[field]
             if isinstance(value, str):
-                escaped_value = self.whoosh_escape(value)
+                escaped_value = self.whoosh_escape(value, field)
                 stored_value = value.replace(',','')
             elif value:
-                escaped_value = ",".join([ self.whoosh_escape(item_value) for item_value in value ])
+                escaped_value = ",".join([ self.whoosh_escape(item_value, field) for item_value in value ])
                 stored_value = ",".join([ item_value.replace(',','') for item_value in value ])
                 value = ",".join(value)
             else:
@@ -367,8 +379,8 @@ class DefinitionsIndex(SearchIndex):
             'oval_id': whoosh.fields.ID(stored=True, unique=True),
             'oval_version': whoosh.fields.STORED(),
             'min_schema_version': whoosh.fields.NUMERIC(numtype=int, bits=32, signed=False, stored=True),
-            'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
-            'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
+            'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
+            'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
             'class': whoosh.fields.ID(stored=True),
             'status': whoosh.fields.ID(stored=True),
             'family': whoosh.fields.ID(stored=True),
@@ -379,7 +391,7 @@ class DefinitionsIndex(SearchIndex):
             'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
-        self.fields_with_stemming = [ 'title', 'description' ]
+        self.text_fields = [ 'title', 'description' ]
 
     def version_to_int(self, version_number):
         """ Converts a version number string to a int that can be sorted """
@@ -447,7 +459,7 @@ class ElementsIndex(SearchIndex):
             'oval_refs': whoosh.fields.KEYWORD(commas=True,scorable=True,stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
-        self.fields_with_stemming = [ ]
+        self.text_fields = [ 'description' ]
 
     def document_iterator(self, paths=False):
         """ Iterator yielding elements files in repo as indexable documents. """
