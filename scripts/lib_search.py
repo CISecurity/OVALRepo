@@ -60,6 +60,7 @@ class SearchIndex:
         self.no_output = False
         self.index_searcher = False
         self.thread_safe = False
+        self.index = False
 
     def query(self, query_dict={}, query_options={}):
         """ Perform a query against an index. 
@@ -96,15 +97,19 @@ class SearchIndex:
                 # get a whoosh.query.Term for each value
                 field_values = []
                 for value in values:
-                    field_values.append(whoosh.query.Term(field, self.whoosh_escape(value)))
+                    escaped_value = self.whoosh_escape(value, field)
+                    field_values.append(whoosh.query.Term(field, escaped_value))
 
-                # OR field values together and add to query_fields list
-                query_fields.append(whoosh.query.Or(field_values))
+                if field_values and len(field_values) > 1:
+                    # OR field values together and add to query_fields list
+                    query_fields.append(whoosh.query.Or(field_values))
+                else:
+                    query_fields.append(field_values[0])
 
         if query_fields:
             # create query by ANDing query_fields together
             query = query_fields[0] if len(query_fields) == 1 else whoosh.query.And(query_fields)
-            #this.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
+            #self.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
         else:
             query = whoosh.query.Every()
 
@@ -198,16 +203,25 @@ class SearchIndex:
         
         # add all definition files to index
         counter = 0
-        for document in documents:
-            counter = counter + 1
-            self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
-            if 'deleted' in document and document['deleted']:
-                index_writer.delete_by_term('path', document['path'])
-                #self.message('debug', 'Deleting from index:\n\t{0} '.format(document['path']))
-            else:
-                index_writer.add_document(**document)
-                #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
-        
+        try:
+            for document in documents:
+                counter = counter + 1
+                self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
+                if 'deleted' in document and document['deleted']:
+                    index_writer.delete_by_term('path', document['path'])
+                    #self.message('debug', 'Deleting from index:\n\t{0} '.format(document['path']))
+                else:
+                    index_writer.add_document(**document)
+                    #self.message('debug', 'Upserting to index:\n\t{0} '.format(document['path']))
+        except lib_xml.InvalidXmlError as e:
+            # abort: cannot build index
+            self.message('ERROR CANNOT BUILD INDEX', 'Invalid xml fragment\n\tFile: {0}\n\tMessage: {1}'.format(e.path, e.message))
+            self.message('ERROR', 'deleting index and aborting execution')
+            index_writer.commit()
+            self.index.close()
+            shutil.rmtree(self.get_index_path())
+            sys.exit(0)
+
         self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
         index_writer.commit()
 
@@ -256,10 +270,16 @@ class SearchIndex:
         with open(filepath, 'wb') as f:
             pickle.dump(files, f)
 
+    def get_indices_path(self):
+        return os.path.join(lib_repo.get_scripts_path(), '__index__')
+
+    def get_index_path(self):
+        return os.path.join(self.get_indices_path(), self.index_name)
+
     def get_index(self, force_rebuild=False):
         """ Returns a reference to the search index, creating if necessary. """
-        indices_path = os.path.join(lib_repo.get_scripts_path(), '__index__')
-        index_path = os.path.join(indices_path, self.index_name)
+        indices_path = self.get_indices_path()
+        index_path = self.get_index_path()
 
         if force_rebuild and os.path.exists(index_path):
             shutil.rmtree(index_path)
@@ -274,7 +294,8 @@ class SearchIndex:
             schema_dictionary = self.schema_dictionary
             whoosh.index.create_in(index_path, whoosh.fields.Schema(**schema_dictionary), self.index_name)
 
-        return whoosh.index.open_dir(index_path, self.index_name)
+        self.index = whoosh.index.open_dir(index_path, self.index_name)
+        return self.index
 
     def get_searcher(self):
         """ Returns a reference to the index searcher, creating if necssary. """
@@ -292,10 +313,18 @@ class SearchIndex:
 
         self.index_searcher = False
 
-    def whoosh_escape(self, s):
+    def whoosh_escape(self, s, field=''):
         """ Escape a string for whoosh. """
         s = s.replace(',','').strip()
-        return re.sub('[\s:\[\]]+','_', s)
+
+        # if not a text field, escape spaces
+        if (field and field not in self.text_fields):
+            s = re.sub('\s+','_', s)
+
+        # escape _:[]
+        s = re.sub('[_:\[\]]+','_', s)
+
+        return s
 
     def whoosh_escape_document(self, document):
         """ Escape all document fields, adding _stored values where necessary. """
@@ -303,10 +332,10 @@ class SearchIndex:
         for field in document.keys():
             value = document[field]
             if isinstance(value, str):
-                escaped_value = self.whoosh_escape(value)
+                escaped_value = self.whoosh_escape(value, field)
                 stored_value = value.replace(',','')
             elif value:
-                escaped_value = ",".join([ self.whoosh_escape(item_value) for item_value in value ])
+                escaped_value = ",".join([ self.whoosh_escape(item_value, field) for item_value in value ])
                 stored_value = ",".join([ item_value.replace(',','') for item_value in value ])
                 value = ",".join(value)
             else:
@@ -350,8 +379,8 @@ class DefinitionsIndex(SearchIndex):
             'oval_id': whoosh.fields.ID(stored=True, unique=True),
             'oval_version': whoosh.fields.STORED(),
             'min_schema_version': whoosh.fields.NUMERIC(numtype=int, bits=32, signed=False, stored=True),
-            'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
-            'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StemmingAnalyzer()),
+            'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
+            'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
             'class': whoosh.fields.ID(stored=True),
             'status': whoosh.fields.ID(stored=True),
             'family': whoosh.fields.ID(stored=True),
@@ -362,14 +391,14 @@ class DefinitionsIndex(SearchIndex):
             'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
-        self.fields_with_stemming = [ 'title', 'description' ]
+        self.text_fields = [ 'title', 'description' ]
 
     def version_to_int(self, version_number):
         """ Converts a version number string to a int that can be sorted """
         components = version_number.split('.') if version_number else [0,0,0]
         
         if len(components) > 3:
-            raise InvalidVersionNumberError('Invalid version number: {0}'.fomat(version_number))
+            raise InvalidVersionNumberError('Invalid version number: {0}'.format(version_number))
 
         while len(components) < 3:
             components.append(0)
@@ -393,6 +422,8 @@ class DefinitionsIndex(SearchIndex):
                 document = lib_xml.get_definition_metadata(path)
             except lib_xml.InvalidPathError as e:
                 yield { 'path': e.path, 'deleted': True }
+            except lib_xml.InvalidXmlError as e:
+                raise
             else:
                 document = self.whoosh_escape_document(document)
                 document['min_schema_version'] = self.version_to_int(document['min_schema_version'])
@@ -428,7 +459,7 @@ class ElementsIndex(SearchIndex):
             'oval_refs': whoosh.fields.KEYWORD(commas=True,scorable=True,stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
-        self.fields_with_stemming = [ ]
+        self.text_fields = [ 'description' ]
 
     def document_iterator(self, paths=False):
         """ Iterator yielding elements files in repo as indexable documents. """
@@ -442,6 +473,8 @@ class ElementsIndex(SearchIndex):
                 document = lib_xml.get_element_metadata(path)
             except lib_xml.InvalidPathError as e:
                 yield { 'path': e.path, 'deleted': True }
+            except lib_xml.InvalidXmlError as e:
+                raise
             else:
                 document = self.whoosh_escape_document(document)
                 yield document

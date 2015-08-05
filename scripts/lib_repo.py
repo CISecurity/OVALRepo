@@ -110,6 +110,9 @@ def get_element_repository_path(element):
                 return None
             return root_path + "/definitions/" + defclass + "/" + oval_id_to_path(oval_id)
         
+        elif element_type == "variable":
+            return root_path + "/variables/" + oval_id_to_path(oval_id)
+        
         else:
             platform = get_schema_short_name(element)
             if not platform or platform is None:
@@ -153,7 +156,7 @@ def get_schema_short_name(element):
     try:
         schema = tag.rsplit('}', 1)[0]
         if not '#' in schema:
-            return None
+            return "independent"
         return schema.rsplit('#', 1)[1].strip()
     except Exception:
         return None

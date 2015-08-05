@@ -45,6 +45,8 @@ def get_definition_metadata(filepath):
         tree = etree.parse(filepath)
     except OSError as e:
         raise InvalidPathError(filepath)
+    except etree.XMLSyntaxError as e:
+        raise InvalidXmlError(filepath, e.msg)
     
     root = tree.getroot()
     ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
@@ -72,8 +74,11 @@ def get_element_metadata(filepath):
     """ Takes a filepath for an OVAL element file and returns dictionary of metadata. """
     try:
         tree = etree.parse(filepath)
-    except Exception:
+    except OSError as e:
         raise InvalidPathError(filepath)
+    except etree.XMLSyntaxError as e:
+        raise InvalidXmlError(filepath, e.msg)
+
 
     tree = etree.parse(filepath)
     root = tree.getroot()
@@ -243,6 +248,13 @@ class InvalidPathError(Error):
     """Exception raised for when a path does not exist. """
     def __init__(self, path):
         self.path = path
+
+
+class InvalidXmlError(Error):
+    """Exception raised for when a fragment cannot be parsed. """
+    def __init__(self, path, message):
+        self.path = path
+        self.message = message
 
 
 class SchemaValidationError(Error):
