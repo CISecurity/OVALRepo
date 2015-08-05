@@ -59,15 +59,11 @@ def main():
 
     affected_oval_ids = oval_ids_changed.union(upstream_ids)
 
-<<<<<<< HEAD
+
     # filter affected to definition ids
     affected_def_ids = { oval_id for oval_id in upstream_ids if lib_repo.get_element_type_from_oval_id(oval_id) == 'definition' }
-    message('info','Found {0} upstream OVAL definitions:\n\t{1}'.format(len(affected_def_ids), '\n\t'.join(affected_def_ids)), verbose)
-=======
-    # filter affected to defintion ids
-    affected_def_ids = { oval_id for oval_id in affected_oval_ids if lib_repo.get_element_type_from_oval_id(oval_id) == 'definition' }
     message('info','Found {0} upstream OVAL definitions:\n\t{1}'.format(len(affected_def_ids), '\n\t'.join(affected_def_ids)), silent)
->>>>>>> upstream/master
+
 
     ## 2. Build an OVAL Definitions File and Validate It!
     message('info','Building an OVAL definitions file for all affected definitions.', silent)
