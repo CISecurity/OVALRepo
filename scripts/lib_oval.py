@@ -633,7 +633,7 @@ class OvalGenerator(object):
         """
         Gets the value of the timestamp element
         """
-        if not self.element:
+        if self.element is None:
             return None
         
         child = self.element.find("oval:timestamp", OvalDocument.NS_OVAL)
@@ -669,7 +669,7 @@ class OvalGenerator(object):
         Gets the value of the first child element of the generator where the tag name matches 'name'
         If the namespace argument is not provided, it will be assumed that the child element does not have a namespace.
         """
-        if not self.element:
+        if self.element is None:
             return None
         
         if not name:
@@ -737,7 +737,7 @@ class OvalElement(object):
          1. This object was instantiated without an Element
          2. The underlying element does not have an "id" attribute
         """
-        if not self.element:
+        if self.element is None:
             return None
         
         return self.element.get("id")
@@ -749,7 +749,7 @@ class OvalElement(object):
         Returns False if there is no underlying Xml ELement for this object
         """
         
-        if not self.element:
+        if self.element is None:
             return False
         
         if ovalid is not None:
@@ -757,14 +757,14 @@ class OvalElement(object):
 
 
     def getVersion(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         return self.element.get("version")
     
     
     def setVersion(self, version):
-        if not self.element:
+        if self.element is None:
             return False
         if not version:
             return False
@@ -1072,7 +1072,7 @@ class OvalDefinition(OvalElement):
     
     def __init__(self, element):
         if element is not None:
-            self.element = element
+            self.element = element.getElement()
         else:
             self.element = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}definition")
             self.element.set("version", "1")
@@ -1089,7 +1089,7 @@ class OvalDefinition(OvalElement):
         """
         Returns the metadata for this definition as an object of type OvalMetadata, or None if it that element does not exist
         """
-        if not self.element:
+        if self.element is None:
             return None
         
         metadata = self.element.find("def:metadata", OvalDocument.NS_DEFAULT)
@@ -1100,13 +1100,13 @@ class OvalDefinition(OvalElement):
     
     
     def getClass(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         return self.element.get("class")
     
     def setClass(self, ovalclass):
-        if not self.element:
+        if self.element is None:
             return False
         
         if not ovalclass:
@@ -1118,13 +1118,36 @@ class OvalDefinition(OvalElement):
             
         
     def getReferencingIDs(self):
-        if not self.element:
+        if self.element is None:
             return None
          
         return self.xpath("//@*[name()='definition_ref' or name()='test_ref'")
-     
-     
-    
+
+    '''
+    Collect a dictionary of the metadata's status changes
+    '''
+    def get_last_status_change(self):
+        last_status_change = {}
+
+        version = self.getVersion()
+        last_status_change["Version"] = version
+
+        meta = self.getMetadata()
+        repo = meta.getOvalRepositoryInformation()
+        if repo:
+            status = repo.getStatus()
+
+            last_status_change["Status"] = status
+            last_status_change["Submitted"] = repo.getSubmitted()
+            last_status_change["Modified"]  = repo.getModified()
+            last_status_change["StatusChange"] = repo.getStatusChange()
+        else:
+            last_status_change["Status"] = None
+            last_status_change["Submitted"] = None
+            last_status_change["Modified"]  = None
+            last_status_change["StatusChange"] = None
+
+        return last_status_change
 
 
 class OvalMetadata(object):
@@ -1137,7 +1160,7 @@ class OvalMetadata(object):
         
         
     def getTitle(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         title_element = self.element.find("def:title", OvalDocument.NS_DEFAULT)
@@ -1149,7 +1172,7 @@ class OvalMetadata(object):
     
     
     def getDescription(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         desc_element = self.element.find("def:description", OvalDocument.NS_DEFAULT)
@@ -1159,7 +1182,7 @@ class OvalMetadata(object):
     
     
     def getAffected(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         aff_element = self.element.find("def:affected", OvalDocument.NS_DEFAULT)
@@ -1169,7 +1192,7 @@ class OvalMetadata(object):
     
     
     def getOvalRepositoryInformation(self):
-        if not self.element:
+        if self.element is None:
             return None
         
         repo_element = self.element.find("def:oval_repository", OvalDocument.NS_DEFAULT)
@@ -1246,26 +1269,65 @@ class OvalRepositoryInformation(object):
             self.element.append(child)
         
         child.text = version
+
+    def getContributor(self, type):
+        results = {}
+
+        if self.element is not None:
+            findstr = "def:dates/def:%s" % type
+            subs = self.element.findall(findstr, OvalDocument.NS_DEFAULT)
+            if subs is not None:
+                sub = subs[(len(subs) - 1)]
+                results["Date"] = sub.get("date")
+
+                contributors = []
+                contribs = sub.findall("def:contributor", OvalDocument.NS_DEFAULT)
+                for c in contribs:
+                    curr = {}
+                    curr["Organization"] = c.get("organization")
+                    curr["Contributor"]  = c.text
+                    contributors.append(curr)
+
+                results["Contributors"] = contributors
+
+        return results
+
+    def getCreated(self):
+        return self.getContributor("created")
+
+    def getSubmitted(self):
+        return self.getContributor("submitted")
+
+    def getModified(self):
+        return self.getContributor("modified")
+
+    def getStatusChange(self):
+        status_change = {}
+
+        if self.element is not None:
+            scs = self.element.findall("def:dates/def:status_change", OvalDocument.NS_DEFAULT)
+            if scs is not None:
+                sc = scs[(len(scs) - 1)]
+                status_change["Date"] = sc.get("date")
+                status_change["Status"] = sc.text
+
+        return status_change
         
-        
-        
-        
-        
+
 class OvalTest(OvalElement):
     
     def __init__(self, element):
-        self.element = element
+        self.element = element.getElement()
         
         
     def getType(self):
         return OvalElement.TEST
         
 
-
 class OvalObject(OvalElement):
     
     def __init__(self, element):
-        self.element = element
+        self.element = element.getElement()
 
 
     def getType(self):
@@ -1275,7 +1337,7 @@ class OvalObject(OvalElement):
 class OvalState(OvalElement):
     
     def __init__(self, element):
-        self.element = element
+        self.element = element.getElement()
         
         
     def getType(self):
@@ -1285,8 +1347,8 @@ class OvalState(OvalElement):
 class OvalVariable(OvalElement):
     
     def __init__(self, element):
-        self.element = element
+        self.element = element.getElement()
         
         
     def getType(self):
-        return OvalElement.VARIABLE                        
+        return OvalElement.VARIABLE

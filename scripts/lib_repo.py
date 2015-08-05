@@ -30,6 +30,8 @@ TODO:
 import inspect
 import os.path
 import sys
+from datetime import datetime
+
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
@@ -266,6 +268,13 @@ def get_oval_def_schematron(schema_version='5.11.1'):
     """ Gets OVAL definitions schema file for specified schema version. """
     return os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version + '/all-oval-definitions-schematron.xsl' )
 
+
+def get_formatted_datetime():
+    dtnow = datetime.now()
+    dtutcnow = datetime.utcnow()
+    delta = dtnow - dtutcnow
+    hh,mm = divmod((delta.days * 24*60*60 + delta.seconds + 30) // 60, 60)
+    return "%s%+02d:%02d" % (dtnow.isoformat(), hh, mm)
 
 def message(type, message):
     """ Print a message """

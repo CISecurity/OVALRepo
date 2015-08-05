@@ -21,6 +21,7 @@ import argparse
 from lxml import etree
 from whoosh.query import Wildcard
 
+import lib_oval
 from lib_oval import OvalDocument
 from lib_oval import OvalElement
 
@@ -126,15 +127,64 @@ def main():
 
     def_list = [ path for path in change_list if lib_repo.get_element_type_from_path(path) == 'definition']
     if def_list is not None and len(def_list) > 0:
+        valid_metadata = 1
         if verbose:
             print("   +++ Number of definitions in this update: {0}".format(len(def_list)))
         for def_path in def_list:
             def_element = lib_xml.load_standalone_element(def_path)
+
+            ode = lib_oval.OvalElement(def_element)
+            od  = lib_oval.OvalDefinition(ode)
+
+            def_id = od.getId()
+
         # 3.1 If this is an update, does it change any existing metadata?
         # 3.2 Check existence and accuracy of definition metadata (<status> and date)
         #  - DRAFT on new submission
         #  - INTERIM if updating a previous definition
         #  - ?
+
+            # no <dates> - invalid
+            # @version == 0:
+            #   no <submitted> - invalid
+            #   no <status_change> - invalid
+            #   <status_change> != <status> != DRAFT - invalid
+            # @ version > 0:
+            #   last <status_change> != <status> - invalid
+            def_status_change = od.get_last_status_change()
+            if def_status_change["Version"] == "0":
+                if def_status_change["Submitted"] is None:
+                    print("   ++++ Definition ID %s is NOT valid:" % def_id)
+                    print("    - New definitions must contain a submitted element")
+                    valid_metadata = 0
+
+                sc = def_status_change["StatusChange"]
+                if sc is None:
+                    print("   ++++ Definition ID %s is NOT valid:" % def_id)
+                    print("    - New definitions must contain a status change element")
+                    valid_metadata = 0
+                else:
+                    if sc["Status"] != "DRAFT":
+                        print("   ++++ Definition ID %s is NOT valid:" % def_id)
+                        print("    - New definitions must contain a status change element with a value of 'DRAFT'")
+                        valid_metadata = 0
+
+                if def_status_change["Status"] != "DRAFT":
+                    print("   ++++ Definition ID %s is NOT valid:" % def_id)
+                    print("    - New definitions must have a status of DRAFT")
+                    valid_metadata = 0
+            else:
+                defstatus = def_status_change["Status"]
+                lscstatus = def_status_change["StatusChange"]["Status"]
+                if (defstatus != lscstatus):
+                    print("   ++++ Definition ID %s is NOT valid:" % def_id)
+                    print("    - Last status change (%s) does not match definition status (%s)" % (lscstatus, defstatus))
+                    valid_metadata = 0
+
+        if valid_metadata == 0:
+            print("\n   ++++ Definition Metadata is Invalid.  Exiting...")
+            return
+
     elif verbose:
         print("   +++ No definitions to check")
     
