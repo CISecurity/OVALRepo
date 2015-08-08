@@ -16,6 +16,7 @@ Available functions:
 - schematron_validate: schematron validate an XML file
 - get_schematron_xsl_from_schema: gets path to schematron from schema_path, creating if necessary 
 - apply_xslt: applies an xslt to an XML tree
+- xsd_datetime_to_datetime: take an xsd:dateTime formatted string and return a python datetime.datetime object
 
 Available classes:
 - OvalGenerator: methods to assist in building an OVAL definitions file
@@ -30,6 +31,7 @@ TODO:
 """
 
 import os.path
+import datetime
 import inspect
 import datetime
 import random
@@ -50,8 +52,38 @@ def get_definition_metadata(filepath):
     
     root = tree.getroot()
     ns_map = { 'oval-def': 'http://oval.mitre.org/XMLSchema/oval-definitions-5' }
-    
-    contributors = root.findall('./oval-def:metadata/oval-def:oval_repository//oval-def:contributor', namespaces=ns_map)
+
+    revision_tags = root.findall('./oval-def:metadata/oval-def:oval_repository/oval-def:dates/*', namespaces=ns_map)
+    revisions = []
+    ns_len = len(ns_map['oval-def']) + 2
+    for revision in revision_tags:
+        revision_type = revision.tag[ns_len:]
+        revision_datetime = xsd_datetime_to_datetime(revision.get('date'))
+        if revision_type == 'status_change':
+            revisions.append({
+                "type": revision_type, 
+                "status": revision.text,
+                "date": revision_datetime
+            });
+        elif revision_type in ['created','submitted','modified']:
+            if len(revision) == 0:
+                revisions.append({
+                    "type": revision_type, 
+                    "comment": revision.get('comment'),
+                    "date": revision_datetime
+                });
+            else:
+                for contributor in revision:
+                    revisions.append({
+                        "type": revision_type, 
+                        "comment": revision.get('comment'),
+                        "date": revision_datetime,
+                        "contributor": contributor.text,
+                        "organization": contributor.get('organization')
+                    });
+        else:
+            raise InvalidRevisionXml(filepath, 'Unexpected revision type:  {0}'.format(revision_type))
+
     return {
         'oval_id': root.get('id'),
         'oval_version' : root.get('version'),
@@ -63,8 +95,7 @@ def get_definition_metadata(filepath):
         'family': ''.join([ affected.get('family') for affected in root.iterfind('./oval-def:metadata/oval-def:affected', namespaces=ns_map) ]),
         'platforms': { platform.text for platform in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:platform', namespaces=ns_map) },
         'products': { product.text for product in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:product', namespaces=ns_map) },
-        'contributors': { contributor.text for contributor in contributors },
-        'organizations': { contributor.get('organization') for contributor in contributors },
+        'revisions': revisions,
         'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) },
         'path' : filepath
     }
@@ -231,6 +262,22 @@ def get_schematron_xsl_from_schema(schema_path, force_generate=False):
     return xsl_path
 
 
+def xsd_datetime_to_datetime(date_string):
+    """ Take an xsd:dateTime formatted string and return a python datetime.datetime object """
+    date_string_format = "%Y-%m-%dT%H:%M:%S"
+    if '.' in date_string:
+        date_string = re.sub(r'\.([0-9]+)', r'.000\1', date_string)
+        date_string_format = date_string_format + ".%f"
+    if re.search(r'([-+])([0-9]+):([0-9]+)', date_string):
+        date_string = re.sub(r'([-+])([0-9]+):([0-9]+)', r'\1\2\3', date_string)
+        date_string_format = date_string_format + "%z"
+    if date_string.endswith('Z'):
+        date_string_format = date_string_format + 'Z'
+
+    #print('\n\n{0} via {1}\n\n'.format(date_string, date_string_format))
+    return datetime.datetime.strptime(date_string, date_string_format)
+
+
 def apply_xslt(xml_tree, xslt_path):
     """ Apply xslt to an XML tree """
     xslt_root = etree.parse(xslt_path)
@@ -252,6 +299,13 @@ class InvalidPathError(Error):
 
 class InvalidXmlError(Error):
     """Exception raised for when a fragment cannot be parsed. """
+    def __init__(self, path, message):
+        self.path = path
+        self.message = message
+
+
+class InvalidRevisionXml(Error):
+    """Exception raised for when a revision fragment cannot be parsed. """
     def __init__(self, path, message):
         self.path = path
         self.message = message

@@ -40,6 +40,8 @@ def main():
     criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     criteria_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
     criteria_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
+    criteria_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='omit contributions before this day (format: YYYYMMDD)')
+    criteria_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='omit contributions after this day (format: YYYYMMDD)')
     args = vars(parser.parse_args())
 
     # get output object
@@ -54,6 +56,26 @@ def main():
     for field in definitions_index.get_fieldnames():
         if field in args and args[field]:
             query[field] = args[field]
+
+    # add date range, if specified
+    if args['from'] or args['to']:
+        # get revisions index
+        revisions_index = lib_search.ThreadSafeRevisionsIndex(output.message)
+        revisions_index.no_output = True
+
+        # get definition ids in date range
+        definitions_revised_in_daterange = revisions_index.get_defs_revised_in_daterange(args['from'], args['to']);
+
+        # add to query
+        if 'oval_id' in query and query['oval_id']:
+            # if oval_id(s) specified in args, get intersection with those revised in daterange
+            query['oval_id'] = set(query['oval_id']) & definitions_revised_in_daterange
+            if not query['oval_id']:
+                output.message('info','Specified definition ids were not revised in specified date range.')
+                output.write_json()
+                sys.exit(0)
+        else:
+            query['oval_id'] = definitions_revised_in_daterange
 
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:
