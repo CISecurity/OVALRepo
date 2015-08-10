@@ -944,11 +944,16 @@ class OvalElement(object):
             return False
         if not path or path is None:
             return False;
-        
+
+
         try:
             namespace = self.getNamespace()
             # Register this namespace with the parser as the default namespace
             xml.etree.ElementTree.register_namespace('', namespace)
+            xml.etree.ElementTree.register_namespace('def', "http://oval.mitre.org/XMLSchema/oval-definitions-5")
+            xml.etree.ElementTree.register_namespace('oval', "http://oval.mitre.org/XMLSchema/oval-common-5")
+            xml.etree.ElementTree.register_namespace('xsi', "http://www.w3.org/2001/XMLSchema-instance")
+
             e = self.getElement()
             # Fix up the element so it will print nicely
             OvalDocument.indent(e)
@@ -1072,7 +1077,8 @@ class OvalDefinition(OvalElement):
     
     def __init__(self, element):
         if element is not None:
-            self.element = element.getElement()
+            #self.element = element.getElement()
+            self.element = element
         else:
             self.element = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}definition")
             self.element.set("version", "1")
@@ -1148,6 +1154,13 @@ class OvalDefinition(OvalElement):
             last_status_change["StatusChange"] = None
 
         return last_status_change
+
+    def set_minimum_schema_version(self, min_schema_version):
+        meta = self.getMetadata()
+        repo = meta.getOvalRepositoryInformation()
+
+        if repo:
+            repo.setMinimumSchemaVersion(min_schema_version)
 
 
 class OvalMetadata(object):
@@ -1317,7 +1330,8 @@ class OvalRepositoryInformation(object):
 class OvalTest(OvalElement):
     
     def __init__(self, element):
-        self.element = element.getElement()
+        #self.element = element.getElement()
+        self.element = element
         
         
     def getType(self):
@@ -1327,7 +1341,8 @@ class OvalTest(OvalElement):
 class OvalObject(OvalElement):
     
     def __init__(self, element):
-        self.element = element.getElement()
+        #self.element = element.getElement()
+        self.element = element
 
 
     def getType(self):
@@ -1337,7 +1352,9 @@ class OvalObject(OvalElement):
 class OvalState(OvalElement):
     
     def __init__(self, element):
-        self.element = element.getElement()
+        #self.element = element.getElement()
+        self.element = element
+
         
         
     def getType(self):
@@ -1347,7 +1364,8 @@ class OvalState(OvalElement):
 class OvalVariable(OvalElement):
     
     def __init__(self, element):
-        self.element = element.getElement()
+        #self.element = element.getElement()
+        self.element = element
         
         
     def getType(self):

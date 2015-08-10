@@ -448,7 +448,7 @@ def set_minimum_schema_version(oval_element, min_schema):
         return None
     
     
-    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema_version", NS_DEFINITION)
+    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema", NS_DEFINITION)
     if min_element is None:
         # Find/create oval_repository element
         repo_element = oval_element.find("def:metadata/def:oval_repository", NS_DEFINITION)
@@ -460,7 +460,7 @@ def set_minimum_schema_version(oval_element, min_schema):
                 
             repo_element = etree.SubElement(meta_element, "oval_repository", NS_DEFINITION)
             
-        min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFINITION)
+        min_element = etree.SubElement(repo_element, "min_schema", NS_DEFINITION)
         
     min_element.text = min_schema
     
@@ -538,12 +538,14 @@ def save_element(element, path):
         os.chmod(parent, 0o0755)
         
     try:
+    	# Get the elements default namespace
+    	namespace = element.getNamespace()
         # Pretty up the element
         indent(element)
         # Create a new ElementTree with this element as the root
         tree = etree.ElementTree(element)
         # Write the full tree to a file
-        tree.write(path, xml_declaration=True, encoding="UTF-8", method="xml")
+        tree.write(path, encoding="UTF-8", method="xml", default_namespace = namespace)
         os.chmod(path, 0o0664)
         return True
     except:

@@ -122,7 +122,7 @@ def get_element_metadata(filepath):
     # get all *_refs attributes
     attribute_id_refs = root.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
     # get filter, object_reference
-    text_id_refs = root.xpath("//*[name()='filter' or name()='object_reference']/text()", smart_strings=False)
+    text_id_refs = root.xpath("//*[local-name()='filter' or local-name()='object_reference']/text()", smart_strings=False)
     # combine, unique
     id_refs = set(attribute_id_refs + text_id_refs)
     
@@ -340,7 +340,11 @@ class OvalGenerator:
     def queue_element_file(self, element, filepath):
         """ add an OVAL element to an output queue file """
         with open(filepath, mode='rt', encoding='utf-8') as xml_file:
-            xml = xml_file.read().replace('<?xml version="1.0" encoding="UTF-8"?>','')
+            xml = xml_file.read()
+            xml = xml.replace('<?xml version="1.0" encoding="UTF-8"?>','')
+            xml = xml.replace('<?xml version="1.0" encoding="utf-8"?>','')
+            xml = xml.replace("<?xml version='1.0' encoding='UTF-8'?>",'')
+            xml = xml.replace("<?xml version='1.0' encoding='utf-8'?>",'')
             xml = re.sub('^','\t\t',xml,0,re.MULTILINE)
         self.queue_element(element, xml)
                 
@@ -388,10 +392,14 @@ class OvalGenerator:
                 self.tmp[key].close();
                 self.tmp[key] = open(self.tmp[key].name, mode='rt', encoding='utf-8')
 
-    def to_string(self, clear_queues=True):
+    def to_string(self, clear_queues=True, append_pi=True):
         """ serializes queued elements to a string """
         chunks = []
-        
+
+        # add processing instruction
+        if append_pi:
+            chunks.append('<?xml version="1.0" encoding="UTF-8"?>\n')
+
         # add header
         chunks.append(self.get_file_header())
 
