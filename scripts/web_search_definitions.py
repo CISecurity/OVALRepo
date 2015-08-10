@@ -97,7 +97,7 @@ def main():
     # add results to output
     for query_result in query_results['documents']:
         del query_result['path']
-        for split_field in ['contributors', 'organizations', 'platforms', 'products', 'reference_ids']:
+        for split_field in ['platforms', 'products', 'reference_ids']:
             query_result[split_field] = query_result[split_field].split(',') if query_result[split_field] else []
         output.add_result(query_result)
 

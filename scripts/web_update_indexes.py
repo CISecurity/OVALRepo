@@ -38,6 +38,12 @@ def main():
     index.update(args['nocache'])
     output.message('elements','index updated')
 
+    # get elements index and update
+    index = lib_search.ThreadSafeRevisionsIndex(output.message)
+    index.no_output = True
+    index.update(args['nocache'])
+    output.message('revisions','index updated')
+
     # add timinig
     seconds_elapsed = time.time() - start_time
     output.message('time','{0}'.format(format_duration(seconds_elapsed)))
