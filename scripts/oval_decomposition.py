@@ -35,30 +35,32 @@ def main():
     Breaks the OVAL file into its constituent elements and writes each of those into the repository
     """
     
-    
-    
     parser = argparse.ArgumentParser(description='Separates an OVAL file into its component parts and saves them to the repository.')
     options = parser.add_argument_group('options')
     options.add_argument('-f', '--file', required=True, help='The name of the source file')
     options.add_argument('-v', '--verbose', required=False, action="store_true", help='Enable more verbose messages')
     args = vars(parser.parse_args())
 
-    oval = OvalDocument(None)
     filename = args['file']
     if args['verbose']:
         verbose = True
     else:
         verbose = False
-        
+
+    decompose(filename, verbose)
+
+
+def decompose(filename, verbose):
+    oval = OvalDocument(None)
     
     if not oval.parseFromFile(filename):
         print("\n >> Unable to parse source file '{0}':  no actions taken".format(filename))
         return
 
     deflist = oval.getDefinitions()
-    if not deflist or deflist is None or len(deflist) < 1:
-        print("\n ## Error:  this document does not contain any OVAL definitions.  No further action will be taken")
-        return
+#    if not deflist or deflist is None or len(deflist) < 1:
+#        print("\n ## Error:  this document does not contain any OVAL definitions.  No further action will be taken")
+#        return
         
     if verbose:
         print(" Number of definitions to process: ", len(deflist))
@@ -120,13 +122,18 @@ def writeFile(path, element, verbose=False):
     # Get the namespace of this element
     namespace = element.getNamespace()
     # Register this namespace with the parser as the default namespace
-    xml.etree.ElementTree.register_namespace('', namespace)
+    xml.etree.ElementTree.register_namespace("", namespace)
+    xml.etree.ElementTree.register_namespace("oval", "http://oval.mitre.org/XMLSchema/oval-common-5")
+    xml.etree.ElementTree.register_namespace("oval-def", "http://oval.mitre.org/XMLSchema/oval-definitions-5")
+    xml.etree.ElementTree.register_namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")
+
     e = element.getElement()
+
     # Fix up the element so it will print nicely
     OvalDocument.indent(e)
     # Create a new ElementTree with this element as the root
     tree = ElementTree(e)
-    # And finally, write the full tree to a file including the xml declaration
+    # And finally, write the full tree to a file not including the xml declaration
     parent = os.path.dirname(path)
     if not os.path.isdir(parent):
         try :
@@ -134,10 +141,10 @@ def writeFile(path, element, verbose=False):
             os.chmod(parent, 0o0755)
         except:
             return False
-    
-    tree.write(path, "UTF-8", True)
+
+    # WKM CHANGE
+    tree.write(path, "UTF-8", False, None, "xml")
     os.chmod(path, 0o0664)
-#     xml.etree.ElementTree.dump(tree)
     return True
     
         
