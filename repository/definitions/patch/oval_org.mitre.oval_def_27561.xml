@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27561" version="4" class="patch" deprecated="true">
-  <metadata>
-    <title>DEPRECATED: ELSA-2012-0571 -- kernel security and bug fix update (moderate)</title>
-    <affected family="unix">
-      <platform>Oracle Linux 6</platform>
-      <product>kernel</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2012-0571.html" ref_id="ELSA-2012-0571"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4086" ref_id="CVE-2011-4086"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1601" ref_id="CVE-2012-1601"/>
-    <description>[2.6.32-220.17.1.el6]
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" deprecated="true" id="oval:org.mitre.oval:def:27561" version="4">
+  <oval-def:metadata>
+    <oval-def:title>DEPRECATED: ELSA-2012-0571 -- kernel security and bug fix update (moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Oracle Linux 6</oval-def:platform>
+      <oval-def:product>kernel</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="ELSA-2012-0571" ref_url="http://linux.oracle.com/errata/ELSA-2012-0571.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2011-4086" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4086" source="CVE" />
+    <oval-def:reference ref_id="CVE-2012-1601" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-1601" source="CVE" />
+    <oval-def:description>[2.6.32-220.17.1.el6]
 - [scsi] fcoe: Do not switch context in vport_delete callback (Neil Horman) [809388 806119]
 
 [2.6.32-220.16.1.el6]
@@ -35,7 +34,7 @@
 
 [2.6.32-220.14.1.el6]
 - [net] fix vlan gro path (Jiri Pirko) [810454 720611]
-- [virt] VMX: vmx_set_cr0 expects kvm->srcu locked (Marcelo Tosatti) [808206 807507] {CVE-2012-1601}
+- [virt] VMX: vmx_set_cr0 expects kvm-&gt;srcu locked (Marcelo Tosatti) [808206 807507] {CVE-2012-1601}
 - [virt] KVM: Ensure all vcpus are consistent with in-kernel irqchip settings (Marcelo Tosatti) [808206 807507] {CVE-2012-1601}
 - [scsi] fcoe: Move destroy_work to a private work queue (Neil Horman) [809388 806119]
 - [fs] jbd2: clear BH_Delay &amp; BH_Unwritten in journal_unmap_buffer (Eric Sandeen) [749727 748713] {CVE-2011-4086}
@@ -50,35 +49,36 @@
 - [net] ipv4: Constrain UFO fragment sizes to multiples of 8 bytes (Jiri Benc) [809104 797731]
 - [net] ipv4: Don't use ufo handling on later transformed packets (Jiri Benc) [809104 797731]
 - [net] udp: Add UFO to NETIF_F_GSO_SOFTWARE (Jiri Benc) [809104 797731]
-- [fs] nfs: Try using machine credentials for RENEW calls (Sachin Prabhu) [806205 795441]</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-11-05T10:25:11">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-11-05T18:27:16.363-05:00">DRAFT</status_change>
-        <status_change date="2014-11-24T04:05:03.798-05:00">INTERIM</status_change>
-        <status_change date="2014-12-15T04:02:15.421-05:00">ACCEPTED</status_change>
-        <modified comment="deprecated due to duplicate Definition" date="2015-02-10T12:48:46.567-05:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2015-02-10T12:48:46.567-05:00">DEPRECATED</status_change>
-      </dates>
-      <status>DEPRECATED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
-    <criteria operator="OR" comment="Packages match section">
-      <criterion comment="kernel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132003"/>
-      <criterion comment="kernel-debug is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132200"/>
-      <criterion comment="kernel-debug-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:131580"/>
-      <criterion comment="kernel-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:131287"/>
-      <criterion comment="kernel-doc is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132085"/>
-      <criterion comment="kernel-firmware is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132110"/>
-      <criterion comment="kernel-headers is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132233"/>
-      <criterion comment="perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132250"/>
-      <criterion comment="python-perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132194"/>
-    </criteria>
-  </criteria>
-</definition>
+- [fs] nfs: Try using machine credentials for RENEW calls (Sachin Prabhu) [806205 795441]</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-11-05T10:25:11">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-11-05T18:27:16.363-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-24T04:05:03.798-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-15T04:02:15.421-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="deprecated due to duplicate Definition" date="2015-02-10T12:48:46.567-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-10T12:48:46.567-05:00">DEPRECATED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>DEPRECATED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="kernel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132003" />
+      <oval-def:criterion comment="kernel-debug is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132200" />
+      <oval-def:criterion comment="kernel-debug-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:131580" />
+      <oval-def:criterion comment="kernel-devel is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:131287" />
+      <oval-def:criterion comment="kernel-doc is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132085" />
+      <oval-def:criterion comment="kernel-firmware is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132110" />
+      <oval-def:criterion comment="kernel-headers is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132233" />
+      <oval-def:criterion comment="perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132250" />
+      <oval-def:criterion comment="python-perf is earlier than 0:2.6.32-220.17.1.el6" test_ref="oval:org.mitre.oval:tst:132194" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

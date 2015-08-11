@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:29038" version="2" class="patch">
-  <metadata>
-    <title>RHSA-2008:0583 -- openldap security update (Important)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 5</platform>
-      <platform>Red Hat Enterprise Linux 4</platform>
-      <platform>CentOS Linux 5</platform>
-      <product>openldap</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0583.html" ref_id="RHSA-2008:0583"/>
-    <reference source="CESA-2008:0583" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015100.html" ref_id="CESA-2008:0583-CentOS 5"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2952" ref_id="CVE-2008-2952"/>
-    <description>Updated openldap packages that fix a security issue are now available for
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:29038" version="2">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2008:0583 -- openldap security update (Important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 5</oval-def:platform>
+      <oval-def:platform>Red Hat Enterprise Linux 4</oval-def:platform>
+      <oval-def:platform>CentOS Linux 5</oval-def:platform>
+      <oval-def:product>openldap</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2008:0583" ref_url="https://rhn.redhat.com/errata/RHSA-2008-0583.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2008:0583-CentOS 5" ref_url="http://lists.centos.org/pipermail/centos-announce/2008-July/015100.html" source="CESA-2008:0583" />
+    <oval-def:reference ref_id="CVE-2008-2952" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2952" source="CVE" />
+    <oval-def:description>Updated openldap packages that fix a security issue are now available for
 Red Hat Enterprise Linux 4 and 5.
 This update has been rated as having important security impact by the Red
 Hat Security Response Team.
@@ -23,43 +22,44 @@ processed certain network messages. An unauthenticated remote attacker
 could send a specially crafted request that would crash the slapd daemon.
 (CVE-2008-2952)
 Users of openldap should upgrade to these updated packages, which contain a
-backported patch to correct this issue.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2015-06-29T10:54:31">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2015-07-06T10:30:33.048-04:00">DRAFT</status_change>
-        <status_change date="2015-07-27T04:00:54.112-04:00">INTERIM</status_change>
-      </dates>
-      <status>INTERIM</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
-      <criteria operator="OR" comment="Operation system section">
-        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
-        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
-      </criteria>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="openldap-devel is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139451"/>
-        <criterion comment="openldap-servers is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139310"/>
-        <criterion comment="openldap-servers-sql is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:138727"/>
-        <criterion comment="compat-openldap is earlier than 0:2.3.27_2.2.29-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139341"/>
-        <criterion comment="openldap is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139240"/>
-        <criterion comment="openldap-clients is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139465"/>
-      </criteria>
-    </criteria>
-    <criteria comment="Red Hat Enterprise Linux 4 release section">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="compat-openldap is earlier than 0:2.1.30-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139352"/>
-        <criterion comment="openldap is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139467"/>
-        <criterion comment="openldap-clients is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139420"/>
-        <criterion comment="openldap-devel is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139460"/>
-        <criterion comment="openldap-servers is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139416"/>
-        <criterion comment="openldap-servers-sql is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139262"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+backported patch to correct this issue.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2015-06-29T10:54:31">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-07-06T10:30:33.048-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-07-27T04:00:54.112-04:00">INTERIM</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>INTERIM</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414" />
+        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="openldap-devel is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139451" />
+        <oval-def:criterion comment="openldap-servers is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139310" />
+        <oval-def:criterion comment="openldap-servers-sql is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:138727" />
+        <oval-def:criterion comment="compat-openldap is earlier than 0:2.3.27_2.2.29-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139341" />
+        <oval-def:criterion comment="openldap is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139240" />
+        <oval-def:criterion comment="openldap-clients is earlier than 0:2.3.27-8.el5_2.4" test_ref="oval:org.mitre.oval:tst:139465" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Red Hat Enterprise Linux 4 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 4" definition_ref="oval:org.mitre.oval:def:11831" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="compat-openldap is earlier than 0:2.1.30-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139352" />
+        <oval-def:criterion comment="openldap is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139467" />
+        <oval-def:criterion comment="openldap-clients is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139420" />
+        <oval-def:criterion comment="openldap-devel is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139460" />
+        <oval-def:criterion comment="openldap-servers is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139416" />
+        <oval-def:criterion comment="openldap-servers-sql is earlier than 0:2.2.13-8.el4_6.5" test_ref="oval:org.mitre.oval:tst:139262" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

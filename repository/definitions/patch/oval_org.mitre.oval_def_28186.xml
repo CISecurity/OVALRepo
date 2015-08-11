@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:28186" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2014:1824 -- php security update (Important)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 5</platform>
-      <platform>CentOS Linux 5</platform>
-      <product>php</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1824.html" ref_id="RHSA-2014:1824"/>
-    <reference source="CESA-2014:1824" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020743.html" ref_id="CESA-2014:1824"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3669" ref_id="CVE-2014-3669"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3670" ref_id="CVE-2014-3670"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8626" ref_id="CVE-2014-8626"/>
-    <description>PHP is an HTML-embedded scripting language commonly used with the Apache
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28186" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:1824 -- php security update (Important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 5</oval-def:platform>
+      <oval-def:platform>CentOS Linux 5</oval-def:platform>
+      <oval-def:product>php</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:1824" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1824.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2014:1824" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020743.html" source="CESA-2014:1824" />
+    <oval-def:reference ref_id="CVE-2014-3669" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3669" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3670" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3670" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-8626" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8626" source="CVE" />
+    <oval-def:description>PHP is an HTML-embedded scripting language commonly used with the Apache
 HTTP Server.
 
 A buffer overflow flaw was found in the Exif extension. A specially crafted
@@ -32,50 +31,51 @@ function could cause a PHP application to crash. (CVE-2014-3669)
 All php users are advised to upgrade to these updated packages, which
 contain backported patches to correct these issues. After installing the
 updated packages, the httpd daemon must be restarted for the update to
-take effect.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-12-08T15:37:49">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-12-19T17:35:54.796-05:00">DRAFT</status_change>
-        <status_change date="2015-01-05T04:00:23.347-05:00">INTERIM</status_change>
-        <status_change date="2015-01-26T04:00:27.056-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
-      <criteria operator="OR" comment="Operation system section">
-        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
-        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802"/>
-      </criteria>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="php is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135711"/>
-        <criterion comment="php-bcmath is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135956"/>
-        <criterion comment="php-cli is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135782"/>
-        <criterion comment="php-common is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136200"/>
-        <criterion comment="php-dba is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136140"/>
-        <criterion comment="php-devel is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136150"/>
-        <criterion comment="php-gd is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135238"/>
-        <criterion comment="php-imap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135806"/>
-        <criterion comment="php-ldap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135302"/>
-        <criterion comment="php-mbstring is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135670"/>
-        <criterion comment="php-mysql is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136076"/>
-        <criterion comment="php-ncurses is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136016"/>
-        <criterion comment="php-odbc is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136162"/>
-        <criterion comment="php-pdo is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135968"/>
-        <criterion comment="php-pgsql is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136179"/>
-        <criterion comment="php-snmp is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136014"/>
-        <criterion comment="php-soap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136015"/>
-        <criterion comment="php-xml is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136197"/>
-        <criterion comment="php-xmlrpc is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136056"/>
-      </criteria>
-    </criteria>
-    <criteria comment="Red Hat Enterprise Linux 5 release section">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414"/>
-      <criterion comment="php-debuginfo is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135391"/>
-    </criteria>
-  </criteria>
-</definition>
+take effect.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T15:37:49">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:35:54.796-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:23.347-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:27.056-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Red Hat Enterprise Linux 5 and CentOS Linux 5 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414" />
+        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="php is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135711" />
+        <oval-def:criterion comment="php-bcmath is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135956" />
+        <oval-def:criterion comment="php-cli is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135782" />
+        <oval-def:criterion comment="php-common is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136200" />
+        <oval-def:criterion comment="php-dba is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136140" />
+        <oval-def:criterion comment="php-devel is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136150" />
+        <oval-def:criterion comment="php-gd is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135238" />
+        <oval-def:criterion comment="php-imap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135806" />
+        <oval-def:criterion comment="php-ldap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135302" />
+        <oval-def:criterion comment="php-mbstring is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135670" />
+        <oval-def:criterion comment="php-mysql is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136076" />
+        <oval-def:criterion comment="php-ncurses is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136016" />
+        <oval-def:criterion comment="php-odbc is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136162" />
+        <oval-def:criterion comment="php-pdo is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135968" />
+        <oval-def:criterion comment="php-pgsql is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136179" />
+        <oval-def:criterion comment="php-snmp is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136014" />
+        <oval-def:criterion comment="php-soap is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136015" />
+        <oval-def:criterion comment="php-xml is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136197" />
+        <oval-def:criterion comment="php-xmlrpc is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:136056" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Red Hat Enterprise Linux 5 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414" />
+      <oval-def:criterion comment="php-debuginfo is earlier than 0:5.1.6-45.el5_11" test_ref="oval:org.mitre.oval:tst:135391" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
