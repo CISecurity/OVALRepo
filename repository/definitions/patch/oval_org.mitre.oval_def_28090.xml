@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:28090" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2014:1724 -- kernel security and bug fix update (Important)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 7</platform>
-      <platform>CentOS Linux 7</platform>
-      <product>kernel</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1724.html" ref_id="RHSA-2014:1724"/>
-    <reference source="CESA-2014:1724" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-October/020710.html" ref_id="CESA-2014:1724"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3611" ref_id="CVE-2014-3611"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3645" ref_id="CVE-2014-3645"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3646" ref_id="CVE-2014-3646"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4653" ref_id="CVE-2014-4653"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5077" ref_id="CVE-2014-5077"/>
-    <description>The kernel packages contain the Linux kernel, the core of any Linux
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28090" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:1724 -- kernel security and bug fix update (Important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 7</oval-def:platform>
+      <oval-def:platform>CentOS Linux 7</oval-def:platform>
+      <oval-def:product>kernel</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:1724" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1724.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2014:1724" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-October/020710.html" source="CESA-2014:1724" />
+    <oval-def:reference ref_id="CVE-2014-3611" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3611" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3645" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3645" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3646" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3646" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4653" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4653" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-5077" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5077" source="CVE" />
+    <oval-def:description>The kernel packages contain the Linux kernel, the core of any Linux
 operating system.
 
 Security fixes:
@@ -92,50 +91,51 @@ skipped during the recovery of double-degraded RAID6 arrays. (BZ#1143850)
 
 All kernel users are advised to upgrade to these updated packages, which
 contain backported patches to correct these issues. The system must be
-rebooted for this update to take effect.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-12-08T15:38:42">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-12-19T17:36:00.320-05:00">DRAFT</status_change>
-        <status_change date="2015-01-05T04:00:21.994-05:00">INTERIM</status_change>
-        <status_change date="2015-01-26T04:00:24.508-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
-      <criteria operator="OR" comment="Operation system section">
-        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
-        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
-      </criteria>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="kernel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136301"/>
-        <criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136149"/>
-        <criterion comment="kernel-debug is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136329"/>
-        <criterion comment="kernel-debug-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135965"/>
-        <criterion comment="kernel-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135668"/>
-        <criterion comment="kernel-doc is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136111"/>
-        <criterion comment="kernel-headers is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136218"/>
-        <criterion comment="kernel-tools is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136005"/>
-        <criterion comment="kernel-tools-libs is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136312"/>
-        <criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135891"/>
-        <criterion comment="perf is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135901"/>
-        <criterion comment="python-perf is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136328"/>
-      </criteria>
-    </criteria>
-    <criteria comment="Red Hat Enterprise Linux 7 release section">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="kernel-debug-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136087"/>
-        <criterion comment="kernel-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135595"/>
-        <criterion comment="kernel-debuginfo-common-x86_64 is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136103"/>
-        <criterion comment="kernel-tools-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136102"/>
-        <criterion comment="perf-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136280"/>
-        <criterion comment="python-perf-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135557"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+rebooted for this update to take effect.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T15:38:42">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:36:00.320-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:21.994-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:24.508-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="kernel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136301" />
+        <oval-def:criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136149" />
+        <oval-def:criterion comment="kernel-debug is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136329" />
+        <oval-def:criterion comment="kernel-debug-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135965" />
+        <oval-def:criterion comment="kernel-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135668" />
+        <oval-def:criterion comment="kernel-doc is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136111" />
+        <oval-def:criterion comment="kernel-headers is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136218" />
+        <oval-def:criterion comment="kernel-tools is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136005" />
+        <oval-def:criterion comment="kernel-tools-libs is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136312" />
+        <oval-def:criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135891" />
+        <oval-def:criterion comment="perf is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135901" />
+        <oval-def:criterion comment="python-perf is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136328" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Red Hat Enterprise Linux 7 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="kernel-debug-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136087" />
+        <oval-def:criterion comment="kernel-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135595" />
+        <oval-def:criterion comment="kernel-debuginfo-common-x86_64 is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136103" />
+        <oval-def:criterion comment="kernel-tools-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136102" />
+        <oval-def:criterion comment="perf-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:136280" />
+        <oval-def:criterion comment="python-perf-debuginfo is earlier than 0:3.10.0-123.9.2.el7" test_ref="oval:org.mitre.oval:tst:135557" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:25448" version="3" class="patch">
-  <metadata>
-    <title>SUSE-SU-2014:0539-1 -- Security update for OpenSSL</title>
-    <affected family="unix">
-      <platform>SUSE Linux Enterprise Server 10</platform>
-      <product>OpenSSL</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140539-1.html" ref_id="SUSE-SU-2014:0539-1"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0076" ref_id="CVE-2014-0076"/>
-    <description>OpenSSL has been updated to fix an attack on ECDSA Nonces.
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25448" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2014:0539-1 -- Security update for OpenSSL</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 10</oval-def:platform>
+      <oval-def:product>OpenSSL</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2014:0539-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140539-1.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-0076" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0076" source="CVE" />
+    <oval-def:description>OpenSSL has been updated to fix an attack on ECDSA Nonces.
 
 Using the FLUSH+RELOAD Cache Side-channel Attack the Nonces
 could be  recovered. (CVE-2014-0076)
@@ -21,27 +20,28 @@ Security Issue reference:
 
     * CVE-2014-0076
 &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0076
-></description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-07-15T17:14:48">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-07-29T19:12:56.849-04:00">DRAFT</status_change>
-        <status_change date="2014-08-18T04:04:20.214-04:00">INTERIM</status_change>
-        <status_change date="2014-09-08T04:02:22.218-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368"/>
-    <criteria operator="OR" comment="Packages match section">
-      <criterion comment="openssl RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116942"/>
-      <criterion comment="openssl-devel RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:117049"/>
-      <criterion comment="openssl-doc RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116809"/>
-      <criterion comment="openssl-32bit RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:117113"/>
-      <criterion comment="openssl-devel-32bit RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116902"/>
-    </criteria>
-  </criteria>
-</definition>
+&gt;</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:14:48">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:12:56.849-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:04:20.214-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:02:22.218-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="openssl RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116942" />
+      <oval-def:criterion comment="openssl-devel RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:117049" />
+      <oval-def:criterion comment="openssl-doc RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116809" />
+      <oval-def:criterion comment="openssl-32bit RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:117113" />
+      <oval-def:criterion comment="openssl-devel-32bit RPM is earlier than 0:0.9.8a-18.45.75.1" test_ref="oval:org.mitre.oval:tst:116902" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

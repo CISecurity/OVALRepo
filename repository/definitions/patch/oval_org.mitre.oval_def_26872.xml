@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:26872" version="3" class="patch">
-  <metadata>
-    <title>ELSA-2014-1193 -- axis security update (Important)</title>
-    <affected family="unix">
-      <platform>Oracle Linux 6</platform>
-      <platform>Oracle Linux 5</platform>
-      <product>axis</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1193.html" ref_id="ELSA-2014-1193"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3596" ref_id="CVE-2014-3596"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5784" ref_id="CVE-2012-5784"/>
-    <description>Apache Axis is an implementation of SOAP (Simple Object Access Protocol).
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26872" version="3">
+  <oval-def:metadata>
+    <oval-def:title>ELSA-2014-1193 -- axis security update (Important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Oracle Linux 6</oval-def:platform>
+      <oval-def:platform>Oracle Linux 5</oval-def:platform>
+      <oval-def:product>axis</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="ELSA-2014-1193" ref_url="http://linux.oracle.com/errata/ELSA-2014-1193.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3596" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3596" source="CVE" />
+    <oval-def:reference ref_id="CVE-2012-5784" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5784" source="CVE" />
+    <oval-def:description>Apache Axis is an implementation of SOAP (Simple Object Access Protocol).
 It can be used to build both web service clients and servers.
 
 It was discovered that Axis incorrectly extracted the host name from an
@@ -26,35 +25,36 @@ Product Security.
 
 All axis users are advised to upgrade to these updated packages, which
 contain a backported patch to correct this issue. Applications using Apache
-Axis must be restarted for this update to take effect.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-10-01T10:21:06">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-10-10T18:35:19.849-04:00">DRAFT</status_change>
-        <status_change date="2014-10-27T04:01:44.643-04:00">INTERIM</status_change>
-        <status_change date="2014-11-17T04:01:02.274-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Oracle Linux 6 release section">
-      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="axis RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124832"/>
-        <criterion comment="axis-javadoc RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124581"/>
-        <criterion comment="axis-manual RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124399"/>
-      </criteria>
-    </criteria>
-    <criteria comment="Oracle Linux 5 release section">
-      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="axis RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124956"/>
-        <criterion comment="axis-javadoc RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124769"/>
-        <criterion comment="axis-manual RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124877"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+Axis must be restarted for this update to take effect.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-01T10:21:06">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-10T18:35:19.849-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-10-27T04:01:44.643-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:02.274-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Oracle Linux 6 release section">
+      <oval-def:extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="axis RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124832" />
+        <oval-def:criterion comment="axis-javadoc RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124581" />
+        <oval-def:criterion comment="axis-manual RPM is earlier than 0:1.2.1-7.5.el6_5" test_ref="oval:org.mitre.oval:tst:124399" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Oracle Linux 5 release section">
+      <oval-def:extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="axis RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124956" />
+        <oval-def:criterion comment="axis-javadoc RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124769" />
+        <oval-def:criterion comment="axis-manual RPM is earlier than 0:1.2.1-2jpp.8.el5_10" test_ref="oval:org.mitre.oval:tst:124877" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

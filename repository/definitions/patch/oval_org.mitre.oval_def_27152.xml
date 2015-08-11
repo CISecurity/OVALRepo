@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27152" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2011:1532 -- kexec-tools security, bug fix, and enhancement update (Moderate)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 6</platform>
-      <product>kexec-tools</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1532.html" ref_id="RHSA-2011:1532"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3588" ref_id="CVE-2011-3588"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3589" ref_id="CVE-2011-3589"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3590" ref_id="CVE-2011-3590"/>
-    <description><![CDATA[Kexec allows for booting a Linux kernel from the context of an already
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27152" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2011:1532 -- kexec-tools security, bug fix, and enhancement update (Moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:product>kexec-tools</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2011:1532" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1532.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2011-3588" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3588" source="CVE" />
+    <oval-def:reference ref_id="CVE-2011-3589" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3589" source="CVE" />
+    <oval-def:reference ref_id="CVE-2011-3590" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3590" source="CVE" />
+    <oval-def:description>Kexec allows for booting a Linux kernel from the context of an already
 running kernel.
 
-Kdump used the SSH (Secure Shell) &quot;StrictHostKeyChecking=no&quot; option when
-dumping to SSH targets, causing the target kdump server&#39;s SSH host key not
+Kdump used the SSH (Secure Shell) &amp;quot;StrictHostKeyChecking=no&amp;quot; option when
+dumping to SSH targets, causing the target kdump server&amp;#39;s SSH host key not
 to be checked. This could make it easier for a man-in-the-middle attacker
 on the local network to impersonate the kdump SSH target server and
 possibly gain access to sensitive information in the vmcore dumps.
@@ -26,13 +25,13 @@ as the private SSH key used to authenticate to a remote server when kdump
 was configured to dump to an SSH target. (CVE-2011-3589)
 
 mkdumprd included unneeded sensitive files (such as all files from the
-&quot;/root/.ssh/&quot; directory and the host&#39;s private SSH keys) in the resulting
+&amp;quot;/root/.ssh/&amp;quot; directory and the host&amp;#39;s private SSH keys) in the resulting
 initrd. This could lead to an information leak when initrd files were
 previously created with world-readable permissions. Note: With this update,
 only the SSH client configuration, known hosts files, and the SSH key
-configured via the newly introduced sshkey option in &quot;/etc/kdump.conf&quot; are
+configured via the newly introduced sshkey option in &amp;quot;/etc/kdump.conf&amp;quot; are
 included in the initrd. The default is the key generated when running the
-&quot;service kdump propagate&quot; command, &quot;/root/.ssh/kdump_id_rsa&quot;.
+&amp;quot;service kdump propagate&amp;quot; command, &amp;quot;/root/.ssh/kdump_id_rsa&amp;quot;.
 (CVE-2011-3590)
 
 Red Hat would like to thank Kevan Carstensen for reporting these issues.
@@ -45,24 +44,25 @@ section.
 
 All kexec-tools users should upgrade to this updated package, which
 contains backported patches to resolve these issues and add these
-enhancements.]]></description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-10-28T18:16:14">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-10-29T12:47:46.286-04:00">DRAFT</status_change>
-        <status_change date="2014-11-17T04:01:51.215-05:00">INTERIM</status_change>
-        <status_change date="2014-12-08T04:00:39.853-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-    <criteria operator="OR" comment="Packages match section">
-      <criterion comment="kexec-tools is earlier than 0:2.0.0-209.el6" test_ref="oval:org.mitre.oval:tst:126084"/>
-      <criterion comment="kexec-tools-debuginfo is earlier than 0:2.0.0-209.el6" test_ref="oval:org.mitre.oval:tst:126267"/>
-    </criteria>
-  </criteria>
-</definition>
+enhancements.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:16:14">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:47:46.286-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:51.215-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:39.853-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema>5.3</oval-def:min_schema>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="kexec-tools is earlier than 0:2.0.0-209.el6" test_ref="oval:org.mitre.oval:tst:126084" />
+      <oval-def:criterion comment="kexec-tools-debuginfo is earlier than 0:2.0.0-209.el6" test_ref="oval:org.mitre.oval:tst:126267" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -134,7 +134,7 @@ def main():
             def_element = lib_xml.load_standalone_element(def_path)
 
             ode = lib_oval.OvalElement(def_element)
-            od  = lib_oval.OvalDefinition(ode)
+            od  = lib_oval.OvalDefinition(ode.getElement())
 
             def_id = od.getId()
 
