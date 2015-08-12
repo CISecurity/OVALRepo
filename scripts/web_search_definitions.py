@@ -7,6 +7,8 @@ For usage information, please see the command line help:
     python3 web_search_definitions.py -h
 
 TODO:
+- update contributor / organization filtering to run from revisions index
+- add schema version filter 
 - testing
 """
 
@@ -36,8 +38,8 @@ def main():
     criteria_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
     criteria_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
     criteria_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
-    criteria_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
-    criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
+    #criteria_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
+    #criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     criteria_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
     criteria_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     criteria_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='omit contributions before this day (format: YYYYMMDD)')
