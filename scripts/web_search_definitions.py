@@ -38,8 +38,8 @@ def main():
     criteria_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
     criteria_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
     criteria_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
-    #criteria_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
-    #criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
+    criteria_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
+    criteria_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     criteria_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
     criteria_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     criteria_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='omit contributions before this day (format: YYYYMMDD)')
@@ -49,7 +49,7 @@ def main():
     # get output object
     output = WebOutput()
 
-    # get definitions index
+    # get index
     definitions_index = lib_search.ThreadSafeDefinitionsIndex(output.message)
     definitions_index.no_output = True
 
@@ -59,25 +59,37 @@ def main():
         if field in args and args[field]:
             query[field] = args[field]
 
-    # add date range, if specified
-    if args['from'] or args['to']:
+    # add date range and contributor/org filters, if specified
+    if args['from'] or args['to'] or args['contributors'] or args['organizations']:
         # get revisions index
         revisions_index = lib_search.ThreadSafeRevisionsIndex(output.message)
         revisions_index.no_output = True
 
-        # get definition ids in date range
-        definitions_revised_in_daterange = revisions_index.get_defs_revised_in_daterange(args['from'], args['to']);
+        revisions_query = {}
+
+        if args['from'] or args['to']:
+            revisions_query['date'] = revisions_index.format_daterange(args['from'], args['to']);
+
+        if args['contributors']:
+            revisions_query['contributor'] = args['contributors']
+
+        if args['organizations']:
+            revisions_query['organization'] = args['organizations']
+
+        filtered_oval_ids = revisions_index.get_definition_ids(revisions_query)
 
         # add to query
         if 'oval_id' in query and query['oval_id']:
-            # if oval_id(s) specified in args, get intersection with those revised in daterange
-            query['oval_id'] = set(query['oval_id']) & definitions_revised_in_daterange
+            # if oval_id(s) specified in args, get intersection with filtered oval ids
+            query['oval_id'] = set(query['oval_id']) & filtered_oval_ids
             if not query['oval_id']:
                 output.message('info','Specified definition ids were not revised in specified date range.')
                 output.write_json()
                 sys.exit(0)
         else:
-            query['oval_id'] = definitions_revised_in_daterange
+            query['oval_id'] = filtered_oval_ids
+
+        output.message('filter time','{0}'.format(format_duration(time.time() - start_time)))
 
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:

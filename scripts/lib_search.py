@@ -167,6 +167,12 @@ class SearchIndex:
         """ Perform a query and return a page of results """
         return self.query(query_dict, { 'page': page, 'page_length': page_length, 'sorted': True })
 
+    def get_definition_ids(self, query={}):
+        """ Gets set of OVAL ids for results of query. """        
+        query_results = self.query(query)
+        definition_ids = { document['oval_id'] for document in query_results }
+        return definition_ids
+
     def update(self, force_rebuild=False):
         """ Adds/updates all items in repo to index. Note: querying will call this automatically."""
 
@@ -584,10 +590,14 @@ class RevisionsIndex(SearchIndex):
         }
         self.text_fields = [ 'description' ]
 
+    def format_daterange(self, start_date=False, end_date=False):
+        """ Formats a date range query parameter. """
+        date_range = "{0} TO {1}".format(start_date or '', end_date or '').strip()
+        return '[{0}]'.format(date_range)
+
     def get_defs_revised_in_daterange(self, start_date=False, end_date=False):
         """ Gets set of OVAL ids for definitions revised on or after start_date and/or on or before end_date. """
-        date_range = "{0} TO {1}".format(start_date or '', end_date or '').strip()
-        query = { "date": '[{0}]'.format(date_range) }
+        query = { "date": self.format_daterange(start_date, end_date) }
         
         query_results = self.query(query)
         definition_ids = { document['oval_id'] for document in query_results }
