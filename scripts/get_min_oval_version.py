@@ -27,15 +27,15 @@ def set_min_schema_version(defpath, schema_version):
     with open(defpath, mode='rt', encoding='utf-8') as f:
         deftext = f.read()
 
-    p = re.compile(r'<oval-def\:min_schema>(.*?)<\/oval-def\:min_schema>')
+    p = re.compile(r'<oval-def\:min_schema_version>(.*?)<\/oval-def\:min_schema_version>')
 
     if p.match(deftext):
         if current_version == p.group(1):
             return
         else:
-            deftext = deftext.replace(p.group(0),'<oval-def:min_schema>' + schema_version + '</oval-def:min_schema>')
+            deftext = deftext.replace(p.group(0),'<oval-def:min_schema_version>' + schema_version + '</oval-def:min_schema_version>')
     else:
-        deftext = deftext.replace('</oval-def:oval_repository>','  <oval-def:min_schema>' + schema_version + '</oval-def:min_schema>\n    </oval-def:oval_repository>')
+        deftext = deftext.replace('</oval-def:oval_repository>','  <oval-def:min_schema_version>' + schema_version + '</oval-def:min_schema_version>\n    </oval-def:oval_repository>')
 
     with open(defpath, mode='wt', encoding='utf-8') as f:
         f.write(deftext)
@@ -101,7 +101,7 @@ def main():
     parser = argparse.ArgumentParser(description='Determine minimum supported OVAL schema for a given definition')
     parser.add_argument('-p', '--path', help='path to definition fragment')
     parser.add_argument('-i', '--id',  help='id of definition fragment')
-    parser.add_argument('-a', '--all', default=False, action="store_true", help='determine minimum supported OVAL schema for all indexed definitino fragments. cannot be combined with --id or --path')
+    parser.add_argument('-a', '--all', default=False, action="store_true", help='determine minimum supported OVAL schema for all indexed definition fragments. cannot be combined with --id or --path')
     parser.add_argument('-u', '--update', default=False, action="store_true", help='update the given definition to include the min_schema_version element')
 
     args = vars(parser.parse_args())
