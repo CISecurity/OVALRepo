@@ -45,6 +45,8 @@ def main():
     #source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
     source_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
+    source_options.add_argument('--min_schema_version', nargs="*", dest='min_schema_version', metavar='MIN_SCHEMA_VERSION',  help='filter by minimum oval schema version, e.g. 5.10')
+
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -89,6 +91,10 @@ def main():
     # create generator
     OvalGenerator = lib_xml.OvalGenerator(message)
 
+    # set oval schema version
+    if args['min_schema_version']:
+        OvalGenerator.oval_schema_version = args['min_schema_version']
+
     # build in memory if there aren't that many files
     if len(file_paths) < 200:
         OvalGenerator.use_file_queues = False
@@ -106,7 +112,7 @@ def main():
     # validate
     if args['validate']:
         # schema validate
-        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema(OvalGenerator.oval_schema_version)
         message('info','performing schema validation')
         try:
             lib_xml.schema_validate(args['outfile'], schema_path)
@@ -116,7 +122,7 @@ def main():
 
     if args['schematron']:
         # schematron validate
-        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema(OvalGenerator.oval_schema_version)
         message('info','performing schematron validation')
         try:
             lib_xml.schematron_validate(args['outfile'], schema_path)
