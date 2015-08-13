@@ -41,12 +41,13 @@ def main():
     source_options.add_argument('--family', nargs='*', dest='family', help='filter by family(ies)')
     source_options.add_argument('--platform', nargs='*', dest='platforms', metavar='PLATFORM', help='filter by platform(s)')
     source_options.add_argument('--product', nargs='*', dest='products', metavar='PRODUCT', help='filter by product(s)')
-    #source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
-    #source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
+    source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
+    source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    source_options.add_argument('--max_schema_version', nargs="?", dest='max_schema_version', metavar='SCHEMA_VERSION',  help='filter by maximum oval schema version, e.g. 5.10')
     source_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
-    source_options.add_argument('--min_schema_version', nargs="*", dest='min_schema_version', metavar='MIN_SCHEMA_VERSION',  help='filter by minimum oval schema version, e.g. 5.10')
-
+    source_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or after this day (format: YYYYMMDD)')
+    source_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or before this day (format: YYYYMMDD)')
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -57,6 +58,37 @@ def main():
     for field in definitions_index.get_fieldnames():
         if field in args and args[field]:
             query[field] = args[field]
+
+    # add schema_version filter, if specified
+    if args['max_schema_version']:
+        query['min_schema_version'] = '[0 TO {0}]'.format(definitions_index.version_to_int(args['max_schema_version']))
+
+    # add date range and contributor/org filters, if specified
+    if args['from'] or args['to'] or args['contributors'] or args['organizations']:
+        # get revisions index
+        revisions_index = lib_search.RevisionsIndex(message)
+
+        if args['from'] or args['to']:
+            filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange(args['from'], args['to']) })
+
+        if args['contributors']:
+            contributor_filtered_ids = revisions_index.get_definition_ids({ 'contributor': args['contributors'] })
+            filtered_oval_ids = filtered_oval_ids & contributor_filtered_ids if 'filtered_oval_ids' in locals() else contributor_filtered_ids
+
+        if args['organizations']:
+            organization_filtered_ids = revisions_index.get_definition_ids({ 'organization': args['organizations'] })
+            filtered_oval_ids = filtered_oval_ids & organization_filtered_ids if 'filtered_oval_ids' in locals() else organization_filtered_ids
+
+        # add to query
+        if 'oval_id' in query and query['oval_id']:
+            # if oval_id(s) specified in args, get intersection with filtered oval ids
+            query['oval_id'] = set(query['oval_id']) & filtered_oval_ids
+        else:
+            query['oval_id'] = filtered_oval_ids
+
+        if not query['oval_id']:
+            message('info','No matching OVAL definitions found. Aborting.')
+            sys.exit(0)
 
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:
@@ -92,8 +124,8 @@ def main():
     OvalGenerator = lib_xml.OvalGenerator(message)
 
     # set oval schema version
-    if args['min_schema_version']:
-        OvalGenerator.oval_schema_version = args['min_schema_version']
+    if args['max_schema_version']:
+        OvalGenerator.oval_schema_version = args['max_schema_version']
 
     # build in memory if there aren't that many files
     if len(file_paths) < 200:

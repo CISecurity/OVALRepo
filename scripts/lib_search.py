@@ -107,6 +107,8 @@ class SearchIndex:
                 for value in values:
                     if isinstance(self.schema_dictionary[field], whoosh.fields.DATETIME):
                         field_values.append(query_parser.parse('{0}:{1}'.format(field, value)))
+                    elif isinstance(self.schema_dictionary[field], whoosh.fields.NUMERIC):
+                        field_values.append(query_parser.parse('{0}:{1}'.format(field, value)))
                     else:
                         value = self.whoosh_escape(value, field)
                         field_values.append(whoosh.query.Term(field, value))
@@ -401,7 +403,7 @@ class DefinitionsIndex(SearchIndex):
         self.schema_dictionary = { 
             'oval_id': whoosh.fields.ID(stored=True, unique=True),
             'oval_version': whoosh.fields.STORED(),
-            'min_schema_version': whoosh.fields.NUMERIC(numtype=int, bits=32, signed=False, stored=True),
+            'min_schema_version': whoosh.fields.NUMERIC(stored=True),
             'title': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
             'description': whoosh.fields.TEXT(stored=True, analyzer=whoosh.analysis.StandardAnalyzer()),
             'class': whoosh.fields.ID(stored=True),
