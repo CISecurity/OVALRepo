@@ -19,6 +19,7 @@ import sys
 import os
 import argparse
 from lxml import etree
+from xml.etree import ElementTree as ET
 from whoosh.query import Wildcard
 
 import lib_oval
@@ -32,8 +33,11 @@ autoaccept = False
 id_cache_list = {'def': None, 'tst': None, 'obj': None, 'ste': None, 'var': None}
 NS_DEFAULT  = {None: "http://oval.mitre.org/XMLSchema/oval-definitions-5"}
 NS_DEFINITION  = {'def': "http://oval.mitre.org/XMLSchema/oval-definitions-5"}
-NS_MAP = { None: "http://oval.mitre.org/XMLSchema/oval-definitions-5", "oval": "http://oval.mitre.org/XMLSchema/oval-common-5",
-            "xsi": "http://www.w3.org/2001/XMLSchema-instance" }
+NS_MAP = {
+    None: "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    "oval": "http://oval.mitre.org/XMLSchema/oval-common-5",
+    "xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}
 
 
 def main():
@@ -140,38 +144,32 @@ def main():
 
         # 3.1 If this is an update, does it change any existing metadata?
         # 3.2 Check existence and accuracy of definition metadata (<status> and date)
-        #  - DRAFT on new submission
+        #  - INITIAL SUBMISSION or DRAFT on new submission
         #  - INTERIM if updating a previous definition
         #  - ?
 
             # no <dates> - invalid
             # @version == 0:
             #   no <submitted> - invalid
-            #   no <status_change> - invalid
-            #   <status_change> != <status> != DRAFT - invalid
+            #   <status_change>s > 0 - invalid
+            #   <status> != "INITIAL SUBMISSION" - invalid
             # @ version > 0:
             #   last <status_change> != <status> - invalid
             def_status_change = od.get_last_status_change()
             if def_status_change["Version"] == "0":
-                if def_status_change["Submitted"] is None:
+                if "Submitted" not in def_status_change or def_status_change["Submitted"] is None:
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
                     print("    - New definitions must contain a submitted element")
                     valid_metadata = 0
 
-                sc = def_status_change["StatusChange"]
-                if sc is None:
+                if "StatusChange" in def_status_change:
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
-                    print("    - New definitions must contain a status change element")
+                    print("    - New definitions should not contain a status change element")
                     valid_metadata = 0
-                else:
-                    if sc["Status"] != "DRAFT":
-                        print("   ++++ Definition ID %s is NOT valid:" % def_id)
-                        print("    - New definitions must contain a status change element with a value of 'DRAFT'")
-                        valid_metadata = 0
 
-                if def_status_change["Status"] != "DRAFT":
+                if def_status_change["Status"] != "INITIAL SUBMISSION":
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
-                    print("    - New definitions must have a status of DRAFT")
+                    print("    - New definitions must have a status of INITIAL SUBMISSION")
                     valid_metadata = 0
             else:
                 defstatus = def_status_change["Status"]
@@ -210,6 +208,7 @@ def main():
     # 5. On passing all of the above, make these changes for all elements:
 
 
+    oval_id_map = {}
     affected_elements = set()
     update_elements = {}
     for path in change_list:
@@ -239,8 +238,9 @@ def main():
             if verbose:
                 print("    ---- Change submission ID from '{0}' to '{1}'".format(ovalid, new_id))
             oval_element.set("id", new_id)
-        #      5.2.1 Set to a unique OVALID in the CIS namespace
-        #      5.2.2 Update all references from the old OVALID
+            #      5.2.1 Set to a unique OVALID in the CIS namespace
+            #      5.2.2 Update all references from the old OVALID
+            oval_id_map[ovalid] = new_id
         
         #  5.3 Set/update version numbers as necessary.  The previous step can be used to determine new vice update
         if is_update:
@@ -273,6 +273,7 @@ def main():
             oval_element = lib_xml.load_standalone_element(file)
             if oval_element is not None:
                 increment_version(oval_element)
+                oval_element = normalize_ids(oval_element, oval_id_map)
                 update_elements[file] = oval_element
     
     
@@ -351,6 +352,31 @@ def increment_version(oval_element):
         
     oval_element.set("version", version)
 
+
+def normalize_ids(oval_element, oval_id_map):
+    """
+    If any OVAL IDs were generated, they need to be modified in
+    all elements which would reference the old id
+    """
+    if oval_element is None:
+        return
+
+    # nothing to do if there are no new oval ids...
+    if not oval_id_map:
+        return
+
+    ET.register_namespace("", "http://oval.mitre.org/XMLSchema/oval-definitions-5")
+    ET.register_namespace("oval", "http://oval.mitre.org/XMLSchema/oval-common-5")
+    ET.register_namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")
+
+    # map is oval_id_map[oldid] = new_id
+    for old_oval_id in oval_id_map:
+        new_oval_id = oval_id_map[old_oval_id]
+
+        xml_string = ET.tostring(oval_element, encoding="UTF-8").decode()
+        xml_string = xml_string.replace(old_oval_id, new_oval_id)
+
+    return ET.fromstring(xml_string)
 
 
 def generate_next_ovalid(element_type, element_index):
@@ -448,7 +474,7 @@ def set_minimum_schema_version(oval_element, min_schema):
         return None
     
     
-    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema", NS_DEFINITION)
+    min_element = oval_element.find("def:metadata/def:oval_repository/def:min_schema_version", NS_DEFINITION)
     if min_element is None:
         # Find/create oval_repository element
         repo_element = oval_element.find("def:metadata/def:oval_repository", NS_DEFINITION)
@@ -460,7 +486,7 @@ def set_minimum_schema_version(oval_element, min_schema):
                 
             repo_element = etree.SubElement(meta_element, "oval_repository", NS_DEFINITION)
             
-        min_element = etree.SubElement(repo_element, "min_schema", NS_DEFINITION)
+        min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFINITION)
         
     min_element.text = min_schema
     
@@ -534,7 +560,7 @@ def save_element(element, path):
     
     parent = os.path.dirname(path)
     if not os.path.isdir(parent):
-        os.makedirs(parent, mode=0o755, True)
+        os.makedirs(parent, mode=0o755, exist_ok=True)
         os.chmod(parent, 0o0755)
         
     try:
