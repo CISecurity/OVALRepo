@@ -22,6 +22,10 @@ def message(label, message):
 def set_min_schema_version(defpath, schema_version):
     """ updates or sets the min_schema_version attribute in the provided oval definition. """
 
+    if not schema_version or schema_version is None:
+        message("ERROR", "Cannot set None as minimum schema version; skipping...")
+        return
+
     current_version = None
 
     with open(defpath, mode='rt', encoding='utf-8') as f:

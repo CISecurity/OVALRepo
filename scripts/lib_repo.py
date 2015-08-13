@@ -123,9 +123,9 @@ def get_element_repository_path(element):
                 return None
                     
             bucket = get_index_bucket(oval_id)
-            if bucket < 1000:
+            if not bucket or bucket is None:
                 return None
-            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + str(bucket) + "/" + oval_id_to_path(oval_id)
+            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + bucket + "/" + oval_id_to_path(oval_id)
         
     except Exception:
         return None
@@ -195,25 +195,28 @@ def get_index_bucket(oval_id):
     be computed.  
     """
     if not oval_id or oval_id is None:
-        return 0
+        return None
         
     # Get the numeric index from the end of the OVAL ID
     position = oval_id.rfind(':')
     if position < 0:
-        return 0
+        return None
         
     try:
         position = position + 1
-        index = oval_id[position:]
-        
+        index = int(oval_id[position:])
+
+        if index < 1000:
+            return "0000"
+
         # Apply the modulus function to determine which bucket it belongs to
-        return int(int(index)/1000 + 1) * 1000
+        return str(int(index/1000) * 1000)
         # Or another way to do it:
 #             sequence = int(index)
 #             mod = sequence % 1000
 #             return sequence - mod + 1000
     except Exception:
-        return 0
+        return None
 
 def get_element_type_from_path(path):
     """ Gets element type from path. """
