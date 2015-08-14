@@ -45,6 +45,7 @@ def main():
     criteria_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
     criteria_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or after this day (format: YYYYMMDD)')
     criteria_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or before this day (format: YYYYMMDD)')
+    criteria_options.add_argument('--revision_type', nargs='*', metavar='TYPE', help='optionally specify the type of revisons that the --to and --from date should match: status_change, created, submitted, modified, any (default:any)')
     args = vars(parser.parse_args())
 
     # get output object
@@ -70,7 +71,10 @@ def main():
         revisions_index = lib_search.ThreadSafeRevisionsIndex(output.message)
         
         if args['from'] or args['to']:
-            filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange(args['from'], args['to']) })
+            revision_date_query = { 'date': revisions_index.format_daterange(args['from'], args['to']) }
+            if args['revision_type'] and 'any' not in args['revision_type']:
+                revision_date_query['type'] = args['revision_type']
+            filtered_oval_ids = revisions_index.get_definition_ids(revision_date_query)
 
         if args['contributors']:
             contributor_filtered_ids = revisions_index.get_definition_ids({ 'contributor': args['contributors'] })
@@ -114,6 +118,7 @@ def main():
         del query_result['path']
         for split_field in ['platforms', 'products', 'reference_ids']:
             query_result[split_field] = query_result[split_field].split(',') if query_result[split_field] else []
+        query_result['last_modified'] = query_result['last_modified'].isoformat() if query_result['last_modified'] else ''
         output.add_result(query_result)
 
     # add paging metadata

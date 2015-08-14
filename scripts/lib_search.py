@@ -412,6 +412,7 @@ class DefinitionsIndex(SearchIndex):
             'platforms': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'products': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
             'reference_ids': whoosh.fields.KEYWORD(commas=True, scorable=True, stored=True),
+            'last_modified': whoosh.fields.DATETIME(stored=True),
             'path': whoosh.fields.ID(stored=True)
         }
         self.text_fields = [ 'title', 'description' ]

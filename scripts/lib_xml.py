@@ -55,10 +55,15 @@ def get_definition_metadata(filepath):
 
     revision_tags = root.findall('./oval-def:metadata/oval-def:oval_repository/oval-def:dates/*', namespaces=ns_map)
     revisions = []
+    last_modified_date = None
     ns_len = len(ns_map['oval-def']) + 2
     for revision in revision_tags:
         revision_type = revision.tag[ns_len:]
         revision_datetime = xsd_datetime_to_datetime(revision.get('date'))
+        
+        if not last_modified_date or revision_datetime > last_modified_date:
+            last_modified_date = revision_datetime
+
         if revision_type == 'status_change':
             revisions.append({
                 "type": revision_type, 
@@ -97,6 +102,7 @@ def get_definition_metadata(filepath):
         'products': { product.text for product in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:product', namespaces=ns_map) },
         'revisions': revisions,
         'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) },
+        'last_modified': last_modified_date,
         'path' : filepath
     }
 
@@ -265,14 +271,18 @@ def get_schematron_xsl_from_schema(schema_path, force_generate=False):
 def xsd_datetime_to_datetime(date_string):
     """ Take an xsd:dateTime formatted string and return a python datetime.datetime object """
     date_string_format = "%Y-%m-%dT%H:%M:%S"
+    
+    if date_string.endswith('Z'):
+        date_string = date_string[:-1]
+
     if '.' in date_string:
         date_string = re.sub(r'\.([0-9]+)', r'.000\1', date_string)
         date_string_format = date_string_format + ".%f"
     if re.search(r'([-+])([0-9]+):([0-9]+)', date_string):
         date_string = re.sub(r'([-+])([0-9]+):([0-9]+)', r'\1\2\3', date_string)
-        date_string_format = date_string_format + "%z"
-    if date_string.endswith('Z'):
-        date_string_format = date_string_format + 'Z'
+    else:
+        date_string = date_string + '-0400'
+    date_string_format = date_string_format + "%z"
 
     #print('\n\n{0} via {1}\n\n'.format(date_string, date_string_format))
     return datetime.datetime.strptime(date_string, date_string_format)
