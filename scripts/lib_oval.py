@@ -1084,8 +1084,8 @@ class OvalDefinition(OvalElement):
             self.element.set("version", "1")
             meta = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}metadata")
             self.element.append(meta)
-    
-    
+
+
     def getType(self):
         return OvalElement.DEFINITION
     
@@ -1275,10 +1275,10 @@ class OvalRepositoryInformation(object):
         if not version or version is None:
             return
         
-        child = self.element.find("def:min_schema", OvalDocument.NS_DEFAULT)
+        child = self.element.find("def:min_schema_version", OvalDocument.NS_DEFAULT)
         
         if child is None:
-            child = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}min_schema")
+            child = Element("{" + OvalDocument.NS_DEFAULT.get("def") + "}min_schema_version")
             self.element.append(child)
         
         child.text = version
@@ -1289,7 +1289,7 @@ class OvalRepositoryInformation(object):
         if self.element is not None:
             findstr = "def:dates/def:%s" % type
             subs = self.element.findall(findstr, OvalDocument.NS_DEFAULT)
-            if subs is not None:
+            if subs is not None and len(subs) > 0:
                 sub = subs[(len(subs) - 1)]
                 results["Date"] = sub.get("date")
 
@@ -1319,12 +1319,16 @@ class OvalRepositoryInformation(object):
 
         if self.element is not None:
             scs = self.element.findall("def:dates/def:status_change", OvalDocument.NS_DEFAULT)
-            if scs is not None:
+            if scs is not None and len(scs) > 0:
                 sc = scs[(len(scs) - 1)]
                 status_change["Date"] = sc.get("date")
                 status_change["Status"] = sc.text
 
         return status_change
+
+    #def add_status_change(self, status):
+    #    if self.element is not None:
+
         
 
 class OvalTest(OvalElement):

@@ -20,6 +20,9 @@ TODO:
 import os, os.path, inspect, datetime, random, re, pprint
 import git
 import lib_repo
+import json
+import urllib.request, urllib.error, urllib.parse
+import shlex
 
 
 def on_master():
@@ -106,6 +109,59 @@ def get_current_commit_hash():
 def get_repo():
     return git.Repo(lib_repo.get_root_path())
 
+def fetch_pull_request(pullreq, repo='origin', branch='master'):
+    print("fetching from repository %s" % (repo))
+    print("loading pull request info for request %s..." % (pullreq))
+    print()
+    url = "https://api.github.com/repos/%s/pulls/%s" % (repo, pullreq)
+    print(url)
+    req = urllib.request.Request(url)
+    response = urllib.request.urlopen(req)
+    data = response.read().decode("UTF-8")
+    if (data == ''):
+        print("failed to speak with github.")
+        return 3
+
+    data = json.loads(data)
+    pr = data
+    if pr['head']['repo'] == None:
+      print("remote repository for this pull request does not exist anymore.")
+      return 6
+    display(pr)
+
+    local  = shlex.quote('pull-request-%s' % (pullreq))
+    branch = "master" #os.popen("git branch|grep '^*'|awk '{print $2}'").read().strip();
+    if(branch != pr['base']['ref'] and branch != local):
+        print("The pull request is based on branch '%s' but you're on '%s' currently" % (pr['base']['ref'], branch))
+        return 4
+
+    ret = os.system('git branch %s' % (local));
+    ret = os.system('git checkout %s' % (local));
+    if(ret != 0):
+        print("Failed to create/switch branch")
+        return 5
+
+    print("pulling from %s (%s)" % (pr['head']['repo']['git_url'], pr['head']['ref']));
+
+    # WKM - Modification to this script was to change the git piece to https, otherwise
+    #       an error was thrown...
+    git_url = shlex.quote(pr['head']['repo']['git_url']).replace("git://", "https://")
+    ref = shlex.quote(pr['head']['ref'])
+    ret = os.system('git pull %s %s' % (git_url, ref));
+
+    print()
+    print("done. examine changes and merge into master if good")
+
+    return 0
+
+"""Nicely display info about a given pull request
+"""
+def display(pr):
+    print("%s - %s" % ('REQUEST %s' % pr.get('number'),pr.get('title')))
+    print("    %s" % (pr['head']['label']))
+    print("    by %s %s" % (pr['user'].get('login'), pr.get('created_at')[:10]))
+    print("    %s" % (pr.get('html_url')))
+    print()
 
 class Error(Exception):
     """Base class for exceptions in this module."""
