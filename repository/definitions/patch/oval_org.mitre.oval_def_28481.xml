@@ -1,0 +1,43 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28481" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2014:1512-1 -- Security update for compat-openssl098 (moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Desktop 12</oval-def:platform>
+      <oval-def:product>compat-openssl098</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2014:1512-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141512-1.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3567" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3567" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3568" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3568" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3566" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566" source="CVE" />
+    <oval-def:description>compat-openssl098 was updated to fix three security issues.
+
+NOTE: this update alone DOESN'T FIX the POODLE SSL protocol vulnerability.
+OpenSSL only adds downgrade detection support for client applications. See
+https://www.suse.com/support/kb/doc.php?id=7015773 for mitigations.
+
+These security issues were fixed:
+- Session ticket memory leak (CVE-2014-3567).
+- Fixed build option no-ssl3 (CVE-2014-3568).
+- Added support for TLS_FALLBACK_SCSV (CVE-2014-3566).</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T11:14:31">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:38:16.777-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:45.785-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:47.145-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 12 is installed" definition_ref="oval:org.mitre.oval:def:28148" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="compat-openssl098-debugsource is earlier than 0:0.9.8j-62.1" test_ref="oval:org.mitre.oval:tst:135710" />
+      <oval-def:criterion comment="libopenssl0_9_8 is earlier than 0:0.9.8j-62.1" test_ref="oval:org.mitre.oval:tst:136398" />
+      <oval-def:criterion comment="libopenssl0_9_8-debuginfo is earlier than 0:0.9.8j-62.1" test_ref="oval:org.mitre.oval:tst:136319" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

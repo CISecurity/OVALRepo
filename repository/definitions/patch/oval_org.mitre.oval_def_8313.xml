@@ -1,0 +1,45 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8313" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1595 xorg-server -- several vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>xorg-server</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1595" ref_url="http://www.debian.org/security/2008/dsa-1595" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-1377" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1377" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-1379" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1379" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-2360" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2360" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-2361" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2361" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-2362" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2362" source="CVE" />
+    <oval-def:description>Several local vulnerabilities have been discovered in the X Window system. The Common Vulnerabilities and Exposures project identifies the following problems: Lack of validation of the parameters of the SProcSecurityGenerateAuthorization and SProcRecordCreateContext functions makes it possible for a specially crafted request to trigger the swapping of bytes outside the parameter of these requests, causing memory corruption. An integer overflow in the validation of the parameters of the ShmPutImage() request makes it possible to trigger the copy of arbitrary server memory to a pixmap that can subsequently be read by the client, to read arbitrary parts of the X server memory space. An integer overflow may occur in the computation of the size of the glyph to be allocated by the AllocateGlyph() function which will cause less memory to be allocated than expected, leading to later heap overflow. An integer overflow may occur in the computation of the size of the glyph to be allocated by the ProcRenderCreateCursor() function which will cause less memory to be allocated than expected, leading later to dereferencing un-mapped memory, causing a crash of the X server. Integer overflows can also occur in the code validating the parameters for the SProcRenderCreateLinearGradient, SProcRenderCreateRadialGradient and SProcRenderCreateConicalGradient functions, leading to memory corruption by swapping bytes outside of the intended request parameters.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:11-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:59:38.175-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:05:25.586-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:04:07.430-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:8313 - Debian Patch Update" date="2014-06-06T16:28:00.025-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:30:38.501-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:10:33.573-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="xserver-xorg-core is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19560" />
+      <oval-def:criterion comment="xdmx is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19394" />
+      <oval-def:criterion comment="xserver-xorg-dev is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19641" />
+      <oval-def:criterion comment="xvfb is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19616" />
+      <oval-def:criterion comment="xnest is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19536" />
+      <oval-def:criterion comment="xserver-xephyr is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19660" />
+      <oval-def:criterion comment="xdmx-tools is earlier than 1.1.1-21etch5" test_ref="oval:org.mitre.oval:tst:19578" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

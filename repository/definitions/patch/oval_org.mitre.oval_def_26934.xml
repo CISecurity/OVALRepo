@@ -1,0 +1,51 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26934" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2011:1741 -- php-pear security and bug fix update (Low)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:product>php-pear</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2011:1741" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1741.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2011-1072" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1072" source="CVE" />
+    <oval-def:description>The php-pear package contains the PHP Extension and Application Repository
+(PEAR), a framework and distribution system for reusable PHP components.
+
+It was found that the &amp;quot;pear&amp;quot; command created temporary files in an insecure
+way when installing packages. A malicious, local user could use this flaw
+to conduct a symbolic link attack, allowing them to overwrite the contents
+of arbitrary files accessible to the victim running the &amp;quot;pear install&amp;quot;
+command. (CVE-2011-1072)
+
+This update also fixes the following bugs:
+
+* The php-pear package has been upgraded to version 1.9.4, which provides a
+number of bug fixes over the previous version. (BZ#651897)
+
+* Prior to this update, php-pear created a cache in the
+&amp;quot;/var/cache/php-pear/&amp;quot; directory when attempting to list all packages. As a
+consequence, php-pear failed to create or update the cache file as a
+regular user without sufficient file permissions and could not list all
+packages. With this update, php-pear no longer fails if writing to the
+cache directory is not permitted. Now, all packages are listed as expected.
+(BZ#747361)
+
+All users of php-pear are advised to upgrade to this updated package, which
+corrects these issues.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:16:05">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:47:55.396-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:11.635-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:26.522-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+    <oval-def:criterion comment="php-pear is earlier than 0:1.9.4-4.el6" test_ref="oval:org.mitre.oval:tst:126140" />
+  </oval-def:criteria>
+</oval-def:definition>

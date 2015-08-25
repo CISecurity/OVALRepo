@@ -1,0 +1,39 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7486" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1627 opensc -- programming error</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>opensc</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1627" ref_url="http://www.debian.org/security/2008/dsa-1627" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-2235" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2235" source="CVE" />
+    <oval-def:description>Chaskiel M Grundman discovered that opensc, a library and utilities to handle smart cards, would initialise smart cards with the Siemens CardOS M4 card operating system without proper access rights. This allowed everyone to change the card's PIN. With this bug anyone can change a user PIN without having the PIN or PUK or the superusers PIN or PUK. However it can not be used to figure out the PIN. If the PIN on your card is still the same you always had, there's a reasonable chance that this vulnerability has not been exploited. This vulnerability affects only smart cards and USB crypto tokens based on Siemens CardOS M4, and within that group only those that were initialised with OpenSC. Users of other smart cards and USB crypto tokens, or cards that have been initialised with some software other than OpenSC, are not affected. After upgrading the package, running pkcs15-tool -T will show you whether the card is fine or vulnerable. If the card is vulnerable, you need to update the security setting using: pkcs15-tool -T -U.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:04-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:50:57.597-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:00:55.961-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:00:37.371-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:7486 - Debian Patch Update" date="2014-06-06T16:46:00.520-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:48:09.046-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:08:30.558-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="mozilla-opensc is earlier than 0.11.1-2etch2" test_ref="oval:org.mitre.oval:tst:13204" />
+      <oval-def:criterion comment="libopensc2-dev is earlier than 0.11.1-2etch2" test_ref="oval:org.mitre.oval:tst:13479" />
+      <oval-def:criterion comment="opensc is earlier than 0.11.1-2etch2" test_ref="oval:org.mitre.oval:tst:13056" />
+      <oval-def:criterion comment="libopensc2 is earlier than 0.11.1-2etch2" test_ref="oval:org.mitre.oval:tst:13054" />
+      <oval-def:criterion comment="libopensc2-dbg is earlier than 0.11.1-2etch2" test_ref="oval:org.mitre.oval:tst:12872" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,0 +1,41 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7732" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1473 scponly -- design flaw</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 3.1</oval-def:platform>
+      <oval-def:product>scponly</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1473" ref_url="http://www.debian.org/security/2008/dsa-1473" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2007-6350" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6350" source="CVE" />
+    <oval-def:reference ref_id="CVE-2007-6415" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6415" source="CVE" />
+    <oval-def:description>Joachim Breitner discovered that Subversion support in scponly is inherently insecure, allowing execution of arbitrary commands. Further investigation showed that rsync and Unison support suffer from similar issues. This set of issues has been assigned CVE-2007-6350. In addition, it was discovered that it was possible to invoke scp with certain options that may lead to the execution of arbitrary commands (CVE-2007-6415). This update removes Subversion, rsync and Unison support from the scponly package, and prevents scp from being invoked with the dangerous options.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:04-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:52:00.324-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:01:32.660-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:01:07.415-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:7732 - Debian Patch Update" date="2014-06-06T16:43:00.922-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:44:35.466-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:08:48.375-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criterion comment="scponly is earlier than 4.6-1etch1" test_ref="oval:org.mitre.oval:tst:13818" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692" />
+      <oval-def:criterion comment="scponly is earlier than 4.0-1sarge2" test_ref="oval:org.mitre.oval:tst:13766" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

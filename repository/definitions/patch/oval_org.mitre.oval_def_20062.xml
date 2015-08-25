@@ -1,0 +1,43 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:20062" version="7">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2628-1 nss-pam-ldapd - buffer overflow</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>nss-pam-ldapd</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2628-1" ref_url="http://www.debian.org/security/dsa-2628-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-0288" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0288" source="CVE" />
+    <oval-def:description>Garth Mollett discovered that a file descriptor overflow issue in the use of FD_SET() in nss-pam-ldapd, which provides NSS and PAM modules for using LDAP as a naming service, can lead to a stack-based buffer overflow. An attacker could, under some circumstances, use this flaw to cause a process that has the NSS or PAM module loaded to crash or potentially execute arbitrary code.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-12-06T10:22:27">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-12-06T14:49:08.400-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-12-23T04:01:33.748-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-01-13T04:01:10.938-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:24962 - We have found 214 dpkginfo_states with incorrect evr (missed RELEASE in form &quot;EPOCH:VERSION-RELEASE&quot;)" date="2014-03-21T13:26:00.697-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-03-21T13:27:39.198-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-04-07T04:02:08.384-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:20062 - Debian Patch Update" date="2014-06-06T17:36:00.316-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:38:36.497-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:06:33.499-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="nss-pam-ldapd DPKG is earlier than 0:0.7.15+squeeze3" test_ref="oval:org.mitre.oval:tst:89057" />
+  </oval-def:criteria>
+</oval-def:definition>

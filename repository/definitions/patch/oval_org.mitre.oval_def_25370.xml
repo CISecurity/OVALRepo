@@ -1,0 +1,43 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25370" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-RU-2014:0666-1 -- Recommended update for ZMD</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 10</oval-def:platform>
+      <oval-def:product>ZMD</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-RU-2014:0666-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20140666-1.html" source="VENDOR" />
+    <oval-def:description>ZMD was updated to roll in fixes already done in SUSE Linux Enterprise 10
+SP4 branch, and to enable the usage of the current nu.novell.com
+certificates.
+
+ZMD was switched to use /etc/ssl/certs as trust storage. (bnc#723034)
+Various SSL certificate handling issues were fixed as follows:
+
+    * Skip password protected or invalid PKCS12 certificates. (bnc#751782)
+    * Skip invalid SPC certificates. (bnc#754502)
+    * Skip broken certificates. (bnc#751782)
+
+Bugs in the logrotate scripts were fixed. (bnc#719869)
+
+ZMD now also retrieves and handles susedata.xml.gz. (bnc#722339)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:12:34">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:03:53.543-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:04:05.897-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:02:06.320-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="zmd RPM is earlier than 0:7.3.0.0-0.20.63" test_ref="oval:org.mitre.oval:tst:116394" />
+      <oval-def:criterion comment="zmd-devel RPM is earlier than 0:7.3.0.0-0.20.63" test_ref="oval:org.mitre.oval:tst:116376" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

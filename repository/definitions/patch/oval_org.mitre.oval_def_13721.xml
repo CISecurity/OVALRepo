@@ -1,0 +1,58 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13721" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1888-1 openssl, openssl097 -- cryptographic weakness</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>openssl</oval-def:product>
+      <oval-def:product>openssl097</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1888-1" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00209.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-2409" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2409" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-1377" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1377" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-1378" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1378" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-1379" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1379" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-1386" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1386" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-1387" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1387" source="CVE" />
+    <oval-def:description>Certificates with MD2 hash signatures are no longer accepted by OpenSSL, since they’re no longer considered cryptographically secure. For the stable distribution, this problem has been fixed in version 0.9.8g-15+lenny5. For the old stable distribution, this problem has been fixed in version 0.9.8c-4etch9 for openssl and version 0.9.7k-3.1etch5 for openssl097. The OpenSSL 0.9.8 update for oldstable also provides updated packages for multiple denial of service vulnerabilities in the Datagram Transport Layer Security implementation. These fixes were already provided for Debian stable in a previous point update. The OpenSSL 0.9.7 package from oldstable is not affected. For the unstable distribution, this problem has been fixed in version 0.9.8k-5. We recommend that you upgrade your openssl packages.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:33:15.376-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:03:52.117-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:10:22.824-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13721 - Debian Patch Update" date="2014-06-06T16:53:00.834-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:54:31.748-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:02:58.158-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libssl-dev DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:51678" />
+        <oval-def:criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:51979" />
+        <oval-def:criterion comment="openssl DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:52073" />
+        <oval-def:criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8g-15+lenny5" test_ref="oval:org.mitre.oval:tst:52080" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libssl0.9.7-dbg DPKG is earlier than 0.9.7k-3.1etch5" test_ref="oval:org.mitre.oval:tst:51837" />
+        <oval-def:criterion comment="libssl-dev DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:51572" />
+        <oval-def:criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:52075" />
+        <oval-def:criterion comment="openssl DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:52021" />
+        <oval-def:criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8c-4etch9" test_ref="oval:org.mitre.oval:tst:52057" />
+        <oval-def:criterion comment="libssl0.9.7 DPKG is earlier than 0.9.7k-3.1etch5" test_ref="oval:org.mitre.oval:tst:51847" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

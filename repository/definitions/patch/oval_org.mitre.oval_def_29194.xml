@@ -1,0 +1,33 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:29194" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2628-2 -- nss-pam-ldapd -- buffer overflow</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>nss-pam-ldapd</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2628-2" ref_url="http://www.debian.org/security/dsa-2628" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-0288" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0288" source="CVE" />
+    <oval-def:description>Garth Mollett discovered that a file descriptor overflow issue in the use of FD_SETin nss-pam-ldapd, which provides NSS and PAM modules for using LDAP as a naming service, can lead to a stack-based buffer overflow. An attacker could, under some circumstances, use this flaw to cause a process that has the NSS or PAM module loaded to crash or potentially execute arbitrary code.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2015-06-29T10:39:17">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-07-06T10:37:26.987-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-07-27T04:01:22.197-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-08-17T04:01:13.992-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="nss-pam-ldapd is earlier than 0:0.7.15+squeeze4" test_ref="oval:org.mitre.oval:tst:140177" />
+  </oval-def:criteria>
+</oval-def:definition>

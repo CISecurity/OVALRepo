@@ -1,0 +1,53 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:17134" version="5">
+  <oval-def:metadata>
+    <oval-def:title>USN-670-1 -- vm-builder vulnerability</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 6.06</oval-def:platform>
+      <oval-def:platform>Ubuntu 7.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 8.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 8.10</oval-def:platform>
+      <oval-def:product>shadow</oval-def:product>
+      <oval-def:product>vm-builder</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-670-1" ref_url="http://www.ubuntu.com/usn/usn-670-1/" source="VENDOR" />
+    <oval-def:description>Mathias Gug discovered that vm-builder improperly set the root password when creating virtual machines.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-07-22T12:08:11">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-08-15T12:44:35.528-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-09-02T04:00:51.102-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-09-23T04:00:23.639-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:22092 - updated UBUNTU states - evr and comment with explicit epoch" date="2013-11-26T15:09:00.423-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2013-11-26T15:13:56.855-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-12-16T04:00:14.361-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319" />
+      <oval-def:criterion comment="passwd DPKG is earlier than 1:4.0.13-7ubuntu3.3" test_ref="oval:org.mitre.oval:tst:83594" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Ubuntu 7.10 is installed" definition_ref="oval:org.mitre.oval:def:13354" />
+      <oval-def:criterion comment="passwd DPKG is earlier than 1:4.0.18.1-9ubuntu0.1" test_ref="oval:org.mitre.oval:tst:83632" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250" />
+      <oval-def:criterion comment="passwd DPKG is earlier than 1:4.0.18.2-1ubuntu2.1" test_ref="oval:org.mitre.oval:tst:83722" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="passwd DPKG is earlier than 1:4.1.1-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:83605" />
+        <oval-def:criterion comment="python-vm-builder DPKG is earlier than 0.9-0ubuntu3.1" test_ref="oval:org.mitre.oval:tst:83471" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

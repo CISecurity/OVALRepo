@@ -1,0 +1,42 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7842" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1613 libgd2 -- multiple vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>libgd2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1613" ref_url="http://www.debian.org/security/2008/dsa-1613" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2007-3476" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3476" source="CVE" />
+    <oval-def:reference ref_id="CVE-2007-3477" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3477" source="CVE" />
+    <oval-def:reference ref_id="CVE-2007-3996" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-3996" source="CVE" />
+    <oval-def:reference ref_id="CVE-2007-2445" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2445" source="CVE" />
+    <oval-def:description>Multiple vulnerabilities have been identified in libgd2, a library for programmatic graphics creation and manipulation. The Common Vulnerabilities and Exposures project identifies the following problems: Grayscale PNG files containing invalid tRNS chunk CRC values could cause a denial of service (crash), if a maliciously crafted image is loaded into an application using libgd. An array indexing error in libgd's GIF handling could induce a denial of service (crash with heap corruption) if exceptionally large color index values are supplied in a maliciously crafted GIF image file. The imagearc() and imagefilledarc() routines in libgd allow an attacker in control of the parameters used to specify the degrees of arc for those drawing functions to perform a denial of service attack (excessive CPU consumption). Multiple integer overflows exist in libgd's image resizing and creation routines; these weaknesses allow an attacker in control of the parameters passed to those routines to induce a crash or execute arbitrary code with the privileges of the user running an application or interpreter linked against libgd2.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:07-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:54:32.474-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:02:00.329-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:01:28.681-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:7842 - Debian Patch Update" date="2014-06-06T16:41:00.361-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:42:54.164-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:09:01.447-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="libgd2-xpm is earlier than 2.0.33-5.2etch1" test_ref="oval:org.mitre.oval:tst:16061" />
+      <oval-def:criterion comment="libgd2-noxpm is earlier than 2.0.33-5.2etch1" test_ref="oval:org.mitre.oval:tst:15642" />
+      <oval-def:criterion comment="libgd2-xpm-dev is earlier than 2.0.33-5.2etch1" test_ref="oval:org.mitre.oval:tst:16443" />
+      <oval-def:criterion comment="libgd-tools is earlier than 2.0.33-5.2etch1" test_ref="oval:org.mitre.oval:tst:16372" />
+      <oval-def:criterion comment="libgd2-noxpm-dev is earlier than 2.0.33-5.2etch1" test_ref="oval:org.mitre.oval:tst:15835" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

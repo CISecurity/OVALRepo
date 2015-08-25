@@ -1,0 +1,37 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8150" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1650 openldap2.3 -- denial of service</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>openldap2.3</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1650" ref_url="http://www.debian.org/security/2008/dsa-1650" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-2952" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2952" source="CVE" />
+    <oval-def:description>Cameron Hotchkies discovered that the OpenLDAP server slapd, a free implementation of the Lightweight Directory Access Protocol, could be crashed by sending malformed ASN1 requests.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:05-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:53:22.770-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:04:38.974-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:03:29.562-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:8150 - Debian Patch Update" date="2014-06-06T16:32:00.192-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:34:09.793-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:10:12.814-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="libldap-2.3-0 is earlier than 2.3.30-5+etch2" test_ref="oval:org.mitre.oval:tst:14836" />
+      <oval-def:criterion comment="ldap-utils is earlier than 2.3.30-5+etch2" test_ref="oval:org.mitre.oval:tst:14971" />
+      <oval-def:criterion comment="slapd is earlier than 2.3.30-5+etch2" test_ref="oval:org.mitre.oval:tst:15010" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

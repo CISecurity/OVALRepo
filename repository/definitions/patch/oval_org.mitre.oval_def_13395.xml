@@ -1,0 +1,48 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13395" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1784-1 freetype -- integer overflows</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>freetype</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1784-1" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00095.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-0946" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0946" source="CVE" />
+    <oval-def:description>Tavis Ormandy discovered several integer overflows in FreeType, a library to process and access font files, resulting in heap- or stack-based buffer overflows leading to application crashes or the execution of arbitrary code via a crafted font file. For the oldstable distribution, this problem has been fixed in version 2.2.1-5+etch4. For the stable distribution, this problem has been fixed in version 2.3.7-2+lenny1. For the testing distribution, this problem will be fixed soon. For the unstable distribution, this problem has been fixed in version 2.3.9-4.1. We recommend that you upgrade your freetype packages.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:33:48.529-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:02:26.015-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:06:25.569-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13395 - Debian Patch Update" date="2014-06-06T16:59:00.298-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:01:33.559-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:02:09.980-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libfreetype6-dev DPKG is earlier than 2.3.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:52206" />
+        <oval-def:criterion comment="freetype2-demos DPKG is earlier than 2.3.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:52464" />
+        <oval-def:criterion comment="libfreetype6 DPKG is earlier than 2.3.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:52343" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libfreetype6-dev DPKG is earlier than 2.2.1-5+etch4" test_ref="oval:org.mitre.oval:tst:52465" />
+        <oval-def:criterion comment="freetype2-demos DPKG is earlier than 2.2.1-5+etch4" test_ref="oval:org.mitre.oval:tst:52246" />
+        <oval-def:criterion comment="libfreetype6 DPKG is earlier than 2.2.1-5+etch4" test_ref="oval:org.mitre.oval:tst:52290" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

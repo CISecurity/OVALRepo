@@ -1,0 +1,58 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27612" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:1801 -- shim security update (Moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 7</oval-def:platform>
+      <oval-def:product>shim</oval-def:product>
+      <oval-def:product>shim-signed</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:1801" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1801.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3675" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3675" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3676" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3676" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3677" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3677" source="CVE" />
+    <oval-def:description>Shim is the initial UEFI bootloader that handles chaining to a trusted full
+bootloader under secure boot environments.
+
+A heap-based buffer overflow flaw was found the way shim parsed certain
+IPv6 addresses. If IPv6 network booting was enabled, a malicious server
+could supply a crafted IPv6 address that would cause shim to crash or,
+potentially, execute arbitrary code. (CVE-2014-3676)
+
+An out-of-bounds memory write flaw was found in the way shim processed
+certain Machine Owner Keys (MOKs). A local attacker could potentially use
+this flaw to execute arbitrary code on the system. (CVE-2014-3677)
+
+An out-of-bounds memory read flaw was found in the way shim parsed certain
+IPv6 packets. A specially crafted DHCPv6 packet could possibly cause shim
+to crash, preventing the system from booting if IPv6 booting was enabled.
+(CVE-2014-3675)
+
+Red Hat would like to thank the SUSE Security Team for reporting these
+issues.
+
+All shim users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues. The system must be
+rebooted for this update to take effect.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T15:38:37">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:35:59.337-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:11.282-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:11.828-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="mokutil is earlier than 0:0.7-8.el7_0" test_ref="oval:org.mitre.oval:tst:135832" />
+      <oval-def:criterion comment="shim is earlier than 0:0.7-8.el7_0" test_ref="oval:org.mitre.oval:tst:136060" />
+      <oval-def:criterion comment="shim-debuginfo is earlier than 0:0.7-8.el7_0" test_ref="oval:org.mitre.oval:tst:135368" />
+      <oval-def:criterion comment="shim-unsigned is earlier than 0:0.7-8.el7_0" test_ref="oval:org.mitre.oval:tst:136142" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

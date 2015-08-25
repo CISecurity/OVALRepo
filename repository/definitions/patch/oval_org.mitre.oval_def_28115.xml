@@ -1,0 +1,59 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28115" version="3">
+  <oval-def:metadata>
+    <oval-def:title>USN-2394-1 -- Linux kernel (Trusty HWE) vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 12.04</oval-def:platform>
+      <oval-def:product>linux-lts-trusty</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2394-1" ref_url="http://www.ubuntu.com/usn/usn-2394-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3647" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3647" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3646" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3646" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3611" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3611" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3610" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3610" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-7145" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7145" source="CVE" />
+    <oval-def:description>Nadav Amit reported that the KVM (Kernel Virtual Machine) mishandles
+noncanonical addresses when emulating instructions that change the rip
+(Instruction Pointer). A guest user with access to I/O or the MMIO can use
+this flaw to cause a denial of service (system crash) of the guest.
+(&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3647"&gt;CVE-2014-3647&lt;/a&gt;)
+
+A flaw was discovered with the handling of the invept instruction in the
+KVM (Kernel Virtual Machine) subsystem of the Linux kernel. An unprivileged
+guest user could exploit this flaw to cause a denial of service (system
+crash) on the guest. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3646"&gt;CVE-2014-3646&lt;/a&gt;)
+
+Lars Bull reported a race condition in the PIT (programmable interrupt
+timer) emulation in the KVM (Kernel Virtual Machine) subsystem of the Linux
+kernel. A local guest user with access to PIT i/o ports could exploit this
+flaw to cause a denial of service (crash) on the host. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3611"&gt;CVE-2014-3611&lt;/a&gt;)
+
+Lars Bull and Nadav Amit reported a flaw in how KVM (the Kernel Virtual
+Machine) handles noncanonical writes to certain MSR registers. A privileged
+guest user can exploit this flaw to cause a denial of service (kernel
+panic) on the host. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3610"&gt;CVE-2014-3610&lt;/a&gt;)
+
+Raphael Geissert reported a NULL pointer dereference in the Linux kernel&amp;#39;s
+CIFS client. A remote CIFS server could cause a denial of service (system
+crash) or possibly have other unspecified impact by deleting IPC$ share
+during resolution of DFS referrals. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-7145"&gt;CVE-2014-7145&lt;/a&gt;)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-11-14T09:52:22">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-11-17T18:43:53.840-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:56.118-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-29T04:00:31.056-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="linux-image-3.13.0-39-generic-lpae is earlier than 0:3.13.0-39.66~precise1" test_ref="oval:org.mitre.oval:tst:135357" />
+      <oval-def:criterion comment="linux-image-3.13.0-39-generic is earlier than 0:3.13.0-39.66~precise1" test_ref="oval:org.mitre.oval:tst:135428" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

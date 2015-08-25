@@ -1,0 +1,51 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7757" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1536 xine-lib -- several vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 3.1</oval-def:platform>
+      <oval-def:product>xine-lib</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1536" ref_url="http://www.debian.org/security/2008/dsa-1536" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2007-1246" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1246" source="CVE" />
+    <oval-def:reference ref_id="CVE-2007-1387" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1387" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-0073" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0073" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-0486" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0486" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-1161" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1161" source="CVE" />
+    <oval-def:description>Several local vulnerabilities have been discovered in Xine, a media player library, allowed for a denial of service or arbitrary code execution, which could be exploited through viewing malicious content. The Common Vulnerabilities and Exposures project identifies the following problems: The DMO_VideoDecoder_Open function does not set the biSize before use in a memcpy, which allows user-assisted remote attackers to cause a buffer overflow and possibly execute arbitrary code (applies to sarge only). Array index error in the sdpplin_parse function allows remote RTSP servers to execute arbitrary code via a large streamid SDP parameter. Array index vulnerability in libmpdemux/demux_audio.c might allow remote attackers to execute arbitrary code via a crafted FLAC tag, which triggers a buffer overflow (applies to etch only). Buffer overflow in the Matroska demuxer allows remote attackers to cause a denial of service (crash) and possibly execute arbitrary code via a Matroska file with invalid frame sizes.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:03-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:50:26.914-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:01:36.469-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:01:10.521-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:7757 - Debian Patch Update" date="2014-06-06T17:33:00.153-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:34:41.234-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:08:50.546-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libxine1 is earlier than 1.1.2+dfsg-6" test_ref="oval:org.mitre.oval:tst:12897" />
+        <oval-def:criterion comment="libxine1-dbg is earlier than 1.1.2+dfsg-6" test_ref="oval:org.mitre.oval:tst:13106" />
+        <oval-def:criterion comment="libxine-dev is earlier than 1.1.2+dfsg-6" test_ref="oval:org.mitre.oval:tst:13199" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libxine1 is earlier than 1.0.1-1sarge7" test_ref="oval:org.mitre.oval:tst:13216" />
+        <oval-def:criterion comment="libxine-dev is earlier than 1.0.1-1sarge7" test_ref="oval:org.mitre.oval:tst:13041" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

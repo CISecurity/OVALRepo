@@ -1,0 +1,36 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:12644" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1775-1 php-json-ext -- denial of service</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>php-json-ext</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1775-1" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00086.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-1271" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1271" source="CVE" />
+    <oval-def:description>It was discovered that php-json-ext, a JSON serialiser for PHP, is prone to a denial of service attack, when receiving a malformed string via the json_decode function. For the oldstable distribution, this problem has been fixed in version 1.2.1-3.2+etch1. The stable distribution does not contain a separate php-json-ext package, but includes it in the php5 packages, which will be fixed soon. The testing distribution and the unstable distribution do not contain a separate php-json-ext package, but include it in the php5 packages. We recommend that you upgrade your php-json-ext packages.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:28:15.273-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:00:27.631-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:00:34.815-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:12644 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-30T16:52:18.717-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-07-21T04:00:24.527-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="php5-json DPKG is earlier than 1.2.1-3.2+etch1" test_ref="oval:org.mitre.oval:tst:47680" />
+      <oval-def:criterion comment="php4-json DPKG is earlier than 1.2.1-3.2+etch1" test_ref="oval:org.mitre.oval:tst:48035" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

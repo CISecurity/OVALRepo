@@ -1,0 +1,48 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8157" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1508 diatheke -- insufficient input sanitising</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 3.1</oval-def:platform>
+      <oval-def:product>diatheke</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1508" ref_url="http://www.debian.org/security/2008/dsa-1508" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-0932" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0932" source="CVE" />
+    <oval-def:description>Dan Dennison discovered that Diatheke, a CGI program to make a bible website, performs insufficient sanitising of a parameter, allowing a remote attacker to execute arbitrary shell commands as the web server user.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:06-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:54:08.133-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:04:40.734-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:03:30.644-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:8157 - Debian Patch Update" date="2014-06-06T16:32:00.192-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:34:14.078-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:10:13.550-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libsword-dev is earlier than 1.5.9-2etch1" test_ref="oval:org.mitre.oval:tst:15846" />
+        <oval-def:criterion comment="libsword6 is earlier than 1.5.9-2etch1" test_ref="oval:org.mitre.oval:tst:15879" />
+        <oval-def:criterion comment="diatheke is earlier than 1.5.9-2etch1" test_ref="oval:org.mitre.oval:tst:15560" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 3.1 is installed" definition_ref="oval:org.mitre.oval:def:7692" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libsword4 is earlier than 1.5.7-7sarge1" test_ref="oval:org.mitre.oval:tst:15816" />
+        <oval-def:criterion comment="libsword-dev is earlier than 1.5.7-7sarge1" test_ref="oval:org.mitre.oval:tst:15624" />
+        <oval-def:criterion comment="diatheke is earlier than 1.5.7-7sarge1" test_ref="oval:org.mitre.oval:tst:15435" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,0 +1,61 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26462" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-RU-2014:1083-1 -- Recommended update for apache2-mod_nss</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:product>apache2-mod_nss</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-RU-2014:1083-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-ru-20141083-1.html" source="VENDOR" />
+    <oval-def:description>This update brings several improvements to apache2-mod_nss.
+
+    *
+
+      More TLS 1.2 ciphers have been added, including AES-GCM and Camelia
+ciphers. These can be selected by their tags:
+
+          o rsa_aes_128_sha256
+          o rsa_aes_128_gcm_sha
+          o rsa_aes_256_sha256
+          o rsa_camellia_128_sha
+          o rsa_camellia_256_sha
+          o ecdh_ecdsa_aes_128_gcm_sha
+          o ecdhe_ecdsa_aes_128_sha256
+          o ecdhe_ecdsa_aes_128_gcm_sha
+          o ecdh_rsa_aes_128_gcm_sha
+          o ecdhe_rsa_aes_128_sha256
+    *
+
+      The mod_nss.conf.in template was updated to include those ciphers.
+(bnc#863035)
+
+    *
+
+      VirtualHost settings in /etc/apache2/conf.d/mod_nss.conf is now
+externalized to /etc/apache2/vhosts.d/vhost-nss.template and not
+activated/read by default. (bnc#878681)
+
+    *
+
+      The Server Name Indication (SNI) extension was implemented.
+
+    *
+
+      Reading the pass phrase during start-up was improved. (bnc#863518)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-09-26T10:58:26">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-09-29T12:10:37.921-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-10-20T04:00:32.664-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-11-10T04:01:26.422-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+    <oval-def:criterion comment="apache2-mod_nss RPM is earlier than 0:1.0.8-0.4.9.1" test_ref="oval:org.mitre.oval:tst:124061" />
+  </oval-def:criteria>
+</oval-def:definition>

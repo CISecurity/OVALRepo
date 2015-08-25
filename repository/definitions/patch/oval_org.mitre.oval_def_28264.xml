@@ -1,0 +1,65 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28264" version="3">
+  <oval-def:metadata>
+    <oval-def:title>USN-2449-1 -- NTP vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 14.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 14.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 12.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 10.04</oval-def:platform>
+      <oval-def:product>ntp</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2449-1" ref_url="http://www.ubuntu.com/usn/usn-2449-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-9293" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9293" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-9294" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9294" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-9295" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9295" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-9296" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9296" source="CVE" />
+    <oval-def:description>Neel Mehta discovered that NTP generated weak authentication keys. A remote
+attacker could possibly use this issue to brute force the authentication
+key and send requests if permitted by IP restrictions. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-9293"&gt;CVE-2014-9293&lt;/a&gt;)
+
+Stephen Roettger discovered that NTP generated weak MD5 keys. A remote
+attacker could possibly use this issue to brute force the MD5 key and spoof
+a client or server. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-9294"&gt;CVE-2014-9294&lt;/a&gt;)
+
+Stephen Roettger discovered that NTP contained buffer overflows in the
+crypto_recv(), ctl_putdata() and configure() functions. In non-default
+configurations, a remote attacker could use these issues to cause NTP to
+crash, resulting in a denial of service, or possibly execute arbitrary
+code. The default compiler options for affected releases should reduce the
+vulnerability to a denial of service. In addition, attackers would be
+isolated by the NTP AppArmor profile. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-9295"&gt;CVE-2014-9295&lt;/a&gt;)
+
+Stephen Roettger discovered that NTP incorrectly continued processing when
+handling certain errors. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-9296"&gt;CVE-2014-9296&lt;/a&gt;)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-30T11:12:45">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-01-14T20:23:18.535-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-02-02T04:00:17.200-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-02-23T04:01:13.820-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Ubuntu 14.10 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174" />
+      <oval-def:criterion comment="ntp is earlier than 1:4.2.6.p5+dfsg-3ubuntu2.14.10.1" test_ref="oval:org.mitre.oval:tst:136923" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 14.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421" />
+      <oval-def:criterion comment="ntp is earlier than 1:4.2.6.p5+dfsg-3ubuntu2.14.04.1" test_ref="oval:org.mitre.oval:tst:137170" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 12.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824" />
+      <oval-def:criterion comment="ntp is earlier than 1:4.2.6.p3+dfsg-1ubuntu3.2" test_ref="oval:org.mitre.oval:tst:137260" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 10.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089" />
+      <oval-def:criterion comment="ntp is earlier than 1:4.2.4p8+dfsg-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:137306" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

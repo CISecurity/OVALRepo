@@ -1,0 +1,54 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25338" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2014:0750-1 -- Security update for gpg2</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:product>gpg2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2014:0750-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140750-1.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-4402" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4402" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-4351" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4351" source="CVE" />
+    <oval-def:reference ref_id="CVE-2012-6085" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6085" source="CVE" />
+    <oval-def:description>This is a SLES 11 SP1 LTSS rollup update for gpg2.
+
+The following security issues have been fixed:
+
+    * CVE-2013-4402: The compressed packet parser in GnuPG allowed remote
+      attackers to cause a denial of service (infinite recursion) via a
+      crafted OpenPGP message.
+    * CVE-2013-4351: GnuPG treated a key flags subpacket with all bits
+      cleared (no usage permitted) as if it has all bits set (all usage
+      permitted), which might have allowed remote attackers to bypass
+      intended cryptographic protection mechanisms by leveraging the
+      subkey.
+    * CVE-2012-6085: The read_block function in g10/import.c in GnuPG,
+      when importing a key, allowed remote attackers to corrupt the public
+      keyring database or cause a denial of service (application crash)
+      via a crafted length field of an OpenPGP packet.
+
+Also the following non-security bugs have been fixed:
+
+    * set the umask before opening a file for writing (bnc#780943)
+    * select proper ciphers when running in FIPS mode (bnc#808958)
+    * add missing options to opts table (bnc#778723)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:09:30">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:03:45.210-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:03:59.697-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:01:58.985-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="gpg2 RPM is earlier than 0:2.0.9-25.33.37.6" test_ref="oval:org.mitre.oval:tst:116226" />
+      <oval-def:criterion comment="gpg2-lang RPM is earlier than 0:2.0.9-25.33.37.6" test_ref="oval:org.mitre.oval:tst:116452" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

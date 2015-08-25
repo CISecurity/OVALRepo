@@ -1,0 +1,107 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26996" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2011:1615 -- virt-v2v security and bug fix update (Low)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:product>virt-v2v</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2011:1615" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1615.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2011-1773" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1773" source="CVE" />
+    <oval-def:description>virt-v2v is a tool for converting and importing virtual machines to
+libvirt-managed KVM (Kernel-based Virtual Machine), or Red Hat Enterprise
+Virtualization.
+
+Using virt-v2v to convert a guest that has a password-protected VNC console
+to a KVM guest removed that password protection from the converted guest:
+after conversion, a password was not required to access the converted
+guest&amp;#39;s VNC console. Now, converted guests will require the same VNC
+console password as the original guest. Note that when converting a guest
+to run on Red Hat Enterprise Virtualization, virt-v2v will display a
+warning that VNC passwords are not supported. (CVE-2011-1773)
+
+Note: The Red Hat Enterprise Linux 6.2 perl-Sys-Virt update must also be
+installed to correct CVE-2011-1773.
+
+Bug fixes:
+
+* When converting a guest virtual machine (VM), whose name contained
+certain characters, virt-v2v would create a converted guest with a
+corrupted name. Now, virt-v2v will not corrupt guest names. (BZ#665883)
+
+* There were numerous usability issues when running virt-v2v as a non-root
+user. This update makes it simpler to run virt-v2v as a non-root user.
+(BZ#671094)
+
+* virt-v2v failed to convert a Microsoft Windows guest with Windows
+Recovery Console installed in a separate partition. Now, virt-v2v will
+successfully convert a guest with Windows Recovery Console installed in a
+separate partition by ignoring that partition. (BZ#673066)
+
+* virt-v2v failed to convert a Red Hat Enterprise Linux guest which did not
+have the symlink &amp;quot;/boot/grub/menu.lst&amp;quot;. With this update, virt-v2v can
+select a grub configuration file from several places. (BZ#694364)
+
+* This update removes information about the usage of deprecated command
+line options in the virt-v2v man page. (BZ#694370)
+
+* virt-v2v would fail to correctly change the allocation policy, (sparse or
+preallocated) when converting a guest with QCOW2 image format. The error
+message &amp;quot;Cannot import VM, The selected disk configuration is not
+supported&amp;quot; was displayed. With this update, allocation policy changes to a
+guest with QCOW2 storage will work correctly. (BZ#696089)
+
+* The options &amp;quot;--network&amp;quot; and &amp;quot;--bridge&amp;quot; can not be used in conjunction
+when converting a guest, but no error message was displayed. With this
+update, virt-v2v will now display an error message if the mutually
+exclusive &amp;quot;--network&amp;quot; and &amp;quot;--bridge&amp;quot; command line options are both
+specified. (BZ#700759)
+
+* virt-v2v failed to convert a multi-boot guest, and did not clean up
+temporary storage and mount points after failure. With this update,
+virt-v2v will prompt for which operating system to convert from a
+multi-boot guest, and will correctly clean up if the process fails.
+(BZ#702007)
+
+* virt-v2v failed to correctly configure modprobe aliases when converting a
+VMware ESX guest with VMware Tools installed. With this update, modprobe
+aliases will be correctly configured. (BZ#707261)
+
+* When converting a guest with preallocated raw storage using the
+libvirtxml input method, virt-v2v failed with the erroneous error message
+&amp;quot;size(X) &amp;lt; usage(Y)&amp;quot;. This update removes this erroneous error. (BZ#727489)
+
+* When converting a Red Hat Enterprise Linux guest, virt-v2v did not check
+that the Cirrus X driver was available before configuring it. With this
+update, virt-v2v will attempt to install the Cirrus X driver if it is
+required. (BZ#708961)
+
+* VirtIO systems do not support the Windows Recovery Console on 32-bit
+Windows XP. The virt-v2v man page has been updated to note this. On Windows
+XP Professional x64 Edition, however, if Windows Recovery Console is
+re-installed after conversion, it will work as expected. (BZ#732421)
+
+* Placing comments in the guest fstab file by means of the leading &amp;quot;#&amp;quot;
+symbol caused an &amp;quot;unknown filesystem&amp;quot; error after conversion of a guest.
+With this update comments can now be used and error messages will not be
+displayed. (BZ#677870)
+
+Users of virt-v2v should upgrade to this updated package, which fixes these
+issues and upgrades virt-v2v to version 0.8.3.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:16:10">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:47:48.127-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:26.222-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:30.564-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+    <oval-def:criterion comment="virt-v2v is earlier than 0:0.8.3-5.el6" test_ref="oval:org.mitre.oval:tst:125955" />
+  </oval-def:criteria>
+</oval-def:definition>

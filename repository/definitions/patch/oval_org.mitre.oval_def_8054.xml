@@ -1,0 +1,38 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8054" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1516 dovecot -- privilege escalation</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>dovecot</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1516" ref_url="http://www.debian.org/security/2008/dsa-1516" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-1199" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1199" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-1218" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1218" source="CVE" />
+    <oval-def:description>Prior to this update, the default configuration for Dovecot used by Debian runs the server daemons with group mail privileges. This means that users with write access to their mail directory on the server (for example, through an SSH login) could read and also delete via a symbolic link mailboxes owned by other users for which they do not have direct access (CVE-2008-1199). In addition, an internal interpretation conflict in password handling has been addressed proactively, even though it is not known to be exploitable (CVE-2008-1218). Note that applying this update requires manual action: The configuration setting mail_extra_groups = mail has been replaced with mail_privileged_group = mail. The update will show a configuration file conflict in /etc/dovecot/dovecot.conf. It is recommended that you keep the currently installed configuration file, and change the affected line. For your reference, the sample configuration (without your local changes) will have been written to /etc/dovecot/dovecot.conf.dpkg-new. If your current configuration uses mail_extra_groups with a value different from mail, you may have to resort to the mail_access_groups configuration directive.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:09-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:57:25.098-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:03:50.833-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:02:50.804-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:8054 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:37:42.926-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:09:54.223-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="dovecot-pop3d is earlier than 1.0.rc15-2etch4" test_ref="oval:org.mitre.oval:tst:17700" />
+      <oval-def:criterion comment="dovecot-common is earlier than 1.0.rc15-2etch4" test_ref="oval:org.mitre.oval:tst:17831" />
+      <oval-def:criterion comment="dovecot-imapd is earlier than 1.0.rc15-2etch4" test_ref="oval:org.mitre.oval:tst:18423" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

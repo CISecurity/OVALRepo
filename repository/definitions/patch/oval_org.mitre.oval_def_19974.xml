@@ -1,0 +1,38 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:19974" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2562-1 cups-pk-helper - privilege escalation</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>cups-pk-helper</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2562-1" ref_url="http://www.debian.org/security/dsa-2562-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2012-4510" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4510" source="CVE" />
+    <oval-def:description>cups-pk-helper, a PolicyKit helper to configure CUPS with fine-grained privileges, wraps CUPS function calls in an insecure way. This could lead to uploading sensitive data to a CUPS resource, or overwriting specific files with the content of a CUPS resource. The user would have to explicitly approve the action.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-12-06T10:22:33">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-12-06T14:49:12.507-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-12-23T04:01:30.150-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-01-13T04:01:04.637-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:19974 - Debian Patch Update" date="2014-06-06T17:26:00.233-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:28:46.241-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:06:15.599-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="cups-pk-helper DPKG is earlier than 0:0.1.0-3" test_ref="oval:org.mitre.oval:tst:89151" />
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,0 +1,57 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28467" version="5">
+  <oval-def:metadata>
+    <oval-def:title>USN-2431-1 -- mod_wsgi vulnerability</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 14.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 14.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 12.04</oval-def:platform>
+      <oval-def:product>mod-wsgi</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2431-1" ref_url="http://www.ubuntu.com/usn/usn-2431-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-8583" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8583" source="CVE" />
+    <oval-def:description>It was discovered that mod_wsgi incorrectly handled errors when setting up
+the working directory and group access rights. A malicious application
+could possibly use this issue to cause a local privilege escalation when
+using daemon mode.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T10:53:07">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:45:53.939-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:44.739-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:46.473-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:28467 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-20T10:53:17.672-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-09T04:01:42.109-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Ubuntu 14.10 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="libapache2-mod-wsgi is earlier than 0:3.5-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:136552" />
+        <oval-def:criterion comment="libapache2-mod-wsgi-py3 is earlier than 0:3.5-1ubuntu0.1" test_ref="oval:org.mitre.oval:tst:136672" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 14.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="libapache2-mod-wsgi is earlier than 0:3.4-4ubuntu2.1.14.04.2" test_ref="oval:org.mitre.oval:tst:136524" />
+        <oval-def:criterion comment="libapache2-mod-wsgi-py3 is earlier than 0:3.4-4ubuntu2.1.14.04.2" test_ref="oval:org.mitre.oval:tst:136698" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 12.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="libapache2-mod-wsgi is earlier than 0:3.3-4ubuntu0.2" test_ref="oval:org.mitre.oval:tst:136652" />
+        <oval-def:criterion comment="libapache2-mod-wsgi-py3 is earlier than 0:3.3-4ubuntu0.2" test_ref="oval:org.mitre.oval:tst:135781" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

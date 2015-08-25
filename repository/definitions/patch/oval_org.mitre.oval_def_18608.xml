@@ -1,0 +1,46 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:18608" version="7">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1892-1 dovecot - arbitrary code execution</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:product>dovecot</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1892-1" ref_url="http://www.debian.org/security/dsa-1892-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-2632" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2632" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-3235" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3235" source="CVE" />
+    <oval-def:description>It was discovered that the SIEVE component of dovecot, a mail server that supports mbox and maildir mailboxes, is vulnerable to a buffer overflow when processing SIEVE scripts. This can be used to elevate privileges to the dovecot system user. An attacker who is able to install SIEVE scripts executed by the server is therefore able to read and modify arbitrary email messages on the system.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-08-01T17:12:53">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-08-27T11:12:35.770-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-09-16T04:02:05.770-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-10-07T04:10:40.061-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:23730 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2013-12-02T15:31:19.383-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-12-23T04:00:40.387-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:18608 - Debian Patch Update" date="2014-06-06T17:17:00.167-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:19:55.243-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:05:03.924-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criterion comment="dovecot DPKG is earlier than 1.0.rc15-2etch5" test_ref="oval:org.mitre.oval:tst:86529" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section">
+      <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+      <oval-def:criterion comment="dovecot DPKG is earlier than 1:1.0.15-2.3+lenny1" test_ref="oval:org.mitre.oval:tst:86434" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

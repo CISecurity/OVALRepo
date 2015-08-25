@@ -1,0 +1,58 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25550" version="5">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-RU-2013:1115-1 -- Recommended update for ksh</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Server 10</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Desktop 11</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Desktop 10</oval-def:platform>
+      <oval-def:product>ksh</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-RU-2013:1115-1" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20131115-1.html" source="VENDOR" />
+    <oval-def:description>This update for Korn Shell provides fixes for the following
+issues:
+
+    * #808449: set -k does not work properly with
+ksh-93t-13.17 and higher
+    * #814135: crash in bestreclaim() after traversing a
+memory block with a very large size
+    * #824187: set -k breaks aliases with ksh-93u.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:33:01">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:32:12.032-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:04:33.706-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:02:38.360-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:tst:119824 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Kedovskaya</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-26T19:18:57.091-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-16T04:00:35.704-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="ksh RPM is earlier than 0:93u-0.22.1" test_ref="oval:org.mitre.oval:tst:119743" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="SUSE Linux Enterprise Server 10 and SUSE Linux Enterprise Desktop 10 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368" />
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 10 is installed" definition_ref="oval:org.mitre.oval:def:2106" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="ksh RPM is earlier than 0:93u-0.27.5" test_ref="oval:org.mitre.oval:tst:119824" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="SUSE Linux Enterprise Server 10 release section">
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Server 10 is installed" definition_ref="oval:org.mitre.oval:def:1368" />
+      <oval-def:criterion comment="ksh-devel RPM is earlier than 0:93u-0.27.5" test_ref="oval:org.mitre.oval:tst:118968" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,0 +1,38 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:18360" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2557-1 hostapd - denial of service</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>hostapd</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2557-1" ref_url="http://www.debian.org/security/dsa-2557-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2012-4445" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4445" source="CVE" />
+    <oval-def:description>Timo Warns discovered that the internal authentication server of hostapd, a user space IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2/EAP Authenticator, is vulnerable to a buffer overflow when processing fragmented EAP-TLS messages. As a result, an internal overflow checking routine terminates the process. An attacker can abuse this flaw to conduct denial of service attacks via crafted EAP-TLS messages prior to any authentication.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-08-01T17:12:24">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-08-27T11:11:34.932-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-09-16T04:01:03.712-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-10-07T04:09:55.149-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:18360 - Debian Patch Update" date="2014-06-06T17:20:00.187-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:22:05.392-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:04:17.742-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="hostapd DPKG is earlier than 1:0.6.10-2+squeeze1" test_ref="oval:org.mitre.oval:tst:86350" />
+  </oval-def:criteria>
+</oval-def:definition>

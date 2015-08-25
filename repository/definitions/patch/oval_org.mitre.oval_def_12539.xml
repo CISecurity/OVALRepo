@@ -1,0 +1,36 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:12539" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2095-1 lvm2 -- insecure communication protocol</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:product>lvm2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2095-1" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00141.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2010-2526" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2526" source="CVE" />
+    <oval-def:description>Alasdair Kergon discovered that the cluster logical volume manager daemon in lvm2, The Linux Logical Volume Manager, does not verify client credentials upon a socket connection, which allows local users to cause a denial of service. For the stable distribution, this problem has been fixed in version 2.02.39-8 For the testing distribution, and the unstable distribution, this problem has been fixed in version 2.02.66-3 We recommend that you upgrade your lvm2 package.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-06-30T06:16:26">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-06-30T14:54:04.640-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-07-18T04:00:16.176-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-08-08T04:00:24.466-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:12539 - Debian Patch Update" date="2014-06-30T16:50:00.552-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-30T16:52:06.464-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-07-21T04:00:20.546-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="clvm DPKG is earlier than 2.02.39-8" test_ref="oval:org.mitre.oval:tst:42889" />
+      <oval-def:criterion comment="lvm2 DPKG is earlier than 2.02.39-8" test_ref="oval:org.mitre.oval:tst:42835" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

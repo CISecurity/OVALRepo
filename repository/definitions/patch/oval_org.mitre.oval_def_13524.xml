@@ -1,0 +1,36 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13524" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1728-1 dkim-milter -- improper assertion</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:product>dkim-milter</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1728-1" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00037.html" source="VENDOR" />
+    <oval-def:description>It was discovered that dkim-milter, an implementation of the DomainKeys Identified Mail protocol, may crash during DKIM verification if it encounters a specially-crafted or revoked public key record in DNS. The old stable distribution does not contain dkim-milter packages. For the stable distribution, this problem has been fixed in version 2.6.0.dfsg-1+lenny1. For the unstable distribution, this problem has been fixed in version 2.6.0.dfsg-2. We recommend that you upgrade your dkim-milter packages.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:31:08.214-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:03:00.125-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:08:20.647-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13524 - Debian Patch Update" date="2014-06-06T16:57:00.521-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:59:40.941-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:02:26.549-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="kim-filter DPKG is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:50106" />
+      <oval-def:criterion comment="libsmdkim-dev DPKG is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:51066" />
+      <oval-def:criterion comment="libsmdkim2 DPKG is earlier than 2.6.0.dfsg-1+lenny1" test_ref="oval:org.mitre.oval:tst:50795" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

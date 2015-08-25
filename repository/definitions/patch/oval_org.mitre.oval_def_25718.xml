@@ -1,0 +1,56 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25718" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2013:1250-1 -- Security update for lcms2</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Desktop 11</oval-def:platform>
+      <oval-def:product>lcms2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2013:1250-1" ref_url="https://www.suse.com/support/update/announcement/2013/suse-su-20131250-1.html" source="VENDOR" />
+    <oval-def:description>lcms2 has been updated to the version 2.5 which is a
+maintenance release to  fix various security and other bugs.
+
+    * User defined parametric curves can now be saved in
+ICC profiles.
+    * RGB profiles using same tone curves for several
+channels are storing now only one copy of the curve
+    * update black point detection algorithm to reflect ICC
+changes
+    * Added new cmsPlugInTHR() and fixed some race
+conditions
+    * Added error descriptions on cmsSmoothToneCurve
+    * Several improvements in cgats parser.
+    * Fixed devicelink generation for 8 bits
+    * Added a reference for Mac MLU tag
+    * Added a way to read the profile creator from header
+    * Added identity curves support for write V2 LUT
+    * Added TIFF Lab16 handling on tifficc
+    * Fixed a bug in parametric curves
+    * Rendering intent used when creating the transform is
+now propagated to profile header in cmsTransform2Devicelink.
+    * Transform2Devicelink now keeps white point when
+guessing deviceclass is enabled
+    * Added some checks for non-happy path, mostly failing
+mallocs (bnc#826097).
+
+For further changes please see the ChangeLog in the RPM.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:30:18">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:28:22.678-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:04:58.125-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:03:04.104-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="lcms2 RPM is earlier than 0:2.5-0.7.1" test_ref="oval:org.mitre.oval:tst:119080" />
+      <oval-def:criterion comment="liblcms2-2 RPM is earlier than 0:2.5-0.7.1" test_ref="oval:org.mitre.oval:tst:119461" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

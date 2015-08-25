@@ -1,0 +1,65 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28244" version="5">
+  <oval-def:metadata>
+    <oval-def:title>USN-2412-1 -- Ruby vulnerability</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 14.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 14.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 12.04</oval-def:platform>
+      <oval-def:product>ruby1.8</oval-def:product>
+      <oval-def:product>ruby1.9.1</oval-def:product>
+      <oval-def:product>ruby2.0</oval-def:product>
+      <oval-def:product>ruby2.1</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2412-1" ref_url="http://www.ubuntu.com/usn/usn-2412-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-8090" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8090" source="CVE" />
+    <oval-def:description>Tomas Hoger discovered that Ruby incorrectly handled XML entity expansion.
+An attacker could use this flaw to cause Ruby to consume large amounts of
+resources, resulting in a denial of service.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-08T10:53:37">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-12-19T17:45:58.257-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-01-05T04:00:26.478-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-01-26T04:00:30.374-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:28244 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-20T10:53:12.715-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-09T04:01:31.408-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Ubuntu 14.10 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="libruby2.1 is earlier than 0:2.1.2-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:136145" />
+        <oval-def:criterion comment="libruby2.0 is earlier than 0:2.0.0.484+really457-3ubuntu1.2" test_ref="oval:org.mitre.oval:tst:136726" />
+        <oval-def:criterion comment="ruby2.1 is earlier than 0:2.1.2-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:135847" />
+        <oval-def:criterion comment="ruby2.0 is earlier than 0:2.0.0.484+really457-3ubuntu1.2" test_ref="oval:org.mitre.oval:tst:136664" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 14.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 14.04 is installed" definition_ref="oval:org.mitre.oval:def:24421" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="libruby2.0 is earlier than 0:2.0.0.484-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:136463" />
+        <oval-def:criterion comment="ruby1.9.1 is earlier than 0:1.9.3.484-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:136341" />
+        <oval-def:criterion comment="libruby1.9.1 is earlier than 0:1.9.3.484-2ubuntu1.2" test_ref="oval:org.mitre.oval:tst:136774" />
+        <oval-def:criterion comment="ruby2.0 is earlier than 0:2.0.0.484-1ubuntu2.2" test_ref="oval:org.mitre.oval:tst:136451" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 12.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="ruby1.8 is earlier than 0:1.8.7.352-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:136725" />
+        <oval-def:criterion comment="ruby1.9.1 is earlier than 0:1.9.3.0-1ubuntu2.10" test_ref="oval:org.mitre.oval:tst:136148" />
+        <oval-def:criterion comment="libruby1.8 is earlier than 0:1.8.7.352-2ubuntu1.6" test_ref="oval:org.mitre.oval:tst:136748" />
+        <oval-def:criterion comment="libruby1.9.1 is earlier than 0:1.9.3.0-1ubuntu2.10" test_ref="oval:org.mitre.oval:tst:135856" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

@@ -1,0 +1,40 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7674" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1884 nginx -- buffer underflow</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
+      <oval-def:product>nginx</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1884" ref_url="http://www.debian.org/security/2009/dsa-1884" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-2629" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2629" source="CVE" />
+    <oval-def:description>Chris Ries discovered that nginx, a high-performance HTTP server, reverse proxy and IMAP/POP3 proxy server, is vulnerable to a buffer underflow when processing certain HTTP requests. An attacker can use this to execute arbitrary code with the rights of the worker process (www-data on Debian) or possibly perform denial of service attacks by repeatedly crashing worker processes via a specially crafted URL in an HTTP request.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-12-15T20:12:04-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-12-28T07:51:24.641-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2010-01-18T04:01:26.109-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-02-08T04:01:01.391-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:7674 - Debian Patch Update" date="2014-06-06T16:43:00.922-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:44:37.055-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:08:44.475-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+      <oval-def:criterion comment="nginx is earlier than 0.6.32-3+lenny2" test_ref="oval:org.mitre.oval:tst:13564" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <oval-def:criterion comment="nginx is earlier than 0.4.13-2+etch2" test_ref="oval:org.mitre.oval:tst:13405" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

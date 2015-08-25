@@ -1,0 +1,63 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28203" version="5">
+  <oval-def:metadata>
+    <oval-def:title>USN-2396-1 -- Linux kernel vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 14.10</oval-def:platform>
+      <oval-def:product>linux</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2396-1" ref_url="http://www.ubuntu.com/usn/usn-2396-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3647" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3647" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3646" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3646" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3611" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3611" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3610" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3610" source="CVE" />
+    <oval-def:description>Nadav Amit reported that the KVM (Kernel Virtual Machine) mishandles
+noncanonical addresses when emulating instructions that change the rip
+(Instruction Pointer). A guest user with access to I/O or the MMIO can use
+this flaw to cause a denial of service (system crash) of the guest.
+(&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3647"&gt;CVE-2014-3647&lt;/a&gt;)
+
+A flaw was discovered with the handling of the invept instruction in the
+KVM (Kernel Virtual Machine) subsystem of the Linux kernel. An unprivileged
+guest user could exploit this flaw to cause a denial of service (system
+crash) on the guest. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3646"&gt;CVE-2014-3646&lt;/a&gt;)
+
+Lars Bull reported a race condition in the PIT (programmable interrupt
+timer) emulation in the KVM (Kernel Virtual Machine) subsystem of the Linux
+kernel. A local guest user with access to PIT i/o ports could exploit this
+flaw to cause a denial of service (crash) on the host. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3611"&gt;CVE-2014-3611&lt;/a&gt;)
+
+Lars Bull and Nadav Amit reported a flaw in how KVM (the Kernel Virtual
+Machine) handles noncanonical writes to certain MSR registers. A privileged
+guest user can exploit this flaw to cause a denial of service (kernel
+panic) on the host. (&lt;a href="http://people.ubuntu.com/~ubuntu-security/cve/CVE-2014-3610"&gt;CVE-2014-3610&lt;/a&gt;)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-11-14T09:52:14">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-11-17T18:43:49.412-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:58.299-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-29T04:00:35.057-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:28203 - Address duplicates of the definition oval:org.mitre.oval:def:27174." date="2015-02-20T10:50:00.874-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-20T10:53:15.139-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-09T04:01:30.434-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Ubuntu 14.10 is installed" definition_ref="oval:org.mitre.oval:def:27174" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="linux-image-3.16.0-24-powerpc-e500mc is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:134838" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-powerpc64-smp is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:134832" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-powerpc-smp is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:135509" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-powerpc64-emb is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:135337" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-lowlatency is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:134785" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-generic is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:135397" />
+      <oval-def:criterion comment="linux-image-3.16.0-24-generic-lpae is earlier than 0:3.16.0-24.32" test_ref="oval:org.mitre.oval:tst:135248" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

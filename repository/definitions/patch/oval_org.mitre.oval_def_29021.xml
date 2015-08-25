@@ -1,0 +1,37 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:29021" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2641-2 -- perl -- rehashing flaw</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>perl</oval-def:product>
+      <oval-def:product>libapache2-mod-perl2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2641-2" ref_url="http://www.debian.org/security/dsa-2641" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-1667" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1667" source="CVE" />
+    <oval-def:description>Yves Orton discovered a flaw in the rehashing code of Perl. This flaw could be exploited to carry out a denial of service attack against code that uses arbitrary user input as hash keys. Specifically an attacker could create a set of keys of a hash causing a denial of service via memory exhaustion.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2015-06-29T10:39:13">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-07-06T10:37:47.450-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-07-27T04:00:52.207-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-08-17T04:00:44.947-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="perl is earlier than 0:5.10.1-17squeeze6" test_ref="oval:org.mitre.oval:tst:139848" />
+      <oval-def:criterion comment="libapache2-mod-perl2 is earlier than 0:2.0.4-7+squeeze1" test_ref="oval:org.mitre.oval:tst:139776" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

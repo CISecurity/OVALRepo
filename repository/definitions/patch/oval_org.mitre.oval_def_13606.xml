@@ -1,0 +1,41 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13606" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1879-1 silc-client/silc-toolkit -- several</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:product>silc-client/silc-toolkit</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1879-1" ref_url="http://lists.debian.org/debian-security-announce/2009/msg00198.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2008-7159" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-7159" source="CVE" />
+    <oval-def:reference ref_id="CVE-2008-7160" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-7160" source="CVE" />
+    <oval-def:reference ref_id="CVE-2009-3051" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3051" source="CVE" />
+    <oval-def:description>Several vulnerabilities have been discovered in the software suite for the SILC protocol, a network protocol designed to provide end-to-end security for conferencing services. The Common Vulnerabilities and Exposures project identifies the following problems: An incorrect format string in sscanf used in the ASN1 encoder to scan an OID value could overwrite a neighbouring variable on the stack as the destination data type is smaller than the source type on 64-bit. On 64-bit architectures this could result in unexpected application behaviour or even code execution in some cases. Various format string vulnerabilities when handling parsed SILC messages allow an attacker to execute arbitrary code with the rights of the victim running the SILC client via crafted nick names or channel names containing format strings. An incorrect format string in a sscanf call used in the HTTP server component of silcd could result in overwriting a neighbouring variable on the stack as the destination data type is smaller than the source type on 64-bit. An attacker could exploit this by using crafted Content-Length header values resulting in unexpected application behaviour or even code execution in some cases. Silc-server doesn’t need an update as it uses the shared library provided by silc-toolkit. Silc-client/silc-toolkit in the oldstable distribution is not affected by this problem. For the stable distribution, this problem has been fixed in version 1.1.7-2+lenny1 of silc-toolkit and in version 1.1.4-1+lenny1 of silc-client. For the testing distribution, this problem will be fixed soon. For the unstable distribution, this problem has been fixed in version 1.1.10-1 of silc-toolkit and version 1.1-2 of silc-client. We recommend that you upgrade your silc-toolkit/silc-client packages.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:28:31.625-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:03:23.179-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:09:19.558-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13606 - Debian Patch Update" date="2014-06-06T16:56:00.436-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T16:57:54.029-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:02:40.801-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="silc DPKG is earlier than 1.1.4-1+lenny1" test_ref="oval:org.mitre.oval:tst:48334" />
+      <oval-def:criterion comment="libsilc-1.1-2 DPKG is earlier than 1.1.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:48339" />
+      <oval-def:criterion comment="libsilc-1.1-2-dbg DPKG is earlier than 1.1.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:47470" />
+      <oval-def:criterion comment="libsilc-1.1-2-dev DPKG is earlier than 1.1.7-2+lenny1" test_ref="oval:org.mitre.oval:tst:47822" />
+      <oval-def:criterion comment="irssi-plugin-silc DPKG is earlier than 1.1.4-1+lenny1" test_ref="oval:org.mitre.oval:tst:48277" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

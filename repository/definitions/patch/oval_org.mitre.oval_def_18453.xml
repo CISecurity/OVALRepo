@@ -1,0 +1,43 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:18453" version="7">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2571-1 libproxy - buffer overflow</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:product>libproxy</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2571-1" ref_url="http://www.debian.org/security/dsa-2571-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2012-4505" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4505" source="CVE" />
+    <oval-def:description>The Red Hat Security Response Team discovered that libproxy, a library for automatic proxy configuration management, applied insufficient validation to the Content-Length header sent by a server providing a proxy.pac file. Such remote server could trigger an integer overflow and consequently overflow an in-memory buffer.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2013-08-01T17:12:23">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2013-08-27T11:11:54.721-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2013-09-16T04:01:22.455-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-10-07T04:10:08.935-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:23594 - updates for DEBIAN states (evr and comment with explicitly epoch)." date="2013-12-02T15:28:00.559-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2013-12-02T15:31:37.896-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-12-23T04:00:35.821-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:18453 - Debian Patch Update" date="2014-06-06T17:20:00.187-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:22:13.718-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:04:32.253-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="libproxy DPKG is earlier than 0.3.1-2+squeeze1" test_ref="oval:org.mitre.oval:tst:86377" />
+  </oval-def:criteria>
+</oval-def:definition>

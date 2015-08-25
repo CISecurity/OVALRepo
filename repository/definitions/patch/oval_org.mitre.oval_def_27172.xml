@@ -1,0 +1,45 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27172" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2011:1694 -- libcap security and bug fix update (Low)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:product>libcap</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2011:1694" ref_url="https://rhn.redhat.com/errata/RHSA-2011-1694.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2011-4099" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-4099" source="CVE" />
+    <oval-def:description>The libcap packages provide a library and tools for getting and setting
+POSIX capabilities.
+
+It was found that capsh did not change into the new root when using the
+&amp;quot;--chroot&amp;quot; option. An application started via the &amp;quot;capsh --chroot&amp;quot; command
+could use this flaw to escape the chroot restrictions. (CVE-2011-4099)
+
+This update also fixes the following bug:
+
+* Previously, the libcap packages did not contain the capsh(1) manual page.
+With this update, the capsh(1) manual page is included. (BZ#730957)
+
+All libcap users are advised to upgrade to these updated packages, which
+contain backported patches to correct these issues.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:16:15">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:48:08.584-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:54.894-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:41.689-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="libcap is earlier than 0:2.16-5.5.el6" test_ref="oval:org.mitre.oval:tst:125836" />
+      <oval-def:criterion comment="libcap-debuginfo is earlier than 0:2.16-5.5.el6" test_ref="oval:org.mitre.oval:tst:125476" />
+      <oval-def:criterion comment="libcap-devel is earlier than 0:2.16-5.5.el6" test_ref="oval:org.mitre.oval:tst:126255" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

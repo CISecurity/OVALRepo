@@ -1,0 +1,50 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26086" version="5">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-RU-2013:0489-1 -- Recommended update for aaa_base</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Desktop 11</oval-def:platform>
+      <oval-def:product>aaa_base</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-RU-2013:0489-1" ref_url="https://www.suse.com/support/update/announcement/2013/suse-ru-20130489-1.html" source="VENDOR" />
+    <oval-def:description>This collective update for aaa_base provides the following
+fixes and  enhancements:
+
+    * Use of large UID numbers could cause the creation of
+a huge "faillog" file in /var/log. When logging in as root,
+the faillog(8) utility could read this file sequentially,
+introducing long delays. This update removes the call to
+faillog from the default login scripts. Users interested in
+keeping this functionality are advised to use the PAM
+module pam_tally2(8). (bnc#801037)
+    * During system shutdown, blogd(8) could close the
+system console before all messages were printed.
+(bnc#789893)
+    * Mime types for .docx, .dotx, .pptx, .xlsx and .xltx
+were added to /etc/mime.types. (FATE#313237)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:39:28">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:36:21.121-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:05:48.619-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:03:51.685-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:32675 - Corrected package names in objects and versions in states." date="2015-02-26T18:54:00.627-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Kedovskaya</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-26T19:18:38.574-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-16T04:00:48.540-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:criteria comment="Operation system section" operator="OR">
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="aaa_base RPM is earlier than 0:11-6.77.77.1" test_ref="oval:org.mitre.oval:tst:120523" />
+  </oval-def:criteria>
+</oval-def:definition>

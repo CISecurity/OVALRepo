@@ -1,0 +1,52 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:24425" version="5">
+  <oval-def:metadata>
+    <oval-def:title>USN-2142-1 -- udisks, udisks2 vulnerability</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 13.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 12.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 12.04</oval-def:platform>
+      <oval-def:product>udisks</oval-def:product>
+      <oval-def:product>udisks2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-2142-1" ref_url="http://www.ubuntu.com/usn/usn-2142-1/" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-0004" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0004" source="CVE" />
+    <oval-def:description>UDisks could be made to manipulate directories as the administrator.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-03-24T11:37:23">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-04-01T10:00:04.458-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-04-21T04:00:53.726-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-05-12T04:00:53.619-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:24425 - updates for Ubuntu patches" date="2014-06-20T11:37:00.128-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-20T11:46:22.510-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-07-07T04:01:12.759-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Ubuntu 13.10 release section">
+      <oval-def:extend_definition comment="Ubuntu 13.10 is installed" definition_ref="oval:org.mitre.oval:def:19244" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="udisks DPKG is earlier than 0:1.0.4-8ubuntu1.1" test_ref="oval:org.mitre.oval:tst:113092" />
+        <oval-def:criterion comment="udisks2 DPKG is earlier than 0:2.1.0-4ubuntu0.1" test_ref="oval:org.mitre.oval:tst:113055" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 12.10 release section">
+      <oval-def:extend_definition comment="Ubuntu 12.10 is installed" definition_ref="oval:org.mitre.oval:def:16418" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="udisks DPKG is earlier than 0:1.0.4-6ubuntu0.1" test_ref="oval:org.mitre.oval:tst:112416" />
+        <oval-def:criterion comment="udisks2 DPKG is earlier than 0:2.0.0-1ubuntu1.1" test_ref="oval:org.mitre.oval:tst:113065" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Ubuntu 12.04 release section">
+      <oval-def:extend_definition comment="Ubuntu 12.04 is installed" definition_ref="oval:org.mitre.oval:def:15824" />
+      <oval-def:criterion comment="udisks DPKG is earlier than 0:1.0.4-5ubuntu2.2" test_ref="oval:org.mitre.oval:tst:113060" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

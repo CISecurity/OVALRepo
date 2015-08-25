@@ -1,0 +1,56 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28644" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2014:1619-1 -- Security update for shim (important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Desktop 11</oval-def:platform>
+      <oval-def:product>shim</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2014:1619-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20141619-1.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3675" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3675" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3676" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3676" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-3677" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3677" source="CVE" />
+    <oval-def:description>shim has been updated to fix three security issues:
+
+    * OOB read access when parsing DHCPv6 packets (remote DoS)
+      (CVE-2014-3675).
+    * Heap overflow when parsing IPv6 addresses provided by tftp:// DHCPv6
+      boot option (RCE) (CVE-2014-3676).
+    * Memory corruption when processing user provided MOK lists
+      (CVE-2014-3677).
+
+Security Issues:
+
+    * CVE-2014-3675
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3675&gt;
+    * CVE-2014-3676
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3676&gt;
+    * CVE-2014-3677
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3677&gt;</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-30T11:42:56">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-01-14T20:20:54.117-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-02-02T04:00:35.215-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-02-23T04:01:31.451-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="SUSE Linux Enterprise Server 11 release section">
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+      <oval-def:criterion comment="gnu-efi is earlier than 0:3.0u-0.7.2" test_ref="oval:org.mitre.oval:tst:137099" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="SUSE Linux Enterprise Server 11 and SUSE Linux Enterprise Desktop 11 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+        <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="shim is earlier than 0:0.7.318.81ee561d-0.9.2" test_ref="oval:org.mitre.oval:tst:136862" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

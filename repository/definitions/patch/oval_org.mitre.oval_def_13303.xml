@@ -1,0 +1,38 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13303" version="5">
+  <oval-def:metadata>
+    <oval-def:title>DSA-1970-1 openssl -- denial of service</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
+      <oval-def:product>openssl</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-1970-1" ref_url="http://lists.debian.org/debian-security-announce/2010/msg00005.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-4355" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4355" source="CVE" />
+    <oval-def:description>It was discovered that a significant memory leak could occur in openssl, related to the reinitialisation of zlib. This could result in a remotely exploitable denial of service vulnerability when using the Apache httpd server in a configuration where mod_ssl, mod_php5, and the php5-curl extension are loaded. The old stable distribution is not affected by this issue. For the stable distribution, this problem has been fixed in version 0.9.8g-15+lenny6. The packages for the arm architecture are not included in this advisory. They will be released as soon as they become available. For the testing distribution and the unstable distribution, this problem will be fixed soon. The issue does not seem to be exploitable with the apache2 package contained in squeeze/sid. We recommend that you upgrade your openssl packages. You also need to restart your Apache httpd server to make sure it uses the updated libraries.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-11T14:18:57-05:00">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-10-13T11:26:43.142-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-10-31T04:02:01.306-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:05:11.317-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13303 - Debian Patch Update" date="2014-06-06T17:01:00.787-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-06T17:03:33.443-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-23T04:01:55.894-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="libssl-dev DPKG is earlier than 0.9.8g-15+lenny6" test_ref="oval:org.mitre.oval:tst:46281" />
+      <oval-def:criterion comment="libssl0.9.8-dbg DPKG is earlier than 0.9.8g-15+lenny6" test_ref="oval:org.mitre.oval:tst:45686" />
+      <oval-def:criterion comment="openssl DPKG is earlier than 0.9.8g-15+lenny6" test_ref="oval:org.mitre.oval:tst:45812" />
+      <oval-def:criterion comment="libssl0.9.8 DPKG is earlier than 0.9.8g-15+lenny6" test_ref="oval:org.mitre.oval:tst:46206" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

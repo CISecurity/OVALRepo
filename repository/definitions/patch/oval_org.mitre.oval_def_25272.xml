@@ -1,0 +1,44 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25272" version="3">
+  <oval-def:metadata>
+    <oval-def:title>SUSE-SU-2014:0643-1 -- Security update for lxc</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>SUSE Linux Enterprise Server 11</oval-def:platform>
+      <oval-def:platform>SUSE Linux Enterprise Desktop 11</oval-def:platform>
+      <oval-def:product>lxc</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="SUSE-SU-2014:0643-1" ref_url="https://www.suse.com/support/update/announcement/2014/suse-su-20140643-1.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-6441" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6441" source="CVE" />
+    <oval-def:description>The container framework LXC has been updated to fix various bugs and a
+security issue:
+
+    * CVE-2013-6441: The sshd template allowed privilege escalation on the
+      host.
+    * SLES container time not aligned with host time (bnc#839653)
+    * SLES container boot takes ages (bnc#839663)
+    * lxc mounts /dev/pts with wrong options (bnc#869663)
+
+Security Issues:
+
+    * CVE-2013-6441
+      &lt;http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6441&gt;</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-15T17:12:48">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:03:27.689-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-08-18T04:03:42.121-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:01:31.931-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:criteria comment="Operation system section" operator="OR">
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Server 11.x is installed" definition_ref="oval:org.mitre.oval:def:17270" />
+      <oval-def:extend_definition comment="SUSE Linux Enterprise Desktop 11.x is installed" definition_ref="oval:org.mitre.oval:def:25140" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="lxc RPM is earlier than 0:0.8.0-0.21.6" test_ref="oval:org.mitre.oval:tst:116614" />
+  </oval-def:criteria>
+</oval-def:definition>
