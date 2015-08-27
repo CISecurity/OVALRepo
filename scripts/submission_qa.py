@@ -564,8 +564,8 @@ def save_element(element, path):
         os.chmod(parent, 0o0755)
         
     try:
-    	# Get the elements default namespace
-    	namespace = element.getNamespace()
+        # Get the elements default namespace
+        namespace = element.getNamespace()
         # Pretty up the element
         indent(element)
         # Create a new ElementTree with this element as the root
