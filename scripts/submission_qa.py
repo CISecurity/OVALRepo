@@ -162,7 +162,7 @@ def main():
                     print("    - New definitions must contain a submitted element")
                     valid_metadata = 0
 
-                if "StatusChange" in def_status_change:
+                if def_status_change["StatusChange"]:
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
                     print("    - New definitions should not contain a status change element")
                     valid_metadata = 0
