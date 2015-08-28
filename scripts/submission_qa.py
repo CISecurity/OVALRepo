@@ -550,9 +550,8 @@ def find_removed_items(changes):
     return [file for file in changes if not os.path.exists(file)]
 
 
-def save_element(element, path):
-    
-    if element is None:
+def save_element(elem, path):
+    if elem is None:
         return
     
     if not path or path is None:
@@ -565,18 +564,48 @@ def save_element(element, path):
         
     try:
         # Get the elements default namespace
-        namespace = element.getNamespace()
+        namespace = getNamespace(elem)
         # Pretty up the element
-        indent(element)
+        indent(elem)
+        # Register the discovered namespace as the default
+        ET.register_namespace("", namespace)
         # Create a new ElementTree with this element as the root
-        tree = etree.ElementTree(element)
+        elem_tree = ET.ElementTree(element=elem)
         # Write the full tree to a file
-        tree.write(path, encoding="UTF-8", method="xml", default_namespace = namespace)
+        elem_tree.write(path, xml_declaration=False, encoding="UTF-8", method="xml")
         os.chmod(path, 0o0664)
         return True
     except:
+        print(" *** Error writing new element to path %s" % path)
+        print("     Exception Type: ", sys.exc_info()[0])
+        print("    Exception Value: ", sys.exc_info()[1])
         return False
 
+def getNamespace(element):
+        """
+        Returns the URI of the namespace or None if this node does not have a namepsace
+        """
+        if not element or element is None:
+            return None
+
+        tag = element.tag
+        
+        if not tag or tag is None:
+            return None
+        
+        # If the oval ID does not contain a namespace, then we can't determine the schema shortname
+        if not '}' in tag:
+            return None
+        
+        try:
+            position = tag.find('}')
+            if position < 0:
+                return None
+            
+            namespace = tag[:position]
+            return namespace[1:]
+        except Exception:
+            return None
 
 def indent(elem, level=0):
     i = "\n" + level*"  "
@@ -755,4 +784,3 @@ def show_files(file_list):
         
 if __name__ == '__main__':
     main()
-        
