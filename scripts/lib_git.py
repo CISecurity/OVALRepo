@@ -147,7 +147,7 @@ def fetch_pull_request(pullreq, repo='origin', branch='master'):
     #       an error was thrown...
     git_url = shlex.quote(pr['head']['repo']['git_url']).replace("git://", "https://")
     ref = shlex.quote(pr['head']['ref'])
-    ret = os.system('git pull %s %s' % (git_url, ref));
+    ret = os.system('git pull -v --no-commit %s %s' % (git_url, ref));
 
     print()
     print("done. examine changes and merge into master if good")
