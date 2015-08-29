@@ -21,6 +21,8 @@ import argparse
 from lxml import etree
 from xml.etree import ElementTree as ET
 from whoosh.query import Wildcard
+from whoosh.query import Regex
+from whoosh.query import Prefix
 
 import lib_oval
 from lib_oval import OvalDocument
@@ -273,7 +275,7 @@ def main():
             oval_element = lib_xml.load_standalone_element(file)
             if oval_element is not None:
                 increment_version(oval_element)
-                oval_element = normalize_ids(oval_element, oval_id_map)
+                #oval_element = normalize_ids(oval_element, oval_id_map)
                 update_elements[file] = oval_element
     
     
@@ -285,13 +287,16 @@ def main():
     print("   * Existing metadata has not been changed")
     print("   * Contains a meaningful change")
     print("   * Does not contain any harmful actions or unacceptable language")
+
+    for x in oval_id_map:
+        print(" -- Convert %s to %s" % (x, oval_id_map[x]))
+
     response = input("\n :::: Save all changes now? (N[o] / y[es]): ")
     if response != 'y' and response != 'Y':
         return
 
-    
     for path in update_elements:
-        oval_element = update_elements[path]
+        oval_element = normalize_ids(update_elements[path], oval_id_map)
         if not oval_element or oval_element is None:
             continue
         new_path = lib_repo.get_element_repository_path(oval_element)
@@ -369,12 +374,14 @@ def normalize_ids(oval_element, oval_id_map):
     ET.register_namespace("oval", "http://oval.mitre.org/XMLSchema/oval-common-5")
     ET.register_namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")
 
+    xml_string = ET.tostring(oval_element, encoding="UTF-8").decode()
+
     # map is oval_id_map[oldid] = new_id
     for old_oval_id in oval_id_map:
         new_oval_id = oval_id_map[old_oval_id]
 
-        xml_string = ET.tostring(oval_element, encoding="UTF-8").decode()
         xml_string = xml_string.replace(old_oval_id, new_oval_id)
+        #print("After -- ", xml_string)
 
     return ET.fromstring(xml_string)
 
@@ -399,21 +406,22 @@ def generate_next_ovalid(element_type, element_index):
 
     cached_list = id_cache_list[type_key]
     if not cached_list or len(cached_list) < 1:
-        search_term = "oval_*_{0}_*".format(type_key)        
+        # Apparently the : is not a good idea when whooshing.
+        search_term = "oval?org.cisecurity?{0}?*".format(type_key)
         index_searcher = element_index.get_searcher();
         query = Wildcard("oval_id", search_term)
         results = index_searcher.search(query, limit=None)
-        
+
         matching = [hit['oval_id'] for hit in results]
         index = find_largest_index(matching) + 1
         new_id = "oval:org.cisecurity:{0}:{1}".format(type_key, index)
         cached_list = [new_id]
-        id_cache_list[type_key] = cached_list
     else:
         index = find_largest_index(cached_list) + 1
         new_id = "oval:org.cisecurity:{0}:{1}".format(type_key, index)
         cached_list.append(new_id)
-        
+    
+    id_cache_list[type_key] = cached_list
     return new_id
 
 
