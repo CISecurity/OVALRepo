@@ -128,7 +128,7 @@ def get_element_metadata(filepath):
     # get all *_refs attributes
     attribute_id_refs = root.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
     # get filter, object_reference
-    text_id_refs = root.xpath("//*[local-name()='filter' or local-name()='object_reference']/text()", smart_strings=False)
+    text_id_refs = root.xpath("//*[local-name()='filter' or local-name()='object_reference' or local-name()='var_ref']/text()", smart_strings=False)
     # combine, unique
     id_refs = set(attribute_id_refs + text_id_refs)
     
