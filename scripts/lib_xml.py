@@ -451,7 +451,7 @@ class OvalGenerator:
 
     def get_file_header(self):
         oval_timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S%z')
-        return """<oval_definitions
+        return '<?xml version="1.0" encoding="UTF-8"?>\n' + """<oval_definitions
             xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
             xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
