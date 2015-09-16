@@ -30,6 +30,7 @@ def main():
     output_options.add_argument('-o', '--outfile', required=True, help='file name for output OVAL definitions file')
     output_options.add_argument('-v', '--validate', default=False, action="store_true", help='schema validate the output file')
     output_options.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the output file')
+    output_options.add_argument('-t', '--tempdir', required=False, default="./", help="directory to store temporary files used when building oval definitions (default: './')")
     source_options = parser.add_argument_group('definitions filtering',
                                                'Provide at least one of the following options to determine which definition(s) ' +
                                                'will be included. Results will include the intersection of matches for each parameter ' +
@@ -115,7 +116,7 @@ def main():
     output.message('info','Found {0} matching OVAL definitions'.format(len(definition_ids)))
 
     # create generator and set oval schema version, if necessary
-    OvalGenerator = lib_xml.OvalGenerator(output.message)
+    OvalGenerator = lib_xml.OvalGenerator(output.message, args['tempdir'])
     if args['max_schema_version']:
         OvalGenerator.oval_schema_version = args['max_schema_version']
 

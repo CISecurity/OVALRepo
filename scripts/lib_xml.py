@@ -340,11 +340,11 @@ class OvalGenerator:
     generator_version = '0.1'
     oval_schema_version = '5.11.1'
 
-    def __init__(self, message_method = False):
+    def __init__(self, message_method = False, tmp_directory = './'):
         """ constructor, set defaults for instances """
         self.message = message_method or self.message
         self.tmp = { }
-        self.tmp_n = random.randrange(1000000,9999999)
+        self.tmp_directory = tmp_directory
         self.use_file_queues = True
 
     def queue_element_file(self, element, filepath):
@@ -365,7 +365,8 @@ class OvalGenerator:
 
         if self.use_file_queues:
             if element not in self.tmp:
-                self.tmp[element] = open('./queue.{0}.{1}.xml'.format(self.tmp_n,element), mode='wt', encoding='utf-8')
+                tmp_n = random.randrange(10000000,99999999)
+                self.tmp[element] = open('{0}queue.{1}.{2}.xml'.format(self.tmp_directory,tmp_n,element), mode='wt', encoding='utf-8')
             self.tmp[element].write(xml + '\n')
         else:
             if element not in self.tmp:
