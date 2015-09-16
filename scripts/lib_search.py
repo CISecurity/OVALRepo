@@ -122,7 +122,7 @@ class SearchIndex:
         if query_fields:
             # create query by ANDing query_fields together
             query = query_fields[0] if len(query_fields) == 1 else whoosh.query.And(query_fields)
-            #self.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
+            # self.message('debug','parsed whoosh query:\n\t{0}'.format(repr(query)))
         else:
             query = whoosh.query.Every()
 
@@ -243,7 +243,7 @@ class SearchIndex:
             index_writer.commit()
             self.index.close()
             shutil.rmtree(self.get_index_path())
-            sys.exit(0)
+            sys.exit(1)
 
         self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
         index_writer.commit()
@@ -338,7 +338,7 @@ class SearchIndex:
 
     def whoosh_escape(self, s, field=''):
         """ Escape a string for whoosh. """
-        s = s.replace(',','').strip()
+        s = s.replace(',','').strip().lower()
 
         # if not a text field, escape spaces
         if (field and field not in self.text_fields):

@@ -64,6 +64,7 @@ def main():
         query['min_schema_version'] = '[0 TO {0}]'.format(definitions_index.version_to_int(args['max_schema_version']))
 
     # add date range and contributor/org filters, if specified
+    all_definitions_filtered = False
     if args['from'] or args['to'] or args['contributors'] or args['organizations']:
         # get revisions index
         revisions_index = lib_search.RevisionsIndex(message)
@@ -87,55 +88,50 @@ def main():
             query['oval_id'] = filtered_oval_ids
 
         if not query['oval_id']:
-            message('info','No matching OVAL definitions found. Aborting.')
-            sys.exit(0)
+            all_definitions_filtered = True
 
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:
         parser.print_help()
         message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
-        sys.exit(0)
+        sys.exit(1)
     elif not (args['all_definitions'] or query):
         parser.print_help()
         message('error','At least one definitions filtering argument must be provided.')
-        sys.exit(0)
+        sys.exit(1)
 
     # query index
-    query_results = definitions_index.query(query)
-    if not query_results:
-        message('info','No matching OVAL definitions found. Aborting.')
-        sys.exit(0)
+    query_results = definitions_index.query(query) if not all_definitions_filtered else {}
 
     # get set of all definition ids found
     definition_ids = { document['oval_id'] for document in query_results }
     message('info','Found {0} matching OVAL definitions'.format(len(definition_ids)))
 
-    # add all downstream element ids
-    message('info','Finding downstream OVAL ids for all definitions')
-    elements_index = lib_search.ElementsIndex(message)
-    oval_ids = elements_index.find_downstream_ids(definition_ids, definition_ids)
-    message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
-
-    # get paths for all elements
-    message('info','Finding paths for {0} OVAL elements'.format(len(oval_ids)))
-    file_paths = elements_index.get_paths_from_ids(oval_ids)
-
-    # create generator
+    # create generator and set oval schema version, if necessary
     OvalGenerator = lib_xml.OvalGenerator(message)
-
-    # set oval schema version
     if args['max_schema_version']:
         OvalGenerator.oval_schema_version = args['max_schema_version']
 
-    # build in memory if there aren't that many files
-    if len(file_paths) < 200:
-        OvalGenerator.use_file_queues = False
+    if definition_ids:
+        # add all downstream element ids
+        message('info','Finding downstream OVAL ids for all definitions')
+        elements_index = lib_search.ElementsIndex(message)
+        oval_ids = elements_index.find_downstream_ids(definition_ids, definition_ids)
+        message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
 
-    # add each OVAL definition to generator
-    message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
-    for file_path in file_paths:
-        element_type = lib_repo.get_element_type_from_path(file_path)
-        OvalGenerator.queue_element_file(element_type, file_path)
+        # get paths for all elements
+        message('info','Finding paths for {0} OVAL elements'.format(len(oval_ids)))
+        file_paths = elements_index.get_paths_from_ids(oval_ids)
+
+        # build in memory if there aren't that many files
+        if len(file_paths) < 200:
+            OvalGenerator.use_file_queues = False
+
+        # add each OVAL definition to generator
+        message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
+        for file_path in file_paths:
+            element_type = lib_repo.get_element_type_from_path(file_path)
+            OvalGenerator.queue_element_file(element_type, file_path)
 
     # write output file
     message('info','Writing OVAL definitions to {0}'.format(args['outfile']))
