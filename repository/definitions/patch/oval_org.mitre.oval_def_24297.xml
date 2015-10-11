@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:24297" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2014:0383: samba4 security update (Moderate)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 6</platform>
-      <platform>CentOS Linux 6</platform>
-      <product>samba4</product>
-    </affected>
-    <reference source="VENDOR" ref_id="RHSA-2014:0383-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0383.html"/>
-    <reference source="CESA" ref_id="CESA-2014:0383"/>
-    <reference source="CVE" ref_id="CVE-2012-6150" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-6150.html"/>
-    <reference source="CVE" ref_id="CVE-2013-4496" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-4496.html"/>
-    <reference source="CVE" ref_id="CVE-2013-6442" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6442.html"/>
-    <description>Samba is an open-source implementation of the Server Message Block (SMB) or
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:24297" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:0383: samba4 security update (Moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:platform>CentOS Linux 6</oval-def:platform>
+      <oval-def:product>samba4</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:0383-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0383.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2014:0383" source="CESA" />
+    <oval-def:reference ref_id="CVE-2012-6150" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-6150.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-4496" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-4496.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-6442" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-6442.html" source="CVE" />
+    <oval-def:description>Samba is an open-source implementation of the Server Message Block (SMB) or
 Common Internet File System (CIFS) protocol, which allows PC-compatible
 machines to share files, printers, and other information.
 
@@ -40,39 +39,40 @@ CVE-2013-4496, and Noel Power as the original reporter of CVE-2013-6442.
 
 All users of Samba are advised to upgrade to these updated packages, which
 contain backported patches to correct these issues. After installing this
-update, the smb service will be restarted automatically.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-04-11T11:46:55">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-04-23T10:26:45.210-04:00">DRAFT</status_change>
-        <status_change date="2014-05-12T04:00:45.106-04:00">INTERIM</status_change>
-        <status_change date="2014-06-02T04:00:11.295-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <criteria operator="OR" comment="Redhat 6 or Centos 6 release">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
-    </criteria>
-    <criteria operator="OR" comment="Packages section">
-      <criterion comment="samba4-python is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113088"/>
-      <criterion comment="samba4-dc-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113311"/>
-      <criterion comment="samba4-devel is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113776"/>
-      <criterion comment="samba4-winbind-krb5-locator is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113223"/>
-      <criterion comment="samba4-dc is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113764"/>
-      <criterion comment="samba4-pidl is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113308"/>
-      <criterion comment="samba4-winbind is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113542"/>
-      <criterion comment="samba4-test is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:112905"/>
-      <criterion comment="samba4 is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113799"/>
-      <criterion comment="samba4-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113658"/>
-      <criterion comment="samba4-swat is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113001"/>
-      <criterion comment="samba4-client is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113385"/>
-      <criterion comment="samba4-winbind-clients is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113527"/>
-      <criterion comment="samba4-common is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113457"/>
-    </criteria>
-  </criteria>
-</definition>
+update, the smb service will be restarted automatically.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-04-11T11:46:55">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-04-23T10:26:45.210-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-05-12T04:00:45.106-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-02T04:00:11.295-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:criteria comment="Redhat 6 or Centos 6 release" operator="OR">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+      <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="samba4-python is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113088" />
+      <oval-def:criterion comment="samba4-dc-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113311" />
+      <oval-def:criterion comment="samba4-devel is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113776" />
+      <oval-def:criterion comment="samba4-winbind-krb5-locator is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113223" />
+      <oval-def:criterion comment="samba4-dc is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113764" />
+      <oval-def:criterion comment="samba4-pidl is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113308" />
+      <oval-def:criterion comment="samba4-winbind is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113542" />
+      <oval-def:criterion comment="samba4-test is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:112905" />
+      <oval-def:criterion comment="samba4 is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113799" />
+      <oval-def:criterion comment="samba4-libs is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113658" />
+      <oval-def:criterion comment="samba4-swat is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113001" />
+      <oval-def:criterion comment="samba4-client is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113385" />
+      <oval-def:criterion comment="samba4-winbind-clients is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113527" />
+      <oval-def:criterion comment="samba4-common is earlier than 0:4.0.0-61.el6_5.rc4" test_ref="oval:org.mitre.oval:tst:113457" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

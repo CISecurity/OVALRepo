@@ -30,6 +30,8 @@ TODO:
 import inspect
 import os.path
 import sys
+from datetime import datetime
+
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
@@ -108,6 +110,9 @@ def get_element_repository_path(element):
                 return None
             return root_path + "/definitions/" + defclass + "/" + oval_id_to_path(oval_id)
         
+        elif element_type == "variable":
+            return root_path + "/variables/" + oval_id_to_path(oval_id)
+        
         else:
             platform = get_schema_short_name(element)
             if not platform or platform is None:
@@ -118,12 +123,13 @@ def get_element_repository_path(element):
                 return None
                     
             bucket = get_index_bucket(oval_id)
-            if bucket < 1000:
+            if not bucket or bucket is None:
                 return None
-            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + str(bucket) + "/" + oval_id_to_path(oval_id)
+            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + bucket + "/" + oval_id_to_path(oval_id)
         
     except Exception:
         return None
+    
     
     
 
@@ -150,7 +156,7 @@ def get_schema_short_name(element):
     try:
         schema = tag.rsplit('}', 1)[0]
         if not '#' in schema:
-            return None
+            return "independent"
         return schema.rsplit('#', 1)[1].strip()
     except Exception:
         return None
@@ -189,25 +195,28 @@ def get_index_bucket(oval_id):
     be computed.  
     """
     if not oval_id or oval_id is None:
-        return 0
+        return None
         
     # Get the numeric index from the end of the OVAL ID
     position = oval_id.rfind(':')
     if position < 0:
-        return 0
+        return None
         
     try:
         position = position + 1
-        index = oval_id[position:]
-        
+        index = int(oval_id[position:])
+
+        if index < 1000:
+            return "0000"
+
         # Apply the modulus function to determine which bucket it belongs to
-        return int(int(index)/1000 + 1) * 1000
+        return str(int(index/1000) * 1000)
         # Or another way to do it:
 #             sequence = int(index)
 #             mod = sequence % 1000
 #             return sequence - mod + 1000
     except Exception:
-        return 0
+        return None
 
 def get_element_type_from_path(path):
     """ Gets element type from path. """
@@ -265,6 +274,13 @@ def get_oval_def_schematron(schema_version='5.11.1'):
     """ Gets OVAL definitions schema file for specified schema version. """
     return os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version + '/all-oval-definitions-schematron.xsl' )
 
+
+def get_formatted_datetime():
+    dtnow = datetime.now()
+    dtutcnow = datetime.utcnow()
+    delta = dtnow - dtutcnow
+    hh,mm = divmod((delta.days * 24*60*60 + delta.seconds + 30) // 60, 60)
+    return "%s%+02d:%02d" % (dtnow.isoformat(), hh, mm)
 
 def message(type, message):
     """ Print a message """

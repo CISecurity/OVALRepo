@@ -22,20 +22,24 @@ def message(label, message):
 def set_min_schema_version(defpath, schema_version):
     """ updates or sets the min_schema_version attribute in the provided oval definition. """
 
+    if not schema_version or schema_version is None:
+        message("ERROR", "Cannot set None as minimum schema version; skipping...")
+        return
+
     current_version = None
 
     with open(defpath, mode='rt', encoding='utf-8') as f:
         deftext = f.read()
 
-    p = re.compile(r'<min_schema_version>(.*?)<\/min_schema_version>')
+    p = re.compile(r'<oval-def\:min_schema_version>(.*?)<\/oval-def\:min_schema_version>')
 
     if p.match(deftext):
         if current_version == p.group(1):
             return
         else:
-            deftext = deftext.replace(p.group(0),'<min_schema_version>' + schema_version + '</min_schema_version>')
+            deftext = deftext.replace(p.group(0),'<oval-def:min_schema_version>' + schema_version + '</oval-def:min_schema_version>')
     else:
-        deftext = deftext.replace('</oval_repository>','  <min_schema_version>' + schema_version + '</min_schema_version>\n    </oval_repository>')
+        deftext = deftext.replace('</oval-def:oval_repository>','  <oval-def:min_schema_version>' + schema_version + '</oval-def:min_schema_version>\n    </oval-def:oval_repository>')
 
     with open(defpath, mode='wt', encoding='utf-8') as f:
         f.write(deftext)
@@ -44,6 +48,10 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
     """ determines the minimum oval schema version the given definition can be expressed in. """
 
     global schema_path_cache
+
+    # build schema path cache
+    for schema_version in lib_repo.get_schema_versions():
+        schema_path_cache[schema_version] = lib_repo.get_oval_def_schema(schema_version)
 
     minimum_version=None
     exception=None
@@ -66,7 +74,7 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
         OvalGenerator.queue_element_file(element_type, file_path)
 
     # parse defintion, get ref to schema_version element
-    tree = etree.fromstring(OvalGenerator.to_string())
+    tree = etree.fromstring(OvalGenerator.to_string(True, False))
     schema_version_element = tree.find('.//oval:schema_version', { 'oval': 'http://oval.mitre.org/XMLSchema/oval-common-5' })
 
     for schema_version in lib_repo.get_schema_versions():
@@ -75,10 +83,13 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
 
         # test of definitions file validates against current schema
         try:
+            message("INFO", "Schema Path is %s" % schema_path_cache[schema_version])
             lib_xml.schema_validate(tree, schema_path_cache[schema_version])
             minimum_version = schema_version
+            message("INFO", "XML is valid against schema version %s" % schema_version)
         except lib_xml.SchemaValidationError as e:
             exception = e.message
+            message("ERROR", "Exception (schema version is %s) - %s" % (schema_version, e.message))
             break;
 
     if update:
@@ -94,7 +105,7 @@ def main():
     parser = argparse.ArgumentParser(description='Determine minimum supported OVAL schema for a given definition')
     parser.add_argument('-p', '--path', help='path to definition fragment')
     parser.add_argument('-i', '--id',  help='id of definition fragment')
-    parser.add_argument('-a', '--all', default=False, action="store_true", help='determine minimum supported OVAL schema for all indexed definitino fragments. cannot be combined with --id or --path')
+    parser.add_argument('-a', '--all', default=False, action="store_true", help='determine minimum supported OVAL schema for all indexed definition fragments. cannot be combined with --id or --path')
     parser.add_argument('-u', '--update', default=False, action="store_true", help='update the given definition to include the min_schema_version element')
 
     args = vars(parser.parse_args())
@@ -117,10 +128,6 @@ def main():
     # get indexes
     definitions_index = lib_search.DefinitionsIndex(message)
     elements_index = lib_search.ElementsIndex(message)
-
-    # build schema path cache
-    for schema_version in lib_repo.get_schema_versions():
-        schema_path_cache[schema_version] = lib_repo.get_oval_def_schema(schema_version)
 
     if args['all']:
         for defpath in lib_repo.get_definition_paths_iterator():

@@ -1,47 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:29019" version="2" class="patch">
-  <metadata>
-    <title>DSA-2808-2 -- openjpeg -- several vulnerabilities</title>
-    <affected family="unix">
-      <platform>Debian GNU/Linux 6.0</platform>
-      <platform>Debian GNU/kFreeBSD 6.0</platform>
-      <platform>Debian GNU/Linux 7.0</platform>
-      <platform>Debian GNU/kFreeBSD 7.0</platform>
-      <product>openjpeg</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2808" ref_id="DSA-2808-2"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1447" ref_id="CVE-2013-1447"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6045" ref_id="CVE-2013-6045"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6052" ref_id="CVE-2013-6052"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6054" ref_id="CVE-2013-6054"/>
-    <description>Several vulnerabilities have been discovered in OpenJPEG, a JPEG 2000 image library, that may lead to denial of service via application crash or high memory consumption, possible code execution through heap buffer overflows, information disclosure, or yet another heap buffer overflow that only appears to affect OpenJPEG 1.3.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2015-06-29T10:39:31">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2015-07-06T10:37:39.595-04:00">DRAFT</status_change>
-        <status_change date="2015-07-27T04:00:51.729-04:00">INTERIM</status_change>
-      </dates>
-      <status>INTERIM</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria operator="AND" comment="Debian 6">
-      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
-      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-      </criteria>
-      <criterion comment="openjpeg is earlier than 0:1.3+dfsg-4+squeeze2" test_ref="oval:org.mitre.oval:tst:139772"/>
-    </criteria>
-    <criteria operator="AND" comment="Debian 7">
-      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
-      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-      </criteria>
-      <criterion comment="openjpeg is earlier than 0:1.3+dfsg-4.7" test_ref="oval:org.mitre.oval:tst:139669"/>
-    </criteria>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:29019" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2808-2 -- openjpeg -- several vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 7.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7.0</oval-def:platform>
+      <oval-def:product>openjpeg</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2808-2" ref_url="http://www.debian.org/security/dsa-2808" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-1447" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1447" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-6045" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6045" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-6052" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6052" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-6054" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6054" source="CVE" />
+    <oval-def:description>Several vulnerabilities have been discovered in OpenJPEG, a JPEG 2000 image library, that may lead to denial of service via application crash or high memory consumption, possible code execution through heap buffer overflows, information disclosure, or yet another heap buffer overflow that only appears to affect OpenJPEG 1.3.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2015-06-29T10:39:31">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-07-06T10:37:39.595-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-07-27T04:00:51.729-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-08-17T04:00:44.274-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 6" operator="AND">
+      <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="openjpeg is earlier than 0:1.3+dfsg-4+squeeze2" test_ref="oval:org.mitre.oval:tst:139772" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 7" operator="AND">
+      <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="openjpeg is earlier than 0:1.3+dfsg-4.7" test_ref="oval:org.mitre.oval:tst:139669" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

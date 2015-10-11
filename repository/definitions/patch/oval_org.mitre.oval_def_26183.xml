@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:26183" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2014:1034: tomcat security update (Low)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 7</platform>
-      <platform>CentOS Linux 7</platform>
-      <product>tomcat</product>
-    </affected>
-    <reference source="VENDOR" ref_id="RHSA-2014:1034-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1034.html"/>
-    <reference source="CESA" ref_id="CESA-2014:1034"/>
-    <reference source="CVE" ref_id="CVE-2014-0119" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0119.html"/>
-    <description>Apache Tomcat is a servlet container for the Java Servlet and JavaServer
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26183" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:1034: tomcat security update (Low)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 7</oval-def:platform>
+      <oval-def:platform>CentOS Linux 7</oval-def:platform>
+      <oval-def:product>tomcat</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:1034-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1034.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2014:1034" source="CESA" />
+    <oval-def:reference ref_id="CVE-2014-0119" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0119.html" source="CVE" />
+    <oval-def:description>Apache Tomcat is a servlet container for the Java Servlet and JavaServer
 Pages (JSP) technologies.
 
 It was found that, in certain circumstances, it was possible for a
@@ -23,35 +22,36 @@ deployed on the same Apache Tomcat instance. (CVE-2014-0119)
 
 All Tomcat users are advised to upgrade to these updated packages, which
 contain a backported patch to correct this issue. Tomcat must be restarted
-for this update to take effect.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-08-18T12:09:18">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-09-05T14:28:40.958-04:00">DRAFT</status_change>
-        <status_change date="2014-09-22T04:00:41.451-04:00">INTERIM</status_change>
-        <status_change date="2014-10-13T04:00:24.049-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <criteria operator="OR" comment="Redhat 7 or Centos 7 release">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
-      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
-    </criteria>
-    <criteria operator="OR" comment="Packages section">
-      <criterion comment="tomcat is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122499"/>
-      <criterion comment="tomcat-admin-webapps is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122267"/>
-      <criterion comment="tomcat-docs-webapp is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122561"/>
-      <criterion comment="tomcat-el-2.2-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122635"/>
-      <criterion comment="tomcat-javadoc is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122577"/>
-      <criterion comment="tomcat-jsp-2.2-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122621"/>
-      <criterion comment="tomcat-jsvc is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122533"/>
-      <criterion comment="tomcat-lib is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122408"/>
-      <criterion comment="tomcat-servlet-3.0-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122045"/>
-      <criterion comment="tomcat-webapps is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122430"/>
-    </criteria>
-  </criteria>
-</definition>
+for this update to take effect.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-08-18T12:09:18">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-09-05T14:28:40.958-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-09-22T04:00:41.451-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-10-13T04:00:24.049-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:criteria comment="Redhat 7 or Centos 7 release" operator="OR">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+      <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Packages section" operator="OR">
+      <oval-def:criterion comment="tomcat is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122499" />
+      <oval-def:criterion comment="tomcat-admin-webapps is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122267" />
+      <oval-def:criterion comment="tomcat-docs-webapp is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122561" />
+      <oval-def:criterion comment="tomcat-el-2.2-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122635" />
+      <oval-def:criterion comment="tomcat-javadoc is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122577" />
+      <oval-def:criterion comment="tomcat-jsp-2.2-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122621" />
+      <oval-def:criterion comment="tomcat-jsvc is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122533" />
+      <oval-def:criterion comment="tomcat-lib is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122408" />
+      <oval-def:criterion comment="tomcat-servlet-3.0-api is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122045" />
+      <oval-def:criterion comment="tomcat-webapps is earlier than 0:7.0.42-8.el7_0" test_ref="oval:org.mitre.oval:tst:122430" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

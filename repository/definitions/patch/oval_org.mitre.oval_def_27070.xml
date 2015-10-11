@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27070" version="5" class="patch">
-  <metadata>
-    <title>RHSA-2013:0519 -- openssh security, bug fix and enhancement update (Moderate)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 6</platform>
-      <platform>CentOS Linux 6</platform>
-      <product>openssh</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0519.html" ref_id="RHSA-2013:0519"/>
-    <reference source="CESA-2013:0519" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-February/000649.html" ref_id="CESA-2013:0519"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5536" ref_id="CVE-2012-5536"/>
-    <description><![CDATA[OpenSSH is OpenBSD&#39;s Secure Shell (SSH) protocol implementation. These
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27070" version="5">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2013:0519 -- openssh security, bug fix and enhancement update (Moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:platform>CentOS Linux 6</oval-def:platform>
+      <oval-def:product>openssh</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2013:0519" ref_url="https://rhn.redhat.com/errata/RHSA-2013-0519.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2013:0519" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-February/000649.html" source="CESA-2013:0519" />
+    <oval-def:reference ref_id="CVE-2012-5536" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5536" source="CVE" />
+    <oval-def:description>OpenSSH is OpenBSD&amp;#39;s Secure Shell (SSH) protocol implementation. These
 packages include the core files necessary for the OpenSSH client and
 server.
 
 Due to the way the pam_ssh_agent_auth PAM module was built in Red Hat
-Enterprise Linux 6, the glibc&#39;s error() function was called rather than the
+Enterprise Linux 6, the glibc&amp;#39;s error() function was called rather than the
 intended error() function in pam_ssh_agent_auth to report errors. As these
 two functions expect different arguments, it was possible for an attacker
 to cause an application using pam_ssh_agent_auth to crash, disclose
@@ -44,13 +43,13 @@ non-zero exit code if there is an error in copying the SSH certificate to a
 remote host. (BZ#836650)
 
 * When SELinux was disabled on the system, no on-disk policy was installed,
-a user account was used for a connection, and no &quot;~/.ssh&quot; configuration was
-present in that user&#39;s home directory, the SSH client terminated
+a user account was used for a connection, and no &amp;quot;~/.ssh&amp;quot; configuration was
+present in that user&amp;#39;s home directory, the SSH client terminated
 unexpectedly with a segmentation fault when attempting to connect to
 another system. A patch has been provided to address this issue and the
 crashes no longer occur in the described scenario. (BZ#836655)
 
-* The &quot;HOWTO&quot; document /usr/share/doc/openssh-ldap-5.3p1/HOWTO.ldap-keys
+* The &amp;quot;HOWTO&amp;quot; document /usr/share/doc/openssh-ldap-5.3p1/HOWTO.ldap-keys
 incorrectly documented the use of the AuthorizedKeysCommand directive.
 This update corrects the document. (BZ#857760)
 
@@ -65,7 +64,7 @@ not try the same PIN for every certificate if the PIN fails for the first
 one. As a result, the CAC will not be disabled if a user enters their PIN
 incorrectly. (BZ#782912)
 
-* This update adds a &quot;netcat mode&quot; to SSH. The &quot;ssh -W host:port ...&quot;
+* This update adds a &amp;quot;netcat mode&amp;quot; to SSH. The &amp;quot;ssh -W host:port ...&amp;quot;
 command connects standard input and output (stdio) on a client to a single
 port on a server. As a result, SSH can be used to route connections via
 intermediate servers. (BZ#860809)
@@ -79,42 +78,43 @@ page. (BZ#869903)
 
 All users of openssh are advised to upgrade to these updated packages,
 which fix these issues and add these enhancements. After installing this
-update, the OpenSSH server daemon (sshd) will be restarted automatically.]]></description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-10-28T18:16:04">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-10-29T12:47:36.814-04:00">DRAFT</status_change>
-        <status_change date="2014-11-17T04:01:41.072-05:00">INTERIM</status_change>
-        <status_change date="2014-12-08T04:00:35.124-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:42383 - Updated States &amp; Objects" date="2015-02-02T15:56:00.526-05:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2015-02-02T16:00:51.384-05:00">INTERIM</status_change>
-        <status_change date="2015-02-23T04:00:53.473-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Red Hat Enterprise Linux 6 release section">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-      <criterion comment="openssh-debuginfo is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125987"/>
-    </criteria>
-    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
-      <criteria operator="OR" comment="Operation system section">
-        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
-      </criteria>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="openssh is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125479"/>
-        <criterion comment="openssh-askpass is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126146"/>
-        <criterion comment="openssh-clients is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126032"/>
-        <criterion comment="openssh-ldap is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125331"/>
-        <criterion comment="openssh-server is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126182"/>
-        <criterion comment="pam_ssh_agent_auth is earlier than 0:0.9.3-84.1.el6" test_ref="oval:org.mitre.oval:tst:126124"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+update, the OpenSSH server daemon (sshd) will be restarted automatically.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:16:04">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:47:36.814-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:41.072-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:35.124-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:42383 - Updated States &amp; Objects" date="2015-02-02T15:56:00.526-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-02T16:00:51.384-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-02-23T04:00:53.473-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Red Hat Enterprise Linux 6 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+      <oval-def:criterion comment="openssh-debuginfo is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125987" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="openssh is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125479" />
+        <oval-def:criterion comment="openssh-askpass is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126146" />
+        <oval-def:criterion comment="openssh-clients is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126032" />
+        <oval-def:criterion comment="openssh-ldap is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:125331" />
+        <oval-def:criterion comment="openssh-server is earlier than 0:5.3p1-84.1.el6" test_ref="oval:org.mitre.oval:tst:126182" />
+        <oval-def:criterion comment="pam_ssh_agent_auth is earlier than 0:0.9.3-84.1.el6" test_ref="oval:org.mitre.oval:tst:126124" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

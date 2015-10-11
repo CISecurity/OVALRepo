@@ -1,26 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27032" version="4" class="patch">
-  <metadata>
-    <title>ELSA-2014-1389 -- krb5 security and bug fix update</title>
-    <affected family="unix">
-      <platform>Oracle Linux 6</platform>
-      <product>krb5</product>
-      <product>krb5-devel</product>
-      <product>krb5-libs</product>
-      <product>krb5-pkinit-openssl</product>
-      <product>krb5-server</product>
-      <product>krb5-server-ldap</product>
-      <product>krb5-workstation</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-1389.html" ref_id="ELSA-2014-1389"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1418" ref_id="CVE-2013-1418"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6800" ref_id="CVE-2013-6800"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4341" ref_id="CVE-2014-4341"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4344" ref_id="CVE-2014-4344"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4345" ref_id="CVE-2014-4345"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4342" ref_id="CVE-2014-4342"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4343" ref_id="CVE-2014-4343"/>
-    <description>[1.10.3-33]
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27032" version="4">
+  <oval-def:metadata>
+    <oval-def:title>ELSA-2014-1389 -- krb5 security and bug fix update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Oracle Linux 6</oval-def:platform>
+      <oval-def:product>krb5</oval-def:product>
+      <oval-def:product>krb5-devel</oval-def:product>
+      <oval-def:product>krb5-libs</oval-def:product>
+      <oval-def:product>krb5-pkinit-openssl</oval-def:product>
+      <oval-def:product>krb5-server</oval-def:product>
+      <oval-def:product>krb5-server-ldap</oval-def:product>
+      <oval-def:product>krb5-workstation</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="ELSA-2014-1389" ref_url="http://linux.oracle.com/errata/ELSA-2014-1389.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2013-1418" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1418" source="CVE" />
+    <oval-def:reference ref_id="CVE-2013-6800" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6800" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4341" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4341" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4344" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4344" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4345" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4345" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4342" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4342" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-4343" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4343" source="CVE" />
+    <oval-def:description>[1.10.3-33]
 - actually apply that last patch
 
 [1.10.3-32]
@@ -102,32 +101,33 @@
 
 [1.10.3-16]
 - backport fix for trying all compatible keys when not being strict about
-  acceptor names while reading AP-REQs (RT#7883, #1070244)</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-10-17T17:21:15">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-10-17T23:33:16.663-04:00">DRAFT</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:def:27032 - Updated patches for Oracle Linux by switching dpkginfo tests to new rpminfo tests." date="2014-10-31T14:02:00.180-04:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2014-11-17T04:01:34.355-05:00">INTERIM</status_change>
-        <status_change date="2014-12-08T04:00:33.253-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
-    <criteria operator="OR" comment="Packages match section">
-      <criterion comment="krb5 is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125523"/>
-      <criterion comment="krb5-devel is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125442"/>
-      <criterion comment="krb5-libs is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125754"/>
-      <criterion comment="krb5-pkinit-openssl is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126441"/>
-      <criterion comment="krb5-server is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126354"/>
-      <criterion comment="krb5-server-ldap is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126429"/>
-      <criterion comment="krb5-workstation is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125470"/>
-    </criteria>
-  </criteria>
-</definition>
+  acceptor names while reading AP-REQs (RT#7883, #1070244)</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-17T17:21:15">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-17T23:33:16.663-04:00">DRAFT</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:27032 - Updated patches for Oracle Linux by switching dpkginfo tests to new rpminfo tests." date="2014-10-31T14:02:00.180-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-11-17T04:01:34.355-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:33.253-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594" />
+    <oval-def:criteria comment="Packages match section" operator="OR">
+      <oval-def:criterion comment="krb5 is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125523" />
+      <oval-def:criterion comment="krb5-devel is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125442" />
+      <oval-def:criterion comment="krb5-libs is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125754" />
+      <oval-def:criterion comment="krb5-pkinit-openssl is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126441" />
+      <oval-def:criterion comment="krb5-server is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126354" />
+      <oval-def:criterion comment="krb5-server-ldap is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:126429" />
+      <oval-def:criterion comment="krb5-workstation is earlier than 0:1.10.3-33.el6" test_ref="oval:org.mitre.oval:tst:125470" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

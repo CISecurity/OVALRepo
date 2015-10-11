@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27511" version="3" class="patch">
-  <metadata>
-    <title>DSA-3062-1 -- wget security update</title>
-    <affected family="unix">
-      <platform>Debian GNU/Linux 7.0</platform>
-      <platform>Debian GNU/kFreeBSD 7.0</platform>
-      <product>wget</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3062" ref_id="DSA-3062-1"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4877" ref_id="CVE-2014-4877"/>
-    <description>HD Moore of Rapid7 discovered a symlink attack in Wget, a command-line utility to retrieve files via HTTP, HTTPS, and FTP. The vulnerability allows to create arbitrary files on the user's system when Wget runs in recursive mode against a malicious FTP server. Arbitrary file creation may override content of user's files or permit remote code execution with the user privilege.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-11-14T09:55:40">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-11-17T19:41:27.170-05:00">DRAFT</status_change>
-        <status_change date="2014-12-08T04:00:46.013-05:00">INTERIM</status_change>
-        <status_change date="2014-12-29T04:00:11.935-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
-    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-    </criteria>
-    <criterion comment="wget is earlier than 0:1.13.4-3+deb7u2" test_ref="oval:org.mitre.oval:tst:135251"/>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27511" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3062-1 -- wget security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 7.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7.0</oval-def:platform>
+      <oval-def:product>wget</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3062-1" ref_url="http://www.debian.org/security/dsa-3062" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-4877" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4877" source="CVE" />
+    <oval-def:description>HD Moore of Rapid7 discovered a symlink attack in Wget, a command-line utility to retrieve files via HTTP, HTTPS, and FTP. The vulnerability allows to create arbitrary files on the user's system when Wget runs in recursive mode against a malicious FTP server. Arbitrary file creation may override content of user's files or permit remote code execution with the user privilege.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-11-14T09:55:40">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-11-17T19:41:27.170-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:46.013-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-29T04:00:11.935-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="wget is earlier than 0:1.13.4-3+deb7u2" test_ref="oval:org.mitre.oval:tst:135251" />
+  </oval-def:criteria>
+</oval-def:definition>

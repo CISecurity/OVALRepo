@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:26652" version="3" class="patch">
-  <metadata>
-    <title>RHSA-2013:1635 -- pacemaker security, bug fix, and enhancement update (Low)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 6</platform>
-      <platform>CentOS Linux 6</platform>
-      <product>pacemaker</product>
-    </affected>
-    <reference source="VENDOR" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1635.html" ref_id="RHSA-2013:1635"/>
-    <reference source="CESA-2013:1635" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-November/001037.html" ref_id="CESA-2013:1635"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0281" ref_id="CVE-2013-0281"/>
-    <description><![CDATA[Pacemaker is a high-availability cluster resource manager with a powerful
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:26652" version="3">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2013:1635 -- pacemaker security, bug fix, and enhancement update (Low)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 6</oval-def:platform>
+      <oval-def:platform>CentOS Linux 6</oval-def:platform>
+      <oval-def:product>pacemaker</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2013:1635" ref_url="https://rhn.redhat.com/errata/RHSA-2013-1635.html" source="VENDOR" />
+    <oval-def:reference ref_id="CESA-2013:1635" ref_url="http://lists.centos.org/pipermail/centos-cr-announce/2013-November/001037.html" source="CESA-2013:1635" />
+    <oval-def:reference ref_id="CVE-2013-0281" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0281" source="CVE" />
+    <oval-def:description>Pacemaker is a high-availability cluster resource manager with a powerful
 policy engine.
 
 A denial of service flaw was found in the way Pacemaker performed
@@ -28,7 +27,7 @@ provides a number of bug fixes and enhancements over the previous version:
 
 * Pacemaker no longer assumes unknown cman nodes are safely stopped.
 
-* The core dump file now converts all exit codes into positive &#39;errno&#39;
+* The core dump file now converts all exit codes into positive &amp;#39;errno&amp;#39;
 values.
 
 * Pacemaker ensures a return to a stable state after too many fencing
@@ -38,9 +37,9 @@ active.
 * The crm_error tool adds the ability to list and print error symbols.
 
 * The crm_resource command allows individual resources to be reprobed, and
-implements the &quot;--ban&quot; option for moving resources away from nodes.
-The &quot;--clear&quot; option has replaced the &quot;--unmove&quot; option. Also, crm_resource
-now supports OCF tracing when using the &quot;--force&quot; option.
+implements the &amp;quot;--ban&amp;quot; option for moving resources away from nodes.
+The &amp;quot;--clear&amp;quot; option has replaced the &amp;quot;--unmove&amp;quot; option. Also, crm_resource
+now supports OCF tracing when using the &amp;quot;--force&amp;quot; option.
 
 * The IPC mechanism restores the ability for members of the haclient group
 to connect to the cluster.
@@ -61,11 +60,11 @@ lockups.
 
 Additional bug fixes:
 
-* The &quot;crm_resource --move&quot; command was designed for atomic resources and
+* The &amp;quot;crm_resource --move&amp;quot; command was designed for atomic resources and
 could not handle resources on clones, masters, or slaves present on
 multiple nodes. Consequently, crm_resource could not obtain enough
-information to move a resource and did not perform any action. The &quot;--ban&quot;
-and &quot;--clear&quot; options have been added to allow the administrator to
+information to move a resource and did not perform any action. The &amp;quot;--ban&amp;quot;
+and &amp;quot;--clear&amp;quot; options have been added to allow the administrator to
 instruct the cluster unambiguously. Clone, master, and slave resources can
 now be navigated within the cluster as expected. (BZ#902407)
 
@@ -76,7 +75,7 @@ GID number 189 was reserved for hacluster and is now used consistently for
 all installations. (BZ#908450)
 
 * Certain clusters used node host names that did not match the output of
-the &quot;uname -n&quot; command. Thus, the default node name used by the crm_standby
+the &amp;quot;uname -n&amp;quot; command. Thus, the default node name used by the crm_standby
 and crm_failcount commands was incorrect and caused the cluster to ignore
 the update by the administrator. The crm_node command is now used instead
 of the uname utility in helper scripts. As a result, the cluster behaves as
@@ -88,48 +87,49 @@ apply, leading to an assertion failure. Return codes are now checked
 correctly, and the recovery of an expected error state is now handled
 transparently. (BZ#951371)
 
-* cman&#39;s automatic unfencing feature failed when combined with Pacemaker.
+* cman&amp;#39;s automatic unfencing feature failed when combined with Pacemaker.
 Support for automated unfencing in Pacemaker has been added, and the
 unwanted behavior no longer occurs. (BZ#996850)
 
 All pacemaker users are advised to upgrade to these updated packages, which
 contain backported patches to correct these issues and add these
-enhancements.]]></description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-10-28T18:15:41">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-10-29T12:47:51.526-04:00">DRAFT</status_change>
-        <status_change date="2014-11-17T04:00:42.401-05:00">INTERIM</status_change>
-        <status_change date="2014-12-08T04:00:20.978-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Red Hat Enterprise Linux 6 release section">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-      <criterion comment="pacemaker-debuginfo is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125891"/>
-    </criteria>
-    <criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
-      <criteria operator="OR" comment="Operation system section">
-        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273"/>
-        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
-      </criteria>
-      <criterion comment="pacemaker-remote is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125581"/>
-    </criteria>
-    <criteria comment="CentOS Linux 6 release section">
-      <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="pacemaker is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125758"/>
-        <criterion comment="pacemaker-cli is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125991"/>
-        <criterion comment="pacemaker-cluster-libs is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:126043"/>
-        <criterion comment="pacemaker-cts is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125912"/>
-        <criterion comment="pacemaker-doc is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125397"/>
-        <criterion comment="pacemaker-libs is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:126048"/>
-        <criterion comment="pacemaker-libs-devel is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125701"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+enhancements.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-10-28T18:15:41">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-10-29T12:47:51.526-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:00:42.401-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-08T04:00:20.978-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Red Hat Enterprise Linux 6 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+      <oval-def:criterion comment="pacemaker-debuginfo is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125891" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Red Hat Enterprise Linux 6 and CentOS Linux 6 release section">
+      <oval-def:criteria comment="Operation system section" operator="OR">
+        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
+        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="pacemaker-remote is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125581" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="CentOS Linux 6 release section">
+      <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="pacemaker is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125758" />
+        <oval-def:criterion comment="pacemaker-cli is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125991" />
+        <oval-def:criterion comment="pacemaker-cluster-libs is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:126043" />
+        <oval-def:criterion comment="pacemaker-cts is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125912" />
+        <oval-def:criterion comment="pacemaker-doc is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125397" />
+        <oval-def:criterion comment="pacemaker-libs is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:126048" />
+        <oval-def:criterion comment="pacemaker-libs-devel is earlier than 0:1.1.10-14.el6" test_ref="oval:org.mitre.oval:tst:125701" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

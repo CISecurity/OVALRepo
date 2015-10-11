@@ -1,76 +1,76 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:6082" version="17" class="inventory">
-  <metadata>
-    <title>Microsoft SQL Server 2005 is installed</title>
-    <affected family="windows">
-      <platform>Microsoft Windows 2000</platform>
-      <platform>Microsoft Windows 7</platform>
-      <platform>Microsoft Windows Server 2003</platform>
-      <platform>Microsoft Windows Server 2008</platform>
-      <platform>Microsoft Windows Server 2008 R2</platform>
-      <platform>Microsoft Windows Vista</platform>
-      <platform>Microsoft Windows XP</platform>
-      <product>Microsoft SQL Server 2005</product>
-    </affected>
-    <reference source="CPE" ref_id="cpe:/a:microsoft:sql_server:2005"/>
-    <description>Microsoft SQL Server 2005 is installed.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2009-02-10T16:00:00">
-          <contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</contributor>
-        </submitted>
-        <status_change date="2009-02-13T17:01:34.144-05:00">DRAFT</status_change>
-        <status_change date="2009-03-02T04:00:23.180-05:00">INTERIM</status_change>
-        <status_change date="2009-03-23T04:00:18.474-04:00">ACCEPTED</status_change>
-        <modified comment="Added tests that check against multiple instances of MS SQL 2005" date="2010-03-25T17:18:00.136-04:00">
-          <contributor organization="DTCC">J. Daniel Brown</contributor>
-        </modified>
-        <status_change date="2010-03-25T17:18:27.188-04:00">INTERIM</status_change>
-        <status_change date="2010-05-17T04:00:10.814-04:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:11792 - Fixed several false positives by setting negate = true.  Also fixed several style issues." date="2011-12-28T21:13:00.551-05:00">
-          <contributor organization="Symantec Corporation">Dragos Prisaca</contributor>
-        </modified>
-        <status_change date="2011-12-28T21:21:07.115-05:00">INTERIM</status_change>
-        <status_change date="2012-01-16T04:03:12.166-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:tst:21160 - Corrected SQL Server inventory tests to properly match the intended version of SQL and not also all versions after the intended version. Updated comments and platform information." date="2012-04-05T07:28:00.447-04:00">
-          <contributor organization="G2, Inc.">Shane Shaffer</contributor>
-        </modified>
-        <status_change date="2012-04-05T07:33:16.860-04:00">INTERIM</status_change>
-        <status_change date="2012-04-23T04:00:24.348-04:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:11792 - SQL Server 32-bit &amp; 64-bit issues." date="2013-09-13T13:52:00.521-04:00">
-          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
-        </modified>
-        <status_change date="2013-09-13T13:53:46.109-04:00">INTERIM</status_change>
-        <status_change date="2013-09-30T04:01:28.300-04:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:26798 - &quot;MSSQL&quot; added to object regex to narrow search" date="2014-01-31T16:01:00.799-05:00">
-          <contributor organization="ALTX-SOFT">Maria Kedovskaya</contributor>
-        </modified>
-        <status_change date="2014-01-31T16:02:49.695-05:00">INTERIM</status_change>
-        <status_change date="2014-02-17T04:01:38.731-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:26674 - Added criteria for 64 bit" date="2014-08-15T10:18:00.371-04:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2014-08-15T10:20:21.507-04:00">INTERIM</status_change>
-        <status_change date="2014-09-01T04:03:15.046-04:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:26798 - Fixed/New Inventory Definitions, and fixed Vulnerability Definitions for Microsoft SQL Server 2012 and 2014." date="2014-10-10T18:35:00.565-04:00">
-          <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
-        </modified>
-        <status_change date="2014-10-10T19:58:54.162-04:00">INTERIM</status_change>
-        <status_change date="2014-10-27T04:01:54.186-04:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:obj:26674 - Modified tests which check SQL Server 2005 Service Packs. The specific version of SQL Server was checked instead of diapason. Now new states were added which mark high limit of SP and operation=&quot;greater than or equal&quot; was add to the old states" date="2014-10-29T12:41:00.258-04:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2014-10-29T12:42:38.693-04:00">INTERIM</status_change>
-        <status_change date="2014-11-17T04:01:59.683-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\90\DTS\Setup\\Version is greater than 9.0.0.0" test_ref="oval:org.mitre.oval:tst:9665"/>
-    <criteria comment="SQL Server instance with version between 9.0.0.0 and 10.0.0.0">
-      <criterion comment="SQL Server instances with version greater than 9.0.0.0 exist" test_ref="oval:org.mitre.oval:tst:21160"/>
-      <criterion comment="SQL Server instances with version less than 10.0.0.0 exist" test_ref="oval:org.mitre.oval:tst:79381"/>
-    </criteria>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:6082" version="17">
+  <oval-def:metadata>
+    <oval-def:title>Microsoft SQL Server 2005 is installed</oval-def:title>
+    <oval-def:affected family="windows">
+      <oval-def:platform>Microsoft Windows 2000</oval-def:platform>
+      <oval-def:platform>Microsoft Windows 7</oval-def:platform>
+      <oval-def:platform>Microsoft Windows Server 2003</oval-def:platform>
+      <oval-def:platform>Microsoft Windows Server 2008</oval-def:platform>
+      <oval-def:platform>Microsoft Windows Server 2008 R2</oval-def:platform>
+      <oval-def:platform>Microsoft Windows Vista</oval-def:platform>
+      <oval-def:platform>Microsoft Windows XP</oval-def:platform>
+      <oval-def:product>Microsoft SQL Server 2005</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="cpe:/a:microsoft:sql_server:2005" source="CPE" />
+    <oval-def:description>Microsoft SQL Server 2005 is installed.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2009-02-10T16:00:00">
+          <oval-def:contributor organization="Gideon Technologies, Inc.">Dragos Prisaca</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2009-02-13T17:01:34.144-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2009-03-02T04:00:23.180-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2009-03-23T04:00:18.474-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="Added tests that check against multiple instances of MS SQL 2005" date="2010-03-25T17:18:00.136-04:00">
+          <oval-def:contributor organization="DTCC">J. Daniel Brown</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2010-03-25T17:18:27.188-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2010-05-17T04:00:10.814-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:11792 - Fixed several false positives by setting negate = true.  Also fixed several style issues." date="2011-12-28T21:13:00.551-05:00">
+          <oval-def:contributor organization="Symantec Corporation">Dragos Prisaca</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2011-12-28T21:21:07.115-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2012-01-16T04:03:12.166-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:tst:21160 - Corrected SQL Server inventory tests to properly match the intended version of SQL and not also all versions after the intended version. Updated comments and platform information." date="2012-04-05T07:28:00.447-04:00">
+          <oval-def:contributor organization="G2, Inc.">Shane Shaffer</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2012-04-05T07:33:16.860-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2012-04-23T04:00:24.348-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:11792 - SQL Server 32-bit &amp; 64-bit issues." date="2013-09-13T13:52:00.521-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Kedovskaya</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2013-09-13T13:53:46.109-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2013-09-30T04:01:28.300-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:26798 - &quot;MSSQL&quot; added to object regex to narrow search" date="2014-01-31T16:01:00.799-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Kedovskaya</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-01-31T16:02:49.695-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-02-17T04:01:38.731-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:26674 - Added criteria for 64 bit" date="2014-08-15T10:18:00.371-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-08-15T10:20:21.507-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-01T04:03:15.046-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:26798 - Fixed/New Inventory Definitions, and fixed Vulnerability Definitions for Microsoft SQL Server 2012 and 2014." date="2014-10-10T18:35:00.565-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Evgeniy Pavlov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-10-10T19:58:54.162-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-10-27T04:01:54.186-04:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:obj:26674 - Modified tests which check SQL Server 2005 Service Packs. The specific version of SQL Server was checked instead of diapason. Now new states were added which mark high limit of SP and operation=&quot;greater than or equal&quot; was add to the old states" date="2014-10-29T12:41:00.258-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-10-29T12:42:38.693-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-11-17T04:01:59.683-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.10</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\90\DTS\Setup\\Version is greater than 9.0.0.0" test_ref="oval:org.mitre.oval:tst:9665" />
+    <oval-def:criteria comment="SQL Server instance with version between 9.0.0.0 and 10.0.0.0">
+      <oval-def:criterion comment="SQL Server instances with version greater than 9.0.0.0 exist" test_ref="oval:org.mitre.oval:tst:21160" />
+      <oval-def:criterion comment="SQL Server instances with version less than 10.0.0.0 exist" test_ref="oval:org.mitre.oval:tst:79381" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

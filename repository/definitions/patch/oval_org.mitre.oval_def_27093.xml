@@ -1,77 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:27093" version="5" class="patch">
-  <metadata>
-    <title>ELSA-2014-3039 -- Unbreakable Enterprise kernel security update (important)</title>
-    <affected family="unix">
-      <platform>Oracle Linux 5</platform>
-      <platform>Oracle Linux 6</platform>
-      <product>kernel-uek</product>
-      <product>mlnx_en</product>
-      <product>ofa</product>
-      <product>kernel-uek-debug</product>
-      <product>kernel-uek-debug-devel</product>
-      <product>kernel-uek-devel</product>
-      <product>kernel-uek-doc</product>
-      <product>kernel-uek-firmware</product>
-      <product>kernel-uek-headers</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://linux.oracle.com/errata/ELSA-2014-3039.html" ref_id="ELSA-2014-3039"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3153" ref_id="CVE-2014-3153"/>
-    <description>kernel-uek
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:27093" version="5">
+  <oval-def:metadata>
+    <oval-def:title>ELSA-2014-3039 -- Unbreakable Enterprise kernel security update (important)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Oracle Linux 5</oval-def:platform>
+      <oval-def:platform>Oracle Linux 6</oval-def:platform>
+      <oval-def:product>kernel-uek</oval-def:product>
+      <oval-def:product>mlnx_en</oval-def:product>
+      <oval-def:product>ofa</oval-def:product>
+      <oval-def:product>kernel-uek-debug</oval-def:product>
+      <oval-def:product>kernel-uek-debug-devel</oval-def:product>
+      <oval-def:product>kernel-uek-devel</oval-def:product>
+      <oval-def:product>kernel-uek-doc</oval-def:product>
+      <oval-def:product>kernel-uek-firmware</oval-def:product>
+      <oval-def:product>kernel-uek-headers</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="ELSA-2014-3039" ref_url="http://linux.oracle.com/errata/ELSA-2014-3039.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3153" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3153" source="CVE" />
+    <oval-def:description>kernel-uek
 [2.6.32-400.36.2uek]
 - futex: Make lookup_pi_state more robust (Thomas Gleixner)  [Orabug: 18918736]  {CVE-2014-3153}
 - futex: Always cleanup owner tid in unlock_pi (Thomas Gleixner)  [Orabug: 18918736]  {CVE-2014-3153}
 - futex: Validate atomic acquisition in futex_lock_pi_atomic() (Thomas Gleixner)  [Orabug: 18918736]  {CVE-2014-3153}
-- futex: Forbid uaddr1 == uaddr2 in futex_requeue(..., requeue_pi=1) (Thomas Gleixner)  [Orabug: 18918736]  {CVE-2014-3153} {CVE-2014-3153}</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-11-05T10:21:47">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-11-05T17:29:32.999-05:00">DRAFT</status_change>
-        <status_change date="2014-11-24T04:02:12.580-05:00">INTERIM</status_change>
-        <status_change date="2014-12-15T04:00:47.428-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:ste:35271 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2015-02-26T18:48:23.249-05:00">INTERIM</status_change>
-        <status_change date="2015-03-16T04:01:06.923-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Oracle Linux 5 release section">
-      <extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="kernel-uek is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127598"/>
-        <criterion comment="mlnx_en-2.6.32-400.36.2.el5uek is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:127656"/>
-        <criterion comment="ofa-2.6.32-400.36.2.el5uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127563"/>
-        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127401"/>
-        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:126690"/>
-        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127639"/>
-        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127578"/>
-        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127580"/>
-        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127454"/>
-        <criterion comment="mlnx_en-2.6.32-400.36.2.el5uekdebug is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:127620"/>
-        <criterion comment="ofa-2.6.32-400.36.2.el5uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:126943"/>
-      </criteria>
-    </criteria>
-    <criteria comment="Oracle Linux 6 release section">
-      <extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594"/>
-      <criteria operator="OR" comment="Packages match section">
-        <criterion comment="kernel-uek is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127597"/>
-        <criterion comment="mlnx_en-2.6.32-400.36.2.el6uek is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:127654"/>
-        <criterion comment="ofa-2.6.32-400.36.2.el6uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127398"/>
-        <criterion comment="kernel-uek-debug is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127470"/>
-        <criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127553"/>
-        <criterion comment="kernel-uek-devel is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:126984"/>
-        <criterion comment="kernel-uek-doc is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127093"/>
-        <criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127544"/>
-        <criterion comment="kernel-uek-headers is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127644"/>
-        <criterion comment="mlnx_en-2.6.32-400.36.2.el6uekdebug is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:127443"/>
-        <criterion comment="ofa-2.6.32-400.36.2.el6uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127226"/>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+- futex: Forbid uaddr1 == uaddr2 in futex_requeue(..., requeue_pi=1) (Thomas Gleixner)  [Orabug: 18918736]  {CVE-2014-3153} {CVE-2014-3153}</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-11-05T10:21:47">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-11-05T17:29:32.999-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-11-24T04:02:12.580-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-12-15T04:00:47.428-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:ste:35271 - Corrected package names in objects and versions in states." date="2015-02-26T18:36:00.989-05:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2015-02-26T18:48:23.249-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-03-16T04:01:06.923-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Oracle Linux 5 release section">
+      <oval-def:extend_definition comment="Oracle Linux 5.x" definition_ref="oval:org.mitre.oval:def:15459" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="kernel-uek is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127598" />
+        <oval-def:criterion comment="mlnx_en-2.6.32-400.36.2.el5uek is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:127656" />
+        <oval-def:criterion comment="ofa-2.6.32-400.36.2.el5uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127563" />
+        <oval-def:criterion comment="kernel-uek-debug is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127401" />
+        <oval-def:criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:126690" />
+        <oval-def:criterion comment="kernel-uek-devel is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127639" />
+        <oval-def:criterion comment="kernel-uek-doc is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127578" />
+        <oval-def:criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127580" />
+        <oval-def:criterion comment="kernel-uek-headers is earlier than 0:2.6.32-400.36.2.el5uek" test_ref="oval:org.mitre.oval:tst:127454" />
+        <oval-def:criterion comment="mlnx_en-2.6.32-400.36.2.el5uekdebug is earlier than 0:1.5.7-2" test_ref="oval:org.mitre.oval:tst:127620" />
+        <oval-def:criterion comment="ofa-2.6.32-400.36.2.el5uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:126943" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Oracle Linux 6 release section">
+      <oval-def:extend_definition comment="Oracle Linux 6.x" definition_ref="oval:org.mitre.oval:def:16594" />
+      <oval-def:criteria comment="Packages match section" operator="OR">
+        <oval-def:criterion comment="kernel-uek is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127597" />
+        <oval-def:criterion comment="mlnx_en-2.6.32-400.36.2.el6uek is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:127654" />
+        <oval-def:criterion comment="ofa-2.6.32-400.36.2.el6uek is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127398" />
+        <oval-def:criterion comment="kernel-uek-debug is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127470" />
+        <oval-def:criterion comment="kernel-uek-debug-devel is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127553" />
+        <oval-def:criterion comment="kernel-uek-devel is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:126984" />
+        <oval-def:criterion comment="kernel-uek-doc is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127093" />
+        <oval-def:criterion comment="kernel-uek-firmware is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127544" />
+        <oval-def:criterion comment="kernel-uek-headers is earlier than 0:2.6.32-400.36.2.el6uek" test_ref="oval:org.mitre.oval:tst:127644" />
+        <oval-def:criterion comment="mlnx_en-2.6.32-400.36.2.el6uekdebug is earlier than 0:1.5.7-0.1" test_ref="oval:org.mitre.oval:tst:127443" />
+        <oval-def:criterion comment="ofa-2.6.32-400.36.2.el6uekdebug is earlier than 0:1.5.1-4.0.58" test_ref="oval:org.mitre.oval:tst:127226" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

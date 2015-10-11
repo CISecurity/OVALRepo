@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:28533" version="3" class="patch">
-  <metadata>
-    <title>DSA-3107-2 -- subversion regression update</title>
-    <affected family="unix">
-      <platform>Debian GNU/Linux 7.0</platform>
-      <platform>Debian GNU/kFreeBSD 7.0</platform>
-      <product>subversion</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-3107" ref_id="DSA-3107-2"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3580" ref_id="CVE-2014-3580"/>
-    <description>Evgeny Kotkov discovered a NULL pointer dereference while processing REPORT requests in mod_dav_svn, the Subversion component which is used to serve repositories with the Apache web server. A remote attacker could abuse this vulnerability for a denial of service.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-12-30T11:21:32">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2015-01-14T20:09:27.987-05:00">DRAFT</status_change>
-        <status_change date="2015-02-02T04:00:29.856-05:00">INTERIM</status_change>
-        <status_change date="2015-02-23T04:01:26.797-05:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria>
-    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
-    <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-    </criteria>
-    <criterion comment="subversion is earlier than 0:1.6.17dfsg-4+deb7u7" test_ref="oval:org.mitre.oval:tst:136419"/>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28533" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3107-2 -- subversion regression update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 7.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7.0</oval-def:platform>
+      <oval-def:product>subversion</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3107-2" ref_url="http://www.debian.org/security/dsa-3107" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-3580" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3580" source="CVE" />
+    <oval-def:description>Evgeny Kotkov discovered a NULL pointer dereference while processing REPORT requests in mod_dav_svn, the Subversion component which is used to serve repositories with the Apache web server. A remote attacker could abuse this vulnerability for a denial of service.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-12-30T11:21:32">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2015-01-14T20:09:27.987-05:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2015-02-02T04:00:29.856-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2015-02-23T04:01:26.797-05:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="subversion is earlier than 0:1.6.17dfsg-4+deb7u7" test_ref="oval:org.mitre.oval:tst:136419" />
+  </oval-def:criteria>
+</oval-def:definition>

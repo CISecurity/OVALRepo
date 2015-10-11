@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:25089" version="4" class="patch">
-  <metadata>
-    <title>RHSA-2014:0702: mariadb security update (Moderate)</title>
-    <affected family="unix">
-      <platform>Red Hat Enterprise Linux 7</platform>
-      <platform>CentOS Linux 7</platform>
-      <product>mariadb</product>
-    </affected>
-    <reference source="VENDOR" ref_id="RHSA-2014:0702-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0702.html"/>
-    <reference source="CVE" ref_id="CVE-2014-0384" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0384.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2419" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2419.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2430" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2430.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2431" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2431.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2432" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2432.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2436" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2436.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2438" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2438.html"/>
-    <reference source="CVE" ref_id="CVE-2014-2440" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2440.html"/>
-    <description>MariaDB is a multi-user, multi-threaded SQL database server that is binary
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:25089" version="4">
+  <oval-def:metadata>
+    <oval-def:title>RHSA-2014:0702: mariadb security update (Moderate)</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Red Hat Enterprise Linux 7</oval-def:platform>
+      <oval-def:platform>CentOS Linux 7</oval-def:platform>
+      <oval-def:product>mariadb</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="RHSA-2014:0702-00" ref_url="https://rhn.redhat.com/errata/RHSA-2014-0702.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-0384" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-0384.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2419" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2419.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2430" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2430.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2431" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2431.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2432" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2432.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2436" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2436.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2438" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2438.html" source="CVE" />
+    <oval-def:reference ref_id="CVE-2014-2440" ref_url="https://www.redhat.com/security/data/cve/CVE-2014-2440.html" source="CVE" />
+    <oval-def:description>MariaDB is a multi-user, multi-threaded SQL database server that is binary
 compatible with MySQL.
 
 This update fixes several vulnerabilities in the MariaDB database server.
@@ -31,39 +30,40 @@ of changes.
 
 All MariaDB users should upgrade to these updated packages, which correct
 these issues. After installing this update, the MariaDB server daemon
-(mysqld) will be restarted automatically.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-07-28T15:03:57">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-07-29T19:01:21.048-04:00">DRAFT</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:def:25089 - CentOS Linux 7 platform was added" date="2014-07-31T12:16:00.971-04:00">
-          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
-        </modified>
-        <status_change date="2014-08-18T04:03:11.859-04:00">INTERIM</status_change>
-        <status_change date="2014-09-08T04:00:55.246-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria operator="AND" comment="RHEL 7">
-      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953"/>
-      <criteria operator="OR" comment="Packages section">
-        <criterion comment="mariadb-embedded-devel is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116075"/>
-        <criterion comment="mariadb-bench is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115662"/>
-        <criterion comment="mariadb-embedded is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116173"/>
-        <criterion comment="mariadb is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115798"/>
-        <criterion comment="mariadb-test is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115361"/>
-        <criterion comment="mariadb-libs is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115829"/>
-        <criterion comment="mariadb-server is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116151"/>
-        <criterion comment="mariadb-devel is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115971"/>
-      </criteria>
-    </criteria>
-    <criteria operator="AND" comment="CentOS 7">
-      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773"/>
-      <criterion comment="mariadb is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115798"/>
-    </criteria>
-  </criteria>
-</definition>
+(mysqld) will be restarted automatically.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-07-28T15:03:57">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-07-29T19:01:21.048-04:00">DRAFT</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:25089 - CentOS Linux 7 platform was added" date="2014-07-31T12:16:00.971-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-08-18T04:03:11.859-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-09-08T04:00:55.246-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="RHEL 7" operator="AND">
+      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="mariadb-embedded-devel is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116075" />
+        <oval-def:criterion comment="mariadb-bench is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115662" />
+        <oval-def:criterion comment="mariadb-embedded is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116173" />
+        <oval-def:criterion comment="mariadb is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115798" />
+        <oval-def:criterion comment="mariadb-test is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115361" />
+        <oval-def:criterion comment="mariadb-libs is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115829" />
+        <oval-def:criterion comment="mariadb-server is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:116151" />
+        <oval-def:criterion comment="mariadb-devel is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115971" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="CentOS 7" operator="AND">
+      <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
+      <oval-def:criterion comment="mariadb is earlier than 1:5.5.37-1.el7_0" test_ref="oval:org.mitre.oval:tst:115798" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

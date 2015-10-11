@@ -7,6 +7,8 @@ For usage information, please see the command line help:
     python3 build_oval_definitions_file.py -h
 
 TODO:
+- update contributor / organization filtering to run from revisions index
+- add schema version filter 
 - testing
 - improve performance of schematron validation (if possible)
 - add options to zip/tar the result file?
@@ -26,6 +28,7 @@ def main():
     output_options.add_argument('-o', '--outfile', required=True, help='file name for output OVAL definitions file')
     output_options.add_argument('-v', '--validate', default=False, action="store_true", help='schema validate the output file')
     output_options.add_argument('-s', '--schematron', default=False, action="store_true", help='schematron validate the output file')
+    output_options.add_argument('-t', '--tempdir', required=False, default="./", help="directory to store temporary files used when building oval definitions (default: './')")
     source_options = parser.add_argument_group('definitions filtering',
                                                'Provide at least one of the following options to determine which definition(s) ' +
                                                'will be included. Results will include the intersection of matches for each parameter ' +
@@ -42,7 +45,10 @@ def main():
     source_options.add_argument('--contributor', nargs='*', dest='contributors', metavar='NAME', help='filter by contributor(s)')
     source_options.add_argument('--organization', nargs='*', dest='organizations', metavar='NAME', help='filter by organization(s)')
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
+    source_options.add_argument('--max_schema_version', nargs="?", dest='max_schema_version', metavar='SCHEMA_VERSION',  help='filter by maximum oval schema version, e.g. 5.10')
     source_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
+    source_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or after this day (format: YYYYMMDD)')
+    source_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or before this day (format: YYYYMMDD)')
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -54,48 +60,79 @@ def main():
         if field in args and args[field]:
             query[field] = args[field]
 
+    # add schema_version filter, if specified
+    if args['max_schema_version']:
+        query['min_schema_version'] = '[0 TO {0}]'.format(definitions_index.version_to_int(args['max_schema_version']))
+
+    # add date range and contributor/org filters, if specified
+    all_definitions_filtered = False
+    if args['from'] or args['to'] or args['contributors'] or args['organizations']:
+        # get revisions index
+        revisions_index = lib_search.RevisionsIndex(message)
+
+        if args['from'] or args['to']:
+            filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange(args['from'], args['to']) })
+
+        if args['contributors']:
+            contributor_filtered_ids = revisions_index.get_definition_ids({ 'contributor': args['contributors'] })
+            filtered_oval_ids = filtered_oval_ids & contributor_filtered_ids if 'filtered_oval_ids' in locals() else contributor_filtered_ids
+
+        if args['organizations']:
+            organization_filtered_ids = revisions_index.get_definition_ids({ 'organization': args['organizations'] })
+            filtered_oval_ids = filtered_oval_ids & organization_filtered_ids if 'filtered_oval_ids' in locals() else organization_filtered_ids
+
+        # add to query
+        if 'oval_id' in query and query['oval_id']:
+            # if oval_id(s) specified in args, get intersection with filtered oval ids
+            query['oval_id'] = set(query['oval_id']) & filtered_oval_ids
+        else:
+            query['oval_id'] = filtered_oval_ids
+
+        if not query['oval_id']:
+            all_definitions_filtered = True
+
     # --all_definitions OR at least one definition selection option must be specified
     if args['all_definitions'] and query:
         parser.print_help()
         message('error',"The '--all_definitions' filter cannot be combined with any other filters.")
-        sys.exit(0)
+        sys.exit(1)
     elif not (args['all_definitions'] or query):
         parser.print_help()
         message('error','At least one definitions filtering argument must be provided.')
-        sys.exit(0)
+        sys.exit(1)
 
     # query index
-    query_results = definitions_index.query(query)
-    if not query_results:
-        message('info','No matching OVAL definitions found. Aborting.')
-        sys.exit(0)
+    query_results = definitions_index.query(query) if not all_definitions_filtered else {}
 
     # get set of all definition ids found
     definition_ids = { document['oval_id'] for document in query_results }
     message('info','Found {0} matching OVAL definitions'.format(len(definition_ids)))
 
-    # add all downstream element ids
-    message('info','Finding downstream OVAL ids for all definitions')
-    elements_index = lib_search.ElementsIndex(message)
-    oval_ids = elements_index.find_downstream_ids(definition_ids, definition_ids)
-    message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
+    # create generator and set oval schema version, if necessary
+    OvalGenerator = lib_xml.OvalGenerator(message, args['tempdir'])
+    if args['max_schema_version']:
+        OvalGenerator.oval_schema_version = args['max_schema_version']
 
-    # get paths for all elements
-    message('info','Finding paths for {0} OVAL elements'.format(len(oval_ids)))
-    file_paths = elements_index.get_paths_from_ids(oval_ids)
+    if definition_ids:
+        # add all downstream element ids
+        message('info','Finding downstream OVAL ids for all definitions')
+        elements_index = lib_search.ElementsIndex(message)
+        oval_ids = elements_index.find_downstream_ids(definition_ids, definition_ids)
+        message('info','Found {0} downstream OVAL ids'.format(len(oval_ids) - len(query_results)))
 
-    # create generator
-    OvalGenerator = lib_xml.OvalGenerator(message)
+        # get paths for all elements
+        message('info','Finding paths for {0} OVAL elements'.format(len(oval_ids)))
+        file_paths = elements_index.get_paths_from_ids(oval_ids)
 
-    # build in memory if there aren't that many files
-    if len(file_paths) < 200:
-        OvalGenerator.use_file_queues = False
+        # build in memory if there aren't that many files
+        if len(file_paths) < 200:
+            OvalGenerator.use_file_queues = False
 
-    # add each OVAL definition to generator
-    message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
-    for file_path in file_paths:
-        element_type = lib_repo.get_element_type_from_path(file_path)
-        OvalGenerator.queue_element_file(element_type, file_path)
+        # add each OVAL definition to generator
+        message('info','Generating OVAL definition file with {0} elements'.format(len(oval_ids)))
+        for file_path in file_paths:
+            element_type = lib_repo.get_element_type_from_path(file_path)
+            OvalGenerator.queue_element_file(element_type, file_path)
 
     # write output file
     message('info','Writing OVAL definitions to {0}'.format(args['outfile']))
@@ -104,7 +141,7 @@ def main():
     # validate
     if args['validate']:
         # schema validate
-        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema(OvalGenerator.oval_schema_version)
         message('info','performing schema validation')
         try:
             lib_xml.schema_validate(args['outfile'], schema_path)
@@ -114,7 +151,7 @@ def main():
 
     if args['schematron']:
         # schematron validate
-        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema(OvalGenerator.oval_schema_version)
         message('info','performing schematron validation')
         try:
             lib_xml.schematron_validate(args['outfile'], schema_path)

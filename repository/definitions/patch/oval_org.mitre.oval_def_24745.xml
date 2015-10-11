@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" id="oval:org.mitre.oval:def:24745" version="3" class="patch">
-  <metadata>
-    <title>DSA-2936-1 torque - security update</title>
-    <affected family="unix">
-      <platform>Debian GNU/Linux 6.0</platform>
-      <platform>Debian GNU/kFreeBSD 6.0</platform>
-      <platform>Debian GNU/Linux 7.0</platform>
-      <platform>Debian GNU/kFreeBSD 7.0</platform>
-      <product>torque</product>
-    </affected>
-    <reference source="VENDOR" ref_url="http://www.debian.org/security/dsa-2936-1" ref_id="DSA-2936-1"/>
-    <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0749" ref_id="CVE-2014-0749"/>
-    <description>John Fitzpatrick from MWR Labs reported a stack-based buffer overflow vulnerability in torque, a PBS-derived batch processing queueing system. An unauthenticated remote attacker could exploit this flaw to execute arbitrary code with root privileges.</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2014-06-09T16:18:26">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </submitted>
-        <status_change date="2014-06-13T14:58:23.211-04:00">DRAFT</status_change>
-        <status_change date="2014-06-30T04:10:48.756-04:00">INTERIM</status_change>
-        <status_change date="2014-07-21T04:01:37.275-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria operator="AND" comment="Debian 6">
-      <extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959"/>
-      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-      </criteria>
-      <criterion comment="torque DPKG is earlier than 0:2.4.8+dfsg-9squeeze4" test_ref="oval:org.mitre.oval:tst:114862"/>
-    </criteria>
-    <criteria operator="AND" comment="Debian 7">
-      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338"/>
-      <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
-        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894"/>
-        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698"/>
-      </criteria>
-      <criterion comment="torque DPKG is earlier than 0:2.4.16+dfsg-1+deb7u3" test_ref="oval:org.mitre.oval:tst:114703"/>
-    </criteria>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:24745" version="3">
+  <oval-def:metadata>
+    <oval-def:title>DSA-2936-1 torque - security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 6.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/Linux 7.0</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7.0</oval-def:platform>
+      <oval-def:product>torque</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-2936-1" ref_url="http://www.debian.org/security/dsa-2936-1" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-0749" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0749" source="CVE" />
+    <oval-def:description>John Fitzpatrick from MWR Labs reported a stack-based buffer overflow vulnerability in torque, a PBS-derived batch processing queueing system. An unauthenticated remote attacker could exploit this flaw to execute arbitrary code with root privileges.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2014-06-09T16:18:26">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2014-06-13T14:58:23.211-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2014-06-30T04:10:48.756-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-07-21T04:01:37.275-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.6</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 6" operator="AND">
+      <oval-def:extend_definition comment="Debian 6.0 is installed" definition_ref="oval:org.mitre.oval:def:12959" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="torque DPKG is earlier than 0:2.4.8+dfsg-9squeeze4" test_ref="oval:org.mitre.oval:tst:114862" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 7" operator="AND">
+      <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="torque DPKG is earlier than 0:2.4.16+dfsg-1+deb7u3" test_ref="oval:org.mitre.oval:tst:114703" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

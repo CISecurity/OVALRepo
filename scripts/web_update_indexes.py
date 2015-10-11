@@ -20,6 +20,7 @@ def main():
 
     # parse command line options
     parser = argparse.ArgumentParser(description='Updates indexes. Should be run one each time new OVAL content is published.')
+    parser.add_argument('--nocache', required=False, action="store_true", help='Rebuild from scratch even if not necessary')
     args = vars(parser.parse_args())
 
     # get output object
@@ -28,14 +29,20 @@ def main():
     # get definitions index and update
     index = lib_search.ThreadSafeDefinitionsIndex(output.message)
     index.no_output = True
-    index.update()
+    index.update(args['nocache'])
     output.message('definitions','index updated')
 
     # get elements index and update
     index = lib_search.ThreadSafeElementsIndex(output.message)
     index.no_output = True
-    index.update()
+    index.update(args['nocache'])
     output.message('elements','index updated')
+
+    # get elements index and update
+    index = lib_search.ThreadSafeRevisionsIndex(output.message)
+    index.no_output = True
+    index.update(args['nocache'])
+    output.message('revisions','index updated')
 
     # add timinig
     seconds_elapsed = time.time() - start_time
