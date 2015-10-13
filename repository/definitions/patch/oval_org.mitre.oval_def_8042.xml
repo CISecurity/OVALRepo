@@ -1,77 +1,77 @@
-<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8042" version="3">
-  <oval-def:metadata>
-    <oval-def:title>DSA-1801 ntp -- buffer overflows</oval-def:title>
-    <oval-def:affected family="unix">
-      <oval-def:platform>Debian GNU/Linux 5.0</oval-def:platform>
-      <oval-def:platform>Debian GNU/Linux 4.0</oval-def:platform>
-      <oval-def:product>ntp</oval-def:product>
-    </oval-def:affected>
-    <oval-def:reference ref_id="DSA-1801" ref_url="http://www.debian.org/security/2009/dsa-1801" source="VENDOR" />
-    <oval-def:reference ref_id="CVE-2009-0159" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0159" source="CVE" />
-    <oval-def:reference ref_id="CVE-2009-1252" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1252" source="CVE" />
-    <oval-def:description>Several remote vulnerabilities have been discovered in NTP, the Network Time Protocol reference implementation. The Common Vulnerabilities and Exposures project identifies the following problems: A buffer overflow in ntpq allow a remote NTP server to create a denial of service attack or to execute arbitrary code via a crafted response. A buffer overflow in ntpd allows a remote attacker to create a denial of service attack or to execute arbitrary code when the autokey functionality is enabled.</oval-def:description>
-    <oval-def:oval_repository>
-      <oval-def:dates>
-        <oval-def:submitted date="2009-12-15T20:12:13-05:00">
-          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
-        </oval-def:submitted>
-        <oval-def:status_change date="2009-12-28T08:00:45.907-05:00">DRAFT</oval-def:status_change>
-        <oval-def:status_change date="2010-01-18T04:03:44.795-05:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2010-02-08T04:02:46.830-05:00">ACCEPTED</oval-def:status_change>
-        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:8042 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
-          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
-        </oval-def:modified>
-        <oval-def:status_change date="2014-06-06T16:37:40.031-04:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2014-06-23T04:09:52.346-04:00">ACCEPTED</oval-def:status_change>
-      </oval-def:dates>
-      <oval-def:status>ACCEPTED</oval-def:status>
-      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
-    </oval-def:oval_repository>
-  </oval-def:metadata>
-  <oval-def:criteria operator="OR">
-    <oval-def:criteria comment="Release section" operator="AND">
-      <oval-def:extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
-      <oval-def:criteria comment="Architecture section" operator="OR">
-        <oval-def:criteria comment="Architecture independent section" operator="AND">
-          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <oval-def:criterion comment="ntp-doc is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20255" />
-        </oval-def:criteria>
-        <oval-def:criteria comment="Architecture dependent section" operator="AND">
-          <oval-def:criteria comment="Supported architectures section" operator="OR">
-            <oval-def:criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024" />
-            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <oval-def:criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933" />
-            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-            <oval-def:criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
-            <oval-def:criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195" />
-            <oval-def:criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830" />
-            <oval-def:criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654" />
-            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <oval-def:criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110" />
-            <oval-def:criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164" />
-          </oval-def:criteria>
-          <oval-def:criteria comment="Packages section" operator="OR">
-            <oval-def:criterion comment="ntp is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20321" />
-            <oval-def:criterion comment="ntpdate is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20408" />
-          </oval-def:criteria>
-        </oval-def:criteria>
-      </oval-def:criteria>
-    </oval-def:criteria>
-    <oval-def:criteria comment="Release section" operator="AND">
-      <oval-def:extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
-      <oval-def:criteria comment="Architecture section" operator="OR">
-        <oval-def:criteria comment="Architecture independent section" operator="AND">
-          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <oval-def:criteria comment="Packages section" operator="OR">
-            <oval-def:criterion comment="ntp-doc is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20524" />
-            <oval-def:criterion comment="ntp-simple is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20607" />
-            <oval-def:criterion comment="ntp-refclock is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20417" />
-          </oval-def:criteria>
-        </oval-def:criteria>
-        <oval-def:criterion comment="ntpdate is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20469" />
-        <oval-def:criterion comment="ntp is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20595" />
-      </oval-def:criteria>
-    </oval-def:criteria>
-  </oval-def:criteria>
-</oval-def:definition>
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8042" version="4">
+  <metadata>
+    <title>DSA-1801 ntp -- buffer overflows</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 5.0</platform>
+      <platform>Debian GNU/Linux 4.0</platform>
+      <product>ntp</product>
+    </affected>
+    <reference ref_id="DSA-1801" ref_url="http://www.debian.org/security/2009/dsa-1801" source="VENDOR" />
+    <reference ref_id="CVE-2009-0159" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0159" source="CVE" />
+    <reference ref_id="CVE-2009-1252" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1252" source="CVE" />
+    <description>Several remote vulnerabilities have been discovered in NTP, the Network Time Protocol reference implementation. The Common Vulnerabilities and Exposures project identifies the following problems: A buffer overflow in ntpq allow a remote NTP server to create a denial of service attack or to execute arbitrary code via a crafted response. A buffer overflow in ntpd allows a remote attacker to create a denial of service attack or to execute arbitrary code when the autokey functionality is enabled.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2009-12-15T20:12:13-05:00">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2009-12-28T08:00:45.907-05:00">DRAFT</status_change>
+        <status_change date="2010-01-18T04:03:44.795-05:00">INTERIM</status_change>
+        <status_change date="2010-02-08T04:02:46.830-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:8042 - Debian Patch Update" date="2014-06-06T16:36:00.227-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-06T16:37:40.031-04:00">INTERIM</status_change>
+        <status_change date="2014-06-23T04:09:52.346-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.4</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Release section" operator="AND">
+      <extend_definition comment="Debian GNU/Linux 5.0 is installed" definition_ref="oval:org.mitre.oval:def:6513" />
+      <criteria comment="Architecture section" operator="OR">
+        <criteria comment="Architecture independent section" operator="AND">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <criterion comment="ntp-doc is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20255" />
+        </criteria>
+        <criteria comment="Architecture dependent section" operator="AND">
+          <criteria comment="Supported architectures section" operator="OR">
+            <criterion comment="Installed architecture is s390" test_ref="oval:org.mitre.oval:tst:11024" />
+            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <criterion comment="Installed architecture is arm" test_ref="oval:org.mitre.oval:tst:10933" />
+            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
+            <criterion comment="Installed architecture is mips" test_ref="oval:org.mitre.oval:tst:11195" />
+            <criterion comment="Installed architecture is ia64" test_ref="oval:org.mitre.oval:tst:10830" />
+            <criterion comment="Installed architecture is alpha" test_ref="oval:org.mitre.oval:tst:10654" />
+            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <criterion comment="Installed architecture is mipsel" test_ref="oval:org.mitre.oval:tst:11110" />
+            <criterion comment="Installed architecture is hppa" test_ref="oval:org.mitre.oval:tst:11164" />
+          </criteria>
+          <criteria comment="Packages section" operator="OR">
+            <criterion comment="ntp is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20321" />
+            <criterion comment="ntpdate is earlier than 4.2.4p4+dfsg-8lenny2" test_ref="oval:org.mitre.oval:tst:20408" />
+          </criteria>
+        </criteria>
+      </criteria>
+    </criteria>
+    <criteria comment="Release section" operator="AND">
+      <extend_definition comment="Debian GNU/Linux 4.0 is installed." definition_ref="oval:org.mitre.oval:def:6461" />
+      <criteria comment="Architecture section" operator="OR">
+        <criteria comment="Architecture independent section" operator="AND">
+          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <criteria comment="Packages section" operator="OR">
+            <criterion comment="ntp-doc is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20524" />
+            <criterion comment="ntp-simple is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20607" />
+            <criterion comment="ntp-refclock is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20417" />
+          </criteria>
+        </criteria>
+        <criterion comment="ntpdate is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20469" />
+        <criterion comment="ntp is earlier than 4.2.2.p4+dfsg-2etch3" test_ref="oval:org.mitre.oval:tst:20595" />
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>

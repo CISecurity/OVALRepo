@@ -108,10 +108,12 @@ def get_element_repository_path(element):
             defclass = element.get("class")
             if not defclass or defclass is None:
                 return None
-            return root_path + "/definitions/" + defclass + "/" + oval_id_to_path(oval_id)
+            #return root_path + "/definitions/" + defclass + "/" + oval_id_to_path(oval_id)
+            return os.path.join(root_path, "definitions", defclass, oval_id_to_path(oval_id))
         
         elif element_type == "variable":
-            return root_path + "/variables/" + oval_id_to_path(oval_id)
+            #return root_path + "/variables/" + oval_id_to_path(oval_id)
+            return os.path.join(root_path, "variables", oval_id_to_path(oval_id))
         
         else:
             platform = get_schema_short_name(element)
@@ -125,7 +127,8 @@ def get_element_repository_path(element):
             bucket = get_index_bucket(oval_id)
             if not bucket or bucket is None:
                 return None
-            return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + bucket + "/" + oval_id_to_path(oval_id)
+            #return root_path + "/" + element_type + "s/" + platform + "/" + predicate + "/" + bucket + "/" + oval_id_to_path(oval_id)
+            return os.path.join(root_path, (element_type + "s"), platform, predicate, bucket, oval_id_to_path(oval_id))
         
     except Exception:
         return None
