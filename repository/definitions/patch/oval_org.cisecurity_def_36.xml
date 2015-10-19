@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:36" version="1">
+  <metadata>
+    <title>DSA-3273-1 -- tiff -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>tiff</product>
+    </affected>
+    <reference ref_id="DSA-3273-1" ref_url="http://www.debian.org/security/dsa-3273" source="VENDOR" />
+    <reference ref_id="CVE-2014-8127" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8127" source="CVE" />
+    <reference ref_id="CVE-2014-8128" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8128" source="CVE" />
+    <reference ref_id="CVE-2014-8129" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8129" source="CVE" />
+    <reference ref_id="CVE-2014-9330" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9330" source="CVE" />
+    <reference ref_id="CVE-2014-9655" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9655" source="CVE" />
+    <description>William Robinet and Michal Zalewski discovered multiple vulnerabilities in the TIFF library and its tools, which may result in denial of service or the execution of arbitrary code if a malformed TIFF file is processed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="tiff is earlier than 0:4.0.2-6+deb7u4" test_ref="oval:org.cisecurity:tst:102" />
+  </criteria>
+</definition>

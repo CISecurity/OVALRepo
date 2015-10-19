@@ -1,0 +1,32 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:15" version="1">
+  <metadata>
+    <title>DSA-3210-1 -- wireshark -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>wireshark</product>
+    </affected>
+    <reference ref_id="DSA-3210-1" ref_url="http://www.debian.org/security/dsa-3210" source="VENDOR" />
+    <reference ref_id="CVE-2015-2188" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2188" source="CVE" />
+    <reference ref_id="CVE-2015-2189" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2189" source="CVE" />
+    <reference ref_id="CVE-2015-2191" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2191" source="CVE" />
+    <description>Multiple vulnerabilities were discovered in the dissectors/parsers for WCP, pcapng and TNEF, which could result in denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="wireshark is earlier than 0:1.8.2-5wheezy15" test_ref="oval:org.cisecurity:tst:36" />
+  </criteria>
+</definition>

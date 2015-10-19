@@ -1,0 +1,31 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:243" version="1">
+  <metadata>
+    <title>DSA-3121-1 -- file -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>file</product>
+    </affected>
+    <reference ref_id="DSA-3121-1" ref_url="http://www.debian.org/security/dsa-3121" source="VENDOR" />
+    <reference ref_id="CVE-2014-8116" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8116" source="CVE" />
+    <reference ref_id="CVE-2014-8117" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8117" source="CVE" />
+    <description>Multiple security issues have been found in file, a tool/library to determine a file type. Processing a malformed file could result in denial of service. Most of the changes are related to parsing ELF files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="file is earlier than 0:5.11-2+deb7u7" test_ref="oval:org.cisecurity:tst:221" />
+  </criteria>
+</definition>

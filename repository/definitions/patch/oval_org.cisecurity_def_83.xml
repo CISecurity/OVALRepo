@@ -1,0 +1,30 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:83" version="1">
+  <metadata>
+    <title>DSA-3178-1 -- unace -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>unace</product>
+    </affected>
+    <reference ref_id="DSA-3178-1" ref_url="http://www.debian.org/security/dsa-3178" source="VENDOR" />
+    <reference ref_id="CVE-2015-2063" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2063" source="CVE" />
+    <description>Jakub Wilk discovered that unace, an utility to extract, test and view .ace archives, contained an integer overflow leading to a buffer overflow. If a user or automated system were tricked into processing a specially crafted ace archive, an attacker could cause a denial of service (application crash) or, possibly, execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="unace is earlier than 0:1.2b-10+deb7u1" test_ref="oval:org.cisecurity:tst:22" />
+  </criteria>
+</definition>

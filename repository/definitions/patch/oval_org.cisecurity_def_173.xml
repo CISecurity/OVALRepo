@@ -1,0 +1,30 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:173" version="1">
+  <metadata>
+    <title>DSA-3137-1 websvn -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>websvn</product>
+    </affected>
+    <reference ref_id="DSA-3137-1" ref_url="http://www.debian.org/security/dsa-3137" source="VENDOR" />
+    <reference ref_id="CVE-2013-6892" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6892" source="CVE" />
+    <description>James Clawson discovered that websvn, a web viewer for Subversion repositories, would follow symlinks in a repository when presenting a file for download. An attacker with repository write access could thereby access any file on disk readable by the user the webserver runs as.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="websvn is earlier than 0:2.3.3-1.1+deb7u1" test_ref="oval:org.cisecurity:tst:308" />
+  </criteria>
+</definition>

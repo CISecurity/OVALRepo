@@ -1,0 +1,25 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:206" version="1">
+  <metadata>
+    <title>DSA-3279-1 -- redis -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>redis</product>
+    </affected>
+    <reference ref_id="DSA-3279-1" ref_url="http://www.debian.org/security/dsa-3279" source="VENDOR" />
+    <reference ref_id="CVE-2015-4335" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4335" source="CVE" />
+    <description>It was discovered that redis, a persistent key-value database, could execute insecure Lua bytecode by way of the EVAL command. This could allow remote attackers to break out of the Lua sandbox and execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="redis is earlier than 2:2.8.17-1+deb8u1" test_ref="oval:org.cisecurity:tst:265" />
+  </criteria>
+</definition>

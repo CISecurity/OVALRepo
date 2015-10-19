@@ -307,7 +307,10 @@ def main():
         if new_path != path:
             if verbose:
                 print("### Deleting {0}".format(path))
-            os.remove(path)
+            try:
+                os.remove(path)
+            except Exception:
+                print("#### Exception/Skipping Deleting {0}".format(path))
             
     
     # 7. Prompt for a message to use for the commit

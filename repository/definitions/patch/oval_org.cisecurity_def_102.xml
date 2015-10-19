@@ -1,0 +1,42 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:102" version="1">
+  <metadata>
+    <title>DSA-3260-1 -- iceweasel -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>iceweasel</product>
+    </affected>
+    <reference ref_id="DSA-3260-1" ref_url="http://www.debian.org/security/dsa-3260" source="VENDOR" />
+    <reference ref_id="CVE-2011-3079" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3079" source="CVE" />
+    <reference ref_id="CVE-2015-0797" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0797" source="CVE" />
+    <reference ref_id="CVE-2015-2708" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2708" source="CVE" />
+    <reference ref_id="CVE-2015-2710" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2710" source="CVE" />
+    <reference ref_id="CVE-2015-2713" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2713" source="CVE" />
+    <reference ref_id="CVE-2015-2716" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2716" source="CVE" />
+    <description>Multiple security issues have been found in Iceweasel, Debian's version of the Mozilla Firefox web browser: Multiple memory safety errors, buffer overflows and use-after-frees may lead to the execution of arbitrary code, privilege escalation or denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="iceweasel is earlier than 0:31.7.0esr-1~deb7u1" test_ref="oval:org.cisecurity:tst:54" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="iceweasel is earlier than 0:31.7.0esr-1~deb8u1" test_ref="oval:org.cisecurity:tst:345" />
+    </criteria>
+  </criteria>
+</definition>

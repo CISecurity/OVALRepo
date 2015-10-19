@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:98" version="1">
+  <metadata>
+    <title>DSA-3298-1 -- jackrabbit -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>jackrabbit</product>
+    </affected>
+    <reference ref_id="DSA-3298-1" ref_url="http://www.debian.org/security/dsa-3298" source="VENDOR" />
+    <reference ref_id="CVE-2015-1833" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1833" source="CVE" />
+    <description>It was discovered that the Jackrabbit WebDAV bundle was susceptible to a XXE/XEE attack. When processing a WebDAV request body containing XML, the XML parser could be instructed to read content from network resources accessible to the host, identified by URI schemes such as &lt;q&gt;http(s)&lt;/q&gt; or &lt;q&gt;file&lt;/q&gt;. Depending on the WebDAV request, this could not only be used to trigger internal network requests, but might also be used to insert said content into the request, potentially exposing it to the attacker and others.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="jackrabbit is earlier than 0:2.3.6-1+deb7u1" test_ref="oval:org.cisecurity:tst:69" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="jackrabbit is earlier than 0:2.3.6-1+deb8u1" test_ref="oval:org.cisecurity:tst:211" />
+    </criteria>
+  </criteria>
+</definition>

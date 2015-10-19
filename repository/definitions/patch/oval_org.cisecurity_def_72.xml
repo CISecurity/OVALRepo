@@ -1,0 +1,46 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:72" version="1">
+  <metadata>
+    <title>DSA-3237-1 -- linux -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>linux</product>
+    </affected>
+    <reference ref_id="DSA-3237-1" ref_url="http://www.debian.org/security/dsa-3237" source="VENDOR" />
+    <reference ref_id="CVE-2014-8159" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8159" source="CVE" />
+    <reference ref_id="CVE-2014-9715" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9715" source="CVE" />
+    <reference ref_id="CVE-2015-2041" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2041" source="CVE" />
+    <reference ref_id="CVE-2015-2042" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2042" source="CVE" />
+    <reference ref_id="CVE-2015-2150" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2150" source="CVE" />
+    <reference ref_id="CVE-2015-2830" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2830" source="CVE" />
+    <reference ref_id="CVE-2015-2922" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2922" source="CVE" />
+    <reference ref_id="CVE-2015-3331" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3331" source="CVE" />
+    <reference ref_id="CVE-2015-3332" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3332" source="CVE" />
+    <reference ref_id="CVE-2015-3339" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3339" source="CVE" />
+    <description>Several vulnerabilities have been discovered in the Linux kernel that may lead to a privilege escalation, denial of service or information leaks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="linux is earlier than 0:3.2.68-1+deb7u1" test_ref="oval:org.cisecurity:tst:335" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="linux is earlier than 0:3.16" test_ref="oval:org.cisecurity:tst:76" />
+    </criteria>
+  </criteria>
+</definition>

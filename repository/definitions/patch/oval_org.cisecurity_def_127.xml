@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:127" version="1">
+  <metadata>
+    <title>DSA-3251-1 -- dnsmasq -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>dnsmasq</product>
+    </affected>
+    <reference ref_id="DSA-3251-1" ref_url="http://www.debian.org/security/dsa-3251" source="VENDOR" />
+    <reference ref_id="CVE-2015-3294" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3294" source="CVE" />
+    <description>Nick Sampanis discovered that dnsmasq, a small caching DNS proxy and DHCP/TFTP server, did not properly check the return value of the setup_reply() function called during a TCP connection, which is used then as a size argument in a function which writes data on the client's connection. A remote attacker could exploit this issue via a specially crafted DNS request to cause dnsmasq to crash, or potentially to obtain sensitive information from process memory.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="dnsmasq is earlier than 0:2.62-3+deb7u2" test_ref="oval:org.cisecurity:tst:263" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="dnsmasq is earlier than 0:2.72-3+deb8u1" test_ref="oval:org.cisecurity:tst:205" />
+    </criteria>
+  </criteria>
+</definition>

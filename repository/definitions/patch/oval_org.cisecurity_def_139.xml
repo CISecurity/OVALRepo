@@ -1,0 +1,24 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:139" version="1">
+  <metadata>
+    <title>DSA-3293-1 -- pyjwt -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>pyjwt</product>
+    </affected>
+    <reference ref_id="DSA-3293-1" ref_url="http://www.debian.org/security/dsa-3293" source="VENDOR" />
+    <description>Tim McLean discovered that pyjwt, a Python implementation of JSON Web Token, would try to verify an HMAC signature using an RSA or ECDSA public key as secret. This could allow remote attackers to trick applications expecting tokens signed with asymmetric keys, into accepting arbitrary tokens. For more information see: &lt;a href="https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/"&gt;https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/&lt;/a&gt;.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="pyjwt is earlier than 0:0.2.1-1+deb8u1" test_ref="oval:org.cisecurity:tst:154" />
+  </criteria>
+</definition>

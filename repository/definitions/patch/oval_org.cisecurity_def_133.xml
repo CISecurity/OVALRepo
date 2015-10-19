@@ -1,0 +1,30 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:133" version="1">
+  <metadata>
+    <title>DSA-3220-1 -- libtasn1-3 -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <product>libtasn1-3</product>
+    </affected>
+    <reference ref_id="DSA-3220-1" ref_url="http://www.debian.org/security/dsa-3220" source="VENDOR" />
+    <reference ref_id="CVE-2015-2806" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2806" source="CVE" />
+    <description>Hanno Boeck discovered a stack-based buffer overflow in the asn1_der_decoding function in Libtasn1, a library to manage ASN.1 structures. A remote attacker could take advantage of this flaw to cause an application using the Libtasn1 library to crash, or potentially to execute arbitrary code.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-13T10:00:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version def="http://oval.mitre.org/XMLSchema/oval-definitions-5">5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="libtasn1-3 is earlier than 0:2.13-2+deb7u2" test_ref="oval:org.cisecurity:tst:241" />
+  </criteria>
+</definition>
