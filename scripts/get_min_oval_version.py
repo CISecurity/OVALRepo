@@ -74,7 +74,14 @@ def determine_def_min_version(defpath, definitions_index, elements_index, update
         OvalGenerator.queue_element_file(element_type, file_path)
 
     # parse defintion, get ref to schema_version element
-    tree = etree.fromstring(OvalGenerator.to_string(True, False))
+    xmlstring = OvalGenerator.to_string(True, False)
+    xmlstring = xmlstring.replace('<?xml version="1.0" encoding="UTF-8"?>','')
+    xmlstring = xmlstring.replace('<?xml version="1.0" encoding="utf-8"?>','')
+    xmlstring = xmlstring.replace("<?xml version='1.0' encoding='UTF-8'?>",'')
+    xmlstring = xmlstring.replace("<?xml version='1.0' encoding='utf-8'?>",'')
+    #message("INFO", "XMLSTRING is %s" % xmlstring)
+    #tree = etree.fromstring(OvalGenerator.to_string(True, False))
+    tree = etree.XML(xmlstring)
     schema_version_element = tree.find('.//oval:schema_version', { 'oval': 'http://oval.mitre.org/XMLSchema/oval-common-5' })
 
     for schema_version in lib_repo.get_schema_versions():

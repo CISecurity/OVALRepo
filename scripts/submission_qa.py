@@ -497,7 +497,8 @@ def set_minimum_schema_version(oval_element, min_schema):
                 
             repo_element = etree.SubElement(meta_element, "oval_repository", NS_DEFINITION)
             
-        min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFINITION)
+        #min_element = etree.SubElement(repo_element, "min_schema_version", NS_DEFINITION)
+        min_element = etree.SubElement(repo_element, "min_schema_version")
         
     min_element.text = min_schema
     
