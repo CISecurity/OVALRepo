@@ -1,0 +1,40 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:272" version="1">
+  <metadata>
+    <title>DSA-3372-1 -- linux -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>linux</product>
+    </affected>
+    <reference ref_id="DSA-3372-1" ref_url="http://www.debian.org/security/dsa-3372" source="VENDOR" />
+    <reference ref_id="CVE-2015-2925" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2925" source="CVE" />
+    <reference ref_id="CVE-2015-5257" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5257" source="CVE" />
+    <reference ref_id="CVE-2015-5283" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5283" source="CVE" />
+    <reference ref_id="CVE-2015-7613" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7613" source="CVE" />
+    <description>Several vulnerabilities have been discovered in the Linux kernel that may lead to a privilege escalation, denial of service, unauthorised information disclosure or unauthorised information modification.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-10-16T14:27:42">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="linux is earlier than 0:3.2.68-1+deb7u5" test_ref="oval:org.cisecurity:tst:358" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="linux is earlier than 0:3.16.7-ckt11-1+deb8u5" test_ref="oval:org.cisecurity:tst:360" />
+    </criteria>
+  </criteria>
+</definition>
