@@ -597,4 +597,5 @@ def load_standalone_element(path):
         tree = etree.parse(path)
         return tree.getroot()
     except Exception:
+        print("Exception parsing %s" % path)
         return None

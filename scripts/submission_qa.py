@@ -272,6 +272,7 @@ def main():
         if verbose:
             print("\n ------- This update affects {0} upstream elements:  incrementing the version number for each...".format(len(affected_elements)))
         for file in affected_elements:
+            print("\n ----------- Loading standalone element for path {0}".format(file))
             oval_element = lib_xml.load_standalone_element(file)
             if oval_element is not None:
                 increment_version(oval_element)
@@ -350,6 +351,7 @@ def find_affected(ovalid, element_index):
 def increment_version(oval_element):
     
     if oval_element is None:
+        print("increment_version::oval_element is None...")
         return
 
     version = oval_element.get("version")
@@ -371,7 +373,7 @@ def normalize_ids(oval_element, oval_id_map):
 
     # nothing to do if there are no new oval ids...
     if not oval_id_map:
-        return
+        return oval_element
 
     ET.register_namespace("", "http://oval.mitre.org/XMLSchema/oval-definitions-5")
     ET.register_namespace("oval", "http://oval.mitre.org/XMLSchema/oval-common-5")
