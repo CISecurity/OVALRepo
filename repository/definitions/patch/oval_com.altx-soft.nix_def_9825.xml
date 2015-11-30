@@ -1,0 +1,36 @@
+    <definition id="oval:com.altx-soft.nix:def:9825" version="0" class="patch">
+      <metadata>
+        <title>DSA-3407-1 dpkg -- security update</title>
+        <affected family="unix">
+          <platform>Debian GNU/Linux 7.0</platform>
+          <platform>Debian GNU/kFreeBSD 7.0</platform>
+          <platform>Debian 8</platform>
+          <product>dpkg</product>
+        </affected>
+        <reference source="VENDOR" ref_url="https://www.debian.org/security/dsa-3407" ref_id="DSA-3407-1" />
+        <reference source="CVE" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0860" ref_id="CVE-2015-0860" />
+        <description>Hanno Boeck discovered a stack-based buffer overflow in the dpkg-deb component of dpkg, the Debian package management system. This flaw could potentially lead to arbitrary code execution if a user or an automated system were tricked into processing a specially crafted Debian binary package (.deb) in the old style Debian binary package format.</description>
+        <oval_repository>
+          <dates>
+            <submitted date="2015-11-30T09:33:37">
+              <contributor organization="ALTX-SOFT">Evgeniy Pavlov</contributor>
+            </submitted>
+          </dates>
+          <status>INITIAL SUBMISSION</status>
+        </oval_repository>
+      </metadata>
+      <criteria operator="OR">
+        <criteria operator="AND" comment="Debian 7">
+          <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+          <criteria operator="OR" comment="GNU/Linux or GNU/kFreeBSD kernel">
+            <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+            <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+          </criteria>
+          <criterion comment="dpkg is earlier than 0:1.16.17" test_ref="oval:com.altx-soft.nix:tst:31962" />
+        </criteria>
+        <criteria operator="AND" comment="Debian 8">
+          <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+          <criterion comment="dpkg is earlier than 0:1.17.26" test_ref="oval:com.altx-soft.nix:tst:31963" />
+        </criteria>
+      </criteria>
+    </definition>
