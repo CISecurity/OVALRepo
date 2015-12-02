@@ -1,0 +1,39 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:279" version="1">
+  <metadata>
+    <title>DSA-3395-1 krb5 -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>krb5</product>
+    </affected>
+    <reference ref_id="DSA-3395-1" ref_url="http://www.debian.org/security/dsa-3395" source="VENDOR" />
+    <reference ref_id="CVE-2015-2695" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2695" source="CVE" />
+    <reference ref_id="CVE-2015-2696" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2696" source="CVE" />
+    <reference ref_id="CVE-2015-2697" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2697" source="CVE" />
+    <description>Several vulnerabilities were discovered in krb5, the MIT implementation of Kerberos. The Common Vulnerabilities and Exposures project identifies the following problems.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-11-10T09:25:43">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="krb5 is earlier than 0:1.10.1+dfsg-5+deb7u4" test_ref="oval:org.cisecurity:tst:395" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="krb5 is earlier than 0:1.12.1+dfsg-19+deb8u1" test_ref="oval:org.cisecurity:tst:407" />
+    </criteria>
+  </criteria>
+</definition>
