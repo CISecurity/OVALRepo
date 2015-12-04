@@ -301,6 +301,14 @@ def main():
         if not oval_element or oval_element is None:
             continue
         new_path = lib_repo.get_element_repository_path(oval_element)
+
+        print("Path (BEFORE) -- %s" % path)
+        path = path.replace("/", "\\")
+        print("Path (AFTER) --- %s" % path)
+        print("New Path (BEFORE) -- %s" % new_path)
+        new_path = new_path.replace("/", "\\")
+        print("New Path (AFTER) --- %s" % new_path)
+        
         if verbose:
             print("## Writing {0}".format(new_path))
         save_element(oval_element, new_path)
