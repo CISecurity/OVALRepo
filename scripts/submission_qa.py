@@ -199,7 +199,9 @@ def main():
         try:
             lib_xml.schema_validate(element_file, schema_path, True)
         except Exception as e:
-            print('    Schema validation failed:\n\t{0}'.format(e.message))
+            #print('    Schema validation failed:\n\t{0}'.format(e.message))
+            #print("\n ### Offending file {0}".format(element_file))
+            print('    Schema validation failed:')
             print("\n ### Offending file {0}".format(element_file))
             return
 
