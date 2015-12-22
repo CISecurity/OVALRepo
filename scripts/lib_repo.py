@@ -35,7 +35,7 @@ from datetime import datetime
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
-supported_definition_statuses = ('ACCEPTED', 'DEPRECATED', 'DRAFT', 'INTERIM')
+supported_definition_statuses = ('ACCEPTED', 'DEPRECATED', 'DRAFT', 'INTERIM', 'INITIAL SUBMISSION')
 supported_element_types = ('definition', 'test', 'object', 'state', 'variable')
 
 
