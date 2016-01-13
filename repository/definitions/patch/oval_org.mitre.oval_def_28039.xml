@@ -1,17 +1,17 @@
-<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28039" version="5">
-  <oval-def:metadata>
-    <oval-def:title>RHSA-2014:1827 -- kdenetwork security update (Moderate)</oval-def:title>
-    <oval-def:affected family="unix">
-      <oval-def:platform>Red Hat Enterprise Linux 7</oval-def:platform>
-      <oval-def:platform>CentOS Linux 7</oval-def:platform>
-      <oval-def:product>kdenetwork</oval-def:product>
-    </oval-def:affected>
-    <oval-def:reference ref_id="RHSA-2014:1827" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1827.html" source="VENDOR" />
-    <oval-def:reference ref_id="CESA-2014:1827" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020753.html" source="CESA-2014:1827" />
-    <oval-def:reference ref_id="CVE-2014-6053" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6053" source="CVE" />
-    <oval-def:reference ref_id="CVE-2014-6054" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6054" source="CVE" />
-    <oval-def:reference ref_id="CVE-2014-6055" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6055" source="CVE" />
-    <oval-def:description>The kdenetwork packages contain networking applications for the K Desktop
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:28039" version="6">
+  <metadata>
+    <title>RHSA-2014:1827 -- kdenetwork security update (Moderate)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>kdenetwork</product>
+    </affected>
+    <reference ref_id="RHSA-2014:1827" ref_url="https://rhn.redhat.com/errata/RHSA-2014-1827.html" source="VENDOR" />
+    <reference ref_id="CESA-2014:1827" ref_url="http://lists.centos.org/pipermail/centos-announce/2014-November/020753.html" source="CESA-2014:1827" />
+    <reference ref_id="CVE-2014-6053" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6053" source="CVE" />
+    <reference ref_id="CVE-2014-6054" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6054" source="CVE" />
+    <reference ref_id="CVE-2014-6055" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6055" source="CVE" />
+    <description>The kdenetwork packages contain networking applications for the K Desktop
 Environment (KDE). Krfb Desktop Sharing, which is a part of the kdenetwork
 package, is a server application that allows session sharing between users.
 Krfb uses the LibVNCServer library.
@@ -41,52 +41,52 @@ issues in krfb described above.
 All kdenetwork users are advised to upgrade to these updated packages,
 which contain backported patches to correct these issues. All running
 instances of the krfb server must be restarted for this update to take
-effect.</oval-def:description>
-    <oval-def:oval_repository>
-      <oval-def:dates>
-        <oval-def:submitted date="2014-12-08T15:38:27">
-          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
-        </oval-def:submitted>
-        <oval-def:status_change date="2014-12-19T17:36:08.511-05:00">DRAFT</oval-def:status_change>
-        <oval-def:status_change date="2015-01-05T04:00:20.346-05:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2015-01-26T04:00:23.024-05:00">ACCEPTED</oval-def:status_change>
-        <oval-def:modified comment="EDITED oval:org.mitre.oval:tst:135645 - Updated Linux patches with modified epoch in states." date="2015-02-02T16:00:00.461-05:00">
-          <oval-def:contributor organization="ALTX-SOFT">Maria Mikhno</oval-def:contributor>
-        </oval-def:modified>
-        <oval-def:status_change date="2015-02-02T16:16:56.559-05:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2015-02-23T04:01:07.629-05:00">ACCEPTED</oval-def:status_change>
-      </oval-def:dates>
-      <oval-def:status>ACCEPTED</oval-def:status>
-      <oval-def:min_schema_version>5.3</oval-def:min_schema_version>
-    </oval-def:oval_repository>
-  </oval-def:metadata>
-  <oval-def:criteria operator="OR">
-    <oval-def:criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
-      <oval-def:criteria comment="Operation system section" operator="OR">
-        <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
-        <oval-def:extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
-      </oval-def:criteria>
-      <oval-def:criteria comment="Packages match section" operator="OR">
-        <oval-def:criterion comment="kdenetwork is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136231" />
-        <oval-def:criterion comment="kdenetwork-common is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136074" />
-        <oval-def:criterion comment="kdenetwork-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136194" />
-        <oval-def:criterion comment="kdenetwork-fileshare-samba is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135645" />
-        <oval-def:criterion comment="kdenetwork-kdnssd is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136115" />
-        <oval-def:criterion comment="kdenetwork-kget is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136159" />
-        <oval-def:criterion comment="kdenetwork-kget-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136034" />
-        <oval-def:criterion comment="kdenetwork-kopete is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135432" />
-        <oval-def:criterion comment="kdenetwork-kopete-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135727" />
-        <oval-def:criterion comment="kdenetwork-kopete-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136116" />
-        <oval-def:criterion comment="kdenetwork-krdc is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136154" />
-        <oval-def:criterion comment="kdenetwork-krdc-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135978" />
-        <oval-def:criterion comment="kdenetwork-krdc-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136010" />
-        <oval-def:criterion comment="kdenetwork-krfb is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136236" />
-        <oval-def:criterion comment="kdenetwork-krfb-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135932" />
-      </oval-def:criteria>
-    </oval-def:criteria>
-    <oval-def:criteria comment="Red Hat Enterprise Linux 7 release section">
-      <oval-def:extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
-      <oval-def:criterion comment="kdenetwork-debuginfo is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136071" />
-    </oval-def:criteria>
-  </oval-def:criteria>
-</oval-def:definition>
+effect.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2014-12-08T15:38:27">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2014-12-19T17:36:08.511-05:00">DRAFT</status_change>
+        <status_change date="2015-01-05T04:00:20.346-05:00">INTERIM</status_change>
+        <status_change date="2015-01-26T04:00:23.024-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:tst:135645 - Updated Linux patches with modified epoch in states." date="2015-02-02T16:00:00.461-05:00">
+          <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+        </modified>
+        <status_change date="2015-02-02T16:16:56.559-05:00">INTERIM</status_change>
+        <status_change date="2015-02-23T04:01:07.629-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.3</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Red Hat Enterprise Linux 7 and CentOS Linux 7 release section">
+      <criteria comment="Operation system section" operator="OR">
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
+      </criteria>
+      <criteria comment="Packages match section" operator="OR">
+        <criterion comment="kdenetwork is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136231" />
+        <criterion comment="kdenetwork-common is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136074" />
+        <criterion comment="kdenetwork-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136194" />
+        <criterion comment="kdenetwork-fileshare-samba is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135645" />
+        <criterion comment="kdenetwork-kdnssd is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136115" />
+        <criterion comment="kdenetwork-kget is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136159" />
+        <criterion comment="kdenetwork-kget-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136034" />
+        <criterion comment="kdenetwork-kopete is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135432" />
+        <criterion comment="kdenetwork-kopete-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135727" />
+        <criterion comment="kdenetwork-kopete-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136116" />
+        <criterion comment="kdenetwork-krdc is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136154" />
+        <criterion comment="kdenetwork-krdc-devel is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135978" />
+        <criterion comment="kdenetwork-krdc-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136010" />
+        <criterion comment="kdenetwork-krfb is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136236" />
+        <criterion comment="kdenetwork-krfb-libs is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:135932" />
+      </criteria>
+    </criteria>
+    <criteria comment="Red Hat Enterprise Linux 7 release section">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+      <criterion comment="kdenetwork-debuginfo is earlier than 7:4.10.5-8.el7_0" test_ref="oval:org.mitre.oval:tst:136071" />
+    </criteria>
+  </criteria>
+</definition>
