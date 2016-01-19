@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:351" version="1">
+  <metadata>
+    <title>DSA-3420-1 -- bind9 -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>bind9</product>
+    </affected>
+    <reference ref_id="DSA-3420-1" ref_url="https://www.debian.org/security/dsa-3420" source="VENDOR" />
+    <reference ref_id="CVE-2015-8000" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8000" source="CVE" />
+    <description>It was discovered that the BIND DNS server does not properly handle the parsing of incoming responses, allowing some records with an incorrect class to be accepted by BIND instead of being rejected as malformed. This can trigger a REQUIRE assertion failure when those records are subsequently cached. A remote attacker can exploit this flaw to cause a denial of service against servers performing recursive queries.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-12-18T15:37:31">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="bind9 is earlier than 1:9.8.4.dfsg.P1-6+nmu2+deb7u8" test_ref="oval:org.cisecurity:tst:526" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="bind9 is earlier than 1:9.9.5.dfsg-9+deb8u4" test_ref="oval:org.cisecurity:tst:497" />
+    </criteria>
+  </criteria>
+</definition>

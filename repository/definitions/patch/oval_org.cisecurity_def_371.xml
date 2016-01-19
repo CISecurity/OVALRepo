@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:371" version="1">
+  <metadata>
+    <title>DSA-3445-1 -- pygments -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>pygments</product>
+    </affected>
+    <reference ref_id="DSA-3445-1" ref_url="https://www.debian.org/security/dsa-3445" source="VENDOR" />
+    <reference ref_id="CVE-2015-8557" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8557" source="CVE" />
+    <description>Javantea discovered that pygments, a generic syntax highlighter, is prone to a shell injection vulnerability allowing a remote attacker to execute arbitrary code via shell metacharacters in a font name.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-01-14T12:20:58">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="pygments is earlier than 0:1.5+dfsg-1+deb7u1" test_ref="oval:org.cisecurity:tst:523" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="pygments is earlier than 0:2.0.1+dfsg-1.1+deb8u1" test_ref="oval:org.cisecurity:tst:511" />
+    </criteria>
+  </criteria>
+</definition>

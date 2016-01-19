@@ -1,0 +1,47 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:346" version="1">
+  <metadata>
+    <title>DSA-3430-1 -- libxml2 -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7.0</platform>
+      <platform>Debian GNU/kFreeBSD 7.0</platform>
+      <platform>Debian 8</platform>
+      <product>libxml2</product>
+    </affected>
+    <reference ref_id="DSA-3430-1" ref_url="https://www.debian.org/security/dsa-3430" source="VENDOR" />
+    <reference ref_id="CVE-2015-1819" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1819" source="CVE" />
+    <reference ref_id="CVE-2015-5312" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5312" source="CVE" />
+    <reference ref_id="CVE-2015-7497" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7497" source="CVE" />
+    <reference ref_id="CVE-2015-7498" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7498" source="CVE" />
+    <reference ref_id="CVE-2015-7499" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7499" source="CVE" />
+    <reference ref_id="CVE-2015-7500" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7500" source="CVE" />
+    <reference ref_id="CVE-2015-7941" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7941" source="CVE" />
+    <reference ref_id="CVE-2015-7942" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7942" source="CVE" />
+    <reference ref_id="CVE-2015-8035" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8035" source="CVE" />
+    <reference ref_id="CVE-2015-8241" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8241" source="CVE" />
+    <reference ref_id="CVE-2015-8317" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8317" source="CVE" />
+    <description>Several vulnerabilities were discovered in libxml2, a library providing support to read, modify and write XML and HTML files. A remote attacker could provide a specially crafted XML or HTML file that, when processed by an application using libxml2, would cause that application to use an excessive amount of CPU, leak potentially sensitive information, or crash the application.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2015-12-30T10:56:06">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="libxml2 is earlier than 0:2.8.0+dfsg1-7+wheezy5" test_ref="oval:org.cisecurity:tst:487" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="libxml2 is earlier than 0:2.9.1+dfsg1-5+deb8u1" test_ref="oval:org.cisecurity:tst:513" />
+    </criteria>
+  </criteria>
+</definition>
