@@ -9,21 +9,21 @@ def main():
     query = {}
 
     definitions_index = lib_search.DefinitionsIndex(message)
-    revisions_index   = lib_search.RevisionsIndex(message)
+    #revisions_index   = lib_search.RevisionsIndex(message)
 
-    #query["status"] = "INITIAL SUBMISSION"
+    #filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange("20151201", "20151231") })
+    #filtered_oval_ids = revisions_index.get_definition_ids({ 'status': 'INITIAL SUBMISSION' })
+    #for ovalid in filtered_oval_ids:
+    #    message("INFO", "Filtered oval id is %s" % ovalid)
 
-    filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange("20151201", "20151231") })
-    for ovalid in filtered_oval_ids:
-        message("INFO", "Filtered oval id is %s" % ovalid)
-
-    query['oval_id'] = filtered_oval_ids
+    query["status"] = "INITIAL SUBMISSION"
+    #query['oval_id'] = filtered_oval_ids
 
     query_results = definitions_index.query(query)
     #definition_ids = { document['oval_id'] for document in query_results }
 
     for document in query_results:
-        message("INFO", "OVAL ID %s has status %s", (document["oval_id"], document["status"]))
+        message("INFO", "OVAL ID %s has status %s" % (document["oval_id"], document["status"]))
         
 
     #response = input("\n :::: Remove all orphans? (N[o] / y[es]): ")
