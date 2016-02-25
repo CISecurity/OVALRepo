@@ -1,151 +1,151 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13302" version="8">
-  <metadata>
-    <title>USN-1085-1 -- tiff vulnerabilities</title>
-    <affected family="unix">
-      <platform>Ubuntu 8.04</platform>
-      <platform>Ubuntu 10.10</platform>
-      <platform>Ubuntu 10.04</platform>
-      <platform>Ubuntu 9.10</platform>
-      <platform>Ubuntu 6.06</platform>
-      <product>tiff</product>
-    </affected>
-    <reference ref_id="USN-1085-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-March/001272.html" source="VENDOR" />
-    <reference ref_id="CVE-2010-2482" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2482" source="CVE" />
-    <reference ref_id="CVE-2010-2595" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2595" source="CVE" />
-    <reference ref_id="CVE-2010-2597" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2597" source="CVE" />
-    <reference ref_id="CVE-2010-2598" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2598" source="CVE" />
-    <reference ref_id="CVE-2010-2630" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2630" source="CVE" />
-    <reference ref_id="CVE-2010-3087" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3087" source="CVE" />
-    <reference ref_id="CVE-2011-0191" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0191" source="CVE" />
-    <reference ref_id="CVE-2010-2483" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2483" source="CVE" />
-    <reference ref_id="CVE-2011-0192" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0192" source="CVE" />
-    <description>Sauli Pahlman discovered that the TIFF library incorrectly handled invalid td_stripbytecount fields. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. This issue only affected Ubuntu 10.04 LTS and 10.10. Sauli Pahlman discovered that the TIFF library incorrectly handled TIFF files with an invalid combination of SamplesPerPixel and Photometric values. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. This issue only affected Ubuntu 10.10. Nicolae Ghimbovschi discovered that the TIFF library incorrectly handled invalid ReferenceBlackWhite values. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. Sauli Pahlman discovered that the TIFF library incorrectly handled certain default fields. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. It was discovered that the TIFF library incorrectly validated certain data types. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. It was discovered that the TIFF library incorrectly handled downsampled JPEG data. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service. This issue only affected Ubuntu 10.04 LTS and 10.10. It was discovered that the TIFF library incorrectly handled certain JPEG data. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service. This issue only affected Ubuntu 6.06 LTS, 8.04 LTS and 9.10. It was discovered that the TIFF library incorrectly handled certain TIFF FAX images. If a user or automated system were tricked into opening a specially crafted TIFF FAX image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2011-10-18T15:55:55">
-          <contributor organization="SecPod Technologies">SecPod Team</contributor>
-        </submitted>
-        <status_change date="2011-11-02T15:40:59.238-04:00">DRAFT</status_change>
-        <status_change date="2011-11-21T04:05:10.570-05:00">INTERIM</status_change>
-        <status_change date="2011-12-12T04:04:11.285-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:def:13302 - added CVE references; also made minor updates" date="2014-06-13T16:06:00.587-04:00">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </modified>
-        <status_change date="2014-06-13T16:08:02.035-04:00">INTERIM</status_change>
-        <status_change date="2014-06-30T04:02:24.643-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250" />
-      <criteria comment="Supported architectures section" operator="OR">
-        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-        <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-      </criteria>
-      <criteria comment="Packages section" operator="OR">
-        <criterion comment="libtiff4 DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64297" />
-        <criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64078" />
-        <criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64098" />
-        <criterion comment="libtiff-tools DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64262" />
-        <criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:63918" />
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independent section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criterion comment="libtiff-doc DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64202" />
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="libtiff4 DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64383" />
-            <criterion comment="libtiff-opengl DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64020" />
-            <criterion comment="libtiffxx0c2 DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64295" />
-            <criterion comment="libtiff-tools DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:63880" />
-            <criterion comment="libtiff4-dev DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64214" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independent section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criterion comment="libtiff-doc DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64325" />
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="libtiff4 DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64397" />
-            <criterion comment="libtiff-opengl DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:63657" />
-            <criterion comment="libtiffxx0c2 DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64286" />
-            <criterion comment="libtiff-tools DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64331" />
-            <criterion comment="libtiff4-dev DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64395" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independent section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criterion comment="libtiff-doc DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64287" />
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-            <criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="libtiff4 DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64350" />
-            <criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64326" />
-            <criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64022" />
-            <criterion comment="libtiff-tools DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:63476" />
-            <criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64344" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319" />
-      <criteria comment="Supported architectures section" operator="OR">
-        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-        <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-      </criteria>
-      <criteria comment="Packages section" operator="OR">
-        <criterion comment="libtiff4 DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64265" />
-        <criterion comment="libtiff-opengl DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:63949" />
-        <criterion comment="libtiffxx0c2 DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64401" />
-        <criterion comment="libtiff-tools DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64122" />
-        <criterion comment="libtiff4-dev DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:63495" />
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13302" version="8">
+  <oval-def:metadata>
+    <oval-def:title>USN-1085-1 -- tiff vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 8.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 10.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 10.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 9.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 6.06</oval-def:platform>
+      <oval-def:product>tiff</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-1085-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-March/001287.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2010-2482" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2482" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-2595" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2595" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-2597" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2597" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-2598" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2598" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-2630" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2630" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-3087" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3087" source="CVE" />
+    <oval-def:reference ref_id="CVE-2011-0191" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0191" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-2483" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2483" source="CVE" />
+    <oval-def:reference ref_id="CVE-2011-0192" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0192" source="CVE" />
+    <oval-def:description>Sauli Pahlman discovered that the TIFF library incorrectly handled invalid td_stripbytecount fields. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. This issue only affected Ubuntu 10.04 LTS and 10.10. Sauli Pahlman discovered that the TIFF library incorrectly handled TIFF files with an invalid combination of SamplesPerPixel and Photometric values. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. This issue only affected Ubuntu 10.10. Nicolae Ghimbovschi discovered that the TIFF library incorrectly handled invalid ReferenceBlackWhite values. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. Sauli Pahlman discovered that the TIFF library incorrectly handled certain default fields. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. It was discovered that the TIFF library incorrectly validated certain data types. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could crash the application, leading to a denial of service. It was discovered that the TIFF library incorrectly handled downsampled JPEG data. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service. This issue only affected Ubuntu 10.04 LTS and 10.10. It was discovered that the TIFF library incorrectly handled certain JPEG data. If a user or automated system were tricked into opening a specially crafted TIFF image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service. This issue only affected Ubuntu 6.06 LTS, 8.04 LTS and 9.10. It was discovered that the TIFF library incorrectly handled certain TIFF FAX images. If a user or automated system were tricked into opening a specially crafted TIFF FAX image, a remote attacker could execute arbitrary code with user privileges, or crash the application, leading to a denial of service</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-18T15:55:55">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-11-02T15:40:59.238-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:05:10.570-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-12-12T04:04:11.285-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13302 - added CVE references; also made minor updates" date="2014-06-13T16:06:00.587-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-13T16:08:02.035-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-30T04:02:24.643-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250" />
+      <oval-def:criteria comment="Supported architectures section" operator="OR">
+        <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+        <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+        <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+        <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+        <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libtiff4 DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64297" />
+        <oval-def:criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64078" />
+        <oval-def:criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64098" />
+        <oval-def:criterion comment="libtiff-tools DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:64262" />
+        <oval-def:criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-7ubuntu3.7" test_ref="oval:org.mitre.oval:tst:63918" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 10.10 is installed" definition_ref="oval:org.mitre.oval:def:13134" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independent section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criterion comment="libtiff-doc DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64202" />
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <oval-def:criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="libtiff4 DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64383" />
+            <oval-def:criterion comment="libtiff-opengl DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64020" />
+            <oval-def:criterion comment="libtiffxx0c2 DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64295" />
+            <oval-def:criterion comment="libtiff-tools DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:63880" />
+            <oval-def:criterion comment="libtiff4-dev DPKG is earlier than 3.9.4-2ubuntu0.1" test_ref="oval:org.mitre.oval:tst:64214" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 10.04 is installed" definition_ref="oval:org.mitre.oval:def:13089" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independent section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criterion comment="libtiff-doc DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64325" />
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <oval-def:criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="libtiff4 DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64397" />
+            <oval-def:criterion comment="libtiff-opengl DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:63657" />
+            <oval-def:criterion comment="libtiffxx0c2 DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64286" />
+            <oval-def:criterion comment="libtiff-tools DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64331" />
+            <oval-def:criterion comment="libtiff4-dev DPKG is earlier than 3.9.2-2ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64395" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independent section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criterion comment="libtiff-doc DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64287" />
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+            <oval-def:criterion comment="Installed architecture is armel" test_ref="oval:org.mitre.oval:tst:11101" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="libtiff4 DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64350" />
+            <oval-def:criterion comment="libtiff-opengl DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64326" />
+            <oval-def:criterion comment="libtiffxx0c2 DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64022" />
+            <oval-def:criterion comment="libtiff-tools DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:63476" />
+            <oval-def:criterion comment="libtiff4-dev DPKG is earlier than 3.8.2-13ubuntu0.4" test_ref="oval:org.mitre.oval:tst:64344" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319" />
+      <oval-def:criteria comment="Supported architectures section" operator="OR">
+        <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+        <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+        <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+        <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+      </oval-def:criteria>
+      <oval-def:criteria comment="Packages section" operator="OR">
+        <oval-def:criterion comment="libtiff4 DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64265" />
+        <oval-def:criterion comment="libtiff-opengl DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:63949" />
+        <oval-def:criterion comment="libtiffxx0c2 DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64401" />
+        <oval-def:criterion comment="libtiff-tools DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:64122" />
+        <oval-def:criterion comment="libtiff4-dev DPKG is earlier than 3.7.4-1ubuntu3.9" test_ref="oval:org.mitre.oval:tst:63495" />
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

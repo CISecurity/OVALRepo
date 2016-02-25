@@ -1,188 +1,188 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13150" version="8">
-  <metadata>
-    <title>USN-923-1 -- openjdk-6 vulnerabilities</title>
-    <affected family="unix">
-      <platform>Ubuntu 8.04</platform>
-      <platform>Ubuntu 8.10</platform>
-      <platform>Ubuntu 9.10</platform>
-      <platform>Ubuntu 9.04</platform>
-      <product>openjdk-6</product>
-    </affected>
-    <reference ref_id="USN-923-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-April/001070.html" source="VENDOR" />
-    <reference ref_id="CVE-2009-3555" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" source="CVE" />
-    <reference ref_id="CVE-2010-0082" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0082" source="CVE" />
-    <reference ref_id="CVE-2010-0084" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0084" source="CVE" />
-    <reference ref_id="CVE-2010-0085" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0085" source="CVE" />
-    <reference ref_id="CVE-2010-0088" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0088" source="CVE" />
-    <reference ref_id="CVE-2010-0091" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0091" source="CVE" />
-    <reference ref_id="CVE-2010-0094" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0094" source="CVE" />
-    <reference ref_id="CVE-2010-0092" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0092" source="CVE" />
-    <reference ref_id="CVE-2010-0093" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0093" source="CVE" />
-    <reference ref_id="CVE-2010-0095" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0095" source="CVE" />
-    <reference ref_id="CVE-2010-0845" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0845" source="CVE" />
-    <reference ref_id="CVE-2010-0837" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0837" source="CVE" />
-    <reference ref_id="CVE-2010-0838" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0838" source="CVE" />
-    <reference ref_id="CVE-2010-0847" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0847" source="CVE" />
-    <reference ref_id="CVE-2010-0848" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0848" source="CVE" />
-    <reference ref_id="CVE-2010-0840" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0840" source="CVE" />
-    <description>Marsh Ray and Steve Dispensa discovered a flaw in the TLS and SSLv3 protocols. If an attacker could perform a man in the middle attack at the start of a TLS connection, the attacker could inject arbitrary content at the beginning of the user�s session. It was discovered that Loader-constraint table, Policy/PolicyFile, Inflater/Deflater, drag/drop access, and deserialization did not correctly handle certain sensitive objects. If a user were tricked into running a specially crafted applet, private information could be leaked to a remote attacker, leading to a loss of privacy. It was discovered that AtomicReferenceArray, System.arraycopy, InetAddress, and HashAttributeSet did not correctly handle certain situations. If a remote attacker could trigger specific error conditions, a Java application could crash, leading to a denial of service. It was discovered that Pack200, CMM readMabCurveData, ImagingLib, and the AWT library did not correctly check buffer lengths. If a user or automated system were tricked into handling specially crafted JAR files or images, a remote attacker could crash the Java application or possibly gain user privileges . It was discovered that applets did not correctly handle certain trust chains. If a user were tricked into running a specially crafted applet, a remote attacker could possibly run untrusted code with user privileges</description>
-    <oval_repository>
-      <dates>
-        <submitted date="2011-10-18T15:55:55">
-          <contributor organization="SecPod Technologies">SecPod Team</contributor>
-        </submitted>
-        <status_change date="2011-11-02T15:00:08.266-04:00">DRAFT</status_change>
-        <status_change date="2011-11-21T04:03:23.311-05:00">INTERIM</status_change>
-        <status_change date="2011-12-12T04:02:35.823-05:00">ACCEPTED</status_change>
-        <modified comment="EDITED oval:org.mitre.oval:def:13150 - added CVE references; also made minor updates" date="2014-06-13T16:14:00.881-04:00">
-          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
-        </modified>
-        <status_change date="2014-06-13T16:16:16.432-04:00">INTERIM</status_change>
-        <status_change date="2014-06-30T04:01:46.737-04:00">ACCEPTED</status_change>
-      </dates>
-      <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
-    </oval_repository>
-  </metadata>
-  <criteria operator="OR">
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independet section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46326" />
-            <criterion comment="openjdk-6-doc DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46677" />
-            <criterion comment="openjdk-6-source DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46800" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45824" />
-            <criterion comment="openjdk-6-demo DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46750" />
-            <criterion comment="openjdk-6-dbg DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46517" />
-            <criterion comment="openjdk-6-jdk DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46815" />
-            <criterion comment="openjdk-6-jre DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46630" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independet section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46737" />
-            <criterion comment="openjdk-6-doc DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46613" />
-            <criterion comment="openjdk-6-source-files DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46683" />
-            <criterion comment="openjdk-6-source DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:45849" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46698" />
-            <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46846" />
-            <criterion comment="openjdk-6-demo DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46636" />
-            <criterion comment="openjdk-6-dbg DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46416" />
-            <criterion comment="openjdk-6-jdk DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46064" />
-            <criterion comment="icedtea6-plugin DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46831" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independet section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46526" />
-            <criterion comment="openjdk-6-doc DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46397" />
-            <criterion comment="openjdk-6-source DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:45857" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46187" />
-            <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46266" />
-            <criterion comment="openjdk-6-demo DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:45922" />
-            <criterion comment="openjdk-6-dbg DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46906" />
-            <criterion comment="openjdk-6-jdk DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46375" />
-            <criterion comment="icedtea6-plugin DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46632" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46916" />
-            <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46685" />
-          </criteria>
-        </criteria>
-      </criteria>
-    </criteria>
-    <criteria comment="Release section" operator="AND">
-      <extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669" />
-      <criteria comment="Architecture section" operator="OR">
-        <criteria comment="Architecture independet section" operator="AND">
-          <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46136" />
-            <criterion comment="openjdk-6-doc DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46322" />
-            <criterion comment="openjdk-6-source-files DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46473" />
-            <criterion comment="openjdk-6-source DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46699" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-          </criteria>
-          <criteria comment="Packages section" operator="OR">
-            <criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46679" />
-            <criterion comment="openjdk-6-jre DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46549" />
-            <criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46675" />
-            <criterion comment="openjdk-6-demo DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:45969" />
-            <criterion comment="openjdk-6-dbg DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46606" />
-            <criterion comment="openjdk-6-jdk DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46901" />
-            <criterion comment="icedtea6-plugin DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46339" />
-          </criteria>
-        </criteria>
-        <criteria comment="Architecture depended section" operator="AND">
-          <criteria comment="Supported architectures section" operator="OR">
-            <criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
-            <criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
-            <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-          </criteria>
-          <criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:45942" />
-        </criteria>
-      </criteria>
-    </criteria>
-  </criteria>
-</definition>
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13150" version="8">
+  <oval-def:metadata>
+    <oval-def:title>USN-923-1 -- openjdk-6 vulnerabilities</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Ubuntu 8.04</oval-def:platform>
+      <oval-def:platform>Ubuntu 8.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 9.10</oval-def:platform>
+      <oval-def:platform>Ubuntu 9.04</oval-def:platform>
+      <oval-def:product>openjdk-6</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="USN-923-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2010-April/001085.html" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2009-3555" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0082" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0082" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0084" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0084" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0085" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0085" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0088" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0088" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0091" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0091" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0094" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0094" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0092" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0092" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0093" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0093" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0095" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0095" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0845" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0845" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0837" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0837" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0838" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0838" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0847" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0847" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0848" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0848" source="CVE" />
+    <oval-def:reference ref_id="CVE-2010-0840" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0840" source="CVE" />
+    <oval-def:description>Marsh Ray and Steve Dispensa discovered a flaw in the TLS and SSLv3 protocols. If an attacker could perform a man in the middle attack at the start of a TLS connection, the attacker could inject arbitrary content at the beginning of the user�s session. It was discovered that Loader-constraint table, Policy/PolicyFile, Inflater/Deflater, drag/drop access, and deserialization did not correctly handle certain sensitive objects. If a user were tricked into running a specially crafted applet, private information could be leaked to a remote attacker, leading to a loss of privacy. It was discovered that AtomicReferenceArray, System.arraycopy, InetAddress, and HashAttributeSet did not correctly handle certain situations. If a remote attacker could trigger specific error conditions, a Java application could crash, leading to a denial of service. It was discovered that Pack200, CMM readMabCurveData, ImagingLib, and the AWT library did not correctly check buffer lengths. If a user or automated system were tricked into handling specially crafted JAR files or images, a remote attacker could crash the Java application or possibly gain user privileges . It was discovered that applets did not correctly handle certain trust chains. If a user were tricked into running a specially crafted applet, a remote attacker could possibly run untrusted code with user privileges</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2011-10-18T15:55:55">
+          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
+        </oval-def:submitted>
+        <oval-def:status_change date="2011-11-02T15:00:08.266-04:00">DRAFT</oval-def:status_change>
+        <oval-def:status_change date="2011-11-21T04:03:23.311-05:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2011-12-12T04:02:35.823-05:00">ACCEPTED</oval-def:status_change>
+        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13150 - added CVE references; also made minor updates" date="2014-06-13T16:14:00.881-04:00">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:modified>
+        <oval-def:status_change date="2014-06-13T16:16:16.432-04:00">INTERIM</oval-def:status_change>
+        <oval-def:status_change date="2014-06-30T04:01:46.737-04:00">ACCEPTED</oval-def:status_change>
+      </oval-def:dates>
+      <oval-def:status>ACCEPTED</oval-def:status>
+      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 8.04 is installed" definition_ref="oval:org.mitre.oval:def:13250" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independet section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46326" />
+            <oval-def:criterion comment="openjdk-6-doc DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46677" />
+            <oval-def:criterion comment="openjdk-6-source DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46800" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:45824" />
+            <oval-def:criterion comment="openjdk-6-demo DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46750" />
+            <oval-def:criterion comment="openjdk-6-dbg DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46517" />
+            <oval-def:criterion comment="openjdk-6-jdk DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46815" />
+            <oval-def:criterion comment="openjdk-6-jre DPKG is earlier than 6b11-2ubuntu2.2" test_ref="oval:org.mitre.oval:tst:46630" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 8.10 is installed" definition_ref="oval:org.mitre.oval:def:13306" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independet section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46737" />
+            <oval-def:criterion comment="openjdk-6-doc DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46613" />
+            <oval-def:criterion comment="openjdk-6-source-files DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46683" />
+            <oval-def:criterion comment="openjdk-6-source DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:45849" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46698" />
+            <oval-def:criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46846" />
+            <oval-def:criterion comment="openjdk-6-demo DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46636" />
+            <oval-def:criterion comment="openjdk-6-dbg DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46416" />
+            <oval-def:criterion comment="openjdk-6-jdk DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46064" />
+            <oval-def:criterion comment="icedtea6-plugin DPKG is earlier than 6b12-0ubuntu6.7" test_ref="oval:org.mitre.oval:tst:46831" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 9.10 is installed" definition_ref="oval:org.mitre.oval:def:13079" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independet section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46526" />
+            <oval-def:criterion comment="openjdk-6-doc DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46397" />
+            <oval-def:criterion comment="openjdk-6-source DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:45857" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46187" />
+            <oval-def:criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46266" />
+            <oval-def:criterion comment="openjdk-6-demo DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:45922" />
+            <oval-def:criterion comment="openjdk-6-dbg DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46906" />
+            <oval-def:criterion comment="openjdk-6-jdk DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46375" />
+            <oval-def:criterion comment="icedtea6-plugin DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46632" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46916" />
+            <oval-def:criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b16-1.6.1-3ubuntu3" test_ref="oval:org.mitre.oval:tst:46685" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+    <oval-def:criteria comment="Release section" operator="AND">
+      <oval-def:extend_definition comment="Ubuntu 9.04 is installed" definition_ref="oval:org.mitre.oval:def:12669" />
+      <oval-def:criteria comment="Architecture section" operator="OR">
+        <oval-def:criteria comment="Architecture independet section" operator="AND">
+          <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="openjdk-6-jre-lib DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46136" />
+            <oval-def:criterion comment="openjdk-6-doc DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46322" />
+            <oval-def:criterion comment="openjdk-6-source-files DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46473" />
+            <oval-def:criterion comment="openjdk-6-source DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46699" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+          </oval-def:criteria>
+          <oval-def:criteria comment="Packages section" operator="OR">
+            <oval-def:criterion comment="icedtea-6-jre-cacao DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46679" />
+            <oval-def:criterion comment="openjdk-6-jre DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46549" />
+            <oval-def:criterion comment="openjdk-6-jre-headless DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46675" />
+            <oval-def:criterion comment="openjdk-6-demo DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:45969" />
+            <oval-def:criterion comment="openjdk-6-dbg DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46606" />
+            <oval-def:criterion comment="openjdk-6-jdk DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46901" />
+            <oval-def:criterion comment="icedtea6-plugin DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:46339" />
+          </oval-def:criteria>
+        </oval-def:criteria>
+        <oval-def:criteria comment="Architecture depended section" operator="AND">
+          <oval-def:criteria comment="Supported architectures section" operator="OR">
+            <oval-def:criterion comment="Installed architecture is lpia" test_ref="oval:org.mitre.oval:tst:44349" />
+            <oval-def:criterion comment="Installed architecture is amd64" test_ref="oval:org.mitre.oval:tst:10392" />
+            <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+          </oval-def:criteria>
+          <oval-def:criterion comment="openjdk-6-jre-zero DPKG is earlier than 6b14-1.4.1-0ubuntu13" test_ref="oval:org.mitre.oval:tst:45942" />
+        </oval-def:criteria>
+      </oval-def:criteria>
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
