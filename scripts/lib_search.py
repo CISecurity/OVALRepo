@@ -231,7 +231,12 @@ class SearchIndex:
                 counter = counter + 1
                 self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label)
                 if 'deleted' in document and document['deleted']:
-                    index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
+                    try:
+                        index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
+                    except:
+                        self.message('debug', 'Something was marked as needing to be deleted but it wasnt in the index')
+                    #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
+                    #index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
                     #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
                 else:
                     index_writer.add_document(**document)
