@@ -101,7 +101,7 @@ def get_definition_metadata(filepath):
         'platforms': { platform.text for platform in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:platform', namespaces=ns_map) },
         'products': { product.text for product in root.iterfind('./oval-def:metadata/oval-def:affected/oval-def:product', namespaces=ns_map) },
         'revisions': revisions,
-        'reference_ids': { reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) },
+        'reference_ids': ''.join([ reference.get('ref_id') for reference in root.iterfind('./oval-def:metadata/oval-def:reference', namespaces=ns_map) ]),
         'last_modified': last_modified_date,
         'path' : filepath
     }
