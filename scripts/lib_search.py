@@ -193,8 +193,9 @@ class SearchIndex:
             # get a new clean/empty index
             index = self.get_index(force_rebuild)
 
-            # get a high-performance writer as per: https://pythonhosted.org/Whoosh/batch.html
-            index_writer = index.writer(procs=4, multisegment=True)
+            # disabled high-performance writer (https://pythonhosted.org/Whoosh/batch.html), causing thread/lock issues
+            # index_writer = index.writer(procs=4, multisegment=True)
+            index_writer = index.writer()
 
             # index all documents
             documents = self.document_iterator()
