@@ -175,7 +175,11 @@ def main():
                     valid_metadata = 0
             else:
                 defstatus = def_status_change["Status"]
-                lscstatus = def_status_change["StatusChange"]["Status"]
+                lscstatus = "INVALID"
+                lsc = def_status_change["StatusChange"]
+                if (lsc and lsc["Status"]):
+                    lscstatus = def_status_change["StatusChange"]["Status"]
+
                 if (defstatus != lscstatus):
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
                     print("    - Last status change (%s) does not match definition status (%s)" % (lscstatus, defstatus))
@@ -199,9 +203,9 @@ def main():
         try:
             lib_xml.schema_validate(element_file, schema_path, True)
         except Exception as e:
-            #print('    Schema validation failed:\n\t{0}'.format(e.message))
+            print('    Schema validation failed:\n\t{0}'.format(e.message))
             #print("\n ### Offending file {0}".format(element_file))
-            print('    Schema validation failed:')
+            #print('    Schema validation failed:')
             print("\n ### Offending file {0}".format(element_file))
             return
 
