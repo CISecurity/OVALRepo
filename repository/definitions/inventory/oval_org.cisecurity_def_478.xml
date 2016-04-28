@@ -1,0 +1,52 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.cisecurity:def:478" version="1">
+  <metadata>
+    <title>Microsoft .NET Framework 4.6.1 is installed</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows 10</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <product>Microsoft .NET Framework 4.6.1</product>
+    </affected>
+    <reference ref_id="cpe:/a:microsoft:.net_framework:4.6.1" source="CPE" />
+    <description>Microsoft .NET Framework 4.6.1 is installed</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-04-25T17:00:00+08:00">
+          <contributor organization="The Depository Trust and Clearing Corporation">Jeff Albert</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Windows 10 + registry release of .NET v4" operator="AND">
+      <extend_definition comment="Microsoft Windows 10 is installed" definition_ref="oval:org.mitre.oval:def:28545" />
+      <criteria comment="registry release of .NET v4" operator="OR">
+        <criterion comment="Check if the release of .Net framework 4.6.1 (full) is equal to 394254" test_ref="oval:org.cisecurity:tst:817" />
+        <criterion comment="Check if the release of .Net framework 4.6.1 (client) is equal to 394254" test_ref="oval:org.cisecurity:tst:819" />
+      </criteria>
+    </criteria>
+    <criteria comment="Windows OS + registry release of .NET v4" operator="AND">
+      <criteria comment="Win7/R2/Win8/Win8.1/2012/2012 R2" operator="OR">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292" />
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627" />
+        <extend_definition comment="Microsoft Windows 8 (x86) is installed" definition_ref="oval:org.mitre.oval:def:14914" />
+        <extend_definition comment="Microsoft Windows 8 (x64) is installed" definition_ref="oval:org.mitre.oval:def:15571" />
+        <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924" />
+        <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956" />
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567" />
+        <extend_definition comment="Microsoft Windows Server 2012 (64-bit) is installed" definition_ref="oval:org.mitre.oval:def:15585" />
+        <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858" />
+      </criteria>
+      <criteria comment="registry release of .NET v4" operator="OR">
+        <criterion comment="Check if the release of .Net framework 4.6.1 (full) is equal to 394271" test_ref="oval:org.cisecurity:tst:818" />
+        <criterion comment="Check if the release of .Net framework 4.6.1 (client) is equal to 394271" test_ref="oval:org.cisecurity:tst:838" />
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>
