@@ -1,222 +1,222 @@
-<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13031" version="8">
-  <oval-def:metadata>
-    <oval-def:title>USN-1057-1 -- linux-source-2.6.15 vulnerabilities</oval-def:title>
-    <oval-def:affected family="unix">
-      <oval-def:platform>Ubuntu 6.06</oval-def:platform>
-      <oval-def:product>linux-source-2.6.15</oval-def:product>
-    </oval-def:affected>
-    <oval-def:reference ref_id="USN-1057-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001256.html" source="VENDOR" />
-    <oval-def:reference ref_id="CVE-2010-2943" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2943" source="CVE" />
-    <oval-def:reference ref_id="CVE-2010-3297" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3297" source="CVE" />
-    <oval-def:reference ref_id="CVE-2010-4072" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4072" source="CVE" />
-    <oval-def:description>Dave Chinner discovered that the XFS filesystem did not correctly order inode lookups when exported by NFS. A remote attacker could exploit this to read or write disk blocks that had changed file assignment or had become unlinked, leading to a loss of privacy. Dan Rosenberg discovered that several network ioctls did not clear kernel memory correctly. A local user could exploit this to read kernel stack memory, leading to a loss of privacy. Kees Cook and Vasiliy Kulikov discovered that the shm interface did not clear kernel memory correctly. A local attacker could exploit this to read kernel stack memory, leading to a loss of privacy</oval-def:description>
-    <oval-def:oval_repository>
-      <oval-def:dates>
-        <oval-def:submitted date="2011-10-18T15:55:55">
-          <oval-def:contributor organization="SecPod Technologies">SecPod Team</oval-def:contributor>
-        </oval-def:submitted>
-        <oval-def:status_change date="2011-11-02T15:37:13.135-04:00">DRAFT</oval-def:status_change>
-        <oval-def:status_change date="2011-11-21T04:02:23.383-05:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2011-12-12T04:01:51.942-05:00">ACCEPTED</oval-def:status_change>
-        <oval-def:modified comment="EDITED oval:org.mitre.oval:def:13031 - added CVE references; also made minor updates" date="2014-06-13T16:21:00.088-04:00">
-          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
-        </oval-def:modified>
-        <oval-def:status_change date="2014-06-13T16:23:04.596-04:00">INTERIM</oval-def:status_change>
-        <oval-def:status_change date="2014-06-30T04:01:24.692-04:00">ACCEPTED</oval-def:status_change>
-      </oval-def:dates>
-      <oval-def:status>ACCEPTED</oval-def:status>
-      <oval-def:min_schema_version>5.4</oval-def:min_schema_version>
-    </oval-def:oval_repository>
-  </oval-def:metadata>
-  <oval-def:criteria>
-    <oval-def:extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319" />
-    <oval-def:criteria comment="Architecture section" operator="OR">
-      <oval-def:criteria comment="Architecture independent section" operator="AND">
-        <oval-def:criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
-        <oval-def:criteria comment="Packages section" operator="OR">
-          <oval-def:criterion comment="linux-kernel-devel DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62770" />
-          <oval-def:criterion comment="linux-source-2.6.15 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62544" />
-          <oval-def:criterion comment="linux-doc-2.6.15 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62781" />
-        </oval-def:criteria>
-      </oval-def:criteria>
-      <oval-def:criteria comment="Architecture depended section" operator="AND">
-        <oval-def:criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
-        <oval-def:criteria comment="Packages section" operator="OR">
-          <oval-def:criterion comment="ide-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62885" />
-          <oval-def:criterion comment="plip-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62708" />
-          <oval-def:criterion comment="fat-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62772" />
-          <oval-def:criterion comment="crc-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62884" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-sparc64 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62790" />
-          <oval-def:criterion comment="input-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62898" />
-          <oval-def:criterion comment="parport-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62585" />
-          <oval-def:criterion comment="nfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62748" />
-          <oval-def:criterion comment="usb-storage-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62833" />
-          <oval-def:criterion comment="ppp-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61961" />
-          <oval-def:criterion comment="nic-firmware-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62951" />
-          <oval-def:criterion comment="md-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62948" />
-          <oval-def:criterion comment="reiserfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62700" />
-          <oval-def:criterion comment="loop-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62915" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-sparc64 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62890" />
-          <oval-def:criterion comment="scsi-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62773" />
-          <oval-def:criterion comment="scsi-core-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62883" />
-          <oval-def:criterion comment="ext3-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62639" />
-          <oval-def:criterion comment="nic-shared-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62320" />
-          <oval-def:criterion comment="nic-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62505" />
-          <oval-def:criterion comment="usb-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62938" />
-          <oval-def:criterion comment="ipv6-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62854" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
-          <oval-def:criterion comment="xfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62954" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-sparc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62927" />
-          <oval-def:criterion comment="kernel-image-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62769" />
-          <oval-def:criterion comment="cdrom-core-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62709" />
-          <oval-def:criterion comment="ext2-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62421" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-sparc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62765" />
-        </oval-def:criteria>
-      </oval-def:criteria>
-      <oval-def:criteria comment="Architecture depended section" operator="AND">
-        <oval-def:criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
-        <oval-def:criteria comment="Packages section" operator="OR">
-          <oval-def:criterion comment="jfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62955" />
-          <oval-def:criterion comment="fb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62831" />
-          <oval-def:criterion comment="plip-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62799" />
-          <oval-def:criterion comment="irda-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62777" />
-          <oval-def:criterion comment="usb-storage-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62904" />
-          <oval-def:criterion comment="serial-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62684" />
-          <oval-def:criterion comment="cdrom-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62897" />
-          <oval-def:criterion comment="scsi-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62809" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-server DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62893" />
-          <oval-def:criterion comment="pcmcia-storage-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62475" />
-          <oval-def:criterion comment="ppp-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61970" />
-          <oval-def:criterion comment="scsi-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62695" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-686 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62458" />
-          <oval-def:criterion comment="firewire-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62725" />
-          <oval-def:criterion comment="input-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62912" />
-          <oval-def:criterion comment="ufs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62186" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-k7 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62601" />
-          <oval-def:criterion comment="usb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62922" />
-          <oval-def:criterion comment="acpi-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62498" />
-          <oval-def:criterion comment="loop-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62815" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
-          <oval-def:criterion comment="ipv6-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62894" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-k7 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62395" />
-          <oval-def:criterion comment="ext3-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62752" />
-          <oval-def:criterion comment="reiserfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62426" />
-          <oval-def:criterion comment="ntfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62870" />
-          <oval-def:criterion comment="nic-firmware-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62880" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-server DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62961" />
-          <oval-def:criterion comment="ide-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62959" />
-          <oval-def:criterion comment="socket-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61992" />
-          <oval-def:criterion comment="pcmcia-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62875" />
-          <oval-def:criterion comment="md-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62944" />
-          <oval-def:criterion comment="xfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62861" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-386 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62972" />
-          <oval-def:criterion comment="nic-usb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62964" />
-          <oval-def:criterion comment="ext2-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62993" />
-          <oval-def:criterion comment="cdrom-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62906" />
-          <oval-def:criterion comment="fat-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62760" />
-          <oval-def:criterion comment="nic-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62958" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-server-bigiron DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62940" />
-          <oval-def:criterion comment="sata-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62871" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-686 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62863" />
-          <oval-def:criterion comment="crc-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62917" />
-          <oval-def:criterion comment="parport-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62824" />
-          <oval-def:criterion comment="nic-shared-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62929" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-386 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62549" />
-          <oval-def:criterion comment="nfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62629" />
-          <oval-def:criterion comment="nic-pcmcia-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62939" />
-          <oval-def:criterion comment="kernel-image-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62907" />
-          <oval-def:criterion comment="floppy-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62814" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-server-bigiron DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62236" />
-        </oval-def:criteria>
-      </oval-def:criteria>
-      <oval-def:criteria comment="Supported platform section" operator="AND">
-        <oval-def:criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
-        <oval-def:criteria comment="Packages section" operator="OR">
-          <oval-def:criterion comment="loop-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62841" />
-          <oval-def:criterion comment="firewire-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62539" />
-          <oval-def:criterion comment="floppy-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62798" />
-          <oval-def:criterion comment="sata-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62882" />
-          <oval-def:criterion comment="ufs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62932" />
-          <oval-def:criterion comment="nfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62878" />
-          <oval-def:criterion comment="usb-storage-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62851" />
-          <oval-def:criterion comment="fb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62003" />
-          <oval-def:criterion comment="serial-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62901" />
-          <oval-def:criterion comment="fat-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62575" />
-          <oval-def:criterion comment="irda-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62606" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-powerpc DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62996" />
-          <oval-def:criterion comment="ppp-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62718" />
-          <oval-def:criterion comment="cdrom-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62941" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-powerpc-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62696" />
-          <oval-def:criterion comment="irda-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62234" />
-          <oval-def:criterion comment="jfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62420" />
-          <oval-def:criterion comment="fs-common-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62877" />
-          <oval-def:criterion comment="affs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62499" />
-          <oval-def:criterion comment="ext2-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62546" />
-          <oval-def:criterion comment="affs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62738" />
-          <oval-def:criterion comment="scsi-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62970" />
-          <oval-def:criterion comment="fat-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62763" />
-          <oval-def:criterion comment="nic-firmware-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62838" />
-          <oval-def:criterion comment="scsi-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62858" />
-          <oval-def:criterion comment="reiserfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62263" />
-          <oval-def:criterion comment="nic-shared-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62413" />
-          <oval-def:criterion comment="pcmcia-storage-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62630" />
-          <oval-def:criterion comment="crc-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62785" />
-          <oval-def:criterion comment="nic-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62945" />
-          <oval-def:criterion comment="ide-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62957" />
-          <oval-def:criterion comment="fb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62835" />
-          <oval-def:criterion comment="floppy-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62755" />
-          <oval-def:criterion comment="scsi-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62478" />
-          <oval-def:criterion comment="nic-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62551" />
-          <oval-def:criterion comment="usb-storage-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62850" />
-          <oval-def:criterion comment="nic-pcmcia-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62795" />
-          <oval-def:criterion comment="sata-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62952" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
-          <oval-def:criterion comment="firewire-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62981" />
-          <oval-def:criterion comment="loop-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62448" />
-          <oval-def:criterion comment="kernel-image-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62899" />
-          <oval-def:criterion comment="nic-usb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62323" />
-          <oval-def:criterion comment="scsi-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62868" />
-          <oval-def:criterion comment="ext3-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62545" />
-          <oval-def:criterion comment="fs-common-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62965" />
-          <oval-def:criterion comment="socket-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62903" />
-          <oval-def:criterion comment="socket-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62930" />
-          <oval-def:criterion comment="crc-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62828" />
-          <oval-def:criterion comment="md-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62343" />
-          <oval-def:criterion comment="cdrom-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62994" />
-          <oval-def:criterion comment="ipv6-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62908" />
-          <oval-def:criterion comment="serial-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62726" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-powerpc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62991" />
-          <oval-def:criterion comment="linux-headers-2.6.15-55-powerpc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62083" />
-          <oval-def:criterion comment="jfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62683" />
-          <oval-def:criterion comment="usb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62969" />
-          <oval-def:criterion comment="xfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62886" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-powerpc-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63009" />
-          <oval-def:criterion comment="pcmcia-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62474" />
-          <oval-def:criterion comment="reiserfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62244" />
-          <oval-def:criterion comment="nfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62652" />
-          <oval-def:criterion comment="ext3-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62920" />
-          <oval-def:criterion comment="xfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63042" />
-          <oval-def:criterion comment="ext2-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63075" />
-          <oval-def:criterion comment="ufs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62214" />
-          <oval-def:criterion comment="ide-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62891" />
-          <oval-def:criterion comment="hfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62345" />
-          <oval-def:criterion comment="nic-usb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62615" />
-          <oval-def:criterion comment="input-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63022" />
-          <oval-def:criterion comment="input-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62596" />
-          <oval-def:criterion comment="ppp-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63010" />
-          <oval-def:criterion comment="nic-firmware-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63030" />
-          <oval-def:criterion comment="pcmcia-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63013" />
-          <oval-def:criterion comment="pcmcia-storage-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62779" />
-          <oval-def:criterion comment="linux-image-2.6.15-55-powerpc DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63036" />
-          <oval-def:criterion comment="kernel-image-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62923" />
-          <oval-def:criterion comment="hfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63081" />
-          <oval-def:criterion comment="md-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62294" />
-          <oval-def:criterion comment="ipv6-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62874" />
-          <oval-def:criterion comment="nic-shared-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62852" />
-          <oval-def:criterion comment="usb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62764" />
-          <oval-def:criterion comment="nic-pcmcia-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62803" />
-        </oval-def:criteria>
-      </oval-def:criteria>
-    </oval-def:criteria>
-  </oval-def:criteria>
-</oval-def:definition>
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13031" version="10">
+  <metadata>
+    <title>USN-1057-1 -- linux-source-2.6.15 vulnerabilities</title>
+    <affected family="unix">
+      <platform>Ubuntu 6.06</platform>
+      <product>linux-source-2.6.15</product>
+    </affected>
+    <reference ref_id="USN-1057-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2011-February/001256.html" source="VENDOR" />
+    <reference ref_id="CVE-2010-2943" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2943" source="CVE" />
+    <reference ref_id="CVE-2010-3297" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3297" source="CVE" />
+    <reference ref_id="CVE-2010-4072" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4072" source="CVE" />
+    <description>Dave Chinner discovered that the XFS filesystem did not correctly order inode lookups when exported by NFS. A remote attacker could exploit this to read or write disk blocks that had changed file assignment or had become unlinked, leading to a loss of privacy. Dan Rosenberg discovered that several network ioctls did not clear kernel memory correctly. A local user could exploit this to read kernel stack memory, leading to a loss of privacy. Kees Cook and Vasiliy Kulikov discovered that the shm interface did not clear kernel memory correctly. A local attacker could exploit this to read kernel stack memory, leading to a loss of privacy</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2011-10-18T15:55:55">
+          <contributor organization="SecPod Technologies">SecPod Team</contributor>
+        </submitted>
+        <status_change date="2011-11-02T15:37:13.135-04:00">DRAFT</status_change>
+        <status_change date="2011-11-21T04:02:23.383-05:00">INTERIM</status_change>
+        <status_change date="2011-12-12T04:01:51.942-05:00">ACCEPTED</status_change>
+        <modified comment="EDITED oval:org.mitre.oval:def:13031 - added CVE references; also made minor updates" date="2014-06-13T16:21:00.088-04:00">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </modified>
+        <status_change date="2014-06-13T16:23:04.596-04:00">INTERIM</status_change>
+        <status_change date="2014-06-30T04:01:24.692-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.4</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Ubuntu 6.06 is installed" definition_ref="oval:org.mitre.oval:def:13319" />
+    <criteria comment="Architecture section" operator="OR">
+      <criteria comment="Architecture independent section" operator="AND">
+        <criterion comment="Installed architecture is all" test_ref="oval:org.mitre.oval:tst:10881" />
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="linux-kernel-devel DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62770" />
+          <criterion comment="linux-source-2.6.15 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62544" />
+          <criterion comment="linux-doc-2.6.15 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62781" />
+        </criteria>
+      </criteria>
+      <criteria comment="Architecture depended section" operator="AND">
+        <criterion comment="Installed architecture is sparc" test_ref="oval:org.mitre.oval:tst:2465" />
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="ide-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62885" />
+          <criterion comment="plip-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62708" />
+          <criterion comment="fat-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62772" />
+          <criterion comment="crc-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62884" />
+          <criterion comment="linux-image-2.6.15-55-sparc64 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62790" />
+          <criterion comment="input-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62898" />
+          <criterion comment="parport-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62585" />
+          <criterion comment="nfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62748" />
+          <criterion comment="usb-storage-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62833" />
+          <criterion comment="ppp-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61961" />
+          <criterion comment="nic-firmware-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62951" />
+          <criterion comment="md-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62948" />
+          <criterion comment="reiserfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62700" />
+          <criterion comment="loop-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62915" />
+          <criterion comment="linux-headers-2.6.15-55-sparc64 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62890" />
+          <criterion comment="scsi-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62773" />
+          <criterion comment="scsi-core-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62883" />
+          <criterion comment="ext3-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62639" />
+          <criterion comment="nic-shared-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62320" />
+          <criterion comment="nic-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62505" />
+          <criterion comment="usb-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62938" />
+          <criterion comment="ipv6-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62854" />
+          <criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
+          <criterion comment="xfs-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62954" />
+          <criterion comment="linux-image-2.6.15-55-sparc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62927" />
+          <criterion comment="kernel-image-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62769" />
+          <criterion comment="cdrom-core-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62709" />
+          <criterion comment="ext2-modules-2.6.15-55-sparc64-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62421" />
+          <criterion comment="linux-headers-2.6.15-55-sparc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62765" />
+        </criteria>
+      </criteria>
+      <criteria comment="Architecture depended section" operator="AND">
+        <criterion comment="Installed architecture is i386" test_ref="oval:org.mitre.oval:tst:10864" />
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="jfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62955" />
+          <criterion comment="fb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62831" />
+          <criterion comment="plip-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62799" />
+          <criterion comment="irda-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62777" />
+          <criterion comment="usb-storage-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62904" />
+          <criterion comment="serial-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62684" />
+          <criterion comment="cdrom-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62897" />
+          <criterion comment="scsi-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62809" />
+          <criterion comment="linux-headers-2.6.15-55-server DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62893" />
+          <criterion comment="pcmcia-storage-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62475" />
+          <criterion comment="ppp-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61970" />
+          <criterion comment="scsi-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62695" />
+          <criterion comment="linux-image-2.6.15-55-686 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62458" />
+          <criterion comment="firewire-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62725" />
+          <criterion comment="input-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62912" />
+          <criterion comment="ufs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62186" />
+          <criterion comment="linux-headers-2.6.15-55-k7 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62601" />
+          <criterion comment="usb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62922" />
+          <criterion comment="acpi-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62498" />
+          <criterion comment="loop-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62815" />
+          <criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
+          <criterion comment="ipv6-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62894" />
+          <criterion comment="linux-image-2.6.15-55-k7 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62395" />
+          <criterion comment="ext3-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62752" />
+          <criterion comment="reiserfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62426" />
+          <criterion comment="ntfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62870" />
+          <criterion comment="nic-firmware-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62880" />
+          <criterion comment="linux-image-2.6.15-55-server DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62961" />
+          <criterion comment="ide-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62959" />
+          <criterion comment="socket-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:61992" />
+          <criterion comment="pcmcia-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62875" />
+          <criterion comment="md-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62944" />
+          <criterion comment="xfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62861" />
+          <criterion comment="linux-image-2.6.15-55-386 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62972" />
+          <criterion comment="nic-usb-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62964" />
+          <criterion comment="ext2-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62993" />
+          <criterion comment="cdrom-core-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62906" />
+          <criterion comment="fat-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62760" />
+          <criterion comment="nic-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62958" />
+          <criterion comment="linux-image-2.6.15-55-server-bigiron DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62940" />
+          <criterion comment="sata-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62871" />
+          <criterion comment="linux-headers-2.6.15-55-686 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62863" />
+          <criterion comment="crc-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62917" />
+          <criterion comment="parport-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62824" />
+          <criterion comment="nic-shared-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62929" />
+          <criterion comment="linux-headers-2.6.15-55-386 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62549" />
+          <criterion comment="nfs-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62629" />
+          <criterion comment="nic-pcmcia-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62939" />
+          <criterion comment="kernel-image-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62907" />
+          <criterion comment="floppy-modules-2.6.15-55-386-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62814" />
+          <criterion comment="linux-headers-2.6.15-55-server-bigiron DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62236" />
+        </criteria>
+      </criteria>
+      <criteria comment="Supported platform section" operator="AND">
+        <criterion comment="Installed architecture is powerpc" test_ref="oval:org.mitre.oval:tst:11168" />
+        <criteria comment="Packages section" operator="OR">
+          <criterion comment="loop-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62841" />
+          <criterion comment="firewire-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62539" />
+          <criterion comment="floppy-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62798" />
+          <criterion comment="sata-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62882" />
+          <criterion comment="ufs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62932" />
+          <criterion comment="nfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62878" />
+          <criterion comment="usb-storage-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62851" />
+          <criterion comment="fb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62003" />
+          <criterion comment="serial-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62901" />
+          <criterion comment="fat-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62575" />
+          <criterion comment="irda-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62606" />
+          <criterion comment="linux-headers-2.6.15-55-powerpc DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62996" />
+          <criterion comment="ppp-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62718" />
+          <criterion comment="cdrom-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62941" />
+          <criterion comment="linux-headers-2.6.15-55-powerpc-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62696" />
+          <criterion comment="irda-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62234" />
+          <criterion comment="jfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62420" />
+          <criterion comment="fs-common-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62877" />
+          <criterion comment="affs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62499" />
+          <criterion comment="ext2-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62546" />
+          <criterion comment="affs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62738" />
+          <criterion comment="scsi-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62970" />
+          <criterion comment="fat-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62763" />
+          <criterion comment="nic-firmware-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62838" />
+          <criterion comment="scsi-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62858" />
+          <criterion comment="reiserfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62263" />
+          <criterion comment="nic-shared-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62413" />
+          <criterion comment="pcmcia-storage-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62630" />
+          <criterion comment="crc-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62785" />
+          <criterion comment="nic-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62945" />
+          <criterion comment="ide-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62957" />
+          <criterion comment="fb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62835" />
+          <criterion comment="floppy-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62755" />
+          <criterion comment="scsi-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62478" />
+          <criterion comment="nic-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62551" />
+          <criterion comment="usb-storage-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62850" />
+          <criterion comment="nic-pcmcia-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62795" />
+          <criterion comment="sata-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62952" />
+          <criterion comment="linux-headers-2.6.15-55 DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62789" />
+          <criterion comment="firewire-core-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62981" />
+          <criterion comment="loop-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62448" />
+          <criterion comment="kernel-image-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62899" />
+          <criterion comment="nic-usb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62323" />
+          <criterion comment="scsi-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62868" />
+          <criterion comment="ext3-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62545" />
+          <criterion comment="fs-common-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62965" />
+          <criterion comment="socket-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62903" />
+          <criterion comment="socket-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62930" />
+          <criterion comment="crc-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62828" />
+          <criterion comment="md-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62343" />
+          <criterion comment="cdrom-core-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62994" />
+          <criterion comment="ipv6-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62908" />
+          <criterion comment="serial-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62726" />
+          <criterion comment="linux-image-2.6.15-55-powerpc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62991" />
+          <criterion comment="linux-headers-2.6.15-55-powerpc64-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62083" />
+          <criterion comment="jfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62683" />
+          <criterion comment="usb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62969" />
+          <criterion comment="xfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62886" />
+          <criterion comment="linux-image-2.6.15-55-powerpc-smp DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63009" />
+          <criterion comment="pcmcia-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62474" />
+          <criterion comment="reiserfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62244" />
+          <criterion comment="nfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62652" />
+          <criterion comment="ext3-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62920" />
+          <criterion comment="xfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63042" />
+          <criterion comment="ext2-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63075" />
+          <criterion comment="ufs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62214" />
+          <criterion comment="ide-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62891" />
+          <criterion comment="hfs-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62345" />
+          <criterion comment="nic-usb-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62615" />
+          <criterion comment="input-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63022" />
+          <criterion comment="input-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62596" />
+          <criterion comment="ppp-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63010" />
+          <criterion comment="nic-firmware-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63030" />
+          <criterion comment="pcmcia-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63013" />
+          <criterion comment="pcmcia-storage-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62779" />
+          <criterion comment="linux-image-2.6.15-55-powerpc DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63036" />
+          <criterion comment="kernel-image-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62923" />
+          <criterion comment="hfs-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:63081" />
+          <criterion comment="md-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62294" />
+          <criterion comment="ipv6-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62874" />
+          <criterion comment="nic-shared-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62852" />
+          <criterion comment="usb-modules-2.6.15-55-powerpc-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62764" />
+          <criterion comment="nic-pcmcia-modules-2.6.15-55-powerpc64-smp-di DPKG is earlier than 2.6.15-55.91" test_ref="oval:org.mitre.oval:tst:62803" />
+        </criteria>
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>
