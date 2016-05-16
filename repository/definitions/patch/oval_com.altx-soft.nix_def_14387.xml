@@ -1,0 +1,36 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:14387" version="1">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3556-1 -- libgd2 -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 7</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7</oval-def:platform>
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:product>libgd2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3556-1" ref_url="https://www.debian.org/security/2016/dsa-3556" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2016-3074" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3074" source="CVE" />
+    <oval-def:description>Hans Jerry Illikainen discovered that libgd2, a library for programmatic graphics creation and manipulation, suffers of a signedness vulnerability which may result in a heap overflow when processing specially crafted compressed gd2 data. A remote attacker can take advantage of this flaw to cause an application using the libgd2 library to crash, or potentially, to execute arbitrary code with the privileges of the user running the application.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2016-04-25T14:34:46">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 7" operator="AND">
+      <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="libgd2 is earlier than 0:2.0.36~rc1~dfsg-6.1+deb7u2" test_ref="oval:ru.altx-soft.nix:tst:50291" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 8" operator="AND">
+      <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <oval-def:criterion comment="libgd2 is earlier than 0:2.1.0-5+deb8u1" test_ref="oval:ru.altx-soft.nix:tst:50292" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

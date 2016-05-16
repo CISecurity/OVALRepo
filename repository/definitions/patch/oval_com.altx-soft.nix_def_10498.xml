@@ -1,0 +1,36 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:10498" version="1">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3504-1 -- bsh -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 7</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7</oval-def:platform>
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:product>bsh</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3504-1" ref_url="https://www.debian.org/security/dsa-3504" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2016-2510" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2510" source="CVE" />
+    <oval-def:description>Alvaro Muñoz and Christian Schneider discovered that BeanShell, an embeddable Java source interpreter, could be leveraged to execute arbitrary commands: applications including BeanShell in their classpath are vulnerable to this flaw if they deserialize data from an untrusted source.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2016-05-16T16:58:01">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 7" operator="AND">
+      <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </oval-def:criteria>
+      <oval-def:criterion comment="bsh is earlier than 0:2.0b4-12+deb7u1" test_ref="oval:ru.altx-soft.nix:tst:39653" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 8" operator="AND">
+      <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <oval-def:criterion comment="bsh is earlier than 0:2.0b4-15+deb8u1" test_ref="oval:ru.altx-soft.nix:tst:39654" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

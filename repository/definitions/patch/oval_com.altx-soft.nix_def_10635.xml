@@ -1,0 +1,29 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:10635" version="1">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3525-1 -- pixman -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian GNU/Linux 7</oval-def:platform>
+      <oval-def:platform>Debian GNU/kFreeBSD 7</oval-def:platform>
+      <oval-def:product>pixman</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3525-1" ref_url="https://www.debian.org/security/dsa-3525" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2014-9766" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9766" source="CVE" />
+    <oval-def:description>Vincent LE GARREC discovered an integer overflow in pixman, a pixel-manipulation library for X and cairo. A remote attacker can exploit this flaw to cause an application using the pixman library to crash, or potentially, to execute arbitrary code with the privileges of the user running the application.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2016-05-16T15:09:17">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <oval-def:criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <oval-def:extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <oval-def:extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </oval-def:criteria>
+    <oval-def:criterion comment="pixman is earlier than 0:0.26.0-4+deb7u2" test_ref="oval:ru.altx-soft.nix:tst:41189" />
+  </oval-def:criteria>
+</oval-def:definition>
