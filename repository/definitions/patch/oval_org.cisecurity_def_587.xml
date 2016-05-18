@@ -1,0 +1,29 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:587" version="1">
+  <metadata>
+    <title>DSA-3547-1 -- imagemagick -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>imagemagick</product>
+    </affected>
+    <reference ref_id="DSA-3547-1" ref_url="https://www.debian.org/security/2016/dsa-3547" source="VENDOR" />
+    <description>Several vulnerabilities were discovered in Imagemagick, a program suite for image manipulation. This update fixes a large number of potential security problems such as null-pointer access and buffer-overflows that might lead to memory leaks or denial of service. None of these security problems have a CVE number assigned.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-04-13T16:57:29">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="imagemagick is earlier than 8:6.7.7.10-5+deb7u4" test_ref="oval:org.cisecurity:tst:999" />
+  </criteria>
+</definition>

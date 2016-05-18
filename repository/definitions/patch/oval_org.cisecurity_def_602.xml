@@ -1,0 +1,43 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:602" version="1">
+  <metadata>
+    <title>DSA-3552-1 -- tomcat7 -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <platform>Debian 8</platform>
+      <product>tomcat7</product>
+    </affected>
+    <reference ref_id="DSA-3552-1" ref_url="https://www.debian.org/security/2016/dsa-3552" source="VENDOR" />
+    <reference ref_id="CVE-2015-5174" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5174" source="CVE" />
+    <reference ref_id="CVE-2015-5345" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5345" source="CVE" />
+    <reference ref_id="CVE-2015-5346" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5346" source="CVE" />
+    <reference ref_id="CVE-2015-5351" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5351" source="CVE" />
+    <reference ref_id="CVE-2016-0706" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0706" source="CVE" />
+    <reference ref_id="CVE-2016-0714" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0714" source="CVE" />
+    <reference ref_id="CVE-2016-0763" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0763" source="CVE" />
+    <description>Multiple security vulnerabilities have been discovered in the Tomcat servlet and JSP engine, which may result in information disclosure, the bypass of CSRF protections and bypass of the SecurityManager.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-04-25T14:34:41">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="tomcat7 is earlier than 0:7.0.28-4+deb7u4" test_ref="oval:org.cisecurity:tst:1074" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="tomcat7 is earlier than 0:7.0.56-3+deb8u2" test_ref="oval:org.cisecurity:tst:1085" />
+    </criteria>
+  </criteria>
+</definition>
