@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:555" version="1">
+  <metadata>
+    <title>DSA-3532-1 -- quagga -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <platform>Debian 8</platform>
+      <product>quagga</product>
+    </affected>
+    <reference ref_id="DSA-3532-1" ref_url="https://www.debian.org/security/dsa-3532" source="VENDOR" />
+    <reference ref_id="CVE-2016-2342" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2342" source="CVE" />
+    <description>Kostya Kortchinsky discovered a stack-based buffer overflow vulnerability in the VPNv4 NLRI parser in bgpd in quagga, a BGP/OSPF/RIP routing daemon. A remote attacker can exploit this flaw to cause a denial of service (daemon crash), or potentially, execution of arbitrary code, if bgpd is configured with BGP peers enabled for VPNv4.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-04-01T11:10:56">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="quagga is earlier than 0:0.99.22.4-1+wheezy2" test_ref="oval:org.cisecurity:tst:1090" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="quagga is earlier than 0:0.99.23.1-1+deb8u1" test_ref="oval:org.cisecurity:tst:993" />
+    </criteria>
+  </criteria>
+</definition>

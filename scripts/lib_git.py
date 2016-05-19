@@ -127,7 +127,7 @@ def fetch_pull_request(pullreq, repo='origin', branch='master'):
     if pr['head']['repo'] == None:
       print("remote repository for this pull request does not exist anymore.")
       return 6
-    display(pr)
+    #display(pr)
 
     local  = shlex.quote('pull-request-%s' % (pullreq))
     branch = "master" #os.popen("git branch|grep '^*'|awk '{print $2}'").read().strip();

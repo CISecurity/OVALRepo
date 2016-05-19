@@ -1,0 +1,41 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:597" version="1">
+  <metadata>
+    <title>DSA-3500-1 -- openssl -- security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <platform>Debian 8</platform>
+      <product>openssl</product>
+    </affected>
+    <reference ref_id="DSA-3500-1" ref_url="https://www.debian.org/security/dsa-3500" source="VENDOR" />
+    <reference ref_id="CVE-2016-0702" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0702" source="CVE" />
+    <reference ref_id="CVE-2016-0705" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0705" source="CVE" />
+    <reference ref_id="CVE-2016-0797" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0797" source="CVE" />
+    <reference ref_id="CVE-2016-0798" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0798" source="CVE" />
+    <reference ref_id="CVE-2016-0799" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0799" source="CVE" />
+    <description>Several vulnerabilities were discovered in OpenSSL, a Secure Socket Layer toolkit.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-05-16T12:35:14">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 7" operator="AND">
+      <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+      <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+        <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+        <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+      </criteria>
+      <criterion comment="openssl is earlier than 0:1.0.1e-2+deb7u20" test_ref="oval:org.cisecurity:tst:997" />
+    </criteria>
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="openssl is earlier than 0:1.0.1k-3+deb8u4" test_ref="oval:org.cisecurity:tst:1027" />
+    </criteria>
+  </criteria>
+</definition>
