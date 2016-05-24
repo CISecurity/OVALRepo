@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:20822" version="34">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:20822" version="35">
   <metadata>
     <title>RHSA-2013:0165: java-1.7.0-openjdk security update (Important)</title>
     <affected family="unix">
@@ -12,7 +12,21 @@
     <reference ref_id="CESA-2013:0165" source="CESA" />
     <reference ref_id="CVE-2012-3174" ref_url="https://www.redhat.com/security/data/cve/CVE-2012-3174.html" source="CVE" />
     <reference ref_id="CVE-2013-0422" ref_url="https://www.redhat.com/security/data/cve/CVE-2013-0422.html" source="CVE" />
-    <description>Multiple vulnerabilities in Oracle Java 7 before Update 11 allow remote attackers to execute arbitrary code by (1) using the public getMBeanInstantiator method in the JmxMBeanServer class to obtain a reference to a private MBeanInstantiator object, then retrieving arbitrary Class references using the findClass method, and (2) using the Reflection API with recursion in a way that bypasses a security check by the java.lang.invoke.MethodHandles.Lookup.checkSecurityManager method due to the inability of the sun.reflect.Reflection.getCallerClass method to skip frames related to the new reflection API, as exploited in the wild in January 2013, as demonstrated by Blackhole and Nuclear Pack, and a different vulnerability than CVE-2012-4681 and CVE-2012-3174. NOTE: some parties have mapped the recursive Reflection API issue to CVE-2012-3174, but CVE-2012-3174 is for a different vulnerability whose details are not public as of 20130114.  CVE-2013-0422 covers both the JMX/MBean and Reflection API issues.  NOTE: it was originally reported that Java 6 was also vulnerable, but the reporter has retracted this claim, stating that Java 6 is not exploitable because the relevant code is called in a way that does not bypass security checks.  NOTE: as of 20130114, a reliable third party has claimed that the findClass/MBeanInstantiator vector was not fixed in Oracle Java 7 Update 11.  If there is still a vulnerable condition, then a separate CVE identifier might be created for the unfixed issue.</description>
+    <description>Multiple vulnerabilities in Oracle Java 7 before Update 11 allow remote attackers to 
+execute arbitrary code by (1) using the public getMBeanInstantiator method in the JmxMBeanServer class 
+to obtain a reference to a private MBeanInstantiator object, then retrieving arbitrary Class references 
+using the findClass method, and (2) using the Reflection API with recursion in a way that bypasses a 
+security check by the java.lang.invoke.MethodHandles.Lookup.checkSecurityManager method due to the inability 
+of the sun.reflect.Reflection.getCallerClass method to skip frames related to the new reflection API, 
+as exploited in the wild in January 2013, as demonstrated by Blackhole and Nuclear Pack, and a different 
+vulnerability than CVE-2012-4681 and CVE-2012-3174. NOTE: some parties have mapped the recursive Reflection 
+API issue to CVE-2012-3174, but CVE-2012-3174 is for a different vulnerability whose details are not 
+public as of 20130114.  CVE-2013-0422 covers both the JMX/MBean and Reflection API issues.  NOTE: it 
+was originally reported that Java 6 was also vulnerable, but the reporter has retracted this claim, stating 
+that Java 6 is not exploitable because the relevant code is called in a way that does not bypass security 
+checks.  NOTE: as of 20130114, a reliable third party has claimed that the findClass/MBeanInstantiator 
+vector was not fixed in Oracle Java 7 Update 11.  If there is still a vulnerable condition, then a separate 
+CVE identifier might be created for the unfixed issue.</description>
     <oval_repository>
       <dates>
         <submitted date="2014-01-09T13:03:25">
@@ -23,14 +37,14 @@
         <status_change date="2014-02-17T04:00:42.599-05:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.3</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria operator="OR">
     <criteria comment="Operation system section">
       <criteria comment="Redhat 6 or Centos 6 release" operator="OR">
         <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 6" definition_ref="oval:org.mitre.oval:def:20273" />
-        <extend_definition comment="CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 6.x" definition_ref="oval:org.mitre.oval:def:16337" />
       </criteria>
       <criteria comment="Packages section" operator="OR">
         <criterion comment="java-1.7.0-openjdk-devel is earlier than 1:1.7.0.9-2.3.4.1.el6_3" test_ref="oval:org.mitre.oval:tst:90037" />
@@ -43,7 +57,7 @@
     <criteria comment="Operation system section">
       <criteria comment="Redhat 5 or Centos 5 release" operator="OR">
         <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 5" definition_ref="oval:org.mitre.oval:def:11414" />
-        <extend_definition comment="CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802" />
+        <extend_definition comment="The operating system installed on the system is CentOS Linux 5.x" definition_ref="oval:org.mitre.oval:def:15802" />
       </criteria>
       <criteria comment="Packages section" operator="OR">
         <criterion comment="java-1.7.0-openjdk-devel is earlier than 1:1.7.0.9-2.3.4.el5_9.1" test_ref="oval:org.mitre.oval:tst:89635" />
