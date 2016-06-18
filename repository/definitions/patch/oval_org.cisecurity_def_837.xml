@@ -1,0 +1,25 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:837" version="1">
+  <metadata>
+    <title>DSA-3577-1 -- jansson -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>jansson</product>
+    </affected>
+    <reference ref_id="DSA-3577-1" ref_url="https://www.debian.org/security/dsa-3577" source="VENDOR" />
+    <reference ref_id="CVE-2016-4425" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4425" source="CVE" />
+    <description>Gustavo Grieco discovered that jansson, a C library for encoding, decoding and manipulating JSON data, did not limit the recursion depth when parsing JSON arrays and objects. This could allow remote attackers to cause a denial of service (crash) via stack exhaustion, using crafted JSON data.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-06-14T16:23:25">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="jansson is earlier than 0:2.7-1+deb8u1" test_ref="oval:org.cisecurity:tst:1385" />
+  </criteria>
+</definition>
