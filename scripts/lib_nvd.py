@@ -50,8 +50,6 @@ NVDCVEDetails
 NVDDownload
 - downloads the NVD XML file to a temporary directory
 - checks if the CVE is found in the downloaded XML file
-
-
 """
 
 
@@ -300,6 +298,7 @@ class NVDOVALStates:
         self.cve_id = ''
         self.xml_path = ''
         self.version = ''
+        self.version_prefix = ''
 
         self.comment = ''
         self.this_id = ''
@@ -325,11 +324,11 @@ class NVDOVALStates:
         NVDWriter().write(self.xml_path, doc_root)
         return
 
-    def put(self, cve_id, xml_path, version, this_type):
-        self.cve_id, self.xml_path, self.version, self.this_type = \
-            cve_id, xml_path, version, this_type
+    def put(self, cve_id, xml_path, version, this_type, prefix):
+        self.cve_id, self.xml_path, self.version, self.this_type, self.version_prefix = \
+            cve_id, xml_path, version, this_type, prefix
 
-        self.version = '0:' + self.version
+        self.version = self.version_prefix + self.version
         self.datatype = 'evr_string'
         self.operation = 'less than or equal'
 
@@ -427,13 +426,13 @@ class OVALNewPath:
             return False
 
     def get_last(self, args):
-        for xml_file in lib_repo.get_element_paths_iterator():
-            if self.is_contained(args, xml_file):
-                current_id = int(lib_repo.path_to_oval_id(xml_file).split(':')[3])
+        for xml_file_name in lib_repo.get_element_paths_iterator():
+            if self.is_contained(args, xml_file_name):
+                current_id = int(lib_repo.path_to_oval_id(xml_file_name).split(':')[3])
                 if current_id > self.new_id:
                     self.new_id = current_id
-                    self.path = os.path.split(xml_file)[0]
-                    self.new_filename = os.path.split(xml_file)[1]
+                    self.path = os.path.split(xml_file_name)[0]
+                    self.new_filename = os.path.split(xml_file_name)[1]
         return
 
     def get(self, *args):

@@ -3,7 +3,9 @@
 
 import argparse
 import sys
+import os
 import lib_search
+import lib_repo
 
 from lib_nvd import \
     NVDValidateArgument, \
@@ -47,8 +49,6 @@ python3 generate_oval_content_from_nvd.py -c cve-2016-1080 -l vulnerability -t d
 using the blacklist option
 - skip CPE containing foobar, OVAL content will not be generated
 python3 generate_oval_content_from_nvd.py -c cve-2016-1080 -l vulnerability -t definitions -f unix -p GenericLinux -r rpminfo -b foobar
-
-
 """
 
 
@@ -70,19 +70,85 @@ class NVDOVALGenerateContent:
             # __index__ and __pycache__ not found, that's ok, passing
             pass
 
-    def get_definition_path(self, cve_id, class_type):
+    def element_definition_in_repo(self, cve_id, class_type):
         oval_query = {'reference_ids': cve_id}
         query_results = lib_search.DefinitionsIndex().query(oval_query)
 
         if not query_results:
-            return False
+            return
 
         for item in query_results:
             if item['class'] == class_type:
                 return item['path']
             else:
                 continue
-        return False
+        return
+
+    def element_object_in_repo(self, name):
+        ename = '>' + name + '<'
+        deprecated = 'deprecated=\"true\"'
+        operator = 'operator=\"AND\"'
+        for xml_file_name in lib_repo.get_element_paths_iterator():
+            if 'objects' in xml_file_name:
+                with open(xml_file_name, 'r') as file:
+                    for line in file:
+                        # if deprecated in line, return
+                        if deprecated in line:
+                            break
+
+                        # if operator in line, return
+                        if operator in line:
+                            break
+
+                        # if ename in line, object already exists
+                        # return the XML file path
+                        if ename in line:
+                            return xml_file_name
+
+    def element_state_in_repo(self, name, prefix):
+        ename = '<evr datatype=\"evr_string\" operation=\"less than or equal\">' + prefix + name + '</evr>'
+        deprecated = 'deprecated=\"true\"'
+        operator = 'operator=\"AND\"'
+        for xml_file_name in lib_repo.get_element_paths_iterator():
+            if 'states' in xml_file_name:
+                with open(xml_file_name, 'r') as file:
+                    for line in file:
+                        # if deprecated in line, return
+                        if deprecated in line:
+                            break
+
+                        # if operator in line, return
+                        if operator in line:
+                            break
+
+                        # if ename in line, object already exists
+                        # return the XML file path
+                        if ename in line:
+                            return xml_file_name
+
+    def element_test_in_repo(self, new_object, new_state):
+        obj = os.path.split(new_object)[1]
+        obj = lib_repo.path_to_oval_id(obj).split(':')[3]
+
+        ste = os.path.split(new_state)[1]
+        ste = lib_repo.path_to_oval_id(ste).split(':')[3]
+
+        for xml_file_name in lib_repo.get_element_paths_iterator():
+            if 'tests' in xml_file_name:
+                count = 0
+                with open(xml_file_name, 'r') as file:
+                    for line in file:
+                        if obj in line:
+                            count += 1
+
+                        if ste in line:
+                            count += 1
+
+                if count == 2:
+                    return xml_file_name
+                else:
+                    continue
+        return
 
     def generate(self, cli_args):
 
@@ -92,6 +158,7 @@ class NVDOVALGenerateContent:
         oval_family = cli_args['oval_family_list'][0]
         oval_platform = cli_args['oval_platform_list'][0]
         oval_probe = cli_args['oval_probe_list'][0]
+        version_prefix = cli_args['version_prefix'][0]
 
         # cve_id, xml_path, cpe_list, summary
         cve_details = NVDDownload().get(cve)
@@ -128,27 +195,58 @@ class NVDOVALGenerateContent:
                     print('correcting product')
                     product = cli_args['correct_NVD_product'][1]
 
-            new_def = OVALNewPath().get(oval_type, oval_class)
+            """
+            PROCESS OBJECTS
+            this will match the product
+            check if there is an object already in OVAL repository
+            if yes, use it
+            if not, add new
+            """
+            new_object = self.element_object_in_repo(product)
+            if not new_object:
+                new_object = OVALNewPath().get('objects')
+                NVDWriter().write(new_object)
+                NVDOVALObjects().put(cve_details[0], new_object, product, oval_probe)
 
-            new_test = OVALNewPath().get('tests')
-            NVDWriter().write(new_test)
+            """
+            PROCESS STATES
+            this will match the version
+            check if there is a state already in OVAL repository
+            if yes, use it
+            if not, add new
+            """
+            new_state = self.element_state_in_repo(version, version_prefix)
+            if not new_state:
+                new_state = OVALNewPath().get('states')
+                NVDWriter().write(new_state)
+                NVDOVALStates().put(cve_details[0], new_state, version, oval_probe, version_prefix)
 
-            new_object = OVALNewPath().get('objects')
-            NVDWriter().write(new_object)
+            """
+            PROCESS TESTS
+            check if there is a test containing the object id and state id from above
+            if yes, use it
+            if not, add new
+            """
+            new_test = self.element_test_in_repo(new_object, new_state)
+            if not new_test:
+                new_test = OVALNewPath().get('tests')
+                NVDWriter().write(new_test)
+                NVDOVALTests().put(cve_details[0], new_test, new_object, new_state, oval_probe)
 
-            new_state = OVALNewPath().get('states')
-            NVDWriter().write(new_state)
-
-            def_file_path = self.get_definition_path(cve_details[0], oval_class)
+            """
+            PROCESS DEFINITION
+            search for a definition containing the CVE from NVD
+            if found, append to it
+            if not found, create new
+            """
+            def_file_path = self.element_definition_in_repo(cve_details[0], oval_class)
             if def_file_path:
                 DefinitionVulnerabilityAppend().append(cve_details[0], oval_platform, product, new_test, def_file_path)
             else:
+                new_def = OVALNewPath().get(oval_type, oval_class)
                 DefinitionVulnerabilityCreate().create(cve_details[0], oval_class, new_def, oval_family, oval_platform,
                                                        product, cve_details[3], new_test)
 
-            NVDOVALTests().put(cve_details[0], new_test, new_object, new_state, oval_probe)
-            NVDOVALObjects().put(cve_details[0], new_object, product, oval_probe)
-            NVDOVALStates().put(cve_details[0], new_state, version, oval_probe)
         return
 
 
@@ -174,6 +272,9 @@ def main():
 
     group_options.add_argument('-r', '--oval-probe', nargs=1, dest='oval_probe_list', required=True,
                                metavar='OVAL probe, i.e. rpminfo, dpkginfo')
+
+    group_options.add_argument('-i', '--version-prefix', nargs=1, dest='version_prefix', required=True,
+                               metavar='prefix the version so that the scanner is able to identify')
 
     group_options.add_argument('-e', '--clean-cpe', nargs=1, dest='nvd_clean_cpe',
                                metavar='Remove unwanted characters the NVD CPE.')
