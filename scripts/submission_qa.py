@@ -308,12 +308,12 @@ def main():
             continue
         new_path = lib_repo.get_element_repository_path(oval_element)
 
-        print("Path (BEFORE) -- %s" % path)
+        #print("Path (BEFORE) -- %s" % path)
         path = path.replace("/", "\\")
-        print("Path (AFTER) --- %s" % path)
-        print("New Path (BEFORE) -- %s" % new_path)
+        #print("Path (AFTER) --- %s" % path)
+        #print("New Path (BEFORE) -- %s" % new_path)
         new_path = new_path.replace("/", "\\")
-        print("New Path (AFTER) --- %s" % new_path)
+        #print("New Path (AFTER) --- %s" % new_path)
         
         if verbose:
             print("## Writing {0}".format(new_path))
@@ -390,6 +390,7 @@ def normalize_ids(oval_element, oval_id_map):
         return oval_element
 
     ET.register_namespace("", "http://oval.mitre.org/XMLSchema/oval-definitions-5")
+    ET.register_namespace("oval-def", "http://oval.mitre.org/XMLSchema/oval-definitions-5")
     ET.register_namespace("oval", "http://oval.mitre.org/XMLSchema/oval-common-5")
     ET.register_namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")
 
@@ -399,8 +400,21 @@ def normalize_ids(oval_element, oval_id_map):
     for old_oval_id in oval_id_map:
         new_oval_id = oval_id_map[old_oval_id]
 
-        xml_string = xml_string.replace(old_oval_id, new_oval_id)
+        # this case covers when the id is referenced in an attribute, 
+        # such as <filepath datatype="string" var_ref="oval:com.submitter:var:12345"/>
+        old_oval_id1 = '="%s"' % old_oval_id
+        new_oval_id1 = '="%s"' % new_oval_id
+        
+        xml_string = xml_string.replace(old_oval_id1, new_oval_id1)
         #print("After -- ", xml_string)
+
+        # this case covers when the id is the value of an element, 
+        # such as <object_reference>oval:com.submitter:obj:67890</object_reference>
+        old_oval_id2 = '>%s</' % old_oval_id
+        new_oval_id2 = '>%s</' % new_oval_id
+        
+        xml_string = xml_string.replace(old_oval_id2, new_oval_id2)
+        
 
     return ET.fromstring(xml_string)
 
