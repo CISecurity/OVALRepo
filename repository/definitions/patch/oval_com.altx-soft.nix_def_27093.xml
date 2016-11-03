@@ -1,0 +1,24 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:27093" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3701-2 -- nginx -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:product>nginx</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3701-2" ref_url="https://www.debian.org/security/dsa-3701" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2016-1247" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1247" source="CVE" />
+    <oval-def:description>Dawid Golunski reported the nginx web server packages in Debian suffered from a privilege escalation vulnerability (www-data to root) due to the way log files are handled. This security update changes ownership of the /var/log/nginx directory root. In addition, /var/log/nginx has to be made accessible to local users, and local users may be able to read the log files themselves local until the next logrotate invocation.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2016-11-03T10:40:51">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <oval-def:criterion comment="nginx is earlier than 0:1.6.2-5+deb8u3" test_ref="oval:ru.altx-soft.nix:tst:64446" />
+  </oval-def:criteria>
+</oval-def:definition>
