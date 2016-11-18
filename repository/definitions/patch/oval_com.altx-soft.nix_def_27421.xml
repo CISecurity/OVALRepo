@@ -1,0 +1,24 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:27421" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3709-1 -- libxslt -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:product>libxslt</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3709-1" ref_url="https://www.debian.org/security/dsa-3709" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2016-4738" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4738" source="CVE" />
+    <oval-def:description>Nick Wellnhofer discovered that the xsltFormatNumberConversion function in libxslt, an XSLT processing runtime library, does not properly check for a zero byte terminating the pattern string. This flaw can be exploited to leak a couple of bytes after the buffer that holds the pattern string.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2016-11-11T15:29:52">
+          <oval-def:contributor organization="ALTX-SOFT">Sergey Artykhov</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria>
+    <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <oval-def:criterion comment="libxslt is earlier than 0:1.1.28-2+deb8u2" test_ref="oval:ru.altx-soft.nix:tst:68348" />
+  </oval-def:criteria>
+</oval-def:definition>
