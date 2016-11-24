@@ -1,0 +1,26 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1342" version="3">
+  <metadata>
+    <title>DSA-3701-1 -- nginx -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>nginx</product>
+    </affected>
+    <reference ref_id="DSA-3701-1" ref_url="https://www.debian.org/security/dsa-3701" source="VENDOR" />
+    <reference ref_id="CVE-2016-1247" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1247" source="CVE" />
+    <description>Dawid Golunski reported the nginx web server packages in Debian suffered from a privilege escalation vulnerability (www-data to root) due to the way log files are handled. This security update changes ownership of the /var/log/nginx directory root. In addition, /var/log/nginx has to be made accessible to local users, and local users may be able to read the log files themselves local until the next logrotate invocation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-11-03T10:40:49">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2016-11-10T12:00:00.000-05:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="nginx is earlier than 0:1.6.2-5+deb8u3" test_ref="oval:org.cisecurity:tst:1954" />
+  </criteria>
+</definition>
