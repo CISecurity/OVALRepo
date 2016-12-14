@@ -22,7 +22,7 @@ import lib_xml
 verbose = False
 force = False
 schema_path = ""
-SCHEMA_VERSION = "5.11.1"
+SCHEMA_VERSION = "5.11.2"
 NS_MAP = { 'def': "http://oval.mitre.org/XMLSchema/oval-definitions-5", "oval": "http://oval.mitre.org/XMLSchema/oval-common-5",
             "xsi": "http://www.w3.org/2001/XMLSchema-instance" }
 

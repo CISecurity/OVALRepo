@@ -31,7 +31,7 @@ import inspect
 import os.path
 import sys
 from datetime import datetime
-
+from lxml import etree
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
@@ -255,7 +255,7 @@ def get_root_path():
 
 def get_schema_versions():
     """ Gets sorted OVAL schema versions contained in the repo. The order must be newest to oldest """
-    return ["5.11.1","5.11","5.10.1","5.10","5.9","5.8","5.7","5.6","5.5","5.4","5.3","5.2","5.1","5.0"]
+    return ["5.11.2","5.11.1","5.11","5.10.1","5.10","5.9","5.8","5.7","5.6","5.5","5.4","5.3","5.2","5.1","5.0"]
 
 
 def get_repository_root_path():
@@ -268,12 +268,30 @@ def get_scripts_path():
     return os.path.realpath(get_root_path() + '/scripts' )
 
 
-def get_oval_def_schema(schema_version='5.11.1'):
+def get_oval_def_schema(schema_version='5.11.2'):
     """ Gets OVAL definitions schema file for specified schema version. """
+    schema_folder = os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version)
+    schema_path = os.path.realpath(schema_folder + '/all-oval-definitions.xsd')
+    
+    if not os.path.isfile(schema_path):
+        # create all-oval-definitions.xsd
+        with open(schema_path, 'w') as f:
+            f.write('<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="{0}">'.format(schema_version))
+            
+            for filename in os.listdir(schema_folder):
+                if not filename.endswith('.xsd'): continue
+                if 'system-characteristics' in filename or 'all-oval-definitions' in filename or 'oval-definitions-schema.xsd' in filename : continue
+                tree = etree.parse(os.path.join(schema_folder, filename))
+                targetNamespace = tree.getroot().get('targetNamespace')
+                f.write('\t<xsd:import namespace="{0}" schemaLocation="{1}"/>\n'.format(targetNamespace, filename))
+            
+            f.write('<xsd:redefine schemaLocation="oval-definitions-schema.xsd"><xsd:complexType name="MetadataType"><xsd:complexContent><xsd:restriction base="oval-def:MetadataType"><xsd:sequence><xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1"/><xsd:element name="affected" type="oval-def:AffectedType" minOccurs="0" maxOccurs="unbounded"/><xsd:element name="reference" type="oval-def:ReferenceType" minOccurs="0" maxOccurs="unbounded"/><xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/><xsd:element name="oval_repository"><xsd:complexType><xsd:sequence><xsd:element name="dates" type="oval-def:MetadataDatesType" minOccurs="1" maxOccurs="1"/><xsd:element name="status" type="oval-def:MetadataStatusEnumeration" minOccurs="1" maxOccurs="1"/><xsd:element name="affected_cpe_list" type="oval-def:AffectedCPEListType" minOccurs="0" maxOccurs="1"/><xsd:element name="min_schema_version" type="oval-def:MetadataMinSchemaVersionType" minOccurs="0" maxOccurs="1"/></xsd:sequence></xsd:complexType></xsd:element></xsd:sequence></xsd:restriction></xsd:complexContent></xsd:complexType></xsd:redefine><xsd:complexType name="AffectedCPEListType"><xsd:sequence><xsd:element name="cpe" minOccurs="1" maxOccurs="unbounded" type="xsd:anyURI"/></xsd:sequence></xsd:complexType><xsd:simpleType name="MetadataMinSchemaVersionType"><xsd:annotation><xsd:documentation>The MetadataMinSchemaVersionType simple type is a restriction of the built-in string simpleType. Empty strings are not allowed.</xsd:documentation></xsd:annotation><xsd:restriction base="xsd:string"><xsd:minLength value="1"/></xsd:restriction></xsd:simpleType><xsd:complexType name="MetadataDatesType"><xsd:sequence><xsd:element name="created" minOccurs="0" maxOccurs="1"><xsd:annotation><xsd:documentation>The created element represents the date the definition was created and the set of contributors that created the definition.</xsd:documentation></xsd:annotation><xsd:complexType><xsd:sequence><xsd:element name="contributor" type="oval-def:MetadataContributorType" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence><xsd:attribute name="date" type="xsd:dateTime" use="required"/></xsd:complexType></xsd:element><xsd:element name="submitted" minOccurs="1" maxOccurs="1"><xsd:annotation><xsd:documentation>The submitted element represents the date the definition was submitted to the OVAL Repository and the set of contributors that submitted the definition.</xsd:documentation></xsd:annotation><xsd:complexType><xsd:sequence><xsd:element name="contributor" type="oval-def:MetadataContributorType" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence><xsd:attribute name="date" type="xsd:dateTime" use="required"/></xsd:complexType></xsd:element><xsd:choice minOccurs="0" maxOccurs="unbounded"><xsd:element name="modified"><xsd:annotation><xsd:documentation>The modified element represents the date the definition was modified, a brief comment about the change that was made, and the set of contributors that modified the definition.</xsd:documentation></xsd:annotation><xsd:complexType><xsd:sequence><xsd:element name="contributor" type="oval-def:MetadataContributorType" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence><xsd:attribute name="date" type="xsd:dateTime" use="required"/><xsd:attribute name="comment" type="xsd:string" use="required"/></xsd:complexType></xsd:element><xsd:element name="status_change"><xsd:annotation><xsd:documentation>The status_change element records the data and time that a definition\'s satatus is chagned. This element is managed by the OVAL Repository.</xsd:documentation></xsd:annotation><xsd:complexType><xsd:simpleContent><xsd:extension base="oval-def:MetadataStatusEnumeration"><xsd:attribute name="date" type="xsd:dateTime" use="required"/></xsd:extension></xsd:simpleContent></xsd:complexType></xsd:element></xsd:choice></xsd:sequence></xsd:complexType><xsd:complexType name="MetadataContributorType"><xsd:simpleContent><xsd:extension base="xsd:string"><xsd:attribute name="organization" type="xsd:string" use="optional"/></xsd:extension></xsd:simpleContent></xsd:complexType><xsd:simpleType name="MetadataStatusEnumeration"><xsd:restriction base="xsd:string"><xsd:enumeration value="ACCEPTED"/><xsd:enumeration value="DEPRECATED"/><xsd:enumeration value="DRAFT"/><xsd:enumeration value="INCOMPLETE"/><xsd:enumeration value="INITIAL SUBMISSION"/><xsd:enumeration value="INTERIM"/></xsd:restriction></xsd:simpleType>')
+            f.write('</xsd:schema>')
+
     return os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version + '/all-oval-definitions.xsd' )
 
 
-def get_oval_def_schematron(schema_version='5.11.1'):
+def get_oval_def_schematron(schema_version='5.11.2'):
     """ Gets OVAL definitions schema file for specified schema version. """
     return os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version + '/all-oval-definitions-schematron.xsl' )
 

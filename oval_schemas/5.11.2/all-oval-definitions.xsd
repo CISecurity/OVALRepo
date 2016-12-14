@@ -1,0 +1,135 @@
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" version="5.11.2" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aix" schemaLocation="aix-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#android" schemaLocation="android-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apache" schemaLocation="apache-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apple_ios" schemaLocation="apple-ios-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#asa" schemaLocation="asa-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#catos" schemaLocation="catos-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#esx" schemaLocation="esx-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/ovaldi/evalids" schemaLocation="evaluation-ids.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#freebsd" schemaLocation="freebsd-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#hpux" schemaLocation="hpux-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" schemaLocation="independent-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#ios" schemaLocation="ios-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe" schemaLocation="iosxe-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos" schemaLocation="junos-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" schemaLocation="linux-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos" schemaLocation="macos-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf" schemaLocation="netconf-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-directives-5" schemaLocation="oval-directives-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-results-5" schemaLocation="oval-results-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-variables-5" schemaLocation="oval-variables-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#pixos" schemaLocation="pixos-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint" schemaLocation="sharepoint-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#solaris" schemaLocation="solaris-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" schemaLocation="unix-definitions-schema.xsd"/>
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" schemaLocation="windows-definitions-schema.xsd"/>
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xsd:redefine schemaLocation="oval-definitions-schema.xsd">
+		<xsd:complexType name="MetadataType">
+			<xsd:complexContent>
+				<xsd:restriction base="oval-def:MetadataType">
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="title" type="xsd:string"/>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="affected" type="oval-def:AffectedType"/>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="reference" type="oval-def:ReferenceType"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="description" type="xsd:string"/>
+						<xsd:element name="oval_repository">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element maxOccurs="1" minOccurs="1" name="dates" type="oval-def:MetadataDatesType"/>
+									<xsd:element maxOccurs="1" minOccurs="1" name="status" type="oval-def:MetadataStatusEnumeration"/>
+									<xsd:element maxOccurs="1" minOccurs="0" name="affected_cpe_list" type="oval-def:AffectedCPEListType"/>
+									<xsd:element maxOccurs="1" minOccurs="0" name="min_schema_version" type="oval-def:MetadataMinSchemaVersionType"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:redefine>
+	<xsd:complexType name="AffectedCPEListType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="cpe" type="xsd:anyURI"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="MetadataMinSchemaVersionType">
+		<xsd:annotation>
+			<xsd:documentation>The MetadataMinSchemaVersionType simple type is a restriction of the built-in string simpleType. Empty strings are not allowed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="MetadataDatesType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="created">
+				<xsd:annotation>
+					<xsd:documentation>The created element represents the date the definition was created and the set of contributors that created the definition.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="contributor" type="oval-def:MetadataContributorType"/>
+					</xsd:sequence>
+					<xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="submitted">
+				<xsd:annotation>
+					<xsd:documentation>The submitted element represents the date the definition was submitted to the OVAL Repository and the set of contributors that submitted the definition.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="contributor" type="oval-def:MetadataContributorType"/>
+					</xsd:sequence>
+					<xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:choice maxOccurs="unbounded" minOccurs="0">
+				<xsd:element name="modified">
+					<xsd:annotation>
+						<xsd:documentation>The modified element represents the date the definition was modified, a brief comment about the change that was made, and the set of contributors that modified the definition.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element maxOccurs="unbounded" minOccurs="0" name="contributor" type="oval-def:MetadataContributorType"/>
+						</xsd:sequence>
+						<xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+						<xsd:attribute name="comment" type="xsd:string" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="status_change">
+					<xsd:annotation>
+						<xsd:documentation>The status_change element records the data and time that a definition's satatus is chagned. This element is managed by the OVAL Repository.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="oval-def:MetadataStatusEnumeration">
+								<xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MetadataContributorType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="organization" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="MetadataStatusEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ACCEPTED"/>
+			<xsd:enumeration value="DEPRECATED"/>
+			<xsd:enumeration value="DRAFT"/>
+			<xsd:enumeration value="INCOMPLETE"/>
+			<xsd:enumeration value="INITIAL SUBMISSION"/>
+			<xsd:enumeration value="INTERIM"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

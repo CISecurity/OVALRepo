@@ -32,7 +32,7 @@ def main():
     files_count = len(files)
     message('info', 'Preparing to validate {0} file(s)'.format(files_count))
     
-    schema_path = lib_repo.get_oval_def_schema('5.11.1') 
+    schema_path = lib_repo.get_oval_def_schema('5.11.2') 
     for i_file, filepath in enumerate(files):
         message('info','{0}. {1}'.format(i_file + 1, filepath))
 
