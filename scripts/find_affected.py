@@ -81,7 +81,7 @@ def main():
     OvalGenerator.to_file(args['outfile'])
 
     # validate
-    schema_path = lib_repo.get_oval_def_schema('5.11.1')
+    schema_path = lib_repo.get_oval_def_schema('5.11.2')
     message('info','Performing schema validation', silent)
     try:
         lib_xml.schema_validate(args['outfile'], schema_path)
@@ -91,7 +91,7 @@ def main():
 
     if args['schematron']:
         # schematron validate
-        schema_path = lib_repo.get_oval_def_schema('5.11.1')
+        schema_path = lib_repo.get_oval_def_schema('5.11.2')
         message('info','Performing schematron validation', silent)
         try:
             lib_xml.schematron_validate(args['outfile'], schema_path)

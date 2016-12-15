@@ -44,7 +44,7 @@ NS_MAP = {
 
 def main():
     
-    SCHEMA_VERSION = '5.11.1'
+    SCHEMA_VERSION = '5.11.2'
 
     global verbose
     global debug

@@ -338,7 +338,7 @@ class OvalGenerator:
     supported_oval_elements = ('definition','test','object','state','variable')
     product_name = 'CIS OVAL Repository'
     generator_version = '0.1'
-    oval_schema_version = '5.11.1'
+    oval_schema_version = '5.11.2'
 
     def __init__(self, message_method = False, tmp_directory = './'):
         """ constructor, set defaults for instances """

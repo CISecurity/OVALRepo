@@ -50,7 +50,8 @@ def main():
     # get index references
     index_refs = {
         'definitions': lib_search.ThreadSafeDefinitionsIndex(output.message),
-        'revisions': lib_search.ThreadSafeRevisionsIndex(output.message)
+        'revisions': lib_search.ThreadSafeRevisionsIndex(output.message),
+        'elements': lib_search.ThreadSafeElementsIndex(output.message)
     }
 
     for index in index_refs:

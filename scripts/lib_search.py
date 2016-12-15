@@ -12,7 +12,7 @@ Available classes:
     - grouped_query: search the index for totals based on grouping
     - paged_query: search and return a page of results
     - other methods are used internally to build, maintain and interact with the index
-- ElementsIndex: methods to create, maintain and query an index of definitions metadata
+- ElementsIndex: methods to create, maintain and query an index of elements metadata
     - query: search the index for definitions metadata
     - grouped_query: search the index for totals based on grouping
     - paged_query: search and return a page of results
