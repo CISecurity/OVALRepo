@@ -1,0 +1,29 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1623" version="1">
+  <metadata>
+    <title>DLA-724-1 -- mcabber security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>mcabber</product>
+    </affected>
+    <reference ref_id="DLA-724-1" ref_url="https://lists.debian.org/debian-lts-announce/2016/debian-lts-announce-201611/msg00030.html" source="VENDOR" />
+    <description>It was discovered that there was a 'roster push attack' [0] in mcabber, a console-based Jabber (XMPP) client.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-12-15T17:10:03">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="mcabber is earlier than 0:0.10.1-3+deb7u1" test_ref="oval:org.cisecurity:tst:2300" />
+  </criteria>
+</definition>

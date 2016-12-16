@@ -1,0 +1,36 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1617" version="1">
+  <metadata>
+    <title>DLA-728-1 -- tomcat6 security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>tomcat6</product>
+    </affected>
+    <reference ref_id="DLA-728-1" ref_url="https://lists.debian.org/debian-lts-announce/2016/debian-lts-announce-201612/msg00001.html" source="VENDOR" />
+    <reference ref_id="CVE-2016-0762" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0762" source="CVE" />
+    <reference ref_id="CVE-2016-5018" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5018" source="CVE" />
+    <reference ref_id="CVE-2016-6794" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6794" source="CVE" />
+    <reference ref_id="CVE-2016-6796" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6796" source="CVE" />
+    <reference ref_id="CVE-2016-6797" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6797" source="CVE" />
+    <reference ref_id="CVE-2016-6816" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6816" source="CVE" />
+    <reference ref_id="CVE-2016-8735" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-8735" source="CVE" />
+    <description>Multiple security vulnerabilities have been discovered in the Tomcat servlet and JSP engine, which may result in possible timing attacks to determine valid user names, bypass of the SecurityManager, disclosure of system properties, unrestricted access to global resources, arbitrary file overwrites, and potentially escalation of privileges. In addition this update further hardens Tomcat's init and maintainer scripts to prevent possible privilege escalations.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-12-15T17:09:36">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="tomcat6 is earlier than 0:6.0.45+dfsg-1~deb7u3" test_ref="oval:org.cisecurity:tst:2305" />
+  </criteria>
+</definition>
