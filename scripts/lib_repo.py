@@ -31,7 +31,7 @@ import inspect
 import os.path
 import sys
 from datetime import datetime
-from lxml import etree
+
 
 
 supported_definition_classes = ('compliance', 'inventory', 'patch', 'vulnerability', 'miscellaneous')
