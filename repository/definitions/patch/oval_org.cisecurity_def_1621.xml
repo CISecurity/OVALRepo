@@ -1,0 +1,30 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1621" version="3">
+  <metadata>
+    <title>DLA-726-1 -- libdatetime-timezone-perl new upstream version</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>libdatetime-timezone-perl</product>
+    </affected>
+    <reference ref_id="DLA-726-1" ref_url="https://lists.debian.org/debian-lts-announce/2016/debian-lts-announce-201611/msg00032.html" source="VENDOR" />
+    <description>This update includes the changes in tzdata 2016j for the Perl bindings. For the list of changes, see DLA-725-1.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-12-15T17:10:04">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2016-12-16T18:37:29.629-05:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="libdatetime-timezone-perl is earlier than 1:1.58-1+2016j" test_ref="oval:org.cisecurity:tst:2298" />
+  </criteria>
+</definition>

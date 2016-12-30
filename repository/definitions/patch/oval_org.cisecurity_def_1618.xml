@@ -1,0 +1,31 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1618" version="3">
+  <metadata>
+    <title>DLA-722-1 -- irssi security update</title>
+    <affected family="unix">
+      <platform>Debian GNU/Linux 7</platform>
+      <platform>Debian GNU/kFreeBSD 7</platform>
+      <product>irssi</product>
+    </affected>
+    <reference ref_id="DLA-722-1" ref_url="https://lists.debian.org/debian-lts-announce/2016/debian-lts-announce-201611/msg00028.html" source="VENDOR" />
+    <reference ref_id="CVE-2016-7553" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7553" source="CVE" />
+    <description>An information disclosure vulnerability was found in irssi. Ther users on the same machine as the user running irssi wit uf.pl loaded may be able to retrieve the whole window content fter /UPGRADE urthermore, this dump of the windows contents is never remove fterwards.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-12-15T17:10:02">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2016-12-16T18:37:29.629-05:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 7 is installed" definition_ref="oval:org.mitre.oval:def:19338" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="irssi is earlier than 0:0.8.15-5+deb7u1" test_ref="oval:org.cisecurity:tst:2302" />
+  </criteria>
+</definition>

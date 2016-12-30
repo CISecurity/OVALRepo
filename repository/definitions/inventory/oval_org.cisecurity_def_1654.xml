@@ -1,0 +1,58 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.cisecurity:def:1654" version="1">
+  <metadata>
+    <title>Microsoft .NET Framework 4.6.2 is installed</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 7</platform>
+      <platform>Microsoft Windows Server 2008 R2</platform>
+      <platform>Microsoft Windows 8.1</platform>
+      <platform>Microsoft Windows 10</platform>
+      <platform>Microsoft Windows Server 2012</platform>
+      <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows Server 2016</platform>
+      <product>Microsoft .NET Framework 4.6.2</product>
+    </affected>
+    <reference ref_id="cpe:/a:microsoft:.net_framework:4.6.2" source="CPE" />
+    <description>Microsoft .NET Framework 4.6.2 is installed</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2016-12-30T00:00:00+08:00">
+          <contributor organization="DTCC">Jeff Albert</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Windows 10 + registry release of .NET v4" operator="AND">
+      <criteria comment="1607/2016" operator="OR">
+        <extend_definition comment="Microsoft Windows 10 Version 1607 (32-bit) is installed" definition_ref="oval:org.cisecurity:def:1377" />
+        <extend_definition comment="Microsoft Windows 10 Version 1607 (64-bit) is installed" definition_ref="oval:org.cisecurity:def:1379" />
+        <extend_definition comment="Microsoft Windows Server 2016 is installed" definition_ref="oval:org.cisecurity:def:1269" />
+      </criteria>
+      <criteria comment="registry release of .NET v4" operator="OR">
+        <criterion comment="Check if the release of .Net framework 4.6.2 (full) is equal to 394802" test_ref="oval:org.cisecurity:tst:2348" />
+        <criterion comment="Check if the release of .Net framework 4.6.2 (client) is equal to 394802" test_ref="oval:org.cisecurity:tst:2363" />
+      </criteria>
+    </criteria>
+    <criteria comment="Windows OS + registry release of .NET v4" operator="AND">
+      <criteria comment="Win7/R2/Win8/Win8.1/2012/2012 R2/Win10/1511" operator="OR">
+        <extend_definition comment="Microsoft Windows 7 (32-bit) Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12292" />
+        <extend_definition comment="Microsoft Windows 7 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12627" />
+        <extend_definition comment="Microsoft Windows 8.1 (x86) is installed" definition_ref="oval:org.mitre.oval:def:20924" />
+        <extend_definition comment="Microsoft Windows 8.1 (x64) is installed" definition_ref="oval:org.mitre.oval:def:20956" />
+        <extend_definition comment="Microsoft Windows Server 2008 R2 x64 Service Pack 1 is installed" definition_ref="oval:org.mitre.oval:def:12567" />
+        <extend_definition comment="Microsoft Windows Server 2012 is installed" definition_ref="oval:org.mitre.oval:def:16359" />
+        <extend_definition comment="Microsoft Windows Server 2012 R2 is installed" definition_ref="oval:org.mitre.oval:def:18858" />
+        <extend_definition comment="Microsoft Windows 10 (x86) is installed" definition_ref="oval:org.mitre.oval:def:29471" />
+        <extend_definition comment="Microsoft Windows 10 (x64) is installed" definition_ref="oval:org.mitre.oval:def:29117" />
+        <extend_definition comment="Microsoft Windows 10 Version 1511 (32-bit) is installed" definition_ref="oval:org.cisecurity:def:379" />
+        <extend_definition comment="Microsoft Windows 10 Version 1511 (64-bit) is installed" definition_ref="oval:org.cisecurity:def:378" />
+      </criteria>
+      <criteria comment="registry release of .NET v4" operator="OR">
+        <criterion comment="Check if the release of .Net framework 4.6.2 (full) is equal to 394806" test_ref="oval:org.cisecurity:tst:2360" />
+        <criterion comment="Check if the release of .Net framework 4.6.2 (client) is equal to 394806" test_ref="oval:org.cisecurity:tst:2359" />
+      </criteria>
+    </criteria>
+  </criteria>
+</definition>
