@@ -1,0 +1,25 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:1753" version="1">
+  <metadata>
+    <title>DSA-3763-1 -- pdns-recursor -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>pdns-recursor</product>
+    </affected>
+    <reference ref_id="DSA-3763-1" ref_url="https://www.debian.org/security/dsa-3763" source="VENDOR" />
+    <reference ref_id="CVE-2016-7068" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7068" source="CVE" />
+    <description>Florian Heinz and Martin Kluge reported that pdns-recursor, a recursive DNS server, parses all records present in a query regardless of whether they are needed or even legitimate, allowing a remote, unauthenticated attacker to cause an abnormal CPU usage load on the pdns server, resulting in a partial denial of service if the system becomes overloaded.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-01-24T16:08:56">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="pdns-recursor is earlier than 0:3.6.2-2+deb8u3" test_ref="oval:org.cisecurity:tst:2463" />
+  </criteria>
+</definition>
