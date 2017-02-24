@@ -13,9 +13,9 @@
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
             <xsd:appinfo>
                   <schema>Windows Definition</schema>
-                  <version>5.11.1:1.2</version>
-                  <date>11/30/2016 09:00:00 AM</date>
-                  <terms_of_use>Copyright (c) 2016, Center for Internet Security. All rights reserved.  The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema.  When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+                  <version>5.11.1:1.4</version>
+                  <date>01/09/2017 10:00:00 PM</date>
+                  <terms_of_use>Copyright (c) 2017, Center for Internet Security. All rights reserved.  The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema.  When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="win-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -551,7 +551,7 @@
                   </xsd:appinfo>
                   <xsd:appinfo>
                         <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
+                              <oval:version>5.11.1:1.2</oval:version>
                               <oval:reason>Use the original activedirectory_test. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.</oval:reason>
                               <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
                         </oval:deprecated_info>
@@ -603,7 +603,7 @@
                   </xsd:appinfo>
                   <xsd:appinfo>
                         <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
+                              <oval:version>5.11.1:1.2</oval:version>
                               <oval:reason>Use the original activedirectory_object. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.</oval:reason>
                               <oval:comment>This object has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
                         </oval:deprecated_info>
@@ -650,7 +650,7 @@
                   <xsd:documentation>Note that this state supports complex values that are in the form of a record. For simple (string based) value collection see the activedirectory_state.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
+                              <oval:version>5.11.1:1.2</oval:version>
                               <oval:reason>Use the original activedirectory_state. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.</oval:reason>
                               <oval:comment>This state has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
                         </oval:deprecated_info>
@@ -1777,7 +1777,7 @@
                                                                   <xsd:simpleType>
                                                                         <xsd:restriction base="oval:SimpleDatatypeEnumeration">
                                                                               <xsd:enumeration value="string"/>
-                                                                              <xsd:enumeration value="int"/>
+                                                                              <xsd:enumeration value="version"/>
                                                                         </xsd:restriction>
                                                                   </xsd:simpleType>
                                                             </xsd:attribute>
@@ -5052,10 +5052,24 @@
                                                 <xsd:documentation>The id given to the parent of the process that is created for the specified command line</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="priority" type="oval-def:EntityStateIntType" minOccurs="0">
+                                    <xsd:element name="priority" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The base priority of the process. The priority value range is from 0 to 31.</xsd:documentation>
                                           </xsd:annotation>
+                                          <xsd:complexType>
+                                                <xsd:simpleContent>
+                                                      <xsd:restriction base="oval-def:EntityStateAnySimpleType">
+                                                            <xsd:attribute name="datatype" use="optional" default="string">
+                                                                  <xsd:simpleType>
+                                                                        <xsd:restriction base="oval:SimpleDatatypeEnumeration">
+                                                                              <xsd:enumeration value="string"/>
+                                                                              <xsd:enumeration value="int"/>
+                                                                        </xsd:restriction>
+                                                                  </xsd:simpleType>
+                                                            </xsd:attribute>
+                                                      </xsd:restriction>
+                                                </xsd:simpleContent>
+                                          </xsd:complexType>
                                     </xsd:element>
                                     <xsd:element name="image_path" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
@@ -5174,10 +5188,24 @@
                                                 <xsd:documentation>The id given to the parent of the process that is created for the specified command line</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="priority" type="oval-def:EntityStateIntType" minOccurs="0">
+                                    <xsd:element name="priority" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The base priority of the process. The priority value range is from 0 to 31.</xsd:documentation>
                                           </xsd:annotation>
+                                          <xsd:complexType>
+                                                <xsd:simpleContent>
+                                                      <xsd:restriction base="oval-def:EntityStateAnySimpleType">
+                                                            <xsd:attribute name="datatype" use="optional" default="string">
+                                                                  <xsd:simpleType>
+                                                                        <xsd:restriction base="oval:SimpleDatatypeEnumeration">
+                                                                              <xsd:enumeration value="string"/>
+                                                                              <xsd:enumeration value="int"/>
+                                                                        </xsd:restriction>
+                                                                  </xsd:simpleType>
+                                                            </xsd:attribute>
+                                                      </xsd:restriction>
+                                                </xsd:simpleContent>
+                                          </xsd:complexType>
                                     </xsd:element>
                                     <xsd:element name="image_path" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
@@ -6880,7 +6908,7 @@
                         <xsd:documentation>'include_group' defines whether the group trustee sid should be included in the object when the object is defined by a group trustee sid. For example, the intent of an object defined by a group trustee sid might be to retrieve all the user trustee sids that are members of the group, but not the group trustee sid itself.</xsd:documentation>
                         <xsd:appinfo>
                               <oval:deprecated_info>
-                                    <oval:version>5.11.2</oval:version>
+                                    <oval:version>5.11.1:1.2</oval:version>
                                     <oval:reason>The 'include_group' behavior has been deprecated in favor of using variables to reference more efficient objects for expanding groups.</oval:reason>
                                     <oval:comment>Consider using a sid_sid_object or similar to include the members of a group.</oval:comment>
                               </oval:deprecated_info>
@@ -6897,7 +6925,7 @@
                         <xsd:documentation>The 'resolve_group' behavior defines whether an object set defined by a group SID should be resolved to return a set that contains all the user SIDs that are a member of that group.  Note that all child groups should also be resolved any valid domain users that are members of the group should also be included.  The intent of this behavior is to end up with a list of all individual users from that system that make up the group once everything has been resolved.</xsd:documentation>
                         <xsd:appinfo>
                               <oval:deprecated_info>
-                                    <oval:version>5.11.2</oval:version>
+                                    <oval:version>5.11.1:1.2</oval:version>
                                     <oval:reason>The 'resolve_group' behavior has been deprecated in favor of using variables to reference more efficient objects for expanding groups.</oval:reason>
                                     <oval:comment>Consider using a sid_sid_object or similar to resolve the members of a group.</oval:comment>
                               </oval:deprecated_info>
@@ -9312,8 +9340,8 @@
                                     <xsd:documentation>The handle identifies a directory.</xsd:documentation>
                                     <xsd:appinfo>
                                           <oval:deprecated_info>
-                                                <oval:version>5.11.2:1.0</oval:version>
-                                                <oval:reason>In version 5.11.2 of the OVAL Language, a file_attributes entity was added to the file_state, obviating the need to overload this attribute with the file-type enumeration.</oval:reason>
+                                                <oval:version>5.11.1:1.2</oval:version>
+                                                <oval:reason>In version 5.11.1:1.2 of the OVAL Language windows schema, a file_attributes entity was added to the file_state, obviating the need to overload this attribute with the file-type enumeration.</oval:reason>
                                                 <oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
                                           </oval:deprecated_info>
                                           <sch:pattern id="win-def_sft_file_attribute_directory_value_dep">
