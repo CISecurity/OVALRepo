@@ -1,0 +1,27 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2151" version="1">
+  <metadata>
+    <title>DSA-3828-1 -- dovecot -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>dovecot</product>
+    </affected>
+    <reference ref_id="DSA-3828-1" ref_url="https://www.debian.org/security/dsa-3828" source="VENDOR" />
+    <reference ref_id="CVE-2017-2669" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2669" source="CVE" />
+    <description>It was discovered that the Dovecot email server is vulnerable to a denial of service attack. When the 'dict' passdb and userdb are used for user authentication,
+		the username sent by the IMAP/POP3 client is sent through var_expand() to perform %variable expansion. Sending specially crafted %variable fields could result
+		in excessive memory usage causing the process to crash (and restart).</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-04-14T15:06:30">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="dovecot is earlier than 1:2.2.13-12~deb8u2" test_ref="oval:org.cisecurity:tst:2928" />
+  </criteria>
+</definition>
