@@ -219,8 +219,23 @@ def main():
     oval_id_map = {}
     affected_elements = set()
     update_elements = {}
+    non_repo_id_references = []
     for path in change_list:
         oval_element = lib_xml.load_standalone_element(path)
+
+        # get all *_refs attributes
+        attribute_id_refs = oval_element.xpath("//@*[name()='definition_ref' or name()='test_ref' or name()='object_ref' or name()='state_ref' or name()='var_ref']")
+        
+        # get filter, object_reference
+        text_id_refs = oval_element.xpath("//*[local-name()='filter' or local-name()='object_reference' or local-name()='var_ref']/text()", smart_strings=False)
+        
+        # combine, unique
+        #id_refs = []
+        id_refs = attribute_id_refs + text_id_refs
+        for id_ref in id_refs:
+            if not is_repository_id(id_ref):
+                non_repo_id_references.append(id_ref)
+
         update_elements[path] = oval_element
         #  5.1 If it's a definition, determine and set the minimum schema version
         ovalid = oval_element.get("id")
@@ -246,6 +261,7 @@ def main():
             if verbose:
                 print("    ---- Change submission ID from '{0}' to '{1}'".format(ovalid, new_id))
             oval_element.set("id", new_id)
+
             #      5.2.1 Set to a unique OVALID in the CIS namespace
             #      5.2.2 Update all references from the old OVALID
             oval_id_map[ovalid] = new_id
@@ -273,6 +289,19 @@ def main():
             oval_element.set("version", "1")
         #  5.4 Canonicalize all altered elements (if possible)
         
+    orphan_references = False
+    non_updated_non_repo_id_references = []
+    if len(non_repo_id_references) > 0:
+        print("\n --- Discovered {0} non-repo ID references:".format(len(non_repo_id_references)))
+        for nrir in non_repo_id_references:
+            if not nrir in oval_id_map:
+                print(nrir)
+                orphan_references = True
+
+    if orphan_references:
+        print("     >>>>> ERROR: Non-Repository OVAL IDs were found in referenced elements but not in the PRs change list.  Ensure any new OVAL ID references are also part of the pull request.  EXITING.")
+        return
+
     # Now that we know all the elements affected by an update we can increment their IDs once
     if len(affected_elements) > 0:
         if verbose:
