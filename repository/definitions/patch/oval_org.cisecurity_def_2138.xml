@@ -1,0 +1,27 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2138" version="3">
+  <metadata>
+    <title>DSA-3823-1 -- eject -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <product>eject</product>
+    </affected>
+    <reference ref_id="DSA-3823-1" ref_url="https://www.debian.org/security/dsa-3823" source="VENDOR" />
+    <reference ref_id="CVE-2017-6964" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6964" source="CVE" />
+    <description>Ilja Van Sprundel discovered that the dmcrypt-get-device helper used to check if a given device is an encrypted device handled by devmapper,
+						and used in eject, does not check return values from setuid() and setgid() when dropping privileges.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-03-31T11:50:30">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2017-04-21T12:00:00.000-05:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+    <criterion comment="eject is earlier than 0:2.1.5+deb1+cvs20081104-13.1+deb8u1" test_ref="oval:org.cisecurity:tst:2933" />
+  </criteria>
+</definition>
