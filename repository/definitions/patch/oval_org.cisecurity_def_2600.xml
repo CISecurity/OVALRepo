@@ -1,0 +1,32 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2600" version="1">
+  <metadata>
+    <title>DSA-3888-1 -- exim4 -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>exim4</product>
+    </affected>
+    <reference ref_id="DSA-3888-1" ref_url="https://www.debian.org/security/dsa-3888" source="VENDOR" />
+    <reference ref_id="CVE-2017-1000369" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000369" source="CVE" />
+    <description>The Qualys Research Labs discovered a memory leak in the Exim mail transport agent.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-06-23T14:17:21">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="exim4 is earlier than 0:4.84.2-2+deb8u4" test_ref="oval:org.cisecurity:tst:3462" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="exim4 is earlier than 0:4.89-2+deb9u1" test_ref="oval:org.cisecurity:tst:3437" />
+    </criteria>
+  </criteria>
+</definition>
