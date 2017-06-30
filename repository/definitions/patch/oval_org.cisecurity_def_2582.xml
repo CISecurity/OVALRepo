@@ -1,0 +1,30 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2582" version="2">
+  <metadata>
+    <title>DSA-3895-1 -- flatpak -- security update</title>
+    <affected family="unix">
+      <platform>Debian 9</platform>
+      <product>flatpak</product>
+    </affected>
+    <reference ref_id="DSA-3895-1" ref_url="https://www.debian.org/security/dsa-3895" source="VENDOR" />
+    <reference ref_id="CVE-2017-9780" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9780" source="CVE" />
+    <description>It was discovered that Flatpak, an application deployment framework for desktop apps insufficiently restricted file permissinons in third-party repositories, which could result in privilege escalation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-06-23T14:17:31">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2017-06-23T12:00:00.000-05:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+    <criteria comment="GNU/Linux or GNU/kFreeBSD kernel" operator="OR">
+      <extend_definition comment="Debian GNU/Linux is installed" definition_ref="oval:org.mitre.oval:def:24894" />
+      <extend_definition comment="Debian GNU/kFreeBSD is installed" definition_ref="oval:org.mitre.oval:def:24698" />
+    </criteria>
+    <criterion comment="flatpak is earlier than 0:0.8.5-2+deb9u1" test_ref="oval:org.cisecurity:tst:3452" />
+  </criteria>
+</definition>
