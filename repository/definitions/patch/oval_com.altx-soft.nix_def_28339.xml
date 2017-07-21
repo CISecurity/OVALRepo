@@ -1,0 +1,32 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:28339" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-3909-1 -- samba -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>samba</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-3909-1" ref_url="https://www.debian.org/security/dsa-3909" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2017-11103" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11103" source="CVE" />
+    <oval-def:description>Jeffrey Altman, Viktor Duchovni and Nico Williams identified a mutual authentication bypass vulnerability in samba, the SMB/CIFS file, print, and login server.
+		Also known as Orpheus' Lyre, this vulnerability is located in Samba Kerberos Key Distribution Center (KDC-REP) component and could be used by an attacker on the network path to impersonate a server.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2017-07-21T15:23:24">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 8" operator="AND">
+      <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <oval-def:criterion comment="samba is earlier than 2:4.2.14+dfsg-0+deb8u7" test_ref="oval:ru.altx-soft.nix:tst:97120" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 9" operator="AND">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="samba is earlier than 2:4.5.8+dfsg-2+deb9u1" test_ref="oval:ru.altx-soft.nix:tst:97121" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
