@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:17697" version="4">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:17697" version="5">
   <metadata>
     <title>Microsoft SQL Server 2008 R2 32-bit is installed</title>
     <affected family="windows">
@@ -27,11 +27,9 @@
       <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
-  <criteria operator="OR">
-    <criteria comment="SQL Server 2008 R2 on x86 OS" operator="AND">
-      <criterion comment="a version of Windows for the x86 architecture is installed" test_ref="oval:org.mitre.oval:tst:3823" />
-      <extend_definition comment="Microsoft SQL Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12596" />
-    </criteria>
-    <extend_definition comment="Microsoft SQL Server 2008 R2 32-bit is installed on 64-bit platform" definition_ref="oval:org.mitre.oval:def:16551" />
+  <criteria>
+    <extend_definition comment="Microsoft SQL Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12596" />
+    <criterion comment="Check if 32-bit SQLPath of Microsoft SQL Server instances exist" test_ref="oval:org.cisecurity:tst:4593" />
+    <criterion comment="Check if SQL Server 32-bit instances with version greater than or equal 2009.100.1600.1 and less than 2011.110.0.0 exist" test_ref="oval:org.cisecurity:tst:4605" />
   </criteria>
 </definition>
