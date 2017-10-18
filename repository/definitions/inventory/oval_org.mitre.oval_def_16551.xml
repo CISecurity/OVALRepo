@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:16551" version="4">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:16551" version="5">
   <metadata>
     <title>Microsoft SQL Server 2008 R2 32-bit is installed on 64-bit platform</title>
     <affected family="windows">
@@ -28,13 +28,9 @@
     </oval_repository>
   </metadata>
   <criteria>
+    <extend_definition comment="Microsoft SQL Server 2008 R2 is installed" definition_ref="oval:org.mitre.oval:def:12596" />
+    <criterion comment="Check if 32-bit SQLPath of Microsoft SQL Server instances exist" test_ref="oval:org.cisecurity:tst:4593" />
+    <criterion comment="Check if SQL Server 32-bit instances with version greater than or equal 2009.100.1600.1 and less than 2011.110.0.0 exist" test_ref="oval:org.cisecurity:tst:4605" />
     <criterion comment="a version of Windows for the x64 architecture is installed" test_ref="oval:org.mitre.oval:tst:3653" />
-    <criteria comment="Check for vulnerable SQL Server" operator="OR">
-      <criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\100\DTS\Setup\\Version is greater than or equal to 10.50.1600.1" test_ref="oval:org.mitre.oval:tst:81898" />
-      <criteria comment="SQL Server instance with version between 10.50.1600.1 and 11.0.0.0">
-        <criterion comment="SQL Server instances with version greater than or equal to 10.50.1600.1 exist" test_ref="oval:org.mitre.oval:tst:81233" />
-        <criterion comment="SQL Server instances with version less than 11.0.0.0 exist" test_ref="oval:org.mitre.oval:tst:81693" />
-      </criteria>
-    </criteria>
   </criteria>
 </definition>
