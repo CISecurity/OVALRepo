@@ -1,0 +1,32 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:16117" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-4039-1 -- opensaml2 -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>opensaml2</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-4039-1" ref_url="https://www.debian.org/security/dsa-4039" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2017-16853" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16853" source="CVE" />
+    <oval-def:description>Rod Widdowson of Steading System Software LLP discovered a coding error in the OpenSAML library,
+		causing the DynamicMetadataProvider class to fail configuring itself with the filters provided and omitting whatever checks they are intended to perform.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2017-11-27T14:07:22">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 8">
+      <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <oval-def:criterion comment="opensaml2 is earlier than 0:2.5.3-2+deb8u2" test_ref="oval:ru.altx-soft.nix:tst:103642" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 9">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="opensaml2 is earlier than 0:2.6.0-4+deb9u1" test_ref="oval:ru.altx-soft.nix:tst:103643" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
