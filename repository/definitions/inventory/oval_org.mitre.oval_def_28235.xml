@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:28235" version="13">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:28235" version="14">
   <metadata>
     <title>Microsoft Windows Server is installed</title>
     <affected family="windows">
@@ -25,6 +25,9 @@
   </metadata>
   <criteria>
     <criterion comment="the installed operating system is part of the Microsoft Windows family" test_ref="oval:org.mitre.oval:tst:99" />
-    <criterion comment="Check if Windows Server is installed" test_ref="oval:org.mitre.oval:tst:135664" />
+    <criteria comment="InstallationType OR ProductName" operator="OR">
+      <criterion comment="Check if Windows Server is installed (InstallationType)" test_ref="oval:org.mitre.oval:tst:135664" />
+      <criterion comment="Check if Windows Server is installed (ProductName)" test_ref="oval:org.cisecurity:tst:4972" />
+    </criteria>
   </criteria>
 </definition>
