@@ -238,7 +238,8 @@ class SearchIndex:
                     try:
                         index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
                     except:
-                        self.message('debug', 'Something was marked as needing to be deleted but it wasnt in the index')
+                        # this was already deleted
+                        pass
                     #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
                     #index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
                     #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
