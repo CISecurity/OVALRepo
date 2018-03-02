@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:4608" version="1">
+  <metadata>
+    <title>DSA-4118-1 -- tomcat-native -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>tomcat-native</product>
+    </affected>
+    <reference ref_id="DSA-4118-1" ref_url="https://www.debian.org/security/dsa-4118" source="VENDOR" />
+    <reference ref_id="CVE-2017-15698" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15698" source="CVE" />
+    <description>Jonas Klempel reported that tomcat-native, a library giving Tomcat access to the Apache Portable Runtime (APR) library's network connection (socket) implementation and random-number generator,
+		does not properly handle fields longer than 127 bytes when parsing the AIA-Extension field of a client certificate.
+		If OCSP checks are used, this could result in client certificates that should have been rejected to be accepted.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2018-03-02T10:12:57">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="tomcat-native is earlier than 0:1.1.32~repack-2+deb8u1" test_ref="oval:org.cisecurity:tst:6344" />
+    </criteria>
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="tomcat-native is earlier than 0:1.2.12-2+deb9u1" test_ref="oval:org.cisecurity:tst:6337" />
+    </criteria>
+  </criteria>
+</definition>
