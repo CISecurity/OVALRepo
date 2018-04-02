@@ -1,0 +1,46 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2753" version="7">
+  <metadata>
+    <title>RHSA-2016:2098 -- kernel security update (Important)</title>
+    <affected family="unix">
+      <platform>Red Hat Enterprise Linux 7</platform>
+      <platform>CentOS Linux 7</platform>
+      <product>kernel</product>
+    </affected>
+    <reference ref_id="RHSA-2016:2098" ref_url="https://rhn.redhat.com/errata/RHSA-2016-2098.html" source="VENDOR" />
+    <reference ref_id="CESA-2016:2098" ref_url="http://lists.centos.org/pipermail/centos-announce/2016-October/022133.html" source="CESA-2016:2098" />
+    <reference ref_id="CVE-2016-5195" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195" source="CVE" />
+    <description>A race condition was found in the way the Linux kernel's memory subsystem handled the copy-on-write (COW) breakage of private read-only memory mappings. An unprivileged, local user could use this flaw to gain write access to otherwise read-only memory mappings and thus increase their privileges on the system.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-07-18T16:20:26">
+          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+        </submitted>
+        <status_change date="2017-07-21T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-08-04T11:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-08-18T14:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <criteria comment="Operation system section" operator="OR">
+      <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+      <extend_definition comment="The operating system installed on the system is CentOS Linux 7.x" definition_ref="oval:org.mitre.oval:def:24773" />
+    </criteria>
+    <criteria comment="Packages match section" operator="OR">
+      <criterion comment="kernel is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3706" />
+      <criterion comment="kernel-abi-whitelists is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3699" />
+      <criterion comment="kernel-debug is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3708" />
+      <criterion comment="kernel-debug-devel is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3707" />
+      <criterion comment="kernel-devel is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3709" />
+      <criterion comment="kernel-doc is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3704" />
+      <criterion comment="kernel-headers is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3702" />
+      <criterion comment="kernel-tools is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3701" />
+      <criterion comment="kernel-tools-libs is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3703" />
+      <criterion comment="kernel-tools-libs-devel is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3710" />
+      <criterion comment="perf is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3700" />
+      <criterion comment="python-perf is earlier than 0:3.10.0-327.36.3.el7" test_ref="oval:org.cisecurity:tst:3705" />
+    </criteria>
+  </criteria>
+</definition>

@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2871" version="6">
+  <metadata>
+    <title>DSA-3924-1 -- varnish -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>varnish</product>
+    </affected>
+    <reference ref_id="DSA-3924-1" ref_url="https://www.debian.org/security/dsa-3924" source="VENDOR" />
+    <description>A denial of service vulnerability was discovered in Varnish, a state of the art, high-performance web accelerator. Specially crafted HTTP requests can cause the Varnish daemon to assert and restart, clearing the cache in the process.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-08-04T14:31:23">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-08-04T13:49:17.165-05:00">DRAFT</status_change>
+        <status_change date="2017-08-18T14:32:01.455-04:00">INTERIM</status_change>
+        <status_change date="2017-09-01T04:00:23.966-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="varnish is earlier than 0:4.0.2-1+deb8u1" test_ref="oval:org.cisecurity:tst:3936" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="varnish is earlier than 0:5.0.0-7+deb9u1" test_ref="oval:org.cisecurity:tst:3938" />
+    </criteria>
+  </criteria>
+</definition>

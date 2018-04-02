@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:28235" version="11">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.mitre.oval:def:28235" version="15">
   <metadata>
     <title>Microsoft Windows Server is installed</title>
     <affected family="windows">
@@ -7,6 +7,7 @@
       <platform>Microsoft Windows Server 2008 R2</platform>
       <platform>Microsoft Windows Server 2012</platform>
       <platform>Microsoft Windows Server 2012 R2</platform>
+      <platform>Microsoft Windows Server 2016</platform>
     </affected>
     <reference ref_id="cpe:/o:microsoft:windows_server" source="CPE" />
     <description>The operating system installed on the system is Microsoft Windows Server.</description>
@@ -20,11 +21,14 @@
         <status_change date="2015-01-12T04:00:08.994-05:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria>
     <criterion comment="the installed operating system is part of the Microsoft Windows family" test_ref="oval:org.mitre.oval:tst:99" />
-    <criterion comment="Check if Windows Server is installed" test_ref="oval:org.mitre.oval:tst:135664" />
+    <criteria comment="InstallationType OR ProductName" operator="OR">
+      <criterion comment="Check if Windows Server is installed (InstallationType)" test_ref="oval:org.mitre.oval:tst:135664" />
+      <criterion comment="Check if Windows Server is installed (ProductName)" test_ref="oval:org.cisecurity:tst:4972" />
+    </criteria>
   </criteria>
 </definition>

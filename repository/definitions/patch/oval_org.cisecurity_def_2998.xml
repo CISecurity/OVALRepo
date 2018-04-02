@@ -1,0 +1,35 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2998" version="6">
+  <metadata>
+    <title>DSA-3940-1 -- cvs -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>cvs</product>
+    </affected>
+    <reference ref_id="DSA-3940-1" ref_url="https://www.debian.org/security/dsa-3940" source="VENDOR" />
+    <reference ref_id="CVE-2017-12836" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12836" source="CVE" />
+    <description>It was discovered that CVS, a centralised version control system, did not correctly handle maliciously constructed repository URLs, which allowed an attacker to run an arbitrary shell command.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-08-18T10:09:16">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-08-18T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-09-01T13:20:47.083-04:00">INTERIM</status_change>
+        <status_change date="2017-09-15T14:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="cvs is earlier than 2:1.12.13+real-15+deb8u1" test_ref="oval:org.cisecurity:tst:4081" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="cvs is earlier than 2:1.12.13+real-22+deb9u1" test_ref="oval:org.cisecurity:tst:4083" />
+    </criteria>
+  </criteria>
+</definition>

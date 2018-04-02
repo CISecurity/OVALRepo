@@ -1,0 +1,35 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:3692" version="6">
+  <metadata>
+    <title>DSA-4039-1 -- opensaml2 -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>opensaml2</product>
+    </affected>
+    <reference ref_id="DSA-4039-1" ref_url="https://www.debian.org/security/dsa-4039" source="VENDOR" />
+    <reference ref_id="CVE-2017-16853" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16853" source="CVE" />
+    <description>Rod Widdowson of Steading System Software LLP discovered a coding error in the OpenSAML library, causing the DynamicMetadataProvider class to fail configuring itself with the filters provided and omitting whatever checks they are intended to perform.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-11-27T14:07:22">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-11-24T09:37:48.609-04:00">DRAFT</status_change>
+        <status_change date="2017-12-08T14:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-12-22T04:00:23.966-04:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="opensaml2 is earlier than 0:2.5.3-2+deb8u2" test_ref="oval:org.cisecurity:tst:4931" />
+    </criteria>
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="opensaml2 is earlier than 0:2.6.0-4+deb9u1" test_ref="oval:org.cisecurity:tst:4918" />
+    </criteria>
+  </criteria>
+</definition>

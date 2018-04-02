@@ -1,0 +1,28 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:3144" version="6">
+  <metadata>
+    <title>DSA-3953-1 -- aodh -- security update</title>
+    <affected family="unix">
+      <platform>Debian 9</platform>
+      <product>aodh</product>
+    </affected>
+    <reference ref_id="DSA-3953-1" ref_url="https://www.debian.org/security/dsa-3953" source="VENDOR" />
+    <reference ref_id="CVE-2017-12440" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12440" source="CVE" />
+    <description>Zane Bitter from Red Hat discovered a vulnerability in Aodh, the alarm engine for OpenStack. Aodh does not verify that the user creating the alarm is the trustor or has the same rights as the trustor, nor that the trust is for the same project as the alarm. The bug allows that an authenticated user without a Keystone token with knowledge of trust IDs to perform unspecified authenticated actions by adding alarm actions.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-09-08T15:43:38">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-09-15T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-09-29T11:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-10-13T12:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+    <criterion comment="aodh is earlier than 0:3.0.0-4+deb9u1" test_ref="oval:org.cisecurity:tst:4215" />
+  </criteria>
+</definition>

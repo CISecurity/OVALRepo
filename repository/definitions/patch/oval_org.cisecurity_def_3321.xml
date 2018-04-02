@@ -1,0 +1,35 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:3321" version="6">
+  <metadata>
+    <title>DSA-3978-1 -- gdk-pixbuf -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>gdk-pixbuf</product>
+    </affected>
+    <reference ref_id="DSA-3978-1" ref_url="https://www.debian.org/security/dsa-3978" source="VENDOR" />
+    <reference ref_id="CVE-2017-2862" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2862" source="CVE" />
+    <description>Marcin Noga discovered a buffer overflow in the JPEG loader of the GDK Pixbuf library, which may result in the execution of arbitrary code if a malformed file is opened.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-10-02T12:36:46">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-10-06T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-10-20T11:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-11-03T10:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="gdk-pixbuf is earlier than 0:2.31.1-2+deb8u6" test_ref="oval:org.cisecurity:tst:4447" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="gdk-pixbuf is earlier than 0:2.36.5-2+deb9u1" test_ref="oval:org.cisecurity:tst:4453" />
+    </criteria>
+  </criteria>
+</definition>

@@ -66,6 +66,7 @@ class SearchIndex:
         self.index_searcher = False
         self.thread_safe = False
         self.index = False
+        self.debug = False
 
     def query(self, query_dict={}, query_options={}):
         """ Perform a query against an index. 
@@ -191,11 +192,11 @@ class SearchIndex:
 
         if force_rebuild:
             # get a new clean/empty index
+            self.start_timer('index:update:reset index')
             index = self.get_index(force_rebuild)
 
-            # disabled high-performance writer (https://pythonhosted.org/Whoosh/batch.html), causing thread/lock issues
-            # index_writer = index.writer(procs=4, multisegment=True)
-            index_writer = index.writer()
+            # high-performance writer (http://whoosh.readthedocs.io/en/latest/batch.html)
+            index_writer = index.writer(limitmb=128, procs=4, multisegment=True)
 
             # index all documents
             documents = self.document_iterator()
@@ -203,6 +204,7 @@ class SearchIndex:
 
             # update indexed commit
             self.set_indexed_commit_hash()
+            self.stop_timer('index:update:reset index', True)
         else:
             # use the current index
             index = self.get_index()
@@ -226,6 +228,7 @@ class SearchIndex:
             activity_description = 'Updating'
         
         # add all definition files to index
+        self.start_timer('index:update:add definitions')
         counter = 0
         try:
             for document in documents:
@@ -235,7 +238,8 @@ class SearchIndex:
                     try:
                         index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
                     except:
-                        self.message('debug', 'Something was marked as needing to be deleted but it wasnt in the index')
+                        # this was already deleted
+                        pass
                     #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
                     #index_writer.delete_by_term('oval_id', self.whoosh_escape(document['oval_id']))
                     #self.message('debug', 'Deleting from index:\n\t{0} '.format(self.whoosh_escape(document['oval_id'])))
@@ -252,7 +256,11 @@ class SearchIndex:
             sys.exit(1)
 
         self.status_spinner(counter, '{0} {1} index'.format(activity_description, self.index_name), self.item_label, True)
+        self.stop_timer('index:update:add definitions', True)
+        
+        self.start_timer('index:update:commit')
         index_writer.commit()
+        self.stop_timer('index:update:commit', True)
 
     def index_based_on_current_commit(self):
         """ Is the index based on the current commit? """
@@ -391,6 +399,52 @@ class SearchIndex:
             sys.stdout.write('{0}\rINFO: {1} completed ({2} {3}s)\n'.format('\b'*10, task, count, label))
 
         sys.stdout.flush()
+
+    def start_timer(self, name):
+        if not self.debug: 
+            return
+        if not hasattr(self, 'timers'):
+            self.timers = dict()
+        if not name in self.timers:
+            self.timers[name] = { 'start':0, 'total':0, 'i':0 }
+        if self.timers[name]['start']:
+            self.message('debug', 'timer {0} already started!'.format(name))
+            return
+        self.timers[name]['start'] = time.time()
+        self.timers[name]['i'] = self.timers[name]['i'] + 1
+
+    def stop_timer(self, name, and_print=False):
+        if not self.debug: 
+            return
+        if not name in self.timers:
+            self.message('debug', 'timer {0} must be created before it is stopped!'.format(name))
+            return
+        if not self.timers[name]['start']:
+            self.message('debug', 'timer {0} must be started before it is stopped!'.format(name))
+            return
+
+        self.timers[name]['total'] = time.time() - self.timers[name]['start']
+        self.timers[name]['start'] = 0
+        if and_print:
+            self.print_timer(name)
+
+    def print_timer(self, name):
+        if not self.debug: 
+            return
+        if not name in self.timers:
+            self.message('debug', 'timer {0} must be created before it is printed!'.format(name))
+            return
+        if self.timers[name]['start']:
+            self.message('debug', 'timer {0} must be stopped before it is printed!'.format(name))
+            return
+
+        seconds = self.timers[name]['total']
+        hours = int(seconds // 3600)
+        seconds = seconds - (hours * 3600)
+        minutes = int(seconds // 60)
+        seconds = int(seconds - (minutes * 60))
+        self.message('debug', '{0}: {1}'.format(name, '{0:02d}:{1:02d}:{2:02d}'.format(hours, minutes, seconds)))
+
 
     def message(self, type, message):
         """ print a message """

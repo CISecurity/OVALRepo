@@ -418,7 +418,7 @@ class OvalGenerator:
         self.set_queues_for_reading()
         for element in OvalGenerator.supported_oval_elements:
             if element in self.tmp:
-                chunks.append("\n\t<{0}s>".format(element))
+                chunks.append("\n\t<{0}s>\n\n".format(element))
                 chunks.append(self.get_queue_contents(element))
                 chunks.append("\t</{0}s>\n".format(element))
 

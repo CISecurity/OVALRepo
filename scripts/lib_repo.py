@@ -296,6 +296,21 @@ def get_oval_def_schematron(schema_version='5.11.2'):
     return os.path.realpath(get_root_path() + '/oval_schemas/' + schema_version + '/all-oval-definitions-schematron.xsl' )
 
 
+def show_progress(current, total, message=None, bar_length=40, throttle=5):
+    """ shows progress bar on command line """
+    if current > throttle and current < (total - throttle) and current % throttle != 0: return
+
+    bar_filled_length = int(round(bar_length * current / float(total)))
+
+    percentage = round(100.0 * current / float(total), 1)
+    bar = 'X' * bar_filled_length + '-' * (bar_length - bar_filled_length)
+    sys.stdout.write('[{0}] {1}%{2}\r'.format(bar, percentage, ' {0}'.format(message) if message else ''))
+    sys.stdout.flush()
+    if current == total:
+        time.sleep(2)
+        sys.stdout.write('{0}\r'.format(' ' * (bar_length + len(message) + 10)))
+        sys.stdout.flush()
+
 def get_formatted_datetime():
     dtnow = datetime.now()
     dtutcnow = datetime.utcnow()

@@ -1,0 +1,35 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2994" version="6">
+  <metadata>
+    <title>DSA-3942-1 -- supervisor -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>supervisor</product>
+    </affected>
+    <reference ref_id="DSA-3942-1" ref_url="https://www.debian.org/security/dsa-3942" source="VENDOR" />
+    <reference ref_id="CVE-2017-11610" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11610" source="CVE" />
+    <description>Calum Hutton reported that the XML-RPC server in supervisor, a system for controlling process state, does not perform validation on requested XML-RPC methods, allowing an authenticated client to send a malicious XML-RPC request to supervisord that will run arbitrary shell commands on the server as the same user as supervisord.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-08-18T10:09:17">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-08-18T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-09-01T13:20:47.083-04:00">INTERIM</status_change>
+        <status_change date="2017-09-15T14:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="supervisor is earlier than 0:3.0r1-1+deb8u1" test_ref="oval:org.cisecurity:tst:4086" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="supervisor is earlier than 0:3.3.1-1+deb9u1" test_ref="oval:org.cisecurity:tst:4079" />
+    </criteria>
+  </criteria>
+</definition>

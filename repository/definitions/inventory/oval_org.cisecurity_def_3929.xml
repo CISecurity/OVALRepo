@@ -1,0 +1,29 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.cisecurity:def:3929" version="8">
+  <metadata>
+    <title>Microsoft .NET Framework 4.7.1 is installed</title>
+    <affected family="windows">
+      <platform>Microsoft Windows 10</platform>
+      <product>Microsoft .NET Framework 4.7.1</product>
+    </affected>
+    <description>Microsoft .NET Framework 4.7.1 is installed.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2018-01-10T18:08:35+08:00">
+          <contributor organization="DTCC">Jose Israel Padilla</contributor>
+        </submitted>
+        <status_change date="2018-01-26T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2018-02-09T14:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2018-02-23T14:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria comment="Windows 10 + registry release of .NET v4" operator="AND">
+    <extend_definition comment="Microsoft Windows 10 is installed" definition_ref="oval:org.mitre.oval:def:28545" />
+    <criteria comment="registry release of .NET v4" operator="OR">
+      <criterion comment="Check if the release of .Net framework 4.7.1 (full) is equal to 461308" test_ref="oval:org.cisecurity:tst:5316" />
+      <criterion comment="Check if the release of .Net framework 4.7.1 (client) is equal to 461308" test_ref="oval:org.cisecurity:tst:5315" />
+    </criteria>
+  </criteria>
+</definition>

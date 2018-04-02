@@ -1,0 +1,36 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:3320" version="6">
+  <metadata>
+    <title>DSA-3977-1 -- newsbeuter -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>newsbeuter</product>
+    </affected>
+    <reference ref_id="DSA-3977-1" ref_url="https://www.debian.org/security/dsa-3977" source="VENDOR" />
+    <reference ref_id="CVE-2017-14500" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14500" source="CVE" />
+    <description>It was discovered that podbeuter, the podcast fetcher in newsbeuter, a text-mode RSS feed reader, did not properly escape the name of the media enclosure (the podcast file),
+												allowing a remote attacker to run an arbitrary shell command on the client machine. This is only exploitable if the file is also played in podbeuter.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-10-02T12:36:44">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-10-06T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-10-20T11:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-11-03T10:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="newsbeuter is earlier than 0:2.8-2+deb8u2" test_ref="oval:org.cisecurity:tst:4439" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="newsbeuter is earlier than 0:2.9-5+deb9u2" test_ref="oval:org.cisecurity:tst:4425" />
+    </criteria>
+  </criteria>
+</definition>

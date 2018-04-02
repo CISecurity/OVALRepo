@@ -1,0 +1,35 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:2783" version="6">
+  <metadata>
+    <title>DSA-3911-1 -- evince -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>evince</product>
+    </affected>
+    <reference ref_id="DSA-3911-1" ref_url="https://www.debian.org/security/dsa-3911" source="VENDOR" />
+    <reference ref_id="CVE-2017-1000083" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000083" source="CVE" />
+    <description>Felix Wilhelm discovered that the Evince document viewer made insecure use of tar when opening tar comic book archives (CBT). Opening a malicious CBT archive could result in the execution of arbitrary code. This update disables the CBT format entirely.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2017-07-21T15:23:26">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2017-07-28T12:00:00.000-05:00">DRAFT</status_change>
+        <status_change date="2017-08-11T14:00:00.000-05:00">INTERIM</status_change>
+        <status_change date="2017-08-25T14:00:00.000-05:00">ACCEPTED</status_change>
+      </dates>
+      <status>ACCEPTED</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8" operator="AND">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="evince is earlier than 0:3.14.1-2+deb8u2" test_ref="oval:org.cisecurity:tst:3781" />
+    </criteria>
+    <criteria comment="Debian 9" operator="AND">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="evince is earlier than 0:3.22.1-3+deb9u1" test_ref="oval:org.cisecurity:tst:3783" />
+    </criteria>
+  </criteria>
+</definition>
