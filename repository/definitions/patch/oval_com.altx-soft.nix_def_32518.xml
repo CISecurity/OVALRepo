@@ -1,0 +1,32 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:32518" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-4227-1 -- plexus-archiver -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 8</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>plexus-archiver</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-4227-1" ref_url="https://www.debian.org/security/dsa-4227" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2018-1002200" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1002200" source="CVE" />
+    <oval-def:description>Danny Grander discovered a directory traversal flaw in plexus-archiver, an Archiver plugin for the Plexus compiler system,
+		allowing an attacker to overwrite any file writable by the extracting user via a specially crafted Zip archive.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2018-06-18T11:30:54">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 8">
+      <oval-def:extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <oval-def:criterion comment="plexus-archiver is earlier than 0:1.2-1+deb8u1" test_ref="oval:ru.altx-soft.nix:tst:165221" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 9">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="plexus-archiver is earlier than 0:2.2-1+deb9u1" test_ref="oval:ru.altx-soft.nix:tst:165222" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
