@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:5158" version="2">
+  <metadata>
+    <title>DSA-4216-1 -- prosody -- security update</title>
+    <affected family="unix">
+      <platform>Debian 8</platform>
+      <platform>Debian 9</platform>
+      <product>prosody</product>
+    </affected>
+    <reference ref_id="DSA-4216-1" ref_url="https://www.debian.org/security/dsa-4216" source="VENDOR" />
+    <reference ref_id="CVE-2018-10847" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10847" source="CVE" />
+    <description>It was discovered that Prosody, a lightweight Jabber/XMPP server, does not properly validate client-provided parameters during XMPP stream restarts,
+				allowing authenticated users to override the realm associated with their session, potentially bypassing security policies and allowing impersonation.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2018-06-18T09:59:59">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+        <status_change date="2018-06-22T10:01:43.577-04:00">DRAFT</status_change>
+      </dates>
+      <status>DRAFT</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 8">
+      <extend_definition comment="Debian 8 is installed" definition_ref="oval:org.mitre.oval:def:28919" />
+      <criterion comment="prosody is earlier than 0:0.9.7-2+deb8u4" test_ref="oval:org.cisecurity:tst:7409" />
+    </criteria>
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="prosody is earlier than 0:0.9.12-2+deb9u2" test_ref="oval:org.cisecurity:tst:7414" />
+    </criteria>
+  </criteria>
+</definition>
