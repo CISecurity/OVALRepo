@@ -1,10 +1,10 @@
-# Get Python 3.4 & Required Packages
+# Get Python 3 & Required Packages
 
 Before you can use the Python scripts bundled with this repository, you will need
 to get the following pre-requisites installed and running on your machine:
 
 - Python 3 (current stable release)
-- Python 3 Packages listed in requirements.txt
+- Python 3 packages listed in requirements.txt
 
 ## Status: Work in Progress
 *Please note: this documentation is a work in progress. If you have questions or suggestions, 
