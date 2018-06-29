@@ -13,7 +13,7 @@ description of your question or idea.*
 
 ## Related Resources
 
-- The OVAL Repository Website (coming soon)
+- [The OVAL Repository Website](https://oval.cisecurity.org/)
 - [Repository Overview](./README.md)
 - [Repository Organization](./repository/README.md)
 - [Contributing OVAL](./CONTRIBUTING.md)
@@ -36,7 +36,7 @@ description of your bug or idea.
 Cloning this repository is the fastest and easiest way to get started. However, if you plan on 
 contributing changes to the repository, you should [fork the repo](#fork-for-read-write-access) instead of simply cloning it.
 
-1. **Install Git**: If you don't have git on your machine, you will need to [install git](https://help.github.com/articles/set-up-git/)
+1. **Install Git**: If you don't have git on your machine, you will need to [install git](https://git-scm.com/downloads)
 2. **Create a Parent Directory**: open your Git command line client (Terminal on Mac, Git Bash on Windows), and cd to the directory 
 that you want to contain the Repository clone.
 3. **Clone!**: this command will download a copy of the repository into ./OVALRepo
