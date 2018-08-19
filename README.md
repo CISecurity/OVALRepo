@@ -10,7 +10,7 @@ Consumers and contributors are invited to engage using this repository.
 
 ## Learn More 
 
-- [The OVAL Repository Website] (https://oval.cisecurity.org/)
+- [The OVAL Repository Website](https://oval.cisecurity.org/)
 - Repository Overview (this document)
 - [Repository Organization](./repository/README.md)
 - [Contributing OVAL](./CONTRIBUTING.md)
@@ -27,7 +27,7 @@ description of your question or idea.*
 ## Getting Help, Making Suggestions
 
 If you need help understanding and following this process, please post your
-questions to the [OVAL Repository Mailing List] (http://lists.cisecurity.org/mailman/listinfo/oval_repository_lists.cisecurity.org).
+questions to the [OVAL Repository Mailing List](http://lists.cisecurity.org/mailman/listinfo/oval_repository_lists.cisecurity.org).
 
 If you encounter issues or have ideas for improving this process, please 
 [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
