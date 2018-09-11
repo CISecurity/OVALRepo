@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13905" version="34">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:13905" version="35">
   <metadata>
     <title>USN-870-1 -- pygresql vulnerability</title>
     <affected family="unix">
@@ -7,7 +7,7 @@
       <product>pygresql</product>
     </affected>
     <reference ref_id="USN-870-1" ref_url="https://lists.ubuntu.com/archives/ubuntu-security-announce/2009-December/001026.html" source="VENDOR" />
-    <reference ref_id="CVE-2009-2940" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2940" source="CVE" />
+    <reference ref_id="CVE-2009-2940" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2940" source="CVE" />
     <description>Steffen Joeris discovered that PyGreSQL 3.8 did not use PostgreSQL�s safe string and bytea functions in its own escaping functions. As a result, applications written to use PyGreSQL�s escaping functions are vulnerable to SQL injections when processing certain multi-byte character sequences. Because the safe functions require a database connection, to maintain backwards compatibility, pg.escape_string and pg.escape_bytea are still available, but applications will have to be adjusted to use the new pyobj.escape_string and pyobj.escape_bytea functions. For example, code containing: import pg connection = pg.connect escaped = pg.escape_string should be adjusted to use: import pg connection = pg.connect escaped = connection.escape_string</description>
     <oval_repository>
       <dates>
@@ -24,7 +24,7 @@
         <status_change date="2014-06-30T04:04:22.014-04:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria operator="OR">

@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8092" version="35">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8092" version="36">
   <metadata>
     <title>DSA-1603 bind9 -- DNS cache poisoning</title>
     <affected family="unix">
@@ -6,7 +6,7 @@
       <product>bind9</product>
     </affected>
     <reference ref_id="DSA-1603" ref_url="http://www.debian.org/security/2008/dsa-1603" source="VENDOR" />
-    <reference ref_id="CVE-2008-1447" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" source="CVE" />
+    <reference ref_id="CVE-2008-1447" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" source="CVE" />
     <description>Dan Kaminsky discovered that properties inherent to the DNS protocol lead to practical DNS cache poisoning attacks. Among other things, successful attacks can lead to misdirected web traffic and email rerouting. This update changes Debian's BIND 9 packages to implement the recommended countermeasure: UDP query source port randomization. This change increases the size of the space from which an attacker has to guess values in a backwards-compatible fashion and makes successful attacks significantly more difficult. Note that this security update changes BIND network behavior in a fundamental way, and the following steps are recommended to ensure a smooth upgrade. 1. Make sure that your network configuration is compatible with source port randomization. If you guard your resolver with a stateless packet filter, you may need to make sure that no non-DNS services listen on the 1024--65535 UDP port range and open it at the packet filter. For instance, packet filters based on etch's Linux 2.6.18 kernel only support stateless filtering of IPv6 packets, and therefore pose this additional difficulty. (If you use IPv4 with iptables and ESTABLISHED rules, networking changes are likely not required.) 2. Install the BIND 9 upgrade, using "apt-get update" followed by "apt-get install bind9". Verify that the named process has been restarted and answers recursive queries. (If all queries result in timeouts, this indicates that networking changes are necessary; see the first step.) 3. Verify that source port randomization is active. Check that the /var/log/daemon.log file does not contain messages of the following form right after the "listening on IPv6 interface" and "listening on IPv4 interface" messages logged by BIND upon startup. If these messages are present, you should remove the indicated lines from the configuration, or replace the port numbers contained within them with "*" sign (e.g., replace "port 53" with "port *"). For additional certainty, use tcpdump or some other network monitoring tool to check for varying UDP source ports. If there is a NAT device in front of your resolver, make sure that it does not defeat the effect of source port randomization. 4. If you cannot activate source port randomization, consider configuring BIND 9 to forward queries to a resolver which can, possibly over a VPN such as OpenVPN to create the necessary trusted network link. (Use BIND's forward-only mode in this case.) Other caching resolvers distributed by Debian (PowerDNS, MaraDNS, Unbound) already employ source port randomization, and no updated packages are needed. BIND 9.5 up to and including version 1:9.5.0.dfsg-4 only implements a weak form of source port randomization and needs to be updated as well. For information on BIND 8, see DSA-1604-1, and for the status of the libc stub resolver, see DSA-1605-1. The updated bind9 packages contain changes originally scheduled for the next stable point release, including the changed IP address of L.ROOT-SERVERS.NET (Debian bug #449148).</description>
     <oval_repository>
       <dates>
@@ -28,7 +28,7 @@
         <status_change date="2015-02-23T04:01:50.620-05:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria>

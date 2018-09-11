@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7660" version="31">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7660" version="32">
   <metadata>
     <title>DSA-1617 refpolicy -- incompatible policy</title>
     <affected family="unix">
@@ -6,7 +6,7 @@
       <product>refpolicy</product>
     </affected>
     <reference ref_id="DSA-1617" ref_url="http://www.debian.org/security/2008/dsa-1617" source="VENDOR" />
-    <reference ref_id="CVE-2008-1447" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" source="CVE" />
+    <reference ref_id="CVE-2008-1447" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447" source="CVE" />
     <description>In DSA-1603-1, Debian released an update to the BIND 9 domain name server, which introduced UDP source port randomization to mitigate the threat of DNS cache poisoning attacks (identified by the Common Vulnerabilities and Exposures project as CVE-2008-1447). The fix, while correct, was incompatible with the version of SELinux Reference Policy shipped with Debian Etch, which did not permit a process running in the named_t domain to bind sockets to UDP ports other than the standard "domain" port (53). The incompatibility affects both the "targeted" and "strict" policy packages supplied by this version of refpolicy. This update to the refpolicy packages grants the ability to bind to arbitrary UDP ports to named_t processes. When installed, the updated packages will attempt to update the bind policy module on systems where it had been previously loaded and where the previous version of refpolicy was 0.0.20061018-5 or below. Because the Debian refpolicy packages are not yet designed with policy module upgradeability in mind, and because SELinux-enabled Debian systems often have some degree of site-specific policy customization, it is difficult to assure that the new bind policy can be successfully upgraded. To this end, the package upgrade will not abort if the bind policy update fails. The new policy module can be found at /usr/share/selinux/refpolicy-targeted/bind.pp after installation. Administrators wishing to use the bind service policy can reconcile any policy incompatibilities and install the upgrade manually thereafter. A more detailed discussion of the corrective procedure may be found on http://wiki.debian.org/SELinux/Issues/BindPortRandomization. For the stable distribution (etch), this problem has been fixed in version 0.0.20061018-5.1+etch1. The unstable distribution (sid) is not affected, as subsequent refpolicy releases have incorporated an analogous change. We recommend that you upgrade your refpolicy packages.</description>
     <oval_repository>
       <dates>
@@ -23,7 +23,7 @@
         <status_change date="2014-06-23T04:08:44.216-04:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria>

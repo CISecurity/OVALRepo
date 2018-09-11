@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8333" version="32">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:8333" version="33">
   <metadata>
     <title>DSA-1807 cyrus-sasl2, cyrus-sasl2-heimdal -- buffer overflow</title>
     <affected family="unix">
@@ -7,7 +7,7 @@
       <product>cyrus-sasl2-heimdal</product>
     </affected>
     <reference ref_id="DSA-1807" ref_url="http://www.debian.org/security/2009/dsa-1807" source="VENDOR" />
-    <reference ref_id="CVE-2009-0688" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0688" source="CVE" />
+    <reference ref_id="CVE-2009-0688" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0688" source="CVE" />
     <description>James Ralston discovered that the sasl_encode64() function of cyrus-sasl2, a free library implementing the Simple Authentication and Security Layer, suffers from a missing null termination in certain situations. This causes several buffer overflows in situations where cyrus-sasl2 itself requires the string to be null terminated which can lead to denial of service or arbitrary code execution. Important notice (Quoting from US-CERT): While this patch will fix currently vulnerable code, it can cause non-vulnerable existing code to break. Here's a function prototype from include/saslutil.h to clarify my explanation: Assume a scenario where calling code has been written in such a way that it calculates the exact size required for base64 encoding in advance, then allocates a buffer of that exact size, passing a pointer to the buffer into sasl_encode64() as *out. As long as this code does not anticipate that the buffer is NUL-terminated (does not call any string-handling functions like strlen(), for example) the code will work and it will not be vulnerable. Once this patch is applied, that same code will break because sasl_encode64() will begin to return SASL_BUFOVER.</description>
     <oval_repository>
       <dates>
@@ -24,7 +24,7 @@
         <status_change date="2014-06-23T04:10:34.791-04:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria>
