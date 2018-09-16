@@ -1,4 +1,4 @@
-<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7639" version="33">
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.mitre.oval:def:7639" version="34">
   <metadata>
     <title>DSA-1915 linux-2.6 -- privilege escalation/denial of service/sensitive memory leak</title>
     <affected family="unix">
@@ -6,16 +6,16 @@
       <product>linux-2.6</product>
     </affected>
     <reference ref_id="DSA-1915" ref_url="http://www.debian.org/security/2009/dsa-1915" source="VENDOR" />
-    <reference ref_id="CVE-2009-2695" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2695" source="CVE" />
-    <reference ref_id="CVE-2009-2903" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2903" source="CVE" />
-    <reference ref_id="CVE-2009-2908" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2908" source="CVE" />
-    <reference ref_id="CVE-2009-2909" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2909" source="CVE" />
-    <reference ref_id="CVE-2009-2910" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2910" source="CVE" />
-    <reference ref_id="CVE-2009-3001" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3001" source="CVE" />
-    <reference ref_id="CVE-2009-3002" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3002" source="CVE" />
-    <reference ref_id="CVE-2009-3286" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3286" source="CVE" />
-    <reference ref_id="CVE-2009-3290" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3290" source="CVE" />
-    <reference ref_id="CVE-2009-3613" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3613" source="CVE" />
+    <reference ref_id="CVE-2009-2695" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2695" source="CVE" />
+    <reference ref_id="CVE-2009-2903" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2903" source="CVE" />
+    <reference ref_id="CVE-2009-2908" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2908" source="CVE" />
+    <reference ref_id="CVE-2009-2909" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2909" source="CVE" />
+    <reference ref_id="CVE-2009-2910" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2910" source="CVE" />
+    <reference ref_id="CVE-2009-3001" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3001" source="CVE" />
+    <reference ref_id="CVE-2009-3002" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3002" source="CVE" />
+    <reference ref_id="CVE-2009-3286" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3286" source="CVE" />
+    <reference ref_id="CVE-2009-3290" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3290" source="CVE" />
+    <reference ref_id="CVE-2009-3613" ref_url="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3613" source="CVE" />
     <description>Notice: Debian 5.0.4, the next point release of Debian "lenny", will include a new default value for the mmap_min_addr tunable. This change will add an additional safeguard against a class of security vulnerabilities known as "NULL pointer dereference" vulnerabilities, but it will need to be overridden when using certain applications. Additional information about this change, including instructions for making this change locally in advance of 5.0.4 (recommended), can be found at: http://wiki.debian.org/mmap_min_addr. Several vulnerabilities have been discovered in the Linux kernel that may lead to a denial of service, sensitive memory leak or privilege escalation. The Common Vulnerabilities and Exposures project identifies the following problems: Eric Paris provided several fixes to increase the protection provided by the mmap_min_addr tunable against NULL pointer dereference vulnerabilities. Mark Smith discovered a memory leak in the appletalk implementation. When the appletalk and ipddp modules are loaded, but no ipddp "N" device is found, remote attackers can cause a denial of service by consuming large amounts of system memory. Loic Minier discovered an issue in the eCryptfs filesystem. A local user can cause a denial of service (kernel oops) by causing a dentry value to go negative. Arjan van de Ven discovered an issue in the AX.25 protocol implementation. A specially crafted call to setsockopt() can result in a denial of service (kernel oops). Jan Beulich discovered the existence of a sensitive kernel memory leak. Systems running the "amd64" kernel do not properly sanitise registers for 32-bit processes. Jiri Slaby fixed a sensitive memory leak issue in the ANSI/IEEE 802.2 LLC implementation. This is not exploitable in the Debian lenny kernel as root privileges are required to exploit this issue. Eric Dumazet fixed several sensitive memory leaks in the IrDA, X.25 PLP (Rose), NET/ROM, Acorn Econet/AUN, and Controller Area Network (CAN) implementations. Local users can exploit these issues to gain access to kernel memory. Eric Paris discovered an issue with the NFSv4 server implementation. When an O_EXCL create fails, files may be left with corrupted permissions, possibly granting unintentional privileges to other local users. Jan Kiszka noticed that the kvm_emulate_hypercall function in KVM does not prevent access to MMU hypercalls from ring 0, which allows local guest OS users to cause a denial of service (guest kernel crash) and read or write guest kernel memory. Alistair Strachan reported an issue in the r8169 driver. Remote users can cause a denial of service (IOMMU space exhaustion and system crash) by transmitting a large amount of jumbo frames.</description>
     <oval_repository>
       <dates>
@@ -32,7 +32,7 @@
         <status_change date="2014-06-23T04:08:41.547-04:00">ACCEPTED</status_change>
       </dates>
       <status>ACCEPTED</status>
-      <min_schema_version>5.4</min_schema_version>
+      <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
   <criteria>
