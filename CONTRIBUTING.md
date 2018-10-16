@@ -96,10 +96,25 @@ steps 2-5 above.
 	- Removing items that don't contain meaningful changes: If any elements in the submission are unchanged, they are pruned from the submission process.
 	- Checking correctness of definition metadata:
 		- If any NEW definitions are being submitted, the following restrictions apply:
-			- The new definition MUST include a `<submitted>` element indicating the date of submission, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
-			- The new definition MUST NOT include any `<status_change>` elements
-			- The new definition MUST have a `<status>` of "INITIAL SUBMISSION"
 			- The new definition MUST have a `version` attribute value of "0"
+			- The new definition MUST have a `<status>` of "INITIAL SUBMISSION"
+			- Within the `<oval_repository>/<dates>` element, the new definition MUST include a `<submitted>` element indicating the date of submission, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
+			- The new definition MUST NOT include any `<status_change>` elements
+```
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="vulnerability" id="oval:org.zackport:def:100" version="0">
+...
+  <oval_repository>
+    <dates>
+      <submitted date="2018-10-16T11:00:00.000-04:00">
+        <contributor organization="CIS">Zackary Port</contributor>
+      </submitted>
+    </dates>
+
+    <status>INITIAL SUBMISSION</status>
+  </oval_repository>
+...
+</definition>
+```
 		- When the PR contains UPDATED definitions:
 			- The updated definition MUST include a `<modified>` element describing the update, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
 			- A `<status_change>` element MUST be included, reverting the definition's status, if necessary:
