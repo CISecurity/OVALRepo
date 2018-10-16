@@ -100,6 +100,21 @@ steps 2-5 above.
 			- The new definition MUST have a `<status>` of "INITIAL SUBMISSION"
 			- Within the `<oval_repository>/<dates>` element, the new definition MUST include a `<submitted>` element indicating the date of submission, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
 			- The new definition MUST NOT include any `<status_change>` elements
+		- When the PR contains UPDATED definitions:
+			- The updated definition MUST include a `<modified>` element describing the update, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
+			- A `<status_change>` element MUST be included, reverting the definition's status, if necessary:
+				- If the current definition status is "DRAFT", the `<status_change>` element value is DRAFT
+				- If the current definition status is "INTERIM", the `<status_change>` element value is INTERIM
+				- If the current definition status is "ACCEPTED", the `<status_change>` element value is INTERIM
+			- The `<status>` element MUST be updated to match the most recent `<status_change>` value.
+	- The separated PR files are assembled into a single OVAL definitions file and schema validated.
+	- Individual definitions are assembled and the minimum schema version is determined.  The minimum schema version is the lowest OVAL version for which the definition (and its components) remain schema-valid.
+	- If any NEW elements (tests, objects, states, variables) are included in the submission, they are processed:
+		- Any NEW element MUST have a `version` attribute value of "0"
+		- Any NEW element will have its OVAL `id` value regenerated as the next available `oval:org.cisecurity`-based value, and its `version` attribute then incremented to "1".
+		- Any NEW elements will then be organized into the appropriate repository folder structure per its new `id` and element type.
+
+	New Definition Example:
 ```
 <definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="vulnerability" id="oval:org.zackport:def:100" version="0">
 ...
@@ -115,19 +130,7 @@ steps 2-5 above.
 ...
 </definition>
 ```
-		- When the PR contains UPDATED definitions:
-			- The updated definition MUST include a `<modified>` element describing the update, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
-			- A `<status_change>` element MUST be included, reverting the definition's status, if necessary:
-				- If the current definition status is "DRAFT", the `<status_change>` element value is DRAFT
-				- If the current definition status is "INTERIM", the `<status_change>` element value is INTERIM
-				- If the current definition status is "ACCEPTED", the `<status_change>` element value is INTERIM
-			- The `<status>` element MUST be updated to match the most recent `<status_change>` value.
-	- The separated PR files are assembled into a single OVAL definitions file and schema validated.
-	- Individual definitions are assembled and the minimum schema version is determined.  The minimum schema version is the lowest OVAL version for which the definition (and its components) remain schema-valid.
-	- If any NEW elements (tests, objects, states, variables) are included in the submission, they are processed:
-		- Any NEW element MUST have a `version` attribute value of "0"
-		- Any NEW element will have its OVAL `id` value regenerated as the next available `oval:org.cisecurity`-based value, and its `version` attribute then incremented to "1".
-		- Any NEW elements will then be organized into the appropriate repository folder structure per its new `id` and element type.
+
 
 
 - **Submission Acceptable**: Once CIS has completed QA, they will accept the PR, merging your changes into 
