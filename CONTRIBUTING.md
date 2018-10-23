@@ -64,41 +64,85 @@ development using git called the "fork & pull" model [learn more](https://help.g
 
 #### Making a Contribution
 
-1. **Create a Topic Branch**: create a branch in which you will create your submission. You should create a topic branch for each set of changes that you think should be reviewed and accepted as unit.
+- **Create a Topic Branch**: create a branch in which you will create your submission. You should create a topic branch for each set of changes that you think should be reviewed and accepted as unit.
 
-2. **Make Updates**: add, update and delete elements in your topic branch.
+- **Make Updates**: add, update and delete elements in your topic branch.
 
-3. **Commit Updates**: commit your updates.
+- **Commit Updates**: commit your updates.
 
-4. **Quality Assurance**: make sure that definitions affected by your contribution schema and schematron validate
+- **Quality Assurance**: make sure that definitions affected by your contribution schema and schematron validate
 using our provided scripts or your own validation scripts. (additional QA guidelines TBD). If you have any validation
 issues, resolve them before proceeding.
 
-5. **Push Commits to Your Fork**: publish you submission to your own fork.
+- **Push Commits to Your Fork**: publish you submission to your own fork.
 
-6. **Initiate a Pull Request ("PR")**: 
+- **Initiate a Pull Request ("PR")**: 
   1. Go to your fork on GitHub.com
   2. Switch to your feature branch\
   3. Click the green "Compare and Review" button 
   4. Review the changes to insure they're correct and click "Create Pull Request"
   5. Add a descriptive title and a description of the submission and click "Create Pull Request"
 
-7. **Community Review**: GitHub will notify CIS and the community that you have made a PR.
+- **Community Review**: GitHub will notify CIS and the community that you have made a PR.
 Community members may add questions and comments to the PR discussion page, to which you are 
 encouraged to respond. CIS will perform QA on your PR, and will add any issues or concerns they've uncovered to the PR discussion page.
 
-8. **Issue Resolution**: If there are issues you wish to resolve, you may update update your PR by following
+- **Issue Resolution**: If there are issues you wish to resolve, you may update update your PR by following
 steps 2-5 above.
 
-9. **Submission Acceptable**: Once CIS has completed QA, they will accept the PR, merging your changes into 
+- **QA**: Once any issues have been resolved, and the PR is ready for processing, CIS will perform a number of quality assurance checks on the submission to determine acceptability:
+
+	- Determining if any changes are deleted items: If the PR contains element deletions, i.e. removing a definition, the user is asked to accept these changes.
+	- Removing items that don't contain meaningful changes: If any elements in the submission are unchanged, they are pruned from the submission process.
+	- Checking correctness of definition metadata:
+		- If any NEW definitions are being submitted, the following restrictions apply:
+			- The new definition MUST have a `version` attribute value of "0"
+			- The new definition MUST have a `<status>` of "INITIAL SUBMISSION"
+			- Within the `<oval_repository>/<dates>` element, the new definition MUST include a `<submitted>` element indicating the date of submission, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
+			- The new definition MUST NOT include any `<status_change>` elements
+		- When the PR contains UPDATED definitions:
+			- The updated definition MUST include a `<modified>` element describing the update, as well as the `<contributor>` sub-element indicating the organization and user submitting the definition.
+			- A `<status_change>` element MUST be included, reverting the definition's status, if necessary:
+				- If the current definition status is "DRAFT", the `<status_change>` element value is DRAFT
+				- If the current definition status is "INTERIM", the `<status_change>` element value is INTERIM
+				- If the current definition status is "ACCEPTED", the `<status_change>` element value is INTERIM
+			- The `<status>` element MUST be updated to match the most recent `<status_change>` value.
+	- The separated PR files are assembled into a single OVAL definitions file and schema validated.
+	- Individual definitions are assembled and the minimum schema version is determined.  The minimum schema version is the lowest OVAL version for which the definition (and its components) remain schema-valid.
+	- If any NEW elements (tests, objects, states, variables) are included in the submission, they are processed:
+		- Any NEW element MUST have a `version` attribute value of "0"
+		- Any NEW element will have its OVAL `id` value regenerated as the next available `oval:org.cisecurity`-based value, and its `version` attribute then incremented to "1".
+		- Any NEW elements will then be organized into the appropriate repository folder structure per its new `id` and element type.
+
+	New Definition Example:
+```
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="vulnerability" id="oval:org.zackport:def:100" version="0">
+...
+  <oval_repository>
+    <dates>
+      <submitted date="2018-10-16T11:00:00.000-04:00">
+        <contributor organization="CIS">Zackary Port</contributor>
+      </submitted>
+    </dates>
+
+    <status>INITIAL SUBMISSION</status>
+  </oval_repository>
+...
+</definition>
+```
+
+
+
+- **Submission Acceptable**: Once CIS has completed QA, they will accept the PR, merging your changes into 
 the master branch of this repository.
 
-10. **Clean Up**: once your PR has been accepted, you should delete your topic branch and update your master
+- **Clean Up**: once your PR has been accepted, you should delete your topic branch and update your master
 branch from the upstream/master so you have all the latest content (including your submission)!
 
 ##### Sample Git Commands
 
-```Shell
+```
+Shell
 # switch to your master branch, if you're not on it already
 $ git checkout master
 
