@@ -13,7 +13,7 @@ description of your question or idea.*
 
 ## Related Resources
 
-- The OVAL Repository Website (coming soon)
+- [The OVAL Repository Website](oval.cisecurity.org)
 - [Repository Overview](../README.md)
 - [Repository Organization](../repository/README.md)
 - [Contributing OVAL](../CONTRIBUTING.md)
@@ -39,7 +39,7 @@ your local copy of the repo, these scripts will not work properly.
 ## Getting Help, Making Suggestions
 
 If you need help using these scripts, please post your questions to the 
-OVAL Repository Mailing List (link TBD).
+[OVAL Repository Mailing List](http://lists.cisecurity.org/mailman/listinfo/oval_repository_lists.cisecurity.org).
 
 If you encounter a bug or have ideas for improving these scripts, please 
 [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
