@@ -13,7 +13,7 @@ description of your question or idea.*
 
 ## Related Resources
 
-- [The OVAL Repository Website](oval.cisecurity.org)
+- [The OVAL Repository Website](https://oval.cisecurity.org)
 - [Repository Overview](../README.md)
 - [Repository Organization](../repository/README.md)
 - [Contributing OVAL](../CONTRIBUTING.md)
