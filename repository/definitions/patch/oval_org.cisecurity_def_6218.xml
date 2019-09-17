@@ -1,0 +1,36 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:6218" version="1">
+  <metadata>
+    <title>DSA-4518-1 -- ghostscript -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>ghostscript</product>
+    </affected>
+    <reference ref_id="DSA-4518-1" ref_url="https://www.debian.org/security/dsa-4518" source="VENDOR" />
+    <reference ref_id="CVE-2019-14811" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14811" source="CVE" />
+    <reference ref_id="CVE-2019-14812" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14812" source="CVE" />
+    <reference ref_id="CVE-2019-14813" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14813" source="CVE" />
+    <reference ref_id="CVE-2019-14817" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14817" source="CVE" />
+    <description>It was discovered that various procedures in Ghostscript, the GPL PostScript/PDF interpreter, 
+		do not properly restrict privileged calls, which could result in bypass of file system restrictions of the dSAFER sandbox.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2019-09-13T15:23:52">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="ghostscript is earlier than 0:9.26a~dfsg-0+deb9u5" test_ref="oval:org.cisecurity:tst:10378" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="ghostscript is earlier than 0:9.27~dfsg-2+deb10u2" test_ref="oval:org.cisecurity:tst:10395" />
+    </criteria>
+  </criteria>
+</definition>
