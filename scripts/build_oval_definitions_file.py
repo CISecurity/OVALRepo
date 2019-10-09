@@ -103,6 +103,8 @@ def main():
 
     # query index
     query_results = definitions_index.query(query) if not all_definitions_filtered else {}
+    # consider adding paramters to filter results based on def title like this:
+    #query_results = [ document for document in query_results if document['title'].startswith('__') ]
 
     # get set of all definition ids found
     definition_ids = { document['oval_id'] for document in query_results }
