@@ -1,0 +1,32 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:120937" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-4567-1 -- dpdk -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 10</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>dpdk</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-4567-1" ref_url="https://www.debian.org/security/dsa-4567" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2019-14818" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14818" source="CVE" />
+    <oval-def:description>It was discovered that the vhost PMD in DPDK, a set of libraries for fast packet processing,
+		was affected by memory and file descriptor leaks which could result in denial of service.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2019-11-15T12:39:22">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 9">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="dpdk is earlier than 0:16.11.9-1+deb9u2" test_ref="oval:ru.altx-soft.nix:tst:238739" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 10">
+      <oval-def:extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <oval-def:criterion comment="dpdk is earlier than 0:18.11.2-2+deb10u2" test_ref="oval:ru.altx-soft.nix:tst:238740" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
