@@ -1,18 +1,17 @@
 <definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:6916" version="1">
   <metadata>
-    <title>DSA-4589-1 -- debian-edu-config -- security update</title>
+    <title>MGASA-2019-0396 -- обновление безопасности для flightcrew</title>
     <affected family="unix">
-      <platform>Debian 10</platform>
-      <platform>Debian 9</platform>
-      <product>debian-edu-config</product>
+      <platform>Mageia 7</platform>
+      <product>flightcrew</product>
     </affected>
-    <reference ref_id="DSA-4589-1" ref_url="https://www.debian.org/security/dsa-4589" source="VENDOR" />
-    <reference ref_id="CVE-2019-3467" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3467" source="CVE" />
-    <description>It was discovered that debian-edu-config, a set of configuration files used for the Debian Edu blend,
-		configured too permissive ACLs for the Kerberos admin server, which allowed password changes for other user principals.</description>
+    <reference ref_id="MGASA-2019-0396" ref_url="https://advisories.mageia.org/MGASA-2019-0396.html" source="VENDOR" />
+    <reference ref_id="CVE-2019-13032" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13032" source="CVE" />
+    <reference ref_id="CVE-2019-13241" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13241" source="CVE" />
+    <description>The updated packages fix security vulnerabilities.</description>
     <oval_repository>
       <dates>
-        <submitted date="2019-12-20T11:06:39">
+        <submitted date="2019-12-23T11:03:03">
           <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
         </submitted>
       </dates>
@@ -20,14 +19,13 @@
       <min_schema_version>5.10</min_schema_version>
     </oval_repository>
   </metadata>
-  <criteria operator="OR">
-    <criteria comment="Debian 9">
-      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
-      <criterion comment="debian-edu-config is earlier than 0:1.929+deb9u4" test_ref="oval:org.cisecurity:tst:13247" />
-    </criteria>
-    <criteria comment="Debian 10">
-      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
-      <criterion comment="debian-edu-config is earlier than 0:2.10.65+deb10u3" test_ref="oval:org.cisecurity:tst:13250" />
+  <criteria>
+    <extend_definition comment="Mageia 7 is installed" definition_ref="oval:org.cisecurity:def:6335" />
+    <criteria comment="Packages match section" operator="OR">
+      <criterion comment="flightcrew-common is earlier than 0:0.9.0-10.1" test_ref="oval:org.cisecurity:tst:13497" />
+      <criterion comment="flightcrew-cli is earlier than 0:0.9.0-10.1" test_ref="oval:org.cisecurity:tst:13719" />
+      <criterion comment="flightcrew-gui is earlier than 0:0.9.0-10.1" test_ref="oval:org.cisecurity:tst:13726" />
+      <criterion comment="flightcrew-plugin is earlier than 0:0.9.0-10.1" test_ref="oval:org.cisecurity:tst:13255" />
     </criteria>
   </criteria>
 </definition>
