@@ -37,6 +37,7 @@ import datetime
 import random
 import re
 import lib_repo
+import sys, pprint
 #from xml.sax.saxutils import escape
 from lxml import etree
 
@@ -167,8 +168,23 @@ def schema_validate(xml, schema_path, use_cached_schema=True):
     schema_validator = schema_cache[schema_path]
 
     if not schema_validator.validate(xml):
-        error_msg = schema_validator.error_log.last_error.message
-        raise SchemaValidationError(error_msg)
+        # group errors by file and get error line, message
+        file_errors = dict()
+        for e in schema_validator.error_log:
+            if not e.filename in file_errors:
+                file_errors[e.filename] = []
+            file_errors[e.filename].append('Line {0}: {1}'.format(e.line, e.message))
+
+        # format error message with header for each file-grouped set of errors
+        error_message = []
+        for filename, file_messages in file_errors.items():
+            error_group_title = '{0} XML Schema Validation errors in {1}:'.format(len(file_messages), os.path.basename(e.filename))
+            error_message.append(error_group_title)
+            error_message.append('-'*len(error_group_title))
+            for file_message in file_messages:
+                error_message.append('{0}'.format(file_message))
+        
+        raise SchemaValidationError('\n\t'.join(error_message))
 
 
 def schematron_validate(filepath, schema_path):
