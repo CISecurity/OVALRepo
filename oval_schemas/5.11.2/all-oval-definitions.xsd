@@ -32,7 +32,22 @@
 				<xsd:restriction base="oval-def:MetadataType">
 					<xsd:sequence>
 						<xsd:element maxOccurs="1" minOccurs="1" name="title" type="xsd:string"/>
-						<xsd:element maxOccurs="unbounded" minOccurs="0" name="affected" type="oval-def:AffectedType"/>
+						<xsd:element name="affected" type="oval-def:AffectedType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:unique name="UniqueAffectedPlatformRepo">
+                    <xsd:annotation>
+                        <xsd:documentation>Each affected platform element must have a unique value.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:selector xpath="oval-def:platform"/>
+                    <xsd:field xpath="."/>
+                </xsd:unique>
+                <xsd:unique name="UniqueAffectedProductRepo">
+                    <xsd:annotation>
+                        <xsd:documentation>Each affected product element must have a unique value.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:selector xpath="oval-def:product"/>
+                    <xsd:field xpath="."/>
+                </xsd:unique>
+            </xsd:element>
 						<xsd:element maxOccurs="unbounded" minOccurs="0" name="reference" type="oval-def:ReferenceType"/>
 						<xsd:element maxOccurs="1" minOccurs="1" name="description" type="xsd:string"/>
 						<xsd:element name="oval_repository">
