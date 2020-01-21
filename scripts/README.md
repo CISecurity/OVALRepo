@@ -130,7 +130,7 @@ Get OVAL elements that are related to one or more elements.
 
 ```Shell
 # See script usage and options
-$ python3 get_repository_stats.py -h
+$ python3 web_get_repository_stats.py -h
 ```
 
 
