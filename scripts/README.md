@@ -110,7 +110,7 @@ Schema and schematron validate one or more OVAL definitions files.
 ```Shell
 
 # See script usage and options
-$ python3 validatate_oval_definitions_files.py -h
+$ python3 validate_oval_definitions_files.py -h
 ```
 
 ### get\_related\_elements.py
