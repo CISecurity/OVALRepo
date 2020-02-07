@@ -1,0 +1,32 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:126290" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-4618-1 -- libexif -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 10</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>libexif</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-4618-1" ref_url="https://www.debian.org/security/dsa-4618" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2019-9278" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9278" source="CVE" />
+    <oval-def:description>An out-of-bounds write vulnerability due to an integer overflow was reported in libexif,
+		a library to parse EXIF files, which could result in denial of service, or potentially the execution of arbitrary code if specially crafted image files are processed.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2020-02-07T12:01:57">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 9">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="libexif is earlier than 0:0.6.21-2+deb9u1" test_ref="oval:ru.altx-soft.nix:tst:247690" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 10">
+      <oval-def:extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <oval-def:criterion comment="libexif is earlier than 0:0.6.21-5.1+deb10u1" test_ref="oval:ru.altx-soft.nix:tst:247691" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>

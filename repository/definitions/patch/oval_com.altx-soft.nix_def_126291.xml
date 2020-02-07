@@ -1,0 +1,31 @@
+<oval-def:definition xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:com.altx-soft.nix:def:126291" version="0">
+  <oval-def:metadata>
+    <oval-def:title>DSA-4619-1 -- libxmlrpc3-java -- security update</oval-def:title>
+    <oval-def:affected family="unix">
+      <oval-def:platform>Debian 10</oval-def:platform>
+      <oval-def:platform>Debian 9</oval-def:platform>
+      <oval-def:product>libxmlrpc3-java</oval-def:product>
+    </oval-def:affected>
+    <oval-def:reference ref_id="DSA-4619-1" ref_url="https://www.debian.org/security/dsa-4619" source="VENDOR" />
+    <oval-def:reference ref_id="CVE-2019-17570" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17570" source="CVE" />
+    <oval-def:description>Guillaume Teissier reported that the XMLRPC client in libxmlrpc3-java, an XML-RPC implementation in Java, does perform deserialization of the server-side exception serialized in the faultCause attribute of XMLRPC error response messages. A malicious XMLRPC server can take advantage of this flaw to execute arbitrary code with the privileges of an application using the Apache XMLRPC client library.</oval-def:description>
+    <oval-def:oval_repository>
+      <oval-def:dates>
+        <oval-def:submitted date="2020-02-07T12:01:57">
+          <oval-def:contributor organization="ALTX-SOFT">Alexandr Ruchkin</oval-def:contributor>
+        </oval-def:submitted>
+      </oval-def:dates>
+      <oval-def:status>INITIAL SUBMISSION</oval-def:status>
+    </oval-def:oval_repository>
+  </oval-def:metadata>
+  <oval-def:criteria operator="OR">
+    <oval-def:criteria comment="Debian 9">
+      <oval-def:extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <oval-def:criterion comment="libxmlrpc3-java is earlier than 0:3.1.3-8+deb9u1" test_ref="oval:ru.altx-soft.nix:tst:247692" />
+    </oval-def:criteria>
+    <oval-def:criteria comment="Debian 10">
+      <oval-def:extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <oval-def:criterion comment="libxmlrpc3-java is earlier than 0:3.1.3-9+deb10u1" test_ref="oval:ru.altx-soft.nix:tst:247693" />
+    </oval-def:criteria>
+  </oval-def:criteria>
+</oval-def:definition>
