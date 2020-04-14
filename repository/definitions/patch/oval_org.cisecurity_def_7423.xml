@@ -1,0 +1,32 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7423" version="1">
+  <metadata>
+    <title>DSA-4650-1 -- qbittorrent -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>qbittorrent</product>
+    </affected>
+    <reference ref_id="DSA-4650-1" ref_url="https://www.debian.org/security/dsa-4650" source="VENDOR" />
+    <reference ref_id="CVE-2019-13640" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13640" source="CVE" />
+    <description>Miguel Onoro reported that qbittorrent, a bittorrent client with a Qt5 GUI user interface, allows command injection via shell metacharacters in the torrent name parameter or current tracker parameter, which could result in remote command execution via a crafted name within an RSS feed if qbittorrent is configured to run an external program on torrent completion.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-04-10T10:18:35">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="qbittorrent is earlier than 0:3.3.7-3+deb9u1" test_ref="oval:org.cisecurity:tst:15034" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="qbittorrent is earlier than 0:4.1.5-1+deb10u1" test_ref="oval:org.cisecurity:tst:15039" />
+    </criteria>
+  </criteria>
+</definition>
