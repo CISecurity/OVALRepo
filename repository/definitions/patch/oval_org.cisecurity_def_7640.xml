@@ -1,0 +1,32 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7640" version="1">
+  <metadata>
+    <title>DSA-4685-1 -- apt -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>apt</product>
+    </affected>
+    <reference ref_id="DSA-4685-1" ref_url="https://www.debian.org/security/dsa-4685" source="VENDOR" />
+    <reference ref_id="CVE-2020-3810" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810" source="CVE" />
+    <description>Shuaibing Lu discovered that missing input validation in the ar/tar implementations of APT, the high level package manager, could result in denial of service when processing specially crafted deb files.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-05-20T12:14:31">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="apt is earlier than 0:1.4.10" test_ref="oval:org.cisecurity:tst:15466" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="apt is earlier than 0:1.8.2.1" test_ref="oval:org.cisecurity:tst:15462" />
+    </criteria>
+  </criteria>
+</definition>

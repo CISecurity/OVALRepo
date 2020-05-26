@@ -1,0 +1,32 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7639" version="1">
+  <metadata>
+    <title>DSA-4687-1 -- exim4 -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>exim4</product>
+    </affected>
+    <reference ref_id="DSA-4687-1" ref_url="https://www.debian.org/security/dsa-4687" source="VENDOR" />
+    <reference ref_id="CVE-2020-12783" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12783" source="CVE" />
+    <description>It was discovered that exim4, a mail transport agent, suffers from a authentication bypass vulnerability in the spa authentication driver. The spa authentication driver is not enabled by default.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-05-22T13:45:00">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="exim4 is earlier than 0:4.89-2+deb9u7" test_ref="oval:org.cisecurity:tst:15460" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="exim4 is earlier than 0:4.92-8+deb10u4" test_ref="oval:org.cisecurity:tst:15463" />
+    </criteria>
+  </criteria>
+</definition>
