@@ -70,14 +70,14 @@ def get_definition_metadata(filepath):
                 "type": revision_type, 
                 "status": revision.text,
                 "date": revision_datetime
-            });
+            })
         elif revision_type in ['created','submitted','modified']:
             if len(revision) == 0:
                 revisions.append({
                     "type": revision_type, 
                     "comment": revision.get('comment'),
                     "date": revision_datetime
-                });
+                })
             else:
                 for contributor in revision:
                     revisions.append({
@@ -86,7 +86,7 @@ def get_definition_metadata(filepath):
                         "date": revision_datetime,
                         "contributor": contributor.text,
                         "organization": contributor.get('organization')
-                    });
+                    })
         else:
             raise InvalidRevisionXml(filepath, 'Unexpected revision type:  {0}'.format(revision_type))
 
