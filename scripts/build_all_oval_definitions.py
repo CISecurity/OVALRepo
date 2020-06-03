@@ -24,7 +24,7 @@ def main():
     args = vars(parser.parse_args())
 
     # get indexes
-    definitions_index = lib_search.DefinitionsIndex(message)
+    # definitions_index = lib_search.DefinitionsIndex(message)
     elements_index = lib_search.ElementsIndex(message)
 
     # create generator, build in memory b/c smallish files
