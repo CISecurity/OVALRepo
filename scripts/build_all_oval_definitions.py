@@ -13,6 +13,9 @@ TODO:
 import argparse, sys, time, cProfile
 import lib_repo, lib_xml, lib_search
 
+###
+# Get a temp directory rather than /tmp/ hardcoding
+import tempfile
 
 def main():
     """ parse command line options and generate file """
@@ -31,6 +34,7 @@ def main():
     OvalGenerator = lib_xml.OvalGenerator(message)
     OvalGenerator.use_file_queues = False
 
+    print("Storing data in temp directory: {}".format(tempfile.gettempdir()))
     i_file = 0
     i_limit = args['limit']
     for defpath in lib_repo.get_definition_paths_iterator():
@@ -52,7 +56,7 @@ def main():
             OvalGenerator.queue_element_file(element_type, file_path)
 
         # write output file
-        outfile = './tmp/gen.{0}'.format(lib_repo.oval_id_to_path(def_id))
+        outfile = '{1}/gen.{0}'.format(lib_repo.oval_id_to_path(def_id), tempfile.gettempdir())
         OvalGenerator.to_file(outfile)
 
     seconds_elapsed = time.time() - start_time
