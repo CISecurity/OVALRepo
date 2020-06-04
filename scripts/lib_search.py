@@ -356,10 +356,10 @@ class SearchIndex:
 
         # if not a text field, escape spaces
         if (field and field not in self.text_fields):
-            s = re.sub('\s+','_', s)
+            s = re.sub(r'\s+','_', s)
 
         # escape _:[]
-        s = re.sub('[_:\[\]]+','_', s)
+        s = re.sub(r'[_:\[\]]+','_', s)
 
         return s
 
