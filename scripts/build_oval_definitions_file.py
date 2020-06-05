@@ -47,8 +47,9 @@ def main():
     source_options.add_argument('--reference_id', nargs='*', dest='reference_ids', metavar='REFERENCE_ID', help='filter by reference ids, e.g. CVE-2015-3306')
     source_options.add_argument('--max_schema_version', nargs="?", dest='max_schema_version', metavar='SCHEMA_VERSION',  help='filter by maximum oval schema version, e.g. 5.10')
     source_options.add_argument('--all_definitions', default=False, action="store_true", help='include all definitions in the repository (do not specify any other filters)')
-    source_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or after this day (format: YYYYMMDD)')
-    source_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='include elements revised on or before this day (format: YYYYMMDD)')
+    source_options.add_argument('--from', nargs='?', default='', metavar='YYYYMMDD', help='include elements submitted or revised on or after this day (format: YYYYMMDD)')
+    source_options.add_argument('--to', nargs='?', default='', metavar='YYYYMMDD', help='include elements submitted or revised on or before this day (format: YYYYMMDD)')
+    source_options.add_argument('--submitted_date_only', default=False, action="store_true", help='use submission dates only when filtering by date (do not consider modifications or status changes)')
     args = vars(parser.parse_args())
 
     # get definitions index
@@ -70,7 +71,9 @@ def main():
         # get revisions index
         revisions_index = lib_search.RevisionsIndex(message)
 
-        if args['from'] or args['to']:
+        if (args['from'] or args['to']) and args['submitted_date_only']:
+            filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange(args['from'], args['to']), 'type': 'submitted' })
+        elif args['from'] or args['to']:
             filtered_oval_ids = revisions_index.get_definition_ids({ 'date': revisions_index.format_daterange(args['from'], args['to']) })
 
         if args['contributors']:
