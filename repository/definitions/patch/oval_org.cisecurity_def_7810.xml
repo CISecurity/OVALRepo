@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7810" version="1">
+  <metadata>
+    <title>DSA-4701-1 -- intel-microcode -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>intel-microcode</product>
+    </affected>
+    <reference ref_id="DSA-4701-1" ref_url="https://www.debian.org/security/dsa-4701" source="VENDOR" />
+    <reference ref_id="CVE-2020-0543" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-0543" source="CVE" />
+    <reference ref_id="CVE-2020-0548" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-0548" source="CVE" />
+    <reference ref_id="CVE-2020-0549" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-0549" source="CVE" />
+    <description>This update ships updated CPU microcode for some types of Intel CPUs and provides mitigations for the Special Register Buffer Data Sampling</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-06-17T12:45:37">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="intel-microcode is earlier than 0:3.20200609.2~deb9u1" test_ref="oval:org.cisecurity:tst:15804" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="intel-microcode is earlier than 0:3.20200609.2~deb10u1" test_ref="oval:org.cisecurity:tst:15814" />
+    </criteria>
+  </criteria>
+</definition>

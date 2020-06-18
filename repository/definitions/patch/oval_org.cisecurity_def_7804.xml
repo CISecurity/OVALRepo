@@ -1,0 +1,37 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7804" version="1">
+  <metadata>
+    <title>DSA-4692-1 -- netqmail -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>netqmail</product>
+    </affected>
+    <reference ref_id="DSA-4692-1" ref_url="https://www.debian.org/security/dsa-4692" source="VENDOR" />
+    <reference ref_id="CVE-2005-1513" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1513" source="CVE" />
+    <reference ref_id="CVE-2005-1514" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1514" source="CVE" />
+    <reference ref_id="CVE-2005-1515" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1515" source="CVE" />
+    <reference ref_id="CVE-2020-3811" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3811" source="CVE" />
+    <reference ref_id="CVE-2020-3812" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3812" source="CVE" />
+    <description>Georgi Guninski and the Qualys Research Labs discovered multiple vulnerabilities in qmail (shipped in Debian as netqmail with additional patches)
+		which could result in the execution of arbitrary code, bypass of mail address verification and a local information leak whether a file exists or not.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-06-17T11:39:30">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="netqmail is earlier than 0:1.06-6.2~deb9u1" test_ref="oval:org.cisecurity:tst:15815" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="netqmail is earlier than 0:1.06-6.2~deb10u1" test_ref="oval:org.cisecurity:tst:15801" />
+    </criteria>
+  </criteria>
+</definition>
