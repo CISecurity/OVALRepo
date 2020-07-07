@@ -1,0 +1,34 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7947" version="1">
+  <metadata>
+    <title>DSA-4705-1 -- python-django -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>python-django</product>
+    </affected>
+    <reference ref_id="DSA-4705-1" ref_url="https://www.debian.org/security/dsa-4705" source="VENDOR" />
+    <reference ref_id="CVE-2020-9402" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9402" source="CVE" />
+    <reference ref_id="CVE-2020-13254" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13254" source="CVE" />
+    <reference ref_id="CVE-2020-13596" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13596" source="CVE" />
+    <description>It was discovered that Django, a high-level Python web development framework, did not properly sanitize input. This would allow a remote attacker to perform SQL injection attacks, Cross-Site Scripting (XSS) attacks, or leak sensitive information.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-07-06T10:17:57">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="python-django is earlier than 1:1.10.7-2+deb9u9" test_ref="oval:org.cisecurity:tst:15892" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="python-django is earlier than 1:1.11.29-1~deb10u1" test_ref="oval:org.cisecurity:tst:15901" />
+    </criteria>
+  </criteria>
+</definition>

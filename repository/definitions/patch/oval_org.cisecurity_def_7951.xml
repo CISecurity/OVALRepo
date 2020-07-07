@@ -1,0 +1,33 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7951" version="1">
+  <metadata>
+    <title>DSA-4707-1 -- mutt -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <platform>Debian 9</platform>
+      <product>mutt</product>
+    </affected>
+    <reference ref_id="DSA-4707-1" ref_url="https://www.debian.org/security/dsa-4707" source="VENDOR" />
+    <reference ref_id="CVE-2020-14093" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14093" source="CVE" />
+    <reference ref_id="CVE-2020-14954" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14954" source="CVE" />
+    <description>Damian Poddebniak and Fabian Ising discovered two security issues in the STARTTLS handling of the Mutt mail client, which could enable MITM attacks.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-07-06T10:37:49">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria operator="OR">
+    <criteria comment="Debian 9">
+      <extend_definition comment="Debian 9 is installed" definition_ref="oval:org.cisecurity:def:2515" />
+      <criterion comment="mutt is earlier than 0:1.7.2-1+deb9u3" test_ref="oval:org.cisecurity:tst:15899" />
+    </criteria>
+    <criteria comment="Debian 10">
+      <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+      <criterion comment="mutt is earlier than 0:1.10.1-2.1+deb10u2" test_ref="oval:org.cisecurity:tst:15909" />
+    </criteria>
+  </criteria>
+</definition>

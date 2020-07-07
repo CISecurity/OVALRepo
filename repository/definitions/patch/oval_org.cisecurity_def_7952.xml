@@ -1,0 +1,25 @@
+<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="patch" id="oval:org.cisecurity:def:7952" version="1">
+  <metadata>
+    <title>DSA-4716-1 -- docker.io -- security update</title>
+    <affected family="unix">
+      <platform>Debian 10</platform>
+      <product>docker.io</product>
+    </affected>
+    <reference ref_id="DSA-4716-1" ref_url="https://www.debian.org/security/dsa-4716" source="VENDOR" />
+    <reference ref_id="CVE-2020-13401" ref_url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13401" source="CVE" />
+    <description>Etienne Champetier discovered that Docker, a Linux container runtime, created network bridges which by default accept IPv6 router advertisements. This could allow an attacker with the CAP_NET_RAW capability in a container to spoof router advertisements, resulting in information disclosure or denial of service.</description>
+    <oval_repository>
+      <dates>
+        <submitted date="2020-07-06T16:57:43">
+          <contributor organization="ALTX-SOFT">Alexandr Ruchkin</contributor>
+        </submitted>
+      </dates>
+      <status>INITIAL SUBMISSION</status>
+      <min_schema_version>5.10</min_schema_version>
+    </oval_repository>
+  </metadata>
+  <criteria>
+    <extend_definition comment="Debian 10 is installed" definition_ref="oval:org.cisecurity:def:6157" />
+    <criterion comment="docker.io is earlier than 0:18.09.1+dfsg1-7.1+deb10u2" test_ref="oval:org.cisecurity:tst:15900" />
+  </criteria>
+</definition>
