@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<oval_definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#windows windows-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <generator>
+    <oval:product_name>OVALdb generator</oval:product_name>
+    <oval:schema_version>5.10.1</oval:schema_version>
+    <oval:timestamp>2020-09-10T17:02:40</oval:timestamp>
+  </generator>
+  <definitions>
+    <definition class="inventory" id="oval:ru.test.win:def:1" version="0">
+      <metadata>
+        <title>CentOS Linux 7.5 is installed</title>
+        <affected family="unix">
+          <platform>CentOS Linux 7.5</platform>
+        </affected>
+        <reference ref_id="cpe:/o:centos:centos:7.5" source="CPE" />
+        <description>The operating system installed on the system is CentOS Linux 7.5</description>
+        <oval_repository>
+          <dates>
+            <submitted date="2020-09-10T10:42:24">
+              <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+            </submitted>
+          </dates>
+          <status>INITIAL SUBMISSION</status>
+        </oval_repository>
+      </metadata>
+      <criteria>
+        <criterion comment="CentOS Linux 7.5 is installed" test_ref="oval:ru.test.win:tst:1" />
+      </criteria>
+    </definition>
+	<definition class="inventory" id="oval:ru.test.win:def:2" version="0">
+      <metadata>
+        <title>CentOS Linux 7.3 is installed</title>
+        <affected family="unix">
+          <platform>CentOS Linux 7.3</platform>
+        </affected>
+        <reference ref_id="cpe:/o:centos:centos:7.5" source="CPE" />
+        <description>The operating system installed on the system is CentOS Linux 7.3</description>
+        <oval_repository>
+          <dates>
+            <submitted date="2020-09-10T10:42:24">
+              <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+            </submitted>
+          </dates>
+          <status>INITIAL SUBMISSION</status>
+        </oval_repository>
+      </metadata>
+      <criteria>
+        <criterion comment="CentOS Linux 7.3 is installed" test_ref="oval:ru.test.win:tst:2" />
+      </criteria>
+    </definition>
+	<definition class="inventory" id="oval:ru.test.nix:def:3" version="1">
+      <metadata>
+        <title>Red Hat Enterprise Linux 7.5 is installed</title>
+        <affected family="unix">
+          <platform>Red Hat Enterprise Linux 7.5</platform>
+        </affected>
+        <reference ref_id="cpe:/o:redhat:enterprise_linux:7.5" source="CPE" />
+        <description>Red Hat Enterprise Linux 7.5 is installed.</description>
+		<oval_repository>
+          <dates>
+            <submitted date="2020-09-10T10:42:24">
+              <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>
+            </submitted>
+          </dates>
+          <status>INITIAL SUBMISSION</status>
+        </oval_repository>
+      </metadata>
+      <criteria>
+        <extend_definition comment="The operating system installed on the system is Red Hat Enterprise Linux 7" definition_ref="oval:org.mitre.oval:def:24953" />
+        <criterion comment="Red Hat Enterprise Linux 7.5 is installed" test_ref="oval:ru.test.nix:tst:3" />
+      </criteria>
+    </definition>
+  </definitions>
+  <tests>
+    <rpminfo_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.win:tst:1" version="0" comment="CentOS Linux 7.5 is installed" check_existence="at_least_one_exists" check="at least one">
+      <object object_ref="oval:org.mitre.oval:obj:24078" />
+      <state state_ref="oval:ru.test.win:ste:1" />
+    </rpminfo_test>
+	<rpminfo_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.win:tst:2" version="0" comment="CentOS Linux 7.3 is installed" check_existence="at_least_one_exists" check="at least one">
+      <object object_ref="oval:org.mitre.oval:obj:24078" />
+      <state state_ref="oval:ru.test.win:ste:2" />
+    </rpminfo_test>
+	<rpminfo_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.nix:tst:3" version="1" comment="Red Hat Enterprise Linux 7.5 is installed" check_existence="at_least_one_exists" check="at least one">
+      <object object_ref="oval:org.mitre.oval:obj:28686" />
+      <state state_ref="oval:ru.test.nix:tst:3" />
+    </rpminfo_test>
+  </tests>
+  <states>
+    <rpminfo_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.win:ste:1" version="0" comment="CentOS Linux 7.5">
+      <extended_name operation="pattern match">^centos\-release\-0\:7\-5.*$</extended_name>
+    </rpminfo_state>
+	<rpminfo_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.win:ste:2" version="0" comment="CentOS Linux 7.3">
+      <extended_name operation="pattern match">^centos\-release\-0\:7\-3.*$</extended_name>
+    </rpminfo_state>
+	<rpminfo_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" id="oval:ru.test.nix:tst:3" version="0" comment="version equals 7.5">
+      <version>7.5</version>
+    </rpminfo_state>
+  </states>
+</oval_definitions>
