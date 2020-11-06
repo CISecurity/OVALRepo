@@ -85,26 +85,33 @@ class ovalStatusUpdates {
                 node."oval-def:status".text()  == "DRAFT" ||
                 node.status.text() == "DRAFT"
         }.each { n ->
-            String draftStatusDateTime = n.dates.status_change[0]."@date"
-            String draftDate = draftStatusDateTime.split('T').first()
-            String currentDate = formattedDate.split('T').first()
-            def dDate = Date.parse("yyyy-MM-dd", draftDate)
-            def cDate = Date.parse("yyyy-MM-dd", currentDate)
-            if (cDate - dDate >= 14 ) {
-                if (n.status) {
-                    count = count + 1
-                    println("DRAFT -> INTERIM - ${n} ${count} \n")
-                    n.dates[0].append(interimStatusChange)
-                    n.status[0].value = "INTERIM"
-                } else {
-                    count = count + 1
-                    println("DRAFT -> INTERIM - ${n} ${count} \n")
-                    n."oval-def:dates"[0].append(interimStatusChange2)
-                    n."oval-def:status"[0].value = "INTERIM" 
+            String draftStatusDateTime = ""
+            if (n."oval-def:dates"."oval-def:status_change"[0] ) {
+                draftStatusDateTime = n."oval-def:dates"."oval-def:status_change"[0]."@date"
+            } else if (n.dates.status_change[0]) {
+                draftStatusDateTime = n.dates.status_change[0]."@date"
+            }
+            if (draftStatusDateTime != "") {
+                String draftDate = draftStatusDateTime.split('T').first()
+                String currentDate = formattedDate.split('T').first()
+                def dDate = Date.parse("yyyy-MM-dd", draftDate)
+                def cDate = Date.parse("yyyy-MM-dd", currentDate)
+                if (cDate - dDate >= 14 ) {
+                    if (n.status) {
+                        count = count + 1
+                        println("DRAFT -> INTERIM - ${n} ${count} \n")
+                        n.dates[0].append(interimStatusChange)
+                        n.status[0].value = "INTERIM"
+                    } else {
+                        count = count + 1
+                        println("DRAFT -> INTERIM - ${n} ${count} \n")
+                        n."oval-def:dates"[0].append(interimStatusChange2)
+                        n."oval-def:status"[0].value = "INTERIM" 
+                    }
                 }
             }
         }
-        def writer = new FileWriter(draftFile)
+        def writer = new FileWriter(interimFile)
         XmlUtil.serialize(xml, writer)
         writer.close()
     }
@@ -124,22 +131,29 @@ class ovalStatusUpdates {
                 node."oval-def:status".text()  == "INTERIM" ||
                 node.status.text() == "INTERIM"
         }.each { n ->
-            String interimStatusDateTime = n.dates.status_change[1]."@date"
-            String interimDate = interimStatusDateTime.split('T').first()
-            String currentDate = formattedDate.split('T').first()
-            def iDate = Date.parse("yyyy-MM-dd", interimDate)
-            def cDate = Date.parse("yyyy-MM-dd", currentDate)
-            if (cDate - iDate >= 14 ) {
-                if (n.status) {
-                    count = count + 1
-                    println("INTERIM -> ACCEPTED - ${n} ${count} \n")
-                    n.dates[0].append(acceptedStatusChange)
-                    n.status[0].value = "ACCEPTED"
-                } else {
-                    count = count + 1
-                    println("INTERIM -> ACCEPTED - ${n} ${count} \n")
-                    n."oval-def:dates"[0].append(acceptedStatusChange2)
-                    n."oval-def:status"[0].value = "ACCEPTED"
+            String interimStatusDateTime = ""
+            if (n."oval-def:dates"."oval-def:status_change"[1] ) {
+                interimStatusDateTime = n."oval-def:dates"."oval-def:status_change"[1]."@date"
+            } else if (n.dates.status_change[1]) {
+                interimStatusDateTime = n.dates.status_change[1]."@date"
+            }
+            if (interimStatusDateTime != "") {
+                String interimDate = interimStatusDateTime.split('T').first()
+                String currentDate = formattedDate.split('T').first()
+                def iDate = Date.parse("yyyy-MM-dd", interimDate)
+                def cDate = Date.parse("yyyy-MM-dd", currentDate)
+                if (cDate - iDate >= 14 ) {
+                    if (n.status) {
+                        count = count + 1
+                        println("INTERIM -> ACCEPTED - ${n} ${count} \n")
+                        n.dates[0].append(acceptedStatusChange)
+                        n.status[0].value = "ACCEPTED"
+                    } else {
+                        count = count + 1
+                        println("INTERIM -> ACCEPTED - ${n} ${count} \n")
+                        n."oval-def:dates"[0].append(acceptedStatusChange2)
+                        n."oval-def:status"[0].value = "ACCEPTED"
+                    }
                 }
             }
         }
@@ -199,7 +213,6 @@ class ovalStatusUpdates {
         def xml = parser.parse(xmlFile)
         return xml
     }
-
 
 }
 
