@@ -111,7 +111,7 @@ class ovalStatusUpdates {
                 }
             }
         }
-        def writer = new FileWriter(interimFile)
+        def writer = new FileWriter(draftFile)
         XmlUtil.serialize(xml, writer)
         writer.close()
     }
