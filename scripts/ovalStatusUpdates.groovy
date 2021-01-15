@@ -1,4 +1,3 @@
-
 import groovy.xml.XmlUtil
 import groovy.xml.MarkupBuilder
 import java.io.FileInputStream
