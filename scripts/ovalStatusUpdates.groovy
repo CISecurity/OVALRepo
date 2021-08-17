@@ -212,8 +212,4 @@ class ovalStatusUpdates {
         def xml = parser.parse(xmlFile)
         return xml
     }
-
 }
-
-
-
