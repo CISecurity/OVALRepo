@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oval_definitions
+	xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+	xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd">
+
+	<generator>
+		<oval:product_name>CIS OVAL Repository</oval:product_name>
+		<oval:product_version>0.1</oval:product_version>
+		<oval:schema_version>5.11.2</oval:schema_version>
+		<oval:timestamp>2022-01-12T20:54:37</oval:timestamp>
+	</generator>
+		
+	<definitions>		<definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" id="oval:org.cisecurity:def:1" version="14">
+		  <metadata>
+		    <title>Zimbra Desktop is installed</title>
+		    <affected family="windows">
+		      <platform>Microsoft Windows XP</platform>
+		      <platform>Microsoft Windows Vista</platform>
+		      <platform>Microsoft Windows 7</platform>
+		      <platform>Microsoft Windows 8</platform>
+		      <platform>Microsoft Windows 8.1</platform>
+		      <platform>Microsoft Windows 10</platform>
+		      <platform>Microsoft Windows Server 2003</platform>
+		      <platform>Microsoft Windows Server 2008</platform>
+		      <platform>Microsoft Windows Server 2008 R2</platform>
+		      <platform>Microsoft Windows Server 2012</platform>
+		      <platform>Microsoft Windows Server 2012 R2</platform>
+		      <product>Zimbra Desktop</product>
+		    </affected>
+		    <reference ref_id="cpe:/a:vmware:zimbra_desktop" source="CPE" />
+		    <description>Zimbra Desktop is installed.</description>
+		    <oval_repository>
+		      <dates>
+		        <submitted date="2015-07-27T08:31:03">
+		          <contributor organization="ALTX-SOFT">Sergey Artykhov</contributor>
+		        </submitted>
+		        <status_change date="2015-12-08T11:00:00.000-05:00">DRAFT</status_change>
+		        <status_change date="2015-12-22T11:00:00.000-05:00">INTERIM</status_change>
+		        <status_change date="2016-02-08T10:00:00.000-05:00">ACCEPTED</status_change>
+		      </dates>
+		      <status>ACCEPTED</status>
+		      <min_schema_version>5.10</min_schema_version>
+		    </oval_repository>
+		  </metadata>
+		  <criteria>
+		    <criterion comment="Zimbra Desktop is installed" test_ref="oval:org.cisecurity:tst:1" />
+		  </criteria>
+		</definition>
+		
+	</definitions>
+
+	<tests>		<registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" check="at least one" check_existence="at_least_one_exists" comment="Zimbra Desktop is installed" id="oval:org.cisecurity:tst:1" version="13">
+		  <object object_ref="oval:org.mitre.oval:obj:911" />
+		  <state state_ref="oval:org.cisecurity:ste:1" />
+		</registry_test>
+		
+	</tests>
+
+	<objects>		<registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:obj:41329" version="5">
+		  <behaviors windows_view="32_bit" />
+		  <hive>HKEY_LOCAL_MACHINE</hive>
+		  <key operation="pattern match">^Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\.*$</key>
+		  <name>DisplayName</name>
+		</registry_object>
+		
+		<registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:org.mitre.oval:obj:41928" version="3">
+		  <hive>HKEY_LOCAL_MACHINE</hive>
+		  <key operation="pattern match">^Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\.*$</key>
+		  <name>DisplayName</name>
+		</registry_object>
+		
+		<registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" xmlns:ns1="http://oval.mitre.org/XMLSchema/oval-definitions-5" comment="Object holds Uninstall!DisplayName registry key" id="oval:org.mitre.oval:obj:911" version="14">
+		  <ns1:set>
+		    <ns1:object_reference>oval:org.mitre.oval:obj:41928</ns1:object_reference>
+		    <ns1:object_reference>oval:org.mitre.oval:obj:41329</ns1:object_reference>
+		  </ns1:set>
+		</registry_object>
+		
+	</objects>
+
+	<states>		<registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" comment="Zimbra Desktop" id="oval:org.cisecurity:ste:1" version="1">
+		  <value datatype="string" operation="pattern match">^Zimbra Desktop.*$</value>
+		</registry_state>
+		
+	</states>
+
+</oval_definitions>

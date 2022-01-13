@@ -1,9 +1,6 @@
 #!/usr/bin/env/ python3
 """Steps through all of the QA tasks needed for a submission and updates the local repository as necessary on success. 
-
 Authors: Gunnar Engelbach <Gunnar.Engelbach@ThreatGuard.com>
-
-
 TODO:
 - Build each of the library calls necessary to complete all of the steps
 - Use gitpython to do a commit and push if everything checks
@@ -628,7 +625,8 @@ def save_element(elem, path):
     if not path or path is None:
         return
     
-    parent = os.path.dirname(path)
+    parent = os.path.dirname(os.path.realpath(path))
+    # parent = os.path.dirname(path)
     if not os.path.isdir(parent):
         os.makedirs(parent, mode=0o755, exist_ok=True)
         os.chmod(parent, 0o0755)
