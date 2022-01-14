@@ -606,7 +606,6 @@ def show_affected(file_list):
         else:
             print("   **** No affected items found ****")
 
-
     
 def message(label, message):
     """ print a message """
