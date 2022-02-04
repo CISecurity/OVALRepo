@@ -38,7 +38,7 @@ class ovalStatusUpdates {
     String formattedDate = ZonedDateTime.now().format(formatter)
 
     def processInitial() {
-        File initialFile = new File("C:\\tmp\\initial.xml")
+        File initialFile = new File("C:\\Temp\\initial.xml")
         def xml = parseXml(initialFile)
         removeTests(xml)
         removeObjects(xml)
@@ -70,7 +70,7 @@ class ovalStatusUpdates {
     }
 
     def processDraft() {
-        File draftFile =  new File("C:\\tmp\\draft.xml")
+        File draftFile =  new File("C:\\Temp\\draft.xml")
         def xml = parseXml(draftFile)
         removeTests(xml)
         removeObjects(xml)
@@ -116,7 +116,7 @@ class ovalStatusUpdates {
     }
 
     def processInterim() {
-        File interimFile = new File("C:\\tmp\\interim.xml")
+        File interimFile = new File("C:\\Temp\\interim.xml")
         def xml = parseXml(interimFile)
         removeTests(xml)
         removeObjects(xml)
