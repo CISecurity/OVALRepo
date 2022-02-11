@@ -159,6 +159,7 @@ def main():
             #   last <status_change> != <status> - invalid
             def_status_change = od.get_last_status_change()
             if def_status_change["Version"] == "0":
+                print("Def Status Change: %s" % def_status_change)
                 if "Submitted" not in def_status_change or def_status_change["Submitted"] is None:
                     print("   ++++ Definition ID %s is NOT valid:" % def_id)
                     print("    - New definitions must contain a submitted element")
