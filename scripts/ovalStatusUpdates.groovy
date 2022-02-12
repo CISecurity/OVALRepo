@@ -30,14 +30,21 @@ class ovalStatusUpdates {
     static main(args) {
         def processStatus = new ovalStatusUpdates()
             processStatus.processInitial()
-            processStatus.processDraft()
-            processStatus.processInterim()
+            // processStatus.processDraft()
+            // processStatus.processInterim()
         }
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     String formattedDate = ZonedDateTime.now().format(formatter)
 
     def processInitial() {
+        File tmpDir = new File("C:\\tmp")
+
+        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+
         File initialFile = new File("C:\\tmp\\initial.xml")
         def xml = parseXml(initialFile)
         removeTests(xml)
@@ -70,6 +77,12 @@ class ovalStatusUpdates {
     }
 
     def processDraft() {
+        File tmpDir = new File("C:\\tmp")
+        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+
         File draftFile =  new File("C:\\tmp\\draft.xml")
         def xml = parseXml(draftFile)
         removeTests(xml)
@@ -116,6 +129,12 @@ class ovalStatusUpdates {
     }
 
     def processInterim() {
+        File tmpDir = new File("C:\\tmp")
+        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+
         File interimFile = new File("C:\\tmp\\interim.xml")
         def xml = parseXml(interimFile)
         removeTests(xml)
