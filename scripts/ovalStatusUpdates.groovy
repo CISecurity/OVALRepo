@@ -30,8 +30,8 @@ class ovalStatusUpdates {
     static main(args) {
         def processStatus = new ovalStatusUpdates()
             processStatus.processInitial()
-            // processStatus.processDraft()
-            // processStatus.processInterim()
+            processStatus.processDraft()
+            processStatus.processInterim()
         }
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
@@ -40,7 +40,7 @@ class ovalStatusUpdates {
     def processInitial() {
         File tmpDir = new File("C:\\tmp")
 
-        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
             println("Creating tmp")
             tmpDir.mkdirs()
         } 
@@ -78,10 +78,12 @@ class ovalStatusUpdates {
 
     def processDraft() {
         File tmpDir = new File("C:\\tmp")
-        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
             println("Creating tmp")
             tmpDir.mkdirs()
         } 
+        
 
         File draftFile =  new File("C:\\tmp\\draft.xml")
         def xml = parseXml(draftFile)
@@ -130,7 +132,8 @@ class ovalStatusUpdates {
 
     def processInterim() {
         File tmpDir = new File("C:\\tmp")
-        if (!tmpDir.exists()) { // && !tmpDir.isDirectory()) {
+
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
             println("Creating tmp")
             tmpDir.mkdirs()
         } 
