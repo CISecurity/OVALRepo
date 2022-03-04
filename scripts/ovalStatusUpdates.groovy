@@ -38,6 +38,13 @@ class ovalStatusUpdates {
     String formattedDate = ZonedDateTime.now().format(formatter)
 
     def processInitial() {
+        File tmpDir = new File("C:\\tmp")
+
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+
         File initialFile = new File("C:\\tmp\\initial.xml")
         def xml = parseXml(initialFile)
         removeTests(xml)
@@ -70,6 +77,14 @@ class ovalStatusUpdates {
     }
 
     def processDraft() {
+        File tmpDir = new File("C:\\tmp")
+
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+        
+
         File draftFile =  new File("C:\\tmp\\draft.xml")
         def xml = parseXml(draftFile)
         removeTests(xml)
@@ -116,6 +131,13 @@ class ovalStatusUpdates {
     }
 
     def processInterim() {
+        File tmpDir = new File("C:\\tmp")
+
+        if (!tmpDir.isDirectory() && !tmpDir.exists()) {
+            println("Creating tmp")
+            tmpDir.mkdirs()
+        } 
+
         File interimFile = new File("C:\\tmp\\interim.xml")
         def xml = parseXml(interimFile)
         removeTests(xml)
