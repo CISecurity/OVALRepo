@@ -25,7 +25,7 @@ description of your question or idea.*
 ## Getting Help, Making Suggestions
 
 If you need help following this documentation, please post your questions to the 
-OVAL Repository Mailing List (link TBD).
+[OVAL Repository Mailing List](https://lists.cisecurity.org/list/oval_repository.lists.cisecurity.org).
 
 If you encounter a bug or have ideas for improving this documentation, please 
 [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
