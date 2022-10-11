@@ -27,7 +27,7 @@ description of your question or idea.*
 ## Getting Help, Making Suggestions
 
 If you need help understanding and following this process, please post your
-questions to the OVAL Repository Mailing List (link TBD).
+questions to the [OVAL Repository Mailing List](https://lists.cisecurity.org/list/oval_repository.lists.cisecurity.org).
 
 If you encounter issues or have ideas for improving this process, please 
 [create an issue](https://github.com/CISecurity/OVALRepo/issues/new) with a full
@@ -37,13 +37,13 @@ description of your issue or idea.
 
 If you have a suggestion for adding or updating content, but are not interested in being a regular
 contributor or [making your contribution via git](#ongoing-contribution-by-git), please post your
-content suggetions to the OVAL Repository mailing list (link TBD) and ask for a regular contributor
+content suggetions to the [OVAL Repository Mailing List](https://lists.cisecurity.org/list/oval_repository.lists.cisecurity.org) and ask for a regular contributor
 to incorporate them into a formal contribution.
 
 ## Ongoing Contribution by Email
 
 In order to ease the transition for content contributors, the repository will accept contributions
-of valid OVAL sent by email to the OVAL Repository mailing list (link TBD).
+of valid OVAL sent by email to the [OVAL Repository Mailing List](https://lists.cisecurity.org/list/oval_repository.lists.cisecurity.org).
 
 This option will be available for a limited time and we recommend that you plan to adopt the 
 [contribution via git](#ongoing-contribution-by-git) option.
