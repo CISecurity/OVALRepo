@@ -1,0 +1,91 @@
+name: build-oval-files
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-xml-files:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install OS Dependencies
+        run: sudo apt install -y python3-lxml jq
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
+      - name: Install Python Dependencies
+        run: python -m pip install -r scripts/requirements.txt
+      - name: Build Web Indexes
+        run: python ./scripts/web_update_indexes.py > /dev/null
+      - name: Get All Platforms
+        run: python ./scripts/web_get_repository_stats.py --platform > platforms.json
+      - name: Get All Families
+        run: python ./scripts/web_get_repository_stats.py --family > families.json
+      - name: Get All Classes
+        run: python ./scripts/web_get_repository_stats.py --class > classes.json
+      - name: Create Output Directory
+        run: mkdir ./output-files
+      - name: Build Individual Files
+        run: |
+          declare -a versions=("5.10" "5.11.1" "5.11.2")
+          for version in "${versions[@]}"
+          do
+            cat classes.json | jq '.RESULTS.class | keys[]' | while read class; do
+                class=`sed -e 's/^"//' -e 's/"$//' <<<"$class"`
+                if [ ! -z "$class" ]; then
+                    mkdir -p "./output-files/$version/$class/"
+
+                    cat platforms.json | jq '.RESULTS.platforms | keys[]' | while read platform; do
+                      platform=`sed -e 's/^"//' -e 's/"$//' -e 's/\// /' <<<"$platform"`
+                      platform_filename=`sed -e 's/ /_/g' <<<"$platform"`
+                      echo "Build OVAL Definitions Files for Platform: $platform"
+                      if [ ! -z "$platform" ]; then
+                          python ./scripts/build_oval_definitions_file.py --outfile="./output-files/$version/$class/$platform_filename.xml" --max_schema_version=$version --platform="$platform" --class=$class > /dev/null
+                      fi
+                    done
+
+                    cat families.json | jq '.RESULTS.family | keys[]' | while read family; do
+                      family=`sed -e 's/^"//' -e 's/"$//' -e 's/\// /' <<<"$family"`
+                      family_filename=`sed -e 's/ /_/g' <<<"$family"`
+                      echo "Build OVAL Definitions Files for Family: $family"
+                      if [ ! -z "$family" ]; then
+                          python ./scripts/build_oval_definitions_file.py --outfile="./output-files/$version/$class/$family_filename.xml" --max_schema_version=$version --family="$family" --class=$class > /dev/null
+                      fi
+                    done
+                fi
+              done
+          done
+      - name: Build All Definitions File
+        run: python ./scripts/build_oval_definitions_file.py --all_definitions --outfile ./output-files/oval.xml
+      - name: Package All Files
+        run: |
+          ls -lah ./output-files
+          zip -r 5.10.zip ./output-files/5.10
+          zip -r 5.11.1.zip ./output-files/5.11.1
+          zip -r 5.11.2.zip ./output-files/5.11.2
+          echo "Release!" > body.md
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 1.0.0
+      - name: Bump Release Version
+        id: bump_version
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.previoustag.outputs.tag }}
+          version-fragment: 'feature'
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          artifacts: "*.zip"
+          bodyFile: "body.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.bump_version.outputs.next-version }}
