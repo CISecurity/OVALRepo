@@ -46,14 +46,20 @@ class ovalStatusUpdates {
         } 
 
         File initialFile = new File("C:\\tmp\\initial.xml")
+
+        println("generating C:\\tmp\\initial.xml")
+
         def xml = parseXml(initialFile)
         removeTests(xml)
         removeObjects(xml)
         removeStates(xml)
         removeVariables(xml)
         Integer count = 0
+        
         def draftStatusChange = new NodeBuilder().status_change(date: formattedDate, "DRAFT")
+        
         def draftStatusChange2 = new NodeBuilder()."oval-def:status_change"(date: formattedDate, "DRAFT")
+        
         xml."**".findAll { node ->
             node instanceof Node && getElementBasename(node.name().toString()) == "oval_repository" &&
                 node."oval-def:status".text()  == "INITIAL SUBMISSION"  ||
@@ -71,6 +77,9 @@ class ovalStatusUpdates {
                 n."oval-def:status"[0].value = "DRAFT"
             }
         }
+
+        println("Updated ${count} INITIAL SUBMISSION -> DRAFT\n")
+
         def writer = new FileWriter(initialFile)
         XmlUtil.serialize(xml, writer)
         writer.close()
@@ -84,32 +93,39 @@ class ovalStatusUpdates {
             tmpDir.mkdirs()
         } 
         
-
         File draftFile =  new File("C:\\tmp\\draft.xml")
+        
+        println("generating C:\\tmp\\draft.xml")
+
         def xml = parseXml(draftFile)
         removeTests(xml)
         removeObjects(xml)
         removeStates(xml)
         removeVariables(xml)
         Integer count = 0
+
         def interimStatusChange = new NodeBuilder().status_change(date: formattedDate, "INTERIM")
         def interimStatusChange2 = new NodeBuilder()."oval-def:status_change"(date: formattedDate, "INTERIM")
+
         xml."**".findAll { node ->
             node instanceof Node && getElementBasename(node.name().toString()) == "oval_repository" &&
                 node."oval-def:status".text()  == "DRAFT" ||
                 node.status.text() == "DRAFT"
         }.each { n ->
             String draftStatusDateTime = ""
+            
             if (n."oval-def:dates"."oval-def:status_change"[0] ) {
                 draftStatusDateTime = n."oval-def:dates"."oval-def:status_change"[0]."@date"
             } else if (n.dates.status_change[0]) {
                 draftStatusDateTime = n.dates.status_change[0]."@date"
             }
+            
             if (draftStatusDateTime != "") {
                 String draftDate = draftStatusDateTime.split('T').first()
                 String currentDate = formattedDate.split('T').first()
                 def dDate = Date.parse("yyyy-MM-dd", draftDate)
                 def cDate = Date.parse("yyyy-MM-dd", currentDate)
+                
                 if (cDate - dDate >= 14 ) {
                     if (n.status) {
                         count = count + 1
@@ -125,6 +141,8 @@ class ovalStatusUpdates {
                 }
             }
         }
+        println("Updated ${count} DRAFT -> INTERIM\n")
+
         def writer = new FileWriter(draftFile)
         XmlUtil.serialize(xml, writer)
         writer.close()
@@ -139,14 +157,19 @@ class ovalStatusUpdates {
         } 
 
         File interimFile = new File("C:\\tmp\\interim.xml")
+
+        println("generating C:\\tmp\\interim.xml")
+
         def xml = parseXml(interimFile)
         removeTests(xml)
         removeObjects(xml)
         removeStates(xml)
         removeVariables(xml)
         Integer count = 0
+
         def acceptedStatusChange = new NodeBuilder().status_change(date: formattedDate, "ACCEPTED")
         def acceptedStatusChange2 = new NodeBuilder()."oval-def:status_change"(date: formattedDate, "ACCEPTED")
+
         xml."**".findAll { node ->
             node instanceof Node && getElementBasename(node.name().toString()) == "oval_repository" &&
                 node."oval-def:status".text()  == "INTERIM" ||
@@ -178,6 +201,9 @@ class ovalStatusUpdates {
                 }
             }
         }
+
+        println("Updated ${count} INTERIM -> ACCEPTED\n")
+
         def writer = new FileWriter(interimFile)
         XmlUtil.serialize(xml, writer)
         writer.close()
